@@ -1,9 +1,0 @@
-[submodule "themes/prav"]
-	path = themes/prav
-	url = https://github.com/pravin/hugo-theme-prav.git
-[submodule "themes/blog"]
-	path = themes/blog
-	url = https://github.com/alanorth/hugo-theme-bootstrap4-blog.git
-[submodule "themes/toha"]
-	path = themes/toha
-	url = https://github.com/hugo-toha/toha.git
