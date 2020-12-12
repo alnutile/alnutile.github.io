@@ -3,6 +3,9 @@ languageCode: en-us
 title: 'Alfred Nutile'
 theme: 'toha'
 
+taxonomies:
+  tag: tags
+
 # Manage languages
 # For any more details, you can check the official documentation: https://gohugo.io/content-management/multilingual/
 languages:

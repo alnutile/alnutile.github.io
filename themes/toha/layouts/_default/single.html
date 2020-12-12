@@ -54,6 +54,15 @@
           {{ .Page.Content }}
         </div>
 
+        <div class="tags">
+          <ul id="tags-single">
+            <li>Tags:</li>
+            {{ range .Params.tags }}
+            <li><a href="/tags/{{ . | urlize }}">{{ . }}</a> </li>
+            {{ end }}
+          </ul>
+        </div>
+
         <!--- Improve this page button --->
         {{ if site.Params.GitRepo }}
           <div class="btn-improve-page">
