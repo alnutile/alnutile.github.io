@@ -1,0 +1,63 @@
+# section information
+section:
+  name: About
+  id: about
+  enable: true
+  weight: 1
+  showOnNavbar: true
+  template: sections/about.html
+
+# your designation
+designation: Software Engineer
+
+# your resume. this file path should be relative to you "static" directory
+resume: 'https://docs.google.com/document/d/1OcjiFV9mhNr6X_yxisQbvb-C9dMDfnP_FJrONyVSZlo'
+
+# a summary about you
+summary: 'I have been in the industry for 20+ years. My roots are in coding and a passion for technology. For the past several years I have been building and leading a team to create technologies to assist in the digital transformation at my current role.'
+
+# your social links
+# give as many as you want. use font-awesome for the icons.
+socialLinks:
+  - name: Email
+    icon: 'fas fa-envelope'
+    url: 'me@alfrednutile.info'
+
+  - name: Github
+    icon: 'fab fa-github'
+    url: 'https://www.github.com/alnutile'
+
+  - name: LinkedIn
+    icon: 'fab fa-linkedin'
+    url: 'https://www.linkedin.com/in/alfrednutile/'
+
+  - name: Twitter
+    icon: 'fab fa-twitter'
+    url: 'https://twitter.com/alnutile'
+
+  - name: Medium
+    icon: 'fab fa-medium'
+    url: 'https://medium.com/@alnutile'
+
+# your soft skills
+# give the percentage between 50 to 100 with 5 intervals.
+# currently supported colors: blue, yellow, pink, green, sky, orange
+softSkills:
+  - name: Leadership
+    percentage: 95
+    color: blue
+  - name: Team Work
+    percentage: 95
+    color: yellow
+  - name: Communication
+    percentage: 90
+    color: pink
+  - name: Hard Working
+    percentage: 95
+    color: green
+  - name: Fast Learner
+    percentage: 95
+    color: sky
+  - name: Problem Solving
+    percentage: 95
+    color: orange

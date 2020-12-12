@@ -1,0 +1,5 @@
+customMenus:
+  - name: Notes
+    url: https://hossainemruz.gitbook.io/notes/
+
+description: Example site for hugo theme Toha.
