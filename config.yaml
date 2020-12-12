@@ -37,7 +37,7 @@ params:
   # Background image of the landing page
   background: /images/site/sky.jpeg
 
-  gitRepo: https://github.com/hugo-toha/hugo-toha.github.io
+  gitRepo: https://github.com/alnutile/alnutile.github.io
 
   # Provide logos for your site. The inverted logo will be used in the initial
   # transparent navbar and the main logo will be used in the non-transparent navbar.
