@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>boris on Alfred Nutile</title><link>https://alnutile.github.io/tags/boris/</link><description>Recent content in boris on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 10 Aug 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/boris/index.xml" rel="self" type="application/rss+xml"/><item><title>Boris REPL and you Applicatoin (Silex in this case)</title><link>https://alnutile.github.io/posts/102/</link><pubDate>Sun, 10 Aug 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/102/</guid><description>This video will cover the details http://youtu.be/RHdxSsCDmNQ
+Just a few notes though https://github.com/d11wtq/boris is a better place for getting started overall.
+Borisrc This lives in the root of my application which includes the startup file for the application.
+&amp;lt;?php
+#.borisrc
+$core = require_once(__DIR__.'/bootstrap/start.php');
+$boris = new \Boris\Boris('base_app&amp;gt; ');
+$boris-&amp;gt;setLocal(array('core' =&amp;gt; $core));
+$boris-&amp;gt;start();
+The start.php file I am using for the core startup needed by index.php, this and later a command line class to run the queue daemon and other things</description></item></channel></rss>

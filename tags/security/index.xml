@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>security on Alfred Nutile</title><link>https://alnutile.github.io/tags/security/</link><description>Recent content in security on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 29 Dec 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/security/index.xml" rel="self" type="application/rss+xml"/><item><title>LarScanner simple foundation for building a good Laravel Security Scanner</title><link>https://alnutile.github.io/posts/203/</link><pubDate>Thu, 29 Dec 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/203/</guid><description>Just the start to a new library that I hope others will help out on https://github.com/alfred-nutile-inc/larscanner
+There is a roadmap in the readme.md but basically how to start adding more and more features on this to protect our applications built in Laravel.</description></item><item><title>Laravel Throttle Feature using IP address as Key</title><link>https://alnutile.github.io/posts/193/</link><pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/193/</guid><description>NOTE: 5.3, for 5.2 see ending update
+The Laravel Throttle feature here is a great addition to the framework. By default it uses the username and the IP for the key to count attempts.
+But I want to cover how to switch that to use an IP only and not the username. A good example of why is a hacker running through a list of emails and passwords just trying to break into sites where that user would use the same password as the site the got the list from.</description></item><item><title>Throttle Password Reset</title><link>https://alnutile.github.io/posts/194/</link><pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/194/</guid><description>Laravel Throttle works on failed auth attempts but how about password resets?
+Here is what I made my app/Http/Controllers/Auth/PasswordController.php look like
+5.3 &amp;lt;?php
+namespace App\Http\Controllers\Auth;
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+class PasswordController extends Controller
+{
+/*
+|--------------------------------------------------------------------------
+| Password Reset Controller
+|--------------------------------------------------------------------------
+|
+| This controller is responsible for handling password reset requests
+| and uses a simple trait to include this behavior.</description></item><item><title>Quick Tip Forcing More Complex Passwords in Laravel</title><link>https://alnutile.github.io/posts/166/</link><pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/166/</guid><description>With the great Laravel Docs I will quickly show how to &amp;ldquo;encourage&amp;rdquo; the user to set a better password.
+Going through the standard docs for Authentication we end up with a registration form.
+Then in the AuthController that comes with Laravel I modify it a bit.
+protected function validator(array $data)
+{
+$messages = ['password.regex' =&amp;gt; &amp;quot;Your password must contain 1 lower case character 1 upper case character one number&amp;quot;];
+return Validator::make($data, [
+'name' =&amp;gt; 'required|max:255',
+'email' =&amp;gt; 'required|email|max:255|unique:users',
+'password' =&amp;gt; 'required|confirmed|min:8|regex:/^(?</description></item><item><title>Adding Expose IDS to Laravel MiddleWare</title><link>https://alnutile.github.io/posts/162/</link><pubDate>Thu, 03 Sep 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/162/</guid><description>The library is https://github.com/enygma/expose
+&amp;ldquo;Expose is an Intrusion Detection System for PHP loosely based on the PHPIDS project (and using it&amp;rsquo;s ruleset for detecting potential threats).&amp;rdquo;
+After seeing it in the latest PHPArch magazine on security I wanted to give it a try.
+Of course this is far from a complete look.
+Step 1 Make the MiddleWare
+php artisan make:middleware ExposeMiddleware
+Then add Expose as noted in the docs.</description></item></channel></rss>

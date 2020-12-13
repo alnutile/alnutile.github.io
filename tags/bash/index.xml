@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bash on Alfred Nutile</title><link>https://alnutile.github.io/tags/bash/</link><description>Recent content in bash on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 28 Dec 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Bash History</title><link>https://alnutile.github.io/posts/32/</link><pubDate>Sat, 28 Dec 2013 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/32/</guid><description>This simple command &amp;quot;history&amp;quot; shows a numbered list of your past commands.
+&amp;nbsp;1720 &amp;nbsp;sudo chgrp -R www-data batch
+&amp;nbsp;1721 &amp;nbsp;sudo chmod -R 766 batch
+&amp;nbsp;1722 &amp;nbsp;ls -al
+&amp;nbsp;1723 &amp;nbsp;sudo chmod -R 776 batch
+&amp;nbsp;1724 &amp;nbsp;cd batch/full/
+&amp;nbsp;1725 &amp;nbsp;pwd
+&amp;nbsp;1726 &amp;nbsp;exit
+&amp;nbsp;1727 &amp;nbsp;mv build.xml.ant /var/www/test/site/sites/default/files/behat_yml/batch/full/
+&amp;nbsp;1728 &amp;nbsp;cd /var/www/test/site/sites/default/files/behat_yml/batch/full/
+&amp;nbsp;
+From there you can choose a number from the output and run
+!1725
+To quickly rerun the command</description></item></channel></rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>lambda on Alfred Nutile</title><link>https://alnutile.github.io/tags/lambda/</link><description>Recent content in lambda on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 08 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/lambda/index.xml" rel="self" type="application/rss+xml"/><item><title>Lambda and Github Webhooks</title><link>https://alnutile.github.io/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/245/</guid><description>Related to https://developer.github.com/webhooks/ and pushing data to Lambda AWS.
+I can check the token by just having this check in my handler.
+const crypto = require('crypto');
+exports.handler = (event, context, callback) =&amp;gt; {
+let headers = event.headers;
+let body = event.body;
+if (typeof body === 'object') {
+body = JSON.stringify(event.body);
+}
+let github_event = headers['X-GitHub-Event'];
+if (
+github_event === undefined ||
+typeof github_event !== 'string' ||
+github_event.length &amp;lt; 1
+) {
+callback(null, {
+statusCode: 400,
+body: 'Missing X-GitHub-Event'
+});
+return;
+}
+let github_signature = headers['X-Hub-Signature'];
+if (
+github_signature === undefined ||
+typeof github_signature !</description></item></channel></rss>

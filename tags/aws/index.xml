@@ -1,2 +1,123 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>aws on Alfred Nutile</title><link>https://alnutile.github.io/tags/aws/</link><description>Recent content in aws on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 08 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml"/><item><title>My Post One</title><link>https://alnutile.github.io/posts/333/</link><pubDate>Mon, 08 Jun 2020 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/333/</guid><description>&lt;h2 id="header-two">Header Two&lt;/h2>
-&lt;p>😄&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>aws on Alfred Nutile</title><link>https://alnutile.github.io/tags/aws/</link><description>Recent content in aws on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 06 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Python Lambda behind and ALB</title><link>https://alnutile.github.io/posts/266/</link><pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/266/</guid><description>Just a quick note to self about ALB and Lambda. When using Lambda behind and ALB for routing your response has to be formatted properly else you will get a 502.
+https://pypi.org/project/alb-response/ solved this problem.
+from alb_response import alb_response
+def lambda_handler(event, context):
+response_dict = process_the_event(event)
+return alb_response(
+http_status=200,
+json=response_dict,
+is_base64_encoded=False,
+)
+The results are easy enough to do by hand but I had a bit of time really finding out the format to respond with other than JavaScript and that casing there was a bit confusing.</description></item><item><title>Lambda Tips</title><link>https://alnutile.github.io/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/264/</guid><description>@WIP
+Taking advantage of a running Lambda function and it&amp;rsquo;s state https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/ under the section Lambda function has a nice &amp;ldquo;trick&amp;rdquo; of setting above the class app = None
+then later on it will see if that is set
+def lambda_handler(event, context):
+global app
+# Initialize app if it doesn't yet exist
+if app is None:
+print(&amp;quot;Loading config and creating new MyApp...&amp;quot;)
+config = load_config(full_config_path)
+app = MyApp(config)
+return &amp;quot;MyApp config is &amp;quot; + str(app.</description></item><item><title>Cognito and OAuth</title><link>https://alnutile.github.io/posts/261/</link><pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/261/</guid><description>make your App Client
+Make sure to check
+Make some scopes uner Resource Server
+Then &amp;ldquo;App Client Settings&amp;rdquo;
+Connect it to &amp;ldquo;Cognito User Pool&amp;rdquo;
+And choose &amp;ldquo;Client Credentials&amp;rdquo; from &amp;ldquo;Allowed OAuth Flow&amp;rdquo; choosing some scopes</description></item><item><title>Deploying Fargate</title><link>https://alnutile.github.io/posts/259/</link><pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/259/</guid><description>Just some notes on the process. This will show how to deploy both a Staging build and then Production.
+Staging Staging is done by TravisCI after all tests pass
+Here is the gist of it the deploy step calls to a bash file.
+deploy:
+skip_cleanup: true
+provider: script
+script: bash deploy/travis_deploy.sh
+on:
+branch: mainline
+Then
+#!/usr/bin/env bash
+# Bail out on first error
+set -e
+## Get the directory of the build script
+DIR=&amp;quot;$( cd &amp;quot;$( dirname &amp;quot;${BASH_SOURCE[0]}&amp;quot; )&amp;quot; &amp;amp;&amp;amp; pwd )&amp;quot;
+## Get the current git commit sha
+HASH=$(git rev-parse HEAD)
+## Get any secret files
+aws s3 cp s3://foo/environments/$STACK_ENV_FILE $DIR/app/packaged/.</description></item><item><title>Dusk Screenshots to S3 of Failing tests</title><link>https://alnutile.github.io/posts/248/</link><pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/248/</guid><description>I can be really annoying to troubleshoot a failed test in Dusk when using CI systems. What I ended up doing was setting up my project to send these files to S3 on fail.
+Here are the steps
+Setup You App This is just S3 storage so make sure you have a bucket and a folder in the bucket to write to. Basically for AWS you make an IAM with a key and secret and let it read/write to this folder.</description></item><item><title>Lambda and Github Webhooks</title><link>https://alnutile.github.io/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/245/</guid><description>Related to https://developer.github.com/webhooks/ and pushing data to Lambda AWS.
+I can check the token by just having this check in my handler.
+const crypto = require('crypto');
+exports.handler = (event, context, callback) =&amp;gt; {
+let headers = event.headers;
+let body = event.body;
+if (typeof body === 'object') {
+body = JSON.stringify(event.body);
+}
+let github_event = headers['X-GitHub-Event'];
+if (
+github_event === undefined ||
+typeof github_event !== 'string' ||
+github_event.length &amp;lt; 1
+) {
+callback(null, {
+statusCode: 400,
+body: 'Missing X-GitHub-Event'
+});
+return;
+}
+let github_signature = headers['X-Hub-Signature'];
+if (
+github_signature === undefined ||
+typeof github_signature !</description></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alnutile.github.io/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/220/</guid><description>Sending Docker Commands to Get A Task Done This article will show how to get started with AWS Batch and Docker to spin up a &amp;ldquo;worker&amp;rdquo;
+By the time you are done reading it you will:
+Have a Docker image to run your command in. Deploy the Docker image to AWS ECR And Run a Task on the AWS Batch system, or a 100 tasks, does not matter. Finally you will have the scripts needed to fully build AWS Batch with CloudFormation, e.</description></item><item><title>Serverless and Custom Tags for Resources</title><link>https://alnutile.github.io/posts/217/</link><pubDate>Tue, 22 Aug 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/217/</guid><description>Because much of serveless.com is CloudFormation based, you can easily update existing resources. They talk about this feature here
+For me this was required for adding tags
+# you can add CloudFormation resource templates here
+resources:
+Resources:
+ServerlessDeploymentBucket:
+Properties:
+Tags:
+- { Key: &amp;quot;project&amp;quot;, Value: &amp;quot;${self:provider.project}&amp;quot; }
+- { Key: &amp;quot;environment&amp;quot;, Value: &amp;quot;${opt:stage, self:provider.stage}&amp;quot; }
+- { Key: &amp;quot;parent_project&amp;quot;, Value: &amp;quot;${self:custom.parent}&amp;quot; }
+- { Key: &amp;quot;key_contact&amp;quot;, Value: &amp;quot;${self:custom.contact}&amp;quot; }
+- { Key: &amp;quot;billing_ref&amp;quot;, Value: &amp;quot;${self:custom.</description></item><item><title>Serverless, AWS API Gateway and Authentication</title><link>https://alnutile.github.io/posts/214/</link><pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/214/</guid><description>Just a note2self really.
+Setting up Auth was super easy
+As seen below I had to add to my serverless.yml authorizer
+addQuote:
+handler: quote/handler.add
+events:
+- http:
+path: quote
+method: post
+cors: true
+authorizer: aws_iam
+authorizer: aws_iam
+From here I then needed, in this case Postman, to pass an AWS KEY and SECRET made for this app.
+When making the user I attached this Policy to the user
+{
+&amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
+&amp;quot;Statement&amp;quot;: [
+{
+&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
+&amp;quot;Action&amp;quot;: [
+&amp;quot;execute-api:Invoke&amp;quot;
+],
+&amp;quot;Resource&amp;quot;: &amp;quot;arn:aws:execute-api:us-east-1:AWS_ID:*/dev/POST/quote&amp;quot;
+}
+]
+}
+I an easily make this in the serverless.</description></item><item><title>AWS, S3 Storage and limited Visibility</title><link>https://alnutile.github.io/posts/180/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/180/</guid><description>Storing files on S3 is great. And many times those files are private so I only want to give temporary access to them. Using Laravel Storage I can interact with the file-system quite easily and seamlessly especially between Cloud and Local.
+In this case I want to return a file only for 10 minutes
+public function getSignedUrl($filename_and_path, $expires_minutes = '10')
+{
+$client = Storage::disk('s3')-&amp;gt;getDriver()-&amp;gt;getAdapter()-&amp;gt;getClient();
+$bucket = env('BUCKET');
+$command = $client-&amp;gt;getCommand('GetObject', [
+'Bucket' =&amp;gt; $bucket,
+'Key' =&amp;gt; $filename_and_path
+]);
+$request = $client-&amp;gt;createPresignedRequest($command, Carbon::now()-&amp;gt;addMinutes($expires_minutes));
+return (string) $request-&amp;gt;getUri();
+}
+That is it!</description></item></channel></rss>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>serverless.com on Alfred Nutile</title><link>https://alnutile.github.io/tags/serverless.com/</link><description>Recent content in serverless.com on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 18 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/serverless.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Serverless, AWS API Gateway and Authentication</title><link>https://alnutile.github.io/posts/214/</link><pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/214/</guid><description>Just a note2self really.
+Setting up Auth was super easy
+As seen below I had to add to my serverless.yml authorizer
+addQuote:
+handler: quote/handler.add
+events:
+- http:
+path: quote
+method: post
+cors: true
+authorizer: aws_iam
+authorizer: aws_iam
+From here I then needed, in this case Postman, to pass an AWS KEY and SECRET made for this app.
+When making the user I attached this Policy to the user
+{
+&amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
+&amp;quot;Statement&amp;quot;: [
+{
+&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
+&amp;quot;Action&amp;quot;: [
+&amp;quot;execute-api:Invoke&amp;quot;
+],
+&amp;quot;Resource&amp;quot;: &amp;quot;arn:aws:execute-api:us-east-1:AWS_ID:*/dev/POST/quote&amp;quot;
+}
+]
+}
+I an easily make this in the serverless.</description></item></channel></rss>

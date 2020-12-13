@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>json on Alfred Nutile</title><link>https://alnutile.github.io/tags/json/</link><description>Recent content in json on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 03 Nov 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/json/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel and Casting 'JSON_UNESCAPED_UNICODE' Data</title><link>https://alnutile.github.io/posts/196/</link><pubDate>Thu, 03 Nov 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/196/</guid><description>Had a interesting issue with Laravel and the cast feature
+Basically a Chinese set of characters would be converted to their unicode counterpart http://php.net/manual/en/json.constants.php
+So saving &amp;ldquo;你好，世界&amp;rdquo; would become &amp;ldquo;\u4f60\u597d\uff0c\u4e16\u754c&amp;rdquo; in the database.
+Making it hard to search for &amp;ldquo;你好，世界&amp;rdquo;
+But I just wanted this data as it was, so later I could query the data and interact with it in it&amp;rsquo;s default character state.
+Digging into the Model class vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.</description></item></channel></rss>

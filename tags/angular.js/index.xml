@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>angular.js on Alfred Nutile</title><link>https://alnutile.github.io/tags/angular.js/</link><description>Recent content in angular.js on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 24 Aug 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/angular.js/index.xml" rel="self" type="application/rss+xml"/><item><title>Team Style Guides and Mind Set</title><link>https://alnutile.github.io/posts/105/</link><pubDate>Sun, 24 Aug 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/105/</guid><description>Been sharing this info with team members a bit lately and want to post it here for reference. Though there is no ONE way to do any of this there are ways that scale better than others. But more importantly having one way as a team to do things can be key to projects from beginning to end (eg the rest of the projects life!)
+Project Style Guides The Clean Coder by Robert Martin book is a look at being a &amp;ldquo;Professional&amp;rdquo; coder and all that comes with it.</description></item><item><title>Many to Many Polymorphic Relations from Laravel to Angular and back</title><link>https://alnutile.github.io/posts/95/</link><pubDate>Sat, 05 Jul 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/95/</guid><description>This will cover having a polymorphic relationship in Laravel, showing it on a form in Angular and saving it back to Laravel. Overall it is well documented here at the great docs at Laravel but this post might help in a few areas.
+As someone defines Polymorphic Relationships there
+&amp;ldquo;Polymorphic relations allow a model to belong to more than one other model, on a single association. For example, you might have a photo model that belongs to either a staff model or an order model.</description></item><item><title>Restangular and nested responses</title><link>https://alnutile.github.io/posts/91/</link><pubDate>Sat, 21 Jun 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/91/</guid><description>this was key to dealing with this type of results
+{
+&amp;quot;data&amp;quot;: {
+&amp;quot;name&amp;quot;: &amp;quot;Foo&amp;quot;
+},
+&amp;quot;message&amp;quot;: {
+&amp;quot;Post Updated&amp;quot;
+}
+}
+So I had to set this in a app.js config area
+//app,js
+app.config(function(RestangularProvider) {
+// add a response intereceptor
+RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+var extractedData;
+extractedData = data.data;
+return extractedData;
+});
+});</description></item><item><title>When you have to use Angular inside of Drupal</title><link>https://alnutile.github.io/posts/89/</link><pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/89/</guid><description>The angularjs module for drupal will direct you to setup a menu path for Angular.js to get it&amp;rsquo;s template files.
+So the Angular route would look like this
+//app.js
+behat_reports.config(['$routeProvider',
+function ($routeProvider) {
+$routeProvider.
+when('/', {
+templateUrl: '/behat_editor_reports_service_v2/tpl/behat_editor_reports_service_reports_tpl',
+controller: 'ReportsAll'
+}).
+otherwise({
+redirectTo: '/'
+});
+}]);
+What I am suggesting is that when bootstraping Angular is to set the path to the &amp;ldquo;html&amp;rdquo; template folder. Then your Angular app route can look like this</description></item><item><title>Angular and Scope - or - How not to waste time figuring out why a scope value is not 'working'</title><link>https://alnutile.github.io/posts/62/</link><pubDate>Wed, 30 Apr 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/62/</guid><description>The creator of Angular notes it in this video which is well worth the watch.
+Basically when using includes or directives etc you may not be getting a scope value as easily because it is child scope and you may be looking in the parent scope.
+For example This include if I have an include and it references a model attribute like this
+//Some include
+&amp;lt;input ng-model=&amp;quot;firstname&amp;quot;&amp;gt;
+I may not get the results from that input that I expect.</description></item><item><title>Angular.js, CKEditor, and REST including file uploads</title><link>https://alnutile.github.io/posts/50/</link><pubDate>Mon, 14 Apr 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/50/</guid><description>I wanted to share the steps I followed to get this WYSIWYG editor working with Angular and to allow uploads. By the end of it you will see how to Plug CKeditor into your Angular app Setup the config options in your Angular Controller and your view Setup your REST endpoints to take the needed requests Show image gallery Upload image Show Files to link to Upload file to link to This can work for really any backend, Laravel, Drupal, Node etc.</description></item><item><title>Building the UI first with Angular, Mocked Data and REST</title><link>https://alnutile.github.io/posts/58/</link><pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/58/</guid><description>Lately I have had a few projects using a RESTful backend to output JSON formatted data and a javascript front end. All of them are different technologies but the front end is in Angular.js.
+So using the Angular mock module I have been able to build out the front end with no backend. I started to do this for speed reasons but realized a number of huge benefits.
+Angular has some good docs on how to mock this data and use this $httpbackend module here.</description></item><item><title>Angular Watching a model and it's filters</title><link>https://alnutile.github.io/posts/43/</link><pubDate>Thu, 20 Mar 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/43/</guid><description>I had to update other items on the page including an CSV export as the user made filter changes on the site.
+I had to pass the results of ng-repeat into a model and then the filters as seen here
+And in my controller I added a watcher to process the new results as needed.
+This simple solution I had some trouble grasping.</description></item><item><title>Angular Seed Testing Setup</title><link>https://alnutile.github.io/posts/19/</link><pubDate>Wed, 12 Mar 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/19/</guid><description>This took a few settings to get it working.
+For one I put the correct paths in for karma and webdriver
+I then had to download mocks http://code.angularjs.org/1.2.14/angular-mocks.js even though I used angular-seed and setup my module to include this &amp;#39;ngMockE2E&amp;#39;
+This page was a good starting point http://docs.angularjs.org/api/ngMockE2E/service/$httpBackend
+Then there is the testing end 2 end frame work https://github.com/angular/protractor/tree/master/docs/ that allowed me to easily write non-unit tests
+&amp;nbsp;</description></item><item><title>Angular Drupal and CSRF</title><link>https://alnutile.github.io/posts/48/</link><pubDate>Tue, 11 Mar 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/48/</guid><description>quick tip on getting and setting your token for drupal when doing a put, post, destroy against a drupal site.&amp;Acirc;&amp;nbsp;
+Mostly gotten from here
+Might even be better to reset the formant for X-CSRF-Token to the default one Angular is looking for X-CSRFToken</description></item><item><title>Angular.js Ticket System</title><link>https://alnutile.github.io/posts/18/</link><pubDate>Fri, 05 Jul 2013 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/18/</guid><description>Fun side project to make a ticket system in Angular.js.
+Still have to build out the authentication system and ideally move the api into Rails.
+And of course wrap up a few other things ( -;
+http://angular.alfrednutile.info/
+Or the video
+http://www.youtube.com/watch?v=RjCJNn7wpj0</description></item></channel></rss>

@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>note2self on Alfred Nutile</title><link>https://alnutile.github.io/tags/note2self/</link><description>Recent content in note2self on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 06 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/note2self/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Python Lambda behind and ALB</title><link>https://alnutile.github.io/posts/266/</link><pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/266/</guid><description>Just a quick note to self about ALB and Lambda. When using Lambda behind and ALB for routing your response has to be formatted properly else you will get a 502.
+https://pypi.org/project/alb-response/ solved this problem.
+from alb_response import alb_response
+def lambda_handler(event, context):
+response_dict = process_the_event(event)
+return alb_response(
+http_status=200,
+json=response_dict,
+is_base64_encoded=False,
+)
+The results are easy enough to do by hand but I had a bit of time really finding out the format to respond with other than JavaScript and that casing there was a bit confusing.</description></item><item><title>Lambda Tips</title><link>https://alnutile.github.io/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/264/</guid><description>@WIP
+Taking advantage of a running Lambda function and it&amp;rsquo;s state https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/ under the section Lambda function has a nice &amp;ldquo;trick&amp;rdquo; of setting above the class app = None
+then later on it will see if that is set
+def lambda_handler(event, context):
+global app
+# Initialize app if it doesn't yet exist
+if app is None:
+print(&amp;quot;Loading config and creating new MyApp...&amp;quot;)
+config = load_config(full_config_path)
+app = MyApp(config)
+return &amp;quot;MyApp config is &amp;quot; + str(app.</description></item><item><title>Laravel Filter Scope on a Model</title><link>https://alnutile.github.io/posts/255/</link><pubDate>Mon, 20 Aug 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/255/</guid><description>So I find myself writing searchable pages that, via an API or what not, someone can filter the page by different fields on the model. This can end up being a Controller class that does a lot of filters off the Request. Or it can be a Repository class that abstracts the business logic into one place for several related models.
+But in many cases it really is just one Model being filtered.</description></item><item><title>Valet Laravel 7.1 and 7.2</title><link>https://alnutile.github.io/posts/253/</link><pubDate>Sat, 18 Aug 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/253/</guid><description>..</description></item><item><title>Python3 Fixtures</title><link>https://alnutile.github.io/posts/252/</link><pubDate>Fri, 10 Aug 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/252/</guid><description>Just a reminder using pickle I can easily make fixtures for testing.
+When I get results from AWS SDK for example I can just
+import pickle
+with open(&amp;quot;fixtures/describe_task_defination.pickle&amp;quot;, 'wb') as fixture:
+pickle.dump(self.stored_state_to_save, fixture)
+Then when I want to feed it back in my test
+import pickle
+from unittest import TestCase
+from unittest.mock import patch
+from unittest import mock
+import pickle
+from task_image import TaskImage
+def getFixture(name):
+with open(&amp;quot;fixtures/&amp;quot; + name, 'rb') as fixture:
+return pickle.</description></item><item><title>Vuex External File</title><link>https://alnutile.github.io/posts/250/</link><pubDate>Tue, 03 Jul 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/250/</guid><description>Setup Vuex with external file https://vuex.vuejs.org/installation.html
+But after this make a file in the resources/assets/js called store.js then set it up as needed Here I will have one loading state
+export default {
+state: {
+loading: true,
+},
+getters: {
+loading: state =&amp;gt; {
+return state.loading;
+},
+},
+mutations: {
+loading(state, loading) {
+state.loading = loading;
+}
+}
+};
+now import it into your app.js
+import store from './store';
+and</description></item><item><title>Windows Dev Box Try 2 2018</title><link>https://alnutile.github.io/posts/247/</link><pubDate>Mon, 11 Jun 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/247/</guid><description>Going to list somethings as I go.
+The Mac, in spite of Apple, is a great developer experience, here is to hoping the Windows, with the help of Microsoft, grows to be better and better as the improve it via user feedback to make it a great development box.
+Links This started it all https://char.gd/blog/2017/how-to-set-up-the-perfect-modern-dev-environment-on-windows
+Webdev on Windows with WSL and VS Code
+NPM and Composer install take a long time Some of this is the Windowsantimalware running.</description></item><item><title>Laravel Queue Restart and 'Why are my changes not showing up'</title><link>https://alnutile.github.io/posts/246/</link><pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/246/</guid><description>Just a note to self and others who have suffered this. If you are running queues locally, for what ever reason, then any changes you make in code you need to restart your queue daemon.
+php artisan queue:restart
+This will cause the daemon to look at a timestamp and restart if that is newer than before &amp;ldquo;e.g. you ran the above. And this will force the in memory process to update itself from the latest code base.</description></item><item><title>Query Strings and VueJS</title><link>https://alnutile.github.io/posts/244/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/244/</guid><description>Quick way to make the url reflect the query string so the user can share the url and filters.
+This is component based VueJS building so not an SPA But I still install &amp;quot;vue-router&amp;quot;: &amp;quot;^3.0.1&amp;quot;
+And load it
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+The on the component I set a watch on the router.
+watch: {
+$route(to, from) {
+this.setModelFromQueryString();
+this.search();
+}
+},
+In this case it will set the query strings then trigger the &amp;ldquo;search&amp;rdquo; to load the data into the page.</description></item><item><title>BrowserSync and Laravel</title><link>https://alnutile.github.io/posts/239/</link><pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/239/</guid><description>Quick reminder to take advantage of this amazing feature https://laravel.com/docs/5.6/mix#browsersync-reloading
+No more reloading your browser.
+yarn add browser-sync --dev
+then to your webpack.mix.js e.g. the domain of the site you are working on.
+mix.browserSync('foo.test');
+finally
+yarn run watch
+Note turn off sourceMaps when running this else it can be kinda slow</description></item><item><title>GroupBy not Sorting by latest</title><link>https://alnutile.github.io/posts/240/</link><pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/240/</guid><description>Just to make this easy to find. I had a report to write which had numerous daily rows of the same related model data. So in this cause I was tracking servers and security reports.
+My reports where daily like this
+id server_id failed type 1 1 1 security 2 1 1 testing 3 1 0 testing But a groupBy here on server_id would return ID 1 so it would appear as if it was still failing.</description></item><item><title>Troubleshoot Laravel Socialite and Github login</title><link>https://alnutile.github.io/posts/238/</link><pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/238/</guid><description>This has driven me mad too many times. Basically you will get very little feedback if there is any issue getting the token from Github.
+The problem is in this method.
+public function user()
+{
+if ($this-&amp;gt;hasInvalidState()) {
+throw new InvalidStateException;
+}
+$response = $this-&amp;gt;getAccessTokenResponse($this-&amp;gt;getCode());
+$user = $this-&amp;gt;mapUserToObject($this-&amp;gt;getUserByToken(
+$token = Arr::get($response, 'access_token')
+));
+return $user-&amp;gt;setToken($token)
+-&amp;gt;setRefreshToken(Arr::get($response, 'refresh_token'))
+-&amp;gt;setExpiresIn(Arr::get($response, 'expires_in'));
+}
+This is in the vendor/laravel/socialite/src/Two/AbstractProvider.php
+So for example my real error was:</description></item><item><title>Wrapping Libraries in Services JS</title><link>https://alnutile.github.io/posts/237/</link><pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/237/</guid><description>Just a note to self that when using libraries like sweetalert for example and then I want to convert to sweetalert2, it would have saved a lot of time to wrap it into a &amp;ldquo;service&amp;rdquo; and import that.
+For example I made this js file
+services/Alerts.js:
+import swal from 'sweetalert2';
+export default {
+send(title, message, error = false) {
+swal(
+{
+type: error ? &amp;quot;error&amp;quot; : &amp;quot;success&amp;quot;,
+title: title,
+text: message
+}
+);
+}
+}
+Then import it into the app or into the component that needs it.</description></item><item><title>Passing from Blade to VueJs</title><link>https://alnutile.github.io/posts/236/</link><pubDate>Sat, 24 Feb 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/236/</guid><description>A lot of posts had this style.
+I ended up just needing this:
+The controller simply does this:</description></item><item><title>Docker Laravel and Cron</title><link>https://alnutile.github.io/posts/234/</link><pubDate>Fri, 16 Feb 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/234/</guid><description>This to this post here
+for the idea.
+Basically running cron in Docker is easy BUT once the Host had more than one Docker client cron stopped working. No clue why but to solve this I did two things
+One made a script that was on the Docker Client
+/scheduler.sh
+#!/bin/bash
+php /app/artisan schedule:run --verbose --no-interaction &amp;gt;&amp;gt; /dev/null 2&amp;gt;&amp;amp;1
+sleep 60
+Then I did this in the Dockerfile
+COPY scheduler.sh /
+RUN chmod 755 /scheduler.</description></item><item><title>Pusher and Laravel Updates</title><link>https://alnutile.github.io/posts/233/</link><pubDate>Wed, 14 Feb 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/233/</guid><description>Getting error &amp;ldquo;Did you forget to specify the cluster when creating the Pusher instance&amp;rdquo;
+Then need to set config/broadcasting.php:
+'pusher' =&amp;gt; [
+'driver' =&amp;gt; 'pusher',
+'key' =&amp;gt; env('PUSHER_KEY'),
+'secret' =&amp;gt; env('PUSHER_SECRET'),
+'app_id' =&amp;gt; env('PUSHER_APP_ID'),
+'options' =&amp;gt; [
+//
+],
+],
+to
+'pusher' =&amp;gt; [
+'driver' =&amp;gt; 'pusher',
+'key' =&amp;gt; env('PUSHER_KEY'),
+'secret' =&amp;gt; env('PUSHER_SECRET'),
+'app_id' =&amp;gt; env('PUSHER_APP_ID'),
+'options' =&amp;gt; [
+&amp;quot;cluster&amp;quot; =&amp;gt; 'us2',
+&amp;quot;encrypted&amp;quot; =&amp;gt; true
+],
+],
+And if still calling pusher manually in your js update to be:</description></item><item><title>Dusk and Production (with Dusk disabled)</title><link>https://alnutile.github.io/posts/232/</link><pubDate>Mon, 05 Feb 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/232/</guid><description>In DatabaseServiceProvider.php line 78:
+Class 'Faker\Factory' not found
+I had a ton if issues getting dusk on production, especially since production would run
+composer install --no-dev --prefer-dist --no-interaction
+To get around this issue I had to do a few things
+One, if you are stuck and can not even run php artisan on the server:
+rm bootstrap/cache/services.php
+rm bootstrap/cache/packages.php
+Two, turn off auto discovery for Dusk and just add it to the app/Providers/AppServiceProvider.</description></item><item><title>Testing Laravel API, Spark with Authentication</title><link>https://alnutile.github.io/posts/231/</link><pubDate>Sun, 04 Feb 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/231/</guid><description>Just a reminder to self, if I want to test an API I made and need to pass and api_token
+&amp;lt;?php
+namespace Tests\Feature;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Quote;
+use Laravel\Spark\Repositories\TokenRepository;
+class QuoteControllerTest extends TestCase
+{
+use RefreshDatabase;
+public function testGettingAQuoteUsingToken()
+{
+$user = factory(\App\User::class)-&amp;gt;create();
+$team = factory(\App\Team::class)-&amp;gt;create();
+$team-&amp;gt;users()-&amp;gt;attach($user-&amp;gt;id, ['role' =&amp;gt; &amp;quot;member&amp;quot;]);
+$quote = factory(\App\Quote::class)-&amp;gt;create([
+'team_id' =&amp;gt; $team-&amp;gt;id,
+'posted_by' =&amp;gt; $user-&amp;gt;id
+]);
+$token = new TokenRepository();
+$token = $token-&amp;gt;createToken(
+$user,
+'get_quote',
+[]
+)-&amp;gt;token;
+$this-&amp;gt;json('GET', &amp;quot;/api/teams/{$team-&amp;gt;id}/quotes/random?</description></item><item><title>Example of Making Documentation in Markdown with PDF Output</title><link>https://alnutile.github.io/posts/230/</link><pubDate>Fri, 05 Jan 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/230/</guid><description>Many of the sites I make have a need for a Support page for staff to know how to do things like add content, manage users etc. This article will cover how I go about writing my help docs in Markdown and then displaying it on the website with an option to print as PDF.
+Writing MarkDown To begin with, I made the help doc in mine. I made a sample one here</description></item><item><title>VueJS Transition Helper</title><link>https://alnutile.github.io/posts/228/</link><pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/228/</guid><description>There are docs on how to get a Transition to take effect when an item loads https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components
+But I was not having much luck with this using https://uiv.wxsm.space/carousel.
+I ended up making a quick helper function to keep it from looking like exploded elements.
+You can see the results of this change here
+So the steps followed per the docs above for the most part.
+Add to my scss file:</description></item><item><title>Laravel Asset Notes WIP</title><link>https://alnutile.github.io/posts/227/</link><pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/227/</guid><description>This is just a reminder area of all the minor details as I find them that I need to remember
+FontAwesome yarn add font-awesome
+Then in my resources/assets/sass/app.scss
+// Fonts
+@import url(&amp;quot;https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;quot;);
+// Variables
+@import &amp;quot;variables&amp;quot;;
+// Bootstrap
+@import &amp;quot;~bootstrap-sass/assets/stylesheets/bootstrap&amp;quot;;
+@import &amp;quot;~font-awesome/css/font-awesome&amp;quot;; My webpack is the default
+mix.js('resources/assets/js/app.js', 'public/js')
+.sass('resources/assets/sass/app.scss', 'public/css');
+set to go!
+If using Less
+#resources/assets/less/app.less
+@import &amp;quot;./../../../node_modules/font-awesome/less/font-awesome&amp;quot;;</description></item><item><title>PostMark SMTP for sending Notifications and Password Resets</title><link>https://alnutile.github.io/posts/226/</link><pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/226/</guid><description>I have been using PostMark for years https://postmarkapp.com for sending emails, e.g. password reset and more.
+They have an API but to get going with SMTP all the info is here
+Basically get your KEY and use it in your .env like this:
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.postmarkapp.com
+MAIL_PORT=587
+MAIL_USERNAME=foo
+MAIL_PASSWORD=foo
+MAIL_ENCRYPTION=tls
+And all should work. Just make sure to
+Register the domain in their domain ui Set the from info in Laravel</description></item><item><title>Dusk Notes</title><link>https://alnutile.github.io/posts/225/</link><pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/225/</guid><description>Just keeping a list of gotchas around dusk.
+use RefreshDatabase not working Cost: 1 hour lost
+Basically I had to go back to the slower &amp;ldquo;use DatabaseMigrations;&amp;rdquo; otherwise it would not work. The user was null.
+Links: This thread helped
+Headless or not Cost: 1 hour lost or less
+For some odd reasons my tests started coming up blank.
+I turned off headless in this class DuskTestCase
+protected function driver()
+{
+$args = [
+'--disable-gpu',
+'--headless'
+];
+if (env(&amp;quot;HEADLESS_OFF&amp;quot;)) {
+$args = [
+'--disable-gpu'
+];
+}
+$options = (new ChromeOptions)-&amp;gt;addArguments($args);
+return RemoteWebDriver::create(
+'http://localhost:9515',
+DesiredCapabilities::chrome()-&amp;gt;setCapability(
+ChromeOptions::CAPABILITY,
+$options
+)
+);
+}
+And this way it still works on travis.</description></item><item><title>Laravel Shift and Your Day Job</title><link>https://alnutile.github.io/posts/223/</link><pubDate>Fri, 03 Nov 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/223/</guid><description>** UPDATED November 22 2017 **
+The service Laravel Shift is a great way to save a ton of time and keep your Laravel application up to date.
+But sometimes you may not be allowed to share access to your company Github account for this process since it is hard to limit access at the repo level.
+In this case I have a quick way to get your work done and back into the company repo IF that is okay with your boss.</description></item><item><title>Wrapping JSONEditor in Vue as Well as Laravel Blade</title><link>https://alnutile.github.io/posts/222/</link><pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/222/</guid><description>UPDATED November 05 2017
+This will cover how to make a JSONEditor component that I can then use in a Blade template and listen to events.
+You will end up with this:
+First making sure I have all the packages I need:
+//package.json
+&amp;quot;devDependencies&amp;quot;: {
+&amp;quot;axios&amp;quot;: &amp;quot;^0.17&amp;quot;,
+&amp;quot;bootstrap-sass&amp;quot;: &amp;quot;^3.3.7&amp;quot;,
+&amp;quot;cross-env&amp;quot;: &amp;quot;^5.0.1&amp;quot;,
+&amp;quot;jquery&amp;quot;: &amp;quot;^3.2&amp;quot;,
+&amp;quot;laravel-mix&amp;quot;: &amp;quot;^1.0&amp;quot;,
+&amp;quot;lodash&amp;quot;: &amp;quot;^4.17.4&amp;quot;,
+&amp;quot;vue&amp;quot;: &amp;quot;^2.1.10&amp;quot;
+},
+&amp;quot;dependencies&amp;quot;: {
+&amp;quot;select2&amp;quot;: &amp;quot;^4.0.5&amp;quot;,
+&amp;quot;jsoneditor&amp;quot;: &amp;quot;^5.9.6&amp;quot;
+}
+And to load it into my bootstrap file:</description></item><item><title>Laravel, Dusk and Valet</title><link>https://alnutile.github.io/posts/221/</link><pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/221/</guid><description>By default I set my phpunit.xml to use test as my database:
+&amp;lt;php&amp;gt;
+&amp;lt;env name=&amp;quot;APP_ENV&amp;quot; value=&amp;quot;testing&amp;quot;/&amp;gt;
+&amp;lt;env name=&amp;quot;CACHE_DRIVER&amp;quot; value=&amp;quot;array&amp;quot;/&amp;gt;
+&amp;lt;env name=&amp;quot;SESSION_DRIVER&amp;quot; value=&amp;quot;array&amp;quot;/&amp;gt;
+&amp;lt;env name=&amp;quot;MAIL_DRIVER&amp;quot; value=&amp;quot;log&amp;quot;/&amp;gt;
+&amp;lt;env name=&amp;quot;QUEUE_DRIVER&amp;quot; value=&amp;quot;sync&amp;quot;/&amp;gt;
+&amp;lt;env name=&amp;quot;DB_DATABASE&amp;quot; value=&amp;quot;test&amp;quot;/&amp;gt; &amp;lt;-- this line here &amp;lt;/php&amp;gt;
+But with Valet and Dusk this led to the browser using my default database and not test but the PHPUnit test itself was using test so the user I created and logged in as was not available in the browser.</description></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alnutile.github.io/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/220/</guid><description>Sending Docker Commands to Get A Task Done This article will show how to get started with AWS Batch and Docker to spin up a &amp;ldquo;worker&amp;rdquo;
+By the time you are done reading it you will:
+Have a Docker image to run your command in. Deploy the Docker image to AWS ECR And Run a Task on the AWS Batch system, or a 100 tasks, does not matter. Finally you will have the scripts needed to fully build AWS Batch with CloudFormation, e.</description></item><item><title>Mocking Models OutSide of Laravel</title><link>https://alnutile.github.io/posts/219/</link><pubDate>Thu, 24 Aug 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/219/</guid><description>This all comes down to me using https://github.com/orchestral/testbench
+With this in place I can work on an external library as if it is in Laravel.
+The one place I ran into trouble on though was mocking model related methods like all for example a model Foo being called as \App\Foo::all() was hard to mock cause all is stacic:
+//\Illuminate\Database\Eloquent\Model::all
+public static function all($columns = ['*'])
+{
+return (new static)-&amp;gt;newQuery()-&amp;gt;get(
+is_array($columns) ?</description></item><item><title>Versions and Branching a Library</title><link>https://alnutile.github.io/posts/218/</link><pubDate>Tue, 22 Aug 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/218/</guid><description>At work Andrew Cavanagh and I had to, using many examples on of libraries we use, to finalize how to branch and version our libraries.
+There should be one branch for each major version (1.0, 2.0, etc).
+These should be the only branches besides master.
+Releases within these versions should be tagged following semantic versioning guidlines (v1.2.3 for example).
+In general, all work should be done via pr from the master branch and then merged into whatever the current branch is.</description></item><item><title>Setting Up My Mac</title><link>https://alnutile.github.io/posts/215/</link><pubDate>Sun, 30 Jul 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/215/</guid><description>Great videos here:
+https://laracasts.com/lessons/dev-machine-setup https://laracasts.com/lessons/dev-machine-setup-phpstorm Items MindNode EverNote TextExpander Dropbox 1Password Alfred Extensions DND https://github.com/mlantz/DND-Alfred-Workflow Clipboard History which seems to be part of it but needs to be put on Misc Napkin Scanner Moom SequelPro iTerm SSH Keys Bartender Brew PHP7 (using brew https://developerjack.com/blog/2016/installing-php71-with-homebrew/) Composer Python Setup Composer Global path touch ~/.bashrc
+Then
+export PATH=~/.composer/vendor/bin:$PATH
+then source ~/.</description></item><item><title>IronFunctions and PHP</title><link>https://alnutile.github.io/posts/213/</link><pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/213/</guid><description>A colleague of mine Dave Hall poing out IronFunctions. And being in the pursuit of serverless options especially ones that even have examples of PHP I had to give it a try. This post is a note2self in that the intro here has some bits that need fixing BUT I think it is close and I hope to add more updates here about the tool.
+All the steps below will only work once you take on the initial hello world here.</description></item><item><title>Meetings and Cross TimeZone Teams</title><link>https://alnutile.github.io/posts/210/</link><pubDate>Wed, 03 May 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/210/</guid><description>Wrote and article https://medium.com/@alnutile/meetings-and-cross-timezone-teams-c9b833c43bfb on trying to find the blanance of meetings and focus time.
+Saved here as well for when they go out of business :)
+Meetings and Cross TimeZone Teams Meetings are needed, most of them at least, and when I worked with a team that was all in the same timezone I was easily able to say, “Between 1–4 I am coding/focusing” or “Between 6am and 9am” I am coding.</description></item><item><title>Dusk and Homestead</title><link>https://alnutile.github.io/posts/209/</link><pubDate>Mon, 24 Apr 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/209/</guid><description>Working on learning Dusk and really excited to get going with it.
+But running it in homestead proved to be a bit tricky.
+After following the docs and running php artisan dusk not much happened. Sure if I ran it on my Mac and it just worked but my tests needed to do migrations and what not and I want to keep my work in Homestead.
+So a few steps later and it worked thanks to this post https://github.</description></item><item><title>Instantiate Request for Testing</title><link>https://alnutile.github.io/posts/206/</link><pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/206/</guid><description>When I need to make a request for a test in which the Class is expecting a \Illuminate\Http\Request I can do this for a file based or non file based request.
+/**
+* @Then I should be able to upload an image file
+*/
+public function iShouldBeAbleToUploadAnImageFile()
+{
+$request = new \Illuminate\Http\Request();
+$file = new \Symfony\Component\HttpFoundation\FileBag();
+$path = base_path('tests/fixtures/example_profile.jpg');
+$originalName = 'example_profile.jpg';
+$upload = new \Illuminate\Http\UploadedFile($path, $originalName, null, null, null, true);
+$file-&amp;gt;set('profile_image', $upload);
+$request-&amp;gt;files = $file;
+$this-&amp;gt;repo = new \App\Repositories\ProfileRepository();
+$results = $this-&amp;gt;repo-&amp;gt;uploadUserProfileImage($request);
+PHPUnit::assertTrue($results, &amp;quot;Repo did not return true&amp;quot;);
+PHPUnit::assertTrue(File::exists(public_path('storage/' .</description></item><item><title>Example Job Format for Queue</title><link>https://alnutile.github.io/posts/204/</link><pubDate>Sat, 14 Jan 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/204/</guid><description>Sometimes I just need this info to remind myself what a job looks like in a queue and how to mock it etc.
+In this case I have a simple class that will be used to dispatch the job.
+&amp;lt;?php
+namespace App\Jobs;
+use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Log;
+class RandomWordJob implements ShouldQueue
+{
+use InteractsWithQueue, Queueable, SerializesModels;
+public $payload = [];
+public function __construct($payload)
+{
+$this-&amp;gt;payload = $payload;
+}
+/**
+* Execute the job.</description></item><item><title>Pusher and PHP 'Error Failed to connect to Pusher'</title><link>https://alnutile.github.io/posts/201/</link><pubDate>Mon, 28 Nov 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/201/</guid><description>Note to self. Getting this error &amp;ldquo;Error Failed to connect to Pusher&amp;rdquo; but the front end is working. And you know your credentials are correct, AND it was working just a day ago check the date and time on your machine/vm.
+Mine had drift and since it was behind by 20 minutes I would end up with this error.
+Oy what a waste or time x 2 :(</description></item><item><title>Model Boot Events</title><link>https://alnutile.github.io/posts/200/</link><pubDate>Sun, 20 Nov 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/200/</guid><description>Just a quick not to modify model data upon an event. Laravel docs talk about it here
+But putting it in another class can get kinda confusing when you are trying to debug or update the code.
+In this example I have a model Board and I want to, upon saving, make sure it has some key data.
+protected static function boot()
+{
+static::bootTraits();
+/** @var \App\Board $model */
+static::creating(function ($model) {
+if (!</description></item><item><title>Queue onConnection</title><link>https://alnutile.github.io/posts/199/</link><pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/199/</guid><description>If you look here https://laravel.com/docs/5.3/queues#customizing-the-queue-and-connection
+Under &amp;ldquo;Dispatching To A Particular Connection&amp;rdquo;
+But if running test and local where I just want sync or database
+if(env('QUEUE_DRIVER') != 'sync' &amp;amp;&amp;amp; env('QUEUE_DRIVER') != 'database') {
+$concentration_curve = (new ImportDataColumnWorker($this-&amp;gt;job_notice-&amp;gt;model, $this-&amp;gt;job_notice-&amp;gt;payload))
+-&amp;gt;onConnection('columns');
+} else {
+$concentration_curve = (new ImportDataColumnWorker($this-&amp;gt;job_notice-&amp;gt;model, $this-&amp;gt;job_notice-&amp;gt;payload));
+}
+$this-&amp;gt;dispatch($concentration_curve);</description></item><item><title>Guzzle 5 or 6 or ????</title><link>https://alnutile.github.io/posts/198/</link><pubDate>Fri, 11 Nov 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/198/</guid><description>Sometimes Guzzle can be a real pain to use in an library. You choose 5.x and then some other library needed 6.x and heck you really did not care either way.
+One interesting package example is aws/aws-sdk-php
+If you look in it&amp;rsquo;s composer.json you will see this
+&amp;quot;require&amp;quot;: {
+&amp;quot;php&amp;quot;: &amp;quot;&amp;gt;=5.5&amp;quot;,
+&amp;quot;guzzlehttp/guzzle&amp;quot;: &amp;quot;~5.3|~6.0.1|~6.1&amp;quot;,
+&amp;quot;guzzlehttp/psr7&amp;quot;: &amp;quot;~1.0&amp;quot;,
+&amp;quot;guzzlehttp/promises&amp;quot;: &amp;quot;~1.0&amp;quot;,
+&amp;quot;mtdowling/jmespath.php&amp;quot;: &amp;quot;~2.2&amp;quot;
+},
+So it allows for other libraries to choose as needed and it will deal with the different versions as needed.</description></item><item><title>Chrome update equals Behat Fail</title><link>https://alnutile.github.io/posts/197/</link><pubDate>Mon, 07 Nov 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/197/</guid><description>Had trouble running behat after I ran updates on Chrome
+My typical install https://www.npmjs.com/package/selenium-standalone
+did not fix it, even try brew but no luck.
+All I needed to do was go here and grab the lastest one for my Mac. For me this was the 32 bit.
+Then after running
+selenium-standalone install
+to see where the old one was installed I used that path to unzip this file and move it there /usr/local/lib/node_modules/selenium-standalone/.</description></item><item><title>Laravel and Casting 'JSON_UNESCAPED_UNICODE' Data</title><link>https://alnutile.github.io/posts/196/</link><pubDate>Thu, 03 Nov 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/196/</guid><description>Had a interesting issue with Laravel and the cast feature
+Basically a Chinese set of characters would be converted to their unicode counterpart http://php.net/manual/en/json.constants.php
+So saving &amp;ldquo;你好，世界&amp;rdquo; would become &amp;ldquo;\u4f60\u597d\uff0c\u4e16\u754c&amp;rdquo; in the database.
+Making it hard to search for &amp;ldquo;你好，世界&amp;rdquo;
+But I just wanted this data as it was, so later I could query the data and interact with it in it&amp;rsquo;s default character state.
+Digging into the Model class vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.</description></item><item><title>Amazon Machine Learning</title><link>https://alnutile.github.io/posts/191/</link><pubDate>Fri, 16 Sep 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/191/</guid><description>This is mostly a note2self.
+Amazon Machine learning is one way to dig into things. For me it mean not getting bogged down in Python or tons of formulas for now.
+Basically I watched their main video here to get a view of how things worked.
+Then I read their docs here and follow this tutorial.
+After that I took a moment to watch another video of how they used ML to help process messages from Twitter https://www.</description></item><item><title>Adding Basic Auth to Forge</title><link>https://alnutile.github.io/posts/189/</link><pubDate>Thu, 18 Aug 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/189/</guid><description>make the username and password http://www.htaccesstools.com/htpasswd-generator/
+admin:$apr1$wLiZDI74$/D64sfIdn74kHc6F.76Qv/
+And save it in a file called, for example, htpass
+Now scp -v htpass forge@your_server:~/
+Go to forge and find the site and click &amp;ldquo;Edit Nginx Configuration&amp;rdquo;
+Now in there just add these lines
+auth_basic &amp;quot;Restricted Area&amp;quot;;
+auth_basic_user_file /home/forge/htpass;
+As seen below
+I think that will restart/reload Nginx, if does not go to the page that list your &amp;ldquo;Server Details&amp;rdquo; and restart there</description></item><item><title>Behat and Uploading Files to a Form Even on Remote Selenium2 Servers</title><link>https://alnutile.github.io/posts/179/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/179/</guid><description>Just had to tackle this issue so making some notes for later here :)
+Updated and more detailed here
+I run selenium on my Windows PC and before that my Mac, either one would have had this issue since my test is running side my VM. This meant when I needed to run a test to interact with a form to upload an image that image path was relative to the machine (VM) that I started the test on and not the Browser that was being manipulated by Selenium2.</description></item><item><title>Laravel, PHPUnit, Require_Once on Routes</title><link>https://alnutile.github.io/posts/178/</link><pubDate>Tue, 22 Mar 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/178/</guid><description>Going crazy running PHPUnit all and getting fail but you run the one route and it works!
+The difference is require versus require_once in PHPUnit tests.
+For example
+require __DIR__ . '/../ConfigurationExamples/routes.php';
+Route::get('/', function () {
+return view('welcome');
+});
+Now when I run my tests I get 100% pass
+/**
+* @test
+*/
+public function should_auth_user()
+{
+$user = factory(\App\User::class)-&amp;gt;create();
+$results = $this-&amp;gt;call('GET', sprintf(&amp;quot;/example/auth_token?api_token=%s&amp;quot;, $user-&amp;gt;api_token));
+$this-&amp;gt;assertEquals(200, $results-&amp;gt;status());
+$this-&amp;gt;assertEquals(&amp;quot;foo&amp;quot;, $results-&amp;gt;getContent());
+}
+/**
+* @test
+*/
+public function should_fail_user()
+{
+$results = $this-&amp;gt;call('GET', '/example/auth_token');
+$this-&amp;gt;assertEquals(302, $results-&amp;gt;status());
+}
+/**
+* @test
+*/
+public function should_pass_auth_with_no_token()
+{
+$user = factory(\App\User::class)-&amp;gt;create();
+$this-&amp;gt;be($user);
+$results = $this-&amp;gt;call('GET', '/example/auth_token');
+$this-&amp;gt;assertEquals(200, $results-&amp;gt;status());
+$this-&amp;gt;assertEquals(&amp;quot;foo&amp;quot;, $results-&amp;gt;getContent());
+}
+The moment I change it to require_once I get fails on the last or second to last one, it is not consistant except that it will fail.</description></item><item><title>Install Webdriver to get testing with Behat and Javascript</title><link>https://alnutile.github.io/posts/174/</link><pubDate>Tue, 26 Jan 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/174/</guid><description>This is so I do not forget!
+UPDATED: go here instead https://www.npmjs.com/package/selenium-standalone
+1) sudo npm -g install webdriver-manager 2) sudo webdriver-manager update &amp;ndash;chrome 3) Get Java for the Mac Googled El Capitan Java and takes me to Apples site to get the right version of java
+https://support.apple.com/kb/dl1572?locale=en_US
+4) webdriver-manager start That is it!</description></item><item><title>Multi Domain Nginx Redirect</title><link>https://alnutile.github.io/posts/135/</link><pubDate>Sat, 28 Feb 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/135/</guid><description>http://wordpress.stackexchange.com/questions/106445/multisite-redirect-loop-for-a-single-www-domain
+Basically the site went from foo-prod.stagingarea.us to wearelive.com but since it was an internal app I wanted to make sure the old url still worked and redirected as needed to the new url
+server {
+listen 80;
+server_name foo-prod.stagingarea.us;
+return 301 https://$host$request_uri;
+}
+server {
+listen 443;
+server_name foo-prod.stagingarea.us;
+if ($host ~* ^foo-prod.stagingarea.us) {
+rewrite ^(.*)$ https://wearelive.com$1 permanent;
+}
+Interesting note is server_name does not contain the primary name wearlive.</description></item><item><title>Linux, Behat and installing ChromeDriver</title><link>https://alnutile.github.io/posts/129/</link><pubDate>Mon, 19 Jan 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/129/</guid><description>Setting up Chrome driver with Behat and Selenium2
+Side note for Mac brew install chromedriver
+ChromeDriver Once you find the path Chrome was installed you place the driver in there. For Ubuntu 14.04 it was
+/opt/google/chrome/chromedriver
+I got the driver from https://code.google.com/p/selenium/wiki/ChromeDriver#Overriding_the_Chrome_binary_location
+Starting Selenium I still need to look up and try setting this in the behat.yml for now I just ran it this way
+java -jar selenium-server-standalone-2.0rc2.jar -Dwebdriver.chrome.driver=/opt/google/chrome/chromedriver
+That is it.</description></item><item><title>Laravel Blade and Angular brackets</title><link>https://alnutile.github.io/posts/124/</link><pubDate>Fri, 19 Dec 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/124/</guid><description>I use one AngularController.php to render main.blade.php file that then renders angular. The only other blade file is the login page. I could have done this in the routes.php file but since the routes file has the login page I decided to place it in this controller.
+&amp;lt;?php namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\View;
+use Laracasts\Utilities\JavaScript\Facades\JavaScript;
+/**
+* @Middleware(&amp;quot;auth&amp;quot;)
+*/
+class AngularController extends BaseController {
+use UserHelper;
+/**
+* @var UserService
+*/
+private $userService;
+public function __construct(UserService $userService)
+{
+$this-&amp;gt;userService = $userService;
+}
+/**
+* @Get(&amp;quot;behat&amp;quot;, as=&amp;quot;behat.</description></item><item><title>Multi Threaded Queue Processing</title><link>https://alnutile.github.io/posts/106/</link><pubDate>Wed, 10 Sep 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/106/</guid><description>I needed a way to run a bunch of jobs in parallel and I am use to using the Symfony Process Component for that.
+So this post will show how I did this in Laravel 4.3 via the Queue so I can remember next time.
+What will come out of this is a workflow as seen here
+We will create two Artisan Commands. This allows us to use Symfony Process to run numerous console commands in the background.</description></item><item><title>Sorting related models in Laravel</title><link>https://alnutile.github.io/posts/104/</link><pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/104/</guid><description>There are a number of related models to this one model that I store in the Models $relations property
+protected static $relations = [
+'owner',
+'apns',
+'zoning_urls',
+'structures.address',
+'structures.comments.user.profiles',
+'listings',
+'attachments',
+'structures.structure_type',
+'property_owner',
+'primary_property_type',
+'address',
+'property_specialist.profiles',
+'listings.team'
+];
+This allows me to easily reuse this for each query
+$found = $found-&amp;gt;load(static::$relations);
+But there is one model I removed from that list to do a dynamic query/sorting on it
+$found = $this-&amp;gt;property-&amp;gt;with([
+'verifiers' =&amp;gt; function($query) {
+$query-&amp;gt;with('user.</description></item><item><title>Polymorphic relationship Laravel</title><link>https://alnutile.github.io/posts/99/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/99/</guid><description>This example will show a typical &amp;ldquo;Attachment&amp;rdquo; need. The Laravel docs really do cover alot as seen here especially &amp;ldquo;Polymorphic Relation Table Structure”. I cover many to many polymorphic relationships here
+I will cover an example of an Attachment that has some fields. And it is related to a model, in this example &amp;ldquo;Post&amp;rdquo;
+Using the Way Generators to make this resource.
+php artisan generate:resource attachment --fields=&amp;quot;attachable_type:string, attachable_id:integer, name:string, file_name:string, note:text, tag:string”
+As noted in the laravel docs our table for Attachments would look something like this</description></item><item><title>Quick way to traverse a nested php arrray</title><link>https://alnutile.github.io/posts/98/</link><pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/98/</guid><description>The RecursiveIteratorIterator makes it super easy to traverse a nested array.
+Here is an example though the docs are pretty clear there. For me it was in a class so I defined the array keys at the top of the Class
+protected $merged_profile_options = [];
+protected $data_values = [
+'browser' =&amp;gt; null,
+'name' =&amp;gt; null,
+'version' =&amp;gt; null,
+'platform' =&amp;gt; null,
+'base_url' =&amp;gt; null,
+'repo' =&amp;gt; null,
+'filename' =&amp;gt; null,
+'branch' =&amp;gt; null,
+'status' =&amp;gt; null,
+'user_uuid' =&amp;gt; null,
+'remote_job_id' =&amp;gt; null,
+'job_id' =&amp;gt; null,
+];
+Then later on iterated over that array.</description></item><item><title>Restangular and nested responses</title><link>https://alnutile.github.io/posts/91/</link><pubDate>Sat, 21 Jun 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/91/</guid><description>this was key to dealing with this type of results
+{
+&amp;quot;data&amp;quot;: {
+&amp;quot;name&amp;quot;: &amp;quot;Foo&amp;quot;
+},
+&amp;quot;message&amp;quot;: {
+&amp;quot;Post Updated&amp;quot;
+}
+}
+So I had to set this in a app.js config area
+//app,js
+app.config(function(RestangularProvider) {
+// add a response intereceptor
+RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+var extractedData;
+extractedData = data.data;
+return extractedData;
+});
+});</description></item><item><title>Showing nested relationships details</title><link>https://alnutile.github.io/posts/87/</link><pubDate>Mon, 09 Jun 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/87/</guid><description>This is soooo easy but this is always something this easy can be missed. In this example we have a Property Model with Buildings that have an address.
+So the model files look like this
+//Property.php
+//structures = buildings
+public function structures()
+{
+return $this-&amp;gt;hasMany('Structure');
+}
+//Structure.php
+public function address()
+{
+return $this-&amp;gt;belongsTo(&amp;quot;Address&amp;quot;);
+}
+So when I query a property I now get
+{
+&amp;quot;id&amp;quot;: 1,
+&amp;quot;structures&amp;quot;: [
+{
+&amp;quot;id&amp;quot;: 6,
+&amp;quot;address_id&amp;quot;: 9,
+&amp;quot;address&amp;quot;: {
+&amp;quot;id&amp;quot;: 9,
+&amp;quot;city&amp;quot;: &amp;quot;Melvinport&amp;quot;,
+&amp;quot;state&amp;quot;: &amp;quot;MT&amp;quot;,
+&amp;quot;zip&amp;quot;: &amp;quot;75182&amp;quot;,
+&amp;quot;lat&amp;quot;: -18.</description></item><item><title>Laravel and non email authentication</title><link>https://alnutile.github.io/posts/84/</link><pubDate>Tue, 20 May 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/84/</guid><description>Note to self. The Laravel docs are here that cover Authentication. But when it came time to use a filter and a non email based user name I had to modify the auth.basic filter, or any filter you want to use.
+It ended up looking like this since I wanted user_account and not email to be the username for authentication.
+//app/filters.php
+Route::filter('auth.basic', function()
+{
+return Auth::basic('user_account');
+});
+You can see this option here</description></item><item><title>Using Dot Env files to manage settings</title><link>https://alnutile.github.io/posts/76/</link><pubDate>Sun, 18 May 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/76/</guid><description>Wow. Included in Laravel http://laravel.com/docs/configuration#protecting-sensitive-configuration
+removed due to old news
+http://mattstauffer.co/blog/laravel-forge-using-environment-variables-for-environment-detection/
+Update I really like the second link and how it sets up a .env file first to just return a simple string. After that you can have the .env.production.php or .env.local.php that laravel can look for.
+//bootstrap/start.php
+$env = $app-&amp;gt;detectEnvironment(function()
+{
+if (file_exists(__DIR__ . '/../.env')) {
+return include(__DIR__ . '/../.env');
+} else {
+return 'production';
+}
+});
+Quite simple at that point to separate all of the environments.</description></item><item><title>Using Scopes in Laravel</title><link>https://alnutile.github.io/posts/69/</link><pubDate>Fri, 16 May 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/69/</guid><description>I have about 4 models that all share 2 common queries. I want all of them that are &amp;ldquo;Published&amp;rdquo; and or Ordered by a field called Order.
+This does help with some DRY goals, but you could easily change or add to a scope as needed to update all the queries involved etc. Especially if at a later point you break this out into a Repository Patter to use a different ORM.</description></item><item><title>Mink Assertions</title><link>https://alnutile.github.io/posts/66/</link><pubDate>Tue, 06 May 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/66/</guid><description>Just a reminder this file as a good list of steps I can use. (will post more here shortly)
+Mink 1.3 [behat/mink-extension/src/Behat/MinkExtension/Context/MinkDictionary.php](https://github.com/Behat/MinkExtension/blob/1.3/src/Behat/MinkExtension/Context/MinkDictionary.php)</description></item><item><title>Adding Column using sqlite caused error 'Cannot add a NOT NULL column with default value NULL'</title><link>https://alnutile.github.io/posts/64/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/64/</guid><description>After the security update I had to add a remember_token to my user table. security update
+Since I am using sqllite locally I ended up with this error
+&amp;gt;php artisan migrate
+[Illuminate\Database\QueryException]
+SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL column with default value NULL (SQL: alter table &amp;quot;users&amp;quot; add column &amp;quot;remember_token&amp;quot; text not null)
+Finally this post made it clear I had to make this nullable
+//migration file
+/**
+* Run the migrations.</description></item><item><title>Angular and Scope - or - How not to waste time figuring out why a scope value is not 'working'</title><link>https://alnutile.github.io/posts/62/</link><pubDate>Wed, 30 Apr 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/62/</guid><description>The creator of Angular notes it in this video which is well worth the watch.
+Basically when using includes or directives etc you may not be getting a scope value as easily because it is child scope and you may be looking in the parent scope.
+For example This include if I have an include and it references a model attribute like this
+//Some include
+&amp;lt;input ng-model=&amp;quot;firstname&amp;quot;&amp;gt;
+I may not get the results from that input that I expect.</description></item><item><title>Behat Checkbox</title><link>https://alnutile.github.io/posts/61/</link><pubDate>Wed, 30 Apr 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/61/</guid><description>Just a reminder to check if a checkbox is checked or not.
+Feature: Behat bug
+Scenario:
+Given I am on &amp;quot;/bug.html&amp;quot;
+When I check &amp;quot;foo&amp;quot;
+Then the &amp;quot;foo&amp;quot; checkbox should be checked
+or
+Feature: Behat bug
+Scenario:
+Given I am on &amp;quot;/bug.html&amp;quot;
+When I check &amp;quot;foo&amp;quot;
+Then the &amp;quot;foo&amp;quot; checkbox should not be checked
+https://github.com/Behat/Behat/issues/298</description></item><item><title>Ng-if and Scope</title><link>https://alnutile.github.io/posts/47/</link><pubDate>Sat, 26 Apr 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/47/</guid><description>Scratched my head on this one for a few.
+Inside of ng-if is a new scope. So a model on $scope.modelName will have to be referenced as $parent.modelName in the view.
+Basically it worked on another page so I knew it should work here. When I moved it out of ng-if it worked so it had to be related to that. Finally this post made some sense of it
+So now my filter works.</description></item><item><title>Drupal Services and Instantiating a Class</title><link>https://alnutile.github.io/posts/52/</link><pubDate>Tue, 04 Feb 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/52/</guid><description>Been using Drupal Services on a project and there are some docs on how to use a Class with this. But to instantiate it I was using a function per class method. Instead I now I have one function that can instantiate the Class and method based on the &amp;#39;callback&amp;#39; and the path 0 arg. Later I would like to just use the $_REQUEST type.
+&amp;nbsp;
+You can see the service below starting on line 4</description></item><item><title>PHPSH</title><link>https://alnutile.github.io/posts/35/</link><pubDate>Mon, 21 Oct 2013 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/35/</guid><description>Interactive command line on a Mac. So far this helped out
+brew tap josegonzalez/php
+brew install phpsh
+and finally add this to the ~/.bash_profile
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages&amp;nbsp;
+and then re source your .bash_profile
+souce ~/.bash_profile
+now phpsh at the command line will give you an interactive shell&amp;nbsp;</description></item><item><title>Installing mysql2 on a mac</title><link>https://alnutile.github.io/posts/22/</link><pubDate>Fri, 09 Aug 2013 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/22/</guid><description>http://stackoverflow.com/questions/5919727/bundle-install-problem-mysql-h-is-missing
+This was key to get this install done.</description></item><item><title>Questions that may come in handy when interviewing</title><link>https://alnutile.github.io/posts/12/</link><pubDate>Sun, 09 Jun 2013 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/12/</guid><description>Can you clearly define the roles and responsibilities you need me to fill? What would you need consider my hire a success in the next 6 months? In the next year? GitHub has a 0% employee turn over rate. How does your company try to prevent turnover? Using the past few years of your organization financial records do you have a sense of growth and constant revenue increase for this year?</description></item></channel></rss>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vuejs on Alfred Nutile</title><link>https://alnutile.github.io/tags/vuejs/</link><description>Recent content in vuejs on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 20 Aug 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/vuejs/index.xml" rel="self" type="application/rss+xml"/><item><title>JSONEditor, Vue and Vuex</title><link>https://alnutile.github.io/posts/256/</link><pubDate>Mon, 20 Aug 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/256/</guid><description>As I post here I wanted to use JSONEditor as a component. But with Vuex I was able to reduce the work quite a ton. Here is my store for the json_field:
+export default {
+state: {
+json_field: null,
+},
+getters: {
+json_field: state =&amp;gt; {
+return state.json_field;
+}
+},
+mutations: {
+jsonField(state, json_field) {
+state.json_field = json_field;
+}
+},
+};
+Then my JSONEditor.vue component:
+&amp;lt;template&amp;gt;
+&amp;lt;div id=&amp;quot;jsoneditor&amp;quot; ref=&amp;quot;editor&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+&amp;lt;script&amp;gt;
+import JSONEditor from 'jsoneditor';
+import { mapGetters } from 'vuex'
+export default Vue.</description></item><item><title>Query Strings, Vue and Bootstrap Active Tab</title><link>https://alnutile.github.io/posts/254/</link><pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/254/</guid><description>In order to have the tabs and URL change as needed when the user lands on the page or clicks the tab I had to setup a few things.
+First I setup the Vue.js router as seen here
+Then my component will work out the rest.
+Using BV
+I have tabs and then I set those tabs as needed.
+&amp;lt;b-tabs v-model=&amp;quot;activeTab&amp;quot;&amp;gt;
+&amp;lt;b-tab title=&amp;quot;Settings&amp;quot; active &amp;gt;
+&amp;lt;div class=&amp;quot;mt-4 alert alert-info&amp;quot;&amp;gt;
+Manage related policies by clicking on the Tabs.</description></item><item><title>Vuex External File</title><link>https://alnutile.github.io/posts/250/</link><pubDate>Tue, 03 Jul 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/250/</guid><description>Setup Vuex with external file https://vuex.vuejs.org/installation.html
+But after this make a file in the resources/assets/js called store.js then set it up as needed Here I will have one loading state
+export default {
+state: {
+loading: true,
+},
+getters: {
+loading: state =&amp;gt; {
+return state.loading;
+},
+},
+mutations: {
+loading(state, loading) {
+state.loading = loading;
+}
+}
+};
+now import it into your app.js
+import store from './store';
+and</description></item><item><title>Simple API_Token Auth for VueJS Components and Laravel</title><link>https://alnutile.github.io/posts/249/</link><pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/249/</guid><description>For those non Passport moments just a simple site that has VueJS Components that need to access routes with authentication in place.
+Thanks to
+https://pineco.de/vue-components-laravel-based-apis/ https://andrew.cool/blog/64/How-to-use-API-tokens-for-authentication-in-Laravel-5-2 Route File routes/api.php
+Route::get('/trigger_contacts', function (Request $request) {
+\Log::info(&amp;quot;Triggering Contacts&amp;quot;);
+return response()-&amp;gt;json(null, 200);
+})-&amp;gt;middleware('auth:api');
+This will not work out of the box, you will get a 401. Let&amp;rsquo;s plug some things in.
+Blade My main resources/views/layouts/app.blade.php
+&amp;lt;script&amp;gt;
+window.Laravel = {!! json_encode([
+&amp;quot;apiToken&amp;quot; =&amp;gt; auth()-&amp;gt;user()-&amp;gt;api_token ?</description></item><item><title>Query Strings and VueJS</title><link>https://alnutile.github.io/posts/244/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/244/</guid><description>Quick way to make the url reflect the query string so the user can share the url and filters.
+This is component based VueJS building so not an SPA But I still install &amp;quot;vue-router&amp;quot;: &amp;quot;^3.0.1&amp;quot;
+And load it
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+The on the component I set a watch on the router.
+watch: {
+$route(to, from) {
+this.setModelFromQueryString();
+this.search();
+}
+},
+In this case it will set the query strings then trigger the &amp;ldquo;search&amp;rdquo; to load the data into the page.</description></item><item><title>BrowserSync and Laravel</title><link>https://alnutile.github.io/posts/239/</link><pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/239/</guid><description>Quick reminder to take advantage of this amazing feature https://laravel.com/docs/5.6/mix#browsersync-reloading
+No more reloading your browser.
+yarn add browser-sync --dev
+then to your webpack.mix.js e.g. the domain of the site you are working on.
+mix.browserSync('foo.test');
+finally
+yarn run watch
+Note turn off sourceMaps when running this else it can be kinda slow</description></item><item><title>Passing from Blade to VueJs</title><link>https://alnutile.github.io/posts/236/</link><pubDate>Sat, 24 Feb 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/236/</guid><description>A lot of posts had this style.
+I ended up just needing this:
+The controller simply does this:</description></item><item><title>VueJS Transition Helper</title><link>https://alnutile.github.io/posts/228/</link><pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/228/</guid><description>There are docs on how to get a Transition to take effect when an item loads https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components
+But I was not having much luck with this using https://uiv.wxsm.space/carousel.
+I ended up making a quick helper function to keep it from looking like exploded elements.
+You can see the results of this change here
+So the steps followed per the docs above for the most part.
+Add to my scss file:</description></item></channel></rss>

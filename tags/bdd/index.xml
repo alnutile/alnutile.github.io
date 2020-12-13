@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bdd on Alfred Nutile</title><link>https://alnutile.github.io/tags/bdd/</link><description>Recent content in bdd on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 31 Aug 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/bdd/index.xml" rel="self" type="application/rss+xml"/><item><title>Mockery Behat and Laravel</title><link>https://alnutile.github.io/posts/190/</link><pubDate>Wed, 31 Aug 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/190/</guid><description>This is a quick view of using this library https://github.com/laracasts/Behat-Laravel-Extension and a Mockery Trait (should be included soon but for now put the below in your features/bootstrap folder and run composer dump).
+The example here is a method that looks like this
+features/bootstrap/ExampleContext.php
+$partial = Mockery::mock(\App\Broadcasts\ColumnsAndRowsDoneProcessingEmail::class, [$this-&amp;gt;segment])-&amp;gt;makePartial();
+$partial-&amp;gt;shouldReceive('sendEmail')-&amp;gt;never();
+$repo = App::make(\App\JobsRepository::class);
+$partial-&amp;gt;handle($repo);
+When this is done running I would get pass BUT if I change it never to once and run it again I still get green :(</description></item><item><title>Uploading Images in Behat both at Domain Level and UI Level</title><link>https://alnutile.github.io/posts/188/</link><pubDate>Thu, 11 Aug 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/188/</guid><description>The goal here is as follows
+@fileCleanup @javascript
+Scenario: Uploading File
+Given I already made a Segmentation and am editing it
+Then I add file and the system will process it
+And I can not add another file till it is done
+And when the system is done I can add another file
+In this case they are large files and I want to get an MVP for the users to interact with so one file at a time is enough for now.</description></item><item><title>Behat Laravel Domain Testing Inside Out</title><link>https://alnutile.github.io/posts/187/</link><pubDate>Wed, 10 Aug 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/187/</guid><description>I will cover the use of FormRequest, Mockery, Behat and more in this article.
+The article will show how to test your Domain code, in this case I mean testing how the code will work outside of the Routing and Controller layer of your Application. But what this will lead to is a &amp;ldquo;lego&amp;rdquo; like moment of plugging in these parts to your Controller so you know it will work. Of course it will be tested as well during the UI testing.</description></item><item><title>Example of Mixing it up Behat BDD and PHPUnit</title><link>https://alnutile.github.io/posts/185/</link><pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/185/</guid><description>Just wanted to show two things here. One is how sometimes I end up in PHPUnit to work out some ideas. And two how awesome it is to refactor thanks to PHPUnit.
+In this example I had a Class responsible for saving data, we&amp;rsquo;ll call FooSaveData. But before that save it has to process some incoming information against another set of data to save the results of that. So I made another class we&amp;rsquo;ll call FooProcessData.</description></item><item><title>Getting Going Quickly Windows, Behat and Selenium</title><link>https://alnutile.github.io/posts/181/</link><pubDate>Tue, 03 May 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/181/</guid><description>Quick Install Steps
+Vagrant and Homestead This was easy I just followed these steps here and I was done. For me I used Vmware but Virtualbox is fine.
+Windows in Selenium Two easy steps
+Step 1 Install Node.js SUPER EASY https://nodejs.org/en/download/
+Install the .exe, restart your console and you have node!
+Step 2 Install Selenium Just go here and you are done! https://www.npmjs.com/package/selenium-standalone
+After those steps I run it in a powershell and the server is running and I am set to use it.</description></item><item><title>Behat and Uploading Files to a Form Even on Remote Selenium2 Servers</title><link>https://alnutile.github.io/posts/179/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/179/</guid><description>Just had to tackle this issue so making some notes for later here :)
+Updated and more detailed here
+I run selenium on my Windows PC and before that my Mac, either one would have had this issue since my test is running side my VM. This meant when I needed to run a test to interact with a form to upload an image that image path was relative to the machine (VM) that I started the test on and not the Browser that was being manipulated by Selenium2.</description></item><item><title>Behat for Product Owners</title><link>https://alnutile.github.io/posts/156/</link><pubDate>Fri, 31 Jul 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/156/</guid><description>As a developer putting all the business requirements into action and then showing that it is working as expected can be hard. 10 different google docs, 3 different views of what are the goals etc.
+And as a Product Owner you are not sure if the work is done without always clicking around. And more importantly you do not even know if the developer really gets what you want.
+This is where Behat / Gherkin (cause that name really gets Product Owners feeling comfortable) can help out.</description></item><item><title>Laravel 5.1 Behat and Codeship</title><link>https://alnutile.github.io/posts/151/</link><pubDate>Sat, 04 Jul 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/151/</guid><description>The new integration testing features with Laravel 5.1 make Behat almost not needed BUT we do a lot of AngularJs work and instead of using karma to test the ui we enjoy using behat since we like the Gherkin Syntax and how we can easily code custom steps in PHP.
+Here are some steps to getting behat going on Codeship so you get full CI even of Angular.
+This is all based off of https://github.</description></item><item><title>Using Faker and ENV vars with Behat</title><link>https://alnutile.github.io/posts/140/</link><pubDate>Fri, 27 Mar 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/140/</guid><description>UPDATED April 01 2015
+Realized I needed more &amp;ldquo;tokens&amp;rdquo; and I was already using my .env file for info for Seeding and for our different servers. So the Trait now pulls those in.
+This is a simple trait to use in your FeatureContext file to then get the power of Faker in your Behat tests
+The Trait &amp;lt;?php
+trait TokenFaker {
+public function checkForTokens($arg)
+{
+$arg = str_replace($this-&amp;gt;replaceAbleTokens(), $this-&amp;gt;loadTokensValues(), $arg);
+return $arg;
+}
+protected function replaceAbleTokens()
+{
+return array_merge($this-&amp;gt;getManualTokensKeys(), $this-&amp;gt;getEnvTokensKeys());
+}
+protected function getManualTokensKeys()
+{
+return [
+'TOKEN_EMAIL',
+'TOKEN_UUID',
+'TOKEN_USERNAME',
+'TOKEN_URL'];
+}
+protected function loadTokensValues()
+{
+return array_merge($this-&amp;gt;getManualTokenValues(), $this-&amp;gt;getEnvTokensValues());
+}
+protected function getManualTokenValues()
+{
+return [
+$this-&amp;gt;faker-&amp;gt;email,
+$this-&amp;gt;faker-&amp;gt;uuid,
+$this-&amp;gt;faker-&amp;gt;word,
+$this-&amp;gt;faker-&amp;gt;url
+];
+}
+protected function getEnvTokensValues()
+{
+return array_values($_ENV);
+}
+protected function getEnvTokensKeys()
+{
+return array_keys($_ENV);
+}
+}
+The Feature Context In my Feature Context I setup Faker and instantiate it and use the trait</description></item><item><title>Saucelabs PHP Client</title><link>https://alnutile.github.io/posts/96/</link><pubDate>Fri, 11 Jul 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/96/</guid><description>It is built off of the php-github-api client seen here by KnpLabs . They made a really nice client that uses Guzzle and an AbstractionAPI to make it easy to code out different classes around the API endpoints.
+Anyways I have had such a good experience with github one I figured it would be nice to have one for the Saucelabs work I do.
+https://github.com/alnutile/saucelabs_client more features will be added shortly as it is being used in a couple of decent size projects.</description></item><item><title>Behat Seed Repo</title><link>https://alnutile.github.io/posts/77/</link><pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/77/</guid><description>The aim of this repo is to make it super easy to get going with behat. All you will need to get outside of this repo is
+Selenium Jar file download Composer Saucelabs Account (Optional) After you install and setup those items you will be able to run tests locally or via Saucelabs and have a base setup to add new/custom steps as needed.
+Selenium Easy This is the one jar file you need</description></item><item><title>Behat and bad HTML</title><link>https://alnutile.github.io/posts/38/</link><pubDate>Sat, 11 Jan 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/38/</guid><description>Some of the sites we are testing have HTML that has multiple ID that are the same. Or elements that do not really have enough info to get a class, name, label or ID out of.
+This has been a challenge and there are a few custom steps made to help get through this
+ Switching to an Iframe with no name or id
+This was hard since the default was to target the ID of the frame or name.</description></item><item><title>Behat Mink and using Javascript / jQuery to test attributes</title><link>https://alnutile.github.io/posts/37/</link><pubDate>Mon, 06 Jan 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/37/</guid><description>Using Behat and Mink I had to make a test that would verify the height of content on the screen compared to the rest of the window size. For example it had to be 30% of the screen or more.
+You can see the code below.
+It allows the user to pass in the expected height % and the element they would like to target. I will optmize it to allow more options than just ID.</description></item></channel></rss>

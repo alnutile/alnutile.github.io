@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>slack on Alfred Nutile</title><link>https://alnutile.github.io/tags/slack/</link><description>Recent content in slack on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 24 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/slack/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Slack Trait Get Request and return Response</title><link>https://alnutile.github.io/posts/208/</link><pubDate>Fri, 24 Mar 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/208/</guid><description>In this example I get a message from Slack (but this can be any message) and then send results back to Slack.
+One thing to keep in mind you really want to get your code working out side of Slack since you cannot easily do a push, test, fix, push, test as we normally do when working locally with a browser.
+Get your PHPUnit working for a class that will handle the payload, then you know when you plug it in to the Slack Route it will &amp;ldquo;just work&amp;rdquo;.</description></item><item><title>Super Simple Sending Messages to Slack from Laravel</title><link>https://alnutile.github.io/posts/202/</link><pubDate>Thu, 29 Dec 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/202/</guid><description>Laravel 5.3 has this feature. But for those not using that version or who just want to see how easy this is, I will show here how I been doing this for some time now.
+Here is the main Class I call to send a message. As you can see I am using Guzzle, in this case &amp;quot;guzzlehttp/guzzle&amp;quot;: &amp;quot;^6.1&amp;quot; but others versions can work.
+&amp;lt;?php
+namespace App\Services;
+use Illuminate\Support\Facades\Log;
+use GuzzleHttp\Client;
+class SlackWrapper
+{
+/**
+* @var Client $client
+*/
+protected $client;
+protected $slack_url = false;
+public function __construct(Client $client)
+{
+$this-&amp;gt;client = $client;
+}
+public function sendMessageToSlack($message)
+{
+try {
+$this-&amp;gt;client-&amp;gt;request(
+'POST',
+$this-&amp;gt;getSlackUrl(),
+[
+'body' =&amp;gt; $this-&amp;gt;message($message)
+]
+);
+} catch (\Exception $e) {
+Log::debug(sprintf(&amp;quot;Error sending to Slack %s&amp;quot;, $e-&amp;gt;getMessage()));
+}
+}
+protected function message($message)
+{
+return json_encode(
+[
+'text' =&amp;gt; $message
+]
+);
+}
+public function getSlackUrl()
+{
+if (!</description></item><item><title>Slack Custom Commands and Laravel to Make an American to British Translater</title><link>https://alnutile.github.io/posts/173/</link><pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/173/</guid><description>Laravel or anything you are comfortable with making a Route and Response will work fine really.
+This &amp;ldquo;messaging as a platform&amp;rdquo; is a new world for me, challenging my way of thinking in many ways. Some things just do not need a authentication of their own, a UI, etc they just need a place to get info from, or do something with some info etc.
+In this case I made a really simple &amp;ldquo;Custom Slash Command&amp;rdquo; to translate British Slang to American and American to British (so I can sound cooler!</description></item></channel></rss>

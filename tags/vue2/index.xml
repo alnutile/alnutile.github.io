@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vue2 on Alfred Nutile</title><link>https://alnutile.github.io/tags/vue2/</link><description>Recent content in vue2 on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 01 Nov 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/vue2/index.xml" rel="self" type="application/rss+xml"/><item><title>Wrapping JSONEditor in Vue as Well as Laravel Blade</title><link>https://alnutile.github.io/posts/222/</link><pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/222/</guid><description>UPDATED November 05 2017
+This will cover how to make a JSONEditor component that I can then use in a Blade template and listen to events.
+You will end up with this:
+First making sure I have all the packages I need:
+//package.json
+&amp;quot;devDependencies&amp;quot;: {
+&amp;quot;axios&amp;quot;: &amp;quot;^0.17&amp;quot;,
+&amp;quot;bootstrap-sass&amp;quot;: &amp;quot;^3.3.7&amp;quot;,
+&amp;quot;cross-env&amp;quot;: &amp;quot;^5.0.1&amp;quot;,
+&amp;quot;jquery&amp;quot;: &amp;quot;^3.2&amp;quot;,
+&amp;quot;laravel-mix&amp;quot;: &amp;quot;^1.0&amp;quot;,
+&amp;quot;lodash&amp;quot;: &amp;quot;^4.17.4&amp;quot;,
+&amp;quot;vue&amp;quot;: &amp;quot;^2.1.10&amp;quot;
+},
+&amp;quot;dependencies&amp;quot;: {
+&amp;quot;select2&amp;quot;: &amp;quot;^4.0.5&amp;quot;,
+&amp;quot;jsoneditor&amp;quot;: &amp;quot;^5.9.6&amp;quot;
+}
+And to load it into my bootstrap file:</description></item></channel></rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>unittest on Alfred Nutile</title><link>https://alnutile.github.io/tags/unittest/</link><description>Recent content in unittest on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 27 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/unittest/index.xml" rel="self" type="application/rss+xml"/><item><title>Mocking in Python</title><link>https://alnutile.github.io/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/263/</guid><description>Serious note to self.
+I wanted to mock the Github module for python.
+My simple class will get the ID of the team.
+from github import Github, Team
+from dotenv import load_dotenv
+import os
+import sys
+import json
+class GetTeamId:
+def __init__(self):
+load_dotenv()
+self.team_id = 5555
+self.token = os.environ.get(&amp;quot;GITHUB_TOKEN&amp;quot;)
+self.client = Github(self.token)
+self.org = self.client.get_organization('FooBar')
+def handle(self, team_name):
+teams = self.org.get_teams()
+for team in teams:
+if team_name == team.name:
+print(&amp;quot;Team id&amp;quot;, team.</description></item></channel></rss>

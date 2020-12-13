@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>auth on Alfred Nutile</title><link>https://alnutile.github.io/tags/auth/</link><description>Recent content in auth on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 31 May 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/auth/index.xml" rel="self" type="application/rss+xml"/><item><title>API Token Based Access Laravel 5.1 (Yet another article on this)</title><link>https://alnutile.github.io/posts/183/</link><pubDate>Tue, 31 May 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/183/</guid><description>API Token Laravel 5.2 introduces the auth token guard setup which is way simpler than Oauth. Also it does not assume a certain level of complexity in needs like Scopes and expirations of tokens that we do not need for our internal app to app communications.
+We are using 5.1 so this will implement it.
+See some docs here https://gistlog.co/JacobBennett/090369fbab0b31130b51
+For creating a user the AppServiceProvider boots the user record and if no api_token is present it will set one.</description></item><item><title>Temporary Auth Updates L5</title><link>https://alnutile.github.io/posts/109/</link><pubDate>Sun, 12 Oct 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/109/</guid><description>Auth updates First make sure your composer update has the latest Laravel and check that there are not relevant fixes already via laravel/docs master laravel/framework master or laravel/laravel dev
+Moved evn files to the new format and only 1 is needed now having the
+APP_ENV='local' setting for the environment.
+Then update the path in the AuthController to go to auth/login
+#app/Http/Controllers/Auth/AuthController
+public function login(LoginRequest $request)
+{
+if ($this-&amp;gt;auth-&amp;gt;attempt($request-&amp;gt;only('email', 'password')))
+{
+return redirect('/');
+}
+return redirect('/auth/login')-&amp;gt;withErrors([
+'email' =&amp;gt; 'The credentials you entered did not match our records.</description></item></channel></rss>

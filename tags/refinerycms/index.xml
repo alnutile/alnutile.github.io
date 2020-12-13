@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>refinerycms on Alfred Nutile</title><link>https://alnutile.github.io/tags/refinerycms/</link><description>Recent content in refinerycms on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 13 Aug 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/refinerycms/index.xml" rel="self" type="application/rss+xml"/><item><title>Ruby on Rails with CMS and other fun stuff</title><link>https://alnutile.github.io/posts/25/</link><pubDate>Tue, 13 Aug 2013 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/25/</guid><description>Been working about a month now on a Ruby on Rails project. The goal of the product is to make a site that can be spun up numerous times as a Saas product. I has to include&amp;nbsp;
+CMS elements
+Settings area to change logo, colors etc.
+Connect to a remote SOAP API to create cloneable content from and users.
+User admin area with Roles
+Reporting
+Ckeditor that integrates with Paperclip on non-cms pages.</description></item><item><title>Paperclip and S3</title><link>https://alnutile.github.io/posts/17/</link><pubDate>Tue, 16 Jul 2013 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/17/</guid><description>Great gem for attaching images to a rails app (maybe even Laravel). This article made it clear how to set this up
+https://devcenter.heroku.com/articles/paperclip-s3
+And this one made it clear why my development environment was not working.
+http://stackoverflow.com/questions/11760597/s3-paperclip-working-on-heroku-but-not-localhost
+I had to edit my .bash_profile
+But instead of restarting the terminal I just did source ~/.bash_profile and then started that rails server again in that terminal.
+If only I found a tutorial on using fog and paperclip since I am already using that gem for refinerycms</description></item><item><title>Technologies for a Saas</title><link>https://alnutile.github.io/posts/16/</link><pubDate>Sun, 07 Jul 2013 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/16/</guid><description>I had to review for a client what CMS to choose. Keeping in mind the CMS was only part of the product and a small part. Small in that the big value to the product seem to fall more on the APP part of the project that allowed the user to make a question set from an JSON based API. So a bulk of the work would be building that.</description></item></channel></rss>

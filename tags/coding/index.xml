@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>coding on Alfred Nutile</title><link>https://alnutile.github.io/tags/coding/</link><description>Recent content in coding on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 16 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/coding/index.xml" rel="self" type="application/rss+xml"/><item><title>We Code in the Context of our Quoting</title><link>https://alnutile.github.io/posts/207/</link><pubDate>Thu, 16 Mar 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/207/</guid><description>This article can be listened too here or in your favorite podcast player
+Whether you are working Waterfall, or Agile we still need to quote out the time it will take for new features . We still need to give the product owners, or the people with the money, a sense of timing. And it is this skill or lack thereof that drives the experience we are going to have when we code.</description></item><item><title>Keeping a Controller Method Simple</title><link>https://alnutile.github.io/posts/186/</link><pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/186/</guid><description>When I am done with a controller, done mocking up ideas and ready for some long term code, then I think this is the most information a Controller method should have.
+public function updateFoor($id, $foo) {
+try {
+$results = $this-&amp;gt;someRepoOrServiceClass($Id, $foo); return Response::json(['data' =&amp;gt; [], 'message' =&amp;gt; &amp;quot;Success doing something&amp;quot;], 202);
+} catch (\Exception $e) {
+$message = sprintf(&amp;quot;Error doing something %s&amp;quot;, $e-&amp;gt;getMessage());
+Log::debug($message);
+return Response::json(['data' =&amp;gt; [], 'message' =&amp;gt; $message], 400);
+}
+}
+At this point I have someRepoOrServiceClass well tested outside of this Controller.</description></item><item><title>Put It All Into Version Control Even Composer!</title><link>https://alnutile.github.io/posts/171/</link><pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/171/</guid><description>Update: September 06 2016
+We stopped doing this. I do not think it is a bad idea but we ended up going with CodeDeploy on AWS. So after our CI does a Composer install and all passes, CodeDeploy will just bundle everything up as a Zip file and deploy that to the server.
+Or Listen here
+Another article about this written by Loran Jane Mitchell Using Composer Without GitIgnoring Vendor</description></item></channel></rss>

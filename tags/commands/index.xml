@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>commands on Alfred Nutile</title><link>https://alnutile.github.io/tags/commands/</link><description>Recent content in commands on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 29 May 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/commands/index.xml" rel="self" type="application/rss+xml"/><item><title>Writing Commands and Scheduling in Laravel 5.1</title><link>https://alnutile.github.io/posts/146/</link><pubDate>Fri, 29 May 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/146/</guid><description>Wow, writing Artisan Commands just become even easier. And plugging it into Scheduler makes for a great combination.
+For example we need to clean out a folder every so many minutes. The example below I also for fun play around with progress and table output.
+Note too protected $signature = 'approve:cleanuploads {--minutes=10}'; simplifies theargument and options features.
+&amp;lt;?php namespace App\Console\Commands;
+use Carbon\Carbon;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
+class CleanUploadsCommands extends Command
+{
+protected $rootPath = 'public/storage';
+protected $maxMinutes = 10;
+protected $deleted = [];
+protected $signature = 'approve:cleanuploads {--minutes=10}';
+protected $description = 'Clean all the uploads in the storage folder for security reasons';
+protected $pdfFiles = [];
+protected $files = [];
+public function __construct()
+{
+parent::__construct();
+}
+public function handle()
+{
+$this-&amp;gt;maxMinutes = $this-&amp;gt;option('minutes');
+$this-&amp;gt;anyPdfFilesHere();
+$this-&amp;gt;deletePdfFiles();
+$this-&amp;gt;outputResults();
+}
+protected function anyPdfFilesHere()
+{
+$this-&amp;gt;files = File::allFiles(base_path($this-&amp;gt;rootPath));
+foreach($this-&amp;gt;files as $file)
+{
+if (File::mimeType($file) == 'application/pdf')
+{
+$this-&amp;gt;pdfFiles[] = $file;
+}
+}
+}
+private function deletePdfFiles()
+{
+if(count($this-&amp;gt;pdfFiles) &amp;gt; 0)
+{
+$this-&amp;gt;output-&amp;gt;progressStart(count($this-&amp;gt;pdfFiles));
+foreach($this-&amp;gt;pdfFiles as $file)
+{
+$modified = File::lastModified($file);
+$minutes = Carbon::createFromTimestamp($modified)-&amp;gt;diffInMinutes();
+if($minutes &amp;gt; $this-&amp;gt;maxMinutes)
+{
+$this-&amp;gt;setDeleted(['filename' =&amp;gt; $file]);
+File::delete($file);
+$this-&amp;gt;output-&amp;gt;progressAdvance();
+}
+}
+}
+}
+private function outputResults()
+{
+if(count($this-&amp;gt;deleted) &amp;gt; 0)
+{
+$this-&amp;gt;output-&amp;gt;progressFinish();
+$headers = ['File Name and Path'];
+$this-&amp;gt;table($headers, $this-&amp;gt;getDeleted());
+}
+else
+{
+$this-&amp;gt;comment(sprintf(&amp;quot;No files older than %d minutes&amp;quot;, $this-&amp;gt;maxMinutes));
+}
+}
+public function getDeleted()
+{
+return $this-&amp;gt;deleted;
+}
+public function setDeleted($deleted)
+{
+$this-&amp;gt;deleted[] = $deleted;
+}
+}
+Then in the Kernel.</description></item></channel></rss>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>note on Alfred Nutile</title><link>https://alnutile.github.io/tags/note/</link><description>Recent content in note on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 29 Aug 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/note/index.xml" rel="self" type="application/rss+xml"/><item><title>Note To Self: A VirtualBox machine with the name 'homestead' already exists.</title><link>https://alnutile.github.io/posts/161/</link><pubDate>Sat, 29 Aug 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/161/</guid><description>Since I know this will happen again I want to remind myself and others how to fix it.
+I had this error A VirtualBox machine with the name 'homestead' already exists. when doing my normal vagrant up. I got some help at http://stackoverflow.com/questions/26993903/a-virtualbox-machine-with-the-name-homestead-already-exists but it was not made too clear.
+Here are the exact steps for me to fix this
+Run vboxmanage list vms
+This will output a list
+&amp;quot;homestead&amp;quot; {5dc30604-8ebe-4060-8966-4881958e6bf5}
+&amp;quot;boot2docker-vm&amp;quot; {38af33d4-7ebc-4498-a80e-39711a08b413}
+&amp;quot;settler_default_1434987271004_24349_1440846292799_16470&amp;quot; {2c80bf94-99b8-4b51-95a0-034dddae8c33}
+Then I took the id of homestead 5dc30604-8ebe-4060-8966-4881958e6bf5 and did</description></item></channel></rss>

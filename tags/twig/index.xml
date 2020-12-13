@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>twig on Alfred Nutile</title><link>https://alnutile.github.io/tags/twig/</link><description>Recent content in twig on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 25 Feb 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/twig/index.xml" rel="self" type="application/rss+xml"/><item><title>Twig and Drupal 7</title><link>https://alnutile.github.io/posts/53/</link><pubDate>Tue, 25 Feb 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/53/</guid><description>This will show how to use Twig in your D7 module
+Setup your composer.json to pull in twig.
+Then setup your template files
+Then the buttons I include
+finally load the template and add your variables
+&amp;nbsp;</description></item></channel></rss>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>phantom on Alfred Nutile</title><link>https://alnutile.github.io/tags/phantom/</link><description>Recent content in phantom on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 16 Mar 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/phantom/index.xml" rel="self" type="application/rss+xml"/><item><title>Behat and PhantomJs</title><link>https://alnutile.github.io/posts/138/</link><pubDate>Mon, 16 Mar 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/138/</guid><description>Using PhantomJS both with Selenium and in replace of Selenium With Selenium Here is my example behat profile for this one
+phantom_via_selenium:
+paths:
+features: app/tests/acceptance/features/ui
+bootstrap: app/tests/acceptance/contexts
+context:
+parameters:
+base_url: https://behat.dev:443
+asset_path: '/tmp/'
+extensions:
+Behat\MinkExtension\Extension:
+default_session: selenium2
+goutte:
+guzzle_parameters:
+curl.options:
+CURLOPT_SSL_VERIFYPEER: false
+CURLOPT_CERTINFO: false
+CURLOPT_TIMEOUT: 120
+ssl.certificate_authority: false
+selenium2:
+wd_host: &amp;quot;http://selenium-server.dev:4444/wd/hub&amp;quot;
+capabilities:
+browser: phantomjs
+base_url: 'https://behat.dev:443'
+browser_name: 'phantomjs'
+And as usual you start up selenium.
+In both cases the test is this one</description></item></channel></rss>

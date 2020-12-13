@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>twitterbootstrap on Alfred Nutile</title><link>https://alnutile.github.io/tags/twitterbootstrap/</link><description>Recent content in twitterbootstrap on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 07 Jul 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/twitterbootstrap/index.xml" rel="self" type="application/rss+xml"/><item><title>Refinery CMS and Twitter Bootstrap</title><link>https://alnutile.github.io/posts/14/</link><pubDate>Sun, 07 Jul 2013 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/14/</guid><description>This worked out quite easily on a project that I am working on. (not yet released)
+At the command line I had to run the needed code to copy the views to my app.
+Here are some commands I ran thoug this command
+rake refinery:override
+will show other options as well.
+rake refinery:override view=refinery/_site_bar
+rake refinery:override view=refinery/_content_page
+rake refinery:override view=refinery/_menu
+rake refinery:override view=refinery/_head</description></item></channel></rss>

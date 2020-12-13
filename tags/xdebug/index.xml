@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>xdebug on Alfred Nutile</title><link>https://alnutile.github.io/tags/xdebug/</link><description>Recent content in xdebug on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 28 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/xdebug/index.xml" rel="self" type="application/rss+xml"/><item><title>PHP Xdebug Visual Code</title><link>https://alnutile.github.io/posts/262/</link><pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/262/</guid><description>UPDATE: PHP 7.4 Every time I do value use php I then lose my xdebug setup :( here is me taking a moment to stop having that happen
+vim /usr/local/etc/php/7.4/php.ini
+Then add this
+[PHP]
+zend_extension=&amp;quot;xdebug.so&amp;quot;
+xdebug.remote_enable = 1
+xdebug.remote_autostart = 1
+xdebug.remote_handler = dbgp
+xdebug.remote_host = 127.0.0.1
+xdebug.remote_port = 9000
+xdebug.remote_mode = req
+And then I am set again! Notice I am using 9000 above my insanity of using 9005 below has passed</description></item></channel></rss>

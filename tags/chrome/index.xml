@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>chrome on Alfred Nutile</title><link>https://alnutile.github.io/tags/chrome/</link><description>Recent content in chrome on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 05 Oct 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/chrome/index.xml" rel="self" type="application/rss+xml"/><item><title>Chrome and Behat</title><link>https://alnutile.github.io/posts/108/</link><pubDate>Sun, 05 Oct 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/108/</guid><description>Getting Chrome run was &amp;ldquo;easy&amp;rdquo; thanks to this post
+My install has behat running inside of a vagrant box so my behat.yml talks to Selenium running on my Mac and uses my Macs Chrome
+default:
+paths:
+features: behat/features
+bootstrap: features/bootstrap
+formatter:
+name: pretty
+extensions:
+Behat\MinkExtension\Extension:
+default_session: selenium2
+goutte: null
+selenium2:
+wd_host: &amp;quot;http://192.168.33.1:4444/wd/hub&amp;quot;
+capabilities: { &amp;quot;browserName&amp;quot;: &amp;quot;chrome&amp;quot;, &amp;quot;browser&amp;quot;: &amp;quot;chrome&amp;quot;, &amp;quot;version&amp;quot;: &amp;quot;25&amp;quot;, 'chrome': {'switches':['--no-sandbox']}}
+base_url: 'http://cms.dev:8000/'
+browser_name: chrome
+I placed chromedriver in /opt and just ran this</description></item></channel></rss>

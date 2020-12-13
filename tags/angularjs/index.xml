@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>angularjs on Alfred Nutile</title><link>https://alnutile.github.io/tags/angularjs/</link><description>Recent content in angularjs on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 19 Dec 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/angularjs/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel Blade and Angular brackets</title><link>https://alnutile.github.io/posts/124/</link><pubDate>Fri, 19 Dec 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/124/</guid><description>I use one AngularController.php to render main.blade.php file that then renders angular. The only other blade file is the login page. I could have done this in the routes.php file but since the routes file has the login page I decided to place it in this controller.
+&amp;lt;?php namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\View;
+use Laracasts\Utilities\JavaScript\Facades\JavaScript;
+/**
+* @Middleware(&amp;quot;auth&amp;quot;)
+*/
+class AngularController extends BaseController {
+use UserHelper;
+/**
+* @var UserService
+*/
+private $userService;
+public function __construct(UserService $userService)
+{
+$this-&amp;gt;userService = $userService;
+}
+/**
+* @Get(&amp;quot;behat&amp;quot;, as=&amp;quot;behat.</description></item><item><title>Angular History Based BreadCrumbs</title><link>https://alnutile.github.io/posts/123/</link><pubDate>Fri, 12 Dec 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/123/</guid><description>Originally I was going to go with one of the more well known packages but then I realized I wanted to show the history of the users states not the children of the state they are on. For example when the user lands on the website at say the path projects and then goes to projects/foo their breadcrumbs will look like this
+Projects / Project Foo
+And if they then go to project/foo/reports then it would be</description></item><item><title>Embed Template Data in View (Angular, Laravel)</title><link>https://alnutile.github.io/posts/122/</link><pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/122/</guid><description>Sometimes, when your frontend shares the same view rendering of the backend, you can store data in the window object. This can save you queries to the backend when, for example, Profile Data that shows on every pages request.
+Embed output into window or $window In the Controller I am using to output the Angular template (app/views/main.blade.php for example) I inject the window data that I want all pages to have.</description></item><item><title>CSRF Tokens and Angular.js</title><link>https://alnutile.github.io/posts/110/</link><pubDate>Wed, 15 Oct 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/110/</guid><description>This is key to preventing Cross-site request forgery. Basically you log in and do some work on one site, then go to a malicious site and now they can send POST requests to the sites you have authentication to. But by passing a token we can prevent that issue.
+The steps
+Make a token path Make a token service to use again and again in Angular.js Add it as a resolve to the route in Angular.</description></item></channel></rss>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>laravel 5 on Alfred Nutile</title><link>https://alnutile.github.io/tags/laravel-5/</link><description>Recent content in laravel 5 on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 12 Oct 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/laravel-5/index.xml" rel="self" type="application/rss+xml"/><item><title>Temporary Auth Updates L5</title><link>https://alnutile.github.io/posts/109/</link><pubDate>Sun, 12 Oct 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/109/</guid><description>Auth updates First make sure your composer update has the latest Laravel and check that there are not relevant fixes already via laravel/docs master laravel/framework master or laravel/laravel dev
+Moved evn files to the new format and only 1 is needed now having the
+APP_ENV='local' setting for the environment.
+Then update the path in the AuthController to go to auth/login
+#app/Http/Controllers/Auth/AuthController
+public function login(LoginRequest $request)
+{
+if ($this-&amp;gt;auth-&amp;gt;attempt($request-&amp;gt;only('email', 'password')))
+{
+return redirect('/');
+}
+return redirect('/auth/login')-&amp;gt;withErrors([
+'email' =&amp;gt; 'The credentials you entered did not match our records.</description></item></channel></rss>
