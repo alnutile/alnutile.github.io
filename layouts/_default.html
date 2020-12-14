@@ -52,12 +52,10 @@
           {{ .Page.Content }}
         </div>
 
-        <ul id="tags-single">
-          <li>Tags:</li>
-          {{ range .Params.tags }}
-          <li><a href="/tags/{{ . | urlize }}">{{ . }}</a>,  </li>
+        <div class="tags pl-3" id="tags-single">
+          Tags: {{ range $i, $e := .Params.tags }}{{ if $i }}, {{ end }} <a href="/tags/{{ $e | urlize }}">{{ $e }}</a>
           {{ end }}
-        </ul>
+        </div>
 
         <!--- Improve this page button --->
         {{ if site.Params.GitRepo }}
