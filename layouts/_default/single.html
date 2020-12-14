@@ -53,7 +53,9 @@
         </div>
 
         <div class="tags pl-3" id="tags-single">
-          Tags: {{ range $i, $e := .Params.tags }}{{ if $i }}, {{ end }} <a href="/tags/{{ $e | urlize }}">{{ $e }}</a>
+          <strong>Tags:</strong>
+          {{ range $key, $value := .Params.tags }}
+          <a href="/tags/{{ $value | urlize }}">{{ $value }}</a>{{ if ne $key (sub (len $.Params.tags) 1) }}, {{ else }}{{ end }}
           {{ end }}
         </div>
 
