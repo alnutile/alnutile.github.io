@@ -23,11 +23,11 @@ markup:
       unsafe: true
   tableOfContents:
     startLevel: 2
-    endLevel: 6
+    endLevel: 4
     ordered: false
 
 # Enable Google Analytics
-googleAnalytics: UA-XXXXXXXXX-X
+googleAnalytics: UA-39925227-1
 
 # Enable Disqus forum
 disqusShortname: alfrednutile
