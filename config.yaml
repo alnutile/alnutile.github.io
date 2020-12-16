@@ -1,4 +1,4 @@
-baseURL: https://alnutile.github.io
+baseURL: https://alfrednutile.info
 languageCode: en-us
 title: 'Alfred Nutile'
 theme: 'toha'
@@ -63,6 +63,7 @@ params:
 
 taxonomies:
   tag: tags
+
 outputs:
     home:
     - HTML
