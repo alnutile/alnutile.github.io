@@ -1,3 +1,6 @@
 ul#tags-single li {
   display: inline;
 }
+html[theme='dark-mode'] {
+  filter: invert(1) hue-rotate(180deg);
+}

@@ -1,6 +1,5 @@
 "use strict";
 var searchFn = function () {
-  console.log("Loaded")
     var lastTerm = "You are likely to be eaten by a grue.";
     var stopwords = ["i", "me", "my", "we", "our", "you", "it",
         "its", "this", "that", "am", "is", "are", "was", "be",
