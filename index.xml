@@ -85,7 +85,7 @@ DIR=&amp;quot;$( cd &amp;quot;$( dirname &amp;quot;${BASH_SOURCE[0]}&amp;quot; )
 ## Get the current git commit sha
 HASH=$(git rev-parse HEAD)
 ## Get any secret files
-aws s3 cp s3://foo/environments/$STACK_ENV_FILE $DIR/app/packaged/.</description></item><item><title>Bitbucket Pipeline</title><link>https://alnutile.github.io/posts/257/</link><pubDate>Tue, 18 Sep 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/257/</guid><description>BitBucket has a nice feature call Pipelines https://bitbucket.org/product/features/pipelines for $0 you can, even for private repos have a decent CI flow.
+aws s3 cp s3://foo/environments/$STACK_ENV_FILE $DIR/app/packaged/.</description></item><item><title>How to Troubleshoot and Issue</title><link>https://alnutile.github.io/posts/258/</link><pubDate>Wed, 03 Oct 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/258/</guid><description>&amp;hellip;</description></item><item><title>Bitbucket Pipeline</title><link>https://alnutile.github.io/posts/257/</link><pubDate>Tue, 18 Sep 2018 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/257/</guid><description>BitBucket has a nice feature call Pipelines https://bitbucket.org/product/features/pipelines for $0 you can, even for private repos have a decent CI flow.
 Private repos CI Pipeline $0!!
 It took a bit to get going though since the docs do not talk about PHP and MySQL in enough details. Here is what I ended up with for a bitbucket-pipelines.yml
 # This is a sample build configuration for PHP.
