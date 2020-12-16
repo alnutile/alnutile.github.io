@@ -63,3 +63,11 @@ params:
 
 taxonomies:
   tag: tags
+outputs:
+    home:
+    - HTML
+    - JSON
+    - RSS
+    page:
+    - HTML
+    - RSS
