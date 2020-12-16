@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>angular on Alfred Nutile</title><link>https://alnutile.github.io/tags/angular/</link><description>Recent content in angular on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 18 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/angular/index.xml" rel="self" type="application/rss+xml"/><item><title>Image Uploads, Laravel, Angular and Flow.js</title><link>https://alnutile.github.io/posts/165/</link><pubDate>Fri, 18 Sep 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/165/</guid><description>Here is one combination out of many to make this happen.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>angular on Alfred Nutile</title><link>https://alfrednutile.info/tags/angular/</link><description>Recent content in angular on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 18 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/angular/index.xml" rel="self" type="application/rss+xml"/><item><title>Image Uploads, Laravel, Angular and Flow.js</title><link>https://alfrednutile.info/posts/165/</link><pubDate>Fri, 18 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/165/</guid><description>Here is one combination out of many to make this happen.
 The libraries are
 https://github.com/flowjs/ng-flow
 and
 https://github.com/flowjs/flow-php-server
 Model and Imageable Resource What I like about this is we can make 1 controller to manage uploads. That controller will upload the file, place it into the correct folder, and setup the relationship to the resource.
 In this example the Resource will be a Contact.
-So I then follow Laravel docs to create the Polymorphic Imageable/Photo example http://laravel.</description></item><item><title>Laravel and Angular Widgets e.g. Non SPA (Single Page Application) Pattern</title><link>https://alnutile.github.io/posts/160/</link><pubDate>Wed, 26 Aug 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/160/</guid><description>Not all apps need to be an SPA (Single Page Application). Sure they have their place but in most cases the task might benefit from just a Blade template and Angular widget. This saves you from having to write an angular route which can be a tedious duplication of work. Also Blade is fast and fun to work with.
-Step One Add Data to Global Window Using the Transform PHP Vars to JavaScript you can easily start to inject some content into your templates, if needed, to setup the data your Angular widget can use to build out it&amp;rsquo;s elements.</description></item><item><title>Quick way to Request Json from Angular and return from Laravel</title><link>https://alnutile.github.io/posts/152/</link><pubDate>Mon, 06 Jul 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/152/</guid><description>I simply want to make sure to return json from my app more easily even on errors. So in Angular I set my app.js as such
+So I then follow Laravel docs to create the Polymorphic Imageable/Photo example http://laravel.</description></item><item><title>Laravel and Angular Widgets e.g. Non SPA (Single Page Application) Pattern</title><link>https://alfrednutile.info/posts/160/</link><pubDate>Wed, 26 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/160/</guid><description>Not all apps need to be an SPA (Single Page Application). Sure they have their place but in most cases the task might benefit from just a Blade template and Angular widget. This saves you from having to write an angular route which can be a tedious duplication of work. Also Blade is fast and fun to work with.
+Step One Add Data to Global Window Using the Transform PHP Vars to JavaScript you can easily start to inject some content into your templates, if needed, to setup the data your Angular widget can use to build out it&amp;rsquo;s elements.</description></item><item><title>Quick way to Request Json from Angular and return from Laravel</title><link>https://alfrednutile.info/posts/152/</link><pubDate>Mon, 06 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/152/</guid><description>I simply want to make sure to return json from my app more easily even on errors. So in Angular I set my app.js as such
 (function(){
 'use strict';
 angular.module('app', []);
@@ -26,7 +26,7 @@ if($request-&amp;gt;header('Accept') == 'application/json')
 return $blogs;
 return view('blogs.index', compact('blogs', 'customPagination'));
 }
-Then I can share the same route with Angular that I do with my Blade templates as needed.</description></item><item><title>Code for making a Shortcut tool for your App</title><link>https://alnutile.github.io/posts/141/</link><pubDate>Sun, 29 Mar 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/141/</guid><description>This allows the user to easily make shortcuts to urls they are on and give them names.
+Then I can share the same route with Angular that I do with my Blade templates as needed.</description></item><item><title>Code for making a Shortcut tool for your App</title><link>https://alfrednutile.info/posts/141/</link><pubDate>Sun, 29 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/141/</guid><description>This allows the user to easily make shortcuts to urls they are on and give them names.
 video
 The Migration &amp;lt;?php
 use Illuminate\Database\Migrations\Migration;
@@ -58,7 +58,7 @@ public function down()
 Schema::drop('shortcuts');
 }
 }
-The Model You will see me using scopes as I wanted to make a really simple POC</description></item><item><title>Sending Dates to Angular from Laravel</title><link>https://alnutile.github.io/posts/134/</link><pubDate>Tue, 24 Feb 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/134/</guid><description>This might not be ideal but so far it allows me to more easily sort dates and filter dates in Angular.
+The Model You will see me using scopes as I wanted to make a really simple POC</description></item><item><title>Sending Dates to Angular from Laravel</title><link>https://alfrednutile.info/posts/134/</link><pubDate>Tue, 24 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/134/</guid><description>This might not be ideal but so far it allows me to more easily sort dates and filter dates in Angular.
 From the Laravel model I add these two methods
 /**
 * See docs http://laravel.com/docs/5.0/eloquent#date-mutators
@@ -71,14 +71,14 @@ public function getCreatedAtAttribute($attr) {
 return Carbon::parse($attr)-&amp;gt;timestamp; //Change the format to whichever you desire
 }
 Then in Angular I can use the filters
-{{ vm.created_at | date:'medium'}}</description></item><item><title>Laravel Behat and Selenium</title><link>https://alnutile.github.io/posts/130/</link><pubDate>Mon, 02 Feb 2015 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/130/</guid><description>Laracasts has some great videos and libraries for Laravel 5 and Behat integration.
+{{ vm.created_at | date:'medium'}}</description></item><item><title>Laravel Behat and Selenium</title><link>https://alfrednutile.info/posts/130/</link><pubDate>Mon, 02 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/130/</guid><description>Laracasts has some great videos and libraries for Laravel 5 and Behat integration.
 Examples
 https://github.com/laracasts/Behat-Laravel-Extension
 and
 https://laracasts.com/lessons/laravel-5-and-behat-bffs
 Two things that I still need and get from this though that I do not think I can get from those are
-Laravel 4.2 support which obviously is not going to work with the above L5 libraries :) Mocking APIs when running under APP_ENV=local or testing Also I think with the libraries above only goutte drivers work for the APP_ENV setting.</description></item><item><title>Reusable UI/API CRUD Laravel and Angular</title><link>https://alnutile.github.io/posts/126/</link><pubDate>Fri, 26 Dec 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/126/</guid><description>related repo
-Working on a recent project it finally hit me how repetitive then need was to make a Resource at the API level and to make the UI to Create, Retrieve, Update, Delete, Index. And how easy it would be to make a foundation for this to use for each Resource keeping the UI goals consistent and simple between these Resources. With this came also a set of API tests in Behat that could also be used with the project.</description></item><item><title>Redirecting back to original Angular.js destination from Laravel Auth</title><link>https://alnutile.github.io/posts/119/</link><pubDate>Fri, 21 Nov 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/119/</guid><description>UPDATE
+Laravel 4.2 support which obviously is not going to work with the above L5 libraries :) Mocking APIs when running under APP_ENV=local or testing Also I think with the libraries above only goutte drivers work for the APP_ENV setting.</description></item><item><title>Reusable UI/API CRUD Laravel and Angular</title><link>https://alfrednutile.info/posts/126/</link><pubDate>Fri, 26 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/126/</guid><description>related repo
+Working on a recent project it finally hit me how repetitive then need was to make a Resource at the API level and to make the UI to Create, Retrieve, Update, Delete, Index. And how easy it would be to make a foundation for this to use for each Resource keeping the UI goals consistent and simple between these Resources. With this came also a set of API tests in Behat that could also be used with the project.</description></item><item><title>Redirecting back to original Angular.js destination from Laravel Auth</title><link>https://alfrednutile.info/posts/119/</link><pubDate>Fri, 21 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/119/</guid><description>UPDATE
 You can see in the comments some updated info.
 When a user visits an Angular url (not html5) like http://foo.com/app#some/long/path
 Then gets redirected to http://foo.com/auth/login because they are not logged in. It would be nice to send them right back after that.
@@ -88,7 +88,7 @@ Include this file in your authentication page.
 (function(){
 'use strict';
 var intended = window.location.hash;
-(intended.length &amp;gt; 0) ? jQuery.cookie('intended', '/app' + intended) : jQuery.</description></item><item><title>Angular Pusher Factory to Centralize Code (also using Laravel to set constants and properties)</title><link>https://alnutile.github.io/posts/111/</link><pubDate>Fri, 24 Oct 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/111/</guid><description>This will cover
+(intended.length &amp;gt; 0) ? jQuery.cookie('intended', '/app' + intended) : jQuery.</description></item><item><title>Angular Pusher Factory to Centralize Code (also using Laravel to set constants and properties)</title><link>https://alfrednutile.info/posts/111/</link><pubDate>Fri, 24 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/111/</guid><description>This will cover
 Making an Angular factory to centralize Pusher setup in Angular Passing settings form Laravel to Angular (though could be just Angular and a .env file as well) Passing Constants into the Angular App to pass these settings around, in this case to the Pusher Factory. Setup your constants This is where I call in the info I need to use later on.
 (function(){
 function config($stateProvider, $urlRouterProvider) {

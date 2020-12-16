@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>nginx on Alfred Nutile</title><link>https://alnutile.github.io/tags/nginx/</link><description>Recent content in nginx on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 18 Nov 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>Nginx force SSL</title><link>https://alnutile.github.io/posts/116/</link><pubDate>Tue, 18 Nov 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/116/</guid><description>Need to quickly setup ssl and default to that for our sites.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>nginx on Alfred Nutile</title><link>https://alfrednutile.info/tags/nginx/</link><description>Recent content in nginx on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 18 Nov 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>Nginx force SSL</title><link>https://alfrednutile.info/posts/116/</link><pubDate>Tue, 18 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/116/</guid><description>Need to quickly setup ssl and default to that for our sites.
 This article made it simple stupid for getting the certs setup.
 Then I wrapped up the redirect as seen below
 server {
@@ -16,7 +16,7 @@ rewrite ^ https://$server_name$request_uri? permanent;
 index index.html index.htm index.php;
 charset utf-8;
 }
-Thanks to this post as well http://serverfault.</description></item><item><title>SSL and Homestead</title><link>https://alnutile.github.io/posts/101/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/101/</guid><description>This is like most nginx the only trick was adding the port forward on Homestead
+Thanks to this post as well http://serverfault.</description></item><item><title>SSL and Homestead</title><link>https://alfrednutile.info/posts/101/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/101/</guid><description>This is like most nginx the only trick was adding the port forward on Homestead
 #scripts/homestead.rb
 # Configure Port Forwarding To The Box
 config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 80, host: 8000

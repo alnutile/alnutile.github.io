@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>python on Alfred Nutile</title><link>https://alnutile.github.io/tags/python/</link><description>Recent content in python on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>Lambda Tips</title><link>https://alnutile.github.io/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/264/</guid><description>@WIP
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>python on Alfred Nutile</title><link>https://alfrednutile.info/tags/python/</link><description>Recent content in python on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 01 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>Lambda Tips</title><link>https://alfrednutile.info/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/264/</guid><description>@WIP
 Taking advantage of a running Lambda function and it&amp;rsquo;s state https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/ under the section Lambda function has a nice &amp;ldquo;trick&amp;rdquo; of setting above the class app = None
 then later on it will see if that is set
 def lambda_handler(event, context):
@@ -8,7 +8,7 @@ if app is None:
 print(&amp;quot;Loading config and creating new MyApp...&amp;quot;)
 config = load_config(full_config_path)
 app = MyApp(config)
-return &amp;quot;MyApp config is &amp;quot; + str(app.</description></item><item><title>Mocking in Python</title><link>https://alnutile.github.io/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/263/</guid><description>Serious note to self.
+return &amp;quot;MyApp config is &amp;quot; + str(app.</description></item><item><title>Mocking in Python</title><link>https://alfrednutile.info/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/263/</guid><description>Serious note to self.
 I wanted to mock the Github module for python.
 My simple class will get the ID of the team.
 from github import Github, Team
@@ -27,7 +27,7 @@ def handle(self, team_name):
 teams = self.org.get_teams()
 for team in teams:
 if team_name == team.name:
-print(&amp;quot;Team id&amp;quot;, team.</description></item><item><title>Serverless Python and Example App WIP</title><link>https://alnutile.github.io/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/229/</guid><description>There are good docs on this http://serverless.com platform. For Python
+print(&amp;quot;Team id&amp;quot;, team.</description></item><item><title>Serverless Python and Example App WIP</title><link>https://alfrednutile.info/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/229/</guid><description>There are good docs on this http://serverless.com platform. For Python
 https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example https://github.com/serverless/examples I will cover some items here I need to do time after time.
 Tagging ENV settings Testing Testing Example file test_cf_backuper.py:
 import unittest

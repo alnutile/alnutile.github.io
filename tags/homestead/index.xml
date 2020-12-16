@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>homestead on Alfred Nutile</title><link>https://alnutile.github.io/tags/homestead/</link><description>Recent content in homestead on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 05 Jun 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/homestead/index.xml" rel="self" type="application/rss+xml"/><item><title>Homestead and Auto Setup Hosts File</title><link>https://alnutile.github.io/posts/184/</link><pubDate>Sun, 05 Jun 2016 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/184/</guid><description>I discovered this Vagrant Plugin https://github.com/cogitatio/vagrant-hostsupdater thanks to https://github.com/cogitatio/vagrant-hostsupdater when setting up Windows and thought why can&amp;rsquo;t I use it on my Mac?
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>homestead on Alfred Nutile</title><link>https://alfrednutile.info/tags/homestead/</link><description>Recent content in homestead on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 05 Jun 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/homestead/index.xml" rel="self" type="application/rss+xml"/><item><title>Homestead and Auto Setup Hosts File</title><link>https://alfrednutile.info/posts/184/</link><pubDate>Sun, 05 Jun 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/184/</guid><description>I discovered this Vagrant Plugin https://github.com/cogitatio/vagrant-hostsupdater thanks to https://github.com/cogitatio/vagrant-hostsupdater when setting up Windows and thought why can&amp;rsquo;t I use it on my Mac?
 Just like the docs say on their github site
 vagrant plugin install vagrant-hostsupdater
 Then update your ruby file that setups up homestead
@@ -9,12 +9,12 @@ And make that like this
 Then run provision
 cd ~/Homestead
 vagrant provision
-That is it now your /etc/hosts file will look like this</description></item><item><title>Drush and Homestead Vagrant Box</title><link>https://alnutile.github.io/posts/100/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/100/</guid><description>Had some trouble doing the normal composer install so I went with the manual install noted here https://github.com/drush-ops/drush
+That is it now your /etc/hosts file will look like this</description></item><item><title>Drush and Homestead Vagrant Box</title><link>https://alfrednutile.info/posts/100/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/100/</guid><description>Had some trouble doing the normal composer install so I went with the manual install noted here https://github.com/drush-ops/drush
 Basically I downloaded and unzipped the repo to /usr/local/sbin. Then I did a symlink to /usr/bin
 cd /usr/bin
 sudo ln -s /usr/local/sbin/drush/drush .
 Then in /usr/local/sbin/drush I ran
-sudo composer install</description></item><item><title>SSL and Homestead</title><link>https://alnutile.github.io/posts/101/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/101/</guid><description>This is like most nginx the only trick was adding the port forward on Homestead
+sudo composer install</description></item><item><title>SSL and Homestead</title><link>https://alfrednutile.info/posts/101/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/101/</guid><description>This is like most nginx the only trick was adding the port forward on Homestead
 #scripts/homestead.rb
 # Configure Port Forwarding To The Box
 config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 80, host: 8000
@@ -24,7 +24,7 @@ config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 5432, host: 54320
 config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 11300, host: 11300
 I set it to 44300
 Then just follow along here
-http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm which leads to here https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04 for the rest</description></item><item><title>Laravel Homestead and MailCatcher</title><link>https://alnutile.github.io/posts/93/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/93/</guid><description>Using MailCatcher http://mailcatcher.me/ I can see the emails sent by the website.
+http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm which leads to here https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04 for the rest</description></item><item><title>Laravel Homestead and MailCatcher</title><link>https://alfrednutile.info/posts/93/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/93/</guid><description>Using MailCatcher http://mailcatcher.me/ I can see the emails sent by the website.
 First checkout https://github.com/fideloper/Vaprobash/pull/348 to get your box ready All I did was
 Log into the vagrant box and run sudo apt-get install libsqlite3-dev
 Then
@@ -32,6 +32,6 @@ sudo apt-get install ruby1.9.1-dev -y
 sudo gem install mailcatcher
 Then
 sudo gem install mailcatcher -V
-Set your mail.php config This is found in app/config and should be copied to app/config/local so it only applies to local</description></item><item><title>Laravel Homestead and Beanstalkd Console</title><link>https://alnutile.github.io/posts/92/</link><pubDate>Mon, 30 Jun 2014 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/92/</guid><description>I am doing some queue work and wanted beanstalkd console installed so I can see the status of the queue
+Set your mail.php config This is found in app/config and should be copied to app/config/local so it only applies to local</description></item><item><title>Laravel Homestead and Beanstalkd Console</title><link>https://alfrednutile.info/posts/92/</link><pubDate>Mon, 30 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/92/</guid><description>I am doing some queue work and wanted beanstalkd console installed so I can see the status of the queue
 Using Laravel Homestead as the vagrant box http://laravel.com/docs/homestead I needed to
 Download beanstalkd console https://github.com/ptrofimov/beanstalk_console Setup Homesteads yml file Provision the box Setup my local hosts file to a url Finally run php artisan queue:listen to have my app call to the queue. And that was about it.</description></item></channel></rss>

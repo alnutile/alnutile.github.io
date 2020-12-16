@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>wip on Alfred Nutile</title><link>https://alnutile.github.io/tags/wip/</link><description>Recent content in wip on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 31 Dec 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alnutile.github.io/tags/wip/index.xml" rel="self" type="application/rss+xml"/><item><title>Serverless Python and Example App WIP</title><link>https://alnutile.github.io/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/229/</guid><description>There are good docs on this http://serverless.com platform. For Python
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>wip on Alfred Nutile</title><link>https://alfrednutile.info/tags/wip/</link><description>Recent content in wip on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 31 Dec 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/wip/index.xml" rel="self" type="application/rss+xml"/><item><title>Serverless Python and Example App WIP</title><link>https://alfrednutile.info/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/229/</guid><description>There are good docs on this http://serverless.com platform. For Python
 https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example https://github.com/serverless/examples I will cover some items here I need to do time after time.
 Tagging ENV settings Testing Testing Example file test_cf_backuper.py:
 import unittest
@@ -16,7 +16,7 @@ log.setLevel(logging.DEBUG)
 class TestHandler(unittest.TestCase):
 def test_get_one_template(self):
 client = CFBackuper()
-results = client.</description></item><item><title>Laravel Asset Notes WIP</title><link>https://alnutile.github.io/posts/227/</link><pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/227/</guid><description>This is just a reminder area of all the minor details as I find them that I need to remember
+results = client.</description></item><item><title>Laravel Asset Notes WIP</title><link>https://alfrednutile.info/posts/227/</link><pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/227/</guid><description>This is just a reminder area of all the minor details as I find them that I need to remember
 FontAwesome yarn add font-awesome
 Then in my resources/assets/sass/app.scss
 // Fonts
@@ -31,6 +31,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
 set to go!
 If using Less
 #resources/assets/less/app.less
-@import &amp;quot;./../../../node_modules/font-awesome/less/font-awesome&amp;quot;;</description></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alnutile.github.io/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alnutile.github.io/posts/220/</guid><description>Sending Docker Commands to Get A Task Done This article will show how to get started with AWS Batch and Docker to spin up a &amp;ldquo;worker&amp;rdquo;
+@import &amp;quot;./../../../node_modules/font-awesome/less/font-awesome&amp;quot;;</description></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alfrednutile.info/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/220/</guid><description>Sending Docker Commands to Get A Task Done This article will show how to get started with AWS Batch and Docker to spin up a &amp;ldquo;worker&amp;rdquo;
 By the time you are done reading it you will:
 Have a Docker image to run your command in. Deploy the Docker image to AWS ECR And Run a Task on the AWS Batch system, or a 100 tasks, does not matter. Finally you will have the scripts needed to fully build AWS Batch with CloudFormation, e.</description></item></channel></rss>
