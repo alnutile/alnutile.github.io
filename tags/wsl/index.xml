@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>wsl on Alfred Nutile</title><link>https://alfrednutile.info/tags/wsl/</link><description>Recent content in wsl on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 25 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/wsl/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows Dev Box Try 3 2020</title><link>https://alfrednutile.info/posts/267/</link><pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/267/</guid><description>Yes this is try number 3. See here for the first 2 goes at it.
 With WSL2 out and a great laptop I wanted to give this another try.
-MariaDB Even though the install is super simple see onnectondemand.pfizer.com/pfizermfa/sslvpn/pfizercontrollerlogin.jsp?profile=pfizerprofile&amp;amp;flowname=aidauth#no-back-button
+MariaDB Even though the install is super simple see https://alfrednutile.info/posts/267
 I still end up having to do:
 $ sudo mysql -u root # I had to use &amp;quot;sudo&amp;quot; since is new installation
 mysql&amp;gt; USE mysql;
