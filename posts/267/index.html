@@ -11,7 +11,7 @@ mysql&gt; FLUSH PRIVILEGES;
 mysql&gt; exit;
 
 $ service mysql restart
-</code></pre><p>To allow me to then use this command, for example <code>maraidb -uroot -proot</code> otherwise I have &ldquo;Error connecting on localhost&rdquo; type errors.</p><h2 id=xdebug>Xdebug</h2><p>Using my previous notes in the above post and <a href=https://gcompagnon.github.io/wsl2/xdebug/vscode/php-fpm/2019/09/17/WSL2_php_VSCode_Xdebug.html>https://gcompagnon.github.io/wsl2/xdebug/vscode/php-fpm/2019/09/17/WSL2_php_VSCode_Xdebug.html</a></p><p>I removed the reference to the host:</p><pre><code>[xdebug]
+</code></pre><p>To allow me to then use this command, for example <code>maraidb -uroot -proot</code> otherwise I have &ldquo;Error connecting on localhost&rdquo; type errors.</p><p>If using MySQL this worked really well <a href=https://phoenixnap.com/kb/access-denied-for-user-root-localhost>here</a></p><h2 id=xdebug>Xdebug</h2><p>Using my previous notes in the above post and <a href=https://gcompagnon.github.io/wsl2/xdebug/vscode/php-fpm/2019/09/17/WSL2_php_VSCode_Xdebug.html>https://gcompagnon.github.io/wsl2/xdebug/vscode/php-fpm/2019/09/17/WSL2_php_VSCode_Xdebug.html</a></p><p>I removed the reference to the host:</p><pre><code>[xdebug]
 xdebug.remote_enable=1
 xdebug.remote_autostart=1
 xdebug.remote_handler=dbgp
