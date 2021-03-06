@@ -11,7 +11,7 @@ menu:
 tags: [devops, accelerate]
 ---
 
-Next time I want this info, I just wanted to make sure that I have the links I need concerning the Accelerate book and Software Delivery Performance. So I will use this page to continue to add info about these resources.
+Next time I needed this info, I just wanted to make sure that I have the links I need concerning the Accelerate book and Software Delivery Performance. So I will use this page to continue to add info about these resources.
 
 The links below really are all related as the authors work together in the different books, videos and research papers.
 
