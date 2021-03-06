@@ -11,9 +11,9 @@ menu:
 tags: [devops, accelerate]
 ---
 
-Next time I want this info, I just wanted to make sure that I have the links I need concerning the Accelerate book and Software Delivery Performance.
+Next time I want this info, I just wanted to make sure that I have the links I need concerning the Accelerate book and Software Delivery Performance. So I will use this page to continue to add info about these resources.
 
-The links below really are all related as the people authors work together in the different books.
+The links below really are all related as the authors work together in the different books, videos and research papers.
 
 ## TL;DR
 The most critical link [State of DevOps Reports](https://www.devops-research.com/research.html#capabilities)
@@ -31,6 +31,8 @@ And so much more.
 First, the data supporting the following makes it all worth trying since it is not a leap of faith but trust in data. And if this data is correct, then along the way, we can avoid many of the pitfalls I have seen or been a part of in the day-to-day delivery of software. While at the same time creating a culture of learning and growing and inevitable success for the company.
 
 <img src="images/accelerate_book.png" width="300" float="left">
+
+Purchase [here](https://www.amazon.com/Accelerate-Software-Performing-Technology-Organizations/dp/1942788339)
 
 This book and it's data lead into or supports a lot of the videos and books below.
 
@@ -100,6 +102,24 @@ Also, they give you a feel for how authentic these authors are in their efforts.
 
 They come from the industry, they are not just speaking about theory, but they have seen the good and the bad.
 
+
+## DevOps Hanbook
+
+<img src="images/devops_handbook.png" width="400">
+
+This is my current read and it is full of both encouraging and discouraging information. Discouraging in that I wish I read it years ago since it would have been great information to have along the way. And encouraging in seeing how common the struggles are like stressful deployments to production, weekend work hours, focusing on costs over speed, outsourcing the wrong things etc.
+
+Some quotes I saved so far:
+
+>“Nordstrom started optimizing for speed instead of merely optimizing for cost.” — The DevOps Handbook:: How to Create World-Class Agility, Reliability, and Security in Technology Organizations by Gene Kim, Jez Humble, et al. https://a.co/aA64V05
+
+> “10 Deploys per Day” by John Allspaw and Paul Hammond, Kim, Gene; Humble, Jez; Debois, Patrick; Willis, John. The DevOps Handbook: (p. 11). IT Revolution Press. Kindle Edition. 
+
+Is not just for Flickr, I am part of a team of only 8 developers and we are averaging 4 deployments to production a day. The site has numerous users using it during those hours. 
+
+Lastly as seen in the quote below, allowing developers to perform using these methodologies leads to the success of the company.
+
+> Furthermore, high performers were twice as likely to exceed profitability, market share, and productivity goals. And, for those organizations that provided a stock ticker symbol, we found that high performers had 50% higher market capitalization growth over three years. Kim, Gene; Humble, Jez; Debois, Patrick; Willis, John. The DevOps Handbook: (p. 37). IT Revolution Press. Kindle Edition. 
 
 ## Continous Delivery Book
 
