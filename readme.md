@@ -8,3 +8,10 @@ https://toha-guides.netlify.app/posts/getting-started/github-pages/
 
 Making Vector images here
 https://icons8.com/vector-creator/dashboard
+
+
+## tl;dr
+
+```
+hugo server -t toha -w
+```
