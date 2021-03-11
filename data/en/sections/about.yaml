@@ -11,7 +11,9 @@ section:
 designation: Director of Engineering
 
 # your resume. this file path should be relative to you "static" directory
-resume: "http://bit.ly/30xtnPZ"
+# https://docs.google.com/document/d/1OcjiFV9mhNr6X_yxisQbvb-C9dMDfnP_FJrONyVSZlo/export?format=pdf
+
+resume: "https://bit.ly/30BHcwA"
 
 # a summary about you
 summary: "I have been in the industry for 20+ years. My roots are in coding and a passion for technology. For the past several years, I have been building and leading a team to create technologies to assist in the digital transformation in my current role."
