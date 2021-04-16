@@ -84,14 +84,13 @@ Or use their opensource system to measure your own [here](https://github.com/Goo
 
 All these books and papers have a focus on culture, in the end a culture of Trust is the goal and without that none of this will work.
 
-The chat that caught my attention is this one:
+The chart that caught my attention is this one:
 
 <img src="images/culture.png" width="800">
 
 The goal is to build the Generative culture. This is the only way to run at the "Elite" speed since this has a realistic reaction failure which comes from trying new things, experimenting, and taking responsibility.
 
 Again from what I see most of what is holding teams back is not the technology.
-dd
 
 ## ROI
 
