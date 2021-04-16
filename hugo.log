@@ -1,0 +1,40 @@
+INFO 2021/04/16 08:17:32 Using config file: 
+INFO 2021/04/16 08:17:32 syncing static files to /
+LOG:   2021/04/16 08:17:39 
+Template Metrics:
+
+LOG:   2021/04/16 08:17:39       cache     cumulative       average       maximum         
+  potential       duration      duration      duration  count  template
+      -----     ----------      --------      --------  -----  --------
+          0   18.8835066s   73.191886ms    217.8639ms    258  _default/single.html
+         99    7.4799387s   17.077485ms     58.4697ms    438  partials/navigators/sidebar.html
+          0    6.6846564s    37.13698ms    101.1588ms    180  _default/list.html
+         43    2.6068708s    10.10415ms     39.3851ms    258  partials/navigators/next-prev-navigator.html
+        100    1.4503453s    5.621493ms    127.6534ms    258  partials/helpers/get-author-image.html
+         13    1.1802975s    1.439387ms     17.0125ms    820  partials/cards/post.html
+          0    514.6412ms    1.309519ms     53.9868ms    393  _internal/_default/rss.xml
+        100    304.9593ms     693.089µs      9.7835ms    440  partials/footer.html
+         92    213.5634ms    1.186463ms     19.6909ms    180  partials/cards/search-result-post.html
+        100     90.5855ms     206.345µs     10.0013ms    439  partials/navigators/navbar-2.html
+        100     88.1806ms      200.41µs      7.9567ms    440  partials/header.html
+        100     79.4714ms     180.616µs      8.2031ms    440  partials/scripts.html
+         20     53.5548ms       42.47µs       921.6µs   1261  partials/helpers/get-hero.html
+          0     46.9348ms     46.9348ms     46.9348ms      1  index.html
+        100     29.3271ms      113.67µs      1.0905ms    258  partials/helpers/get-author-name.html
+        100     26.1095ms     26.1095ms     26.1095ms      1  partials/sections/recent-posts.html
+          0     25.5091ms     25.5091ms     25.5091ms      1  _internal/_default/sitemap.xml
+          0      20.162ms      20.162ms      20.162ms      1  _default/index.json
+         47     18.9104ms    6.303466ms     10.7946ms      3  partials/cards/recent-post.html
+        100       13.34ms      51.705µs      3.7889ms    258  partials/disqus.html
+          0      9.9423ms      74.196µs      1.8396ms    134  _internal/alias.html
+        100      7.0568ms      7.0568ms      7.0568ms      1  partials/sections/projects.html
+        100      3.2609ms      3.2609ms      3.2609ms      1  partials/sections/achievements.html
+         58      2.6947ms     673.675µs       1.916ms      4  partials/sections/achievements/entry.html
+        100       1.874ms       1.874ms       1.874ms      1  partials/navigators/navbar.html
+        100      1.5632ms      1.5632ms      1.5632ms      1  partials/sections/about.html
+          0      1.4385ms      1.4385ms      1.4385ms      1  404.html
+         52      1.2128ms     202.133µs       613.1µs      6  partials/cards/project.html
+        100      1.0386ms      1.0386ms      1.0386ms      1  partials/sections/home.html
+
+LOG:   2021/04/16 08:17:40 Built in 7876 ms
+LOG:   2021/04/16 08:17:42 Watching for config changes in /mnt/c/Users/alfre/Code/alnutile.github.io/config.yaml
