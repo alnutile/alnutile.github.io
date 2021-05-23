@@ -7,8 +7,7 @@
 Mac M1 Had a MySQL error:
 ERROR: no matching manifest for linux/arm64/v8 in the manifest list entries All I had to do was update docker-composer.yml:
 File: docker-compose.yml 24: mysql: 25: image: 'mysql:8.0' 26: ports: 27: - '${FORWARD_DB_PORT:-3306}:3306' To:
-mysql: image: mariadb:10.5.8 ports: - "${FORWARD_DB_PORT:-3306}:3306" Then I disabled meilisearch
-File: docker-compose.yml 50: # meilisearch: 51: # image: "getmeili/meilisearch:latest" 52: # ports: 53: # - "${FORWARD_MEILISEARCH_PORT:-7700}:7700" 54: # volumes: 55: # - "sailmeilisearch:/data.</p></div><div class=card-footer><span class=float-left>May 23, 2021</span>
+mysql: image: mariadb:10.5.8 ports: - "${FORWARD_DB_PORT:-3306}:3306" Then I disabled meilisearch else everytime I ran sail anything it would stop the docker container.</p></div><div class=card-footer><span class=float-left>May 23, 2021</span>
 <a href=/posts/sail/ class="float-right btn btn-outline-info btn-sm">Read</a></div></div></a></div><div class=post-card><a href=/posts/161/ class=post-card-link><div class=card><div class=card-head><img class=card-img-top src=/images/heros/hero-coding.png></div><div class=card-body><h5 class=card-title>Note To Self: A VirtualBox machine with the name 'homestead' already exists.</h5><p class="card-text post-summary">Since I know this will happen again I want to remind myself and others how to fix it.
 I had this error A VirtualBox machine with the name 'homestead' already exists. when doing my normal vagrant up. I got some help at http://stackoverflow.com/questions/26993903/a-virtualbox-machine-with-the-name-homestead-already-exists but it was not made too clear.
 Here are the exact steps for me to fix this

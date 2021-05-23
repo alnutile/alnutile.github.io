@@ -13,7 +13,7 @@
     image: mariadb:10.5.8
     ports:
       - &quot;${FORWARD_DB_PORT:-3306}:3306&quot;
-</code></pre><p>Then I disabled <code>meilisearch</code></p><pre><code>File: docker-compose.yml
+</code></pre><p>Then I disabled <code>meilisearch</code> else everytime I ran <code>sail anything</code> it would stop the docker container.</p><pre><code>File: docker-compose.yml
 50:   #   meilisearch:
 51:   #     image: &quot;getmeili/meilisearch:latest&quot;
 52:   #     ports:
