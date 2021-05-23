@@ -40,7 +40,7 @@ To:
       - "${FORWARD_DB_PORT:-3306}:3306"
 ```
 
-Then I disabled `meilisearch`
+Then I disabled `meilisearch` else everytime I ran `sail anything` it would stop the docker container.
 
 ```
 File: docker-compose.yml
