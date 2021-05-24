@@ -56,4 +56,7 @@ File: docker-compose.yml
 
 I will have to come back to this one to fix it some info is [here](https://github.com/meilisearch/MeiliSearch/issues/1195)
 
-Otherwise there is a thread [here](https://github.com/laravel/sail/issues/104) about the overall issues
+## Links
+
+- [Xdebug](https://medium.com/geekculture/debug-your-laravel-sail-applications-with-xdebug-160ad70fcd41)
+- Some overall m1 issues [here](https://github.com/laravel/sail/issues/104)
