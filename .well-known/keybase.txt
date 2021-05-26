@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/alfrednutile
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://alfrednutile.info
+  * I am alfrednutile (https://keybase.io/alfrednutile) on keybase.
+  * I have a public key ASB_u5hH4Vouu99C5j21asdM3xjs99ogJWUv19r3rJ7_1wo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101ec44f4aa87962e793029ae4034d57e37e3e0cc31e6289a73b3043b4dc29b722f0a",
+      "host": "keybase.io",
+      "kid": "01207fbb9847e15a2ebbdf42e63db56ac74cdf18ecf7da2025652fd7daf7ac9effd70a",
+      "uid": "d8168498bbb5aa98e513d2a7f04abf19",
+      "username": "alfrednutile"
+    },
+    "merkle_root": {
+      "ctime": 1622033882,
+      "hash": "ebb7cda87d9bece2f3635df9cb8bba25c6559f5a72acd28b7cbb4c070b5986313d91bb314bda5333c48e38d16114f507bad626540c529243a8e517ec7e37bd17",
+      "hash_meta": "1fadf95e5c1634f1856d64beae909feca252fa04f314b92597d4739889ea434f",
+      "seqno": 20046853
+    },
+    "service": {
+      "entropy": "DQA0fh1nURA0vMW9lZ+5vvQD",
+      "hostname": "alfrednutile.info",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.6.2"
+  },
+  "ctime": 1622033923,
+  "expire_in": 504576000,
+  "prev": "9318ad660bd9fbd56a84d9684aafd5c61131546e01150f9d426ccb3911119dbe",
+  "seqno": 86,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgf7uYR+FaLrvfQuY9tWrHTN8Y7PfaICVlL9fa96ye/9cKp3BheWxvYWTESpcCVsQgkxitZgvZ+9VqhNloSq/VxhExVG4BFQ+dQmzLORERnb7EIBYDuYMWxehKHhA7PTXqLLBnXnuKY7pp08mQ5NGkxRfsAgHCo3NpZ8RAETCNIAG40Em2nFJFXHBPY7bfIUKmI8JznNNJwsjg9GG+h4O83qc3Y1r7/7ftjuYWq4cS1/thnXzaYPA852jLBahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEILipX9WAD8FVHKZ0s5jTS1nqC7o0syklrgKW7mbc1VHEo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/alfrednutile
+
+==================================================================
