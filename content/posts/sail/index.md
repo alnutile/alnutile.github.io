@@ -56,6 +56,22 @@ File: docker-compose.yml
 
 I will have to come back to this one to fix it some info is [here](https://github.com/meilisearch/MeiliSearch/issues/1195)
 
+## Xdebug
+
+The article is a great start [here](https://medium.com/geekculture/debug-your-laravel-sail-applications-with-xdebug-160ad70fcd41)
+
+But a couple of things I think need to be made more clear or might even be an error:
+
+Set the `SAIL_DEBUG=true` not `SAILDEBUG=true`
+
+When running the build do:
+
+```
+❯ sail build --no-cache --build-arg XDEBUG=true
+```
+
+To pass the args. And as he notes run `sail php -v` after sail is running to make sure you do not see any errors and xdebug is working.
+
 ## Links
 
 - [Xdebug](https://medium.com/geekculture/debug-your-laravel-sail-applications-with-xdebug-160ad70fcd41)
