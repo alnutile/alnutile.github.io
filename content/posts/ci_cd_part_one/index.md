@@ -8,30 +8,30 @@ menu:
     name: "CI - GitHub Actions and Laravel (Part 1 of 3)"
     weight: -270
 tags: [laravel, ci, cd, accelerate, devops]
-draft: true
+draft: false
 ---
 
 > The point is GitHub Actions should be revolutionizing your team's workflows; if it is not, you are missing something important.
 
-This first post part one of three. I will cover the following subjects in this series.
+This first post is part one of three. In this series I will cover the following topics.
 
 - PT 1 CI - Simple Continuous Integration using GitHub Actions
 - PT 2 CD - Simple Continuous Deployment using GitHub Actions
 - PT 3 Security - Shifting Left on Security
 
-Please keep in mind that I share the repository and code below that it is not an end product and will evolve.
+Please keep in mind that the repository and code below I am sharing is not an end product and will evolve. The "Links" section below will have many of the links needed.
 
-If I do not get any interest in this post, I will not do PT 2 or PT 2 as I try to Build Measure Learn [^bml] with writing these articles.
+If I do not get any interest in this post, I will not do PT 2 or PT 2 as I try to use Build Measure Learn [^bml] with writing these articles. **¯\_(ツ)\_/¯**
 
 By the end of this post, you will easily be able to add CI to your open-source project, independent private project, team project, or even, dare I say, "enterprise" project. ( more on that later 🤔)
 
-I will reference material in numerous books and research papers you can see [here](https://alfrednutile.info/posts/sod/)
+I will reference material in numerous books and research papers you can see many of them [here](https://alfrednutile.info/posts/sod/)
 
 ### Continuous Delivery Book
 
 > The commit stage begins with a change to the state of the project—that is, a commit to the version control system. It ends with either a report of failure or, if successful, a collection of binary artifacts and deployable assemblies to be used in subsequent test and release stages, as well as reports on the state of the application. Ideally, a commit stage should take less than five minutes to run, and certainly no more than ten. Humble, Jez; Farley, David. Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation [^cont]
 
-This book is the why behind this article. You can not deliver quality code without a CI system that embraces automation and tooling to vet code quickly. To that end the company paying for this code can not succeed either with out this level of thinking.
+This book is the **"why"** behind this article. You can not deliver quality code without a CI system that embraces automation and tooling to vet code quickly. To that end the company paying for this code can not succeed either with out this level of thinking.
 
 > Those who excel at delivering profitability, productivity, and customer satisfaction survive. Anything less than excellence leads to failure. pg 32 [^sod]
 
@@ -39,16 +39,19 @@ This book is the why behind this article. You can not deliver quality code witho
 
 > Our analysis this year shows elite performers are twice as likely to meet or exceed their organizational performance goals. Pg 54 [^sod]
 
-The quotes make it clear that a company that says NO proper CI and CD is also saying NO to success. And most companies have to see the sentence "We are a company that does x and happens to have a technology team" flipped around to say, "We are a technology company that focuses on x."
+These quotes make it clear that a company that says NO proper CI and CD is also saying NO to success. And most companies have to see the sentence "We are a company that does x and happens to have a technology team" flipped around to say, "We are a technology company that happens to focuses on x."
 
 ### The Twelve-Factor App
 
 <img src="images/factor.png" width="800" class="center">
-To begin with, this is how I started years ago to consider any application I was building. In this article, CI will include the following principles.
- 
- 1. CodeBase
- 1. Dependencies
- 1. Config
+
+Read more about that [here](https://12factor.net)
+
+This article is how I started years ago to consider any application I was building. In this post I am writing, CI will include the following principles.
+
+1.  CodeBase
+1.  Dependencies
+1.  Config
 
 The article will use the repo [https://github.com/alnutile/codenames](https://github.com/alnutile/codenames) as if it is an application. I mean it is, even though a very silly one.
 
@@ -56,11 +59,14 @@ We will in this case, focus more on the "shifting left" when it comes to "qualit
 
 > We recommend that organizations move away from external change approval because of the negative effects on performance. Instead, organizations should "shift left" to peer review-based approval during the development process. [^sod]
 
-And part of this is getting these things right at the CI level. I will apply some base GitHub Actions to the codebase to help confidence in quality and security from the start.
+I will apply some base GitHub Actions to the codebase to help confidence in quality and security from the start. By then end we will have the start of a CI system to help you and your team achieve "Elite" levels of performance.
+
+<img src="images/elite.png" width="1200" class="center">
 
 ### Accelerate
 
-The book Accelerate [^accelerate] is not just a game-changer; it is a culture-changing strategy that can be implemented on any team today.
+The book Accelerate [^accelerate] is not just a technology game-changer; it is a culture-changing strategy that can be implemented on any team today.
+
 Just the habit of working in "small batches" will change the performance level of any team. This book will impact all parts of these three articles.
 
 On that note, the only way to get to the "Elite" levels this book talks about is by putting CI and CD first. You have to believe in it, do it no matter how much time pressure is on your team because it will succeed in the long run. What will not succeed is cutting corners, building technical debt, and having too many non-automated processes between your code and going to production. All of this is proven by the data in this book and the ongoing reports it offers [^sod]
@@ -73,25 +79,27 @@ On that note, the only way to get to the "Elite" levels this book talks about is
 
 To begin this CI process and all the GitHub Actions will assume a trunk-based branching process.
 Basically, you have "mainline" and ONE level of branching off of that, e.g. the "small batch" of the feature you are working on.
-This size of this "batch" should be under four hours of work, ideally, two, to merge two pull requests a day of work.
+This size of this "batch" should be under four hours of work, ideally, two. Consider a daily goal to merge two pull requests a day of work.
 This strategy will make more sense as I cover Feature Flags in part two of the article.
 
 > Our research shows that effective trunk-based development is characterized by fewer than three active branches and branches and forks having lifetimes of less than a day before being merged to master. Pg 41 [^sod]
 
 All [Pull Request](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) will trigger these automations leaving only one real manual step that is a peer developer on the project to review the code WHILE you work on the pull request or the next part of the feature.
 
-Keep that in mind. We are working in small batches. Your code is not a
+Keep in mind, we are working in small batches. Your code is not a
 days worth of work thrown to some poor teammate who has barely enough time to get a hot cup of coffee ☕️. No, it is a small batch of code they can quickly review and even suggest an update for the next PR cause they know you will be at it quickly enough.
 
-Every merged PR is not a final stoke on some great renascence painting but a small step toward building a feature. If you think Build Measure Learn [^bml], you realize that feature might never get used and eventually removed. Some statistics show this to be about 2/3 of the code pushed!
+Every merged PR is not a final stoke on some great renascence painting but a small step toward building a feature. If you think in line with Build Measure Learn [^bml], you start realize that the feature might never get used or even eventually removed. Some statistics show this to be about 2/3 of the code pushed!
 
 This PR process asks a teammate to review the code, and if they are too busy after thirty minutes, go find someone else. Please keep it to ONE person. This is not a time to philosophize around the merits of style and ideals. Those conversations can happen, but a team should have time to do that during the week and build standards together. Maybe, for example, the reviewer thinks you should not do x, then agree to come back to it later, set up a time to talk as the larger team and or in chat, make a decision, document it, or better add it to automation. These pull requests are about the feature and the known best practices the team has agreed to.
 
 The short of it is, make a branch from trunk, push to your version control system a pull request with the first bit of code-test you write. Get someone's eyes on it sooner than later. When approved, merge that one branch back into trunk (main, master, mainline).
 
-Lastly, if you find yourself waiting for someone to review the branch, you can branch-off of it since, by the time you are done with your second PR, you should have enough feedback from your teammate to merge and then rebase your current branch from trunk. Leaving you ever one branch out at most from trunk.
+Lastly, if you find yourself waiting for someone to review the branch, you can branch-off of it since, by the time you are done with your second PR, you should have enough feedback from your teammate to merge and then rebase your current branch from trunk. Leaving you never more than one branch out at most from trunk.
 
-One good question I had asked about this was, "Won't this distract my team from the work they are doing if all day there are looking at PRs" and I asked the team about this, and overall, the answer is no. For one, these are small batches of work; the dev does not have to switch their context that significantly unlike if they are handed days of code. Second, the devs do not and should not be coding eight hours a day. There should be other things going on in their day to make sure the health of the project and team are being built and maintained as well. We are preventing debt by doing this.
+One good question I had been asked about this was when I presented this workflow to another team was, "Won't this distract my team from the work they are doing if all day there are looking at PRs" and I asked my team about this, and overall, the answer is no.
+
+For one, these are small batches of work; the dev does not have to switch their context that significantly unlike if they are handed days of code. Second, the devs do not and should not be coding eight hours a day. There should be other things going on in their day to make sure the health of the project and team are being built and maintained as well. We are preventing debt by doing this. [^scheduling]
 
 ## GitHub Actions
 
@@ -147,7 +155,7 @@ steps:
 
 Once that is done, we can get to work.
 
-I set up PHP with some extensions I need, especially Xdebug even though it slows things down.
+I set up PHP with some extensions I need, especially Xdebug even though it slows things down but it is how we will measure coverage.
 
 ```yml
 - name: Setup PHP, with composer and extensions
@@ -187,7 +195,7 @@ I then prepare the application:
  php artisan key:generate
 ```
 
-We depend on `composer.lock` as being part of this. One key thing here is to never reference `dev-master in your composer.json file. Please make sure you use the MAJOR version that you want and let itself updated at the MINOR version levels [^sem]
+We depend on `composer.lock` as being part of this. One key thing here is to never reference `dev-master` in your composer.json file. Please make sure you use the MAJOR version that you want and let itself updated at the MINOR version levels [^sem]
 
 Okay, now we have the system setup, PHP, MySQL, Composer files installed, and the `.env` setup.
 
@@ -242,7 +250,9 @@ Okay, this is the big one-time to PHPUnit test. Sixty percent is a bit low. I th
 
 <img src="images/kent.png" width="800" class="center">
 
-No Dusk tests? Right, so I might add Dusk for some End2End. The work I do day to day depends on Python Pytest for End2End testing. Since those projects have an embedded QA person, they tend to know Python. Dusk is , fantastic and there are actions running selenium and what not, so it should plug in fine. Maybe I will come back later to this. If this app had a JavaScript framework like VueJS I would not use Dusk I would use Jest or some other well-known testing framework for JavaScript. Since this app is Livewire, I depend on its testing at the PHPUnit level, but I do see the value here of some e2e testing in Dusk.
+---
+
+No Dusk tests? Right, so I might add Dusk for some End2End. The work I do day to day depends on Python Pytest for End2End testing. Since those projects have an embedded QA person, they tend to know Python. Dusk is fantastic and there are actions running selenium and what not, so it should plug in fine. Maybe I will come back later to this. If this app had a JavaScript framework like VueJS I would not use Dusk I would use Jest or some other well-known testing framework for JavaScript. Since this app is Livewire, I depend on its testing at the PHPUnit level, but I do see the value here of some e2e testing in Dusk.
 
 Okay, so that is it; you now have these automations running with every PR. Let's see what a PR looks like.
 
@@ -284,14 +294,14 @@ I mention this above and just want to take a moment to say that even a solution 
 
 [^sod]: [State of DevOps Report 2019](https://www.dropbox.com/s/b856g72dkzjjriq/state-of-devops-2019.pdf?dl=0)
 [^cont]: [https://www.amazon.com/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912](https://www.amazon.com/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912)
-[^accelerate]:
-
-[Accelerate](https://www.amazon.com/Accelerate-Software-Performing-Technology-Organizations/dp/1942788339)
-[^sem](https://semver.org)
+[^accelerate]: [Accelerate](https://www.amazon.com/Accelerate-Software-Performing-Technology-Organizations/dp/1942788339)
+[^sem]: [Semantic Verision](https://semver.org)
 [^bml]: [https://www.mindtools.com/pages/article/build-measure-learn.htm](https://www.mindtools.com/pages/article/build-measure-learn.htm)
+[^scheduling]: (https://www.linkedin.com/pulse/being-offense-when-comes-day-scheduling-alfred-nutile/?trackingId=o9EJPZ73zVJOR6MeQ1HN3w%3D%3D)
 
 ## Links
 
+- [Example Repo](https://github.com/alnutile/codenames)
 - [Intro Post to all things State of DevOps](https://alfrednutile.info/posts/sod/)
 - [PHP Actions](https://github.com/shivammathur/setup-php)
 
