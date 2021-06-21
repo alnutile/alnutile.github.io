@@ -31,7 +31,7 @@ First, the work I do for you will always take place in "small batches". No matte
 As noted above, I will email or chat (Slack, Teams etc) with a list of goals for the day. Typically 1-2 Pull Requests (sending code to the code storage system and then production) will be my goal. This workflow represents fully functional parts of the overall feature. Of course, even after I deploy it to production, some of this will not be seen by you, the user, but knowing it is there helps you know progress is clearly being made.
 
 ## Tracking Progress 
-If you have a ticket system, I can put all the feature(s) broken into "small batches". For example, a feature that will take me approximately four days of work will end up being no less than 8 "tickets." This pace allows me to continue working per the standards seen in the State of DevOps and, hopefully the **Elite** levels seen there. If you do not have a system and are using GitHub, we can use the system provided by GitHub. Read more about "Elite Performance" [here](https://services.google.com/fh/files/misc/state-of-devops-2019.pdf) page 18 shows the chart.
+If you have a ticket system, I can put all the feature(s) broken into "small batches". For example, a feature that will take me approximately four days of work will end up being no less than 8 "tickets." This pace allows me to continue working per the standards seen in the State of DevOps and, hopefully the **Elite** levels seen there. If you do not have a system and are using GitHub, we can use the system provided by GitHub. Read more about "Elite Performance" [here](https://services.google.com/fh/files/misc/state-of-devops-2019.pdf) page 18 shows the chart.[^sdo]
 
 <img src="/images/elite.png" width="800" class="center">
 
@@ -51,5 +51,5 @@ You will interact with the system [Client Portal](https://alfrednutile.invoice.s
 
 ## Links
 
-[^waterfall]: [Here](https://en.wikipedia.org/wiki/Waterfall_model)
-[^sdo]: [State of DevOps Report](https://services.google.com/fh/files/misc/state-of-devops-2019.pdf)
+[^waterfall]:[Waterfall](https://en.wikipedia.org/wiki/Waterfall_model)
+[^sdo]:[State of DevOps Report](https://services.google.com/fh/files/misc/state-of-devops-2019.pdf)
