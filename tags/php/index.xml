@@ -8,18 +8,12 @@ mysql&amp;gt; UPDATE user SET plugin='mysql_native_password' WHERE User='root';
 mysql&amp;gt; FLUSH PRIVILEGES;
 mysql&amp;gt; exit;
 $ service mysql restart
-To allow me to then use this command, for example maraidb -uroot -proot otherwise I have &amp;ldquo;Error connecting on localhost&amp;rdquo; type errors.</description></item><item><title>PHP Xdebug Visual Code</title><link>https://alfrednutile.info/posts/262/</link><pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/262/</guid><description>UPDATE: PHP 7.4 Every time I do value use php I then lose my xdebug setup :( here is me taking a moment to stop having that happen
-vim /usr/local/etc/php/7.4/php.ini
-Then add this
-[PHP]
-zend_extension=&amp;quot;xdebug.so&amp;quot;
-xdebug.remote_enable = 1
-xdebug.remote_autostart = 1
-xdebug.remote_handler = dbgp
-xdebug.remote_host = 127.0.0.1
-xdebug.remote_port = 9000
-xdebug.remote_mode = req
-And then I am set again! Notice I am using 9000 above my insanity of using 9005 below has passed</description></item><item><title>IronFunctions and PHP</title><link>https://alfrednutile.info/posts/213/</link><pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/213/</guid><description>A colleague of mine Dave Hall poing out IronFunctions. And being in the pursuit of serverless options especially ones that even have examples of PHP I had to give it a try. This post is a note2self in that the intro here has some bits that need fixing BUT I think it is close and I hope to add more updates here about the tool.
+To allow me to then use this command, for example maraidb -uroot -proot otherwise I have &amp;ldquo;Error connecting on localhost&amp;rdquo; type errors.</description></item><item><title>PHP Xdebug Visual Code</title><link>https://alfrednutile.info/posts/262/</link><pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/262/</guid><description>UPDATE: PHP 8 and Xdebug 3 2021.07.18
+Ok this took a bit since the Xdebug site talks about arch -x86_64 sudo pecl install xdebug which did not work.
+I just did the normal
+sudo pecl install xdebug Then I edit the addition it made:
+/opt/homebrew/etc/php/8.0/php.ini
+zend_extension=&amp;#34;xdebug.so&amp;#34; xdebug.mode = debug xdebug.start_with_request = yes I moved it all to the bottom of the file too. The docs talk about OPCache but not sure this really helped.</description></item><item><title>IronFunctions and PHP</title><link>https://alfrednutile.info/posts/213/</link><pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/213/</guid><description>A colleague of mine Dave Hall poing out IronFunctions. And being in the pursuit of serverless options especially ones that even have examples of PHP I had to give it a try. This post is a note2self in that the intro here has some bits that need fixing BUT I think it is close and I hope to add more updates here about the tool.
 All the steps below will only work once you take on the initial hello world here.</description></item><item><title>Testing a trait with PHPUnit</title><link>https://alfrednutile.info/posts/212/</link><pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/212/</guid><description>In an effort to start recording test coverage using vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover I had some issues with traits being seen.
 I tried numerous approaches my default being just to Use the trait in the test class. I ended up with this as I found some online info about trait testing here that references a now missing post by Sebastian Bergman the maker of PHPUnit
 &amp;lt;?php

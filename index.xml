@@ -61,18 +61,12 @@ def handle(self, team_name):
 teams = self.org.get_teams()
 for team in teams:
 if team_name == team.name:
-print(&amp;quot;Team id&amp;quot;, team.</description></item><item><title>PHP Xdebug Visual Code</title><link>https://alfrednutile.info/posts/262/</link><pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/262/</guid><description>UPDATE: PHP 7.4 Every time I do value use php I then lose my xdebug setup :( here is me taking a moment to stop having that happen
-vim /usr/local/etc/php/7.4/php.ini
-Then add this
-[PHP]
-zend_extension=&amp;quot;xdebug.so&amp;quot;
-xdebug.remote_enable = 1
-xdebug.remote_autostart = 1
-xdebug.remote_handler = dbgp
-xdebug.remote_host = 127.0.0.1
-xdebug.remote_port = 9000
-xdebug.remote_mode = req
-And then I am set again! Notice I am using 9000 above my insanity of using 9005 below has passed</description></item><item><title>Cognito and OAuth</title><link>https://alfrednutile.info/posts/261/</link><pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/261/</guid><description>make your App Client
+print(&amp;quot;Team id&amp;quot;, team.</description></item><item><title>PHP Xdebug Visual Code</title><link>https://alfrednutile.info/posts/262/</link><pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/262/</guid><description>UPDATE: PHP 8 and Xdebug 3 2021.07.18
+Ok this took a bit since the Xdebug site talks about arch -x86_64 sudo pecl install xdebug which did not work.
+I just did the normal
+sudo pecl install xdebug Then I edit the addition it made:
+/opt/homebrew/etc/php/8.0/php.ini
+zend_extension=&amp;#34;xdebug.so&amp;#34; xdebug.mode = debug xdebug.start_with_request = yes I moved it all to the bottom of the file too. The docs talk about OPCache but not sure this really helped.</description></item><item><title>Cognito and OAuth</title><link>https://alfrednutile.info/posts/261/</link><pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/261/</guid><description>make your App Client
 Make sure to check
 Make some scopes uner Resource Server
 Then &amp;ldquo;App Client Settings&amp;rdquo;
