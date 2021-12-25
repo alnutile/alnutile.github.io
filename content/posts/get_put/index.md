@@ -1,6 +1,6 @@
 ---
 title: "Get Fixture Put Fixture Helpers for Laravel"
-date: 2021-12-25T14:32:07-04:00
+date: 2021-12-25T06:32:07-04:00
 hero: /images/heros/default-hero.jpg
 images: "images/"
 menu:
