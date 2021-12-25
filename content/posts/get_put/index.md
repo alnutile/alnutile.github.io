@@ -1,12 +1,13 @@
 ---
 title: "Get Fixture Put Fixture Helpers for Laravel"
-date: 2021-12-25
+date: 2021-12-25T14:32:07-04:00
 hero: /images/heros/default-hero.jpg
+images: "images/"
 menu:
   sidebar:
     name: "Get Fixture Put Fixture Helpers for Laravel"
     identifier: fixutre-helpers
-    weight: -269
+    weight: -271
 tags: [laravel, php, note2self, helpers]
 ---
 
