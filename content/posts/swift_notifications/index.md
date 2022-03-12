@@ -7,14 +7,14 @@ menu:
   sidebar:
     name: "SwiftUI: Switching to a page when a user clicks on notification"
     identifier: fixutre-helpers
-    weight: -271
+    weight: -273
 tags: [swiftui, swift, note2self]
 ---
 
 ### Quick Notes to Self on how to have the user go to a specific page after clicking on a Notification in iOS.
 
 
-<img src="images/notifications.gif" width="400">
+<img src="images/notifications.gif" width="600">
 
 
 The two main articles that helped are [https://stackoverflow.com/questions/62504400/programmatically-change-to-another-tab-in-swiftui](https://stackoverflow.com/questions/62504400/programmatically-change-to-another-tab-in-swiftui)
@@ -108,6 +108,8 @@ class NotificationManager: ObservableObject {
     @Published var pageToNavigationTo : String?
 }
 ```
+
+Then the AppDelegate
 
 ```swift
 @available(iOS 10, *)

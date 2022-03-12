@@ -61,9 +61,6 @@ params:
   newsletter:
     enable: false
 
-taxonomies:
-  tag: tags
-
 outputs:
     home:
     - HTML
