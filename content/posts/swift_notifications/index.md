@@ -6,7 +6,7 @@ images: "images/"
 menu:
   sidebar:
     name: "SwiftUI: Switching to a page when a user clicks on notification"
-    identifier: fixutre-helpers
+    identifier: swiftui-switching
     weight: -276
 tags: [swiftui, swift, note2self]
 ---
@@ -32,7 +32,7 @@ I followed the first post but I was a bit more specific since I just, for now, h
 For example when that person setups up the `pageToNavigateTo` a number I just set it to 
 
 ```swift
-    notificationManager?.pageToNavigationTo = "myRecalls"
+notificationManager?.pageToNavigationTo = "myRecalls"
 ```
 
 This means I had to set the class as well
