@@ -7,7 +7,7 @@ menu:
   sidebar:
     name: "SwiftUI: Switching to a page when a user clicks on notification"
     identifier: fixutre-helpers
-    weight: -273
+    weight: -276
 tags: [swiftui, swift, note2self]
 ---
 
