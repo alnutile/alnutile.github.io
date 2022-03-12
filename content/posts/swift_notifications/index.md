@@ -1,7 +1,7 @@
 ---
 title: "SwiftUI: Switching to a page when a user clicks on notification"
 date: 2022-02-12T06:32:07-04:00
-hero: /images/heros/hero-office.jpg
+hero: /images/heros/hero-office.png
 images: "images/"
 menu:
   sidebar:
