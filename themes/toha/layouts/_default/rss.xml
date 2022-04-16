@@ -21,8 +21,8 @@
         <guid>{{ .Permalink }}</guid>
         <description>{{- .Content | html -}}</description>
   
-          {{ if .Params.Categories }}
-              {{ range .Params.Categories }}
+          {{ if .Params.tags }}
+              {{ range .Params.tags }}
                   <category>{{ . }}</category>
               {{ end }}
           {{ end }}
