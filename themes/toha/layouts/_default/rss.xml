@@ -22,7 +22,7 @@
       <description>{{- .Content | html -}}</description>
 
         {{ if .Params.tags }}
-            {{ range $i, $e := .Params.tags }}{{ if $i }}, {{ end }}
+            {{ delimit .Params.tags ", " }}
         {{ end }}
     </item>
     {{ end }}
