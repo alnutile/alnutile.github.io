@@ -30,7 +30,7 @@ for either of them.&lt;/p>
 &lt;pre>&lt;code>key('link-' . $import-&amp;gt;id))
 &lt;/code>&lt;/pre>&lt;p>Did not work when I was using &lt;code>key($import-&amp;gt;id)&lt;/code>&lt;/p>
 &lt;p>The table and search all just stopped :(&lt;/p>
-&lt;p>Anyways hope this saves the future me an hour!&lt;/p></description></item><item><title>Laravel Sail and M1 Mac</title><link>https://alfrednutile.info/posts/sail/</link><pubDate>Sun, 23 May 2021 14:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/sail/</guid><description>&lt;p>Some notes to self will add more after time if needed.&lt;/p>
+&lt;p>Anyways hope this saves the future me an hour!&lt;/p></description><category>laravel</category><category>livewire</category><category>note</category></item><item><title>Laravel Sail and M1 Mac</title><link>https://alfrednutile.info/posts/sail/</link><pubDate>Sun, 23 May 2021 14:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/sail/</guid><description>&lt;p>Some notes to self will add more after time if needed.&lt;/p>
 &lt;h2 id="mac-m1">Mac M1&lt;/h2>
 &lt;p>Had a MySQL error:&lt;/p>
 &lt;pre>&lt;code>ERROR: no matching manifest for linux/arm64/v8 in the manifest list entries
@@ -67,7 +67,7 @@ ports:
 &lt;ul>
 &lt;li>&lt;a href="https://medium.com/geekculture/debug-your-laravel-sail-applications-with-xdebug-160ad70fcd41">Xdebug&lt;/a>&lt;/li>
 &lt;li>Some overall m1 issues &lt;a href="https://github.com/laravel/sail/issues/104">here&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Note To Self: A VirtualBox machine with the name 'homestead' already exists.</title><link>https://alfrednutile.info/posts/161/</link><pubDate>Sat, 29 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/161/</guid><description>&lt;p>Since I know this will happen again I want to remind myself and others how to fix it.&lt;/p>
+&lt;/ul></description><category>laravel</category><category>note</category></item><item><title>Note To Self: A VirtualBox machine with the name 'homestead' already exists.</title><link>https://alfrednutile.info/posts/161/</link><pubDate>Sat, 29 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/161/</guid><description>&lt;p>Since I know this will happen again I want to remind myself and others how to fix it.&lt;/p>
 &lt;p>I had this error &lt;code>A VirtualBox machine with the name 'homestead' already exists.&lt;/code> when doing my normal vagrant up. I got some help at &lt;a href="http://stackoverflow.com/questions/26993903/a-virtualbox-machine-with-the-name-homestead-already-exists">http://stackoverflow.com/questions/26993903/a-virtualbox-machine-with-the-name-homestead-already-exists&lt;/a> but it was not made too clear.&lt;/p>
 &lt;p>Here are the exact steps for me to fix this&lt;/p>
 &lt;p>Run &lt;code>vboxmanage list vms&lt;/code>&lt;/p>
@@ -82,4 +82,4 @@ ports:
 &lt;pre>&lt;code>cd /tmp
 wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub
 cat vagrant.pub &amp;gt;&amp;gt; ~/.ssh/authorized_keys
-&lt;/code>&lt;/pre></description></item></channel></rss>
+&lt;/code>&lt;/pre></description><category>laravel</category><category>note</category></item></channel></rss>

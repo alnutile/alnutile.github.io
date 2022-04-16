@@ -61,4 +61,4 @@ fn bump &amp;amp;&amp;amp; fn build &amp;amp;&amp;amp; fn push
 # then update the route
 fn routes update phpapp1 /hello
 &lt;/code>&lt;/pre>&lt;p>just to save some time there.&lt;/p>
-&lt;p>More soon on using this with Lumen and other options. I tried this but some PHP items are missing on the Alpine docker image to make this work.&lt;/p></description></item></channel></rss>
+&lt;p>More soon on using this with Lumen and other options. I tried this but some PHP items are missing on the Alpine docker image to make this work.&lt;/p></description><category>php</category><category>ironfunctions</category><category>note2self</category></item></channel></rss>

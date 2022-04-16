@@ -62,4 +62,4 @@ RUN chmod +x /usr/local/bin/start-container
 COPY scheduler.sh /
 RUN chmod 755 /scheduler.sh
 CMD [ &amp;quot;start-container&amp;quot; ]
-&lt;/code>&lt;/pre></description></item></channel></rss>
+&lt;/code>&lt;/pre></description><category>laravel</category><category>note2self</category><category>docker</category></item></channel></rss>

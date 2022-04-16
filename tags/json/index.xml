@@ -13,4 +13,4 @@
 */
 return json_encode($value, JSON_UNESCAPED_UNICODE);
 }
-&lt;/code>&lt;/pre>&lt;p>And now &amp;ldquo;你好，世界&amp;rdquo; would save that way to the database and not &amp;ldquo;\u4f60\u597d\uff0c\u4e16\u754c&amp;rdquo;&lt;/p></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>And now &amp;ldquo;你好，世界&amp;rdquo; would save that way to the database and not &amp;ldquo;\u4f60\u597d\uff0c\u4e16\u754c&amp;rdquo;&lt;/p></description><category>laravel</category><category>json</category><category>note2self</category></item></channel></rss>

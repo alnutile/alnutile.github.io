@@ -22,7 +22,7 @@ client = SnykReport()
 results = client.get_report_for_current_week(
 &amp;quot;98873-8ecc-46f0-b077-39322abc4390&amp;quot;)
 assert results == 1989
-&lt;/code>&lt;/pre>&lt;p>I no longer hit their API and &lt;code>post&lt;/code> returns the response I wanted.&lt;/p></description></item><item><title>Lambda Tips</title><link>https://alfrednutile.info/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/264/</guid><description>&lt;p>@WIP&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>I no longer hit their API and &lt;code>post&lt;/code> returns the response I wanted.&lt;/p></description><category>python</category><category>testing</category><category>mocking</category><category>pytest</category></item><item><title>Lambda Tips</title><link>https://alfrednutile.info/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/264/</guid><description>&lt;p>@WIP&lt;/p>
 &lt;h2 id="taking-advantage-of-a-running-lambda-function-and-its-state">Taking advantage of a running Lambda function and it&amp;rsquo;s state&lt;/h2>
 &lt;p>&lt;a href="https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/">https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/&lt;/a> under the section &lt;strong>Lambda function&lt;/strong> has a nice &amp;ldquo;trick&amp;rdquo; of setting above the class &lt;code>app = None&lt;/code>&lt;/p>
 &lt;p>then later on it will see if that is set&lt;/p>
@@ -60,7 +60,7 @@ FunctionName=lam,
 InvocationType=&amp;quot;Event&amp;quot;
 )
 print(&amp;quot;Invoked &amp;quot;, lam)
-&lt;/code>&lt;/pre>&lt;p>Is another way to look around and call those functions.&lt;/p></description></item><item><title>Mocking in Python</title><link>https://alfrednutile.info/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/263/</guid><description>&lt;p>Serious note to self.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Is another way to look around and call those functions.&lt;/p></description><category>note2self</category><category>aws</category><category>python</category></item><item><title>Mocking in Python</title><link>https://alfrednutile.info/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/263/</guid><description>&lt;p>Serious note to self.&lt;/p>
 &lt;p>I wanted to mock the Github module for python.&lt;/p>
 &lt;p>My simple class will get the ID of the team.&lt;/p>
 &lt;pre>&lt;code>from github import Github, Team
@@ -153,7 +153,7 @@ return False
 &lt;li>&lt;a href="https://docs.python.org/3/library/unittest.mock.html">https://docs.python.org/3/library/unittest.mock.html&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.toptal.com/python/an-introduction-to-mocking-in-python">https://www.toptal.com/python/an-introduction-to-mocking-in-python&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832">https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Serverless Python and Example App WIP</title><link>https://alfrednutile.info/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/229/</guid><description>&lt;p>There are good docs on this &lt;a href="http://serverless.com">http://serverless.com&lt;/a> platform.
+&lt;/ul></description><category>python</category><category>mocking</category><category>tdd</category><category>unittest</category></item><item><title>Serverless Python and Example App WIP</title><link>https://alfrednutile.info/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/229/</guid><description>&lt;p>There are good docs on this &lt;a href="http://serverless.com">http://serverless.com&lt;/a> platform.
 For Python&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example">https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example&lt;/a>&lt;/li>
@@ -206,4 +206,4 @@ python-dotenv
 name: aws
 runtime: python2.7
 profile: profile_name_here
-&lt;/code>&lt;/pre>&lt;p>More info &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/credentials/#using-aws-profiles">here&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>More info &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/credentials/#using-aws-profiles">here&lt;/a>&lt;/p></description><category>serverless</category><category>python</category><category>wip</category></item></channel></rss>

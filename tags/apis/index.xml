@@ -79,7 +79,7 @@ $user_id = Authorizer::getResourceOwnerId();
 Auth::loginUsingId($user_id);
 }
 });
-&lt;/code>&lt;/pre></description></item><item><title>Github CLI to get Teams and Members of an Org</title><link>https://alfrednutile.info/posts/67/</link><pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/67/</guid><description>&lt;p>Needed to make a quick library for pulling down this info and making it a CSV file.&lt;/p>
+&lt;/code>&lt;/pre></description><category>oauth</category><category>laravel</category><category>apis</category></item><item><title>Github CLI to get Teams and Members of an Org</title><link>https://alfrednutile.info/posts/67/</link><pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/67/</guid><description>&lt;p>Needed to make a quick library for pulling down this info and making it a CSV file.&lt;/p>
 &lt;p>The libraries made this super easy. But it was hard to get all the emails since these can only been seen if in the users profile.&lt;/p>
 &lt;h3 id="the-link">the link&lt;/h3>
-&lt;p>&lt;a href="https://github.com/alnutile/org_reports">https://github.com/alnutile/org_reports&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;a href="https://github.com/alnutile/org_reports">https://github.com/alnutile/org_reports&lt;/a>&lt;/p></description><category>github</category><category>tools</category><category>apis</category><category>php</category></item></channel></rss>

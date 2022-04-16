@@ -35,7 +35,7 @@
 &lt;ul>
 &lt;li>&lt;a href="http://www.json-generator.com/">http://www.json-generator.com/&lt;/a>&lt;/li>
 &lt;li>&lt;a href="http://www.layoutit.com/">http://www.layoutit.com/&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Put It All Into Version Control Even Composer!</title><link>https://alfrednutile.info/posts/171/</link><pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/171/</guid><description>&lt;p>&lt;strong>Update: September 06 2016&lt;/strong>&lt;/p>
+&lt;/ul></description><category>developer</category><category>user stories</category><category>workflows</category></item><item><title>Put It All Into Version Control Even Composer!</title><link>https://alfrednutile.info/posts/171/</link><pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/171/</guid><description>&lt;p>&lt;strong>Update: September 06 2016&lt;/strong>&lt;/p>
 &lt;p>We stopped doing this. I do not think it is a bad idea but we ended up going with CodeDeploy on AWS. So after our CI does a Composer install and all passes, CodeDeploy will just bundle everything up as a Zip file and deploy that to the server.&lt;/p>
 &lt;p>&lt;strong>Or Listen &lt;a href="http://www.readorlisten.com/2">here&lt;/a>&lt;/strong>&lt;/p>
 &lt;p>Another article about this written by Loran Jane Mitchell &lt;a href="http://www.lornajane.net/posts/2014/using-composer-without-gitignoring">Using Composer Without GitIgnoring Vendor&lt;/a>&lt;/p>
@@ -55,4 +55,4 @@
 &lt;p>&amp;ldquo;when things are down on production 1/2 a minute can feel like a life time&amp;rdquo;&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="fixing-merge-conflicts">Fixing Merge Conflicts&lt;/h2>
-&lt;p>Well what happens when there is a conflict in this vendor folder? That is easy really just &lt;code>rm&lt;/code> the whole thing and do what I have been doing all along &lt;code>composer install&lt;/code> saving &lt;code>composer update&lt;/code> only for those moments you are looking for something to really be updated and feeling lucky (and patient).&lt;/p></description></item></channel></rss>
+&lt;p>Well what happens when there is a conflict in this vendor folder? That is easy really just &lt;code>rm&lt;/code> the whole thing and do what I have been doing all along &lt;code>composer install&lt;/code> saving &lt;code>composer update&lt;/code> only for those moments you are looking for something to really be updated and feeling lucky (and patient).&lt;/p></description><category>laravel</category><category>php</category><category>workflows</category><category>coding</category><category>best practices</category></item></channel></rss>

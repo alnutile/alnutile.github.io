@@ -14,4 +14,4 @@
 &amp;nbsp; &amp;nbsp; &amp;nbsp; base_url: &amp;#39;http://localhost:8000&amp;#39;&lt;br />
 &amp;nbsp; &amp;nbsp; &amp;nbsp; browser_name: safari&lt;/p>
 &lt;/blockquote>
-&lt;p>This way the goutte driver will use the correct port. Where as the base_url setting only seems to apply to that @javascript tag. Thanks to&amp;nbsp;&lt;a href="https://groups.google.com/forum/#!msg/behat/WCalw_TIjpo/FyaOjVfZP8IJ" target="_blank">https://groups.google.com/forum/#!msg/behat/WCalw_TIjpo/FyaOjVfZP8IJ&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>This way the goutte driver will use the correct port. Where as the base_url setting only seems to apply to that @javascript tag. Thanks to&amp;nbsp;&lt;a href="https://groups.google.com/forum/#!msg/behat/WCalw_TIjpo/FyaOjVfZP8IJ" target="_blank">https://groups.google.com/forum/#!msg/behat/WCalw_TIjpo/FyaOjVfZP8IJ&lt;/a>&lt;/p></description><category>mink</category></item></channel></rss>

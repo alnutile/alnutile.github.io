@@ -18,4 +18,4 @@
 &lt;p>&amp;ldquo;when things are down on production 1/2 a minute can feel like a life time&amp;rdquo;&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="fixing-merge-conflicts">Fixing Merge Conflicts&lt;/h2>
-&lt;p>Well what happens when there is a conflict in this vendor folder? That is easy really just &lt;code>rm&lt;/code> the whole thing and do what I have been doing all along &lt;code>composer install&lt;/code> saving &lt;code>composer update&lt;/code> only for those moments you are looking for something to really be updated and feeling lucky (and patient).&lt;/p></description></item></channel></rss>
+&lt;p>Well what happens when there is a conflict in this vendor folder? That is easy really just &lt;code>rm&lt;/code> the whole thing and do what I have been doing all along &lt;code>composer install&lt;/code> saving &lt;code>composer update&lt;/code> only for those moments you are looking for something to really be updated and feeling lucky (and patient).&lt;/p></description><category>laravel</category><category>php</category><category>workflows</category><category>coding</category><category>best practices</category></item></channel></rss>

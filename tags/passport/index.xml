@@ -23,4 +23,4 @@ return &amp;quot;FOO&amp;quot;;
 'throttle' =&amp;gt; \Illuminate\Routing\Middleware\ThrottleRequests::class,
 'auth.client' =&amp;gt; \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
 ];
-&lt;/code>&lt;/pre>&lt;p>Adding &lt;code>auth.client&lt;/code> then I was back in business.&lt;/p></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>Adding &lt;code>auth.client&lt;/code> then I was back in business.&lt;/p></description><category>laravel</category><category>passport</category></item></channel></rss>

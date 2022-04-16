@@ -133,4 +133,4 @@ return Redirect::to('profile')-&amp;gt;with(&amp;quot;message&amp;quot;, &amp;qu
 &lt;p>This controller takes on the profile route to manage their subscriptions and print.
 You can see those files for the view about in the image and the gist link provided above.&lt;/p>
 &lt;p>When all that is in place they can see this&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/9dhd81vxyu78yph/subscribe.gif?dl=0" alt="the site">&lt;/p></description></item></channel></rss>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/9dhd81vxyu78yph/subscribe.gif?dl=0" alt="the site">&lt;/p></description><category>stripe</category><category>laravel</category></item></channel></rss>

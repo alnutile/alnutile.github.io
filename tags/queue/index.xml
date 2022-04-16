@@ -72,4 +72,4 @@ $job-&amp;gt;release(30);
 &lt;p>This was really not bad. I ended up using the existing server but will move to another server shortly. One thing to keep in mind is your firewall. You really want to make sure that you are only allowing certain IPs to visit this server or limit beanstalkd to localhost.&lt;/p>
 &lt;p>As noted this tutorial handles most of this really well &lt;a href="http://fideloper.com/ubuntu-beanstalkd-and-laravel4">Fideloper&lt;/a>&lt;/p>
 &lt;p>Finally &lt;a href="https://github.com/ptrofimov/beanstalk_console">beanstalk console&lt;/a> is a great way, especially locally if you are not using &amp;ldquo;sync&amp;rdquo; driver to see what is going on. Just make sure to block it with htaccess so no one can just visit it on your server.&lt;/p>
-&lt;p>That is about it. Later I will add an even to allow other things to be triggered maybe via IFTT!&lt;/p></description></item></channel></rss>
+&lt;p>That is about it. Later I will add an even to allow other things to be triggered maybe via IFTT!&lt;/p></description><category>laravel</category><category>php</category><category>queue</category></item></channel></rss>

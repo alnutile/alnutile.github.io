@@ -18,4 +18,4 @@
 &lt;p>This may help as well &lt;a href="https://github.com/nunomaduro/larastan">https://github.com/nunomaduro/larastan&lt;/a> for Laravel&lt;/p>
 &lt;p>This will avoid some Facade and other issues. Even just trying&lt;/p>
 &lt;pre>&lt;code>php artisan code:analyse --paths=app --level=0
-&lt;/code>&lt;/pre>&lt;p>Found some issues I did not see, for example object properties I did not define at the top of the Class.&lt;/p></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>Found some issues I did not see, for example object properties I did not define at the top of the Class.&lt;/p></description><category>static analysis</category><category>laravel</category></item></channel></rss>

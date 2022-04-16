@@ -97,7 +97,7 @@ parent::tearDown();
 AWS_ACCESS_KEY_ID=bar
 &lt;/code>&lt;/pre>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/nez8f4hz4anmghl/Screenshot%202018-06-26%2009.36.26.png?dl=0" alt="">&lt;/p>
 &lt;h2 id="now-you-are-ready-to-fail">Now You are Ready to Fail!&lt;/h2>
-&lt;p>Ok so on your next fail you will see in your s3 bucket some of those super handy screenshots.&lt;/p></description></item><item><title>Dusk Notes</title><link>https://alfrednutile.info/posts/225/</link><pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/225/</guid><description>&lt;p>Just keeping a list of gotchas around dusk.&lt;/p>
+&lt;p>Ok so on your next fail you will see in your s3 bucket some of those super handy screenshots.&lt;/p></description><category>dusk</category><category>laravel</category><category>testing</category><category>aws</category></item><item><title>Dusk Notes</title><link>https://alfrednutile.info/posts/225/</link><pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/225/</guid><description>&lt;p>Just keeping a list of gotchas around dusk.&lt;/p>
 &lt;h2 id="use-refreshdatabase-not-working">use RefreshDatabase not working&lt;/h2>
 &lt;p>Cost: 1 hour lost&lt;/p>
 &lt;p>Basically I had to go back to the slower &amp;ldquo;use DatabaseMigrations;&amp;rdquo; otherwise it would not work. The user was null.&lt;/p>
@@ -127,4 +127,4 @@ $options
 )
 );
 }
-&lt;/code>&lt;/pre>&lt;p>And this way it still works on travis.&lt;/p></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>And this way it still works on travis.&lt;/p></description><category>note2self</category><category>laravel</category><category>dusk</category></item></channel></rss>

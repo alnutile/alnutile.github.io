@@ -90,4 +90,4 @@ $table-&amp;gt;dropColumn('project_id');
 $table-&amp;gt;string('bundle_id', 36)-&amp;gt;nullable();
 });
 }
-&lt;/code>&lt;/pre></description></item></channel></rss>
+&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category><category>sqlite</category></item></channel></rss>

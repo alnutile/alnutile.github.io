@@ -112,4 +112,4 @@ And I can see logs in &lt;code>logs/laravel.log&lt;/code>&lt;/p>
 &amp;lt;env name=&amp;quot;QUEUE_DRIVER&amp;quot; value=&amp;quot;sync&amp;quot;/&amp;gt;
 &amp;lt;env name=&amp;quot;MAIL_DRIVER&amp;quot; value=&amp;quot;array&amp;quot;/&amp;gt;
 &amp;lt;/php&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>To my &lt;code>phpunit.xml.dist&lt;/code> so it can set defaults as Laravel does.&lt;/p></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>To my &lt;code>phpunit.xml.dist&lt;/code> so it can set defaults as Laravel does.&lt;/p></description><category>laravel</category><category>testing</category><category>orchestra</category></item></channel></rss>

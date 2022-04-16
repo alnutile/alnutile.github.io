@@ -150,7 +150,7 @@ authState.signedIn = authState.isSignedIn
 HomeView().environmentObject(authState)
 }
 }
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Get Fixture Put Fixture Helpers for Laravel</title><link>https://alfrednutile.info/posts/get_put/</link><pubDate>Sat, 25 Dec 2021 06:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/get_put/</guid><description>&lt;p>I do a lot with fixtures when testing. This means I put files in the &lt;code>tests/fixtures&lt;/code> folder that represet the JSON of what ever I am testing. For example maybe I hit an
+&lt;/code>&lt;/pre>&lt;/div></description><category>swiftui</category><category>swift</category><category>note2self</category></item><item><title>Get Fixture Put Fixture Helpers for Laravel</title><link>https://alfrednutile.info/posts/get_put/</link><pubDate>Sat, 25 Dec 2021 06:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/get_put/</guid><description>&lt;p>I do a lot with fixtures when testing. This means I put files in the &lt;code>tests/fixtures&lt;/code> folder that represet the JSON of what ever I am testing. For example maybe I hit an
 API that returns&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
 &lt;span style="color:#f92672">&amp;#34;foo&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;bar&amp;#34;&lt;/span>
@@ -214,7 +214,7 @@ and mock it from then on&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
 &lt;span style="color:#f92672">&amp;#34;foo&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;bar&amp;#34;&lt;/span>
 }
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Using Python Lambda behind and ALB</title><link>https://alfrednutile.info/posts/266/</link><pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/266/</guid><description>&lt;p>Just a quick note to self about ALB and Lambda. When using Lambda behind and ALB for routing your response has to be formatted properly else you will get a 502.&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div></description><category>laravel</category><category>php</category><category>note2self</category><category>helpers</category></item><item><title>Using Python Lambda behind and ALB</title><link>https://alfrednutile.info/posts/266/</link><pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/266/</guid><description>&lt;p>Just a quick note to self about ALB and Lambda. When using Lambda behind and ALB for routing your response has to be formatted properly else you will get a 502.&lt;/p>
 &lt;p>&lt;a href="https://pypi.org/project/alb-response">https://pypi.org/project/alb-response/&lt;/a> solved this problem.&lt;/p>
 &lt;pre>&lt;code>from alb_response import alb_response
 def lambda_handler(event, context):
@@ -224,7 +224,7 @@ http_status=200,
 json=response_dict,
 is_base64_encoded=False,
 )
-&lt;/code>&lt;/pre>&lt;p>The results are easy enough to do by hand but I had a bit of time really finding out the format to respond with other than JavaScript and that casing there was a bit confusing.&lt;/p></description></item><item><title>Lambda Tips</title><link>https://alfrednutile.info/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/264/</guid><description>&lt;p>@WIP&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>The results are easy enough to do by hand but I had a bit of time really finding out the format to respond with other than JavaScript and that casing there was a bit confusing.&lt;/p></description><category>aws</category><category>serverless</category><category>note2self</category></item><item><title>Lambda Tips</title><link>https://alfrednutile.info/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/264/</guid><description>&lt;p>@WIP&lt;/p>
 &lt;h2 id="taking-advantage-of-a-running-lambda-function-and-its-state">Taking advantage of a running Lambda function and it&amp;rsquo;s state&lt;/h2>
 &lt;p>&lt;a href="https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/">https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/&lt;/a> under the section &lt;strong>Lambda function&lt;/strong> has a nice &amp;ldquo;trick&amp;rdquo; of setting above the class &lt;code>app = None&lt;/code>&lt;/p>
 &lt;p>then later on it will see if that is set&lt;/p>
@@ -262,7 +262,7 @@ FunctionName=lam,
 InvocationType=&amp;quot;Event&amp;quot;
 )
 print(&amp;quot;Invoked &amp;quot;, lam)
-&lt;/code>&lt;/pre>&lt;p>Is another way to look around and call those functions.&lt;/p></description></item><item><title>Laravel Filter Scope on a Model</title><link>https://alfrednutile.info/posts/255/</link><pubDate>Mon, 20 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/255/</guid><description>&lt;p>So I find myself writing searchable pages that, via an API or what not, someone can filter the page by different fields on the model.
+&lt;/code>&lt;/pre>&lt;p>Is another way to look around and call those functions.&lt;/p></description><category>note2self</category><category>aws</category><category>python</category></item><item><title>Laravel Filter Scope on a Model</title><link>https://alfrednutile.info/posts/255/</link><pubDate>Mon, 20 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/255/</guid><description>&lt;p>So I find myself writing searchable pages that, via an API or what not, someone can filter the page by different fields on the model.
 &lt;img src="https://dl.dropboxusercontent.com/s/qm3semea1hzutuk/filter_example.png?dl=0" alt="">&lt;/p>
 &lt;p>This can end up being a Controller class that does a lot of filters off the Request. Or it can be a Repository class that abstracts the business logic into one place for several related models.&lt;/p>
 &lt;p>But in many cases it really is just one Model being filtered. And if I add a Scope &lt;code>scopeFilter&lt;/code> and pass in the Request as an array I can iterate over that array and call to other existing scopes on the model.&lt;/p>
@@ -324,7 +324,7 @@ return $query-&amp;gt;whereIn(&amp;quot;active&amp;quot;, $state);
 }
 &lt;/code>&lt;/pre>&lt;p>For some time I kept this logic out of models but recently I been trying to use models as more of a place to store this sort of model related logic.&lt;/p>
 &lt;p>If two models need to work together then maybe a Business class could help out to glue them together but still something to consider.&lt;/p>
-&lt;p>I will show in the next post one model subscribing another model.&lt;/p></description></item><item><title>Valet Laravel 7.1 and 7.2</title><link>https://alfrednutile.info/posts/253/</link><pubDate>Sat, 18 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/253/</guid><description>&lt;p>..&lt;/p></description></item><item><title>Python3 Fixtures</title><link>https://alfrednutile.info/posts/252/</link><pubDate>Fri, 10 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/252/</guid><description>&lt;p>Just a reminder using pickle I can easily make fixtures for testing.&lt;/p>
+&lt;p>I will show in the next post one model subscribing another model.&lt;/p></description><category>laravel</category><category>note2self</category></item><item><title>Valet Laravel 7.1 and 7.2</title><link>https://alfrednutile.info/posts/253/</link><pubDate>Sat, 18 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/253/</guid><description>&lt;p>..&lt;/p></description><category>laravel</category><category>note2self</category></item><item><title>Python3 Fixtures</title><link>https://alfrednutile.info/posts/252/</link><pubDate>Fri, 10 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/252/</guid><description>&lt;p>Just a reminder using pickle I can easily make fixtures for testing.&lt;/p>
 &lt;p>When I get results from AWS SDK for example I can just&lt;/p>
 &lt;pre>&lt;code>import pickle
 with open(&amp;quot;fixtures/describe_task_defination.pickle&amp;quot;, 'wb') as fixture:
@@ -347,7 +347,7 @@ self.task_image = TaskImage()
 def test_gets_service(self, _getService, _getTaskDefinition):
 self.results = self.task_image.handle('default', 'cat-teamdocs-production-122')
 self.assertEqual('cat-teamdocs:latest', self.results)
-&lt;/code>&lt;/pre>&lt;p>Pretty easy and then I am not hitting the service&lt;/p></description></item><item><title>Vuex External File</title><link>https://alfrednutile.info/posts/250/</link><pubDate>Tue, 03 Jul 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/250/</guid><description>&lt;p>Setup Vuex with external file &lt;a href="https://vuex.vuejs.org/installation.html">https://vuex.vuejs.org/installation.html&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Pretty easy and then I am not hitting the service&lt;/p></description><category>note2self</category><category>python3</category><category>testing</category></item><item><title>Vuex External File</title><link>https://alfrednutile.info/posts/250/</link><pubDate>Tue, 03 Jul 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/250/</guid><description>&lt;p>Setup Vuex with external file &lt;a href="https://vuex.vuejs.org/installation.html">https://vuex.vuejs.org/installation.html&lt;/a>&lt;/p>
 &lt;p>But after this make a file in the &lt;code>resources/assets/js&lt;/code> called &lt;code>store.js&lt;/code> then set it up as needed
 Here I will have one loading state&lt;/p>
 &lt;pre>&lt;code>export default {
@@ -379,7 +379,7 @@ window.Laravel = {!! json_encode([
 &amp;quot;apiToken&amp;quot; =&amp;gt; auth()-&amp;gt;user()-&amp;gt;api_token ?? null
 ]) !!};
 &amp;lt;/script&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>Just to help with some basic stuff&lt;/p></description></item><item><title>Windows Dev Box Try 2 2018</title><link>https://alfrednutile.info/posts/247/</link><pubDate>Mon, 11 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/247/</guid><description>&lt;p>Going to list somethings as I go.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Just to help with some basic stuff&lt;/p></description><category>note2self</category><category>vuejs</category><category>laravel</category></item><item><title>Windows Dev Box Try 2 2018</title><link>https://alfrednutile.info/posts/247/</link><pubDate>Mon, 11 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/247/</guid><description>&lt;p>Going to list somethings as I go.&lt;/p>
 &lt;p>The Mac, in spite of Apple, is a great developer experience, here is to hoping the Windows, with the help of Microsoft, grows to be better and better as the improve it via user feedback to make it a great development box.&lt;/p>
 &lt;h2 id="links">Links&lt;/h2>
 &lt;p>This started it all &lt;a href="https://char.gd/blog/2017/how-to-set-up-the-perfect-modern-dev-environment-on-windows">https://char.gd/blog/2017/how-to-set-up-the-perfect-modern-dev-environment-on-windows&lt;/a>&lt;/p>
@@ -462,10 +462,10 @@ bind-address = 0.0.0.0
 &lt;h3 id="mysqlworkbenchhttpsdevmysqlcomgetdownloadsmysqlguitoolsmysql-workbench-community-6310-winx64msi">&lt;a href="https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community-6.3.10-winx64.msi">MySQLWorkbench&lt;/a>&lt;/h3>
 &lt;p>not pretty but does handle things well&lt;/p>
 &lt;h3 id="add-wsl-file-path-to-be-ignored-in-the-windows-defender-scanner">Add WSL File path to be ignored in the Windows defender scanner&lt;/h3>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/5k1xpc2q7szahtr/exclude.png?dl=0" alt="">&lt;/p></description></item><item><title>Laravel Queue Restart and 'Why are my changes not showing up'</title><link>https://alfrednutile.info/posts/246/</link><pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/246/</guid><description>&lt;p>Just a note to self and others who have suffered this. If you are running queues locally, for what ever reason, then any changes you make in code you need to restart your queue daemon.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/5k1xpc2q7szahtr/exclude.png?dl=0" alt="">&lt;/p></description><category>windows</category><category>note2self</category></item><item><title>Laravel Queue Restart and 'Why are my changes not showing up'</title><link>https://alfrednutile.info/posts/246/</link><pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/246/</guid><description>&lt;p>Just a note to self and others who have suffered this. If you are running queues locally, for what ever reason, then any changes you make in code you need to restart your queue daemon.&lt;/p>
 &lt;pre>&lt;code>php artisan queue:restart
 &lt;/code>&lt;/pre>&lt;p>This will cause the daemon to look at a timestamp and restart if that is newer than before &amp;ldquo;e.g. you ran the above. And this will force the in memory process to update itself from the latest code base.&lt;/p>
-&lt;p>Good luck!&lt;/p></description></item><item><title>Query Strings and VueJS</title><link>https://alfrednutile.info/posts/244/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/244/</guid><description>&lt;p>Quick way to make the url reflect the query string so the user can share the url and filters.&lt;/p>
+&lt;p>Good luck!&lt;/p></description><category>laravel</category><category>queues</category><category>note2self</category></item><item><title>Query Strings and VueJS</title><link>https://alfrednutile.info/posts/244/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/244/</guid><description>&lt;p>Quick way to make the url reflect the query string so the user can share the url and filters.&lt;/p>
 &lt;p>This is component based VueJS building so not an SPA
 But I still install &lt;code>&amp;quot;vue-router&amp;quot;: &amp;quot;^3.0.1&amp;quot;&lt;/code>&lt;/p>
 &lt;p>And load it&lt;/p>
@@ -569,7 +569,7 @@ this.$router.push({
 query: items
 });
 },
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/lmnyjw7aub0ggb2/filters.gif?dl=0" alt="">&lt;/p></description></item><item><title>BrowserSync and Laravel</title><link>https://alfrednutile.info/posts/239/</link><pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/239/</guid><description>&lt;p>Quick reminder to take advantage of this amazing feature &lt;a href="https://laravel.com/docs/5.6/mix#browsersync-reloading">https://laravel.com/docs/5.6/mix#browsersync-reloading&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/lmnyjw7aub0ggb2/filters.gif?dl=0" alt="">&lt;/p></description><category>vuejs</category><category>note2self</category><category>laravel</category></item><item><title>BrowserSync and Laravel</title><link>https://alfrednutile.info/posts/239/</link><pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/239/</guid><description>&lt;p>Quick reminder to take advantage of this amazing feature &lt;a href="https://laravel.com/docs/5.6/mix#browsersync-reloading">https://laravel.com/docs/5.6/mix#browsersync-reloading&lt;/a>&lt;/p>
 &lt;p>No more reloading your browser.&lt;/p>
 &lt;pre>&lt;code>yarn add browser-sync --dev
 &lt;/code>&lt;/pre>&lt;p>then to your &lt;code>webpack.mix.js&lt;/code> e.g. the domain of the site you are working on.&lt;/p>
@@ -578,7 +578,7 @@ query: items
 &lt;pre>&lt;code>yarn run watch
 &lt;/code>&lt;/pre>&lt;blockquote>
 &lt;p>Note turn off sourceMaps when running this else it can be kinda slow&lt;/p>
-&lt;/blockquote></description></item><item><title>GroupBy not Sorting by latest</title><link>https://alfrednutile.info/posts/240/</link><pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/240/</guid><description>&lt;p>Just to make this easy to find. I had a report to write which had numerous daily rows of the same related model data.
+&lt;/blockquote></description><category>laravel</category><category>note2self</category><category>vuejs</category></item><item><title>GroupBy not Sorting by latest</title><link>https://alfrednutile.info/posts/240/</link><pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/240/</guid><description>&lt;p>Just to make this easy to find. I had a report to write which had numerous daily rows of the same related model data.
 So in this cause I was tracking servers and security reports.&lt;/p>
 &lt;p>My reports where daily like this&lt;/p>
 &lt;table>
@@ -616,7 +616,7 @@ So in this cause I was tracking servers and security reports.&lt;/p>
 &lt;pre>&lt;code>$results = $results-&amp;gt;whereRaw('ID IN ( select MAX(id) from reports GROUP BY server_id)');
 &lt;/code>&lt;/pre>&lt;p>or double group by:&lt;/p>
 &lt;pre>&lt;code>$results = $results-&amp;gt;whereRaw('ID IN ( select MAX(id) from reports GROUP BY server_id, type)');
-&lt;/code>&lt;/pre>&lt;p>Did the trick to sort and group by that latest record, which &lt;code>latest&lt;/code> did not do for me.&lt;/p></description></item><item><title>Troubleshoot Laravel Socialite and Github login</title><link>https://alfrednutile.info/posts/238/</link><pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/238/</guid><description>&lt;p>This has driven me mad too many times. Basically you will get very little feedback if there is any issue getting the token from Github.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Did the trick to sort and group by that latest record, which &lt;code>latest&lt;/code> did not do for me.&lt;/p></description><category>laravel</category><category>note2self</category></item><item><title>Troubleshoot Laravel Socialite and Github login</title><link>https://alfrednutile.info/posts/238/</link><pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/238/</guid><description>&lt;p>This has driven me mad too many times. Basically you will get very little feedback if there is any issue getting the token from Github.&lt;/p>
 &lt;p>The problem is in this method.&lt;/p>
 &lt;pre>&lt;code> public function user()
 {
@@ -642,7 +642,7 @@ return $user-&amp;gt;setToken($token)
 &lt;p>Here is to the next time I get this error to remind me where to &lt;code>dd&lt;/code>&lt;/p>
 &lt;p>Also the url gave it away too but by then it was gone:&lt;/p>
 &lt;pre>&lt;code>https://foo.te\st/login/github/callback?error=redirect_uri_mismatch&amp;amp;error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.&amp;amp;error_uri=https%3A%2F%2Fdeveloper.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-authorization-request-errors%2F%23redirect-uri-mismatch&amp;amp;state=foo
-&lt;/code>&lt;/pre></description></item><item><title>Wrapping Libraries in Services JS</title><link>https://alfrednutile.info/posts/237/</link><pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/237/</guid><description>&lt;p>Just a note to self that when using libraries like &lt;code>sweetalert&lt;/code> for example and then I want to convert to &lt;code>sweetalert2&lt;/code>, it would have saved a lot of time to wrap it into a &amp;ldquo;service&amp;rdquo; and import that.&lt;/p>
+&lt;/code>&lt;/pre></description><category>note2self</category><category>laravel</category></item><item><title>Wrapping Libraries in Services JS</title><link>https://alfrednutile.info/posts/237/</link><pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/237/</guid><description>&lt;p>Just a note to self that when using libraries like &lt;code>sweetalert&lt;/code> for example and then I want to convert to &lt;code>sweetalert2&lt;/code>, it would have saved a lot of time to wrap it into a &amp;ldquo;service&amp;rdquo; and import that.&lt;/p>
 &lt;p>For example I made this js file&lt;/p>
 &lt;p>&lt;code>services/Alerts.js&lt;/code>:&lt;/p>
 &lt;pre>&lt;code>import swal from 'sweetalert2';
@@ -663,11 +663,11 @@ window.$alerts = Alerts;
 &lt;/code>&lt;/pre>&lt;p>And later on in that file&lt;/p>
 &lt;pre>&lt;code>let message = &amp;quot;Something went wrong with your token, please update it or email for support&amp;quot;;
 $alerts.alert(&amp;quot;Error&amp;quot;, message, true);
-&lt;/code>&lt;/pre></description></item><item><title>Passing from Blade to VueJs</title><link>https://alfrednutile.info/posts/236/</link><pubDate>Sat, 24 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/236/</guid><description>&lt;p>A lot of posts had &lt;a href="https://medium.com/@m_ramsden/passing-data-from-laravel-to-vue-98b9d2a4bd23">this&lt;/a> style.&lt;/p>
+&lt;/code>&lt;/pre></description><category>note2self</category></item><item><title>Passing from Blade to VueJs</title><link>https://alfrednutile.info/posts/236/</link><pubDate>Sat, 24 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/236/</guid><description>&lt;p>A lot of posts had &lt;a href="https://medium.com/@m_ramsden/passing-data-from-laravel-to-vue-98b9d2a4bd23">this&lt;/a> style.&lt;/p>
 &lt;p>I ended up just needing this:&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/huucm3vx4uyklq7/Screenshot%202018-02-23%2020.29.22.png?dl=0" alt="">&lt;/p>
 &lt;p>The controller simply does this:&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/qw7x7u7ayr7j441/Screenshot%202018-02-23%2020.29.52.png?dl=0" alt="">&lt;/p></description></item><item><title>Docker Laravel and Cron</title><link>https://alfrednutile.info/posts/234/</link><pubDate>Fri, 16 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/234/</guid><description>&lt;p>This to this post &lt;a href="https://laracasts.com/discuss/channels/servers/run-the-scheduler-in-a-docker-image/replies/325422">here&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/qw7x7u7ayr7j441/Screenshot%202018-02-23%2020.29.52.png?dl=0" alt="">&lt;/p></description><category>laravel</category><category>note2self</category><category>vuejs</category></item><item><title>Docker Laravel and Cron</title><link>https://alfrednutile.info/posts/234/</link><pubDate>Fri, 16 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/234/</guid><description>&lt;p>This to this post &lt;a href="https://laracasts.com/discuss/channels/servers/run-the-scheduler-in-a-docker-image/replies/325422">here&lt;/a>&lt;/p>
 &lt;p>for the idea.&lt;/p>
 &lt;p>Basically running cron in Docker is easy BUT once the Host had more than one Docker client cron stopped working. No clue why but to solve this I did two things&lt;/p>
 &lt;p>One made a script that was on the Docker Client&lt;/p>
@@ -731,7 +731,7 @@ RUN chmod +x /usr/local/bin/start-container
 COPY scheduler.sh /
 RUN chmod 755 /scheduler.sh
 CMD [ &amp;quot;start-container&amp;quot; ]
-&lt;/code>&lt;/pre></description></item><item><title>Pusher and Laravel Updates</title><link>https://alfrednutile.info/posts/233/</link><pubDate>Wed, 14 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/233/</guid><description>&lt;p>Getting error &amp;ldquo;Did you forget to specify the cluster when creating the Pusher instance&amp;rdquo;&lt;/p>
+&lt;/code>&lt;/pre></description><category>laravel</category><category>note2self</category><category>docker</category></item><item><title>Pusher and Laravel Updates</title><link>https://alfrednutile.info/posts/233/</link><pubDate>Wed, 14 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/233/</guid><description>&lt;p>Getting error &amp;ldquo;Did you forget to specify the cluster when creating the Pusher instance&amp;rdquo;&lt;/p>
 &lt;p>Then need to set &lt;code>config/broadcasting.php&lt;/code>:&lt;/p>
 &lt;pre>&lt;code> 'pusher' =&amp;gt; [
 'driver' =&amp;gt; 'pusher',
@@ -763,7 +763,7 @@ var pusher = $pusher($window.client);
 &lt;blockquote>
 &lt;p>NOTE yours may not be &lt;strong>us2&lt;/strong>&lt;/p>
 &lt;/blockquote>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/eu96h23ko3034q2/pusher_cluster.png?dl=0" alt="">&lt;/p></description></item><item><title>Dusk and Production (with Dusk disabled)</title><link>https://alfrednutile.info/posts/232/</link><pubDate>Mon, 05 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/232/</guid><description>&lt;pre>&lt;code>In DatabaseServiceProvider.php line 78:
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/eu96h23ko3034q2/pusher_cluster.png?dl=0" alt="">&lt;/p></description><category>laravel</category><category>note2self</category></item><item><title>Dusk and Production (with Dusk disabled)</title><link>https://alfrednutile.info/posts/232/</link><pubDate>Mon, 05 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/232/</guid><description>&lt;pre>&lt;code>In DatabaseServiceProvider.php line 78:
 Class 'Faker\Factory' not found
 &lt;/code>&lt;/pre>&lt;p>I had a ton if issues getting dusk on production, especially since production would run&lt;/p>
 &lt;pre>&lt;code>composer install --no-dev --prefer-dist --no-interaction
@@ -798,7 +798,7 @@ $this-&amp;gt;app-&amp;gt;register(DuskServiceProvider::class);
 - export APP_ENV=production
 - php artisan clear-compiled
 - composer install --no-dev --prefer-dist --no-interaction
-&lt;/code>&lt;/pre>&lt;p>And prevents the error while at the same time cleanup up my code before CodeDeploy bundles it up for deployment.&lt;/p></description></item><item><title>Testing Laravel API, Spark with Authentication</title><link>https://alfrednutile.info/posts/231/</link><pubDate>Sun, 04 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/231/</guid><description>&lt;p>Just a reminder to self, if I want to test an API I made and need to pass and &lt;code>api_token&lt;/code>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>And prevents the error while at the same time cleanup up my code before CodeDeploy bundles it up for deployment.&lt;/p></description><category>laravel</category><category>note2self</category></item><item><title>Testing Laravel API, Spark with Authentication</title><link>https://alfrednutile.info/posts/231/</link><pubDate>Sun, 04 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/231/</guid><description>&lt;p>Just a reminder to self, if I want to test an API I made and need to pass and &lt;code>api_token&lt;/code>&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php
 namespace Tests\Feature;
 use Tests\TestCase;
@@ -848,7 +848,7 @@ return factory(User::class)-&amp;gt;create()-&amp;gt;id;
 }
 ];
 });
-&lt;/code>&lt;/pre></description></item><item><title>Example of Making Documentation in Markdown with PDF Output</title><link>https://alfrednutile.info/posts/230/</link><pubDate>Fri, 05 Jan 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/230/</guid><description>&lt;p>Many of the sites I make have a need for a Support page for staff to know how to do things like add content, manage users etc. This article will cover how I go about writing my help docs in Markdown and then displaying it on the website with an option to print as PDF.&lt;/p>
+&lt;/code>&lt;/pre></description><category>laravel</category><category>note2self</category><category>testing</category></item><item><title>Example of Making Documentation in Markdown with PDF Output</title><link>https://alfrednutile.info/posts/230/</link><pubDate>Fri, 05 Jan 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/230/</guid><description>&lt;p>Many of the sites I make have a need for a Support page for staff to know how to do things like add content, manage users etc. This article will cover how I go about writing my help docs in Markdown and then displaying it on the website with an option to print as PDF.&lt;/p>
 &lt;h2 id="writing-markdown">Writing MarkDown&lt;/h2>
 &lt;p>To begin with, I made the help doc in mine. I made a sample one &lt;a href="https://raw.githubusercontent.com/alnutile/alsblog5/master/docs/help.md">here&lt;/a>&lt;/p>
 &lt;p>I save this to the root of the application &lt;code>docs/help.md&lt;/code>&lt;/p>
@@ -912,7 +912,7 @@ return \PDF::loadHTML($help)-&amp;gt;stream();
 &lt;/code>&lt;/pre>&lt;blockquote>
 &lt;p>Note: this is a good time to move the injected Classes into a &lt;code>__costructor&lt;/code> since they are using in two methods in the same class&lt;/p>
 &lt;/blockquote>
-&lt;p>Alright, now when you click the link o the help page it will output an inline PDF.&lt;/p></description></item><item><title>VueJS Transition Helper</title><link>https://alfrednutile.info/posts/228/</link><pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/228/</guid><description>&lt;p>There are docs on how to get a Transition to take effect when an item loads &lt;a href="https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components">https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components&lt;/a>&lt;/p>
+&lt;p>Alright, now when you click the link o the help page it will output an inline PDF.&lt;/p></description><category>laravel</category><category>note2self</category></item><item><title>VueJS Transition Helper</title><link>https://alfrednutile.info/posts/228/</link><pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/228/</guid><description>&lt;p>There are docs on how to get a Transition to take effect when an item loads &lt;a href="https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components">https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components&lt;/a>&lt;/p>
 &lt;p>But I was not having much luck with this using &lt;a href="https://uiv.wxsm.space/carousel">https://uiv.wxsm.space/carousel&lt;/a>.&lt;/p>
 &lt;p>I ended up making a quick helper function to keep it from looking like exploded elements.&lt;/p>
 &lt;p>You can see the results of this change here&lt;/p>
@@ -965,7 +965,7 @@ this.show = true;
 &amp;lt;/div&amp;gt;
 &amp;lt;div class=&amp;quot;ibox-content&amp;quot;&amp;gt;
 &lt;/code>&lt;/pre>&lt;p>You can see the &lt;code>display:none&lt;/code> kicking in before the page loads &lt;code>js&lt;/code> etc keeping it well hidden.
-Then once it is all loaded and we are ready I show it and transition it in.&lt;/p></description></item><item><title>Laravel Asset Notes WIP</title><link>https://alfrednutile.info/posts/227/</link><pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/227/</guid><description>&lt;p>This is just a reminder area of all the minor details as I find them that I need to remember&lt;/p>
+Then once it is all loaded and we are ready I show it and transition it in.&lt;/p></description><category>vuejs</category><category>note2self</category></item><item><title>Laravel Asset Notes WIP</title><link>https://alfrednutile.info/posts/227/</link><pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/227/</guid><description>&lt;p>This is just a reminder area of all the minor details as I find them that I need to remember&lt;/p>
 &lt;h2 id="fontawesome">FontAwesome&lt;/h2>
 &lt;pre>&lt;code>yarn add font-awesome
 &lt;/code>&lt;/pre>&lt;p>Then in my &lt;code>resources/assets/sass/app.scss&lt;/code>&lt;/p>
@@ -983,7 +983,7 @@ Then once it is all loaded and we are ready I show it and transition it in.&lt;/
 &lt;p>If using Less&lt;/p>
 &lt;pre>&lt;code>#resources/assets/less/app.less
 @import &amp;quot;./../../../node_modules/font-awesome/less/font-awesome&amp;quot;;
-&lt;/code>&lt;/pre></description></item><item><title>PostMark SMTP for sending Notifications and Password Resets</title><link>https://alfrednutile.info/posts/226/</link><pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/226/</guid><description>&lt;p>I have been using PostMark for years &lt;a href="https://postmarkapp.com">https://postmarkapp.com&lt;/a>
+&lt;/code>&lt;/pre></description><category>note2self</category><category>laravel</category><category>assets</category><category>wip</category></item><item><title>PostMark SMTP for sending Notifications and Password Resets</title><link>https://alfrednutile.info/posts/226/</link><pubDate>Thu, 14 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/226/</guid><description>&lt;p>I have been using PostMark for years &lt;a href="https://postmarkapp.com">https://postmarkapp.com&lt;/a>
 for sending emails, e.g. password reset and more.&lt;/p>
 &lt;p>They have an API but to get going with SMTP all the info is &lt;a href="https://postmarkapp.com/developer/user-guide/sending-email/sending-with-smtp">here&lt;/a>&lt;/p>
 &lt;p>Basically get your KEY and use it in your .env like this:&lt;/p>
@@ -997,7 +997,7 @@ MAIL_ENCRYPTION=tls
 &lt;ul>
 &lt;li>Register the domain in their domain ui&lt;/li>
 &lt;li>Set the from info in Laravel&lt;/li>
-&lt;/ul></description></item><item><title>Dusk Notes</title><link>https://alfrednutile.info/posts/225/</link><pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/225/</guid><description>&lt;p>Just keeping a list of gotchas around dusk.&lt;/p>
+&lt;/ul></description><category>laravel</category><category>note2self</category></item><item><title>Dusk Notes</title><link>https://alfrednutile.info/posts/225/</link><pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/225/</guid><description>&lt;p>Just keeping a list of gotchas around dusk.&lt;/p>
 &lt;h2 id="use-refreshdatabase-not-working">use RefreshDatabase not working&lt;/h2>
 &lt;p>Cost: 1 hour lost&lt;/p>
 &lt;p>Basically I had to go back to the slower &amp;ldquo;use DatabaseMigrations;&amp;rdquo; otherwise it would not work. The user was null.&lt;/p>
@@ -1027,7 +1027,7 @@ $options
 )
 );
 }
-&lt;/code>&lt;/pre>&lt;p>And this way it still works on travis.&lt;/p></description></item><item><title>Laravel Shift and Your Day Job</title><link>https://alfrednutile.info/posts/223/</link><pubDate>Fri, 03 Nov 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/223/</guid><description>&lt;p>** UPDATED November 22 2017 **&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>And this way it still works on travis.&lt;/p></description><category>note2self</category><category>laravel</category><category>dusk</category></item><item><title>Laravel Shift and Your Day Job</title><link>https://alfrednutile.info/posts/223/</link><pubDate>Fri, 03 Nov 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/223/</guid><description>&lt;p>** UPDATED November 22 2017 **&lt;/p>
 &lt;p>The service &lt;a href="https://laravelshift.com/shifts">Laravel Shift&lt;/a> is a great way to save a ton of time and keep your Laravel application up to date.&lt;/p>
 &lt;p>But sometimes you may not be allowed to share access to your company Github account for this process since it is hard to limit access at the repo level.&lt;/p>
 &lt;p>In this case I have a quick way to get your work done and back into the company repo IF that is okay with your boss.&lt;/p>
@@ -1060,7 +1060,7 @@ I typically will pull this work down locally.&lt;/p>
 &lt;p>NOTE: After each merge I tend to clean out vendor and composer.lock:&lt;/p>
 &lt;/blockquote>
 &lt;pre>&lt;code>rm -rf composer.lock vendor
-&lt;/code>&lt;/pre>&lt;p>This just seems to be a lot faster of a process.&lt;/p></description></item><item><title>Wrapping JSONEditor in Vue as Well as Laravel Blade</title><link>https://alfrednutile.info/posts/222/</link><pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/222/</guid><description>&lt;p>&lt;strong>UPDATED November 05 2017&lt;/strong>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>This just seems to be a lot faster of a process.&lt;/p></description><category>laravel</category><category>note2self</category></item><item><title>Wrapping JSONEditor in Vue as Well as Laravel Blade</title><link>https://alfrednutile.info/posts/222/</link><pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/222/</guid><description>&lt;p>&lt;strong>UPDATED November 05 2017&lt;/strong>&lt;/p>
 &lt;p>This will cover how to make a &lt;a href="https://github.com/josdejong/jsoneditor">JSONEditor&lt;/a> component that I can then use in a Blade template and listen to events.&lt;/p>
 &lt;p>You will end up with this:&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/g8n5brbtjom1ulp/Screenshot%202017-11-02%2013.17.32.png?dl=0" alt="">&lt;/p>
@@ -1180,7 +1180,7 @@ el: '#config_form',
 &lt;p>Then I use Vue to listen to the event &amp;ldquo;config-updated&amp;rdquo;. From there, since this is not about Ajax requests, I update the hidden field on the form.
 I could have done this with JQuery but just wanted to get use to this Vue workflow. Also I could see sending this over Ajax sooner than later even if just for validation notices etc.&lt;/p>
 &lt;p>Here is a quick look at the Scope of the objects:&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/nc1yn0hci05mtq4/events.png?dl=0" alt="">&lt;/p></description></item><item><title>Laravel, Dusk and Valet</title><link>https://alfrednutile.info/posts/221/</link><pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/221/</guid><description>&lt;p>By default I set my &lt;code>phpunit.xml&lt;/code> to use &lt;code>test&lt;/code> as my database:&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/nc1yn0hci05mtq4/events.png?dl=0" alt="">&lt;/p></description><category>vue</category><category>vue2</category><category>laravel</category><category>blade</category><category>note2self</category></item><item><title>Laravel, Dusk and Valet</title><link>https://alfrednutile.info/posts/221/</link><pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/221/</guid><description>&lt;p>By default I set my &lt;code>phpunit.xml&lt;/code> to use &lt;code>test&lt;/code> as my database:&lt;/p>
 &lt;pre>&lt;code> &amp;lt;php&amp;gt;
 &amp;lt;env name=&amp;quot;APP_ENV&amp;quot; value=&amp;quot;testing&amp;quot;/&amp;gt;
 &amp;lt;env name=&amp;quot;CACHE_DRIVER&amp;quot; value=&amp;quot;array&amp;quot;/&amp;gt;
@@ -1192,7 +1192,7 @@ I could have done this with JQuery but just wanted to get use to this Vue workfl
 &lt;/code>&lt;/pre>&lt;p>But with &lt;a href="https://laravel.com/docs/5.5/valet">Valet&lt;/a> and &lt;a href="https://laravel.com/docs/5.5/dusk">Dusk&lt;/a> this led to the browser using my default database and not &lt;code>test&lt;/code>
 but the PHPUnit test itself was using &lt;code>test&lt;/code> so the user I created and logged in as was not available in the browser.&lt;/p>
 &lt;p>I tried to set &lt;code>.env.dusk.local&lt;/code> and I tried &lt;code>phpuni.dusk.xml&lt;/code> none of it worked so I had to remove &lt;code>&amp;lt;env name=&amp;quot;DB_DATABASE&amp;quot; value=&amp;quot;test&amp;quot;/&amp;gt;&lt;/code>&lt;/p>
-&lt;p>This is a bummer and I am sure I am missing something. What this means and my tests reset my database for my local app which ideally it would not since it is really nice to keep state.&lt;/p></description></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alfrednutile.info/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/220/</guid><description>&lt;h1 id="sending-docker-commands-to-get-a-task-done">Sending Docker Commands to Get A Task Done&lt;/h1>
+&lt;p>This is a bummer and I am sure I am missing something. What this means and my tests reset my database for my local app which ideally it would not since it is really nice to keep state.&lt;/p></description><category>note2self</category><category>laravel</category><category>testing</category></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alfrednutile.info/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/220/</guid><description>&lt;h1 id="sending-docker-commands-to-get-a-task-done">Sending Docker Commands to Get A Task Done&lt;/h1>
 &lt;p>This article will show how to get started with AWS Batch and Docker to spin up a &amp;ldquo;worker&amp;rdquo;&lt;/p>
 &lt;p>By the time you are done reading it you will:&lt;/p>
 &lt;ol>
@@ -1269,7 +1269,7 @@ Setup Core CloudFormation&lt;/p>
 Get docker-compose inlace
 Get Travis.yml in place and docker/deploy.bash
 See diagram on how this all comes together&lt;/li>
-&lt;/ul></description></item><item><title>Mocking Models OutSide of Laravel</title><link>https://alfrednutile.info/posts/219/</link><pubDate>Thu, 24 Aug 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/219/</guid><description>&lt;p>This all comes down to me using &lt;a href="https://github.com/orchestral/testbench">https://github.com/orchestral/testbench&lt;/a>&lt;/p>
+&lt;/ul></description><category>laravel</category><category>note2self</category><category>aws</category><category>wip</category></item><item><title>Mocking Models OutSide of Laravel</title><link>https://alfrednutile.info/posts/219/</link><pubDate>Thu, 24 Aug 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/219/</guid><description>&lt;p>This all comes down to me using &lt;a href="https://github.com/orchestral/testbench">https://github.com/orchestral/testbench&lt;/a>&lt;/p>
 &lt;p>With this in place I can work on an external library as if it is in Laravel.&lt;/p>
 &lt;p>The one place I ran into trouble on though was mocking model related methods like &lt;code>all&lt;/code> for example a model &lt;code>Foo&lt;/code> being called as &lt;code>\App\Foo::all()&lt;/code> was hard to mock cause all is stacic:&lt;/p>
 &lt;pre>&lt;code>//\Illuminate\Database\Eloquent\Model::all
@@ -1288,7 +1288,7 @@ App::instance(FeatureFlag::class, $mock);
 $fjs = new FeatureFlagsForJavascript();
 $this-&amp;gt;assertEmpty($fjs-&amp;gt;get());
 }
-&lt;/code>&lt;/pre>&lt;p>It was mocked!&lt;/p></description></item><item><title>Versions and Branching a Library</title><link>https://alfrednutile.info/posts/218/</link><pubDate>Tue, 22 Aug 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/218/</guid><description>&lt;p>At work &lt;a href="https://twitter.com/cavanaghacea">Andrew Cavanagh&lt;/a> and I had to, using many examples on of libraries we use, to finalize how to branch and version our libraries.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>It was mocked!&lt;/p></description><category>laravel</category><category>note2self</category></item><item><title>Versions and Branching a Library</title><link>https://alfrednutile.info/posts/218/</link><pubDate>Tue, 22 Aug 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/218/</guid><description>&lt;p>At work &lt;a href="https://twitter.com/cavanaghacea">Andrew Cavanagh&lt;/a> and I had to, using many examples on of libraries we use, to finalize how to branch and version our libraries.&lt;/p>
 &lt;p>There should be one branch for each major version (&lt;code>1.0&lt;/code>, &lt;code>2.0&lt;/code>, etc).&lt;/p>
 &lt;p>These should be the only branches besides &lt;code>master&lt;/code>.&lt;/p>
 &lt;p>Releases within these versions should be tagged following semantic &lt;a href="http://semver.org/">versioning guidlines&lt;/a> (&lt;code>v1.2.3&lt;/code> for example).&lt;/p>
@@ -1303,7 +1303,7 @@ figure 1&lt;/p>
 &amp;quot;dev-master&amp;quot;: &amp;quot;3.0-dev&amp;quot;
 }
 },
-&lt;/code>&lt;/pre></description></item><item><title>Setting Up My Mac</title><link>https://alfrednutile.info/posts/215/</link><pubDate>Sun, 30 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/215/</guid><description>&lt;p>Great videos here:&lt;/p>
+&lt;/code>&lt;/pre></description><category>laravel</category><category>versioning</category><category>note2self</category></item><item><title>Setting Up My Mac</title><link>https://alfrednutile.info/posts/215/</link><pubDate>Sun, 30 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/215/</guid><description>&lt;p>Great videos here:&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://laracasts.com/lessons/dev-machine-setup">https://laracasts.com/lessons/dev-machine-setup&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://laracasts.com/lessons/dev-machine-setup-phpstorm">https://laracasts.com/lessons/dev-machine-setup-phpstorm&lt;/a>&lt;/li>
@@ -1367,7 +1367,7 @@ alias docker-composer=&amp;quot;docker-compose&amp;quot;
 &lt;/code>&lt;/pre>&lt;h2 id="sublime-shortcut">Sublime shortcut&lt;/h2>
 &lt;pre>&lt;code>cd /usr/local/bin
 ln -s &amp;quot;/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl&amp;quot; subl
-&lt;/code>&lt;/pre></description></item><item><title>IronFunctions and PHP</title><link>https://alfrednutile.info/posts/213/</link><pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/213/</guid><description>&lt;p>A colleague of mine &lt;a href="https://twitter.com/skwashd">Dave Hall&lt;/a> poing out &lt;a href="https://github.com/iron-io/functions">IronFunctions&lt;/a>. And being in the pursuit of serverless options especially ones that even have examples of PHP I had to give it a try. This post is a note2self in that the intro &lt;a href="https://github.com/iron-io/functions/tree/master/examples/hello/php">here&lt;/a> has some bits that need fixing BUT I think it is close and I hope to add more updates here about the tool.&lt;/p>
+&lt;/code>&lt;/pre></description><category>note2self</category></item><item><title>IronFunctions and PHP</title><link>https://alfrednutile.info/posts/213/</link><pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/213/</guid><description>&lt;p>A colleague of mine &lt;a href="https://twitter.com/skwashd">Dave Hall&lt;/a> poing out &lt;a href="https://github.com/iron-io/functions">IronFunctions&lt;/a>. And being in the pursuit of serverless options especially ones that even have examples of PHP I had to give it a try. This post is a note2self in that the intro &lt;a href="https://github.com/iron-io/functions/tree/master/examples/hello/php">here&lt;/a> has some bits that need fixing BUT I think it is close and I hope to add more updates here about the tool.&lt;/p>
 &lt;p>All the steps below will only work once you take on the initial hello world &lt;a href="https://github.com/iron-io/functions/blob/master/README.md">here&lt;/a>. After that you have the &lt;code>fn&lt;/code> cli tool installed and a running local iron-functions server.&lt;/p>
 &lt;p>For one I needed to apply each patch seen &lt;a href="https://github.com/iron-io/functions/pull/444/files">here&lt;/a>&lt;/p>
 &lt;p>Once I had all that in place I re-reran the &lt;code>fn&lt;/code> install command from the folder where I download the &lt;code>iron-io/functions&lt;/code> repo into&lt;/p>
@@ -1430,7 +1430,7 @@ fn bump &amp;amp;&amp;amp; fn build &amp;amp;&amp;amp; fn push
 # then update the route
 fn routes update phpapp1 /hello
 &lt;/code>&lt;/pre>&lt;p>just to save some time there.&lt;/p>
-&lt;p>More soon on using this with Lumen and other options. I tried this but some PHP items are missing on the Alpine docker image to make this work.&lt;/p></description></item><item><title>Meetings and Cross TimeZone Teams</title><link>https://alfrednutile.info/posts/210/</link><pubDate>Wed, 03 May 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/210/</guid><description>&lt;p>Wrote and article &lt;a href="https://medium.com/@alnutile/meetings-and-cross-timezone-teams-c9b833c43bfb">https://medium.com/@alnutile/meetings-and-cross-timezone-teams-c9b833c43bfb&lt;/a> on trying to find the blanance of meetings and focus time.&lt;/p>
+&lt;p>More soon on using this with Lumen and other options. I tried this but some PHP items are missing on the Alpine docker image to make this work.&lt;/p></description><category>php</category><category>ironfunctions</category><category>note2self</category></item><item><title>Meetings and Cross TimeZone Teams</title><link>https://alfrednutile.info/posts/210/</link><pubDate>Wed, 03 May 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/210/</guid><description>&lt;p>Wrote and article &lt;a href="https://medium.com/@alnutile/meetings-and-cross-timezone-teams-c9b833c43bfb">https://medium.com/@alnutile/meetings-and-cross-timezone-teams-c9b833c43bfb&lt;/a> on trying to find the blanance of meetings and focus time.&lt;/p>
 &lt;p>Saved here as well for when they go out of business :)&lt;/p>
 &lt;h2 id="meetings-and-cross-timezone-teams">Meetings and Cross TimeZone Teams&lt;/h2>
 &lt;p>Meetings are needed, most of them at least, and when I worked with a team that was all in the same timezone I was easily able to say, “Between 1–4 I am coding/focusing” or “Between 6am and 9am” I am coding. Then the rest of the day was for meetings, interruptions and just helping out on things.&lt;/p>
@@ -1479,7 +1479,7 @@ For these StandUps stick to the guidelines&lt;/p>
 &lt;/ol>
 &lt;hr>
 &lt;p>Point being the doing of the work needs to get done and the planning time if done properly has had it’s chance to be laid down and hopefully done well. In this case giving it almost 50% of a chance to create a work load and expectations. (for me this is okay but for a developer maybe meetings should be 20% of your week)&lt;/p>
-&lt;p>And with these patterns in place, then ideally I find myself less feeling like I did not get enough done at the end of the day, or trying to do the “real work” after hours.&lt;/p></description></item><item><title>Dusk and Homestead</title><link>https://alfrednutile.info/posts/209/</link><pubDate>Mon, 24 Apr 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/209/</guid><description>&lt;p>Working on learning &lt;a href="https://laravel.com/docs/5.4/dusk#introduction">Dusk&lt;/a> and really excited to get going with it.&lt;/p>
+&lt;p>And with these patterns in place, then ideally I find myself less feeling like I did not get enough done at the end of the day, or trying to do the “real work” after hours.&lt;/p></description><category>developers</category><category>note2self</category></item><item><title>Dusk and Homestead</title><link>https://alfrednutile.info/posts/209/</link><pubDate>Mon, 24 Apr 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/209/</guid><description>&lt;p>Working on learning &lt;a href="https://laravel.com/docs/5.4/dusk#introduction">Dusk&lt;/a> and really excited to get going with it.&lt;/p>
 &lt;p>But running it in homestead proved to be a bit tricky.&lt;/p>
 &lt;p>After following the docs and running &lt;code>php artisan dusk&lt;/code> not much happened. Sure if I ran it on my Mac and it just worked but my tests needed to do migrations and what not and I want to keep my work in Homestead.&lt;/p>
 &lt;p>So a few steps later and it worked thanks to this post &lt;a href="https://github.com/laravel/dusk/issues/50#issuecomment-275155974">https://github.com/laravel/dusk/issues/50#issuecomment-275155974&lt;/a>&lt;/p>
@@ -1502,7 +1502,7 @@ For these StandUps stick to the guidelines&lt;/p>
 There is a screen on:
 16315.running_xvfb (04/24/2017 12:34:09 AM) (Detached)
 1 Socket in /var/run/screen/S-vagrant.
-&lt;/code>&lt;/pre>&lt;p>Now it all just worked!&lt;/p></description></item><item><title>Instantiate Request for Testing</title><link>https://alfrednutile.info/posts/206/</link><pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/206/</guid><description>&lt;p>When I need to make a request for a test in which the Class is expecting a &lt;code>\Illuminate\Http\Request&lt;/code> I can do this for a file based or non file based request.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Now it all just worked!&lt;/p></description><category>note2self</category><category>laravel</category></item><item><title>Instantiate Request for Testing</title><link>https://alfrednutile.info/posts/206/</link><pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/206/</guid><description>&lt;p>When I need to make a request for a test in which the Class is expecting a &lt;code>\Illuminate\Http\Request&lt;/code> I can do this for a file based or non file based request.&lt;/p>
 &lt;pre>&lt;code> /**
 * @Then I should be able to upload an image file
 */
@@ -1529,7 +1529,7 @@ $request-&amp;gt;shouldReceive('all')-&amp;gt;andReturn($fixture);
 /** @var \App\PlannerSlackReport $report */
 $report = new \App\PlannerSlackReport();
 $report-&amp;gt;handle($request);
-&lt;/code>&lt;/pre></description></item><item><title>Example Job Format for Queue</title><link>https://alfrednutile.info/posts/204/</link><pubDate>Sat, 14 Jan 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/204/</guid><description>&lt;p>Sometimes I just need this info to remind myself what a job looks like in a queue and how to mock it etc.&lt;/p>
+&lt;/code>&lt;/pre></description><category>laravel</category><category>note2self</category><category>php</category><category>testing</category></item><item><title>Example Job Format for Queue</title><link>https://alfrednutile.info/posts/204/</link><pubDate>Sat, 14 Jan 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/204/</guid><description>&lt;p>Sometimes I just need this info to remind myself what a job looks like in a queue and how to mock it etc.&lt;/p>
 &lt;p>In this case I have a simple class that will be used to dispatch the job.&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php
 namespace App\Jobs;
@@ -1636,9 +1636,9 @@ dd($this-&amp;gt;payload);
 Log::debug(sprintf(&amp;quot;Failed to work :( %s&amp;quot;, $e-&amp;gt;getMessage()));
 }
 }
-&lt;/code>&lt;/pre></description></item><item><title>Pusher and PHP 'Error Failed to connect to Pusher'</title><link>https://alfrednutile.info/posts/201/</link><pubDate>Mon, 28 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/201/</guid><description>&lt;p>Note to self. Getting this error &amp;ldquo;Error Failed to connect to Pusher&amp;rdquo; but the front end is working. And you know your credentials are correct, AND it was working just a day ago check the date and time on your machine/vm.&lt;/p>
+&lt;/code>&lt;/pre></description><category>note2self</category><category>laravel</category></item><item><title>Pusher and PHP 'Error Failed to connect to Pusher'</title><link>https://alfrednutile.info/posts/201/</link><pubDate>Mon, 28 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/201/</guid><description>&lt;p>Note to self. Getting this error &amp;ldquo;Error Failed to connect to Pusher&amp;rdquo; but the front end is working. And you know your credentials are correct, AND it was working just a day ago check the date and time on your machine/vm.&lt;/p>
 &lt;p>Mine had drift and since it was behind by 20 minutes I would end up with this error.&lt;/p>
-&lt;p>Oy what a waste or time x 2 :(&lt;/p></description></item><item><title>Model Boot Events</title><link>https://alfrednutile.info/posts/200/</link><pubDate>Sun, 20 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/200/</guid><description>&lt;p>Just a quick not to modify model data upon an event. Laravel docs talk about it &lt;a href="https://laravel.com/docs/5.3/eloquent#events">here&lt;/a>&lt;/p>
+&lt;p>Oy what a waste or time x 2 :(&lt;/p></description><category>php</category><category>note2self</category><category>laravel</category></item><item><title>Model Boot Events</title><link>https://alfrednutile.info/posts/200/</link><pubDate>Sun, 20 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/200/</guid><description>&lt;p>Just a quick not to modify model data upon an event. Laravel docs talk about it &lt;a href="https://laravel.com/docs/5.3/eloquent#events">here&lt;/a>&lt;/p>
 &lt;p>But putting it in another class can get kinda confusing when you are trying to debug or update the code.&lt;/p>
 &lt;p>In this example I have a model &lt;code>Board&lt;/code> and I want to, upon saving, make sure it has some key data.&lt;/p>
 &lt;pre>&lt;code> protected static function boot()
@@ -1651,7 +1651,7 @@ $model-&amp;gt;id = Uuid::uuid4()-&amp;gt;toString();
 }
 });
 }
-&lt;/code>&lt;/pre>&lt;p>So now my &lt;code>\App\Board&lt;/code> class will trigger this addition of UUID if the ID is not set upon &lt;code>creation&lt;/code>.&lt;/p></description></item><item><title>Queue onConnection</title><link>https://alfrednutile.info/posts/199/</link><pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/199/</guid><description>&lt;p>If you look here &lt;a href="https://laravel.com/docs/5.3/queues#customizing-the-queue-and-connection">https://laravel.com/docs/5.3/queues#customizing-the-queue-and-connection&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>So now my &lt;code>\App\Board&lt;/code> class will trigger this addition of UUID if the ID is not set upon &lt;code>creation&lt;/code>.&lt;/p></description><category>laravel</category><category>note2self</category></item><item><title>Queue onConnection</title><link>https://alfrednutile.info/posts/199/</link><pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/199/</guid><description>&lt;p>If you look here &lt;a href="https://laravel.com/docs/5.3/queues#customizing-the-queue-and-connection">https://laravel.com/docs/5.3/queues#customizing-the-queue-and-connection&lt;/a>&lt;/p>
 &lt;p>Under &amp;ldquo;Dispatching To A Particular Connection&amp;rdquo;&lt;/p>
 &lt;p>But if running test and local where I just want &lt;code>sync&lt;/code> or &lt;code>database&lt;/code>&lt;/p>
 &lt;pre>&lt;code> if(env('QUEUE_DRIVER') != 'sync' &amp;amp;&amp;amp; env('QUEUE_DRIVER') != 'database') {
@@ -1661,7 +1661,7 @@ $concentration_curve = (new ImportDataColumnWorker($this-&amp;gt;job_notice-&amp
 $concentration_curve = (new ImportDataColumnWorker($this-&amp;gt;job_notice-&amp;gt;model, $this-&amp;gt;job_notice-&amp;gt;payload));
 }
 $this-&amp;gt;dispatch($concentration_curve);
-&lt;/code>&lt;/pre></description></item><item><title>Guzzle 5 or 6 or ????</title><link>https://alfrednutile.info/posts/198/</link><pubDate>Fri, 11 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/198/</guid><description>&lt;p>Sometimes Guzzle can be a real pain to use in an library. You choose 5.x and then some other library needed 6.x and heck you really did not care either way.&lt;/p>
+&lt;/code>&lt;/pre></description><category>laravel</category><category>note2self</category></item><item><title>Guzzle 5 or 6 or ????</title><link>https://alfrednutile.info/posts/198/</link><pubDate>Fri, 11 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/198/</guid><description>&lt;p>Sometimes Guzzle can be a real pain to use in an library. You choose 5.x and then some other library needed 6.x and heck you really did not care either way.&lt;/p>
 &lt;p>One interesting package example is &lt;a href="https://packagist.org/packages/aws/aws-sdk-php">aws/aws-sdk-php&lt;/a>&lt;/p>
 &lt;p>If you look in it&amp;rsquo;s composer.json you will see this&lt;/p>
 &lt;pre>&lt;code> &amp;quot;require&amp;quot;: {
@@ -1684,7 +1684,7 @@ return new \Aws\Handler\GuzzleV6\GuzzleHandler();
 throw new \RuntimeException('Unknown Guzzle version: ' . $version);
 }
 }
-&lt;/code>&lt;/pre>&lt;p>Then each class deals with instantiating the &lt;code>GuzzleHttp\Client&lt;/code> as needed.&lt;/p></description></item><item><title>Chrome update equals Behat Fail</title><link>https://alfrednutile.info/posts/197/</link><pubDate>Mon, 07 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/197/</guid><description>&lt;p>Had trouble running behat after I ran updates on Chrome&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Then each class deals with instantiating the &lt;code>GuzzleHttp\Client&lt;/code> as needed.&lt;/p></description><category>php</category><category>note2self</category></item><item><title>Chrome update equals Behat Fail</title><link>https://alfrednutile.info/posts/197/</link><pubDate>Mon, 07 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/197/</guid><description>&lt;p>Had trouble running behat after I ran updates on Chrome&lt;/p>
 &lt;p>My typical install &lt;a href="https://www.npmjs.com/package/selenium-standalone">https://www.npmjs.com/package/selenium-standalone&lt;/a>&lt;/p>
 &lt;p>did not fix it, even try &lt;code>brew&lt;/code> but no luck.&lt;/p>
 &lt;p>All I needed to do was go &lt;a href="https://chromedriver.storage.googleapis.com/index.html?path=2.25/">here&lt;/a> and grab the lastest one for my Mac. For me this was the 32 bit.&lt;/p>
@@ -1695,7 +1695,7 @@ throw new \RuntimeException('Unknown Guzzle version: ' . $version);
 &lt;pre>&lt;code>curl -O https://chromedriver.storage.googleapis.com/2.25/chromedriver_mac64.zip
 unzip chromedriver_mac64.zip
 mv chromedriver /usr/local/lib/node_modules/selenium-standalone/.selenium/chromedriver/2.21-x64-chromedriver
-&lt;/code>&lt;/pre></description></item><item><title>Laravel and Casting 'JSON_UNESCAPED_UNICODE' Data</title><link>https://alfrednutile.info/posts/196/</link><pubDate>Thu, 03 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/196/</guid><description>&lt;p>Had a interesting issue with Laravel and the &lt;a href="https://laravel.com/docs/5.2/eloquent-mutators">cast feature&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre></description><category>note2self</category><category>behat</category></item><item><title>Laravel and Casting 'JSON_UNESCAPED_UNICODE' Data</title><link>https://alfrednutile.info/posts/196/</link><pubDate>Thu, 03 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/196/</guid><description>&lt;p>Had a interesting issue with Laravel and the &lt;a href="https://laravel.com/docs/5.2/eloquent-mutators">cast feature&lt;/a>&lt;/p>
 &lt;p>Basically a Chinese set of characters would be converted to their unicode counterpart &lt;a href="http://php.net/manual/en/json.constants.php">http://php.net/manual/en/json.constants.php&lt;/a>&lt;/p>
 &lt;p>So saving &amp;ldquo;你好，世界&amp;rdquo; would become &amp;ldquo;\u4f60\u597d\uff0c\u4e16\u754c&amp;rdquo; in the database.&lt;/p>
 &lt;p>Making it hard to search for &amp;ldquo;你好，世界&amp;rdquo;&lt;/p>
@@ -1710,14 +1710,14 @@ mv chromedriver /usr/local/lib/node_modules/selenium-standalone/.selenium/chrome
 */
 return json_encode($value, JSON_UNESCAPED_UNICODE);
 }
-&lt;/code>&lt;/pre>&lt;p>And now &amp;ldquo;你好，世界&amp;rdquo; would save that way to the database and not &amp;ldquo;\u4f60\u597d\uff0c\u4e16\u754c&amp;rdquo;&lt;/p></description></item><item><title>Amazon Machine Learning</title><link>https://alfrednutile.info/posts/191/</link><pubDate>Fri, 16 Sep 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/191/</guid><description>&lt;p>This is mostly a note2self.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>And now &amp;ldquo;你好，世界&amp;rdquo; would save that way to the database and not &amp;ldquo;\u4f60\u597d\uff0c\u4e16\u754c&amp;rdquo;&lt;/p></description><category>laravel</category><category>json</category><category>note2self</category></item><item><title>Amazon Machine Learning</title><link>https://alfrednutile.info/posts/191/</link><pubDate>Fri, 16 Sep 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/191/</guid><description>&lt;p>This is mostly a note2self.&lt;/p>
 &lt;p>Amazon Machine learning is one way to dig into things. For me it mean not getting bogged down in Python or tons of formulas for now.&lt;/p>
 &lt;p>Basically I watched their main video &lt;a href="https://aws.amazon.com/machine-learning/getting-started/">here&lt;/a> to get a view of how things worked.&lt;/p>
 &lt;p>Then I read their docs &lt;a href="http://docs.aws.amazon.com/machine-learning/latest/dg/what-is-amazon-machine-learning.html">here&lt;/a> and follow &lt;a href="http://docs.aws.amazon.com/machine-learning/latest/dg/tutorial.html">this&lt;/a> tutorial.&lt;/p>
 &lt;p>After that I took a moment to watch another video of how they used ML to help process messages from Twitter &lt;a href="https://www.youtube.com/watch?v=GRRX9amYsyM">https://www.youtube.com/watch?v=GRRX9amYsyM&lt;/a>&lt;/p>
 &lt;p>From there I tried a few of my own datasets one I used on a not ready for prime time product &lt;a href="https://incomings.io/blogs/3">here&lt;/a>&lt;/p>
 &lt;p>Anyways it was just fun to play around. Their API is super easy to use, even to the point of having a PHP client I could plug in for AWS or MicroSoft &lt;a href="https://alfrednutile.info/projects/57">https://alfrednutile.info/projects/57&lt;/a>&lt;/p>
-&lt;p>Have a number of other ideas as well looking forward to making them happen here or with other services.&lt;/p></description></item><item><title>Adding Basic Auth to Forge</title><link>https://alfrednutile.info/posts/189/</link><pubDate>Thu, 18 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/189/</guid><description>&lt;p>make the username and password &lt;a href="http://www.htaccesstools.com/htpasswd-generator/">http://www.htaccesstools.com/htpasswd-generator/&lt;/a>&lt;/p>
+&lt;p>Have a number of other ideas as well looking forward to making them happen here or with other services.&lt;/p></description><category>note2self</category></item><item><title>Adding Basic Auth to Forge</title><link>https://alfrednutile.info/posts/189/</link><pubDate>Thu, 18 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/189/</guid><description>&lt;p>make the username and password &lt;a href="http://www.htaccesstools.com/htpasswd-generator/">http://www.htaccesstools.com/htpasswd-generator/&lt;/a>&lt;/p>
 &lt;pre>&lt;code>admin:$apr1$wLiZDI74$/D64sfIdn74kHc6F.76Qv/
 &lt;/code>&lt;/pre>&lt;p>And save it in a file called, for example, &lt;code>htpass&lt;/code>&lt;/p>
 &lt;p>Now &lt;code>scp -v htpass forge@your_server:~/&lt;/code>&lt;/p>
@@ -1729,7 +1729,7 @@ auth_basic_user_file /home/forge/htpass;
 &lt;/code>&lt;/pre>&lt;p>As seen below&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/oxuo4vw6rvfnrnv/nginx_conf.png?dl=0" alt="">&lt;/p>
 &lt;p>I think that will restart/reload Nginx, if does not go to the page that list your &amp;ldquo;Server Details&amp;rdquo; and restart there&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/hp1p1v9nkv684r8/restart_nginx.png?dl=0" alt="">&lt;/p></description></item><item><title>Behat and Uploading Files to a Form Even on Remote Selenium2 Servers</title><link>https://alfrednutile.info/posts/179/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/179/</guid><description>&lt;p>Just had to tackle this issue so making some notes for later here :)&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/hp1p1v9nkv684r8/restart_nginx.png?dl=0" alt="">&lt;/p></description><category>note2self</category></item><item><title>Behat and Uploading Files to a Form Even on Remote Selenium2 Servers</title><link>https://alfrednutile.info/posts/179/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/179/</guid><description>&lt;p>Just had to tackle this issue so making some notes for later here :)&lt;/p>
 &lt;p>&lt;strong>Updated and more detailed &lt;a href="https://alfrednutile.info/posts/188">here&lt;/a>&lt;/strong>&lt;/p>
 &lt;p>I run selenium on my Windows PC and before that my Mac, either one would have had this issue since my test is running side my VM. This meant when I needed to run a test to interact with a form to upload an image that image path was relative to the machine (VM) that I started the test on and not the Browser that was being manipulated by Selenium2.&lt;/p>
 &lt;p>The solution was &amp;ldquo;easy&amp;rdquo; thanks to this &lt;a href="https://github.com/minkphp/MinkSelenium2Driver/issues/187#issuecomment-112106857">thread&lt;/a>&lt;/p>
@@ -1753,7 +1753,7 @@ unlink($tempZip);
 $this-&amp;gt;pressButton('Save');
 }
 &lt;/code>&lt;/pre>&lt;p>I also had to add &lt;code>@javascript&lt;/code> to the test to allow this WebDriver feature to work.&lt;/p>
-&lt;p>That was it, saved me a ton of time suffering through this gotcha moment.&lt;/p></description></item><item><title>Laravel, PHPUnit, Require_Once on Routes</title><link>https://alfrednutile.info/posts/178/</link><pubDate>Tue, 22 Mar 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/178/</guid><description>&lt;p>Going crazy running PHPUnit all and getting fail but you run the one route and it works!&lt;/p>
+&lt;p>That was it, saved me a ton of time suffering through this gotcha moment.&lt;/p></description><category>behat</category><category>bdd</category><category>php</category><category>note2self</category></item><item><title>Laravel, PHPUnit, Require_Once on Routes</title><link>https://alfrednutile.info/posts/178/</link><pubDate>Tue, 22 Mar 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/178/</guid><description>&lt;p>Going crazy running PHPUnit all and getting fail but you run the one route and it works!&lt;/p>
 &lt;p>The difference is &lt;code>require&lt;/code> versus &lt;code>require_once&lt;/code> in PHPUnit tests.&lt;/p>
 &lt;p>For example&lt;/p>
 &lt;pre>&lt;code>require __DIR__ . '/../ConfigurationExamples/routes.php';
@@ -1792,7 +1792,7 @@ $this-&amp;gt;assertEquals(&amp;quot;foo&amp;quot;, $results-&amp;gt;getContent(
 }
 &lt;/code>&lt;/pre>&lt;p>The moment I change it to &lt;code>require_once&lt;/code> I get fails on the last or second to last one, it is not consistant except that it will fail. I immediately run that one and it passes.&lt;/p>
 &lt;p>It is not the database and I can change the order of these tests to have the bottom one fail.&lt;/p>
-&lt;p>So &lt;code>require&lt;/code> is your friend!!&lt;/p></description></item><item><title>Install Webdriver to get testing with Behat and Javascript</title><link>https://alfrednutile.info/posts/174/</link><pubDate>Tue, 26 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/174/</guid><description>&lt;p>This is so I do not forget!&lt;/p>
+&lt;p>So &lt;code>require&lt;/code> is your friend!!&lt;/p></description><category>note2self</category><category>php</category><category>laravel</category></item><item><title>Install Webdriver to get testing with Behat and Javascript</title><link>https://alfrednutile.info/posts/174/</link><pubDate>Tue, 26 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/174/</guid><description>&lt;p>This is so I do not forget!&lt;/p>
 &lt;p>&lt;strong>UPDATED: go here instead &lt;a href="https://www.npmjs.com/package/selenium-standalone">https://www.npmjs.com/package/selenium-standalone&lt;/a>&lt;/strong>&lt;/p>
 &lt;h2 id="1-sudo-npm--g-install-webdriver-manager">1) sudo npm -g install webdriver-manager&lt;/h2>
 &lt;h2 id="2-sudo-webdriver-manager-update---chrome">2) sudo webdriver-manager update &amp;ndash;chrome&lt;/h2>
@@ -1800,7 +1800,7 @@ $this-&amp;gt;assertEquals(&amp;quot;foo&amp;quot;, $results-&amp;gt;getContent(
 &lt;p>Googled El Capitan Java and takes me to Apples site to get the right version of java&lt;/p>
 &lt;p>&lt;a href="https://support.apple.com/kb/dl1572?locale=en_US">https://support.apple.com/kb/dl1572?locale=en_US&lt;/a>&lt;/p>
 &lt;h2 id="4-webdriver-manager-start">4) webdriver-manager start&lt;/h2>
-&lt;p>That is it!&lt;/p></description></item><item><title>Multi Domain Nginx Redirect</title><link>https://alfrednutile.info/posts/135/</link><pubDate>Sat, 28 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/135/</guid><description>&lt;p>&lt;a href="http://wordpress.stackexchange.com/questions/106445/multisite-redirect-loop-for-a-single-www-domain">http://wordpress.stackexchange.com/questions/106445/multisite-redirect-loop-for-a-single-www-domain&lt;/a>&lt;/p>
+&lt;p>That is it!&lt;/p></description><category>behat</category><category>note2self</category></item><item><title>Multi Domain Nginx Redirect</title><link>https://alfrednutile.info/posts/135/</link><pubDate>Sat, 28 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/135/</guid><description>&lt;p>&lt;a href="http://wordpress.stackexchange.com/questions/106445/multisite-redirect-loop-for-a-single-www-domain">http://wordpress.stackexchange.com/questions/106445/multisite-redirect-loop-for-a-single-www-domain&lt;/a>&lt;/p>
 &lt;p>Basically the site went from foo-prod.stagingarea.us to wearelive.com but since it was an internal app I wanted to make sure the old url still worked and redirected as needed to the new url&lt;/p>
 &lt;pre>&lt;code>server {
 listen 80;
@@ -1813,7 +1813,7 @@ server_name foo-prod.stagingarea.us;
 if ($host ~* ^foo-prod.stagingarea.us) {
 rewrite ^(.*)$ https://wearelive.com$1 permanent;
 }
-&lt;/code>&lt;/pre>&lt;p>Interesting note is server_name does not contain the primary name wearlive.com&lt;/p></description></item><item><title>Linux, Behat and installing ChromeDriver</title><link>https://alfrednutile.info/posts/129/</link><pubDate>Mon, 19 Jan 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/129/</guid><description>&lt;p>Setting up Chrome driver with Behat and Selenium2&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Interesting note is server_name does not contain the primary name wearlive.com&lt;/p></description><category>note2self</category></item><item><title>Linux, Behat and installing ChromeDriver</title><link>https://alfrednutile.info/posts/129/</link><pubDate>Mon, 19 Jan 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/129/</guid><description>&lt;p>Setting up Chrome driver with Behat and Selenium2&lt;/p>
 &lt;h2 id="side-note-for-mac">Side note for Mac&lt;/h2>
 &lt;pre>&lt;code>brew install chromedriver
 &lt;/code>&lt;/pre>&lt;h2 id="chromedriver">ChromeDriver&lt;/h2>
@@ -1847,7 +1847,7 @@ selenium2:
 wd_host: &amp;quot;http://192.168.10.1:4444/wd/hub&amp;quot;
 base_url: 'http://thehub.dev:8000/'
 browser_name: chrome
-&lt;/code>&lt;/pre></description></item><item><title>Laravel Blade and Angular brackets</title><link>https://alfrednutile.info/posts/124/</link><pubDate>Fri, 19 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/124/</guid><description>&lt;p>I use one AngularController.php to render main.blade.php file that then renders angular. The only other blade file is the login page.
+&lt;/code>&lt;/pre></description><category>note2self</category></item><item><title>Laravel Blade and Angular brackets</title><link>https://alfrednutile.info/posts/124/</link><pubDate>Fri, 19 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/124/</guid><description>&lt;p>I use one AngularController.php to render main.blade.php file that then renders angular. The only other blade file is the login page.
 I could have done this in the routes.php file but since the routes file has the login page I decided to place it in this controller.&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Blade;
@@ -1891,7 +1891,7 @@ JavaScript::put(
 return View::make('layouts.main', compact('chat_on'));
 }
 }
-&lt;/code>&lt;/pre>&lt;p>Thanks to &lt;a href="http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs">http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs&lt;/a> for the tip&lt;/p></description></item><item><title>Multi Threaded Queue Processing</title><link>https://alfrednutile.info/posts/106/</link><pubDate>Wed, 10 Sep 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/106/</guid><description>&lt;p>I needed a way to run a bunch of jobs in parallel and I am use to using the Symfony Process Component for that.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Thanks to &lt;a href="http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs">http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs&lt;/a> for the tip&lt;/p></description><category>note2self</category><category>angularjs</category><category>laravel</category></item><item><title>Multi Threaded Queue Processing</title><link>https://alfrednutile.info/posts/106/</link><pubDate>Wed, 10 Sep 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/106/</guid><description>&lt;p>I needed a way to run a bunch of jobs in parallel and I am use to using the Symfony Process Component for that.&lt;/p>
 &lt;p>So this post will show how I did this in Laravel 4.3 via the Queue so I can remember next time.&lt;/p>
 &lt;p>What will come out of this is a workflow as seen here&lt;/p>
 &lt;div markdown=0>
@@ -2086,7 +2086,7 @@ array('job_uuid', InputArgument::REQUIRED, 'The uuid of the related request job 
 }
 }
 &lt;/code>&lt;/pre>&lt;p>There still is some work to do. I have to set the limit so my initial run does not timeout. I also need to clean up some code so that these classes are digging so deep into the other classes.&lt;/p>
-&lt;p>But this was just to show how to use Symfony Process Component, Laravel Queue, and Laravel Artisan to run a multi threaded task.&lt;/p></description></item><item><title>Sorting related models in Laravel</title><link>https://alfrednutile.info/posts/104/</link><pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/104/</guid><description>&lt;p>There are a number of related models to this one model that I store in the Models $relations property&lt;/p>
+&lt;p>But this was just to show how to use Symfony Process Component, Laravel Queue, and Laravel Artisan to run a multi threaded task.&lt;/p></description><category>laravel</category><category>php</category><category>note2self</category><category>4.3</category></item><item><title>Sorting related models in Laravel</title><link>https://alfrednutile.info/posts/104/</link><pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/104/</guid><description>&lt;p>There are a number of related models to this one model that I store in the Models $relations property&lt;/p>
 &lt;pre>&lt;code> protected static $relations = [
 'owner',
 'apns',
@@ -2111,7 +2111,7 @@ $query-&amp;gt;with('user.profiles')-&amp;gt;orderBy('id', 'DESC');
 },
 ])-&amp;gt;findOrFail($id);
 $found = $found-&amp;gt;load(static::$relations);
-&lt;/code>&lt;/pre>&lt;p>veifiers was part of the protected static $relations list but I moved it out since, for each query, I need to sort them from last to first.&lt;/p></description></item><item><title>Polymorphic relationship Laravel</title><link>https://alfrednutile.info/posts/99/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/99/</guid><description>&lt;p>This example will show a typical &amp;ldquo;Attachment&amp;rdquo; need. The Laravel docs really do cover alot as seen &lt;a href="http://laravel.com/docs/eloquent#polymorphic-relations">here&lt;/a> especially &lt;strong>&amp;ldquo;Polymorphic Relation Table Structure”&lt;/strong>. I cover many to many polymorphic relationships &lt;a href="http://www.alfrednutile.info/posts/95">here&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>veifiers was part of the protected static $relations list but I moved it out since, for each query, I need to sort them from last to first.&lt;/p></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Polymorphic relationship Laravel</title><link>https://alfrednutile.info/posts/99/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/99/</guid><description>&lt;p>This example will show a typical &amp;ldquo;Attachment&amp;rdquo; need. The Laravel docs really do cover alot as seen &lt;a href="http://laravel.com/docs/eloquent#polymorphic-relations">here&lt;/a> especially &lt;strong>&amp;ldquo;Polymorphic Relation Table Structure”&lt;/strong>. I cover many to many polymorphic relationships &lt;a href="http://www.alfrednutile.info/posts/95">here&lt;/a>&lt;/p>
 &lt;p>I will cover an example of an Attachment that has some fields. And it is related to a model, in this example &amp;ldquo;Post&amp;rdquo;&lt;/p>
 &lt;p>Using the &lt;a href="https://github.com/JeffreyWay/Laravel-4-Generators">Way Generators&lt;/a> to make this resource.&lt;/p>
 &lt;pre>&lt;code>php artisan generate:resource attachment --fields=&amp;quot;attachable_type:string, attachable_id:integer, name:string, file_name:string, note:text, tag:string”
@@ -2153,7 +2153,7 @@ return $this-&amp;gt;morphTo();
 &lt;/code>&lt;/pre>&lt;p>Finally if we where to seed the db or add content the table for Attachments would look like this&lt;/p>
 &lt;p>&lt;img src="https://photos-1.dropbox.com/t/0/AADRAfBTNcMG8puEahtElixkH6F6rsoCXD1zgM_aFoUiRQ/12/54803135/png/1024x768/3/1405868400/0/2/Screenshot%202014-07-20%2009.12.12.png/bA938wfNJbWkPlOIKMlD5gJKsBGGGJCH-RTweCGQqwk" alt="example">&lt;/p>
 &lt;p>the attachable_type is the model class so if the namespace was Acme\Post then that would be &amp;ldquo;Acme\Post&lt;/p>
-&lt;p>That is it. As long as you include it in your results you will see it in your output.&lt;/p></description></item><item><title>Quick way to traverse a nested php arrray</title><link>https://alfrednutile.info/posts/98/</link><pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/98/</guid><description>&lt;p>The &lt;a href="http://php.net/manual/en/class.recursiveiteratoriterator.php">RecursiveIteratorIterator&lt;/a> makes it super easy to traverse a nested array.&lt;/p>
+&lt;p>That is it. As long as you include it in your results you will see it in your output.&lt;/p></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Quick way to traverse a nested php arrray</title><link>https://alfrednutile.info/posts/98/</link><pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/98/</guid><description>&lt;p>The &lt;a href="http://php.net/manual/en/class.recursiveiteratoriterator.php">RecursiveIteratorIterator&lt;/a> makes it super easy to traverse a nested array.&lt;/p>
 &lt;p>Here is an example though the docs are pretty clear there. For me it was in a class so I defined the array keys at the top of the Class&lt;/p>
 &lt;pre>&lt;code> protected $merged_profile_options = [];
 protected $data_values = [
@@ -2186,7 +2186,7 @@ public function setDataValues($key, $value)
 {
 $this-&amp;gt;data_values[$key] = $value;
 }
-&lt;/code>&lt;/pre>&lt;p>Super easy. This array was 4 levels deep.&lt;/p></description></item><item><title>Restangular and nested responses</title><link>https://alfrednutile.info/posts/91/</link><pubDate>Sat, 21 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/91/</guid><description>&lt;p>&lt;a href="https://github.com/mgonto/restangular#my-response-is-actually-wrapped-with-some-metadata-how-do-i-get-the-data-in-that-case">this was key&lt;/a> to dealing with this type of results&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Super easy. This array was 4 levels deep.&lt;/p></description><category>php</category><category>note2self</category></item><item><title>Restangular and nested responses</title><link>https://alfrednutile.info/posts/91/</link><pubDate>Sat, 21 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/91/</guid><description>&lt;p>&lt;a href="https://github.com/mgonto/restangular#my-response-is-actually-wrapped-with-some-metadata-how-do-i-get-the-data-in-that-case">this was key&lt;/a> to dealing with this type of results&lt;/p>
 &lt;pre>&lt;code>{
 &amp;quot;data&amp;quot;: {
 &amp;quot;name&amp;quot;: &amp;quot;Foo&amp;quot;
@@ -2205,7 +2205,7 @@ extractedData = data.data;
 return extractedData;
 });
 });
-&lt;/code>&lt;/pre></description></item><item><title>Showing nested relationships details</title><link>https://alfrednutile.info/posts/87/</link><pubDate>Mon, 09 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/87/</guid><description>&lt;p>This is soooo easy but this is always something this easy can be missed.
+&lt;/code>&lt;/pre></description><category>angular.js</category><category>note2self</category></item><item><title>Showing nested relationships details</title><link>https://alfrednutile.info/posts/87/</link><pubDate>Mon, 09 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/87/</guid><description>&lt;p>This is soooo easy but this is always something this easy can be missed.
 In this example we have a Property Model with Buildings that have an address.&lt;/p>
 &lt;p>So the model files look like this&lt;/p>
 &lt;pre>&lt;code>//Property.php
@@ -2246,7 +2246,7 @@ $found = $this-&amp;gt;property-&amp;gt;with('structures.address')
 -&amp;gt;get();
 return $found;
 }
-&lt;/code>&lt;/pre>&lt;p>the dot notation basically showing load Structures and the Address data related to those.&lt;/p></description></item><item><title>Laravel and non email authentication</title><link>https://alfrednutile.info/posts/84/</link><pubDate>Tue, 20 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/84/</guid><description>&lt;p>Note to self. The Laravel docs are here that cover Authentication. But when it came time to use a filter and a non email based user name I had to modify the auth.basic filter, or any filter you want to use.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>the dot notation basically showing load Structures and the Address data related to those.&lt;/p></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Laravel and non email authentication</title><link>https://alfrednutile.info/posts/84/</link><pubDate>Tue, 20 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/84/</guid><description>&lt;p>Note to self. The Laravel docs are here that cover Authentication. But when it came time to use a filter and a non email based user name I had to modify the auth.basic filter, or any filter you want to use.&lt;/p>
 &lt;p>It ended up looking like this since I wanted user_account and not email to be the username for authentication.&lt;/p>
 &lt;pre>&lt;code>//app/filters.php
 Route::filter('auth.basic', function()
@@ -2256,7 +2256,7 @@ return Auth::basic('user_account');
 &lt;/code>&lt;/pre>&lt;p>You can see this option here&lt;/p>
 &lt;pre>&lt;code>//vendor/laravel/framework/src/Illuminate/Auth/Guard.php
 public function basic($field = 'email', Request $request = null)
-&lt;/code>&lt;/pre></description></item><item><title>Using Dot Env files to manage settings</title><link>https://alfrednutile.info/posts/76/</link><pubDate>Sun, 18 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/76/</guid><description>&lt;p>Wow. Included in Laravel &lt;a href="http://laravel.com/docs/configuration#protecting-sensitive-configuration">http://laravel.com/docs/configuration#protecting-sensitive-configuration&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Using Dot Env files to manage settings</title><link>https://alfrednutile.info/posts/76/</link><pubDate>Sun, 18 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/76/</guid><description>&lt;p>Wow. Included in Laravel &lt;a href="http://laravel.com/docs/configuration#protecting-sensitive-configuration">http://laravel.com/docs/configuration#protecting-sensitive-configuration&lt;/a>&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>removed due to old news&lt;/p>
@@ -2276,7 +2276,7 @@ return include(__DIR__ . '/../.env');
 return 'production';
 }
 });
-&lt;/code>&lt;/pre>&lt;p>Quite simple at that point to separate all of the environments.&lt;/p></description></item><item><title>Using Scopes in Laravel</title><link>https://alfrednutile.info/posts/69/</link><pubDate>Fri, 16 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/69/</guid><description>&lt;p>I have about 4 models that all share 2 common queries. I want all of them that are &amp;ldquo;Published&amp;rdquo; and or Ordered by a field called Order.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Quite simple at that point to separate all of the environments.&lt;/p></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Using Scopes in Laravel</title><link>https://alfrednutile.info/posts/69/</link><pubDate>Fri, 16 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/69/</guid><description>&lt;p>I have about 4 models that all share 2 common queries. I want all of them that are &amp;ldquo;Published&amp;rdquo; and or Ordered by a field called Order.&lt;/p>
 &lt;p>This does help with some &lt;a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY&lt;/a> goals, but you could easily change or add to a scope as needed to update all the queries involved etc. Especially if at a later point you break this out into a Repository Patter to use a different ORM.&lt;/p>
 &lt;p>So using &lt;a href="http://laravel.com/docs/eloquent#query-scopes">Scopes&lt;/a> I can make one shared query. All my Model classes extend a BaseModel class I made that looks like this&lt;/p>
 &lt;pre>&lt;code>//app/models/BaseModel.php
@@ -2304,10 +2304,10 @@ public function projects()
 {
 return $this-&amp;gt;hasMany('Project')-&amp;gt;Published()-&amp;gt;OrderByOrder();
 }
-&lt;/code>&lt;/pre></description></item><item><title>Mink Assertions</title><link>https://alfrednutile.info/posts/66/</link><pubDate>Tue, 06 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/66/</guid><description>&lt;p>Just a reminder this file as a good list of steps I can use. (will post more here shortly)&lt;/p>
+&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Mink Assertions</title><link>https://alfrednutile.info/posts/66/</link><pubDate>Tue, 06 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/66/</guid><description>&lt;p>Just a reminder this file as a good list of steps I can use. (will post more here shortly)&lt;/p>
 &lt;h3 id="mink-13">Mink 1.3&lt;/h3>
 &lt;pre>&lt;code>[behat/mink-extension/src/Behat/MinkExtension/Context/MinkDictionary.php](https://github.com/Behat/MinkExtension/blob/1.3/src/Behat/MinkExtension/Context/MinkDictionary.php)
-&lt;/code>&lt;/pre></description></item><item><title>Adding Column using sqlite caused error 'Cannot add a NOT NULL column with default value NULL'</title><link>https://alfrednutile.info/posts/64/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/64/</guid><description>&lt;p>After the &lt;a href="http://laravel.com/docs/upgrade#upgrade-4.1.26">security update&lt;/a> I had to add a remember_token to my user table.
+&lt;/code>&lt;/pre></description><category>note2self</category><category>behat</category></item><item><title>Adding Column using sqlite caused error 'Cannot add a NOT NULL column with default value NULL'</title><link>https://alfrednutile.info/posts/64/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/64/</guid><description>&lt;p>After the &lt;a href="http://laravel.com/docs/upgrade#upgrade-4.1.26">security update&lt;/a> I had to add a remember_token to my user table.
 &lt;a href="">security update&lt;/a>&lt;/p>
 &lt;p>Since I am using sqllite locally I ended up with this error&lt;/p>
 &lt;pre>&lt;code>&amp;gt;php artisan migrate
@@ -2327,7 +2327,7 @@ Schema::table('users', function(Blueprint $table)
 $table-&amp;gt;text('remember_token')-&amp;gt;nullable();
 });
 }
-&lt;/code>&lt;/pre></description></item><item><title>Angular and Scope - or - How not to waste time figuring out why a scope value is not 'working'</title><link>https://alfrednutile.info/posts/62/</link><pubDate>Wed, 30 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/62/</guid><description>&lt;p>The creator of Angular notes it in this &lt;a href="https://www.youtube.com/watch?v=ZhfUv0spHCY&amp;amp;list=FLZa3QWzy1z1G9FIw02pytdA&amp;amp;index=2">video&lt;/a> which is well worth the watch.&lt;/p>
+&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Angular and Scope - or - How not to waste time figuring out why a scope value is not 'working'</title><link>https://alfrednutile.info/posts/62/</link><pubDate>Wed, 30 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/62/</guid><description>&lt;p>The creator of Angular notes it in this &lt;a href="https://www.youtube.com/watch?v=ZhfUv0spHCY&amp;amp;list=FLZa3QWzy1z1G9FIw02pytdA&amp;amp;index=2">video&lt;/a> which is well worth the watch.&lt;/p>
 &lt;p>Basically when using includes or directives etc you may not be getting a scope value as easily because it is child scope and you may be looking in the parent scope.&lt;/p>
 &lt;h3 id="for-example">For example&lt;/h3>
 &lt;p>This include if I have an include and it references a model attribute like this&lt;/p>
@@ -2343,7 +2343,7 @@ $scope.person.firstname = &amp;quot;Bob&amp;quot;
 &lt;/code>&lt;/pre>&lt;p>Tends to work better than fighting with $parent prefixes as such&lt;/p>
 &lt;pre>&lt;code>//Some include
 &amp;lt;input ng-model=&amp;quot;$parent.firstname&amp;quot;&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>Anyways glad I watched the video which meant I only wasted under an hour one this head scratcher.&lt;/p></description></item><item><title>Behat Checkbox</title><link>https://alfrednutile.info/posts/61/</link><pubDate>Wed, 30 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/61/</guid><description>&lt;p>Just a reminder to check if a checkbox is checked or not.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Anyways glad I watched the video which meant I only wasted under an hour one this head scratcher.&lt;/p></description><category>angular.js</category><category>note2self</category></item><item><title>Behat Checkbox</title><link>https://alfrednutile.info/posts/61/</link><pubDate>Wed, 30 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/61/</guid><description>&lt;p>Just a reminder to check if a checkbox is checked or not.&lt;/p>
 &lt;pre>&lt;code>Feature: Behat bug
 Scenario:
 Given I am on &amp;quot;/bug.html&amp;quot;
@@ -2355,25 +2355,25 @@ Scenario:
 Given I am on &amp;quot;/bug.html&amp;quot;
 When I check &amp;quot;foo&amp;quot;
 Then the &amp;quot;foo&amp;quot; checkbox should not be checked
-&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://github.com/Behat/Behat/issues/298">https://github.com/Behat/Behat/issues/298&lt;/a>&lt;/p></description></item><item><title>Ng-if and Scope</title><link>https://alfrednutile.info/posts/47/</link><pubDate>Sat, 26 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/47/</guid><description>&lt;p>Scratched my head on this one for a few.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://github.com/Behat/Behat/issues/298">https://github.com/Behat/Behat/issues/298&lt;/a>&lt;/p></description><category>behat</category><category>note2self</category></item><item><title>Ng-if and Scope</title><link>https://alfrednutile.info/posts/47/</link><pubDate>Sat, 26 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/47/</guid><description>&lt;p>Scratched my head on this one for a few.&lt;/p>
 &lt;p>Inside of ng-if is a new scope. So a model on $scope.modelName will have to be referenced as $parent.modelName in the view.&lt;/p>
 &lt;p>&lt;img alt="" src="https://dl.dropboxusercontent.com/s/3rkj4et733pha3x/Screenshot%202014-04-26%2009.01.58.png" style="width: 869px; height: 262px;" />&lt;/p>
 &lt;p>Basically it worked on another page so I knew it should work here. When I moved it out of ng-if it worked so it had to be related to that. Finally this &lt;a href="http://stackoverflow.com/questions/18342917/angularjs-ng-model-doesnt-work-inside-ng-if" target="_blank">post&lt;/a> made some sense of it&lt;/p>
 &lt;p>So now my filter works.&lt;/p>
-&lt;p>&lt;img alt="" src="https://photos-3.dropbox.com/t/0/AADIDwZp5vivK9ZGPUjRqT9-x6kuPteqCYXMRz_CfqRKLA/12/54803135/png/1024x768/3/1398657600/0/2/Screenshot%202014-04-26%2009.06.02.png/6qNuz9X5KcY5BZxJgTousavMbnCnmA755dLXMGaNdM0" style="width: 955px; height: 67px;" />&lt;/p></description></item><item><title>Drupal Services and Instantiating a Class</title><link>https://alfrednutile.info/posts/52/</link><pubDate>Tue, 04 Feb 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/52/</guid><description>&lt;p>Been using Drupal Services on a project and there are some docs on how to use a Class with this. But to instantiate it I was using a function per class method. Instead I now I have one function that can instantiate the Class and method based on the &amp;#39;callback&amp;#39; and the path 0 arg. Later I would like to just use the $_REQUEST type.&lt;/p>
+&lt;p>&lt;img alt="" src="https://photos-3.dropbox.com/t/0/AADIDwZp5vivK9ZGPUjRqT9-x6kuPteqCYXMRz_CfqRKLA/12/54803135/png/1024x768/3/1398657600/0/2/Screenshot%202014-04-26%2009.06.02.png/6qNuz9X5KcY5BZxJgTousavMbnCnmA755dLXMGaNdM0" style="width: 955px; height: 67px;" />&lt;/p></description><category>note2self</category></item><item><title>Drupal Services and Instantiating a Class</title><link>https://alfrednutile.info/posts/52/</link><pubDate>Tue, 04 Feb 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/52/</guid><description>&lt;p>Been using Drupal Services on a project and there are some docs on how to use a Class with this. But to instantiate it I was using a function per class method. Instead I now I have one function that can instantiate the Class and method based on the &amp;#39;callback&amp;#39; and the path 0 arg. Later I would like to just use the $_REQUEST type.&lt;/p>
 &lt;p>&amp;nbsp;&lt;/p>
 &lt;p>You can see the service below starting on line 4&lt;/p>
 &lt;p>Note the callback then calls to this function on line 127 which then just instantiates the class for me and calls the method.&lt;/p>
 &lt;p>&amp;nbsp;&lt;/p>
 &lt;p>&amp;nbsp;&lt;/p>
-&lt;script src="https://gist.github.com/alnutile/8844092.js">&lt;/script></description></item><item><title>PHPSH</title><link>https://alfrednutile.info/posts/35/</link><pubDate>Mon, 21 Oct 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/35/</guid><description>&lt;p>Interactive command line on a Mac. So far this helped out&lt;/p>
+&lt;script src="https://gist.github.com/alnutile/8844092.js">&lt;/script></description><category>note2self</category></item><item><title>PHPSH</title><link>https://alfrednutile.info/posts/35/</link><pubDate>Mon, 21 Oct 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/35/</guid><description>&lt;p>Interactive command line on a Mac. So far this helped out&lt;/p>
 &lt;div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">brew tap josegonzalez/php&lt;/div>
 &lt;div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">brew install phpsh&lt;/div>
 &lt;p>and finally add this to the ~/.bash_profile&lt;/p>
 &lt;div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">export PYTHONPATH=/usr/local/lib/python2.7/site-packages&amp;nbsp;&lt;/div>
 &lt;p>and then re source your .bash_profile&lt;/p>
 &lt;div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">souce ~/.bash_profile&lt;/div>
-&lt;p>&lt;span style="line-height: 1.6em;">now phpsh at the command line will give you an interactive shell&amp;nbsp;&lt;/span>&lt;/p></description></item><item><title>Installing mysql2 on a mac</title><link>https://alfrednutile.info/posts/22/</link><pubDate>Fri, 09 Aug 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/22/</guid><description>&lt;p>&lt;a href="http://stackoverflow.com/questions/5919727/bundle-install-problem-mysql-h-is-missing" target="" rel="">&lt;a href="http://stackoverflow.com/questions/5919727/bundle-install-problem-mysql-h-is-missing">http://stackoverflow.com/questions/5919727/bundle-install-problem-mysql-h-is-missing&lt;/a>&lt;/a>&lt;br>&lt;br>This was key to get this install done.&lt;/p></description></item><item><title>Questions that may come in handy when interviewing</title><link>https://alfrednutile.info/posts/12/</link><pubDate>Sun, 09 Jun 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/12/</guid><description>&lt;ol>
+&lt;p>&lt;span style="line-height: 1.6em;">now phpsh at the command line will give you an interactive shell&amp;nbsp;&lt;/span>&lt;/p></description><category>note2self</category></item><item><title>Installing mysql2 on a mac</title><link>https://alfrednutile.info/posts/22/</link><pubDate>Fri, 09 Aug 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/22/</guid><description>&lt;p>&lt;a href="http://stackoverflow.com/questions/5919727/bundle-install-problem-mysql-h-is-missing" target="" rel="">&lt;a href="http://stackoverflow.com/questions/5919727/bundle-install-problem-mysql-h-is-missing">http://stackoverflow.com/questions/5919727/bundle-install-problem-mysql-h-is-missing&lt;/a>&lt;/a>&lt;br>&lt;br>This was key to get this install done.&lt;/p></description><category>note2self</category></item><item><title>Questions that may come in handy when interviewing</title><link>https://alfrednutile.info/posts/12/</link><pubDate>Sun, 09 Jun 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/12/</guid><description>&lt;ol>
 &lt;li>
 &lt;p>Can you clearly define the roles and responsibilities you need me to fill?
 &lt;br>&lt;/p>
@@ -2446,4 +2446,4 @@ Then the &amp;quot;foo&amp;quot; checkbox should not be checked
 &lt;p>What are some ways your company allows the employee to grow in their role(s)?
 &lt;br>&lt;/p>
 &lt;/li>
-&lt;/ol></description></item></channel></rss>
+&lt;/ol></description><category>note2self</category></item></channel></rss>

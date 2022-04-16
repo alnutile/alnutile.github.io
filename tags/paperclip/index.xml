@@ -10,4 +10,4 @@ Finally I setup the development.rb and production.rb like this
 &lt;p>You can see the URL below of the image and the PDF&lt;/p>
 &lt;p>&lt;img alt="" src="http://s3-us-west-2.amazonaws.com/nutilesblog/var/www/alsstuff2Cap/releases/20130811161031/public/ckeditor_assets/pictures/7/content_website.jpg" style="height:252px; width:300px" />&lt;/p>
 &lt;p>And a PDF&lt;/p>
-&lt;p>&lt;a href="http://s3-us-west-2.amazonaws.com/nutilesblog/var/www/alsstuff2Cap/releases/20130811161031/public/ckeditor_assets/pictures/8/original_testpdf.pdf">http://s3-us-west-2.amazonaws.com/nutilesblog/var/www/alsstuff2Cap/releases/20130811161031/public/ckeditor_assets/pictures/8/original_testpdf.pdf&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;a href="http://s3-us-west-2.amazonaws.com/nutilesblog/var/www/alsstuff2Cap/releases/20130811161031/public/ckeditor_assets/pictures/8/original_testpdf.pdf">http://s3-us-west-2.amazonaws.com/nutilesblog/var/www/alsstuff2Cap/releases/20130811161031/public/ckeditor_assets/pictures/8/original_testpdf.pdf&lt;/a>&lt;/p></description><category>paperclip</category></item></channel></rss>

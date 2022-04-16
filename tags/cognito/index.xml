@@ -4,4 +4,4 @@
 &lt;p>Make some scopes uner Resource Server&lt;/p>
 &lt;p>Then &amp;ldquo;App Client Settings&amp;rdquo;&lt;/p>
 &lt;p>Connect it to &amp;ldquo;Cognito User Pool&amp;rdquo;&lt;/p>
-&lt;p>And choose &amp;ldquo;Client Credentials&amp;rdquo; from &amp;ldquo;Allowed OAuth Flow&amp;rdquo; choosing some scopes&lt;/p></description></item></channel></rss>
+&lt;p>And choose &amp;ldquo;Client Credentials&amp;rdquo; from &amp;ldquo;Allowed OAuth Flow&amp;rdquo; choosing some scopes&lt;/p></description><category>aws</category><category>cognito</category><category>laravel</category></item></channel></rss>

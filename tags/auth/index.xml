@@ -268,7 +268,7 @@ return &amp;quot;foo&amp;quot;;
 &lt;/ul>
 &lt;p>Note the token might change if you seed the database. You can ssh into the server and run&lt;/p>
 &lt;pre>&lt;code>php artisan cat:create-token foo@gmail.com --show
-&lt;/code>&lt;/pre>&lt;p>To get the token.&lt;/p></description></item><item><title>Temporary Auth Updates L5</title><link>https://alfrednutile.info/posts/109/</link><pubDate>Sun, 12 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/109/</guid><description>&lt;h1 id="auth-updates">Auth updates&lt;/h1>
+&lt;/code>&lt;/pre>&lt;p>To get the token.&lt;/p></description><category>php</category><category>auth</category><category>laravel</category><category>api</category></item><item><title>Temporary Auth Updates L5</title><link>https://alfrednutile.info/posts/109/</link><pubDate>Sun, 12 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/109/</guid><description>&lt;h1 id="auth-updates">Auth updates&lt;/h1>
 &lt;p>First make sure your composer update has the latest Laravel and check that
 there are not relevant fixes already via laravel/docs master laravel/framework master or laravel/laravel dev&lt;/p>
 &lt;p>Moved evn files to the new format and only 1 is needed now having the&lt;/p>
@@ -356,4 +356,4 @@ $router-&amp;gt;get('sites', ['uses' =&amp;gt; 'App\Http\Controllers\SitesContro
 0 =&amp;gt; 'App\\Http\\Middleware\\AuthMiddleware',
 ), 'where' =&amp;gt; array (
 )]);
-&lt;/code>&lt;/pre></description></item></channel></rss>
+&lt;/code>&lt;/pre></description><category>laravel</category><category>laravel 5</category><category>auth</category></item></channel></rss>

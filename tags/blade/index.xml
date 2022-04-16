@@ -118,4 +118,4 @@ el: '#config_form',
 &lt;p>Then I use Vue to listen to the event &amp;ldquo;config-updated&amp;rdquo;. From there, since this is not about Ajax requests, I update the hidden field on the form.
 I could have done this with JQuery but just wanted to get use to this Vue workflow. Also I could see sending this over Ajax sooner than later even if just for validation notices etc.&lt;/p>
 &lt;p>Here is a quick look at the Scope of the objects:&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/nc1yn0hci05mtq4/events.png?dl=0" alt="">&lt;/p></description></item></channel></rss>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/nc1yn0hci05mtq4/events.png?dl=0" alt="">&lt;/p></description><category>vue</category><category>vue2</category><category>laravel</category><category>blade</category><category>note2self</category></item></channel></rss>

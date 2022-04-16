@@ -119,4 +119,4 @@ Code reviews - @iamdevloper&lt;/p>
 &lt;p>For us we keep logic in the code and not so much in the database, so when a field is created we tend to allow it to be null since this means we can manage that impact it has on the rest of the application if our code is not ready yet to manage the field. &lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item></channel></rss>
+&lt;/section></description><category>continuous delivery</category></item></channel></rss>

@@ -8,7 +8,7 @@ http_status=200,
 json=response_dict,
 is_base64_encoded=False,
 )
-&lt;/code>&lt;/pre>&lt;p>The results are easy enough to do by hand but I had a bit of time really finding out the format to respond with other than JavaScript and that casing there was a bit confusing.&lt;/p></description></item><item><title>Lambda and Github Webhooks</title><link>https://alfrednutile.info/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/245/</guid><description>&lt;p>Related to &lt;a href="https://developer.github.com/webhooks/">https://developer.github.com/webhooks/&lt;/a> and pushing data to Lambda AWS.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>The results are easy enough to do by hand but I had a bit of time really finding out the format to respond with other than JavaScript and that casing there was a bit confusing.&lt;/p></description><category>aws</category><category>serverless</category><category>note2self</category></item><item><title>Lambda and Github Webhooks</title><link>https://alfrednutile.info/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/245/</guid><description>&lt;p>Related to &lt;a href="https://developer.github.com/webhooks/">https://developer.github.com/webhooks/&lt;/a> and pushing data to Lambda AWS.&lt;/p>
 &lt;p>I can check the token by just having this check in my handler.&lt;/p>
 &lt;pre>&lt;code>const crypto = require('crypto');
 exports.handler = (event, context, callback) =&amp;gt; {
@@ -84,7 +84,7 @@ APP_ENV: !Sub ${AppEnv}
 APP_REGION: &amp;quot;eu-west-1&amp;quot;
 &lt;/code>&lt;/pre>&lt;p>then during the update command I can pass&lt;/p>
 &lt;pre>&lt;code>SECRET=FOO
-&lt;/code>&lt;/pre>&lt;p>or put a .env file on the system and use the &lt;code>dotenv&lt;/code> library&lt;/p></description></item><item><title>Serverless Python and Example App WIP</title><link>https://alfrednutile.info/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/229/</guid><description>&lt;p>There are good docs on this &lt;a href="http://serverless.com">http://serverless.com&lt;/a> platform.
+&lt;/code>&lt;/pre>&lt;p>or put a .env file on the system and use the &lt;code>dotenv&lt;/code> library&lt;/p></description><category>serverless</category><category>lambda</category><category>aws</category></item><item><title>Serverless Python and Example App WIP</title><link>https://alfrednutile.info/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/229/</guid><description>&lt;p>There are good docs on this &lt;a href="http://serverless.com">http://serverless.com&lt;/a> platform.
 For Python&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example">https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example&lt;/a>&lt;/li>
@@ -137,7 +137,7 @@ python-dotenv
 name: aws
 runtime: python2.7
 profile: profile_name_here
-&lt;/code>&lt;/pre>&lt;p>More info &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/credentials/#using-aws-profiles">here&lt;/a>&lt;/p></description></item><item><title>Serverless and Custom Tags for Resources</title><link>https://alfrednutile.info/posts/217/</link><pubDate>Tue, 22 Aug 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/217/</guid><description>&lt;p>Because much of serveless.com is CloudFormation based, you can easily update existing resources. They talk about this feature &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/resources/#override-aws-cloudformation-resource">here&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>More info &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/credentials/#using-aws-profiles">here&lt;/a>&lt;/p></description><category>serverless</category><category>python</category><category>wip</category></item><item><title>Serverless and Custom Tags for Resources</title><link>https://alfrednutile.info/posts/217/</link><pubDate>Tue, 22 Aug 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/217/</guid><description>&lt;p>Because much of serveless.com is CloudFormation based, you can easily update existing resources. They talk about this feature &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/resources/#override-aws-cloudformation-resource">here&lt;/a>&lt;/p>
 &lt;p>For me this was required for adding tags&lt;/p>
 &lt;pre>&lt;code># you can add CloudFormation resource templates here
 resources:
@@ -178,7 +178,7 @@ environment:
 APP_ENV: ${self:custom.secrets.APP_ENV}
 REGION: ${self:custom.secrets.REGION}
 ACCOUNT_ID: 555555555
-&lt;/code>&lt;/pre></description></item><item><title>Serverless, AWS API Gateway and Authentication</title><link>https://alfrednutile.info/posts/214/</link><pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/214/</guid><description>&lt;p>Just a note2self really.&lt;/p>
+&lt;/code>&lt;/pre></description><category>serverless</category><category>aws</category></item><item><title>Serverless, AWS API Gateway and Authentication</title><link>https://alfrednutile.info/posts/214/</link><pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/214/</guid><description>&lt;p>Just a note2self really.&lt;/p>
 &lt;p>Setting up Auth was super easy&lt;/p>
 &lt;p>As seen below I had to add to my serverless.yml &lt;code>authorizer&lt;/code>&lt;/p>
 &lt;pre>&lt;code> addQuote:
@@ -256,4 +256,4 @@ Value:
 &lt;h2 id="links">Links&lt;/h2>
 &lt;p>&lt;a href="https://aws.amazon.com/premiumsupport/knowledge-center/iam-authentication-api-gateway/">https://aws.amazon.com/premiumsupport/knowledge-center/iam-authentication-api-gateway/&lt;/a>&lt;/p>
 &lt;p>&lt;a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html">http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference">https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;a href="https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference">https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference&lt;/a>&lt;/p></description><category>serverless.com</category><category>aws</category><category>serverless</category></item></channel></rss>

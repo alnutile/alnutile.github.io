@@ -51,7 +51,7 @@ python-dotenv
 name: aws
 runtime: python2.7
 profile: profile_name_here
-&lt;/code>&lt;/pre>&lt;p>More info &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/credentials/#using-aws-profiles">here&lt;/a>&lt;/p></description></item><item><title>Laravel Asset Notes WIP</title><link>https://alfrednutile.info/posts/227/</link><pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/227/</guid><description>&lt;p>This is just a reminder area of all the minor details as I find them that I need to remember&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>More info &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/credentials/#using-aws-profiles">here&lt;/a>&lt;/p></description><category>serverless</category><category>python</category><category>wip</category></item><item><title>Laravel Asset Notes WIP</title><link>https://alfrednutile.info/posts/227/</link><pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/227/</guid><description>&lt;p>This is just a reminder area of all the minor details as I find them that I need to remember&lt;/p>
 &lt;h2 id="fontawesome">FontAwesome&lt;/h2>
 &lt;pre>&lt;code>yarn add font-awesome
 &lt;/code>&lt;/pre>&lt;p>Then in my &lt;code>resources/assets/sass/app.scss&lt;/code>&lt;/p>
@@ -69,7 +69,7 @@ profile: profile_name_here
 &lt;p>If using Less&lt;/p>
 &lt;pre>&lt;code>#resources/assets/less/app.less
 @import &amp;quot;./../../../node_modules/font-awesome/less/font-awesome&amp;quot;;
-&lt;/code>&lt;/pre></description></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alfrednutile.info/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/220/</guid><description>&lt;h1 id="sending-docker-commands-to-get-a-task-done">Sending Docker Commands to Get A Task Done&lt;/h1>
+&lt;/code>&lt;/pre></description><category>note2self</category><category>laravel</category><category>assets</category><category>wip</category></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alfrednutile.info/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/220/</guid><description>&lt;h1 id="sending-docker-commands-to-get-a-task-done">Sending Docker Commands to Get A Task Done&lt;/h1>
 &lt;p>This article will show how to get started with AWS Batch and Docker to spin up a &amp;ldquo;worker&amp;rdquo;&lt;/p>
 &lt;p>By the time you are done reading it you will:&lt;/p>
 &lt;ol>
@@ -146,4 +146,4 @@ Setup Core CloudFormation&lt;/p>
 Get docker-compose inlace
 Get Travis.yml in place and docker/deploy.bash
 See diagram on how this all comes together&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul></description><category>laravel</category><category>note2self</category><category>aws</category><category>wip</category></item></channel></rss>

@@ -30,4 +30,4 @@
 &lt;p>Finally I made sure to add the path to my ~/.bash_profile as&lt;/p>
 &lt;pre>&lt;code>export PATH=$PATH:/Users/alfrednutile/.composer/vendor/bin/
 &lt;/code>&lt;/pre>&lt;p>Then ran &lt;code>source ~/.bash_profile&lt;/code>&lt;/p>
-&lt;p>With all that in place I could go to my new Laravel install to run &lt;code>spark install&lt;/code>&lt;/p></description></item></channel></rss>
+&lt;p>With all that in place I could go to my new Laravel install to run &lt;code>spark install&lt;/code>&lt;/p></description><category>spark</category><category>laravel</category><category>php</category></item></channel></rss>

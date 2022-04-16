@@ -21,7 +21,7 @@ charset utf-8;
 &lt;pre>&lt;code>service nginx restart
 &lt;/code>&lt;/pre>&lt;p>was not working had to do&lt;/p>
 &lt;pre>&lt;code>/etc/init.d/nginx restart
-&lt;/code>&lt;/pre>&lt;p>to get the server to reload.&lt;/p></description></item><item><title>SSL and Homestead</title><link>https://alfrednutile.info/posts/101/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/101/</guid><description>&lt;p>This is like most nginx the only trick was adding the port forward on Homestead&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>to get the server to reload.&lt;/p></description><category>nginx</category></item><item><title>SSL and Homestead</title><link>https://alfrednutile.info/posts/101/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/101/</guid><description>&lt;p>This is like most nginx the only trick was adding the port forward on Homestead&lt;/p>
 &lt;pre>&lt;code>#scripts/homestead.rb
 # Configure Port Forwarding To The Box
 config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 80, host: 8000
@@ -31,4 +31,4 @@ config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 5432, host: 54320
 config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 11300, host: 11300
 &lt;/code>&lt;/pre>&lt;p>I set it to 44300&lt;/p>
 &lt;p>Then just follow along here&lt;/p>
-&lt;p>&lt;a href="http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm">http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm&lt;/a> which leads to here &lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04">https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04&lt;/a> for the rest&lt;/p></description></item></channel></rss>
+&lt;p>&lt;a href="http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm">http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm&lt;/a> which leads to here &lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04">https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04&lt;/a> for the rest&lt;/p></description><category>homestead</category><category>nginx</category></item></channel></rss>

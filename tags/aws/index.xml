@@ -8,7 +8,7 @@ http_status=200,
 json=response_dict,
 is_base64_encoded=False,
 )
-&lt;/code>&lt;/pre>&lt;p>The results are easy enough to do by hand but I had a bit of time really finding out the format to respond with other than JavaScript and that casing there was a bit confusing.&lt;/p></description></item><item><title>Lambda Tips</title><link>https://alfrednutile.info/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/264/</guid><description>&lt;p>@WIP&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>The results are easy enough to do by hand but I had a bit of time really finding out the format to respond with other than JavaScript and that casing there was a bit confusing.&lt;/p></description><category>aws</category><category>serverless</category><category>note2self</category></item><item><title>Lambda Tips</title><link>https://alfrednutile.info/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/264/</guid><description>&lt;p>@WIP&lt;/p>
 &lt;h2 id="taking-advantage-of-a-running-lambda-function-and-its-state">Taking advantage of a running Lambda function and it&amp;rsquo;s state&lt;/h2>
 &lt;p>&lt;a href="https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/">https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/&lt;/a> under the section &lt;strong>Lambda function&lt;/strong> has a nice &amp;ldquo;trick&amp;rdquo; of setting above the class &lt;code>app = None&lt;/code>&lt;/p>
 &lt;p>then later on it will see if that is set&lt;/p>
@@ -46,13 +46,13 @@ FunctionName=lam,
 InvocationType=&amp;quot;Event&amp;quot;
 )
 print(&amp;quot;Invoked &amp;quot;, lam)
-&lt;/code>&lt;/pre>&lt;p>Is another way to look around and call those functions.&lt;/p></description></item><item><title>Cognito and OAuth</title><link>https://alfrednutile.info/posts/261/</link><pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/261/</guid><description>&lt;p>make your App Client&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Is another way to look around and call those functions.&lt;/p></description><category>note2self</category><category>aws</category><category>python</category></item><item><title>Cognito and OAuth</title><link>https://alfrednutile.info/posts/261/</link><pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/261/</guid><description>&lt;p>make your App Client&lt;/p>
 &lt;p>Make sure to check&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/b41fgm4avehxkar/cog_app_client.png?dl=0" alt="">&lt;/p>
 &lt;p>Make some scopes uner Resource Server&lt;/p>
 &lt;p>Then &amp;ldquo;App Client Settings&amp;rdquo;&lt;/p>
 &lt;p>Connect it to &amp;ldquo;Cognito User Pool&amp;rdquo;&lt;/p>
-&lt;p>And choose &amp;ldquo;Client Credentials&amp;rdquo; from &amp;ldquo;Allowed OAuth Flow&amp;rdquo; choosing some scopes&lt;/p></description></item><item><title>Deploying Fargate</title><link>https://alfrednutile.info/posts/259/</link><pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/259/</guid><description>&lt;p>Just some notes on the process. This will show how to deploy both a Staging build and then Production.&lt;/p>
+&lt;p>And choose &amp;ldquo;Client Credentials&amp;rdquo; from &amp;ldquo;Allowed OAuth Flow&amp;rdquo; choosing some scopes&lt;/p></description><category>aws</category><category>cognito</category><category>laravel</category></item><item><title>Deploying Fargate</title><link>https://alfrednutile.info/posts/259/</link><pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/259/</guid><description>&lt;p>Just some notes on the process. This will show how to deploy both a Staging build and then Production.&lt;/p>
 &lt;h2 id="staging">Staging&lt;/h2>
 &lt;p>Staging is done by TravisCI after all tests pass&lt;/p>
 &lt;p>Here is the gist of it the deploy step calls to a bash file.&lt;/p>
@@ -141,7 +141,7 @@ fi
 &amp;quot;ECR&amp;quot;
 ]
 },
-&lt;/code>&lt;/pre>&lt;p>So when I update this I can just update the &lt;code>ProductionTag&lt;/code> and this will take effect.&lt;/p></description></item><item><title>Dusk Screenshots to S3 of Failing tests</title><link>https://alfrednutile.info/posts/248/</link><pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/248/</guid><description>&lt;p>I can be really annoying to troubleshoot a failed test in Dusk when using CI systems. What I ended up doing was setting up my project to send these files to S3 on fail.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>So when I update this I can just update the &lt;code>ProductionTag&lt;/code> and this will take effect.&lt;/p></description><category>aws</category><category>fargate</category></item><item><title>Dusk Screenshots to S3 of Failing tests</title><link>https://alfrednutile.info/posts/248/</link><pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/248/</guid><description>&lt;p>I can be really annoying to troubleshoot a failed test in Dusk when using CI systems. What I ended up doing was setting up my project to send these files to S3 on fail.&lt;/p>
 &lt;p>Here are the steps&lt;/p>
 &lt;h2 id="setup-you-app">Setup You App&lt;/h2>
 &lt;p>This is just S3 storage so make sure you have a bucket and a folder in the bucket to write to. Basically for AWS you make an IAM with a key and secret and let it read/write to this folder. Might look like this policy&lt;/p>
@@ -240,7 +240,7 @@ parent::tearDown();
 AWS_ACCESS_KEY_ID=bar
 &lt;/code>&lt;/pre>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/nez8f4hz4anmghl/Screenshot%202018-06-26%2009.36.26.png?dl=0" alt="">&lt;/p>
 &lt;h2 id="now-you-are-ready-to-fail">Now You are Ready to Fail!&lt;/h2>
-&lt;p>Ok so on your next fail you will see in your s3 bucket some of those super handy screenshots.&lt;/p></description></item><item><title>Lambda and Github Webhooks</title><link>https://alfrednutile.info/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/245/</guid><description>&lt;p>Related to &lt;a href="https://developer.github.com/webhooks/">https://developer.github.com/webhooks/&lt;/a> and pushing data to Lambda AWS.&lt;/p>
+&lt;p>Ok so on your next fail you will see in your s3 bucket some of those super handy screenshots.&lt;/p></description><category>dusk</category><category>laravel</category><category>testing</category><category>aws</category></item><item><title>Lambda and Github Webhooks</title><link>https://alfrednutile.info/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/245/</guid><description>&lt;p>Related to &lt;a href="https://developer.github.com/webhooks/">https://developer.github.com/webhooks/&lt;/a> and pushing data to Lambda AWS.&lt;/p>
 &lt;p>I can check the token by just having this check in my handler.&lt;/p>
 &lt;pre>&lt;code>const crypto = require('crypto');
 exports.handler = (event, context, callback) =&amp;gt; {
@@ -316,7 +316,7 @@ APP_ENV: !Sub ${AppEnv}
 APP_REGION: &amp;quot;eu-west-1&amp;quot;
 &lt;/code>&lt;/pre>&lt;p>then during the update command I can pass&lt;/p>
 &lt;pre>&lt;code>SECRET=FOO
-&lt;/code>&lt;/pre>&lt;p>or put a .env file on the system and use the &lt;code>dotenv&lt;/code> library&lt;/p></description></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alfrednutile.info/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/220/</guid><description>&lt;h1 id="sending-docker-commands-to-get-a-task-done">Sending Docker Commands to Get A Task Done&lt;/h1>
+&lt;/code>&lt;/pre>&lt;p>or put a .env file on the system and use the &lt;code>dotenv&lt;/code> library&lt;/p></description><category>serverless</category><category>lambda</category><category>aws</category></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alfrednutile.info/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/220/</guid><description>&lt;h1 id="sending-docker-commands-to-get-a-task-done">Sending Docker Commands to Get A Task Done&lt;/h1>
 &lt;p>This article will show how to get started with AWS Batch and Docker to spin up a &amp;ldquo;worker&amp;rdquo;&lt;/p>
 &lt;p>By the time you are done reading it you will:&lt;/p>
 &lt;ol>
@@ -393,7 +393,7 @@ Setup Core CloudFormation&lt;/p>
 Get docker-compose inlace
 Get Travis.yml in place and docker/deploy.bash
 See diagram on how this all comes together&lt;/li>
-&lt;/ul></description></item><item><title>Serverless and Custom Tags for Resources</title><link>https://alfrednutile.info/posts/217/</link><pubDate>Tue, 22 Aug 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/217/</guid><description>&lt;p>Because much of serveless.com is CloudFormation based, you can easily update existing resources. They talk about this feature &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/resources/#override-aws-cloudformation-resource">here&lt;/a>&lt;/p>
+&lt;/ul></description><category>laravel</category><category>note2self</category><category>aws</category><category>wip</category></item><item><title>Serverless and Custom Tags for Resources</title><link>https://alfrednutile.info/posts/217/</link><pubDate>Tue, 22 Aug 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/217/</guid><description>&lt;p>Because much of serveless.com is CloudFormation based, you can easily update existing resources. They talk about this feature &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/resources/#override-aws-cloudformation-resource">here&lt;/a>&lt;/p>
 &lt;p>For me this was required for adding tags&lt;/p>
 &lt;pre>&lt;code># you can add CloudFormation resource templates here
 resources:
@@ -434,7 +434,7 @@ environment:
 APP_ENV: ${self:custom.secrets.APP_ENV}
 REGION: ${self:custom.secrets.REGION}
 ACCOUNT_ID: 555555555
-&lt;/code>&lt;/pre></description></item><item><title>Serverless, AWS API Gateway and Authentication</title><link>https://alfrednutile.info/posts/214/</link><pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/214/</guid><description>&lt;p>Just a note2self really.&lt;/p>
+&lt;/code>&lt;/pre></description><category>serverless</category><category>aws</category></item><item><title>Serverless, AWS API Gateway and Authentication</title><link>https://alfrednutile.info/posts/214/</link><pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/214/</guid><description>&lt;p>Just a note2self really.&lt;/p>
 &lt;p>Setting up Auth was super easy&lt;/p>
 &lt;p>As seen below I had to add to my serverless.yml &lt;code>authorizer&lt;/code>&lt;/p>
 &lt;pre>&lt;code> addQuote:
@@ -512,7 +512,7 @@ Value:
 &lt;h2 id="links">Links&lt;/h2>
 &lt;p>&lt;a href="https://aws.amazon.com/premiumsupport/knowledge-center/iam-authentication-api-gateway/">https://aws.amazon.com/premiumsupport/knowledge-center/iam-authentication-api-gateway/&lt;/a>&lt;/p>
 &lt;p>&lt;a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html">http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference">https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference&lt;/a>&lt;/p></description></item><item><title>AWS, S3 Storage and limited Visibility</title><link>https://alfrednutile.info/posts/180/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/180/</guid><description>&lt;p>Storing files on S3 is great. And many times those files are private so I only want to give temporary access to them. Using Laravel Storage I can interact with the file-system quite easily and seamlessly especially between Cloud and Local.&lt;/p>
+&lt;p>&lt;a href="https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference">https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference&lt;/a>&lt;/p></description><category>serverless.com</category><category>aws</category><category>serverless</category></item><item><title>AWS, S3 Storage and limited Visibility</title><link>https://alfrednutile.info/posts/180/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/180/</guid><description>&lt;p>Storing files on S3 is great. And many times those files are private so I only want to give temporary access to them. Using Laravel Storage I can interact with the file-system quite easily and seamlessly especially between Cloud and Local.&lt;/p>
 &lt;p>In this case I want to return a file only for 10 minutes&lt;/p>
 &lt;pre>&lt;code> public function getSignedUrl($filename_and_path, $expires_minutes = '10')
 {
@@ -526,4 +526,4 @@ $request = $client-&amp;gt;createPresignedRequest($command, Carbon::now()-&amp;g
 return (string) $request-&amp;gt;getUri();
 }
 &lt;/code>&lt;/pre>&lt;p>That is it!&lt;/p>
-&lt;p>Thanks to this &lt;a href="https://github.com/minio/minio/issues/1285">post&lt;/a> for the help.&lt;/p></description></item></channel></rss>
+&lt;p>Thanks to this &lt;a href="https://github.com/minio/minio/issues/1285">post&lt;/a> for the help.&lt;/p></description><category>php</category><category>aws</category></item></channel></rss>

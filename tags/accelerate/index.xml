@@ -222,7 +222,7 @@ The upper right corner will be a Green &amp;ldquo;Review Pr&amp;rdquo; button if
 &lt;p>&lt;a href="https://semver.org">Semantic Verision&lt;/a> &lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Ongoing: Links and Notes About DevOps Transformation Using the Accelerate Data and Strategies</title><link>https://alfrednutile.info/posts/sod/</link><pubDate>Sat, 06 Mar 2021 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/sod/</guid><description>&lt;p>Next time I needed this info, I just wanted to make sure that I have the links I need concerning the Accelerate book and Software Delivery Performance. So I will use this page to continue to add info about these resources.&lt;/p>
+&lt;/section></description><category>laravel</category><category>ci</category><category>cd</category><category>accelerate</category><category>devops</category></item><item><title>Ongoing: Links and Notes About DevOps Transformation Using the Accelerate Data and Strategies</title><link>https://alfrednutile.info/posts/sod/</link><pubDate>Sat, 06 Mar 2021 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/sod/</guid><description>&lt;p>Next time I needed this info, I just wanted to make sure that I have the links I need concerning the Accelerate book and Software Delivery Performance. So I will use this page to continue to add info about these resources.&lt;/p>
 &lt;p>The links below really are all related as the authors work together in the different books, videos and research papers.&lt;/p>
 &lt;h2 id="tldr">TL;DR&lt;/h2>
 &lt;p>The most critical link &lt;a href="https://www.devops-research.com/research.html#capabilities">State of DevOps Reports&lt;/a>&lt;/p>
@@ -312,4 +312,4 @@ in the long run, they are building a better product and culture that will lead t
 &lt;p>Continuous Delivery Sounds Great, but Will It Work Here?: It&amp;rsquo;s not magic, it just requires continuous, daily improvement at all levels.&lt;/p>
 &lt;/blockquote>
 &lt;img src="images/ci_book.png" width="400">
-&lt;p>&lt;a href="https://www.amazon.com/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912">here&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;a href="https://www.amazon.com/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912">here&lt;/a>&lt;/p></description><category>devops</category><category>accelerate</category></item></channel></rss>

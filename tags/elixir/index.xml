@@ -75,4 +75,4 @@ mix
 .scripts( [&amp;quot;custom/**/*.js&amp;quot;], &amp;quot;public/js/custom.js&amp;quot;)
 .version( [&amp;quot;css/vendor.css&amp;quot;, &amp;quot;js/vendor.js&amp;quot;]);
 });
-&lt;/code>&lt;/pre>&lt;p>and run &lt;code>gulp watch&lt;/code>. This is not my normal workflow but it sure beats putting all the files in my html file and then also doing this to concatenate them.&lt;/p></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>and run &lt;code>gulp watch&lt;/code>. This is not my normal workflow but it sure beats putting all the files in my html file and then also doing this to concatenate them.&lt;/p></description><category>laravel</category><category>elixir</category></item></channel></rss>

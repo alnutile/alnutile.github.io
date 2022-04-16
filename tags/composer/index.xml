@@ -11,4 +11,4 @@ composer --working-dir=/var/www/drupal/sites/default/files/composer update
 &lt;pre>&lt;code>drush composer-manager update
 &lt;/code>&lt;/pre>&lt;p>You can clear that up with&lt;/p>
 &lt;pre>&lt;code>drush rr
-&lt;/code>&lt;/pre>&lt;p>And then use composer directly as I did above to update/install your composer related files.&lt;/p></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>And then use composer directly as I did above to update/install your composer related files.&lt;/p></description><category>composer</category><category>drupal</category><category>php</category></item></channel></rss>
