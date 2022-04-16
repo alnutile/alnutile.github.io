@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>tdd on Alfred Nutile</title><link>https://alfrednutile.info/tags/tdd/</link><description>Recent content in tdd on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 27 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/tdd/index.xml" rel="self" type="application/rss+xml"/><item><title>Mocking in Python</title><link>https://alfrednutile.info/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/263/</guid><description>Serious note to self.
-I wanted to mock the Github module for python.
-My simple class will get the ID of the team.
-from github import Github, Team
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>tdd on Alfred Nutile</title><link>https://alfrednutile.info/tags/tdd/</link><description>Recent content in tdd on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 27 Jun 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/tdd/index.xml" rel="self" type="application/rss+xml"/><item><title>Mocking in Python</title><link>https://alfrednutile.info/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/263/</guid><description>&lt;p>Serious note to self.&lt;/p>
+&lt;p>I wanted to mock the Github module for python.&lt;/p>
+&lt;p>My simple class will get the ID of the team.&lt;/p>
+&lt;pre>&lt;code>from github import Github, Team
 from dotenv import load_dotenv
 import os
 import sys
@@ -17,7 +17,108 @@ def handle(self, team_name):
 teams = self.org.get_teams()
 for team in teams:
 if team_name == team.name:
-print(&amp;quot;Team id&amp;quot;, team.</description></item><item><title>My first Rails site for the masses.</title><link>https://alfrednutile.info/posts/15/</link><pubDate>Thu, 27 Jun 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/15/</guid><description>First Rails site for the masses for me. Thanks to Progressive Exchange http://www.progressiveexchange.org/welcome.htm
-I was able to volunteer for a webapp for Doctors for America http://www.drsforamerica.org/
+print(&amp;quot;Team id&amp;quot;, team.id)
+return team.id
+if __name__ == &amp;quot;__main__&amp;quot;:
+client = GetTeamId()
+team = sys.argv[1]
+print(&amp;quot;Going to get team&amp;quot;, team)
+client.handle(team)
+&lt;/code>&lt;/pre>&lt;p>But I need test coverage on this so I made this test.&lt;/p>
+&lt;pre>&lt;code>from unittest import TestCase
+import unittest
+from unittest.mock import patch, Mock
+import json
+from src.get_team_id import GetTeamId
+class Team:
+def __init__(self):
+self.id = 4444444
+self.name = &amp;quot;foo-team&amp;quot;
+class TestGetTeamId(TestCase):
+@patch(&amp;quot;src.get_team_id.Github.get_organization&amp;quot;)
+def test_can_get_id(self, mock_github):
+mock_github.return_value.get_teams.return_value = [
+Team()
+]
+client = GetTeamId()
+results = client.handle(&amp;quot;foo-team&amp;quot;)
+self.assertEqual(4444444, results)
+&lt;/code>&lt;/pre>&lt;p>Know how long that took!&lt;/p>
+&lt;h2 id="example-two">Example Two&lt;/h2>
+&lt;p>Mocking JIRA:&lt;/p>
+&lt;pre>&lt;code>from unittest import TestCase
+import unittest
+from unittest.mock import patch, Mock
+import json
+from src.jira_ticket import JiraTicket
+class TestJiraCreateTicket(TestCase):
+@patch(&amp;quot;src.jira_ticket.JIRA.create_issue&amp;quot;)
+def test_can_make_ticket(self, mock_jira):
+mock_jira.return_value.create_issue.return_value.update.return_value = True
+client = JiraTicket()
+title = &amp;quot;(RENOVATE PR OPEN) Update dependency @ionic/core to v4.6.0 292416206&amp;quot;
+project = &amp;quot;PENG&amp;quot;
+message = &amp;quot;\nTitle: Foo Bar\nIssue Url: https://boo.baz\nState: open\n&amp;quot;
+label = &amp;quot;renovate&amp;quot;
+client.create_ticket(title, message, project, label)
+mock_jira.assert_called_once()
+&lt;/code>&lt;/pre>&lt;p>and the class:&lt;/p>
+&lt;pre>&lt;code>import json
+from dotenv import load_dotenv
+from collections import Counter
+from jira import JIRA
+import os
+class JiraTicket:
+def __init__(self):
+self.jira = None
+self.auth()
+def auth(self):
+load_dotenv()
+username = os.getenv(&amp;quot;JIRA_USERNAME&amp;quot;)
+password = os.getenv(&amp;quot;JIRA_PASSWORD&amp;quot;)
+self.jira = JIRA(server=&amp;quot;https://foo.atlassian.net&amp;quot;,
+basic_auth=(username, password))
+def handle(self, title, message=None, label=None, project=&amp;quot;FOO&amp;quot;):
+&amp;quot;&amp;quot;&amp;quot; see if exists if does update &amp;quot;&amp;quot;&amp;quot;
+def see_if_exists(self, title, project):
+results = self.jira.search_issues(&amp;quot;title ~ \&amp;quot;%s\&amp;quot; and project= \&amp;quot;%s\&amp;quot;&amp;quot; % (title, project))
+if len(results) &amp;gt; 0:
+for issue in results:
+print(issue)
+return False
+&lt;/code>&lt;/pre>&lt;h2 id="good-reads">Good reads&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://docs.python.org/3/library/unittest.mock.html">https://docs.python.org/3/library/unittest.mock.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.toptal.com/python/an-introduction-to-mocking-in-python">https://www.toptal.com/python/an-introduction-to-mocking-in-python&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832">https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>My first Rails site for the masses.</title><link>https://alfrednutile.info/posts/15/</link><pubDate>Thu, 27 Jun 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/15/</guid><description>&lt;p>
+First Rails site for the masses for me. Thanks to Progressive Exchange &lt;a href=http://www.progressiveexchange.org/welcome.htm target="_blank">http://www.progressiveexchange.org/welcome.htm&lt;/a>
+I was able to volunteer for a webapp for Doctors for America &lt;a target="_blank" href="http://www.drsforamerica.org/">http://www.drsforamerica.org/&lt;/a>
 So not only do I get to learn Ruby on Rails and practice but I get to build something for a good group and purpose.
-This app had to allow staff to enter and manage Speaker Requests and Speakers data as well as allow the public to view a Calendar of the upcoming events, filter as needed and submit a requests.</description></item></channel></rss>
+&lt;/p>
+&lt;p>
+This app had to allow staff to enter and manage Speaker Requests and Speakers data as well as allow the public to view a Calendar of the upcoming events, filter as needed and submit a requests.
+&lt;a target="_blank" href=http://speakers.drsforamerica.org/calendar>http://speakers.drsforamerica.org/calendar&lt;/a>
+&lt;/p>
+&lt;p>
+Some of the key points for me where.
+1. TDD – Still new at this but truly enjoy. Not only it is relaxing but it make refactoring code awesome.
+2. Agile – Tried to keep the goals in small small units and check in with the client often to make sure things where on track and make changes easy.
+3. Capistrano – coming from a drupal background where migrations and database relate changes = clicking this has been pure awesome. cap deploy = done
+4. Pair programming – I was assisted by Amos King https://twitter.com/Adkron helping me to work through what to must have seems like headstart level work but he really helped me to see how to use scopes and how to better separate my Controllers and Models.
+5. ActiveAdmin – though it will be fun to build my own user login area this was a quick quick way to get going. It uses formtastic to output the forms, some of which I had to customize.
+6. Twitter Bootstrap – Still getting to know this one too. It really is great, I may try Foundations next but only because they both look super.
+7. Rails – the obvious output. Though there are great tutorials online nothing is better then application of what you “know” cause then you realize what you don't know ( -: Which makes going back to those tutorials even better. This being my favorite so far http://ruby.railstutorial.org/ and http://railscasts.com
+&lt;/p>
+&lt;p>
+Thanks to Twitter Bootstrap I get some nice Modal effects
+&lt;a href="https://dl.dropboxusercontent.com/u/54803135/dfa_modal.gif">https://dl.dropboxusercontent.com/u/54803135/dfa_modal.gif&lt;/a>
+&lt;/p>
+&lt;p>
+All code on GitHub
+&lt;a href="https://github.com/alnutile/dfa">https://github.com/alnutile/dfa&lt;/a>
+&lt;/p>
+&lt;p>
+rake stats! – next time more tests
+&lt;a href="https://dl.dropboxusercontent.com/u/54803135/dfa_stats.png">https://dl.dropboxusercontent.com/u/54803135/dfa_stats.png&lt;/a>
+&lt;/p></description></item></channel></rss>

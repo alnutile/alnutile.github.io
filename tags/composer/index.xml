@@ -1,5 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>composer on Alfred Nutile</title><link>https://alfrednutile.info/tags/composer/</link><description>Recent content in composer on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 04 May 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/composer/index.xml" rel="self" type="application/rss+xml"/><item><title>Drupal and Composer install or update</title><link>https://alfrednutile.info/posts/65/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/65/</guid><description>Using composer and drupal, even d7, is great. But an update or install can leave you with a broken drupal registry.
-So here is a workflow that is pretty bullet proof.
-In this example drupal&amp;rsquo;s composer folder where composer.json lives is located in /var/www/drupal/sites/default/files/composer
-So in there is composer.json and composer.lock
-So when you need to install a new composer library and you updated your json file you can run</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>composer on Alfred Nutile</title><link>https://alfrednutile.info/tags/composer/</link><description>Recent content in composer on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 04 May 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/composer/index.xml" rel="self" type="application/rss+xml"/><item><title>Drupal and Composer install or update</title><link>https://alfrednutile.info/posts/65/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/65/</guid><description>&lt;p>Using composer and drupal, even d7, is great.
+But an update or install can leave you with a broken drupal registry.&lt;/p>
+&lt;p>So here is a workflow that is pretty bullet proof.&lt;/p>
+&lt;p>In this example drupal&amp;rsquo;s composer folder where composer.json lives is located in /var/www/drupal/sites/default/files/composer&lt;/p>
+&lt;p>So in there is composer.json and composer.lock&lt;/p>
+&lt;p>So when you need to install a new composer library and you updated your json file you can run&lt;/p>
+&lt;pre>&lt;code>cd /var/www/drupal/
+drush composer-rebuild-file
+composer --working-dir=/var/www/drupal/sites/default/files/composer update
+&lt;/code>&lt;/pre>&lt;p>If you get an broken registry issue the typically happens when you run&lt;/p>
+&lt;pre>&lt;code>drush composer-manager update
+&lt;/code>&lt;/pre>&lt;p>You can clear that up with&lt;/p>
+&lt;pre>&lt;code>drush rr
+&lt;/code>&lt;/pre>&lt;p>And then use composer directly as I did above to update/install your composer related files.&lt;/p></description></item></channel></rss>

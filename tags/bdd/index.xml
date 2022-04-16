@@ -1,35 +1,582 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bdd on Alfred Nutile</title><link>https://alfrednutile.info/tags/bdd/</link><description>Recent content in bdd on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 31 Aug 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/bdd/index.xml" rel="self" type="application/rss+xml"/><item><title>Mockery Behat and Laravel</title><link>https://alfrednutile.info/posts/190/</link><pubDate>Wed, 31 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/190/</guid><description>This is a quick view of using this library https://github.com/laracasts/Behat-Laravel-Extension and a Mockery Trait (should be included soon but for now put the below in your features/bootstrap folder and run composer dump).
-The example here is a method that looks like this
-features/bootstrap/ExampleContext.php
-$partial = Mockery::mock(\App\Broadcasts\ColumnsAndRowsDoneProcessingEmail::class, [$this-&amp;gt;segment])-&amp;gt;makePartial();
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bdd on Alfred Nutile</title><link>https://alfrednutile.info/tags/bdd/</link><description>Recent content in bdd on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 31 Aug 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/bdd/index.xml" rel="self" type="application/rss+xml"/><item><title>Mockery Behat and Laravel</title><link>https://alfrednutile.info/posts/190/</link><pubDate>Wed, 31 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/190/</guid><description>&lt;p>This is a quick view of using this library &lt;a href="https://github.com/laracasts/Behat-Laravel-Extension">https://github.com/laracasts/Behat-Laravel-Extension&lt;/a> and a Mockery Trait (should be included soon but for now put the below in your &lt;code>features/bootstrap&lt;/code> folder and run &lt;code>composer dump&lt;/code>).&lt;/p>
+&lt;p>The example here is a method that looks like this&lt;/p>
+&lt;p>&lt;code>features/bootstrap/ExampleContext.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code> $partial = Mockery::mock(\App\Broadcasts\ColumnsAndRowsDoneProcessingEmail::class, [$this-&amp;gt;segment])-&amp;gt;makePartial();
 $partial-&amp;gt;shouldReceive('sendEmail')-&amp;gt;never();
 $repo = App::make(\App\JobsRepository::class);
 $partial-&amp;gt;handle($repo);
-When this is done running I would get pass BUT if I change it never to once and run it again I still get green :(</description></item><item><title>Uploading Images in Behat both at Domain Level and UI Level</title><link>https://alfrednutile.info/posts/188/</link><pubDate>Thu, 11 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/188/</guid><description>The goal here is as follows
-@fileCleanup @javascript
+&lt;/code>&lt;/pre>&lt;p>When this is done running I would get pass BUT if I change it &lt;code>never&lt;/code> to &lt;code>once&lt;/code> and run it again I still get green :(&lt;/p>
+&lt;p>But I need to include the Mockery. In my case I made this trait that will allow me to also tests and mock events.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+trait MockeryTrait
+{
+public $firedEvents = [];
+public $beforeApplicationDestroyedCallbacks = [];
+/**
+* @AfterScenario
+*/
+public function reviewMocks()
+{
+if ($this-&amp;gt;app) {
+foreach ($this-&amp;gt;beforeApplicationDestroyedCallbacks as $callback) {
+call_user_func($callback);
+}
+$this-&amp;gt;app-&amp;gt;flush();
+$this-&amp;gt;app = null;
+}
+if (class_exists('Mockery')) {
+Mockery::close();
+}
+$this-&amp;gt;beforeApplicationDestroyedCallbacks = [];
+}
+protected function beforeApplicationDestroyed(callable $callback)
+{
+$this-&amp;gt;beforeApplicationDestroyedCallbacks[] = $callback;
+}
+/**
+* Specify a list of events that should be fired for the given operation.
+*
+* These events will be mocked, so that handlers will not actually be executed.
+*
+* @param array|string $events
+* @return $this
+*
+* @throws \Exception
+*/
+public function expectsEvents($events)
+{
+$events = is_array($events) ? $events : func_get_args();
+$this-&amp;gt;withoutEvents();
+$this-&amp;gt;beforeApplicationDestroyed(function () use ($events) {
+$fired = $this-&amp;gt;getFiredEvents($events);
+if ($eventsNotFired = array_diff($events, $fired)) {
+throw new Exception(
+'These expected events were not fired: ['.implode(', ', $eventsNotFired).']'
+);
+}
+});
+return $this;
+}
+/**
+* Mock the event dispatcher so all events are silenced and collected.
+*
+* @return $this
+*/
+protected function withoutEvents()
+{
+$mock = Mockery::mock('Illuminate\Contracts\Events\Dispatcher');
+$mock-&amp;gt;shouldReceive('fire')-&amp;gt;andReturnUsing(function ($called) {
+$this-&amp;gt;firedEvents[] = $called;
+});
+$this-&amp;gt;app-&amp;gt;instance('events', $mock);
+return $this;
+}
+/**
+* Filter the given events against the fired events.
+*
+* @param array $events
+* @return array
+*/
+protected function getFiredEvents(array $events)
+{
+return $this-&amp;gt;getDispatched($events, $this-&amp;gt;firedEvents);
+}
+/**
+* Filter the given classes against an array of dispatched classes.
+*
+* @param array $classes
+* @param array $dispatched
+* @return array
+*/
+protected function getDispatched(array $classes, array $dispatched)
+{
+return array_filter($classes, function ($class) use ($dispatched) {
+return $this-&amp;gt;wasDispatched($class, $dispatched);
+});
+}
+/**
+* Check if the given class exists in an array of dispatched classes.
+*
+* @param string $needle
+* @param array $haystack
+* @return bool
+*/
+protected function wasDispatched($needle, array $haystack)
+{
+foreach ($haystack as $dispatched) {
+if ((is_string($dispatched) &amp;amp;&amp;amp; ($dispatched === $needle || is_subclass_of($dispatched, $needle))) ||
+$dispatched instanceof $needle) {
+return true;
+}
+}
+return false;
+}
+}
+&lt;/code>&lt;/pre>&lt;p>This pulls in a trait Laravel uses in PHPUnit.&lt;/p>
+&lt;p>So now when I run that test I get red and when I set it back to &lt;code>zero&lt;/code> I get green!&lt;/p></description></item><item><title>Uploading Images in Behat both at Domain Level and UI Level</title><link>https://alfrednutile.info/posts/188/</link><pubDate>Thu, 11 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/188/</guid><description>&lt;p>The goal here is as follows&lt;/p>
+&lt;pre>&lt;code> @fileCleanup @javascript
 Scenario: Uploading File
 Given I already made a Segmentation and am editing it
 Then I add file and the system will process it
 And I can not add another file till it is done
 And when the system is done I can add another file
-In this case they are large files and I want to get an MVP for the users to interact with so one file at a time is enough for now.</description></item><item><title>Behat Laravel Domain Testing Inside Out</title><link>https://alfrednutile.info/posts/187/</link><pubDate>Wed, 10 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/187/</guid><description>I will cover the use of FormRequest, Mockery, Behat and more in this article.
-The article will show how to test your Domain code, in this case I mean testing how the code will work outside of the Routing and Controller layer of your Application. But what this will lead to is a &amp;ldquo;lego&amp;rdquo; like moment of plugging in these parts to your Controller so you know it will work. Of course it will be tested as well during the UI testing.</description></item><item><title>Example of Mixing it up Behat BDD and PHPUnit</title><link>https://alfrednutile.info/posts/185/</link><pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/185/</guid><description>Just wanted to show two things here. One is how sometimes I end up in PHPUnit to work out some ideas. And two how awesome it is to refactor thanks to PHPUnit.
-In this example I had a Class responsible for saving data, we&amp;rsquo;ll call FooSaveData. But before that save it has to process some incoming information against another set of data to save the results of that. So I made another class we&amp;rsquo;ll call FooProcessData.</description></item><item><title>Getting Going Quickly Windows, Behat and Selenium</title><link>https://alfrednutile.info/posts/181/</link><pubDate>Tue, 03 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/181/</guid><description>Quick Install Steps
-Vagrant and Homestead This was easy I just followed these steps here and I was done. For me I used Vmware but Virtualbox is fine.
-Windows in Selenium Two easy steps
-Step 1 Install Node.js SUPER EASY https://nodejs.org/en/download/
-Install the .exe, restart your console and you have node!
-Step 2 Install Selenium Just go here and you are done! https://www.npmjs.com/package/selenium-standalone
-After those steps I run it in a powershell and the server is running and I am set to use it.</description></item><item><title>Behat and Uploading Files to a Form Even on Remote Selenium2 Servers</title><link>https://alfrednutile.info/posts/179/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/179/</guid><description>Just had to tackle this issue so making some notes for later here :)
-Updated and more detailed here
-I run selenium on my Windows PC and before that my Mac, either one would have had this issue since my test is running side my VM. This meant when I needed to run a test to interact with a form to upload an image that image path was relative to the machine (VM) that I started the test on and not the Browser that was being manipulated by Selenium2.</description></item><item><title>Behat for Product Owners</title><link>https://alfrednutile.info/posts/156/</link><pubDate>Fri, 31 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/156/</guid><description>As a developer putting all the business requirements into action and then showing that it is working as expected can be hard. 10 different google docs, 3 different views of what are the goals etc.
-And as a Product Owner you are not sure if the work is done without always clicking around. And more importantly you do not even know if the developer really gets what you want.
-This is where Behat / Gherkin (cause that name really gets Product Owners feeling comfortable) can help out.</description></item><item><title>Laravel 5.1 Behat and Codeship</title><link>https://alfrednutile.info/posts/151/</link><pubDate>Sat, 04 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/151/</guid><description>The new integration testing features with Laravel 5.1 make Behat almost not needed BUT we do a lot of AngularJs work and instead of using karma to test the ui we enjoy using behat since we like the Gherkin Syntax and how we can easily code custom steps in PHP.
-Here are some steps to getting behat going on Codeship so you get full CI even of Angular.
-This is all based off of https://github.</description></item><item><title>Using Faker and ENV vars with Behat</title><link>https://alfrednutile.info/posts/140/</link><pubDate>Fri, 27 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/140/</guid><description>UPDATED April 01 2015
-Realized I needed more &amp;ldquo;tokens&amp;rdquo; and I was already using my .env file for info for Seeding and for our different servers. So the Trait now pulls those in.
-This is a simple trait to use in your FeatureContext file to then get the power of Faker in your Behat tests
-The Trait &amp;lt;?php
+&lt;/code>&lt;/pre>&lt;p>In this case they are large files and I want to get an MVP for the users to interact with so one file at a time is enough for now.&lt;/p>
+&lt;p>The tricky part is that I am running Selenium on my Mac and running behat in my VM there is no file path connection between the two.
+This can also be an issue when using Saucelabs and &lt;a href="https://crossbrowsertesting.com/">https://crossbrowsertesting.com/&lt;/a>.&lt;/p>
+&lt;h2 id="ui-level">UI Level&lt;/h2>
+&lt;p>I am using the Flow Angular library so it is JavaScript heavy (some notes below). Otherwise your work is even easier.&lt;/p>
+&lt;p>My step to set things up &lt;code>Given I already made a Segmentation and am editing it&lt;/code> just adds that resource to the system and then I visit it.&lt;/p>
+&lt;p>From there I hit &lt;code>Then I add file and the system will process it&lt;/code> and this is where it all begins&lt;/p>
+&lt;pre>&lt;code> /**
+* @Then I add file and the system will process it
+*/
+public function iAddFileAndTheSystemWillProcessIt()
+{
+$this-&amp;gt;visit('/segments/files/' . $this-&amp;gt;segment_uuid);
+sleep(2); //load up the page
+$this-&amp;gt;assertPageContainsText('Upload File'); //make sure the button is there
+/**
+* Here is the meat of it, or tofu, I have to deal with the fact I am running
+* Selenium on a different machine than my VM's filesystem
+* So I inject this into the WebDriverSession
+* Which only exists because this Scenario is marked `@javascript`
+*/
+$localFile = base_path('features/fixtures/data_columns_not_snaked.xls');
+$tempZip = tempnam('', 'WebDriverZip');
+$zip = new \ZipArchive();
+$zip-&amp;gt;open($tempZip, \ZipArchive::CREATE);
+$zip-&amp;gt;addFile($localFile, basename($localFile));
+$zip-&amp;gt;close();
+$remotePath = $this-&amp;gt;getSession()-&amp;gt;getDriver()-&amp;gt;getWebDriverSession()-&amp;gt;file([
+'file' =&amp;gt; base64_encode(file_get_contents($tempZip))
+]);
+/** end the hard part **/
+$this-&amp;gt;attachFileToField('image_upload', $remotePath); //see Flow notes at the bottom of this page
+$this-&amp;gt;assertPageNotContainsText('Upload File');
+unlink($tempZip);
+sleep(5); //Later on I will move this to `spin` see notes below
+$this-&amp;gt;assertPageContainsText('data_columns_not_snaked');
+}
+&lt;/code>&lt;/pre>&lt;p>Let me show that again but now more simple just a normal input button&lt;/p>
+&lt;pre>&lt;code> /**
+* @Then I add file and the system will process it
+*/
+public function iAddFileAndTheSystemWillProcessIt()
+{
+$this-&amp;gt;visit('/segments/files/' . $this-&amp;gt;segment_uuid);
+sleep(2); //load up the page
+$this-&amp;gt;assertPageContainsText('Upload File'); //make sure the button is there
+/**
+* Here is the meat of it, or tofu, I have to deal with the fact I am running
+* Selenium on a different machine than my VM's filesystem
+* So I inject this into the WebDriverSession
+* Which only exists because this Scenario is marked `@javascript`
+*/
+$localFile = base_path('features/fixtures/data_columns_not_snaked.xls');
+$tempZip = tempnam('', 'WebDriverZip');
+$zip = new \ZipArchive();
+$zip-&amp;gt;open($tempZip, \ZipArchive::CREATE);
+$zip-&amp;gt;addFile($localFile, basename($localFile));
+$zip-&amp;gt;close();
+$remotePath = $this-&amp;gt;getSession()-&amp;gt;getDriver()-&amp;gt;getWebDriverSession()-&amp;gt;file([
+'file' =&amp;gt; base64_encode(file_get_contents($tempZip))
+]);
+/** end the hard part **/
+$this-&amp;gt;attachFileToField('image_upload', $remotePath); //the input field
+/** prove the button is gone during this process **/
+$this-&amp;gt;assertPageNotContainsText('Upload File');
+unlink($tempZip);
+$this-&amp;gt;pressButton('Upload File'); //dealing with normal input button
+}
+&lt;/code>&lt;/pre>&lt;h2 id="domain-level">Domain Level&lt;/h2>
+&lt;p>Since my Controller gets the info from the incoming &lt;code>Request&lt;/code> and hands it to the Repository class, I like to test my classes outside the Controller then plug them in (see &lt;a href="https://alfrednutile.info/posts/187">here&lt;/a> for more on that), there is typically no need to pass the full &lt;code>Request&lt;/code> to the Repository. But in this case I went about passing the entire &lt;code>Request&lt;/code> to the &lt;code>Repository&lt;/code> and doing some checking in there as well.&lt;/p>
+&lt;pre>&lt;code> /**
+* @Then I should be able to upload an image file
+*/
+public function iShouldBeAbleToUploadAnImageFile()
+{
+$request = new \Illuminate\Http\Request();
+$file = new \Symfony\Component\HttpFoundation\FileBag();
+$path = base_path('features/fixtures/data_columns_not_snaked.xls');
+$originalName = 'data_columns_not_snaked.xls';
+/** note `true` passed in to `UploadedFile` it defines this as a test request **/
+$upload = new \Illuminate\Http\UploadedFile($path, $originalName, null, null, null, true);
+$file-&amp;gt;set('profile_image', $upload);
+$request-&amp;gt;files = $file;
+$this-&amp;gt;repo = new \App\Repositories\ProfileRepository();
+$results = $this-&amp;gt;repo-&amp;gt;uploadUserProfileImage($request);
+PHPUnit::assertTrue($results, &amp;quot;Repo did not return true&amp;quot;);
+PHPUnit::assertTrue(File::exists(public_path('storage/' . $this-&amp;gt;user-&amp;gt;id . '/data_columns_not_snaked.xls')), &amp;quot;File Not found&amp;quot;);
+}
+&lt;/code>&lt;/pre>&lt;p>And now that is passing as well.&lt;/p>
+&lt;h2 id="thats-it">Thats It&lt;/h2>
+&lt;p>I am now testing both the UI and the Domain level part of this Application.&lt;/p>
+&lt;h2 id="note">Note&lt;/h2>
+&lt;p>Using Flow Library &lt;a href="https://github.com/flowjs/ng-flow">https://github.com/flowjs/ng-flow&lt;/a> makes it easy to process large files in PHP for me.&lt;/p>
+&lt;p>One thing I had to do was do was set &lt;code>flow-attrs&lt;/code> to the directive so I can get a &lt;code>name&lt;/code> in there to target field.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;div class=&amp;quot;btn btn-xs btn-primary&amp;quot; flow-attrs=&amp;quot;{name:'image_upload'}&amp;quot; flow-btn ng-if=&amp;quot;vm.file_uploading&amp;quot;&amp;gt;
+&amp;lt;i class=&amp;quot;fa fa-cloud-upload&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; Upload File
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>Link to Spin on Behat docs and StackOverflow for a better solution than &lt;code>sleep&lt;/code>&lt;/p>
+&lt;p>&lt;a href="http://stackoverflow.com/questions/28510155/how-to-get-the-mink-selenium-2-driver-to-wait-for-the-page-to-load-with-behat">http://stackoverflow.com/questions/28510155/how-to-get-the-mink-selenium-2-driver-to-wait-for-the-page-to-load-with-behat&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://docs.behat.org/en/v2.5/cookbook/using_spin_functions.html">http://docs.behat.org/en/v2.5/cookbook/using_spin_functions.html&lt;/a>&lt;/p>
+&lt;p>And a bit more on that
+&lt;a href="http://www.tentacode.net/10-tips-with-behat-and-mink">http://www.tentacode.net/10-tips-with-behat-and-mink&lt;/a>&lt;/p></description></item><item><title>Behat Laravel Domain Testing Inside Out</title><link>https://alfrednutile.info/posts/187/</link><pubDate>Wed, 10 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/187/</guid><description>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/055lj0hcljvpp7u/4_pane_guy_and_getting_started.png?dl=0" alt="">&lt;/p>
+&lt;p>I will cover the use of &lt;code>FormRequest&lt;/code>, &lt;code>Mockery&lt;/code>, &lt;code>Behat&lt;/code> and more in this article.&lt;/p>
+&lt;p>The article will show how to test your Domain code, in this case I mean testing how the code will work outside of the Routing and Controller layer of your Application. But what this will lead to is a &amp;ldquo;lego&amp;rdquo; like moment of plugging in these parts to your Controller so you know it will work. Of course it will be tested as well during the UI testing.&lt;/p>
+&lt;p>I will start off with this Behat Feature&lt;/p>
+&lt;pre>&lt;code>Feature: Login Page
+Login page to do authenticated tasks
+As an anonymous user
+So we can protect some personal and administrative parts of the site
+@happy_path @smoke @javascript @profile
+Scenario: A user can login and see their profile
+Given I am on the login page
+And I fill in the login form with my proper username and password
+Then I should be able to see my profile page
+Then if I try to see another persons page I should get rejected
+@smoke @profile
+Scenario: A non logged in user can not get a profile
+Given I am an anonymous user
+And I go to the profile page
+Then I should get redirected with an error message to let me know the problem
+&lt;/code>&lt;/pre>&lt;p>What we have is the &lt;code>@happy_path&lt;/code> that will be the UI &lt;code>Scenario&lt;/code> in this case as well as the Domain. And yes I can have more than one UI &lt;code>Scenario&lt;/code> but in this case I just want to deliver something that let&amp;rsquo;s the Product Owner knows her application is working as expected.&lt;/p>
+&lt;p>What we will start with is &lt;code>Scenario: A user can login and see their profile&lt;/code>&lt;/p>
+&lt;p>In my example there will be a &lt;code>Repository&lt;/code> class to manage the Business logic and a &lt;code>FormRequest&lt;/code> Class to deal with managing ACL.&lt;/p>
+&lt;p>Let&amp;rsquo;s take the Context file one step at a time &lt;code>features/bootstrap/LoginPageDomainContext.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code> /**
+* @Given I am on the login page
+*/
+public function iAmOnTheLoginPage()
+{
+$this-&amp;gt;user = factory(\App\User::class)-&amp;gt;create();
+}
+&lt;/code>&lt;/pre>&lt;p>I setup the state of the world for this &lt;code>Scenario&lt;/code> I do not rely on seed data.&lt;/p>
+&lt;p>Also at the top of the Class I pull in &lt;code>use \Laracasts\Behat\Context\DatabaseTransactions;&lt;/code> and &lt;code>\Laracasts\Behat\Context\Migrator&lt;/code>&lt;/p>
+&lt;p>These come from the Laracast Library on Behat &lt;a href="https://laracasts.com/lessons/laravel-5-and-behat-bffs">https://laracasts.com/lessons/laravel-5-and-behat-bffs&lt;/a> and &lt;a href="https://github.com/laracasts/Behat-Laravel-Extension">https://github.com/laracasts/Behat-Laravel-Extension&lt;/a>&lt;/p>
+&lt;p>This next step is written with too much &amp;ldquo;Web&amp;rdquo; in mind. I should try and reword it so it fits more inline with the business goals.&lt;/p>
+&lt;pre>&lt;code> /**
+* @Given I fill in the login form with my proper username and password
+*/
+public function iFillInTheLoginFormWithMyProperUsernameAndPassword()
+{
+Auth::login($this-&amp;gt;user);
+PHPUnit_Framework_Assert::assertFalse(Auth::guest());
+}
+&lt;/code>&lt;/pre>&lt;p>Here is where things get fun&lt;/p>
+&lt;pre>&lt;code> /**
+* @Then I should be able to see my profile page
+*/
+public function iShouldBeAbleToSeeMyProfilePage()
+{
+$user = factory(\App\User::class)-&amp;gt;create();
+factory(\App\Profile::class)-&amp;gt;create(['user_id' =&amp;gt; $user-&amp;gt;id]);
+/** @var \App\Http\Requests\ProfileShowRequest $auth */
+$auth = Mockery::mock(\App\Http\Requests\ProfileShowRequest::class)-&amp;gt;makePartial();
+$auth-&amp;gt;shouldReceive('route')-&amp;gt;andReturn($user-&amp;gt;url);
+$results = $auth-&amp;gt;authorize();
+PHPUnit::assertTrue($results);
+}
+&lt;/code>&lt;/pre>&lt;p>And the next part to that&lt;/p>
+&lt;pre>&lt;code> /**
+* @Then if I try to see another persons page I should get rejected
+*/
+public function ifITryToSeeAnotherPersonsPageIShouldGetRejected()
+{
+$user = factory(\App\User::class)-&amp;gt;create();
+factory(\App\Profile::class)-&amp;gt;create(
+['favorite_comic_character' =&amp;gt; &amp;quot;foo&amp;quot;, 'user_id' =&amp;gt; $user-&amp;gt;id]
+);
+/** @var \App\Http\Requests\ProfileShowRequest $auth */
+$auth = Mockery::mock(\App\Http\Requests\ProfileShowRequest::class)-&amp;gt;makePartial();
+$auth-&amp;gt;shouldReceive('route')-&amp;gt;andReturn($user-&amp;gt;url);
+$results = $auth-&amp;gt;authorize();
+PHPUnit::assertFalse($results);
+}
+&lt;/code>&lt;/pre>&lt;p>Making sure to close my &lt;code>Mockery&lt;/code> when done&lt;/p>
+&lt;pre>&lt;code> /**
+* @afterScenario
+*/
+public function cleanUp() {
+Mockery::close();
+}
+&lt;/code>&lt;/pre>&lt;p>We are testing the two pieces that matter right now, the &lt;code>Repo&lt;/code> and the &lt;code>FormRequest&lt;/code>.&lt;/p>
+&lt;p>All I did was run &lt;code>vendor/bin/behat -slogin_domain --append-snippets --tags=@happy_path&lt;/code> and I got to see the one(s) with that tag working.&lt;/p>
+&lt;h2 id="the-repo">The Repo&lt;/h2>
+&lt;p>&lt;code>\App\Repositories\ProfileShowPage&lt;/code>&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App\Repositories;
+use App\Profile;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
+class ProfileShowPage extends ProfileRepository
+{
+public function showProfileForUserFromSlug($slug)
+{
+return \App\User::fromSlug($slug);
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Why not just use the Controller! Well this is still a simple simple example but honestly if you are just building something for fun or something serious and just getting the feel of an idea go for it. I am doing this cause I want to plug in more to this later since it is part of a larger plan.&lt;/p>
+&lt;p>&lt;strong>Note: &lt;code>Profile::fromSlug()&lt;/code> is just a scope and the model works out the rest of the query for me&lt;/strong>&lt;/p>
+&lt;pre>&lt;code> public function scopeFromSlug($query, $slug)
+{
+return $query-&amp;gt;with('profile')-&amp;gt;where('url', $slug)-&amp;gt;firstOrFail();
+}
+&lt;/code>&lt;/pre>&lt;p>That is it for the repository, now how about this &lt;code>FormRequest&lt;/code> at &lt;code>app/Http/Requests/ProfileShowRequest.php&lt;/code>?&lt;/p>
+&lt;h2 id="formrequest">FormRequest&lt;/h2>
+&lt;p>You can read more about this &lt;a href="https://laravel.com/docs/5.2/validation#form-request-validation">here&lt;/a> on Laravel Docs&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App\Http\Requests;
+/**
+* @NOTE THERE ARE SOME CLASSES HERE SEE GITHUB
+*/
+class ProfileShowRequest extends Request
+{
+protected $profile;
+/**
+* Determine if the user is authorized to make this request.
+*
+* @return bool
+*/
+public function authorize()
+{
+if (Auth::guest()) {
+return false;
+}
+/** @var \App\Repositories\ProfileShowPage $profilePage */
+$profilePage = App::make(\App\Repositories\ProfileShowPage::class);
+$user = $profilePage-&amp;gt;showProfileForUserFromSlug($this-&amp;gt;route('slug'));
+return Auth::user()-&amp;gt;id == $user-&amp;gt;profile-&amp;gt;user_id;
+}
+public function forbiddenResponse()
+{
+return redirect('login')-&amp;gt;with('message', &amp;quot;You need to login first&amp;quot;);
+}
+/**
+* Get the validation rules that apply to the request.
+*
+* @return array
+*/
+public function rules()
+{
+return [
+//
+];
+}
+}
+&lt;/code>&lt;/pre>&lt;h2 id="the-controller">The Controller&lt;/h2>
+&lt;p>All right now that step is passing and the pieces are ready to plug in to the Controller!&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App\Http\Controllers;
+use App\Http\Requests\ProfileShowRequest;
+use App\Repositories\ProfileShowPage;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+class ProfileShowController extends Controller
+{
+public function getProfileForUserUsingSlug(ProfileShowRequest $request, ProfileShowPage $repository, $slug)
+{
+try {
+$profile = $repository-&amp;gt;showProfileForUserFromSlug($slug);
+return view('profile.show', compact('profile'));
+} catch (ModelNotFoundException $e) {
+return redirect()-&amp;gt;route('home')-&amp;gt;with('message', &amp;quot;Could not find your profile :(&amp;quot;);
+} catch (\Exception $e) {
+return redirect()-&amp;gt;route('home')-&amp;gt;with('message', &amp;quot;Error getting profile :(&amp;quot;);
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;p>This controller has one Job &lt;code>app/Http/Controllers/ProfileShowController.php&lt;/code> Showing the profile.&lt;/p>
+&lt;p>In with that job it has the ACL taken care of before it even has to think about what it needs to do.&lt;/p>
+&lt;p>After that it asks the repo to take care of the request and it deals with the response or inevitable exception!&lt;/p>
+&lt;p>So right away I can go to my ui test and make it so you can see the &lt;strong>&lt;a href="https://github.com/alnutile/recipes/blob/a5f2522e702ee49d21711d9416c5a659e7761ddc/features/bootstrap/LoginPageUIContext.php">code here&lt;/a>&lt;/strong>&lt;/p>
+&lt;h2 id="follow-up">Follow Up&lt;/h2>
+&lt;p>All code for this can be seen at &lt;a href="https://github.com/alnutile/recipes">https://github.com/alnutile/recipes&lt;/a> this is a foundation repo for a new book coming out in 2 months with many day to day Laravel Recipes!&lt;/p></description></item><item><title>Example of Mixing it up Behat BDD and PHPUnit</title><link>https://alfrednutile.info/posts/185/</link><pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/185/</guid><description>&lt;p>Just wanted to show two things here. One is how sometimes I end up in PHPUnit to work out some ideas. And two how awesome it is to refactor thanks to PHPUnit.&lt;/p>
+&lt;p>In this example I had a Class responsible for saving data, we&amp;rsquo;ll call FooSaveData. But before that save it has to process some incoming information against another set of data to save the results of that. So I made another class we&amp;rsquo;ll call FooProcessData.&lt;/p>
+&lt;p>The BDD Story for this worked out well in that just like in Konstantin Kudryashov noted in this &lt;a href="http://stakeholderwhisperer.com/posts/2014/10/introducing-modelling-by-example#_=_">article&lt;/a> I had a great reading business driven gherkin feature that I then, using &lt;a href="http://docs.behat.org/en/v3.0/guides/5.suites.html">Behat 3 and Suites&lt;/a> was able to make some really great names for my classes and methods.&lt;/p>
+&lt;p>But this was fine as I was working on FooSaveData, but the fact that FooProcessData had to iterate over a large complex array of data I did not want to do inside of this Gherkin test. It would mean that I had to deal with 5 other steps, x number of model states I needed etc. Instead I just made a unit test for that class &amp;ldquo;FooProcessData&amp;rdquo; and focused on it for a bit outside the rest of this work.&lt;/p>
+&lt;p>To begin with I just use&lt;/p>
+&lt;pre>&lt;code>File::put(base_path('tests/fixtures/data_to_process.json', json_encode($some_data, JSON_PRETTY_PRINT))
+&lt;/code>&lt;/pre>&lt;p>to put that data right where I want it for my unit tests.&lt;/p>
+&lt;p>Then from there I go around and around unil the thinking on the left reads more like the thinking on the right&lt;/p>
+&lt;p>&lt;a href="https://dl.dropboxusercontent.com/s/evboprnu04gllrn/example_of_crazy_method_to_readable.png?dl=0">&lt;img src="https://dl.dropboxusercontent.com/s/evboprnu04gllrn/example_of_crazy_method_to_readable.png?dl=0" alt="start to end">&lt;/a>&lt;/p>
+&lt;p>Which is my favorite part of this really as I see code evolve to something I can come back 6 months later and read.&lt;/p>
+&lt;blockquote>
+&lt;p>Let&amp;rsquo;s Plan for a Future Where We&amp;rsquo;re All As Stupid as We Are Today - Dan Milstein&lt;/p>
+&lt;/blockquote>
+&lt;p>At this point that &amp;ldquo;lego&amp;rdquo; like piece is done and I can go back to my Behat BDD Gherkin test to finish off where I left off.&lt;/p></description></item><item><title>Getting Going Quickly Windows, Behat and Selenium</title><link>https://alfrednutile.info/posts/181/</link><pubDate>Tue, 03 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/181/</guid><description>&lt;p>Quick Install Steps&lt;/p>
+&lt;h2 id="vagrant-and-homestead">Vagrant and Homestead&lt;/h2>
+&lt;p>This was easy I just followed these steps &lt;a href="http://sherriflemings.blogspot.ca/2015/03/laravel-homestead-on-windows-8.html">here&lt;/a> and I was done. For me I used Vmware but Virtualbox is fine.&lt;/p>
+&lt;h2 id="windows-in-selenium">Windows in Selenium&lt;/h2>
+&lt;p>Two easy steps&lt;/p>
+&lt;h3 id="step-1-install-nodejs-super-easy">Step 1 Install Node.js SUPER EASY&lt;/h3>
+&lt;p>&lt;a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/&lt;/a>&lt;/p>
+&lt;p>Install the .exe, restart your console and you have node!&lt;/p>
+&lt;h3 id="step-2-install-selenium">Step 2 Install Selenium&lt;/h3>
+&lt;p>Just go here and you are done!
+&lt;a href="https://www.npmjs.com/package/selenium-standalone">https://www.npmjs.com/package/selenium-standalone&lt;/a>&lt;/p>
+&lt;p>After those steps I run it in a powershell and the server is running and I am set to use it.&lt;/p>
+&lt;h2 id="final-touches">Final Touches&lt;/h2>
+&lt;p>In my VM I &amp;ldquo;sudo vim /etc/hosts&amp;rdquo; and point it to my selenium on windows using the domain &amp;ldquo;selenium.dev&amp;rdquo;&lt;/p>
+&lt;pre>&lt;code>192.168.7.57 selenium.dev
+&lt;/code>&lt;/pre>&lt;p>Then my behat.yml looks like this&lt;/p>
+&lt;p>So when I run this inside the VM it knows to talk to the exteral version of Selenium&lt;/p>
+&lt;pre>&lt;code>default:
+suites:
+home_ui:
+paths: [ %paths.base%/features/home]
+contexts: [ HomePageUiContext ]
+extensions:
+Laracasts\Behat:
+env_path: .env.behat
+Behat\MinkExtension:
+default_session: laravel
+base_url: https://recipes.dev
+laravel: ~
+selenium2:
+wd_host: &amp;quot;http://selenium.dev:4444/wd/hub&amp;quot;
+browser_name: chrome
+&lt;/code>&lt;/pre>&lt;p>You can see more of it &lt;a href="https://github.com/alnutile/recipes/blob/master/behat.yml">here&lt;/a>&lt;/p></description></item><item><title>Behat and Uploading Files to a Form Even on Remote Selenium2 Servers</title><link>https://alfrednutile.info/posts/179/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/179/</guid><description>&lt;p>Just had to tackle this issue so making some notes for later here :)&lt;/p>
+&lt;p>&lt;strong>Updated and more detailed &lt;a href="https://alfrednutile.info/posts/188">here&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>I run selenium on my Windows PC and before that my Mac, either one would have had this issue since my test is running side my VM. This meant when I needed to run a test to interact with a form to upload an image that image path was relative to the machine (VM) that I started the test on and not the Browser that was being manipulated by Selenium2.&lt;/p>
+&lt;p>The solution was &amp;ldquo;easy&amp;rdquo; thanks to this &lt;a href="https://github.com/minkphp/MinkSelenium2Driver/issues/187#issuecomment-112106857">thread&lt;/a>&lt;/p>
+&lt;p>After that my step just looked like this and I was done&lt;/p>
+&lt;pre>&lt;code> /**
+* @Then I should be able to upload an image file
+*/
+public function iShouldBeAbleToUploadAnImageFile()
+{
+$localFile = base_path('features/assets/profile.jpg');
+$tempZip = tempnam('', 'WebDriverZip');
+$zip = new \ZipArchive();
+$zip-&amp;gt;open($tempZip, \ZipArchive::CREATE);
+$zip-&amp;gt;addFile($localFile, basename($localFile));
+$zip-&amp;gt;close();
+$remotePath = $this-&amp;gt;getSession()-&amp;gt;getDriver()-&amp;gt;getWebDriverSession()-&amp;gt;file([
+'file' =&amp;gt; base64_encode(file_get_contents($tempZip))
+]);
+$this-&amp;gt;attachFileToField('profile_image', $remotePath);
+unlink($tempZip);
+$this-&amp;gt;pressButton('Save');
+}
+&lt;/code>&lt;/pre>&lt;p>I also had to add &lt;code>@javascript&lt;/code> to the test to allow this WebDriver feature to work.&lt;/p>
+&lt;p>That was it, saved me a ton of time suffering through this gotcha moment.&lt;/p></description></item><item><title>Behat for Product Owners</title><link>https://alfrednutile.info/posts/156/</link><pubDate>Fri, 31 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/156/</guid><description>&lt;p>As a developer putting all the business requirements into action and then showing that it is working as expected can be hard. 10 different google docs, 3 different views of what are the goals etc.&lt;/p>
+&lt;p>And as a Product Owner you are not sure if the work is done without always clicking around. And more importantly you do not even know if the developer really gets what you want.&lt;/p>
+&lt;p>This is where Behat / Gherkin (cause that name really gets Product Owners feeling comfortable) can help out. BUT the key is to remove ALL language barriers.&lt;/p>
+&lt;h2 id="gathering-the-business-requirements-into-a-gherkin-file">Gathering the Business Requirements into a Gherkin File&lt;/h2>
+&lt;p>Just open up a text editor, or google doc or even email, talk to the product owner, even share your screen, and write it with them.&lt;/p>
+&lt;pre>&lt;code>Feature: Reporting Goals for Product Foo
+So I can decide what to order for next week
+As a the business manager
+Should allow me to see products, sort and filter
+Scenario: Visit Reporting Page
+I should be able to go to the report page
+See all the products but only 100 per page to keep it easy to see
+No products should be here that are not &amp;quot;active&amp;quot;
+Filter by types of products using many filters at once
+Paginate on those filter results
+Export to a spreadsheet those results
+@done
+Scenario: Visit Reporting Page and do not have permission to be here
+As a non admin person who goes to the reports page I should not be allowed to go here
+&lt;/code>&lt;/pre>&lt;p>So at this point there are 3 things they need to know and at that the rest is freeform.&lt;/p>
+&lt;h3 id="feature">Feature&lt;/h3>
+&lt;p>This is a one line look at the goal of this area, requirement.&lt;/p>
+&lt;h3 id="the-three-lines-after-the-feature">The Three Lines After the Feature&lt;/h3>
+&lt;p>Benefit, Role or User or Feature, The Feature itself&lt;/p>
+&lt;h3 id="scenario">Scenario&lt;/h3>
+&lt;p>Start your small bite size goals here. Maybe there is just one? Maybe there are also negatives to consider like &lt;code>Scenario: Someone how does not have permission goes here&lt;/code>&lt;/p>
+&lt;h3 id="tagging">Tagging&lt;/h3>
+&lt;p>Also maybe agree on some simple tags&lt;/p>
+&lt;p>@done = um done&lt;/p>
+&lt;p>@wip = work in progress&lt;/p>
+&lt;p>@needs_review&lt;/p>
+&lt;p>Etc.&lt;/p>
+&lt;h3 id="now-what">Now What&lt;/h3>
+&lt;p>At this point the Owners and Developers hopefully have what they need to start writing. Behat so easily let&amp;rsquo;s us make custom steps that we can turn any of this into steps and even better code.&lt;/p>
+&lt;p>And as an Owner you can go simply to github and add these tests if you feel comfortable (yes some even are okay with this) and write it as the business needs it not as &amp;ldquo;gherkin&amp;rdquo; needs it.&lt;/p></description></item><item><title>Laravel 5.1 Behat and Codeship</title><link>https://alfrednutile.info/posts/151/</link><pubDate>Sat, 04 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/151/</guid><description>&lt;p>The new integration testing features with Laravel 5.1 make Behat almost not needed BUT we do a lot of AngularJs work and instead of using karma to test the ui we enjoy using behat since we like the Gherkin Syntax and how we can easily code custom steps in PHP.&lt;/p>
+&lt;p>Here are some steps to getting behat going on Codeship so you get full CI even of Angular.&lt;/p>
+&lt;p>This is all based off of &lt;a href="https://github.com/laracasts/Behat-Laravel-Extension">https://github.com/laracasts/Behat-Laravel-Extension&lt;/a>&lt;/p>
+&lt;h2 id="behatyml">Behat.yml&lt;/h2>
+&lt;p>behat.yml looks like this for me&lt;/p>
+&lt;pre>&lt;code>default:
+extensions:
+Laracasts\Behat:
+# env_path: .env.behat
+Behat\MinkExtension:
+base_url: https://microservicehub.dev:44300
+default_session: laravel
+laravel: ~
+selenium2:
+wd_host: &amp;quot;http://192.168.10.1:4444/wd/hub&amp;quot;
+browser_name: chrome
+codeship:
+extensions:
+Laracasts\Behat:
+env_path: .env.codeship
+Behat\MinkExtension:
+base_url: http://localhost:8080
+default_session: laravel
+laravel: ~
+selenium2:
+wd_host: &amp;quot;http://localhost:4444/wd/hub&amp;quot;
+browser_name: chrome
+&lt;/code>&lt;/pre>&lt;p>This is so I can run it locally as needed. The Codeship profile will then call in the &lt;code>.env.codeship&lt;/code> and update the url as needed.&lt;/p>
+&lt;h2 id="envcodeship">.env.codeship&lt;/h2>
+&lt;p>This file has&lt;/p>
+&lt;pre>&lt;code>APP_ENV=testing
+APP_DEBUG=true
+APP_KEY=f5edkkfijPDKQXPLHyYNDhiNZZrpT0Qd
+DB_HOST=localhost
+DB_DATABASE=test
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+QUEUE_DRIVER=sync
+MAIL_DRIVER=smtp
+MAIL_HOST=mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+&lt;/code>&lt;/pre>&lt;h2 id="build-script-for-codeship">Build Script for Codeship&lt;/h2>
+&lt;p>Using the code they offer on their site I add that to my projects folder under tests/selenium_server.sh it is this file &lt;a href="https://github.com/codeship/scripts/blob/master/packages/selenium_server.sh">here&lt;/a>&lt;/p>
+&lt;p>Maybe some do not need to be there?&lt;/p>
+&lt;h2 id="codeship-test-settings">Codeship Test Settings&lt;/h2>
+&lt;p>Now in the settings I end up with inside the CodeShip UI are as follows&lt;/p>
+&lt;p>Here for example is the URL for my project to find these settings.&lt;/p>
+&lt;p>&lt;code>https://codeship.com/projects/8844/configure_tests&lt;/code>&lt;/p>
+&lt;p>Under Setup Commands&lt;/p>
+&lt;pre>&lt;code># Set php version through phpenv. 5.3, 5.4 and 5.5 available
+phpenv local 5.5
+# Install dependencies through Composer
+composer config -g github-oauth.github.com foobar
+touch .env
+echo &amp;quot;APP_ENV='testing'&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;DB_DATABASE='test'&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;MYSQL_TESTING_URL='localhost'&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;APP_KEY=DHMbPIbNLd1jI0ZEZZSxRFOHj03SU4P5&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;CACHE_DRIVER=file&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;SESSION_DRIVER=file&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;QUEUE_DRIVER=sync&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;MAIL_DRIVER=smtp&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;MAIL_HOST=smtp.mailgun.org&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;MAIL_PORT=2525&amp;quot; &amp;gt;&amp;gt; .env
+composer install --dev
+php artisan migrate
+php artisan db:seed
+nohup bash -c &amp;quot;sh tests/selenium_server.sh &amp;amp;&amp;quot; &amp;amp;&amp;amp; sleep 9
+cd public &amp;amp;&amp;amp; nohup bash -c &amp;quot;php -S localhost:8080 &amp;amp;&amp;quot; &amp;amp;&amp;amp; sleep 9
+cd ../
+&lt;/code>&lt;/pre>&lt;p>Under Configure Test&lt;/p>
+&lt;pre>&lt;code>DB_DATABASE=test phpunit
+php artisan migrate
+php artisan db:seed
+vendor/bin/behat --profile=codeship --stop-on-failure
+&lt;/code>&lt;/pre>&lt;p>I run the migration one more time to get it ready for behat&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/2uadht5426s40p8/behat_codeship.png?dl=0" alt="behat">&lt;/p></description></item><item><title>Using Faker and ENV vars with Behat</title><link>https://alfrednutile.info/posts/140/</link><pubDate>Fri, 27 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/140/</guid><description>&lt;p>&lt;strong>UPDATED April 01 2015&lt;/strong>&lt;/p>
+&lt;p>Realized I needed more &amp;ldquo;tokens&amp;rdquo; and I was already using my .env file for info for Seeding and for our different servers. So the Trait now pulls those in.&lt;/p>
+&lt;p>This is a simple trait to use in your FeatureContext file to then get the power of &lt;a href="https://packagist.org/packages/fzaninotto/faker">Faker&lt;/a> in your Behat tests&lt;/p>
+&lt;h2 id="the-trait">The Trait&lt;/h2>
+&lt;pre>&lt;code>&amp;lt;?php
 trait TokenFaker {
 public function checkForTokens($arg)
 {
@@ -70,13 +617,229 @@ protected function getEnvTokensKeys()
 return array_keys($_ENV);
 }
 }
-The Feature Context In my Feature Context I setup Faker and instantiate it and use the trait</description></item><item><title>Saucelabs PHP Client</title><link>https://alfrednutile.info/posts/96/</link><pubDate>Fri, 11 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/96/</guid><description>It is built off of the php-github-api client seen here by KnpLabs . They made a really nice client that uses Guzzle and an AbstractionAPI to make it easy to code out different classes around the API endpoints.
-Anyways I have had such a good experience with github one I figured it would be nice to have one for the Saucelabs work I do.
-https://github.com/alnutile/saucelabs_client more features will be added shortly as it is being used in a couple of decent size projects.</description></item><item><title>Behat Seed Repo</title><link>https://alfrednutile.info/posts/77/</link><pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/77/</guid><description>The aim of this repo is to make it super easy to get going with behat. All you will need to get outside of this repo is
-Selenium Jar file download Composer Saucelabs Account (Optional) After you install and setup those items you will be able to run tests locally or via Saucelabs and have a base setup to add new/custom steps as needed.
-Selenium Easy This is the one jar file you need</description></item><item><title>Behat and bad HTML</title><link>https://alfrednutile.info/posts/38/</link><pubDate>Sat, 11 Jan 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/38/</guid><description>Some of the sites we are testing have HTML that has multiple ID that are the same. Or elements that do not really have enough info to get a class, name, label or ID out of.
-This has been a challenge and there are a few custom steps made to help get through this
- Switching to an Iframe with no name or id
-This was hard since the default was to target the ID of the frame or name.</description></item><item><title>Behat Mink and using Javascript / jQuery to test attributes</title><link>https://alfrednutile.info/posts/37/</link><pubDate>Mon, 06 Jan 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/37/</guid><description>Using Behat and Mink I had to make a test that would verify the height of content on the screen compared to the rest of the window size. For example it had to be 30% of the screen or more.
-You can see the code below.
-It allows the user to pass in the expected height % and the element they would like to target. I will optmize it to allow more options than just ID.</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;h2 id="the-feature-context">The Feature Context&lt;/h2>
+&lt;p>In my Feature Context I setup Faker and instantiate it and use the trait&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+use Faker\Factory as Faker;
+class BaseContext extends MinkContext {
+use TokenFaker;
+public function __construct($parameters = [])
+{
+$this-&amp;gt;faker = Faker::create();
+}
+&lt;/code>&lt;/pre>&lt;h2 id="the-step">The Step&lt;/h2>
+&lt;p>Here is one example but you could pass all your args through this&lt;/p>
+&lt;pre>&lt;code> /**
+* @Given /^I have the payload:$/
+*/
+public function iHaveThePayload(PyStringNode $requestPayload)
+{
+$this-&amp;gt;requestPayload = $this-&amp;gt;checkForTokens($requestPayload);
+}
+&lt;/code>&lt;/pre>&lt;h2 id="and-the-scenario">And The Scenario&lt;/h2>
+&lt;pre>&lt;code> Scenario: Can Create a Person
+Given I have the payload:
+&amp;quot;&amp;quot;&amp;quot;
+{ &amp;quot;data&amp;quot;:
+{
+&amp;quot;email&amp;quot;: &amp;quot;TOKEN_EMAIL&amp;quot;,
+&amp;quot;roles&amp;quot;: [
+{ &amp;quot;id&amp;quot;: &amp;quot;role-manager&amp;quot;, &amp;quot;name&amp;quot;: &amp;quot;Manager&amp;quot; }
+]
+}
+}
+&amp;quot;&amp;quot;&amp;quot;
+Scenario: How do I get a token
+Given I have the payload:
+&amp;quot;&amp;quot;&amp;quot;
+{
+&amp;quot;password&amp;quot;: &amp;quot;ADMIN_PASS&amp;quot;,
+&amp;quot;grant_type&amp;quot;: &amp;quot;password&amp;quot;,
+&amp;quot;client_id&amp;quot;: &amp;quot;CLIENT_ID&amp;quot;,
+&amp;quot;client_secret&amp;quot;: &amp;quot;CLIENT_SECRET&amp;quot;,
+&amp;quot;username&amp;quot;: &amp;quot;ADMIN_USERNAME&amp;quot;
+}
+&amp;quot;&amp;quot;&amp;quot;
+And I request &amp;quot;POST /oauth/access_token&amp;quot;
+Then I get a &amp;quot;200&amp;quot; response
+&lt;/code>&lt;/pre>&lt;p>I would like to also save the state of the token made so I can check that the update/post really worked etc. But for now this makes it super easy to not reseed with every step and not worry about duplicate ids.&lt;/p></description></item><item><title>Saucelabs PHP Client</title><link>https://alfrednutile.info/posts/96/</link><pubDate>Fri, 11 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/96/</guid><description>&lt;p>It is built off of the php-github-api client seen &lt;a href="https://github.com/KnpLabs/php-github-api">here&lt;/a> by KnpLabs . They made a really nice client that uses Guzzle and an AbstractionAPI to make it easy to code out different classes around the API endpoints.&lt;/p>
+&lt;p>Anyways I have had such a good experience with github one I figured it would be nice to have one for the Saucelabs work I do.&lt;/p>
+&lt;p>&lt;a href="https://github.com/alnutile/saucelabs_client">https://github.com/alnutile/saucelabs_client&lt;/a> more features will be added shortly as it is being used in a couple of decent size projects.&lt;/p>
+&lt;p>There are plenty of Tests to show how to use it.&lt;/p></description></item><item><title>Behat Seed Repo</title><link>https://alfrednutile.info/posts/77/</link><pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/77/</guid><description>&lt;p>The aim of this repo is to make it super easy to get going with behat. All you will need to get outside of this repo is&lt;/p>
+&lt;ul>
+&lt;li>Selenium Jar file download&lt;/li>
+&lt;li>Composer&lt;/li>
+&lt;li>Saucelabs Account (Optional)&lt;/li>
+&lt;/ul>
+&lt;p>After you install and setup those items you will be able to run tests locally or via Saucelabs and have a base setup to add new/custom steps as needed.&lt;/p>
+&lt;h3 id="selenium-easy">Selenium Easy&lt;/h3>
+&lt;p>This is the one jar file you need&lt;/p>
+&lt;p>&lt;a href="https://code.google.com/p/selenium/downloads/detail?name=selenium-server-standalone-2.39.0.jar&amp;amp;can=2&amp;amp;q=">https://code.google.com/p/selenium/downloads/detail?name=selenium-server-standalone-2.39.0.jar&amp;amp;can=2&amp;amp;q=&lt;/a>&lt;/p>
+&lt;p>The trick though is getting Java for your OS. For me, a Mac, I had to go here &lt;a href="http://support.apple.com/kb/DL1572">http://support.apple.com/kb/DL1572&lt;/a> ie avoid Oracles horrible download process at all costs. Linux is easy and Windows I am not sure about.&lt;/p>
+&lt;p>Once you have Java and Selenium open a terminal and go to the folder you will be keeping selenium and type&lt;/p>
+&lt;pre>&lt;code>java -jar selenium-server-standalone-2.39.0.jar
+&lt;/code>&lt;/pre>&lt;p>This will output a lot of info to the screen and will remain running as you work. This line shows it is running&lt;/p>
+&lt;pre>&lt;code>14:21:08.171 INFO - Started SocketListener on 0.0.0.0:4444
+&lt;/code>&lt;/pre>&lt;p>So now we can connect to that port later on.&lt;/p>
+&lt;h3 id="composer">Composer&lt;/h3>
+&lt;p>This is a great way to manage PHP dependencies and just enjoy the numerous libraries out there.&lt;/p>
+&lt;p>The install is pretty easy just type&lt;/p>
+&lt;pre>&lt;code>$ php composer.phar install
+&lt;/code>&lt;/pre>&lt;p>And then move that into /use/bin on your machine so you can now run it from anywhere. (this may take sudo powers)&lt;/p>
+&lt;h3 id="behat-install">Behat Install&lt;/h3>
+&lt;p>Finally download the repo &lt;a href="https://github.com/alnutile/behat-seed">https://github.com/alnutile/behat-seed&lt;/a>
+to a folder that you will store tests for a site or many sites.&lt;/p>
+&lt;p>For example&lt;/p>
+&lt;pre>&lt;code>cd /opt
+git clone https://github.com/alnutile/behat-seed
+&lt;/code>&lt;/pre>&lt;p>Then cd into behat-seed and lets start the composer install&lt;/p>
+&lt;pre>&lt;code>cd behat-seed
+composer install --prefer-dist
+&lt;/code>&lt;/pre>&lt;p>Comeback in 20 minutes (or less hopefully)&lt;/p>
+&lt;p>After that you should be able to run&lt;/p>
+&lt;pre>&lt;code>bin/behat --help
+&lt;/code>&lt;/pre>&lt;h4 id="layout-of-files-and-folders">Layout of files and folders&lt;/h4>
+&lt;p>This download and build of composer will leave you with this layout.&lt;/p>
+&lt;hr>
+&lt;pre>&lt;code>/opt/behat-seed
+|-tests
+|--behat.yml
+|--features
+| --bootstrap
+| FeatureContext.php
+| wikipedia.feature
+| wikipedia_tokens.feature
+|-files
+|-vendor
+|-composer.json
+|-composer.lock
+|-bin
+| behat
+|-dummy-site
+&lt;/code>&lt;/pre>&lt;p>Tests will be where we store the behat.yml file and tests files. We will explore that more in a moment.&lt;/p>
+&lt;p>Tests has a folder called features. In here we store our actual tests called *.feature. Example wikipedia.feature.&lt;/p>
+&lt;p>Files is for storing files for a vanilla behat example.&lt;/p>
+&lt;p>Vendor is for composer as well as composer.lock and composer.json&lt;/p>
+&lt;p>Bin which stores behat only for now (really a symlink to the right area).&lt;/p>
+&lt;p>Finally dummy-site to run a php server for use to quickly test against.&lt;/p>
+&lt;h4 id="exploring-our-configuration">Exploring our configuration&lt;/h4>
+&lt;p>To start we are going to look at behat.yml so open up that file and you should see this in your editor. Keep in mind it is YAML format. So if you get errors then look for tabs and other formats that break YAML. Stick to spaces.&lt;/p>
+&lt;p>Looking at the file&lt;/p>
+&lt;pre>&lt;code>default:
+paths:
+features: /opt/behat-seed/tests/features
+bootstrap: /opt/behat-seed/tests/features/bootstrap
+formatter:
+name: pretty
+extensions:
+OrangeDigital\BusinessSelectorExtension\Extension:
+urlFilePath: tests/urls.yml
+selectorFilePath: tests/selectors.yml
+assetPath: path
+timeout: 30
+contexts:
+UIBusinessSelector: ~
+Behat\MinkExtension\Extension:
+default_session: selenium2
+goutte: null
+selenium2: ~
+base_url: 'http://localhost:8080'
+browser_name: safari
+saucelabs:
+extensions:
+Behat\MinkExtension\Extension:
+default_session: selenium2
+base_url: 'http://en.wikipedia.org/wiki/'
+selenium2:
+browser: chrome
+wd_host: 'behat-seed:fc5b688a-f27c-4c73-a914-eb5d7e2cdf1e@ondemand.saucelabs.com/wd/hub'
+capabilities:
+platform: 'Windows 2012'
+browser: chrome
+version: '26'
+name: 'Behat See'
+command-timeout: '600'
+max-duration: '600'
+&lt;/code>&lt;/pre>&lt;p>We will cover the details shortly.&lt;/p>
+&lt;h4 id="running-the-local-server">Running the local server&lt;/h4>
+&lt;p>I included a simple php server and some test pages to try this out against
+To get it going&lt;/p>
+&lt;pre>&lt;code>cd dummy-site
+php -S 127.0.0.1:8080
+&lt;/code>&lt;/pre>&lt;p>And you now can visit that url to see a site with numerous things to click and move.&lt;/p>
+&lt;h2 id="now-what">Now What&lt;/h2>
+&lt;p>With all of this setup, selenium running then you can just run, for example, this command&lt;/p>
+&lt;pre>&lt;code>bin/behat --config tests/behat.yml --profile saucelabs tests/features/local_tokens.feature
+&lt;/code>&lt;/pre>&lt;p>To see tokens in action. Or&lt;/p>
+&lt;pre>&lt;code>bin/behat --config tests/behat.yml --profile saucelabs tests/features/local.feature
+&lt;/code>&lt;/pre>&lt;p>To see basic behat/mink Or to see it run but where? On Saucelabs.&lt;/p>
+&lt;pre>&lt;code>bin/behat --config tests/behat.yml --profile saucelabs tests/features/wikipedia.feature
+&lt;/code>&lt;/pre>&lt;p>Even just testing linux/Mac so you can see that level of work.&lt;/p>
+&lt;pre>&lt;code>bin/behat --config tests/behat.yml tests/features/pure_behat.feature
+&lt;/code>&lt;/pre>&lt;h2 id="roadmap">RoadMap&lt;/h2>
+&lt;ul>
+&lt;li>Some more steps included.&lt;/li>
+&lt;li>Base Vagrant install file&lt;/li>
+&lt;/ul>
+&lt;h2 id="links">Links&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>OrangeDigital &lt;a href="https://github.com/orangedigital/business-selector-extension">https://github.com/orangedigital/business-selector-extension&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Saucelabs &lt;a href="https://saucelabs.com/">https://saucelabs.com/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Some Code From&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/philsturgeon/build-apis-you-wont-hate/blob/master/chapter8/app/tests/behat/features/bootstrap/FeatureContext.php">build apis you wont hate&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Slim PHP &lt;a href="http://www.slimframework.com/">http://www.slimframework.com/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul></description></item><item><title>Behat and bad HTML</title><link>https://alfrednutile.info/posts/38/</link><pubDate>Sat, 11 Jan 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/38/</guid><description>&lt;p>Some of the sites we are testing have HTML that has multiple ID that are the same. Or elements that do not really have enough info to get a class, name, label or ID out of.&lt;/p>
+&lt;p>This has been a challenge and there are a few custom steps made to help get through this&lt;/p>
+&lt;p> &lt;/p>
+&lt;hr />
+&lt;h2>Switching to an Iframe with no name or id&lt;/h2>
+&lt;p>This was hard since the default was to target the ID of the frame or name.&lt;/p>
+&lt;p>Thanks to the help of this thread &lt;a href="https://groups.google.com/forum/#!topic/behat/z0z3DscjzhU" target="_blank">https://groups.google.com/forum/#!topic/behat/z0z3DscjzhU&lt;/a> I was able to pull it off.&lt;/p>
+&lt;p>First, using jQuery and JavaScript I enable the user to target an Iframe by finding the ID of the div that surrounds it. Second I give the frame a name / id to target.&lt;/p>
+&lt;p>Then I the user can choose one of or other custom steps noted below to switch to the frame. The code still needs better error checking e.g. if the element does not exist.&lt;/p>
+&lt;p>&lt;script src="https://gist.github.com/alnutile/8365567.js">&lt;/script>&lt;/p>
+&lt;hr />
+&lt;h2>Finding a Submit button on the page when there are 2 with the same name and ID&lt;/h2>
+&lt;p>This snippet allows the user to target a specific element on the page by adding a number. This was done a couple of months ago and at this point I think we have a better way to do it. I will show that below.&lt;/p>
+&lt;p>&lt;script src="https://gist.github.com/alnutile/8365581.js">&lt;/script>&lt;/p>
+&lt;hr />
+&lt;h2>Clicking Submit on a form with no button&lt;/h2>
+&lt;p>There are a few ways to do this. So far this one seem to be working best.&lt;/p>
+&lt;p>&lt;script src="https://gist.github.com/alnutile/8365610.js">&lt;/script>&lt;/p>
+&lt;p>Of course if the form does not have an ID we would be in trouble.&lt;/p>
+&lt;hr />
+&lt;h2>Switching to a popup window that has no name&lt;/h2>
+&lt;p>Finally this was the toughest one. We had to use a different branch of Mink to do this. This thread was key to getting this to work &lt;a href="https://groups.google.com/forum/#!topic/behat/QNhOuGHKEWI" target="_blank">https://groups.google.com/forum/#!topic/behat/QNhOuGHKEWI&lt;/a>&lt;/p>
+&lt;p>What we ended up with was basically from that thread&lt;/p>
+&lt;p>&lt;script src="https://gist.github.com/alnutile/8365741.js">&lt;/script>&lt;/p>
+&lt;hr />
+&lt;h2>&lt;span style="line-height: 1.6em;">Dealing with Alerts&lt;/span>&lt;/h2>
+&lt;p>Dealing with built in browser alerts was found in those threads as well.&lt;/p>
+&lt;p>I then wrote a helper that I use in other methods to do this.&lt;/p>
+&lt;p>Since all the steps are called from a web form they user can choose to "Click and Alert" as needed.&lt;/p>
+&lt;p> &lt;/p>
+&lt;p> &lt;/p>
+&lt;p> &lt;/p>
+&lt;p> &lt;/p>
+&lt;p>&lt;script src="https://gist.github.com/alnutile/8365634.js">&lt;/script>&lt;/p>
+&lt;p> &lt;/p>
+&lt;h2>Comparing the Size of an element to the Window&lt;/h2>
+&lt;p>Lastly (really this time) we have to check the size of an element to make sure it meets requirements.&lt;/p>
+&lt;p>This custom steps allows the user to enter a class to get the height of and enter the % it should be of the window.&lt;/p>
+&lt;script src="https://gist.github.com/alnutile/8365794.js">&lt;/script>
+&lt;h2>UPDATE &lt;/h2>
+&lt;p>Noted in comments this might help as well&lt;/p>
+&lt;p>&lt;script src="https://gist.github.com/alnutile/4a112a99c967adffe88b.js">&lt;/script>&lt;/p></description></item><item><title>Behat Mink and using Javascript / jQuery to test attributes</title><link>https://alfrednutile.info/posts/37/</link><pubDate>Mon, 06 Jan 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/37/</guid><description>&lt;p>Using Behat and Mink I had to make a test that would verify the height of content on the screen compared to the rest of the window size. For example it had to be 30% of the screen or more.&lt;/p>
+&lt;p>You can see the code below.&lt;/p>
+&lt;p>It allows the user to pass in the expected height % and the element they would like to target. I will optmize it to allow more options than just ID.&lt;/p>
+&lt;script src="https://gist.github.com/alnutile/8289033.js">&lt;/script></description></item></channel></rss>

@@ -1,2 +1,64 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ironfunctions on Alfred Nutile</title><link>https://alfrednutile.info/tags/ironfunctions/</link><description>Recent content in ironfunctions on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 12 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/ironfunctions/index.xml" rel="self" type="application/rss+xml"/><item><title>IronFunctions and PHP</title><link>https://alfrednutile.info/posts/213/</link><pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/213/</guid><description>A colleague of mine Dave Hall poing out IronFunctions. And being in the pursuit of serverless options especially ones that even have examples of PHP I had to give it a try. This post is a note2self in that the intro here has some bits that need fixing BUT I think it is close and I hope to add more updates here about the tool.
-All the steps below will only work once you take on the initial hello world here.</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ironfunctions on Alfred Nutile</title><link>https://alfrednutile.info/tags/ironfunctions/</link><description>Recent content in ironfunctions on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 12 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/ironfunctions/index.xml" rel="self" type="application/rss+xml"/><item><title>IronFunctions and PHP</title><link>https://alfrednutile.info/posts/213/</link><pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/213/</guid><description>&lt;p>A colleague of mine &lt;a href="https://twitter.com/skwashd">Dave Hall&lt;/a> poing out &lt;a href="https://github.com/iron-io/functions">IronFunctions&lt;/a>. And being in the pursuit of serverless options especially ones that even have examples of PHP I had to give it a try. This post is a note2self in that the intro &lt;a href="https://github.com/iron-io/functions/tree/master/examples/hello/php">here&lt;/a> has some bits that need fixing BUT I think it is close and I hope to add more updates here about the tool.&lt;/p>
+&lt;p>All the steps below will only work once you take on the initial hello world &lt;a href="https://github.com/iron-io/functions/blob/master/README.md">here&lt;/a>. After that you have the &lt;code>fn&lt;/code> cli tool installed and a running local iron-functions server.&lt;/p>
+&lt;p>For one I needed to apply each patch seen &lt;a href="https://github.com/iron-io/functions/pull/444/files">here&lt;/a>&lt;/p>
+&lt;p>Once I had all that in place I re-reran the &lt;code>fn&lt;/code> install command from the folder where I download the &lt;code>iron-io/functions&lt;/code> repo into&lt;/p>
+&lt;pre>&lt;code>cd ../functions
+curl -LSs https://goo.gl/VZrL8t | sh
+&lt;/code>&lt;/pre>&lt;p>Then I restarted the service&lt;/p>
+&lt;pre>&lt;code>docker run --rm -it --name functions -v ${PWD}/data:/app/data -v /var/run/docker.sock:/var/run/docker.sock -p 8080:8080 iron/functions
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>btw you need to have Docker working on your machine. This is so easy now that, for example &lt;a href="https://docs.docker.com/docker-for-mac/install/">mac&lt;/a>, it should be a gui install.&lt;/p>
+&lt;/blockquote>
+&lt;p>Ok now back to my example project&lt;/p>
+&lt;pre>&lt;code>cd ../example_php
+&lt;/code>&lt;/pre>&lt;p>In here I have several files since the above fix&lt;/p>
+&lt;pre>&lt;code>worker.php
+func.yml
+Dockerfile
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>the cat hello.payload.php in the example docs did not work so I used curl and POST instead but this is not what I want to do
+I want to test this from the CLI first so will come back to that later&lt;/p>
+&lt;/blockquote>
+&lt;p>This folder has a &lt;code>composer.json&lt;/code> file. Just run &lt;code>composer init&lt;/code> since it just needs to be a basic install of PHP.&lt;/p>
+&lt;p>&lt;strong>worker.php&lt;/strong>&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+require 'vendor/autoload.php';
+stream_set_blocking(STDIN, 0);
+$payload = json_decode(file_get_contents(&amp;quot;php://stdin&amp;quot;), true);
+if (isset($payload['name'])) {
+var_dump($payload);
+echo &amp;quot;Hello 2 &amp;quot;, $payload['name'],&amp;quot;!\n\n&amp;quot;;
+} else {
+var_dump($payload);
+echo &amp;quot;Hello World 2!\n\n&amp;quot;;
+}
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>func.yml&lt;/strong>&lt;/p>
+&lt;pre>&lt;code>name: alnutile/hello
+version: 0.0.7
+runtime: php
+entrypoint: ./func
+build:
+- docker run --rm -v &amp;quot;$PWD&amp;quot;:/worker -w /worker iron/php:dev composer install
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>Dockerfile&lt;/strong>&lt;/p>
+&lt;pre>&lt;code>FROM iron/php
+WORKDIR /app
+ADD . /app
+ENTRYPOINT [&amp;quot;php&amp;quot;, &amp;quot;worker.php&amp;quot;]
+&lt;/code>&lt;/pre>&lt;p>Then as the docs note &lt;a href="https://github.com/iron-io/functions/tree/master/examples/hello/php">https://github.com/iron-io/functions/tree/master/examples/hello/php&lt;/a> I do all the install steps.&lt;/p>
+&lt;p>Once those are done ran &lt;code>curl&lt;/code> to see it work:&lt;/p>
+&lt;pre>&lt;code>&amp;gt;curl -X POST http://localhost:8080/r/phpapp1/hello -d '{ &amp;quot;name&amp;quot;: &amp;quot;bar&amp;quot; }'
+&lt;/code>&lt;/pre>
+&lt;p>Which results in:&lt;/p>
+&lt;pre>&lt;code>array(1) {
+[&amp;quot;name&amp;quot;]=&amp;gt;
+string(3) &amp;quot;bar&amp;quot;
+}
+Hello 2 bar!
+&lt;/code>&lt;/pre>&lt;p>For updates I added one more file &lt;code>update.sh&lt;/code>&lt;/p>
+&lt;pre>&lt;code>#!/bin/sh
+# update a function with a new version and push it
+fn bump &amp;amp;&amp;amp; fn build &amp;amp;&amp;amp; fn push
+# then update the route
+fn routes update phpapp1 /hello
+&lt;/code>&lt;/pre>&lt;p>just to save some time there.&lt;/p>
+&lt;p>More soon on using this with Lumen and other options. I tried this but some PHP items are missing on the Alpine docker image to make this work.&lt;/p></description></item></channel></rss>

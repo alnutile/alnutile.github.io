@@ -1,11 +1,48 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>linux on Alfred Nutile</title><link>https://alfrednutile.info/tags/linux/</link><description>Recent content in linux on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 25 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows Dev Box Try 3 2020</title><link>https://alfrednutile.info/posts/267/</link><pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/267/</guid><description>Yes this is try number 3. See here for the first 2 goes at it.
-With WSL2 out and a great laptop I wanted to give this another try.
-MariaDB Even though the install is super simple see https://alfrednutile.info/posts/267
-I still end up having to do:
-$ sudo mysql -u root # I had to use &amp;quot;sudo&amp;quot; since is new installation
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>linux on Alfred Nutile</title><link>https://alfrednutile.info/tags/linux/</link><description>Recent content in linux on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 25 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows Dev Box Try 3 2020</title><link>https://alfrednutile.info/posts/267/</link><pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/267/</guid><description>&lt;p>Yes this is try number 3. See &lt;a href="https://alfrednutile.info/posts/247">here&lt;/a> for the first 2 goes at it.&lt;/p>
+&lt;p>With WSL2 out and a great laptop I wanted to give this another try.&lt;/p>
+&lt;h2 id="mariadb">MariaDB&lt;/h2>
+&lt;p>Even though the install is super simple see &lt;a href="https://alfrednutile.info/posts/267/">https://alfrednutile.info/posts/267&lt;/a>&lt;/p>
+&lt;p>I still end up having to do:&lt;/p>
+&lt;pre>&lt;code>$ sudo mysql -u root # I had to use &amp;quot;sudo&amp;quot; since is new installation
 mysql&amp;gt; USE mysql;
 mysql&amp;gt; UPDATE user SET plugin='mysql_native_password' WHERE User='root';
 mysql&amp;gt; FLUSH PRIVILEGES;
 mysql&amp;gt; exit;
 $ service mysql restart
-To allow me to then use this command, for example maraidb -uroot -proot otherwise I have &amp;ldquo;Error connecting on localhost&amp;rdquo; type errors.</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>To allow me to then use this command, for example &lt;code>maraidb -uroot -proot&lt;/code> otherwise I have &amp;ldquo;Error connecting on localhost&amp;rdquo; type errors.&lt;/p>
+&lt;p>If using MySQL this worked really well &lt;a href="https://phoenixnap.com/kb/access-denied-for-user-root-localhost">here&lt;/a>&lt;/p>
+&lt;h2 id="xdebug">Xdebug&lt;/h2>
+&lt;p>Using my previous notes in the above post and &lt;a href="https://gcompagnon.github.io/wsl2/xdebug/vscode/php-fpm/2019/09/17/WSL2_php_VSCode_Xdebug.html">https://gcompagnon.github.io/wsl2/xdebug/vscode/php-fpm/2019/09/17/WSL2_php_VSCode_Xdebug.html&lt;/a>&lt;/p>
+&lt;p>I removed the reference to the host:&lt;/p>
+&lt;pre>&lt;code>[xdebug]
+xdebug.remote_enable=1
+xdebug.remote_autostart=1
+xdebug.remote_handler=dbgp
+xdebug.remote_port=9009
+xdebug.remote_log = /var/log/xdebug.log
+&lt;/code>&lt;/pre>&lt;p>in Visual Code my launch.json ended up looking like this:&lt;/p>
+&lt;pre>&lt;code>{
+// Use IntelliSense to learn about possible attributes.
+// Hover to view descriptions of existing attributes.
+// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+&amp;quot;version&amp;quot;: &amp;quot;0.2.0&amp;quot;,
+&amp;quot;configurations&amp;quot;: [
+{
+&amp;quot;name&amp;quot;: &amp;quot;Listen for XDebug&amp;quot;,
+&amp;quot;type&amp;quot;: &amp;quot;php&amp;quot;,
+&amp;quot;request&amp;quot;: &amp;quot;launch&amp;quot;,
+&amp;quot;hostname&amp;quot;: &amp;quot;0.0.0.0&amp;quot;,
+&amp;quot;port&amp;quot;: 9009
+},
+{
+&amp;quot;name&amp;quot;: &amp;quot;Launch currently open script&amp;quot;,
+&amp;quot;type&amp;quot;: &amp;quot;php&amp;quot;,
+&amp;quot;request&amp;quot;: &amp;quot;launch&amp;quot;,
+&amp;quot;program&amp;quot;: &amp;quot;${file}&amp;quot;,
+&amp;quot;hostname&amp;quot;: &amp;quot;0.0.0.0&amp;quot;,
+&amp;quot;cwd&amp;quot;: &amp;quot;${fileDirname}&amp;quot;,
+&amp;quot;port&amp;quot;: 9009
+}
+]
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>

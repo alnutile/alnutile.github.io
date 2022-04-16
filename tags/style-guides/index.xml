@@ -1,1 +1,70 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>style guides on Alfred Nutile</title><link>https://alfrednutile.info/tags/style-guides/</link><description>Recent content in style guides on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 22 Sep 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/style-guides/index.xml" rel="self" type="application/rss+xml"/><item><title>Design Guide - Controllers, Services and IOC</title><link>https://alfrednutile.info/posts/107/</link><pubDate>Mon, 22 Sep 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/107/</guid><description>Design Guides Controllers - contains application logic and passing user input data to service Services - The middleware between controller and repository. Gather data from controller, performs validation and business logic, and calling repositories for data manipulation. Repositories - layer for interaction with models and performing DB operations Models - common laravel model files with relationships defined In and Out Burgers Between the user&amp;rsquo;s request and the response is the application.</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>style guides on Alfred Nutile</title><link>https://alfrednutile.info/tags/style-guides/</link><description>Recent content in style guides on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 22 Sep 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/style-guides/index.xml" rel="self" type="application/rss+xml"/><item><title>Design Guide - Controllers, Services and IOC</title><link>https://alfrednutile.info/posts/107/</link><pubDate>Mon, 22 Sep 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/107/</guid><description>&lt;h2 id="design-guides">Design Guides&lt;/h2>
+&lt;ul>
+&lt;li>Controllers - contains application logic and passing user input data to service&lt;/li>
+&lt;li>Services - The middleware between controller and repository. Gather data from controller, performs validation and business logic, and calling repositories for data manipulation.&lt;/li>
+&lt;li>Repositories - layer for interaction with models and performing DB operations&lt;/li>
+&lt;li>Models - common laravel model files with relationships defined&lt;/li>
+&lt;/ul>
+&lt;h1 id="in-and-out-burgers">In and Out Burgers&lt;/h1>
+&lt;p>Between the user&amp;rsquo;s request and the response is the application. The above design guide not only gives us a consistent, flexible way to manage a requests and responses from a web user but then leads us into creating applications that can manage consul request as well.&lt;/p>
+&lt;p>&lt;img src="https://docs.google.com/drawings/d/1D601St_IuaZ8FKW2eXQYqE2vHqZxRRLtmB8eGpQw8Aw/pub?w=761&amp;amp;h=296" alt="in and out">&lt;/p>
+&lt;p>Starting with the book by the Author of Laravel, Tyler Otwell&lt;/p>
+&lt;p>&lt;a href="https://leanpub.com/laravel">book laravel&lt;/a>&lt;/p>
+&lt;p>The great thing about this book is that it is not really about Laravel but about SOLID design principles&lt;/p>
+&lt;ul>
+&lt;li>Single responsibility principle&lt;/li>
+&lt;li>Open/closed principle&lt;/li>
+&lt;li>Liskov substitution principle&lt;/li>
+&lt;li>Interface segregation principle&lt;/li>
+&lt;li>Dependency inversion principle&lt;/li>
+&lt;/ul>
+&lt;p>[wikipedia solid](&lt;a href="http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)">http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)&lt;/a>&lt;/p>
+&lt;h1 id="change-to-scope-does-not-cause-bad-code-bad-design-patterns-cause-bad-code">Change to scope does not cause bad code, bad design patterns cause bad code.&lt;/h1>
+&lt;p>&lt;em>Scope changes and that is fine.&lt;/em> This is key to the success of an application. It must change with the vision of the Product owner as deliverables bring to light what could not be seen on paper, mock ups, whiteboards etc.&lt;/p>
+&lt;p>If we follow the Solid Design Principles then &amp;ldquo;change is okay&amp;rdquo; and easy.&lt;/p>
+&lt;h1 id="back-to-the-book-laravel-from-apprentice-to-artisan">Back to the book &amp;ldquo;Laravel: from Apprentice to Artisan&lt;/h1>
+&lt;p>So Tyler Otwell goes over each principle showing them in context of Laravel.&lt;/p>
+&lt;p>Here are some key design patters to grasp&lt;/p>
+&lt;h2 id="ioc">IOC&lt;/h2>
+&lt;p>Inversion of control is fundamental to a flexible application that meets the 5 goals above. By &amp;ldquo;coding to an interface&amp;rdquo; we can not only work faster as a team but adapt to change easily.&lt;/p>
+&lt;p>How to get here?&lt;/p>
+&lt;p>Other than reading the book consider this common example.&lt;/p>
+&lt;p>&amp;ldquo;Build A Contract&amp;rdquo; Taylor Otwell. Laravel: From Apprentice To Artisan (Kindle Location 75 to 185). leanpub.com.&lt;/p>
+&lt;p>By hooking an Interface into the Service Provider we can attach any implementation we want to that interface.&lt;/p>
+&lt;p>This means someone can be working on one part of the app talking to another part that is not even done yet cause they can mock out the responses based on an Interface.&lt;/p>
+&lt;p>Using&lt;/p>
+&lt;pre>&lt;code>php artisan make:provider BillingInterface
+&lt;/code>&lt;/pre>&lt;p>You will easily setup the class to start with in the app/Providers folder&lt;/p>
+&lt;p>Laravel 5 is taking this to the next level with &amp;ldquo;Contracts/Interfaces&amp;rdquo; as a big part of the framework.&lt;/p>
+&lt;p>&lt;a href="https://laracasts.com/series/whats-new-in-laravel-5/episodes/7">laracasts contracts&lt;/a>&lt;/p>
+&lt;p>This also means we can easily swap out classes as needed. The book goes over Billing we have another example Queue. We are using Beanstalkd to work locally and Amazon SQS to work on production. This is all done via such design patters. Interfaces/Contracts around talking to a queue.&lt;/p>
+&lt;h1 id="controllers">Controllers&lt;/h1>
+&lt;p>A request comes in and it sends it to the right service. Finally it delivers the response. Below is an example of what a method in a controller should have and no more.&lt;/p>
+&lt;pre>&lt;code>app/Http/Controllers/ProjectsController.php:31
+public function index()
+{
+try
+{
+$results = $this-&amp;gt;service-&amp;gt;getAllProjectsForThisUser();
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($results, &amp;quot;Loaded Projects&amp;quot;), 200);
+}
+catch(\Exception $e) {
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;getMessage(), &amp;quot;Error Getting Project Failed&amp;quot;), 422);
+}
+}
+&lt;/code>&lt;/pre>&lt;p>It traps any errors and responds as needed to that error.&lt;/p>
+&lt;h2 id="issues-with-above">Issues with above?&lt;/h2>
+&lt;p>Yes! Error codes should come from the Service as well. How does the controller know a 422?&lt;/p>
+&lt;h3 id="service-then-does-what">Service then does what?&lt;/h3>
+&lt;p>As defined above&lt;/p>
+&lt;p>&amp;ldquo;The middleware between controller and repository. Gather data from controller, performs validation and business logic, and calling repositories for data manipulation.&amp;rdquo;&lt;/p>
+&lt;ul>
+&lt;li>Validation&lt;/li>
+&lt;li>Business Logic&lt;/li>
+&lt;li>Calling Repositories&lt;/li>
+&lt;li>Transform Data in and out&lt;/li>
+&lt;li>Lastly returns the results with a know error code.&lt;/li>
+&lt;/ul>
+&lt;p>Since 422 is an HTTP Response&lt;/p>
+&lt;pre>&lt;code>vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php:64
+&lt;/code>&lt;/pre>&lt;p>We should have possible a response transformer class to consider the non HTTP response. Then let the Controller pick from that to find its related HTTP response. See the &lt;a href="https://leanpub.com/build-apis-you-wont-hate">Build API&amp;rsquo;s You Wont&amp;rsquo;t Hate&lt;/a> for more on that. Covered in the other guide shortly too.&lt;/p></description></item></channel></rss>

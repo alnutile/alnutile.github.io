@@ -1,19 +1,514 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>phpunit on Alfred Nutile</title><link>https://alfrednutile.info/tags/phpunit/</link><description>Recent content in phpunit on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 09 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/phpunit/index.xml" rel="self" type="application/rss+xml"/><item><title>PHPUnit CodeCoverage</title><link>https://alfrednutile.info/posts/260/</link><pubDate>Wed, 09 Jan 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/260/</guid><description>PHPUnit CodeCoverage PHPUnit CodeCoverage
-There is a ton of information about your code PHPUNit CodeCoverage can provide. At the root just making sure your coverage is at a certain level and if not where is it lacking.
-With it&amp;rsquo;s xml output I use a script found here to check during our TravisCI builds if the code is meeting a required level.
-Here is a gist of that script here and here is the .</description></item><item><title>Testing a trait with PHPUnit</title><link>https://alfrednutile.info/posts/212/</link><pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/212/</guid><description>In an effort to start recording test coverage using vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover I had some issues with traits being seen.
-I tried numerous approaches my default being just to Use the trait in the test class. I ended up with this as I found some online info about trait testing here that references a now missing post by Sebastian Bergman the maker of PHPUnit
-&amp;lt;?php
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>phpunit on Alfred Nutile</title><link>https://alfrednutile.info/tags/phpunit/</link><description>Recent content in phpunit on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 09 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/phpunit/index.xml" rel="self" type="application/rss+xml"/><item><title>PHPUnit CodeCoverage</title><link>https://alfrednutile.info/posts/260/</link><pubDate>Wed, 09 Jan 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/260/</guid><description>&lt;h1 id="phpunit-codecoverage">PHPUnit CodeCoverage&lt;/h1>
+&lt;p>&lt;a href="https://phpunit.de/manual/6.5/en/code-coverage-analysis.html">PHPUnit CodeCoverage&lt;/a>&lt;/p>
+&lt;p>There is a ton of information about your code PHPUNit CodeCoverage can provide. At the root just making sure your coverage is at a certain level and if not where is it lacking.&lt;/p>
+&lt;p>With it&amp;rsquo;s xml output I use a script found &lt;a href="https://ocramius.github.io/blog/automated-code-coverage-check-for-github-pull-requests-with-travis/">here&lt;/a> to check during our TravisCI builds if the code is meeting a required level.&lt;/p>
+&lt;p>Here is a gist of that script &lt;a href="https://gist.github.com/alnutile/78e11717d91f2dfce970f8f1aec68469">here&lt;/a>
+and here is the &lt;code>.travis.yml&lt;/code> section snippet that will run the coverage generating test and then review it for percentage of coverage.&lt;/p>
+&lt;pre>&lt;code>script:
+- vendor/bin/phpcs --standard=psr2 app/
+- set -e
+- vendor/bin/phpunit --coverage-clover clover.xml --stop-on-failure --testsuite=Unit,Feature
+- php ./coverage-checker.php clover.xml 70
+&lt;/code>&lt;/pre>&lt;p>This is what we run in Travis to review the coverage, if it is below &lt;strong>70&lt;/strong>% it will fail.&lt;/p>
+&lt;blockquote>
+&lt;p>If your unit tests cover 100% of your code, you&amp;rsquo;re doing it wrong.
+Just my 2 cts. - Fabien Potencier&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="setting-up">Setting Up&lt;/h2>
+&lt;p>This can be tricky you need Xdebug in place else you might get &amp;ldquo;Coverage driver missing&amp;rdquo; errors.&lt;/p>
+&lt;p>Once ready you need to update your &lt;code>phpunit.xml&lt;/code> here is my example:&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;phpunit
+/// left out some area for brevity
+&amp;lt;testsuites&amp;gt;
+&amp;lt;testsuite name=&amp;quot;Unit&amp;quot;&amp;gt;
+&amp;lt;directory suffix=&amp;quot;Test.php&amp;quot;&amp;gt;./tests/Unit&amp;lt;/directory&amp;gt;
+&amp;lt;/testsuite&amp;gt;
+&amp;lt;testsuite name=&amp;quot;Feature&amp;quot;&amp;gt;
+&amp;lt;directory suffix=&amp;quot;Test.php&amp;quot;&amp;gt;./tests/Feature&amp;lt;/directory&amp;gt;
+&amp;lt;/testsuite&amp;gt;
+&amp;lt;/testsuites&amp;gt;
+&amp;lt;filter&amp;gt;
+&amp;lt;whitelist processUncoveredFilesFromWhitelist=&amp;quot;true&amp;quot;&amp;gt;
+&amp;lt;directory suffix=&amp;quot;.php&amp;quot;&amp;gt;./app&amp;lt;/directory&amp;gt;
+&amp;lt;exclude&amp;gt;
+&amp;lt;directory suffix=&amp;quot;.php&amp;quot;&amp;gt;app/Http/Controllers/Auth&amp;lt;/directory&amp;gt;
+&amp;lt;file&amp;gt;app/Console/Commands/SetupDeploymentCommand.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Console/Kernel.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Http/Kernel.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Providers/AppServiceProvider.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Providers/AuthServiceProvider.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Providers/EventServiceProvider.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Providers/BroadcastServiceProvider.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Providers/RouteServiceProvider.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Http/Controllers/Controller.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Exceptions/Handler.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Http/Middleware/Authenticate.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Http/Middleware/EncryptCookies.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Http/Middleware/RedirectIfAuthenticated.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Http/Middleware/TrimStrings.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Http/Middleware/TrustProxies.php&amp;lt;/file&amp;gt;
+&amp;lt;file&amp;gt;app/Http/Middleware/VerifyCsrfToken.php&amp;lt;/file&amp;gt;
+&amp;lt;/exclude&amp;gt;
+&amp;lt;/whitelist&amp;gt;
+&amp;lt;/filter&amp;gt;
+/// left out some area for brevity
+&amp;lt;/phpunit&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>Above I setup &lt;code>filter&lt;/code> to exclude a bunch of Laravel files I do not want to maintain.&lt;/p>
+&lt;h2 id="running-the-command">Running the Command&lt;/h2>
+&lt;pre>&lt;code>vendor/bin/phpunit --coverage-clover clover.xml --stop-on-failure --coverage-html=build
+&lt;/code>&lt;/pre>&lt;p>This will output the clover.xml and make a folder called &lt;code>build&lt;/code> make sure to include that in your &lt;code>.gitignore&lt;/code>&lt;/p>
+&lt;p>On my Mac, when done, I just type &lt;code>open build/index.html&lt;/code> and I go to a page like this&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/vnmt5iy909hycid/Screenshot%202019-01-09%2012.02.29.png?dl=0" alt="">&lt;/p>
+&lt;h2 id="exploring">Exploring&lt;/h2>
+&lt;p>As seen above I get a list of all my classes and how the coverage is on each them. It gets even better from here.&lt;/p>
+&lt;h3 id="class-level">Class Level&lt;/h3>
+&lt;p>So you are wondering why a class is missing coverage? Click on the Class folder and start to dig in.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/ii7yqczoviw0vpz/Screenshot%202019-01-09%2012.22.23.png?dl=0" alt="">&lt;/p>
+&lt;p>Maybe it finds something you forgot or maybe it is fussing about a bit of code you know you tested?&lt;/p>
+&lt;p>In this example it could be either. So I have two main options.&lt;/p>
+&lt;h4 id="annotate-the-test">Annotate the test&lt;/h4>
+&lt;p>Let&amp;rsquo;s say I have a Controller level test that is testing this:&lt;/p>
+&lt;pre>&lt;code> /**
+* @covers App\Http\Controllers\AdminController::index
+*/
+public function testWorksAsAdmin()
+{
+$user = factory(\App\User::class)-&amp;gt;states('admin')-&amp;gt;create();
+$this-&amp;gt;be($user);
+$this-&amp;gt;get(&amp;quot;/admin&amp;quot;)-&amp;gt;assertStatus(200)-&amp;gt;assertSee(&amp;quot;Show user&amp;quot;);
+}
+/**
+* @covers App\Http\Controllers\AdminController::index
+*/
+public function testWorksAsNonAdmin()
+{
+$user = factory(\App\User::class)-&amp;gt;create();
+$this-&amp;gt;be($user);
+$this-&amp;gt;get(&amp;quot;/admin&amp;quot;)-&amp;gt;assertStatus(302);
+}
+&lt;/code>&lt;/pre>&lt;p>You can see I specifically tell PHPUnit CodeCoverage that this controller tests are testing this area. But I do not let it know about the MiddleWare so I could do:&lt;/p>
+&lt;pre>&lt;code> /**
+* @covers App\Http\Controllers\AdminController::index
+* @covers App\Http\Controllers\AdminController::__constructor
+*/
+public function testWorksAsAdmin()
+{
+$user = factory(\App\User::class)-&amp;gt;states('admin')-&amp;gt;create();
+$this-&amp;gt;be($user);
+$this-&amp;gt;get(&amp;quot;/admin&amp;quot;)-&amp;gt;assertStatus(200)-&amp;gt;assertSee(&amp;quot;Show user&amp;quot;);
+}
+/**
+* @covers App\Http\Controllers\AdminController::index
+* @covers App\Http\Controllers\AdminController::__constructor
+*/
+public function testWorksAsNonAdmin()
+{
+$user = factory(\App\User::class)-&amp;gt;create();
+$this-&amp;gt;be($user);
+$this-&amp;gt;get(&amp;quot;/admin&amp;quot;)-&amp;gt;assertStatus(302);
+}
+&lt;/code>&lt;/pre>&lt;p>Then run the test command again and:&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/gl8m3ompd4s8vw5/Screenshot%202019-01-09%2012.26.43.png?dl=0" alt="">&lt;/p>
+&lt;h4 id="annotate-the-class">Annotate the Class&lt;/h4>
+&lt;p>In the above I could have just done this:&lt;/p>
+&lt;pre>&lt;code> /**
+* @codeCoverageIgnore
+*/
+public function __construct()
+{
+$this-&amp;gt;middleware('admin_only')-&amp;gt;only(&amp;quot;index&amp;quot;);
+}
+&lt;/code>&lt;/pre>&lt;p>And that is fine, as long as you know that middleware is tested in it&amp;rsquo;s own area.&lt;/p>
+&lt;h4 id="exceptions">Exceptions&lt;/h4>
+&lt;p>I tend to do try/catch in my controllers to clearly react to an issue and respond to a user&amp;rsquo;s request but this can show in PHPUnit Coverage as a non tested section of code.&lt;/p>
+&lt;p>All I need to do is add a test for that.&lt;/p>
+&lt;pre>&lt;code> /**
+* @covers App\Http\Controllers\AdminController::index
+* @covers App\Http\Controllers\AdminController::__constructor
+* @expectedException \Exception
+*/
+public function testWorksAsNonAdmin()
+{
+$user = factory(\App\User::class)-&amp;gt;create();
+$this-&amp;gt;be($user);
+$this-&amp;gt;get(&amp;quot;/admin&amp;quot;)-&amp;gt;assertStatus(422);
+}
+&lt;/code>&lt;/pre>&lt;h3 id="dashboard">Dashboard&lt;/h3>
+&lt;p>This is where some other nice info is surfaced about your code.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/9cgvtghsc56iqyk/dashboard_link.png?dl=0" alt="">&lt;/p>
+&lt;p>Should bring you to this layout&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/04vgti8gogembv8/Screenshot%202019-01-09%2012.31.05.png?dl=0" alt="">&lt;/p>
+&lt;p>The &lt;strong>CRAP&lt;/strong> rating is &amp;ldquo;interesting&amp;rdquo; you can read more about it &lt;a href="https://stackoverflow.com/questions/4731774/how-to-read-improve-c-r-a-p-index-calculated-by-php/4731869#4731869">here&lt;/a> since I do not fully understand it myself but imo it comes down not to 100% coverage but:&lt;/p>
+&lt;ul>
+&lt;li>Keep classes small and focused&lt;/li>
+&lt;li>Keep classed down to 1 public method, even Controllers letting other protected/private methods do the work&lt;/li>
+&lt;li>Test the class for message in and message out&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>&amp;ldquo;You don&amp;rsquo;t send messages because you have objects, you have objects because you send messages - Sandi Metz Poodr Book&amp;rdquo;&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="helpers">Helpers&lt;/h2>
+&lt;p>Two other tools to compliment that above&lt;/p>
+&lt;h3 id="phpmetrics">PHPMetrics&lt;/h3>
+&lt;p>This tool &lt;a href="http://www.phpmetrics.org/">http://www.phpmetrics.org/&lt;/a> can easily be setup and run showing more details about your classes and their state of &amp;ldquo;complexity&amp;rdquo; etc.&lt;/p>
+&lt;h3 id="larastan">LaraStan&lt;/h3>
+&lt;p>This tool &lt;a href="https://github.com/nunomaduro/larastan">https://github.com/nunomaduro/larastan&lt;/a> when it does not go overboard in it&amp;rsquo;s reading your code (set it to a low level) can do a good job of finding issues in your code that you did not find in your tests. It runs over your code including exceptions you did not cover in your tests etc. Really does find some interesting things.&lt;/p></description></item><item><title>Testing a trait with PHPUnit</title><link>https://alfrednutile.info/posts/212/</link><pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/212/</guid><description>&lt;p>In an effort to start recording test coverage using &lt;code>vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover&lt;/code> I had some issues with traits being seen.&lt;/p>
+&lt;p>I tried numerous approaches my default being just to &lt;code>Use&lt;/code> the trait in the test class. I ended up with this as I found some online info about trait testing &lt;a href="http://blog.florianwolters.de/educational/2012/09/20/Testing-Traits-with-PHPUnit/">here&lt;/a> that references a now missing post by Sebastian Bergman the maker of PHPUnit&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 use Symfony\Component\Yaml\Yaml;
 /**
-* Test class for {@see PfawsYaml}.</description></item><item><title>Example of Mixing it up Behat BDD and PHPUnit</title><link>https://alfrednutile.info/posts/185/</link><pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/185/</guid><description>Just wanted to show two things here. One is how sometimes I end up in PHPUnit to work out some ideas. And two how awesome it is to refactor thanks to PHPUnit.
-In this example I had a Class responsible for saving data, we&amp;rsquo;ll call FooSaveData. But before that save it has to process some incoming information against another set of data to save the results of that. So I made another class we&amp;rsquo;ll call FooProcessData.</description></item><item><title>Codeship and Laravel for Continuous Integration</title><link>https://alfrednutile.info/posts/148/</link><pubDate>Sun, 07 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/148/</guid><description>Getting going on Codeship and Laravel is pretty easy.
-Once you setup codeship to work with your github account just pull in your repo and set your Testing scripts as follows. (they have a ui for ENV variables as well)
-Codeship Testing Settings [easier copy paste bottom of article] You can do this in their UI as well. But at this point I am
-Setting up the composer token for any private repos that application might have Setting up .</description></item><item><title>Easily Create Fixture Data from Remote Services and Refresh Mock Data</title><link>https://alfrednutile.info/posts/145/</link><pubDate>Wed, 27 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/145/</guid><description>Oops Codeship and Laravel is here
-Easily Create Fixture Data from Remote Services and Refresh Mock Data We have integration tests that hit remote apis like Github, S3, DynomoDB, our own APIs etc and we do not want to hit those during out tests but we also want to make sure we have the real data. So when one of those APIs change then our mock data can be refreshed to see if our systems really work with it.</description></item><item><title>Timing PHPUnit Tests</title><link>https://alfrednutile.info/posts/127/</link><pubDate>Wed, 31 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/127/</guid><description>Maybe there is a better way to do this? But using this article https://fatalfailure.wordpress.com/2011/08/22/detecting-slow-tests-with-phpunit/ I was able to find a hanging test.
-Setup I already have an xml file at the root of my project so I added to that that listener.
-&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+* Test class for {@see PfawsYaml}.
+*
+* @covers \PfAws\Traits\PfawsYaml
+*/
+class PfawsYamlTest extends TestCase
+{
+/**
+* The object under test.
+*
+* @var object
+*/
+protected $traitObject;
+public function setUp()
+{
+parent::setUp(); // TODO: Change the autogenerated stub
+$this-&amp;gt;traitObject = $this-&amp;gt;createObjectForTrait();
+}
+/**
+* *Creation Method* to create an object for the trait under test.
+*
+* @return object The newly created object.
+*/
+private function createObjectForTrait()
+{
+$traitName = '\PfAws\Traits\PfawsYaml';
+return $this-&amp;gt;getObjectForTrait($traitName);
+}
+/**
+* coversDefaultClass loadPfawsYaml
+*/
+public function testLoadPfawsYaml()
+{
+$path = __DIR__ . '/fixtures/pfaws.yaml';
+$results = $this-&amp;gt;traitObject-&amp;gt;loadPfawsYaml('staging', $path);
+$this-&amp;gt;assertEquals(&amp;quot;bar2&amp;quot;, $results-&amp;gt;getPfawsYamlEnv('aws_key'));
+$this-&amp;gt;assertEquals(&amp;quot;foo2&amp;quot;, $results-&amp;gt;getPfawsYamlEnv('aws_secret'));
+$this-&amp;gt;assertNotNull($this-&amp;gt;traitObject-&amp;gt;getPfawsyaml());
+}
+/**
+* @coversDefaultClass getPfawsYamlEnv
+*/
+public function testGetPfawsYamlEnv()
+{
+$path = __DIR__ . '/fixtures/pfaws.yaml';
+$results = $this-&amp;gt;traitObject-&amp;gt;loadPfawsYaml('staging', $path);
+$this-&amp;gt;assertEquals(&amp;quot;bar2&amp;quot;, $results-&amp;gt;getPfawsYamlEnv('aws_key'));
+$this-&amp;gt;assertEquals(&amp;quot;foo2&amp;quot;, $results-&amp;gt;getPfawsYamlEnv('aws_secret'));
+}
+/**
+* @coversDefaultClass getPfawsyaml
+*/
+public function testGetPfawsyaml()
+{
+$path = __DIR__ . '/fixtures/pfaws.yaml';
+$results = $this-&amp;gt;traitObject-&amp;gt;loadPfawsYaml('staging', $path);
+$this-&amp;gt;assertNotNull($results-&amp;gt;getPfawsyaml());
+$this-&amp;gt;assertNotNull($results);
+$this-&amp;gt;assertEquals(&amp;quot;bar2&amp;quot;, $results-&amp;gt;getPfawsYamlEnv('aws_key'));
+$this-&amp;gt;assertEquals(&amp;quot;foo2&amp;quot;, $results-&amp;gt;getPfawsYamlEnv('aws_secret'));
+}
+/**
+* @coversDefaultClass setS3
+*/
+public function testSetS3() {
+$path = __DIR__ . '/fixtures/pfaws.yaml';
+$this-&amp;gt;traitObject-&amp;gt;loadPfawsYaml('staging', $path);
+$this-&amp;gt;traitObject-&amp;gt;setS3();
+$filesystem = \League\Flysystem\AwsS3v3\AwsS3Adapter::class;
+$this-&amp;gt;assertInstanceOf($filesystem, $this-&amp;gt;traitObject-&amp;gt;getS3());
+}
+/**
+* @coversDefaultClass getPfawsYamlKeyValue
+*/
+public function testGetPfawsYamlKeyValue() {
+$path = __DIR__ . '/fixtures/pfaws.yaml';
+$this-&amp;gt;traitObject-&amp;gt;loadPfawsYaml('staging', $path)-&amp;gt;setS3();
+$app_name = $this-&amp;gt;traitObject-&amp;gt;getPfawsYamlKeyValue('app_name');
+$this-&amp;gt;assertEquals('foo', $app_name);
+}
+}
+&lt;/code>&lt;/pre>&lt;p>The annotations are for the coverage to know what I am testing.&lt;/p>
+&lt;p>This area puts the Trait in to an object using a method provided by PHPUnit:&lt;/p>
+&lt;pre>&lt;code>/**
+* *Creation Method* to create an object for the trait under test.
+*
+* @return object The newly created object.
+*/
+private function createObjectForTrait()
+{
+$traitName = '\PfAws\Traits\PfawsYaml';
+return $this-&amp;gt;getObjectForTrait($traitName);
+}
+&lt;/code>&lt;/pre>
+&lt;p>And then I run &lt;code>vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover&lt;/code> and the coverage was boosted / recognized.&lt;/p>
+&lt;p>On a side note adding to my &lt;code>phpunit.xml&lt;/code>&lt;/p>
+&lt;pre>&lt;code> &amp;lt;logging&amp;gt;
+&amp;lt;log
+type=&amp;quot;coverage-html&amp;quot;
+target=&amp;quot;./docs/coverage&amp;quot;
+charset=&amp;quot;UTF-8&amp;quot;
+yui=&amp;quot;true&amp;quot;
+lowUpperBound=&amp;quot;35&amp;quot;
+highLowerBound=&amp;quot;70&amp;quot;
+showUncoveredFiles=&amp;quot;true&amp;quot;
+/&amp;gt;
+&amp;lt;log
+type=&amp;quot;coverage-text&amp;quot;
+target=&amp;quot;php://stdout&amp;quot;
+lowUpperBound=&amp;quot;35&amp;quot;
+highLowerBound=&amp;quot;70&amp;quot;
+/&amp;gt;
+&amp;lt;/logging&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>Gave me some really nice code coverage information&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/2hbocuv8qfyv2u9/code_coverage.png?dl=0" alt="">&lt;/p></description></item><item><title>Example of Mixing it up Behat BDD and PHPUnit</title><link>https://alfrednutile.info/posts/185/</link><pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/185/</guid><description>&lt;p>Just wanted to show two things here. One is how sometimes I end up in PHPUnit to work out some ideas. And two how awesome it is to refactor thanks to PHPUnit.&lt;/p>
+&lt;p>In this example I had a Class responsible for saving data, we&amp;rsquo;ll call FooSaveData. But before that save it has to process some incoming information against another set of data to save the results of that. So I made another class we&amp;rsquo;ll call FooProcessData.&lt;/p>
+&lt;p>The BDD Story for this worked out well in that just like in Konstantin Kudryashov noted in this &lt;a href="http://stakeholderwhisperer.com/posts/2014/10/introducing-modelling-by-example#_=_">article&lt;/a> I had a great reading business driven gherkin feature that I then, using &lt;a href="http://docs.behat.org/en/v3.0/guides/5.suites.html">Behat 3 and Suites&lt;/a> was able to make some really great names for my classes and methods.&lt;/p>
+&lt;p>But this was fine as I was working on FooSaveData, but the fact that FooProcessData had to iterate over a large complex array of data I did not want to do inside of this Gherkin test. It would mean that I had to deal with 5 other steps, x number of model states I needed etc. Instead I just made a unit test for that class &amp;ldquo;FooProcessData&amp;rdquo; and focused on it for a bit outside the rest of this work.&lt;/p>
+&lt;p>To begin with I just use&lt;/p>
+&lt;pre>&lt;code>File::put(base_path('tests/fixtures/data_to_process.json', json_encode($some_data, JSON_PRETTY_PRINT))
+&lt;/code>&lt;/pre>&lt;p>to put that data right where I want it for my unit tests.&lt;/p>
+&lt;p>Then from there I go around and around unil the thinking on the left reads more like the thinking on the right&lt;/p>
+&lt;p>&lt;a href="https://dl.dropboxusercontent.com/s/evboprnu04gllrn/example_of_crazy_method_to_readable.png?dl=0">&lt;img src="https://dl.dropboxusercontent.com/s/evboprnu04gllrn/example_of_crazy_method_to_readable.png?dl=0" alt="start to end">&lt;/a>&lt;/p>
+&lt;p>Which is my favorite part of this really as I see code evolve to something I can come back 6 months later and read.&lt;/p>
+&lt;blockquote>
+&lt;p>Let&amp;rsquo;s Plan for a Future Where We&amp;rsquo;re All As Stupid as We Are Today - Dan Milstein&lt;/p>
+&lt;/blockquote>
+&lt;p>At this point that &amp;ldquo;lego&amp;rdquo; like piece is done and I can go back to my Behat BDD Gherkin test to finish off where I left off.&lt;/p></description></item><item><title>Codeship and Laravel for Continuous Integration</title><link>https://alfrednutile.info/posts/148/</link><pubDate>Sun, 07 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/148/</guid><description>&lt;p>Getting going on Codeship and Laravel is pretty easy.&lt;/p>
+&lt;p>Once you setup codeship to work with your github account just pull in your repo and set your Testing scripts as follows. (they have a ui for ENV variables as well)&lt;/p>
+&lt;h2 id="codeship-testing-settings-easier-copy-paste-bottom-of-article">Codeship Testing Settings [easier copy paste bottom of article]&lt;/h2>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/fh6vv3g5wpqw7ac/codeship1.png?dl=0" alt="codeship">&lt;/p>
+&lt;p>You can do this in their UI as well. But at this point I am&lt;/p>
+&lt;ul>
+&lt;li>Setting up the composer token for any private repos that application might have&lt;/li>
+&lt;li>Setting up .env for their specific needs as well eg MYSQL_*&lt;/li>
+&lt;/ul>
+&lt;p>For the Database to use their settings I have to edit &lt;code>config/database.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+return [
+'fetch' =&amp;gt; PDO::FETCH_CLASS,
+'default' =&amp;gt; env('DB_CONNECTION', 'mysql'),
+'connections' =&amp;gt; [
+'mysql' =&amp;gt; [
+'driver' =&amp;gt; 'mysql',
+'host' =&amp;gt; env('DB_HOST', 'localhost'),
+'database' =&amp;gt; env('DB_DATABASE', env('TEST_ENV_NUMBER')),
+'username' =&amp;gt; env('DB_USERNAME', env('MYSQL_USER')),
+'password' =&amp;gt; env('DB_PASSWORD', env('MYSQL_PASSWORD')),
+'charset' =&amp;gt; 'utf8',
+'collation' =&amp;gt; 'utf8_unicode_ci',
+'prefix' =&amp;gt; '',
+'strict' =&amp;gt; false,
+],
+],
+.......
+];
+&lt;/code>&lt;/pre>&lt;p>Adding&lt;/p>
+&lt;pre>&lt;code>env('DB_PASSWORD', env('MYSQL_PASSWORD')),
+env('DB_USERNAME', env('MYSQL_USER')),
+env('DB_DATABASE', env('TEST_ENV_NUMBER')),
+&lt;/code>&lt;/pre>&lt;p>So we default to theirs if ours is not there. Finally when we run the test I set the db to the name they want&lt;/p>
+&lt;pre>&lt;code>DB_DATABASE=test phpunit
+&lt;/code>&lt;/pre>&lt;h2 id="envoy-deploy">Envoy Deploy&lt;/h2>
+&lt;p>After it passes I can use Envoy to deploy it.&lt;/p>
+&lt;p>The Envoy scripts are not on Forge but use to be so a lot of the naming matches.&lt;/p>
+&lt;p>Under the Codeship Deployment page I set&lt;/p>
+&lt;pre>&lt;code>composer global require &amp;quot;laravel/envoy=~1.0&amp;quot; &amp;amp;&amp;amp; /home/rof/.composer/vendor/bin/envoy run deploy_dev
+&lt;/code>&lt;/pre>&lt;p>In that script do what ever you need to make this thing deploy for example.&lt;/p>
+&lt;pre>&lt;code>@servers(['dev' =&amp;gt; 'forge@foo.com'])
+@task('deploy_dev', ['on' =&amp;gt; 'dev'])
+cd /home/forge/app
+git reset --hard HEAD
+git pull origin dev
+composer config -g github-oauth.github.com foo
+rm -rf vendor
+composer install
+composer dump-autoload
+php artisan migrate:refresh --seed
+bower install
+@endtask
+&lt;/code>&lt;/pre>&lt;p>We do not do this on Prod. Someone with proper permissions will run Envoy locally once the tests are passing.&lt;/p>
+&lt;p>&lt;strong>UPDATE&lt;/strong>&lt;/p>
+&lt;p>Easier copy paste&lt;/p>
+&lt;pre>&lt;code># Set php version through phpenv. 5.3, 5.4 and 5.5 available
+phpenv local 5.5
+# Install dependencies through Composer
+composer config -g github-oauth.github.com foo
+touch .env
+echo &amp;quot;APP_ENV='testing'&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;MYSQL_TESTING_URL='localhost'&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;MYSQL_TESTING_URL='localhost'&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;APP_KEY=foo&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;CACHE_DRIVER=file&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;SESSION_DRIVER=file&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;QUEUE_DRIVER=sync&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;MAIL_DRIVER=smtp&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;MAIL_HOST=smtp.mailgun.org&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;MAIL_PORT=2525&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;MAIL_USERNAME=postmaster@email.foo.io&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;MAIL_PASSWORD=foo&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;MAIL_ENCRYPTION=true&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;STRIPE_API_SECRET='foo'&amp;quot; &amp;gt;&amp;gt; .env
+echo &amp;quot;STRIPE_PUBLIC='foo'&amp;quot; &amp;gt;&amp;gt; .env
+composer install --dev
+&lt;/code>&lt;/pre></description></item><item><title>Easily Create Fixture Data from Remote Services and Refresh Mock Data</title><link>https://alfrednutile.info/posts/145/</link><pubDate>Wed, 27 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/145/</guid><description>&lt;p>&lt;strong>Oops Codeship and Laravel is &lt;a href="https://goo.gl/k62TEB">here&lt;/a>&lt;/strong>&lt;/p>
+&lt;h1 id="easily-create-fixture-data-from-remote-services-and-refresh-mock-data">Easily Create Fixture Data from Remote Services and Refresh Mock Data&lt;/h1>
+&lt;p>We have integration tests that hit remote apis like Github, S3, DynomoDB, our own APIs etc and we do not want to hit those during out tests but we also want to make sure we have the real data. So when one of those APIs change then our mock data can be refreshed to see if our systems really work with it.&lt;/p>
+&lt;p>Using Laravel&amp;rsquo;s new integration tests, though this works with any framework, we will swap out these Service classes with a Wrapper class ONLY if we have a matching file. This allows us to delete those files and get another one on the fly.&lt;/p>
+&lt;h2 id="lets-start-with-the-controller">Lets start with the Controller&lt;/h2>
+&lt;p>This simple Controller will talk to a Repo. Imagine the repo talking to Dynamodb or GithubApi, database etc.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App\Http\Controllers;
+use App\ExampleRepo;
+use Illuminate\Support\Facades\Response;
+class ExampleController extends Controller
+{
+public function mocking(ExampleRepo $exampleRepo)
+{
+return Response::json(&amp;quot;You are here &amp;quot; . $exampleRepo-&amp;gt;get());
+}
+}
+&lt;/code>&lt;/pre>&lt;p>So thanks to the dependency injection system; and the use of the Reflection Class, &lt;code>ExampleRepo&lt;/code> get constructed as well.&lt;/p>
+&lt;h2 id="the-tests">The Tests&lt;/h2>
+&lt;p>First lets look at a normal test no mock&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
+use Mockery as m;
+class ExampleTest extends TestCase
+{
+public function testDefault()
+{
+$this-&amp;gt;get('/mocking')-&amp;gt;see(&amp;quot;You are here foo&amp;quot;);
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Pretty simple. But not lets&amp;hellip;&lt;/p>
+&lt;h2 id="swap-things-out">Swap Things Out&lt;/h2>
+&lt;p>Here we add an example of replacing the default instance &lt;code>App&lt;/code> would make with our own Wrapper&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
+use Mockery as m;
+class ExampleTest extends TestCase
+{
+public function testDefault()
+{
+$this-&amp;gt;get('/mocking')-&amp;gt;see(&amp;quot;You are here foo&amp;quot;);
+}
+public function testMocking()
+{
+$mock = m::mock('App\ExampleRepo');
+$mock-&amp;gt;shouldReceive('get')-&amp;gt;once()-&amp;gt;andReturn('bar');
+App::instance('App\ExampleRepo', $mock);
+$this-&amp;gt;get('/mocking')-&amp;gt;see(&amp;quot;You are here bar&amp;quot;);
+}
+}
+&lt;/code>&lt;/pre>&lt;p>&lt;code>testMocking&lt;/code> will now return bar!&lt;/p>
+&lt;h2 id="making-fixtures-on-the-fly">Making Fixtures on the Fly&lt;/h2>
+&lt;p>Same results BUT we hit my wrapper not the real services. But here is where I think it gets even better. I can return fixture data BUT at the same time I can not worry about returning stale fixture data eg the apis have changed but my fixtures have not. All of this without having my test code wrapped into the app code.&lt;/p>
+&lt;p>This will look for the output of a route. That Controller and Repo we will show in a moment&lt;/p>
+&lt;pre>&lt;code> public function testMakeFixture()
+{
+$wrapper = App::make('App\ExampleRepoWrapper');
+App::instance('App\ExampleRepo', $wrapper);
+$this-&amp;gt;get('/mocking')-&amp;gt;see(&amp;quot;You are here foo&amp;quot;);
+}
+&lt;/code>&lt;/pre>&lt;p>This test has a wrapper which extends the repo&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App;
+use Illuminate\Support\Facades\File;
+class ExampleRepoWrapper extends ExampleRepo
+{
+public function get()
+{
+if(File::exists(base_path('tests/fixtures/foo.json')))
+{
+$content = File::get(base_path('tests/fixtures/foo.json'));
+return json_decode($content, true);
+}
+$results = parent::get();
+if(!File::exists(base_path('tests/fixtures/foo.json')))
+{
+$content = json_encode($results, JSON_PRETTY_PRINT);
+File::put(base_path('tests/fixtures/foo.json'), $content);
+}
+return $results;
+}
+}
+&lt;/code>&lt;/pre>&lt;p>So now the Controller will talk to the Wrapper instead which will look for a file &lt;code>(NOTE: You can easily pass in $id or $name to make the fixtures unique)&lt;/code>&lt;/p>
+&lt;p>So now when the Controller hits our Wrapper it goes right to the real &lt;code>ExampleRepo&lt;/code> (seen below) &lt;strong>if there is no fixture file&lt;/strong> and then the Wrapper kicks in to make the file (as seen in the above class).&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php namespace App;
+class ExampleRepo
+{
+protected $results;
+public function get()
+{
+$this-&amp;gt;results = 'foo';
+return $this-&amp;gt;results;
+}
+/**
+* @return mixed
+*/
+public function getResults()
+{
+return $this-&amp;gt;results;
+}
+}
+&lt;/code>&lt;/pre>&lt;p>That is it you can do integration testing on your APIs and not hit external services or even databases.&lt;/p>
+&lt;h2 id="force-full-integration">Force Full Integration&lt;/h2>
+&lt;p>Sometimes you want to hit the external resources. This can be part of a weekly or daily test to make sure you app is working with all the external APIs. You can do this by deleting all the fixtures before running that test.&lt;/p>
+&lt;p>So you can setup a provider like this&lt;/p>
+&lt;pre>&lt;code>
+class ExampleProvider extends ServiceProvider
+{
+public function register()
+{
+if(App::environment() == 'testing' and env('FULL_INTEGRATION') != 'true')
+{
+$this-&amp;gt;app-&amp;gt;bind('App\ExampleRepo', 'App\ExampleRepoWrapper');
+} else {
+$this-&amp;gt;app-&amp;gt;bind('App\ExampleRepo', 'App\ExampleRepo');
+}
+}
+}
+** UPDATE **
+Another good idea, by [Nathan Kirschbaum](https://twitter.com/n_kirschbaum), is to set the `FULL_INTEGRATION` setting by the user that is logged in.
+&lt;/code>&lt;/pre>&lt;h2 id="cons">Cons&lt;/h2>
+&lt;p>One is UI testing. Prior to this I would make wrappers as needed to then take over if say &lt;code>APP_MOCK=true&lt;/code>. Then I could mock even on Behat testing or the UI. But that meant a lot of Providers and alot of mixing of testing and code. But it worked and ran well on services like CodeShip and locally. If you Behat/Acceptance tests are hitting the API or UI it would be nice to fake all the external responses. Though now with the above the API testing is easy. The UI (when there is javascript) not so easy :(&lt;/p>
+&lt;p>Since we are using &lt;code>App::instance&lt;/code> we did not need to register a Provider Class. But to make the UI con a non issue you can go that far to register a ServiceProvider&lt;/p>
+&lt;pre>&lt;code>
+class ExampleProvider extends ServiceProvider
+{
+public function register()
+{
+if(App::environment() == 'testing'
+{
+$this-&amp;gt;app-&amp;gt;bind('App\ExampleRepo', 'App\ExampleRepoWrapper');
+} else {
+$this-&amp;gt;app-&amp;gt;bind('App\ExampleRepo', 'App\ExampleRepo');
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Then register as normal in your config/app.php . This can be kinda tedious but would produce the same results.&lt;/p>
+&lt;p>Great book on the topic &lt;a href="https://leanpub.com/laravel-testing-decoded">Laravel Testing Decoded&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://s3.amazonaws.com/titlepages.leanpub.com/laravel-testing-decoded/large?1425536214" alt="decoded">&lt;/p></description></item><item><title>Timing PHPUnit Tests</title><link>https://alfrednutile.info/posts/127/</link><pubDate>Wed, 31 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/127/</guid><description>&lt;p>Maybe there is a better way to do this? But using this article &lt;a href="https://fatalfailure.wordpress.com/2011/08/22/detecting-slow-tests-with-phpunit/">https://fatalfailure.wordpress.com/2011/08/22/detecting-slow-tests-with-phpunit/&lt;/a> I was able to find a hanging test.&lt;/p>
+&lt;h1 id="setup">Setup&lt;/h1>
+&lt;p>I already have an xml file at the root of my project so I added to that that listener.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
 &amp;lt;phpunit backupGlobals=&amp;quot;false&amp;quot;
 backupStaticAttributes=&amp;quot;false&amp;quot;
 bootstrap=&amp;quot;tests/bootstrap.php&amp;quot;
@@ -33,10 +528,120 @@ syntaxCheck=&amp;quot;false&amp;quot;
 &amp;lt;directory&amp;gt;./app/tests/BehatEditor/Tests&amp;lt;/directory&amp;gt;
 &amp;lt;directory&amp;gt;./app/tests/TheHub/Tests&amp;lt;/directory&amp;gt;
 &amp;lt;exclude&amp;gt;./app/tests/BehatEditor/Tests/Migrations&amp;lt;/exclude&amp;gt;
-&amp;lt;exclude&amp;gt;.</description></item><item><title>PHP quick fixture data for phpunit testing</title><link>https://alfrednutile.info/posts/117/</link><pubDate>Thu, 20 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/117/</guid><description>You can use VCR or other libraries to make fixture data. But sometimes you can just make the request and save the results using this technique. From then on you mock and return the data.
-Get the data. In this example I had a Client that would get data and return it for import. I was testing out the class that would take this data and import it and do other things.</description></item><item><title>Speeding up PHPunit tests and Behat in Laravel for Database refreshes</title><link>https://alfrednutile.info/posts/112/</link><pubDate>Thu, 06 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/112/</guid><description>This article covers some good tips on this. Ideally you do not hit the database in unit tests but sometimes you do. Also in behat it hits the db all the time since it is at the Acceptance level.
-Sqlite It is a great database and works. We easily can use it on running tests. When seeding the db I have my main seeding class doing this
-&amp;lt;?php
+&amp;lt;exclude&amp;gt;./app/tests/DMPIntegration&amp;lt;/exclude&amp;gt;
+&amp;lt;/testsuite&amp;gt;
+&amp;lt;/testsuites&amp;gt;
+&amp;lt;/phpunit&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>the lines are&lt;/p>
+&lt;pre>&lt;code> &amp;lt;listeners&amp;gt;
+&amp;lt;listener file=&amp;quot;./app/tests/listeners/TestTimesListener.php&amp;quot; /&amp;gt;
+&amp;lt;/listeners&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>That I added.&lt;/p>
+&lt;p>Then that file I ended up with this&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+class PHPUnitTestListener implements PHPUnit_Framework_TestListener {
+private $time;
+private $timeLimit = 0;
+public function startTest(PHPUnit_Framework_Test $test) {
+$this-&amp;gt;time = time();
+}
+public function endTest(PHPUnit_Framework_Test $test, $time) {
+$current = time();
+$took = $current - $this-&amp;gt;time;
+if($took &amp;gt; $this-&amp;gt;timeLimit ) {
+echo &amp;quot;\nName: &amp;quot;.$test-&amp;gt;getName().&amp;quot; took &amp;quot;.$took . &amp;quot; second(s) (from: $this-&amp;gt;time, to: $current)\n&amp;quot;;
+}
+}
+public function addError(PHPUnit_Framework_Test $test, Exception $e, $time) {
+}
+public function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time) {
+}
+public function addIncompleteTest(PHPUnit_Framework_Test $test, Exception $e, $time){
+}
+public function addSkippedTest(PHPUnit_Framework_Test $test, Exception $e, $time) {
+}
+public function startTestSuite(PHPUnit_Framework_TestSuite $suite) {
+}
+public function endTestSuite(PHPUnit_Framework_TestSuite $suite) {
+}
+/**
+* Risky test.
+*
+* @param PHPUnit_Framework_Test $test
+* @param Exception $e
+* @param float $time
+* @since Method available since Release 4.0.0
+*/
+public function addRiskyTest(PHPUnit_Framework_Test $test, Exception $e, $time)
+{
+// TODO: Implement addRiskyTest() method.
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Right now I am only using startTest and endTest.&lt;/p>
+&lt;p>Finally all my tests have a TestCase class they share so in there I ended up with&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Mockery as m;
+class TestCase extends Illuminate\Foundation\Testing\TestCase {
+public function setUp()
+{
+parent::setUp();
+$this-&amp;gt;listener = new PHPUnitTestListener();
+$this-&amp;gt;faker = Faker::create();
+$this-&amp;gt;prepareForTests();
+$this-&amp;gt;listener-&amp;gt;startTest($this);
+}
+public function tearDown()
+{
+$this-&amp;gt;listener-&amp;gt;endTest($this, time());
+parent::tearDown();
+}
+&lt;/code>&lt;/pre>&lt;p>Overall it is pretty simple once the other post pointed it out. Now to use all the other listeners.&lt;/p></description></item><item><title>PHP quick fixture data for phpunit testing</title><link>https://alfrednutile.info/posts/117/</link><pubDate>Thu, 20 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/117/</guid><description>&lt;p>You can use VCR or other libraries to make fixture data. But sometimes you can just make the request and save the results using this technique. From then on you mock and return the data.&lt;/p>
+&lt;h1 id="get-the-data">Get the data.&lt;/h1>
+&lt;p>In this example I had a Client that would get data and return it for import. I was testing out the class that would take this data and import it and do other things. So I make my phpunit test methods of that class (not the Client it is fully tested)&lt;/p>
+&lt;pre>&lt;code>
+/**
+* @test
+*/
+public function should_get_data_to_import()
+{
+//Load up the client I will later mock, but to get some data to mock
+$client = new Client();
+//Get the results (api return json)
+$results = $client-&amp;gt;getData();
+//Get the yaml library I am using to covert it to Yaml
+$yaml = new Yaml();
+//Convert it to Yaml from Array
+$results_yml = $yaml-&amp;gt;dump($results);
+//Save it for now
+file_put_contents('/tmp/data.yml', $results_yml);
+}
+&lt;/code>&lt;/pre>&lt;p>Once that is done I copy that data.yml file to fixtures/data.yml which is in the tests folder. Here is a quick look at the folders.&lt;/p>
+&lt;pre>&lt;code>tests
+tests/fixtures
+// @NOTE this is the file we are using for the test example above
+tests/NameSpace/Tests/ClassTest.php
+&lt;/code>&lt;/pre>&lt;p>Finally I rewrite that same test method as&lt;/p>
+&lt;pre>&lt;code>/**
+* @test
+*/
+public function should_get_data_to_import()
+{
+$yaml = new Yaml();
+$fixture = $yaml-&amp;gt;parse(__DIR__ . '/../fixtures/data.yml');
+$client = m::mock();
+$client-&amp;gt;shouldReceive('getData')-&amp;gt;andReturn($fixture);
+$classTesting new ClassTest($client); //we inject the mock into it
+$classTesting-&amp;gt;importData();
+$this-&amp;gt;assertCount(100, $classTesting-&amp;gt;getDataImported());
+}
+&lt;/code>&lt;/pre>&lt;p>The client in this case if a fully tested standalone client so I am not testing it. Just my use of it to migrate data.&lt;/p></description></item><item><title>Speeding up PHPunit tests and Behat in Laravel for Database refreshes</title><link>https://alfrednutile.info/posts/112/</link><pubDate>Thu, 06 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/112/</guid><description>&lt;p>This &lt;a href="http://www.chrisduell.com/blog/development/speeding-up-unit-tests-in-php/">article&lt;/a> covers some good tips on this. Ideally you do not hit the database in unit tests but sometimes you do. Also in behat it hits the db all the time since it is at the Acceptance level.&lt;/p>
+&lt;h1 id="sqlite">Sqlite&lt;/h1>
+&lt;p>It is a great database and works. We easily can use it on running tests. When seeding the db I have my main seeding class doing this&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
@@ -44,24 +649,171 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 class DatabaseSeeder extends Seeder {
 /**
-* Run the database seeds.</description></item><item><title>Quick Gulp file to run php-unit tests</title><link>https://alfrednutile.info/posts/85/</link><pubDate>Sun, 25 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/85/</guid><description>MUCH BETTER WAY HERE
-This is setup for Laravel but can work for any app. Most of this is due to the great Laracasts on Gulp
-Download and setup gulp
-First make a package.json file in the root of your app and just put curly brackets in it.
-touch package.json
+* Run the database seeds.
+*
+* @return void
+*/
+public function run()
+{
+Model::unguard();
+if(App::environment() != 'testing') {
+DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+}
+$this-&amp;gt;call('AppTableSeeder');
+$this-&amp;gt;call('ParentRequestExample');
+$this-&amp;gt;call('ProductionSeeder');
+if(App::environment() != 'testing') {
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Since sqlite does not like this we skip it for it but not for production etc.&lt;/p>
+&lt;p>Second my config/testing/database.php looks like this (as noted in the article)&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+return [
+'default' =&amp;gt; 'sqlite',
+'connections' =&amp;gt; [
+'mysql' =&amp;gt; [
+'driver' =&amp;gt; 'mysql',
+'host' =&amp;gt; $_ENV['DB_URL'],
+'database' =&amp;gt; $_ENV['DB_NAME'],
+'username' =&amp;gt; $_ENV['MYSQL_USER'],
+'password' =&amp;gt; $_ENV['MYSQL_PASSWORD'],
+'charset' =&amp;gt; 'utf8',
+'collation' =&amp;gt; 'utf8_unicode_ci',
+'prefix' =&amp;gt; '',
+],
+'pgsql' =&amp;gt; [
+'driver' =&amp;gt; 'pgsql',
+'host' =&amp;gt; 'localhost',
+'database' =&amp;gt; 'homestead',
+'username' =&amp;gt; 'homestead',
+'password' =&amp;gt; 'secret',
+'charset' =&amp;gt; 'utf8',
+'prefix' =&amp;gt; '',
+'schema' =&amp;gt; 'public',
+],
+'setup' =&amp;gt; array(
+'driver' =&amp;gt; 'sqlite',
+'database' =&amp;gt; __DIR__.'/../../database/stubdb.sqlite',
+'prefix' =&amp;gt; '',
+),
+'sqlite' =&amp;gt; array(
+'driver' =&amp;gt; 'sqlite',
+'database' =&amp;gt; __DIR__ . '/../../database/testing.sqlite',
+'prefix' =&amp;gt; '',
+),
+],
+];
+&lt;/code>&lt;/pre>&lt;p>Which makes the below seeding command to setup the stub db work&lt;/p>
+&lt;pre>&lt;code>php artisan migrate:refresh --seed --database=&amp;quot;setup&amp;quot; --env=&amp;quot;testing&amp;quot;
+&lt;/code>&lt;/pre>&lt;h1 id="phpunit">PHPUnit&lt;/h1>
+&lt;p>What I ended up with is a base TestCase like this&lt;/p>
+&lt;pre>&lt;code>
+public function setUp()
+{
+parent::setUp();
+$this-&amp;gt;faker = Faker::create();
+$this-&amp;gt;prepareForTests();
+}
+private function prepareForTests()
+{
+if(!file_exists(base_path() . '/app/database/testing.sqlite'))
+{
+$this-&amp;gt;refreshDb();
+}
+}
+public function refreshDb()
+{
+copy(base_path() . '/app/database/stubdb.sqlite', base_path() . '/app/database/testing.sqlite');
+}
+&lt;/code>&lt;/pre>&lt;p>And with any new migrations I run this command&lt;/p>
+&lt;pre>&lt;code>php artisan migrate:refresh --seed --database=&amp;quot;setup&amp;quot; --env=&amp;quot;testing&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>That file is kept in git since it is just seed data. If there are any conflicts just rm and start over. Testing.sqlite is not kept in git.&lt;/p>
+&lt;p>#Behat&lt;/p>
+&lt;p>Behat is the same idea. In the main FeatureContext file I have&lt;/p>
+&lt;pre>&lt;code>
+/**
+* @Given /^I reseed the database$/
+*/
+public function iReseedTheDatabase()
+{
+try
+{
+dd(getenv('APP_ENV'));
+//exec(&amp;quot;php artisan migrate:refresh --seed&amp;quot;);
+copy(__DIR__ . '/../../../../database/stubdb.sqlite', __DIR__ . '/../../../../database/testing.sqlite');
+}
+catch(\Exception $e)
+{
+throw new \Exception(sprintf(&amp;quot;Error seeding the database %s&amp;quot;, $e-&amp;gt;getMessage()));
+}
+}
+&lt;/code>&lt;/pre>&lt;p>So as we test the ui or api we can reload the data.&lt;/p>
+&lt;p>#Behat / Laravel&lt;/p>
+&lt;p>This package &lt;a href="https://github.com/GuilhermeGuitte/behat-laravel">https://github.com/GuilhermeGuitte/behat-laravel&lt;/a>&lt;/p>
+&lt;p>This integrates behat into artisan command line helping with environment settings for behat.&lt;/p></description></item><item><title>Quick Gulp file to run php-unit tests</title><link>https://alfrednutile.info/posts/85/</link><pubDate>Sun, 25 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/85/</guid><description>&lt;p>&lt;strong>MUCH BETTER WAY &lt;a href="https://gist.github.com/laracasts/8659865">HERE&lt;/a>&lt;/strong>&lt;/p>
+&lt;hr>
+&lt;p>This is setup for Laravel but can work for any app. Most of this is due to the great &lt;a href="https://laracasts.com/lessons/gulp-this">Laracasts on Gulp&lt;/a>&lt;/p>
+&lt;p>Download and setup gulp&lt;/p>
+&lt;p>First make a package.json file in the root of your app and just put curly brackets in it.&lt;/p>
+&lt;pre>&lt;code>touch package.json
 vim package.json
-//package.json
+&lt;/code>&lt;/pre>&lt;pre>&lt;code>//package.json
 {
 }
-Then run the needed node commands
-npm install -g gulp
+&lt;/code>&lt;/pre>&lt;p>Then run the needed node commands&lt;/p>
+&lt;pre>&lt;code>npm install -g gulp
 npm install gulp --save-dev
 npm install gulp-notify --save-dev
 npm install gulp-phpunit --save-dev
-Now the package.</description></item><item><title>Guard, Laravel and phpunit</title><link>https://alfrednutile.info/posts/51/</link><pubDate>Wed, 05 Feb 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/51/</guid><description>If you already have rvm install this should be easy. Otherwise google that pain.
-I set my rvm to ruby 2.0 but not sure if needed
-rvm --default use 2.0
-http://rvm.io/rubies/default
-Then I made a Gemfile in the root folder and add this content
-and run bundle install
-After that was in place I ran guard init to get going and then pasted this code into the Guard file it made.</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>Now the package.json should look like this thanks to the save switch.&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;devDependencies&amp;quot;: {
+&amp;quot;gulp&amp;quot;: &amp;quot;^3.6.2&amp;quot;,
+&amp;quot;gulp-phpunit&amp;quot;: &amp;quot;^0.5.3&amp;quot;,
+&amp;quot;gulp-notify&amp;quot;: &amp;quot;^1.3.0&amp;quot;
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Now to setup the gulpfile, again in the root of your app&lt;/p>
+&lt;pre>&lt;code>//gulpfile.js
+var phpunit = require('gulp-phpunit');
+var gulp = require('gulp'),
+notify = require('gulp-notify'),
+phpunit = require('gulp-phpunit');
+gulp.task('phpunit', function() {
+var options = {debug: false, notify: true};
+gulp.src('app/tests/*.php')
+.pipe(phpunit('', options))
+.on('error', notify.onError({
+title: &amp;quot;Failed Tests!&amp;quot;,
+message: &amp;quot;Error(s) occurred during testing...&amp;quot;
+}));
+});
+gulp.task('default', function(){
+gulp.run('phpunit');
+gulp.watch('app/**/*.php', function(){
+gulp.run('phpunit');
+});
+});
+&lt;/code>&lt;/pre>&lt;p>Basically we are saying watch the app folder recursively for file changes to files ending in php then run all the tests in app/tests/*.php.&lt;/p>
+&lt;p>Finally run gulp at the command line and it will run keeping an eye on changes.&lt;/p>
+&lt;pre>&lt;code>gulp
+&lt;/code>&lt;/pre>&lt;p>That is it. From here you will get typically phpunit output as you work BUT also a notice if you break something.&lt;/p></description></item><item><title>Guard, Laravel and phpunit</title><link>https://alfrednutile.info/posts/51/</link><pubDate>Wed, 05 Feb 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/51/</guid><description>&lt;p>If you already have rvm install this should be easy. Otherwise google that pain.&lt;/p>
+&lt;p>I set my rvm to ruby 2.0 but not sure if needed&lt;/p>
+&lt;div class="code">
+&lt;p>rvm --default use 2.0&lt;/p>
+&lt;/div>
+&lt;p>&lt;a href="http://rvm.io/rubies/default" target="_blank">http://rvm.io/rubies/default&lt;/a>&lt;/p>
+&lt;p>Then I made a Gemfile in the root folder and add this content&lt;/p>
+&lt;script src="https://gist.github.com/alnutile/4ce81981e7bfe298de4e.js">&lt;/script>
+&lt;p>and run bundle install&lt;/p>
+&lt;p>After that was in place I ran guard init to get going and then pasted this code into the Guard file it made.&lt;/p>
+&lt;script src="https://gist.github.com/alnutile/8831791.js">&lt;/script>
+&lt;p>So now my root folder has a guard file and it is looking for changes both in app/tests and app/* If the change happens in app/* other than tests it looks for the related *Test.php for that Controller or Model etc It also pops up a notification so you can see all is green or red as you work.&lt;/p>
+&lt;p>&amp;nbsp;&lt;/p>
+&lt;p>&amp;nbsp;&lt;/p>
+&lt;p>Now you are finally ready to run guard&amp;nbsp;&lt;/p>
+&lt;p>bundle exe guard&amp;nbsp;&lt;/p>
+&lt;p>and that should start up guard&lt;/p>
+&lt;p>&amp;nbsp;&lt;/p></description></item></channel></rss>

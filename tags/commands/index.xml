@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>commands on Alfred Nutile</title><link>https://alfrednutile.info/tags/commands/</link><description>Recent content in commands on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 29 May 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/commands/index.xml" rel="self" type="application/rss+xml"/><item><title>Writing Commands and Scheduling in Laravel 5.1</title><link>https://alfrednutile.info/posts/146/</link><pubDate>Fri, 29 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/146/</guid><description>Wow, writing Artisan Commands just become even easier. And plugging it into Scheduler makes for a great combination.
-For example we need to clean out a folder every so many minutes. The example below I also for fun play around with progress and table output.
-Note too protected $signature = 'approve:cleanuploads {--minutes=10}'; simplifies theargument and options features.
-&amp;lt;?php namespace App\Console\Commands;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>commands on Alfred Nutile</title><link>https://alfrednutile.info/tags/commands/</link><description>Recent content in commands on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 29 May 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/commands/index.xml" rel="self" type="application/rss+xml"/><item><title>Writing Commands and Scheduling in Laravel 5.1</title><link>https://alfrednutile.info/posts/146/</link><pubDate>Fri, 29 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/146/</guid><description>&lt;p>Wow, writing &lt;a href="http://laravel.com/docs/master/artisan#command-structure">Artisan Commands&lt;/a> just become even easier. And plugging it into &lt;a href="http://laravel.com/docs/master/scheduling">Scheduler&lt;/a> makes for a great combination.&lt;/p>
+&lt;p>For example we need to clean out a folder every so many minutes. The example below I also for fun play around with &lt;code>progress&lt;/code> and table output.&lt;/p>
+&lt;p>Note too &lt;code>protected $signature = 'approve:cleanuploads {--minutes=10}';&lt;/code> simplifies the&lt;code>argument&lt;/code> and &lt;code>options&lt;/code> features.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php namespace App\Console\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -76,4 +76,32 @@ public function setDeleted($deleted)
 $this-&amp;gt;deleted[] = $deleted;
 }
 }
-Then in the Kernel.</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>Then in the Kernel.php I enter&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php namespace Approve\Console;
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+class Kernel extends ConsoleKernel
+{
+/**
+* The Artisan commands provided by your application.
+*
+* @var array
+*/
+protected $commands = [
+'App\Console\Commands\CleanUploadsCommands'
+];
+/**
+* Define the application's command schedule.
+*
+* @param \Illuminate\Console\Scheduling\Schedule $schedule
+* @return void
+*/
+protected function schedule(Schedule $schedule)
+{
+$schedule-&amp;gt;command('approve:cleanuploads --minutes=10')
+-&amp;gt;everyMinute();
+}
+}
+&lt;/code>&lt;/pre>&lt;p>And that is it.&lt;/p>
+&lt;p>One big thing about Commands is the power of Asynchronous processing that libraries like &lt;a href="http://symfony.com/doc/current/components/process.html">Symfony Process&lt;/a> gives us the ability to run numerous commands at once!&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/cu1v0wl61ul29qr/cleanFiles.gif?dl=0" alt="running">&lt;/p></description></item></channel></rss>

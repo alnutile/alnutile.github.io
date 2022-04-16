@@ -1,10 +1,61 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>rails on Alfred Nutile</title><link>https://alfrednutile.info/tags/rails/</link><description>Recent content in rails on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 03 Sep 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/rails/index.xml" rel="self" type="application/rss+xml"/><item><title>Heroku in Heroku</title><link>https://alfrednutile.info/posts/30/</link><pubDate>Tue, 03 Sep 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/30/</guid><description>As I build out these sites I had to run heroku commands on heroku since the admin site needs to setup Domains and Subdomain on each new site. I was glad they had the&amp;nbsp;https://github.com/heroku/heroku.rb&amp;nbsp;gem&amp;nbsp;that made it possible to make an interface for administrators to add domains and subdomains to their heroku site.&amp;nbsp;
-In my controller I included the heroku-api as the node on the github page.
-After that, on an update or a create I check if the domain exists.</description></item><item><title>HerokuApps and Multiple Domains</title><link>https://alfrednutile.info/posts/27/</link><pubDate>Sun, 01 Sep 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/27/</guid><description>There are some great docs online for figuring out how to setup heroku domains.
-https://devcenter.heroku.com/articles/custom-domains as well as others.
-The feature I had to get setup was that for every new herokuapp I spun up under my account/clients account it had to make a sub-domain under that SaaS owners zone/domain.
-For example the owner wanted all of these apps to show up under freesurvey.com (not really but just an example url)&amp;nbsp;so each one they spun up would be, for example yoursite.</description></item><item><title>Going Angular.js</title><link>https://alfrednutile.info/posts/2/</link><pubDate>Fri, 12 Apr 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/2/</guid><description>Going Angular
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>rails on Alfred Nutile</title><link>https://alfrednutile.info/tags/rails/</link><description>Recent content in rails on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 03 Sep 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/rails/index.xml" rel="self" type="application/rss+xml"/><item><title>Heroku in Heroku</title><link>https://alfrednutile.info/posts/30/</link><pubDate>Tue, 03 Sep 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/30/</guid><description>&lt;p>As I build out these sites I had to run heroku commands on heroku since the admin site needs to setup Domains and Subdomain on each new site. I was glad they had the&amp;nbsp;&lt;a href="https://github.com/heroku/heroku.rb" target="_blank">https://github.com/heroku/heroku.rb&lt;/a>&amp;nbsp;gem&amp;nbsp;that made it possible to make an interface for administrators to add domains and subdomains to their heroku site.&amp;nbsp;&lt;/p>
+&lt;p>In my controller I included the heroku-api as the node on the github page.&lt;/p>
+&lt;script src="https://gist.github.com/alnutile/f487851c7dd0cb01a4fb.js">&lt;/script>
+&lt;p>After that, on an update or a create I check if the domain exists.&lt;/p>
+&lt;p>There was another post on github in the issue queue to help me figure out how to &lt;strong>rescue out of an error&lt;/strong>. Ideally though I would direct the user back to the edit page with an error message or autocomplete as they type. But right now I save their settings to the Partner model and show the error.&lt;/p>
+&lt;p>This allows me to use the &amp;quot;heroku domain:add --app APPNAME domain_name&amp;quot; command from within the app.&lt;/p>
+&lt;p>Setting up the ENV variables are explained on setting up heroku pages like this one&amp;nbsp;&lt;a href="https://devcenter.heroku.com/articles/config-vars" target="_blank">https://devcenter.heroku.com/articles/config-vars&lt;/a>&amp;nbsp;so you can do this at the command line and note store it in a file on git.&amp;nbsp;&lt;/p></description></item><item><title>HerokuApps and Multiple Domains</title><link>https://alfrednutile.info/posts/27/</link><pubDate>Sun, 01 Sep 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/27/</guid><description>&lt;p>There are some great docs online for figuring out how to setup heroku domains.&lt;/p>
+&lt;p>&lt;a href="https://devcenter.heroku.com/articles/custom-domains">https://devcenter.heroku.com/articles/custom-domains&lt;/a> as well as others.&lt;/p>
+&lt;p>The feature I had to get setup was that for &lt;strong>every new herokuapp&lt;/strong> I spun up under my account/clients account it had to make a sub-domain under that SaaS owners zone/domain.&lt;/p>
+&lt;p>For example the owner wanted all of these apps to show up under freesurvey.com (not really but just an example url)&amp;nbsp;so each one they spun up would be, for example yoursite.freesurvey.com but also later the person who &amp;quot;subscribed&amp;quot; for the product&amp;nbsp;can also use their real domain like www.mysite.com or survey.mysite.com so it would be fully branded under their name as well.&lt;/p>
+&lt;p>The interface for the owner and the subscriber would allow them to do 2 things. One they could enter the sub-domain they wanted eg &amp;quot;yoursite&amp;quot; as long as it was free to use in the owners domain name spacing eg &amp;quot;freesurvey.com&amp;quot;. Just as you see with basecamp or freshbooks. Second they had a field to enter a full domain they wanted to point here as well eg &amp;quot;survey.mysite.com&amp;quot; to quickly setup the subscriber if they were ready to do that. &amp;nbsp;Keeping in mind each site is a new herokuapp which is really a new IP address. And heroku does not suggest the use of this IP address but to use the herokuapp name as I use below.&lt;/p>
+&lt;p>After clicking save a few things took place.&lt;/p>
+&lt;ol>
+&lt;li>A new herokuapp was spun up from the master git branch&amp;nbsp;&lt;/li>
+&lt;li>The herokuapp was given a name that is available from heroku, in my case I ran &amp;quot;heroku create --app NAMEHERE&lt;sup>1&lt;/sup>&amp;quot; using a name the script would produce that I am about 99% sure was available at heroku. But at this point it could just use the one heroku gives it and pass it back to the script.&lt;/li>
+&lt;li>During the heroku install the&amp;nbsp;zerigo_dns addon was added.&amp;nbsp;&lt;/li>
+&lt;li>The script then adds a domain to heroku via the command &amp;quot;heroku domains:add&amp;nbsp;NAMEHERE.freesurvey.com&amp;quot;&amp;nbsp;this automatically submits that domain via the add on &amp;quot;&lt;a href="http://zerigo_dns" target="_blank">zerigo_dns&lt;/a>&amp;quot; so now my DNS records for that domain &amp;quot;freesurvey.com&amp;quot; includes a CNAME to NAMEHERE.freesurvey.com that points to proxy.heroku.com. The benefit here is that I can do this all in the script at the command line and API to setup the herokuapp so it will respond to the this domain, and the DNS so that it knows of this new subdomain and what to do with it.&lt;br />
+&lt;br />
+A Wildcard DNS record for freesurvey.com would not have worked since each record points to the herokoapp which is it&amp;#39;s own domain/IP. So NAMEHERE&lt;strong>1&lt;/strong>.herokuapp.com and&amp;nbsp;NAMEHERE&lt;strong>2&lt;/strong>.herokuapp.com&amp;nbsp;are typically&amp;nbsp;a different server and IP. I did not want all of these sites on one server and I wanted to use a Paas provider like heroku for reasons I note &lt;a href="http://www.alfrednutile.info/posts/23" target="_blank">here&lt;/a>&amp;nbsp;.&amp;nbsp;&lt;/li>
+&lt;li>Finally when the client who now uses this site is ready to point it to their own domain/zone they enter into the form &amp;quot;survey.mydomain.com&amp;quot; and this registers with the herokuapp via the command &amp;quot;heroku domains:add&amp;nbsp;survey.mydomain.com&amp;quot;&amp;nbsp;to accept requests from this domain and point it to &amp;quot;NAMEHERE.herokuapp.com&amp;quot;.&lt;br />
+&lt;br />
+So now it works for NAMEHERE.freesurvey.com, survey.mydomain.com and of course the name heroku was give to make the app&amp;nbsp;it&amp;nbsp;NAMEHERE.herokuapp.com. Of course the subscriber has to update their records that ONE time to point their CNAME survey.mydomain.com to ideally&amp;nbsp;NAMEHERE.herokuapp.com&lt;/li>
+&lt;/ol>
+&lt;p>&amp;nbsp;&lt;/p>
+&lt;p>Zerigo DNS&amp;nbsp;&lt;a href="https://devcenter.heroku.com/articles/zerigo_dns" target="_blank">https://devcenter.heroku.com/articles/zerigo_dns&lt;/a>&lt;/p>
+&lt;p>This was already setup for the client who owns the survey making SaaS site in this case for example &amp;quot;freesurvey.com&amp;quot; (not really this domain just an example)&lt;/p>
+&lt;p>So Zerigo was the Name Server&amp;nbsp;provider for this domain. And was linked to heroku account I made for the client.&amp;nbsp;&lt;/p>
+&lt;p>&amp;nbsp;&lt;/p>
+&lt;p>&lt;sup>1&lt;/sup>This name is made by Time.now.to_i via the ruby script prefixed with a consistent string of characters like freesurvey so I would end up with an App Name like freesurvey1234556789 which I could error check and make another until heroku says that was available. But that name is pretty rare so so far they are always available.&lt;/p></description></item><item><title>Going Angular.js</title><link>https://alfrednutile.info/posts/2/</link><pubDate>Fri, 12 Apr 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/2/</guid><description>&lt;p>Going Angular&lt;/p>
+&lt;p>
 Took some time to rewrite my drupal/bootstrap site into Angular.js and slim php.
 Using slim and a seed project I quickly had a rest api to get the different content types, Blog, Page etc.
 I am using the Page content type to make other dynamic parts to the site like Footer and Header.
-After a quick migration from drupal to a more basic MySQL db layout (soon mongodb?</description></item></channel></rss>
+&lt;/p>
+&lt;p>
+After a quick migration from drupal to a more basic MySQL db layout (soon mongodb?) I put together a Angular.js
+front end.&lt;/p>
+&lt;p>
+Still have a ton to learn about Angular and I figure this will only help. I will post some notes soon on Angular for a different
+project I am working on.
+&lt;/p>
+&lt;p>
+Some good links
+&lt;br>
+&lt;strong>Angular&lt;/strong>
+&lt;br>
+http://angularjs.org/
+&lt;br>
+They have a great tutorial there.
+&lt;br>
+&lt;strong>The Slim Rest skeleton here&lt;/strong>
+&lt;br>
+https://github.com/ccoenraets/angular-cellar
+&lt;br>
+&lt;strong>Great Seed for a Project&lt;/strong>
+&lt;br>
+https://github.com/angular/angular-seed
+&lt;br>
+This seems like it could have been a good starter to build out the site
+http://yeoman.io/
+But I already had a Twitter Bootstrap theme in place and ready.</description></item></channel></rss>

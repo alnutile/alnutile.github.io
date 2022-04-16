@@ -1,4 +1,115 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>orchestra on Alfred Nutile</title><link>https://alfrednutile.info/tags/orchestra/</link><description>Recent content in orchestra on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 01 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/orchestra/index.xml" rel="self" type="application/rss+xml"/><item><title>Getting Started with Orchestra Testbench for Laravel Package Development</title><link>https://alfrednutile.info/posts/241/</link><pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/241/</guid><description>The goal of this article will allow one to setup a stand alone package working with it&amp;rsquo;s own tests and has access to all of the normal Laravel workflows outside of Laravel. So you can build it using the easier conventions and helpers Laravel offers.
-Since my work will include database usage I will grab both packages:
-composer require --dev &amp;quot;orchestra/testbench:&amp;lt;=3.5&amp;quot; &amp;quot;orchestra/database:v3.5.0&amp;quot;
-I will setup my composer.json after this as such:</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>orchestra on Alfred Nutile</title><link>https://alfrednutile.info/tags/orchestra/</link><description>Recent content in orchestra on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 01 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/orchestra/index.xml" rel="self" type="application/rss+xml"/><item><title>Getting Started with Orchestra Testbench for Laravel Package Development</title><link>https://alfrednutile.info/posts/241/</link><pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/241/</guid><description>&lt;p>The goal of this article will allow one to setup a stand alone package working with it&amp;rsquo;s own tests and has access to all of the normal Laravel workflows outside of Laravel. So you can build it using the easier conventions and helpers Laravel offers.&lt;/p>
+&lt;p>Since my work will include database usage I will grab both packages:&lt;/p>
+&lt;pre>&lt;code>composer require --dev &amp;quot;orchestra/testbench:&amp;lt;=3.5&amp;quot; &amp;quot;orchestra/database:v3.5.0&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>I will setup my &lt;code>composer.json&lt;/code> after this as such:&lt;/p>
+&lt;pre>&lt;code> &amp;quot;autoload-dev&amp;quot;: {
+&amp;quot;psr-4&amp;quot;: {
+&amp;quot;Tests\\&amp;quot;: &amp;quot;tests/&amp;quot;
+}
+}
+&lt;/code>&lt;/pre>&lt;p>This way my classes will just have the Tests namespace.&lt;/p>
+&lt;p>And then add &lt;code>tests/TestCase.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace Tests;
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\StreamHandler;
+use Mockery;
+use AlfredNutileInc\HPClient\HubPlannerProvider;
+class TestCase extends \Orchestra\Testbench\TestCase
+{
+/**
+* Load any providers I am offering
+*/
+protected function getPackageProviders($app)
+{
+return
+[
+HubPlannerProvider::class,
+];
+}
+public function setUp()
+{
+parent::setUp();
+//I can load any local factories if I want to
+//$this-&amp;gt;withFactories(__DIR__ . '/../database/factories');
+//make the bast path under tests folder
+$this-&amp;gt;app-&amp;gt;setBasePath(__DIR__ . '/../');
+//Because I use dynamic facades
+\File::makeDirectory(base_path(&amp;quot;storage/framework/cache&amp;quot;), 0755, true, true);
+//I can deliver routes for testing
+//$this-&amp;gt;app['router']-&amp;gt;get('example', function () {
+// return view(&amp;quot;testing&amp;quot;);
+//})-&amp;gt;name('featured');
+//Load a view for testing
+//\View::addLocation(__DIR__ . '/../views');
+//$this-&amp;gt;loadLaravelMigrations(['--database' =&amp;gt; 'testing']);
+//Any migrations I need to bring in
+$this-&amp;gt;loadMigrationsFrom([
+'--database' =&amp;gt; 'testing',
+'--path' =&amp;gt; realpath(__DIR__ . '/migrations')
+]);
+//$output = $this-&amp;gt;artisan('migrate', ['--database' =&amp;gt; 'testing']);
+}
+/**
+* Setup logging
+*/
+protected function getEnvironmentSetUp($app)
+{
+$app-&amp;gt;configureMonologUsing(function ($monolog) {
+$path = __DIR__ . &amp;quot;/logs/laravel.log&amp;quot;;
+$handler = $handler = new StreamHandler($path, 'debug');
+$handler-&amp;gt;setFormatter(tap(new LineFormatter(null, null, true, true), function ($formatter) {
+/** @var LineFormatter $formatter */
+$formatter-&amp;gt;includeStacktraces();
+}));
+/** @var \Monolog\Logger $monolog */
+$monolog-&amp;gt;pushHandler($handler);
+});
+//setup db config if needed
+//$app['config']-&amp;gt;set('database.default', 'testbench');
+//$app['config']-&amp;gt;set('database.connections.testbench', [
+// 'driver' =&amp;gt; 'sqlite',
+// 'database' =&amp;gt; ':memory:',
+// 'prefix' =&amp;gt; '',
+//]);
+$app['config']-&amp;gt;set('app.debug', env('APP_DEBUG', true));
+//Does my pacakge had any default configurations I want to set
+//$app['config']-&amp;gt;set('laravel-feature-flag.logging', true);
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Also:&lt;/p>
+&lt;pre>&lt;code>composer require --dev &amp;quot;mockery/mockery:0.9.*&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>Since I use this a lot to mock and it does not come with &amp;ldquo;orchestra/testbench&amp;rdquo;&lt;/p>
+&lt;p>Now I am ready to run tests.&lt;/p>
+&lt;p>Here is a sample on&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace Tests\Feature;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use AlfredNutileInc\HPClient\UserFromResource;
+use function GuzzleHttp\json_decode;
+class UserFromResourceTest extends TestCase
+{
+use UserFromResource;
+public function testResultsFromPayload()
+{
+$users = \File::get(base_path(&amp;quot;tests/fixtures/resources.json&amp;quot;));
+$payload = \File::get(base_path(&amp;quot;tests/fixtures/comments_report_limited.json&amp;quot;));
+$results = $this-&amp;gt;transformResouceToResourceName(json_decode($payload, true), json_decode($users, true));
+$result = array_first($results);
+$this-&amp;gt;assertArrayHasKey('user_name', $result);
+$this-&amp;gt;assertEquals('Rob Sherali', $result['user_name']);
+}
+}
+&lt;/code>&lt;/pre>&lt;p>I can easily use Facades, helpers etc that I am use to from Laravel.
+And I can see logs in &lt;code>logs/laravel.log&lt;/code>&lt;/p>
+&lt;p>Also I add&lt;/p>
+&lt;pre>&lt;code> &amp;lt;php&amp;gt;
+&amp;lt;env name=&amp;quot;APP_ENV&amp;quot; value=&amp;quot;testing&amp;quot;/&amp;gt;
+&amp;lt;env name=&amp;quot;CACHE_DRIVER&amp;quot; value=&amp;quot;array&amp;quot;/&amp;gt;
+&amp;lt;env name=&amp;quot;SESSION_DRIVER&amp;quot; value=&amp;quot;array&amp;quot;/&amp;gt;
+&amp;lt;env name=&amp;quot;QUEUE_DRIVER&amp;quot; value=&amp;quot;sync&amp;quot;/&amp;gt;
+&amp;lt;env name=&amp;quot;MAIL_DRIVER&amp;quot; value=&amp;quot;array&amp;quot;/&amp;gt;
+&amp;lt;/php&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>To my &lt;code>phpunit.xml.dist&lt;/code> so it can set defaults as Laravel does.&lt;/p></description></item></channel></rss>

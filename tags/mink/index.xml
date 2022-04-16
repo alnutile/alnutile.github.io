@@ -1,15 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>mink on Alfred Nutile</title><link>https://alfrednutile.info/tags/mink/</link><description>Recent content in mink on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 30 Jan 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/mink/index.xml" rel="self" type="application/rss+xml"/><item><title>Using headless tests with Mink and Behat</title><link>https://alfrednutile.info/posts/9/</link><pubDate>Thu, 30 Jan 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/9/</guid><description>Took a bit to find the right setting.
-The yml file should look like
-default:
-&amp;nbsp; paths:
-&amp;nbsp; &amp;nbsp; features: &amp;#39;features&amp;#39;
-&amp;nbsp; extensions:
-&amp;nbsp; &amp;nbsp; Behat\MinkExtension\Extension:
-&amp;nbsp; &amp;nbsp; &amp;nbsp; goutte:
-&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; guzzle_parameters:
-&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; curl.options:
-&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; CURLOPT_PORT: 8000
-&amp;nbsp; &amp;nbsp; &amp;nbsp; selenium2: ~
-&amp;nbsp; &amp;nbsp; &amp;nbsp; base_url: &amp;#39;http://localhost:8000&amp;#39;
-&amp;nbsp; &amp;nbsp; &amp;nbsp; browser_name: safari
-This way the goutte driver will use the correct port.</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>mink on Alfred Nutile</title><link>https://alfrednutile.info/tags/mink/</link><description>Recent content in mink on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 30 Jan 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/mink/index.xml" rel="self" type="application/rss+xml"/><item><title>Using headless tests with Mink and Behat</title><link>https://alfrednutile.info/posts/9/</link><pubDate>Thu, 30 Jan 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/9/</guid><description>&lt;p>Took a bit to find the right setting.&lt;/p>
+&lt;p>The yml file should look like&lt;/p>
+&lt;blockquote>
+&lt;p>default:&lt;br />
+&amp;nbsp; paths:&lt;br />
+&amp;nbsp; &amp;nbsp; features: &amp;#39;features&amp;#39;&lt;br />
+&amp;nbsp; extensions:&lt;br />
+&amp;nbsp; &amp;nbsp; Behat\MinkExtension\Extension:&lt;br />
+&amp;nbsp; &amp;nbsp; &amp;nbsp; goutte:&lt;br />
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; guzzle_parameters:&lt;br />
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; curl.options:&lt;br />
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; CURLOPT_PORT: 8000&lt;br />
+&amp;nbsp; &amp;nbsp; &amp;nbsp; selenium2: ~&lt;br />
+&amp;nbsp; &amp;nbsp; &amp;nbsp; base_url: &amp;#39;http://localhost:8000&amp;#39;&lt;br />
+&amp;nbsp; &amp;nbsp; &amp;nbsp; browser_name: safari&lt;/p>
+&lt;/blockquote>
+&lt;p>This way the goutte driver will use the correct port. Where as the base_url setting only seems to apply to that @javascript tag. Thanks to&amp;nbsp;&lt;a href="https://groups.google.com/forum/#!msg/behat/WCalw_TIjpo/FyaOjVfZP8IJ" target="_blank">https://groups.google.com/forum/#!msg/behat/WCalw_TIjpo/FyaOjVfZP8IJ&lt;/a>&lt;/p></description></item></channel></rss>

@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>aws on Alfred Nutile</title><link>https://alfrednutile.info/tags/aws/</link><description>Recent content in aws on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 06 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/aws/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Python Lambda behind and ALB</title><link>https://alfrednutile.info/posts/266/</link><pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/266/</guid><description>Just a quick note to self about ALB and Lambda. When using Lambda behind and ALB for routing your response has to be formatted properly else you will get a 502.
-https://pypi.org/project/alb-response/ solved this problem.
-from alb_response import alb_response
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>aws on Alfred Nutile</title><link>https://alfrednutile.info/tags/aws/</link><description>Recent content in aws on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 06 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/aws/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Python Lambda behind and ALB</title><link>https://alfrednutile.info/posts/266/</link><pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/266/</guid><description>&lt;p>Just a quick note to self about ALB and Lambda. When using Lambda behind and ALB for routing your response has to be formatted properly else you will get a 502.&lt;/p>
+&lt;p>&lt;a href="https://pypi.org/project/alb-response">https://pypi.org/project/alb-response/&lt;/a> solved this problem.&lt;/p>
+&lt;pre>&lt;code>from alb_response import alb_response
 def lambda_handler(event, context):
 response_dict = process_the_event(event)
 return alb_response(
@@ -8,32 +8,62 @@ http_status=200,
 json=response_dict,
 is_base64_encoded=False,
 )
-The results are easy enough to do by hand but I had a bit of time really finding out the format to respond with other than JavaScript and that casing there was a bit confusing.</description></item><item><title>Lambda Tips</title><link>https://alfrednutile.info/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/264/</guid><description>@WIP
-Taking advantage of a running Lambda function and it&amp;rsquo;s state https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/ under the section Lambda function has a nice &amp;ldquo;trick&amp;rdquo; of setting above the class app = None
-then later on it will see if that is set
-def lambda_handler(event, context):
+&lt;/code>&lt;/pre>&lt;p>The results are easy enough to do by hand but I had a bit of time really finding out the format to respond with other than JavaScript and that casing there was a bit confusing.&lt;/p></description></item><item><title>Lambda Tips</title><link>https://alfrednutile.info/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/264/</guid><description>&lt;p>@WIP&lt;/p>
+&lt;h2 id="taking-advantage-of-a-running-lambda-function-and-its-state">Taking advantage of a running Lambda function and it&amp;rsquo;s state&lt;/h2>
+&lt;p>&lt;a href="https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/">https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/&lt;/a> under the section &lt;strong>Lambda function&lt;/strong> has a nice &amp;ldquo;trick&amp;rdquo; of setting above the class &lt;code>app = None&lt;/code>&lt;/p>
+&lt;p>then later on it will see if that is set&lt;/p>
+&lt;pre>&lt;code>def lambda_handler(event, context):
 global app
 # Initialize app if it doesn't yet exist
 if app is None:
 print(&amp;quot;Loading config and creating new MyApp...&amp;quot;)
 config = load_config(full_config_path)
 app = MyApp(config)
-return &amp;quot;MyApp config is &amp;quot; + str(app.</description></item><item><title>Cognito and OAuth</title><link>https://alfrednutile.info/posts/261/</link><pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/261/</guid><description>make your App Client
-Make sure to check
-Make some scopes uner Resource Server
-Then &amp;ldquo;App Client Settings&amp;rdquo;
-Connect it to &amp;ldquo;Cognito User Pool&amp;rdquo;
-And choose &amp;ldquo;Client Credentials&amp;rdquo; from &amp;ldquo;Allowed OAuth Flow&amp;rdquo; choosing some scopes</description></item><item><title>Deploying Fargate</title><link>https://alfrednutile.info/posts/259/</link><pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/259/</guid><description>Just some notes on the process. This will show how to deploy both a Staging build and then Production.
-Staging Staging is done by TravisCI after all tests pass
-Here is the gist of it the deploy step calls to a bash file.
-deploy:
+return &amp;quot;MyApp config is &amp;quot; + str(app.get_config()._sections)
+&lt;/code>&lt;/pre>&lt;p>If it is set it will not try to set it again but take advantage of the state and use it.&lt;/p>
+&lt;h2 id="keep-warm">Keep Warm&lt;/h2>
+&lt;p>&lt;a href="https://read.acloud.guru/how-to-keep-your-lambda-functions-warm-9d7e1aa6e2f0">https://read.acloud.guru/how-to-keep-your-lambda-functions-warm-9d7e1aa6e2f0&lt;/a>&lt;/p>
+&lt;p>You can set a bunch of schedulers and your Lambda function can check for the context of the request. If it is a scheduler event then just reply OK otherwise it should do what it normally would do.&lt;/p>
+&lt;pre>&lt;code>import boto3
+from config import Config
+class KeepAwake:
+def __init__(self):
+&amp;quot;&amp;quot;&amp;quot; keey awake &amp;quot;&amp;quot;&amp;quot;
+self.config = Config()
+self.region = self.config.region
+self.app_env = self.config.app_env
+self.client = boto3.client('lambda', region_name=self.region)
+self.functions = [
+&amp;quot;foo&amp;quot;,
+&amp;quot;bar&amp;quot;,
+]
+def run(self):
+&amp;quot;&amp;quot;&amp;quot; interate over lambda functions &amp;quot;&amp;quot;&amp;quot;
+for lam in self.functions:
+print(&amp;quot;Invoking &amp;quot;, lam)
+self.client.invoke(
+FunctionName=lam,
+InvocationType=&amp;quot;Event&amp;quot;
+)
+print(&amp;quot;Invoked &amp;quot;, lam)
+&lt;/code>&lt;/pre>&lt;p>Is another way to look around and call those functions.&lt;/p></description></item><item><title>Cognito and OAuth</title><link>https://alfrednutile.info/posts/261/</link><pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/261/</guid><description>&lt;p>make your App Client&lt;/p>
+&lt;p>Make sure to check&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/b41fgm4avehxkar/cog_app_client.png?dl=0" alt="">&lt;/p>
+&lt;p>Make some scopes uner Resource Server&lt;/p>
+&lt;p>Then &amp;ldquo;App Client Settings&amp;rdquo;&lt;/p>
+&lt;p>Connect it to &amp;ldquo;Cognito User Pool&amp;rdquo;&lt;/p>
+&lt;p>And choose &amp;ldquo;Client Credentials&amp;rdquo; from &amp;ldquo;Allowed OAuth Flow&amp;rdquo; choosing some scopes&lt;/p></description></item><item><title>Deploying Fargate</title><link>https://alfrednutile.info/posts/259/</link><pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/259/</guid><description>&lt;p>Just some notes on the process. This will show how to deploy both a Staging build and then Production.&lt;/p>
+&lt;h2 id="staging">Staging&lt;/h2>
+&lt;p>Staging is done by TravisCI after all tests pass&lt;/p>
+&lt;p>Here is the gist of it the deploy step calls to a bash file.&lt;/p>
+&lt;pre>&lt;code>deploy:
 skip_cleanup: true
 provider: script
 script: bash deploy/travis_deploy.sh
 on:
 branch: mainline
-Then
-#!/usr/bin/env bash
+&lt;/code>&lt;/pre>&lt;p>Then&lt;/p>
+&lt;pre>&lt;code>#!/usr/bin/env bash
 # Bail out on first error
 set -e
 ## Get the directory of the build script
@@ -41,11 +71,178 @@ DIR=&amp;quot;$( cd &amp;quot;$( dirname &amp;quot;${BASH_SOURCE[0]}&amp;quot; )
 ## Get the current git commit sha
 HASH=$(git rev-parse HEAD)
 ## Get any secret files
-aws s3 cp s3://foo/environments/$STACK_ENV_FILE $DIR/app/packaged/.</description></item><item><title>Dusk Screenshots to S3 of Failing tests</title><link>https://alfrednutile.info/posts/248/</link><pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/248/</guid><description>I can be really annoying to troubleshoot a failed test in Dusk when using CI systems. What I ended up doing was setting up my project to send these files to S3 on fail.
-Here are the steps
-Setup You App This is just S3 storage so make sure you have a bucket and a folder in the bucket to write to. Basically for AWS you make an IAM with a key and secret and let it read/write to this folder.</description></item><item><title>Lambda and Github Webhooks</title><link>https://alfrednutile.info/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/245/</guid><description>Related to https://developer.github.com/webhooks/ and pushing data to Lambda AWS.
-I can check the token by just having this check in my handler.
-const crypto = require('crypto');
+aws s3 cp s3://foo/environments/$STACK_ENV_FILE $DIR/app/packaged/.env
+##we only want non-dev vendors
+composer config -g github-oauth.github.com $GITHUB_TOKEN &amp;amp;&amp;amp; composer install --no-dev
+echo &amp;quot;Region $STACK_AWS_REGION is the target region&amp;quot;
+eval $(aws ecr get-login --no-include-email --region $STACK_AWS_REGION)
+echo &amp;quot;Tagging images $STACK_APP_NAME&amp;quot;
+docker build --pull -t $STACK_APP_NAME .
+docker tag $STACK_APP_NAME:latest 1111111111.dkr.ecr.$STACK_AWS_REGION.amazonaws.com/$STACK_APP_NAME:latest
+echo &amp;quot;Pushing up image $STACK_APP_NAME:latest&amp;quot;
+docker push 1111111111.dkr.ecr.us-east-1.amazonaws.com/$STACK_APP_NAME:latest
+## Now Run again for Production WILL COME BACK TO THIS IN A MOMENT
+## if production set???
+if [[ &amp;quot;$STACK_ENV_FILE_PRODUCTION&amp;quot; ]]; then
+echo &amp;quot;Running Production build&amp;quot;
+aws s3 cp s3://foo/environments/$STACK_ENV_FILE_PRODUCTION $DIR/app/packaged/.env
+echo &amp;quot;Building Production Image&amp;quot;
+docker build --pull -t $STACK_APP_NAME .
+docker tag $STACK_APP_NAME:latest 1111111111.dkr.ecr.us-east-1.amazonaws.com/$STACK_APP_NAME:production_$HASH
+echo &amp;quot;Pushing up production image using has production_$HASH&amp;quot;
+docker push 1111111111.dkr.ecr.us-east-1.amazonaws.com/$STACK_APP_NAME:production_$HASH
+fi
+&lt;/code>&lt;/pre>&lt;p>So Staging will build and push right to the AWS ECR which means Fargate by default will get the Latest tagged image since the TaskDefinition says so. So staging is done. Next task will run this one.&lt;/p>
+&lt;h2 id="production">Production&lt;/h2>
+&lt;p>This we want to happen by choice not by Travis. So you can see the step in Travis &lt;code>STACK_ENV_FILE_PRODUCTION&lt;/code> that looks for an environment variable and if true it will push the same working image but with it&amp;rsquo;s own secrets to ECR but with the tag &lt;code>production_GIT_HASH&lt;/code>&lt;/p>
+&lt;p>Then we ready we have a UI to push it BUT really it is just CloudFormation that updates the TaskDefinition using the build in Params to make it reference this HASH. This can be done pretty easily with Python, PHP etc and the AWS SDK that allows you to update CloudFormation and the Parameter that then fills in the TaskDefinition Field and updates it, from there the next time the Production Fargate runs it runs that latest version.&lt;/p>
+&lt;p>Example Task Definition:&lt;/p>
+&lt;pre>&lt;code> &amp;quot;TaskDefinition&amp;quot;: {
+&amp;quot;Type&amp;quot;: &amp;quot;AWS::ECS::TaskDefinition&amp;quot;,
+&amp;quot;Properties&amp;quot;: {
+&amp;quot;ExecutionRoleArn&amp;quot;: &amp;quot;&amp;quot;,
+&amp;quot;Memory&amp;quot;: 250,
+&amp;quot;NetworkMode&amp;quot;: &amp;quot;bridge&amp;quot;,
+&amp;quot;TaskRoleArn&amp;quot;: &amp;quot;arn:aws:iam::364215618558:role/foo&amp;quot;,
+&amp;quot;ContainerDefinitions&amp;quot;: [{
+&amp;quot;Name&amp;quot;: {
+&amp;quot;Fn::Sub&amp;quot;: &amp;quot;${AppName}-${AppEnv}&amp;quot;
+},
+&amp;quot;Image&amp;quot;: {
+&amp;quot;Fn::Sub&amp;quot;: &amp;quot;${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${AppName}:${ProductionTag}&amp;quot;
+},
+&amp;quot;PortMappings&amp;quot;: [{
+&amp;quot;ContainerPort&amp;quot;: 80,
+&amp;quot;HostPort&amp;quot;: {
+&amp;quot;Ref&amp;quot;: &amp;quot;AppPort&amp;quot;
+}
+},
+{
+&amp;quot;ContainerPort&amp;quot;: 443,
+&amp;quot;HostPort&amp;quot;: {
+&amp;quot;Ref&amp;quot;: &amp;quot;AppPortSSL&amp;quot;
+}
+}
+],
+&amp;quot;Memory&amp;quot;: 250,
+&amp;quot;MountPoints&amp;quot;: [{
+&amp;quot;SourceVolume&amp;quot;: &amp;quot;shared&amp;quot;,
+&amp;quot;ContainerPath&amp;quot;: &amp;quot;/opt/shared&amp;quot;
+}]
+}],
+&amp;quot;Volumes&amp;quot;: [{
+&amp;quot;Name&amp;quot;: &amp;quot;shared&amp;quot;,
+&amp;quot;Host&amp;quot;: {
+&amp;quot;SourcePath&amp;quot;: &amp;quot;/opt/shared&amp;quot;
+}
+}]
+},
+&amp;quot;DependsOn&amp;quot;: [
+&amp;quot;ECR&amp;quot;
+]
+},
+&lt;/code>&lt;/pre>&lt;p>So when I update this I can just update the &lt;code>ProductionTag&lt;/code> and this will take effect.&lt;/p></description></item><item><title>Dusk Screenshots to S3 of Failing tests</title><link>https://alfrednutile.info/posts/248/</link><pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/248/</guid><description>&lt;p>I can be really annoying to troubleshoot a failed test in Dusk when using CI systems. What I ended up doing was setting up my project to send these files to S3 on fail.&lt;/p>
+&lt;p>Here are the steps&lt;/p>
+&lt;h2 id="setup-you-app">Setup You App&lt;/h2>
+&lt;p>This is just S3 storage so make sure you have a bucket and a folder in the bucket to write to. Basically for AWS you make an IAM with a key and secret and let it read/write to this folder. Might look like this policy&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
+&amp;quot;Statement&amp;quot;: [
+{
+&amp;quot;Action&amp;quot;: [
+&amp;quot;s3:ListBucket&amp;quot;
+],
+&amp;quot;Resource&amp;quot;: [
+&amp;quot;arn:aws:s3:::your-bucket&amp;quot;
+],
+&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;
+},
+{
+&amp;quot;Action&amp;quot;: [
+&amp;quot;*&amp;quot;
+],
+&amp;quot;Resource&amp;quot;: [
+&amp;quot;arn:aws:s3:::your-bucket/*&amp;quot;
+],
+&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;
+}
+]
+}
+&lt;/code>&lt;/pre>&lt;p>or limited it just to the folder &lt;code>screenshots&lt;/code>&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
+&amp;quot;Statement&amp;quot;: [
+{
+&amp;quot;Action&amp;quot;: [
+&amp;quot;s3:ListAllMyBuckets&amp;quot;,
+&amp;quot;s3:HeadBucket&amp;quot;
+],
+&amp;quot;Resource&amp;quot;: &amp;quot;*&amp;quot;,
+&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
+&amp;quot;Sid&amp;quot;: &amp;quot;VisualEditor1&amp;quot;
+},
+{
+&amp;quot;Action&amp;quot;: [
+&amp;quot;s3:ListBucket&amp;quot;,
+&amp;quot;s3:GetBucketLocation&amp;quot;
+],
+&amp;quot;Resource&amp;quot;: [
+&amp;quot;arn:aws:s3:::your-bucket&amp;quot;,
+&amp;quot;arn:aws:s3:::your-bucket/*&amp;quot;
+],
+&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
+&amp;quot;Sid&amp;quot;: &amp;quot;VisualEditor0&amp;quot;
+},
+{
+&amp;quot;Action&amp;quot;: [
+&amp;quot;s3:GetObject&amp;quot;
+],
+&amp;quot;Resource&amp;quot;: [
+&amp;quot;arn:aws:s3:::your-bucket/screenshots&amp;quot;,
+&amp;quot;arn:aws:s3:::your-bucket/screenshots/*&amp;quot;
+],
+&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
+&amp;quot;Sid&amp;quot;: &amp;quot;VisualEditor2&amp;quot;
+}
+]
+}
+&lt;/code>&lt;/pre>&lt;p>Now in your &lt;code>tests/DuskTestCase.php&lt;/code> file add this:&lt;/p>
+&lt;pre>&lt;code> public function tearDown()
+{
+if (env(&amp;quot;TRAVIS&amp;quot;)) {
+$files = \File::files(base_path(&amp;quot;tests/Browser/screenshots&amp;quot;));
+if ($files) {
+foreach ($files as $file) {
+Storage::disk('travis_fails')
+-&amp;gt;put($file-&amp;gt;getFileName(), $file-&amp;gt;getContents());
+}
+}
+}
+parent::tearDown();
+}
+&lt;/code>&lt;/pre>&lt;p>This will run on Travis based tests saving files to the bucket.&lt;/p>
+&lt;p>I added to my &lt;code>config/filesystems.php&lt;/code> file this:&lt;/p>
+&lt;pre>&lt;code> 'disks' =&amp;gt; [
+'travis_fails' =&amp;gt; [
+'driver' =&amp;gt; 's3',
+'key' =&amp;gt; env('AWS_ACCESS_KEY_ID'),
+'secret' =&amp;gt; env('AWS_SECRET_ACCESS_KEY'),
+'region' =&amp;gt; &amp;quot;eu-west-1&amp;quot;,
+'root' =&amp;gt; &amp;quot;screenshots&amp;quot;,
+'bucket' =&amp;gt; 'foo-bucket',
+'url' =&amp;gt; env('AWS_URL'),
+],
+///
+&lt;/code>&lt;/pre>&lt;p>Now for TravisCI&lt;/p>
+&lt;h2 id="setup-travisci">Setup TravisCI&lt;/h2>
+&lt;p>Then in Travis under Settings -&amp;gt; Environment Variables we make sure to add our key and secret with the proper key format:&lt;/p>
+&lt;pre>&lt;code>AWS_SECRET_ACCESS_KEY=foo
+AWS_ACCESS_KEY_ID=bar
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/nez8f4hz4anmghl/Screenshot%202018-06-26%2009.36.26.png?dl=0" alt="">&lt;/p>
+&lt;h2 id="now-you-are-ready-to-fail">Now You are Ready to Fail!&lt;/h2>
+&lt;p>Ok so on your next fail you will see in your s3 bucket some of those super handy screenshots.&lt;/p></description></item><item><title>Lambda and Github Webhooks</title><link>https://alfrednutile.info/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/245/</guid><description>&lt;p>Related to &lt;a href="https://developer.github.com/webhooks/">https://developer.github.com/webhooks/&lt;/a> and pushing data to Lambda AWS.&lt;/p>
+&lt;p>I can check the token by just having this check in my handler.&lt;/p>
+&lt;pre>&lt;code>const crypto = require('crypto');
 exports.handler = (event, context, callback) =&amp;gt; {
 let headers = event.headers;
 let body = event.body;
@@ -67,11 +264,138 @@ return;
 let github_signature = headers['X-Hub-Signature'];
 if (
 github_signature === undefined ||
-typeof github_signature !</description></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alfrednutile.info/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/220/</guid><description>Sending Docker Commands to Get A Task Done This article will show how to get started with AWS Batch and Docker to spin up a &amp;ldquo;worker&amp;rdquo;
-By the time you are done reading it you will:
-Have a Docker image to run your command in. Deploy the Docker image to AWS ECR And Run a Task on the AWS Batch system, or a 100 tasks, does not matter. Finally you will have the scripts needed to fully build AWS Batch with CloudFormation, e.</description></item><item><title>Serverless and Custom Tags for Resources</title><link>https://alfrednutile.info/posts/217/</link><pubDate>Tue, 22 Aug 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/217/</guid><description>Because much of serveless.com is CloudFormation based, you can easily update existing resources. They talk about this feature here
-For me this was required for adding tags
-# you can add CloudFormation resource templates here
+typeof github_signature !== 'string' ||
+!github_signature.match(/sha1=\S+/)
+) {
+callback(null, {
+statusCode: 400,
+body: 'Missing X-Hub-Signature'
+});
+}
+let secret = process.env.SECRET;
+if (secret === undefined || secret.length &amp;lt; 1) {
+callback(null, {
+statusCode: 500,
+body: 'We are missing the secret in our server sorry'
+});
+return;
+}
+let signature = headers['X-Hub-Signature'];
+let computed_signature = crypto
+.createHmac('sha1', secret)
+.update(body)
+.digest('hex');
+if (`sha1=${computed_signature}` !== signature) {
+callback(null, {
+statusCode: 403,
+body: 'HMAC Output not Correct'
+});
+return;
+}
+//ready to process token
+callback(null, {
+statusCode: 204,
+body: 'OK'
+});
+};
+&lt;/code>&lt;/pre>&lt;p>With the serverless library from AWS &lt;a href="https://github.com/awslabs/serverless-application-model">https://github.com/awslabs/serverless-application-model&lt;/a> I can build a template to include this in the Resource&lt;/p>
+&lt;pre>&lt;code>Resources:
+GithubSecurityWebhook:
+Type: AWS::Serverless::Function
+DependsOn:
+- Stream
+Properties:
+Runtime: nodejs8.10
+Description: &amp;gt;-
+This will verify that the incoming data is from Github and hashed with the key
+we are using for this environment
+Environment:
+Variables:
+SECRET: !Sub ${Secret}
+APP_ENV: !Sub ${AppEnv}
+APP_REGION: &amp;quot;eu-west-1&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>then during the update command I can pass&lt;/p>
+&lt;pre>&lt;code>SECRET=FOO
+&lt;/code>&lt;/pre>&lt;p>or put a .env file on the system and use the &lt;code>dotenv&lt;/code> library&lt;/p></description></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alfrednutile.info/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/220/</guid><description>&lt;h1 id="sending-docker-commands-to-get-a-task-done">Sending Docker Commands to Get A Task Done&lt;/h1>
+&lt;p>This article will show how to get started with AWS Batch and Docker to spin up a &amp;ldquo;worker&amp;rdquo;&lt;/p>
+&lt;p>By the time you are done reading it you will:&lt;/p>
+&lt;ol>
+&lt;li>Have a Docker image to run your command in.&lt;/li>
+&lt;li>Deploy the Docker image to AWS ECR&lt;/li>
+&lt;li>And Run a Task on the AWS Batch system, or a 100 tasks, does not matter.&lt;/li>
+&lt;li>Finally you will have the scripts needed to fully build AWS Batch with CloudFormation, e.g. super simple&lt;/li>
+&lt;/ol>
+&lt;h2 id="building-the-laravel-worker">Building the Laravel Worker&lt;/h2>
+&lt;p>This can be any language you want, any framework or none! I will focus on Laravel.&lt;/p>
+&lt;p>Either way we need a git repo, so later we can push this and do a Docker build on the CI via the deploy scripts.&lt;/p>
+&lt;p>Note the 2 Commands&lt;/p>
+&lt;ul>
+&lt;li>One to manage all the Tasks and then stitch the results together&lt;/li>
+&lt;li>One to just covert the image to PDF
+&amp;ndash; depend on?&lt;/li>
+&lt;/ul>
+&lt;p>Install SDK&lt;/p>
+&lt;h3 id="the-command">The Command&lt;/h3>
+&lt;p>Before you get going install &lt;a href="https://aws.amazon.com/cli/">AWS CLI&lt;/a> on your machine.&lt;/p>
+&lt;p>Make sure you have your credentials and profiles setup per the docs &lt;a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html">here&lt;/a>&lt;/p>
+&lt;p>Then the rest will work off those credentials as we make new ones per application and you just place them into your profile via &lt;code>~/.aws/credentials&lt;/code> and &lt;code>~/.aws/config&lt;/code>&lt;/p>
+&lt;h3 id="installing-incomings">Installing Incomings&lt;/h3>
+&lt;h2 id="building-the-docker-container-to-run-this-work">Building the Docker container to run this work&lt;/h2>
+&lt;pre>&lt;code>docker-compose build //this will be needed locally
+docker-compose run --rm -w /app app php artisan
+docker-compose run app php artisan security:scan --git-repo=https://github.com/alnutile/security-scanner-show-error-poc
+docker-compose run -w /app app php artisan batch:convert_image_to_pdf --image-url=https://dl.dropboxusercontent.com/s/d2sx0wjheb7dk0p/example_batch.jpg --destination=batch-example/foo
+&lt;/code>&lt;/pre>&lt;h2 id="setting-up-aws-to-run-the-work-on">Setting up AWS to run the work on.&lt;/h2>
+&lt;h3 id="compute-environment">Compute Environment&lt;/h3>
+&lt;p>For starters there is the Compute Environment (CE). This is what manages the scaling of the EC2 instances.&lt;/p>
+&lt;p>The script is HERE. But this is only needed once. I will Explain in a moment.&lt;/p>
+&lt;h3 id="job-definition">Job Definition&lt;/h3>
+&lt;p>Then there is the JobDefinitions. This is where we can define the Job we want to run and the Compute Environment to run it on. Let the CE figure out the scaling, and hence we can just build one and share it with every one.
+So if you have a CE already build try putting your JobDefinition on that before making another one for your Worker.&lt;/p>
+&lt;p>The script is HERE.&lt;/p>
+&lt;p>Open the scripts, they are just JSON. Good docs are &lt;strong>HERE&lt;/strong> on how to make, or read these scripts.&lt;/p>
+&lt;p>Once those are all setup take the AWS KEY and Secret it gave you and use it to setup you local AWS CLI.&lt;/p>
+&lt;p>This is key for a sane workflow. Here is a link [&lt;strong>HERE&lt;/strong>] get your profile right.&lt;/p>
+&lt;p>Once you have this setup all the rest will fall into place.&lt;/p>
+&lt;h2 id="deploying-to-ci">Deploying to CI&lt;/h2>
+&lt;p>Before we push let&amp;rsquo;s make sure that &lt;code>.gitignore&lt;/code> has:&lt;/p>
+&lt;pre>&lt;code>docker/app/packaged/*
+!docker/app/packaged/.gitkeep
+&lt;/code>&lt;/pre>&lt;p>Plus all the default Laravel ignores including &lt;code>.env&lt;/code>&lt;/p>
+&lt;p>Deploy Script
+Now we need to get this work to CI&lt;/p>
+&lt;h2 id="going-to-aws-ui-to-run">Going to AWS UI to run&lt;/h2>
+&lt;p>This is annoying lets make a command for this&amp;hellip;&lt;/p>
+&lt;h3 id="the-testing-command">The Testing Command&lt;/h3>
+&lt;p>More import that is how a &amp;ldquo;requesting&amp;rdquo; app will call this.&lt;/p>
+&lt;p>&lt;strong>DIAGRAM HERE&lt;/strong>&lt;/p>
+&lt;h2 id="putting-it-all-together">Putting it all together&lt;/h2>
+&lt;p>Show running 10 jobs via the command&lt;/p>
+&lt;h2 id="now-taking-it-a-bit-further">Now Taking it a bit further&lt;/h2>
+&lt;p>The command did a lot&lt;/p>
+&lt;ul>
+&lt;li>Got Image&lt;/li>
+&lt;li>Made into PDF&lt;/li>
+&lt;li>Stitched them all together&lt;/li>
+&lt;/ul>
+&lt;p>But now let&amp;rsquo;s take this a bit further. I am going to make 2 JobDefinitions.&lt;/p>
+&lt;p>One will kick off an orchestrate the work by creating a job per image, tracking the progress of those jobs, and
+When all those jobs are done knit them together!&lt;/p>
+&lt;p>Here is how it will look.&lt;/p>
+&lt;h2 id="summary-of-install">Summary of Install&lt;/h2>
+&lt;p>Get Docker file in place docker/app/DockerFile
+Get Packaged file in place
+Setup Core CloudFormation&lt;/p>
+&lt;ul>
+&lt;li>ECR&lt;/li>
+&lt;li>JobDefinition&lt;/li>
+&lt;li>User Key/Secret
+Get docker-compose inlace
+Get Travis.yml in place and docker/deploy.bash
+See diagram on how this all comes together&lt;/li>
+&lt;/ul></description></item><item><title>Serverless and Custom Tags for Resources</title><link>https://alfrednutile.info/posts/217/</link><pubDate>Tue, 22 Aug 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/217/</guid><description>&lt;p>Because much of serveless.com is CloudFormation based, you can easily update existing resources. They talk about this feature &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/resources/#override-aws-cloudformation-resource">here&lt;/a>&lt;/p>
+&lt;p>For me this was required for adding tags&lt;/p>
+&lt;pre>&lt;code># you can add CloudFormation resource templates here
 resources:
 Resources:
 ServerlessDeploymentBucket:
@@ -81,10 +405,39 @@ Tags:
 - { Key: &amp;quot;environment&amp;quot;, Value: &amp;quot;${opt:stage, self:provider.stage}&amp;quot; }
 - { Key: &amp;quot;parent_project&amp;quot;, Value: &amp;quot;${self:custom.parent}&amp;quot; }
 - { Key: &amp;quot;key_contact&amp;quot;, Value: &amp;quot;${self:custom.contact}&amp;quot; }
-- { Key: &amp;quot;billing_ref&amp;quot;, Value: &amp;quot;${self:custom.</description></item><item><title>Serverless, AWS API Gateway and Authentication</title><link>https://alfrednutile.info/posts/214/</link><pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/214/</guid><description>Just a note2self really.
-Setting up Auth was super easy
-As seen below I had to add to my serverless.yml authorizer
-addQuote:
+- { Key: &amp;quot;billing_ref&amp;quot;, Value: &amp;quot;${self:custom.billing_ref}&amp;quot; }
+&lt;/code>&lt;/pre>&lt;p>now that bucket, that Severless makes by default, will have tags.&lt;/p>
+&lt;p>Also I need to tag Lambda functions too for billing:&lt;/p>
+&lt;pre>&lt;code>functions:
+check_queue:
+handler: handler.check_queue
+tags:
+project: ${self:provider.project}
+environment: ${opt:stage, self:provider.stage}
+parent_project: ${self:custom.parent}
+key_contact: ${self:custom.contact}
+billing_ref: ${self:custom.billing_ref}
+events:
+&lt;/code>&lt;/pre>&lt;p>Some of this info I centralize in this area here&lt;/p>
+&lt;pre>&lt;code>custom:
+secrets: ${file(secrets.${opt:stage, self:provider.stage}.yml)}
+contact: AlfredNutile
+billing_ref: foo_app
+parent: foo_app
+&lt;/code>&lt;/pre>&lt;p>Some of this I can drive using this plugin &lt;code>serverless-secrets-plugin&lt;/code> &lt;a href="https://www.npmjs.com/package/serverless-secrets-plugin">here&lt;/a>&lt;/p>
+&lt;p>So I then pull in the secrets file and use it as needed.&lt;/p>
+&lt;pre>&lt;code>provider:
+name: aws
+stage: dev
+runtime: nodejs6.10
+environment:
+APP_ENV: ${self:custom.secrets.APP_ENV}
+REGION: ${self:custom.secrets.REGION}
+ACCOUNT_ID: 555555555
+&lt;/code>&lt;/pre></description></item><item><title>Serverless, AWS API Gateway and Authentication</title><link>https://alfrednutile.info/posts/214/</link><pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/214/</guid><description>&lt;p>Just a note2self really.&lt;/p>
+&lt;p>Setting up Auth was super easy&lt;/p>
+&lt;p>As seen below I had to add to my serverless.yml &lt;code>authorizer&lt;/code>&lt;/p>
+&lt;pre>&lt;code> addQuote:
 handler: quote/handler.add
 events:
 - http:
@@ -92,10 +445,11 @@ path: quote
 method: post
 cors: true
 authorizer: aws_iam
-authorizer: aws_iam
-From here I then needed, in this case Postman, to pass an AWS KEY and SECRET made for this app.
-When making the user I attached this Policy to the user
-{
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>authorizer: aws_iam&lt;/strong>&lt;/p>
+&lt;p>From here I then needed, in this case Postman, to pass an AWS KEY and SECRET made for this app.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/54mz7mxo0x7ei25/auth_aws.jpg?dl=0" alt="">&lt;/p>
+&lt;p>When making the user I attached this Policy to the user&lt;/p>
+&lt;pre>&lt;code>{
 &amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
 &amp;quot;Statement&amp;quot;: [
 {
@@ -107,9 +461,60 @@ When making the user I attached this Policy to the user
 }
 ]
 }
-I an easily make this in the serverless.</description></item><item><title>AWS, S3 Storage and limited Visibility</title><link>https://alfrednutile.info/posts/180/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/180/</guid><description>Storing files on S3 is great. And many times those files are private so I only want to give temporary access to them. Using Laravel Storage I can interact with the file-system quite easily and seamlessly especially between Cloud and Local.
-In this case I want to return a file only for 10 minutes
-public function getSignedUrl($filename_and_path, $expires_minutes = '10')
+&lt;/code>&lt;/pre>&lt;p>I an easily make this in the &lt;code>serverless.yml&lt;/code> file by adding the following:&lt;/p>
+&lt;pre>&lt;code>
+resources:
+Resources:
+s3Data:
+Type: AWS::S3::Bucket
+Properties:
+BucketName: &amp;quot;${self:custom.bucket}&amp;quot;
+VersioningConfiguration:
+Status: Enabled
+quotePolicy:
+Type: AWS::IAM::Policy
+Properties:
+PolicyName: &amp;quot;serverless-quotes-policy-${opt:stage, self:provider.stage}&amp;quot;
+PolicyDocument:
+Version: &amp;quot;2012-10-17&amp;quot;
+Statement:
+-
+Effect: &amp;quot;Allow&amp;quot;
+Action:
+- &amp;quot;execute-api:Invoke&amp;quot;
+Resource: &amp;quot;arn:aws:execute-api:#{AWS::Region}:#{AWS::AccountId}:*/${opt:stage, self:provider.stage}/POST/quote&amp;quot;
+Users:
+- &amp;quot;serverless-quotes-${opt:stage, self:provider.stage}&amp;quot;
+DependsOn:
+- authUser
+userKey:
+Type: AWS::IAM::AccessKey
+Properties:
+UserName: &amp;quot;serverless-quotes-${opt:stage, self:provider.stage}&amp;quot;
+DependsOn:
+- authUser
+authUser:
+Type: AWS::IAM::User
+Properties:
+UserName: &amp;quot;serverless-quotes-${opt:stage, self:provider.stage}&amp;quot;
+Outputs:
+UserSecret:
+Description: The user secret
+Value:
+&amp;quot;Fn::GetAtt&amp;quot;: [ userKey, SecretAccessKey ]
+UserKey:
+Description: The user key
+Value:
+&amp;quot;Ref&amp;quot;: userKey
+&lt;/code>&lt;/pre>&lt;p>This is after adding &lt;code>serverless-pseudo-parameters&lt;/code> plugin, see link below.&lt;/p>
+&lt;p>Now when I run &lt;code>sls deploy --stage dev&lt;/code> I get the User, IAM, Key and Secret (via the webui output), then I need to access this url.&lt;/p>
+&lt;p>That was it. With serverless.com I could have limited stage, production builds to the unique user per stack as well.&lt;/p>
+&lt;h2 id="links">Links&lt;/h2>
+&lt;p>&lt;a href="https://aws.amazon.com/premiumsupport/knowledge-center/iam-authentication-api-gateway/">https://aws.amazon.com/premiumsupport/knowledge-center/iam-authentication-api-gateway/&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html">http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference">https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference&lt;/a>&lt;/p></description></item><item><title>AWS, S3 Storage and limited Visibility</title><link>https://alfrednutile.info/posts/180/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/180/</guid><description>&lt;p>Storing files on S3 is great. And many times those files are private so I only want to give temporary access to them. Using Laravel Storage I can interact with the file-system quite easily and seamlessly especially between Cloud and Local.&lt;/p>
+&lt;p>In this case I want to return a file only for 10 minutes&lt;/p>
+&lt;pre>&lt;code> public function getSignedUrl($filename_and_path, $expires_minutes = '10')
 {
 $client = Storage::disk('s3')-&amp;gt;getDriver()-&amp;gt;getAdapter()-&amp;gt;getClient();
 $bucket = env('BUCKET');
@@ -120,4 +525,5 @@ $command = $client-&amp;gt;getCommand('GetObject', [
 $request = $client-&amp;gt;createPresignedRequest($command, Carbon::now()-&amp;gt;addMinutes($expires_minutes));
 return (string) $request-&amp;gt;getUri();
 }
-That is it!</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>That is it!&lt;/p>
+&lt;p>Thanks to this &lt;a href="https://github.com/minio/minio/issues/1285">post&lt;/a> for the help.&lt;/p></description></item></channel></rss>

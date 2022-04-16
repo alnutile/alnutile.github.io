@@ -1,5 +1,85 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>apis on Alfred Nutile</title><link>https://alfrednutile.info/tags/apis/</link><description>Recent content in apis on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 23 Feb 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/apis/index.xml" rel="self" type="application/rss+xml"/><item><title>Dealing with Oauth2 Server and Laravel for both a local app login and for remote apps using Lucadegasperi/oauth2-server-laravel</title><link>https://alfrednutile.info/posts/133/</link><pubDate>Mon, 23 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/133/</guid><description>This is all based around this library https://github.com/lucadegasperi/oauth2-server-laravel
-I am building and API to be used by an iOs and Android client I will be making soon. But I also needed the filter system to deal with my local Laravel view that was using the api via an Angular driven widget so the user can go to the website as well.
-So the website is where the user can go to do change settings, subscription updates etc, but in that case they are logged in via the Laravel login form.</description></item><item><title>Github CLI to get Teams and Members of an Org</title><link>https://alfrednutile.info/posts/67/</link><pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/67/</guid><description>Needed to make a quick library for pulling down this info and making it a CSV file.
-The libraries made this super easy. But it was hard to get all the emails since these can only been seen if in the users profile.
-the link https://github.com/alnutile/org_reports</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>apis on Alfred Nutile</title><link>https://alfrednutile.info/tags/apis/</link><description>Recent content in apis on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 23 Feb 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/apis/index.xml" rel="self" type="application/rss+xml"/><item><title>Dealing with Oauth2 Server and Laravel for both a local app login and for remote apps using Lucadegasperi/oauth2-server-laravel</title><link>https://alfrednutile.info/posts/133/</link><pubDate>Mon, 23 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/133/</guid><description>&lt;p>This is all based around this library &lt;a href="https://github.com/lucadegasperi/oauth2-server-laravel">https://github.com/lucadegasperi/oauth2-server-laravel&lt;/a>&lt;/p>
+&lt;p>I am building and API to be used by an iOs and Android client I will be making soon. &lt;strong>But&lt;/strong> I also needed the filter system to deal with my local Laravel view that was using the api via an Angular driven widget so the user can go to the website as well.&lt;/p>
+&lt;p>So the website is where the user can go to do change settings, subscription updates etc, but in that case they are logged in via the Laravel login form. From there they land on the profile page where the Angular widget will do n xhr request to the api to fill in the table/settings.&lt;/p>
+&lt;p>The routes ends up looking like this&lt;/p>
+&lt;pre>&lt;code>
+Route::filter('setUser', function()
+{
+if(Auth::guest())
+{
+$user_id = Authorizer::getResourceOwnerId();
+Auth::loginUsingId($user_id);
+}
+});
+//The view they see using Laravel Blade and an embedded angular widget
+Route::get('profile', ['middleware' =&amp;gt; 'auth', 'uses' =&amp;gt; 'ProfileController@getProfile']);
+//The API
+Route::group(['prefix' =&amp;gt; 'api/v1', 'before' =&amp;gt; 'oauth|setUser|auth'], function() {
+Route::get('profile', 'ProfileController@getApiProfile');
+});
+&lt;/code>&lt;/pre>&lt;p>The thing is the Oauth2 filter was causing some issues&lt;/p>
+&lt;p>1 Looks for a access_token query string or header
+2 Does not load the user like I need&lt;/p>
+&lt;p>The first issue I just made a class to extend the core filter for the Oauth2 library.&lt;/p>
+&lt;h3 id="my-provider">My provider&lt;/h3>
+&lt;pre>&lt;code>&amp;lt;?php namespace App\Providers;
+use App\Filters\OauthTotalRecalls;
+use Illuminate\Support\ServiceProvider;
+class OauthFilterProvider extends ServiceProvider {
+public function boot()
+{
+$this-&amp;gt;app-&amp;gt;bindShared('LucaDegasperi\OAuth2Server\Filters\OAuthFilter', function ($app) {
+$httpHeadersOnly = $app['config']-&amp;gt;get('oauth2.http_headers_only');
+return new OauthTotalRecalls($app['oauth2-server.authorizer'], $httpHeadersOnly);
+});
+}
+/**
+* Register the service provider.
+*
+* @return void
+*/
+public function register()
+{
+// TODO: Implement register() method.
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Then I register that in my app.conf after I register his.&lt;/p>
+&lt;h3 id="my-filter">My Filter&lt;/h3>
+&lt;p>It overrides the filter to do one thing and that is to check if the user is a guest. Which they would not be if they are logging in via the Laravel login form.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php namespace App\Filters;
+use Illuminate\Support\Facades\Auth;
+use LucaDegasperi\OAuth2Server\Filters\OAuthFilter;
+class OauthTotalRecalls extends OAuthFilter {
+/**
+* Run the oauth filter
+*
+* @internal param mixed $route, mixed $request, mixed $scope,...
+* @return void a bad response in case the request is invalid
+*/
+public function filter()
+{
+if(Auth::guest())
+{
+if (func_num_args() &amp;gt; 2) {
+$args = func_get_args();
+$this-&amp;gt;scopes = array_slice($args, 2);
+}
+$this-&amp;gt;authorizer-&amp;gt;validateAccessToken($this-&amp;gt;httpHeadersOnly);
+$this-&amp;gt;validateScopes();
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;h3 id="loading-user">Loading user&lt;/h3>
+&lt;p>So at this point the user is logged in via Laravel so the Auth::user() is fully set. But lastly if this was the token based log in the &amp;ldquo;setUser&amp;rdquo; filter will kick in and load the user from the token. If the token is wrong then this all will fail.&lt;/p>
+&lt;pre>&lt;code>Route::filter('setUser', function()
+{
+if(Auth::guest())
+{
+$user_id = Authorizer::getResourceOwnerId();
+Auth::loginUsingId($user_id);
+}
+});
+&lt;/code>&lt;/pre></description></item><item><title>Github CLI to get Teams and Members of an Org</title><link>https://alfrednutile.info/posts/67/</link><pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/67/</guid><description>&lt;p>Needed to make a quick library for pulling down this info and making it a CSV file.&lt;/p>
+&lt;p>The libraries made this super easy. But it was hard to get all the emails since these can only been seen if in the users profile.&lt;/p>
+&lt;h3 id="the-link">the link&lt;/h3>
+&lt;p>&lt;a href="https://github.com/alnutile/org_reports">https://github.com/alnutile/org_reports&lt;/a>&lt;/p></description></item></channel></rss>

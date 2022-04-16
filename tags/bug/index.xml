@@ -1,1 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bug on Alfred Nutile</title><link>https://alfrednutile.info/tags/bug/</link><description>Recent content in bug on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 15 Jan 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/bug/index.xml" rel="self" type="application/rss+xml"/><item><title>Global Redirect module after spaces / purl install does not</title><link>https://alfrednutile.info/posts/26/</link><pubDate>Tue, 15 Jan 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/26/</guid><description>Sometime when using spaces and purl there are Pages Not Found even though they are there. This is one reason. There is a space that purl is looking for a url starting with eg test. Some day you make a node test/testmore and decide later to use drupal&amp;#39;s redirect to save the url test/testmore and delete the node (or unpublish it) But since spaces and purl is keeping an eye on test it will not work.</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bug on Alfred Nutile</title><link>https://alfrednutile.info/tags/bug/</link><description>Recent content in bug on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 15 Jan 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/bug/index.xml" rel="self" type="application/rss+xml"/><item><title>Global Redirect module after spaces / purl install does not</title><link>https://alfrednutile.info/posts/26/</link><pubDate>Tue, 15 Jan 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/26/</guid><description>&lt;p>Sometime when using spaces and purl there are Pages Not Found even though they are there. This is one reason. There is a space that purl is looking for a url starting with eg test. Some day you make a node test/testmore and decide later to use drupal&amp;#39;s redirect to save the url test/testmore and delete the node (or unpublish it) But since spaces and purl is keeping an eye on test it will not work. Purl will strip the redirect of the test part $_REQUEST[&amp;#39;q&amp;#39;] making it so this would fail since it no longer is in this space. This minor hook_init can do a double check.&lt;/p>
+&lt;pre class="prettyprint linenums:1t">
+function path_redirect_extra_init() {
+//Check if empty page
+$status = menu_get_item($_GET[&amp;#39;q&amp;#39;]);
+//print_r(&amp;#39;Menu get item &amp;#39; . $status);
+if(empty($status)) {
+//do one more check if this can be redirects
+if(isset($_REQUEST[&amp;#39;q&amp;#39;])) {
+$original_request = check_plain($_REQUEST[&amp;#39;q&amp;#39;]);
+$result = db_query(&amp;quot;SELECT redirect FROM path_redirect WHERE source LIKE \&amp;quot;%s\&amp;quot;&amp;quot;, $original_request);
+while ($row = db_fetch_array($result)) {
+drupal_goto($row[&amp;#39;redirect&amp;#39;], $query = NULL, $fragment = NULL, $http_response_code = 301);
+}
+}
+}
+}
+&lt;/pre>
+&lt;p>The http://drupal.org/project/fast_404 module used hook_boot which may have worked as well. Also this is d6 and d7 has the hook_url_inbound_alter and hook_url_outbound_alter whereas d6 closest option to these is custom_url_rewrite_inbound&lt;/p></description></item></channel></rss>

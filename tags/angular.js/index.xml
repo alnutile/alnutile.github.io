@@ -1,8 +1,124 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>angular.js on Alfred Nutile</title><link>https://alfrednutile.info/tags/angular.js/</link><description>Recent content in angular.js on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 24 Aug 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/angular.js/index.xml" rel="self" type="application/rss+xml"/><item><title>Team Style Guides and Mind Set</title><link>https://alfrednutile.info/posts/105/</link><pubDate>Sun, 24 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/105/</guid><description>Been sharing this info with team members a bit lately and want to post it here for reference. Though there is no ONE way to do any of this there are ways that scale better than others. But more importantly having one way as a team to do things can be key to projects from beginning to end (eg the rest of the projects life!)
-Project Style Guides The Clean Coder by Robert Martin book is a look at being a &amp;ldquo;Professional&amp;rdquo; coder and all that comes with it.</description></item><item><title>Many to Many Polymorphic Relations from Laravel to Angular and back</title><link>https://alfrednutile.info/posts/95/</link><pubDate>Sat, 05 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/95/</guid><description>This will cover having a polymorphic relationship in Laravel, showing it on a form in Angular and saving it back to Laravel. Overall it is well documented here at the great docs at Laravel but this post might help in a few areas.
-As someone defines Polymorphic Relationships there
-&amp;ldquo;Polymorphic relations allow a model to belong to more than one other model, on a single association. For example, you might have a photo model that belongs to either a staff model or an order model.</description></item><item><title>Restangular and nested responses</title><link>https://alfrednutile.info/posts/91/</link><pubDate>Sat, 21 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/91/</guid><description>this was key to dealing with this type of results
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>angular.js on Alfred Nutile</title><link>https://alfrednutile.info/tags/angular.js/</link><description>Recent content in angular.js on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 24 Aug 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/angular.js/index.xml" rel="self" type="application/rss+xml"/><item><title>Team Style Guides and Mind Set</title><link>https://alfrednutile.info/posts/105/</link><pubDate>Sun, 24 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/105/</guid><description>&lt;p>Been sharing this info with team members a bit lately and want to post it here for reference.
+Though there is no ONE way to do any of this there are ways that scale better than others. But more importantly having one way as a team to do things can be key to projects from beginning to end (eg the rest of the projects life!)&lt;/p>
+&lt;h1 id="project-style-guides">Project Style Guides&lt;/h1>
+&lt;p>&lt;a href="https://kindle.amazon.com/work/the-clean-coder-professional-programmers-ebook/B004SJU478/B0050JLC9Y">The Clean Coder&lt;/a> by Robert Martin book is a look at being a &amp;ldquo;Professional&amp;rdquo; coder and all that comes with it.
+It is a great look at not only how one should be in the role of a Programmer but what to expect of each other as a team.&lt;/p>
+&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/51MoTaVrS7L._SS130_.jpg" alt="clean code">&lt;/p>
+&lt;p>&lt;a href="https://kindle.amazon.com/work/domain-driven-design-tackling-complexity-software-ebook/B001KBG6RO/B00794TAUG">Domain Driven Deisgn&lt;/a>
+A great look at being a programmer that not only makes code but more importantly bridges the gap between the vision of the business with the goals of the code.&lt;/p>
+&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/51WLtI-uLcL._SS130_.jpg" alt="ddd">&lt;/p>
+&lt;hr>
+&lt;h1 id="php-style-guides">PHP Style Guides&lt;/h1>
+&lt;p>Back to Robert Martin again on this to start &lt;a href="https://kindle.amazon.com/work/clean-code-handbook-software-craftsmanship-ebook/B001GTWCJG/B001GSTOAM">Clean Code&lt;/a>&lt;/p>
+&lt;p>It is not about PHP directly but it all applies to good Oo PHP design patterns and thinking. There are so many classics he quotes that could be added here as well.&lt;/p>
+&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/41XojFFhYlL._SS130_.jpg" alt="clean code">&lt;/p>
+&lt;hr>
+&lt;h1 id="angular-style-guides">Angular Style Guides&lt;/h1>
+&lt;p>I use to start with Angular Seed but always thought it fell short when the project grew and this guide made it clear to me why. IMO it is a much better approach to Angular &lt;a href="https://github.com/johnpapa/angularjs-styleguide">John Papa&lt;/a>. This guide includes examples which is great.&lt;/p>
+&lt;hr>
+&lt;h1 id="api-guides">API Guides&lt;/h1>
+&lt;p>There are a number of great books on this as well. Right now a short and simple look at how to make an API, I think, is &lt;a href="https://leanpub.com/build-apis-you-wont-hate">Build APIs You Won&amp;rsquo;t Hate&lt;/a> by Phil Sturgeon. Great code example too on Behat and API testing&lt;/p>
+&lt;p>&lt;img src="https://s3.amazonaws.com/titlepages.leanpub.com/build-apis-you-wont-hate/small?1408731468" alt="apis">&lt;/p>
+&lt;hr>
+&lt;h1 id="uml-20">UML 2.0&lt;/h1>
+&lt;p>A unified means to communicate ideas to each other and to product owners. Before digging into code this is a great way for teams to communicate all the way from higher level overview down to the classes and constructors.&lt;/p>
+&lt;p>Seems the Gang of Four book, Robert Martin books and Domain Driven Design all point to this as a way to sketch out ideas or even use it as a long term blueprint to go hand and hand with deployed code. The &lt;a href="http://www.amazon.com/UML-2-0-Nutshell-OReilly-ebook/dp/B0026OR2L8/ref=tmm_kin_title_0?_encoding=UTF8&amp;amp;sr=8-1&amp;amp;qid=1410697423">UML 2.0 in a Nutshell&lt;/a> along with the more in depth O&amp;rsquo;Reilly book UML 2.0 second edition.&lt;/p>
+&lt;p>&lt;img src="http://ecx.images-amazon.com/images/I/41FVsizkpIL._BO2,204,203,200_PIsitb-sticker-v3-big,TopRight,0,-55_SX278_SY278_PIkin4,BottomRight,1,22_AA300_SH20_OU01_.jpg" alt="nutshell">&lt;/p>
+&lt;hr>
+&lt;h1 id="bdd--tdd">BDD / TDD&lt;/h1>
+&lt;p>Testing is really key I think know one anymore doubts that. What you end up with is Code that you can refactor and make better over time with confidence. And as a team that is important. It also leads to one of the best sources of documentation. This presentation talks about &lt;a href="https://amsterdam2014.drupal.org/session/doing-behaviour-driven-development-behat">BDD&lt;/a> and &lt;a href="http://everzet.com/post/99045129766/introducing-modelling-by-example">article&lt;/a> really take it to the next level. As the test become the glue between the goals of the business and the code of the developers.&lt;/p>
+&lt;h1 id="final-notes">Final Notes&lt;/h1>
+&lt;p>Robert Martin really hones in for me why testing is so important. It is not about TDD in the end &lt;strong>but maintainable and changeable code&lt;/strong>. And so even though much of the above seems like more work upfront it really leads to better code and better experiences as a coder and more importantly as a team.&lt;/p>
+&lt;p>Also Pair programming is a great use of time and should not be feared. Too much of it wears me out but just the right amount can be a powerful way to get a team member up to speed on a new part to a project or just to check in with each other and spend some time coding and growing as a team. It is scary to share in something as personal as coding but in the end we all can learn from each other.&lt;/p>
+&lt;hr>
+&lt;h1 id="misc-reads">Misc Reads&lt;/h1>
+&lt;p>Not as key as the ones above imo but still super helpful. Though POODR could easily be moved above.&lt;/p>
+&lt;h2 id="practical-object-oriented-design-in-ruby-an-agile-primerhttpskindleamazoncomworkpractical-object-oriented-design-ruby-addison-wesley-ebookb0096gequeb0096byg7c">&lt;a href="https://kindle.amazon.com/work/practical-object-oriented-design-ruby-addison-wesley-ebook/B0096GEQUE/B0096BYG7C">Practical Object-Oriented Design in Ruby: An Agile Primer&lt;/a>&lt;/h2>
+&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/51lFbn3LPCL._SS130_.jpg" alt="https://images-na.ssl-images-amazon.com/images/I/51lFbn3LPCL.SS130.jpg">&lt;/p>
+&lt;h2 id="php-objects-patterns-and-practicehttpskindleamazoncomworkobjects-patterns-practice-experts-source-ebookb003xrx1qmb003xqf3nw">&lt;a href="https://kindle.amazon.com/work/objects-patterns-practice-experts-source-ebook/B003XRX1QM/B003XQF3NW">PHP Objects, Patterns and Practice&lt;/a>&lt;/h2>
+&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/51bJaFjTZnL._SS130_.jpg" alt="https://images-na.ssl-images-amazon.com/images/I/51bJaFjTZnL.SS130.jpg">&lt;/p>
+&lt;h2 id="laravel-from-apprentice-to-artisanhttpsleanpubcomlaravel">&lt;a href="https://leanpub.com/laravel">Laravel: From Apprentice To Artisan&lt;/a>&lt;/h2>
+&lt;p>&lt;img src="https://s3.amazonaws.com/titlepages.leanpub.com/laravel/small?1387959278" alt="https://s3.amazonaws.com/titlepages.leanpub.com/laravel/small?1387959278">&lt;/p>
+&lt;h2 id="eloquent-javascript-a-modern-introduction-to-programminghttpskindleamazoncomworkeloquent-javascript-modern-introduction-programming-ebookb00409onimb004oejnq0">&lt;a href="https://kindle.amazon.com/work/eloquent-javascript-modern-introduction-programming-ebook/B00409ONIM/B004OEJNQ0">Eloquent JavaScript: A Modern Introduction to Programming&lt;/a>&lt;/h2>
+&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/519WDGN-9DL._SS130_.jpg" alt="https://images-na.ssl-images-amazon.com/images/I/519WDGN-9DL.SS130.jpg">&lt;/p>
+&lt;h2 id="nodejs-the-right-way-practical-server-side-javascript-that-scaleshttpskindleamazoncomworknode-js-right-way-server-side-javascript-ebookb00hsocscyb00hso6yd8">&lt;a href="https://kindle.amazon.com/work/node-js-right-way-server-side-javascript-ebook/B00HSOCSCY/B00HSO6YD8">Node.js the Right Way: Practical, Server-Side JavaScript That Scales&lt;/a>&lt;/h2>
+&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/51%2BVjuSvKJL._SS130_.jpg" alt="https://images-na.ssl-images-amazon.com/images/I/51%2BVjuSvKJL.SS130.jpg">&lt;/p>
+&lt;h2 id="the-pragmatic-programmer-from-journeyman-to-masterhttpskindleamazoncomworknode-js-right-way-server-side-javascript-ebookb00hsocscyb00hso6yd8">&lt;a href="https://kindle.amazon.com/work/node-js-right-way-server-side-javascript-ebook/B00HSOCSCY/B00HSO6YD8">The Pragmatic Programmer: From Journeyman to Master&lt;/a>&lt;/h2>
+&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/41oqLxoTYsL._SS130_.jpg" alt="https://images-na.ssl-images-amazon.com/images/I/41oqLxoTYsL.SS130.jpg">&lt;/p>
+&lt;h2 id="restful-web-apishttpskindleamazoncomworkrestful-web-apis-leonard-richardson-ebookb00dduvtr2b00f5bs966">&lt;a href="https://kindle.amazon.com/work/restful-web-apis-leonard-richardson-ebook/B00DDUVTR2/B00F5BS966">RESTful Web APIs&lt;/a>&lt;/h2>
+&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/51KhFuo-5%2BL._SS130_.jpg" alt="https://images-na.ssl-images-amazon.com/images/I/51KhFuo-5%2BL.SS130.jpg">&lt;/p></description></item><item><title>Many to Many Polymorphic Relations from Laravel to Angular and back</title><link>https://alfrednutile.info/posts/95/</link><pubDate>Sat, 05 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/95/</guid><description>&lt;p>This will cover having a polymorphic relationship in Laravel, showing it on a form in Angular and saving it back to Laravel. Overall it is well documented &lt;a href="http://laravel.com/docs/eloquent#many-to-many-polymorphic-relations">here&lt;/a> at the great docs at Laravel but this post might help in a few areas.&lt;/p>
+&lt;p>As someone defines Polymorphic Relationships there&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;ldquo;Polymorphic relations allow a model to belong to more than one other model, on a single association. For example, you might have a photo model that belongs to either a staff model or an order model. &amp;quot;&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="output-the-data-to-angular">Output the data to Angular&lt;/h2>
+&lt;p>Taking the User Model as an example I query the user but then before returning the data to Angular I append the polymorphic results. In this case we will call it Specialties&lt;/p>
+&lt;pre>&lt;code>protected function transformOutgoingData($data)
 {
+$data-&amp;gt;specialties = $data-&amp;gt;specialties()-&amp;gt;getResults()-&amp;gt;lists('id');
+return $data;
+}
+&lt;/code>&lt;/pre>&lt;p>This returns just an array to Angular to deal with. When sending it an Object trouble getting Angular to set the selected options. The hard part, since by default it just worked, was to send not only the 2 selected Specialties but the 20 other possible ones and make the list out of that.&lt;/p>
+&lt;pre>&lt;code>#angular html file
+&amp;lt;div class=&amp;quot;form-group&amp;quot; ng-if=&amp;quot;userHasAdminRole(user)&amp;quot; markdown=&amp;quot;1&amp;quot;&amp;gt;
+&amp;lt;label&amp;gt;Specialties:&amp;lt;/label&amp;gt;
+&amp;lt;select ng-options=&amp;quot;specialty.id as specialty.name for specialty in user.specialties_all&amp;quot;
+name=&amp;quot;specialty&amp;quot;
+multiple
+ng-model=&amp;quot;user.specialties&amp;quot;
+ng-required=&amp;quot;true&amp;quot;
+class=&amp;quot;form-control&amp;quot;&amp;gt;
+&amp;lt;/select&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>The specialties_all comes from the method I run on the data before output it which I do anyways on many data models. This comes right before the transformOutgoingData.&lt;/p>
+&lt;pre>&lt;code> protected function addDataToOutGoingModel($user)
+{
+$user = $this-&amp;gt;addAllSpecialtiesToModel($user);
+return $user;
+}
+&lt;/code>&lt;/pre>&lt;p>This way all my select lists on that page and other data lists, checkboxes etc have the data they need.&lt;/p>
+&lt;p>Finally when the person clicks Submit it is sent back to Laravel. So far I could not just save or update the user with this info. For example&lt;/p>
+&lt;pre>&lt;code>#app/models/User.php
+public function update($user_id, $all)
+{
+$all = $this-&amp;gt;transformIncomingData($all);
+try {
+$user = \User::findOrFail($user_id);
+}
+catch(\Expection $e){
+throw new \Exception(&amp;quot;User not found&amp;quot;);
+}
+$user-&amp;gt;update($all);
+$user = $this-&amp;gt;saveDataToModel($user);
+return $user;
+}
+&lt;/code>&lt;/pre>&lt;p>The $user-&amp;gt;update($all); will crash with this extra &amp;ldquo;specialties&amp;rdquo; data coming in with this error.&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;ldquo;preg_replace(): Parameter mismatch, pattern is a string while replacement is an array&amp;rdquo;&lt;/p>
+&lt;/blockquote>
+&lt;p>So instead I do a step before and after&lt;/p>
+&lt;p>Before I run transformIncomingData and unset the $all[&amp;lsquo;specialties&amp;rsquo;] key I get from Input::all() and save that to a property&lt;/p>
+&lt;pre>&lt;code> protected function transformIncomingData($data)
+{
+$data = ( isset($data['specialties'])) ? $this-&amp;gt;transformSpecialtiesIncoming($data) : $data;
+return $data;
+}
+&lt;/code>&lt;/pre>&lt;p>which goes to&lt;/p>
+&lt;pre>&lt;code> protected function transformSpecialtiesIncoming($data)
+{
+$this-&amp;gt;original_specialities = $data['specialties'];
+unset($data['specialties']);
+return $data;
+}
+&lt;/code>&lt;/pre>&lt;p>Then after I update the User I run saveDataToModel($user) which triggers this method&lt;/p>
+&lt;pre>&lt;code> protected function setSpecialties($user)
+{
+$user-&amp;gt;specialties()-&amp;gt;sync($this-&amp;gt;original_specialities);
+return $user;
+}
+&lt;/code>&lt;/pre>&lt;p>Finally back to Angular with the results.&lt;/p>
+&lt;p>Another good way to tie all this together is the Model Observer Pattern noted here &lt;a href="http://laravel.com/docs/eloquent#model-observers">http://laravel.com/docs/eloquent#model-observers&lt;/a>&lt;/p></description></item><item><title>Restangular and nested responses</title><link>https://alfrednutile.info/posts/91/</link><pubDate>Sat, 21 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/91/</guid><description>&lt;p>&lt;a href="https://github.com/mgonto/restangular#my-response-is-actually-wrapped-with-some-metadata-how-do-i-get-the-data-in-that-case">this was key&lt;/a> to dealing with this type of results&lt;/p>
+&lt;pre>&lt;code>{
 &amp;quot;data&amp;quot;: {
 &amp;quot;name&amp;quot;: &amp;quot;Foo&amp;quot;
 },
@@ -10,8 +126,8 @@ As someone defines Polymorphic Relationships there
 &amp;quot;Post Updated&amp;quot;
 }
 }
-So I had to set this in a app.js config area
-//app,js
+&lt;/code>&lt;/pre>&lt;p>So I had to set this in a app.js config area&lt;/p>
+&lt;pre>&lt;code>//app,js
 app.config(function(RestangularProvider) {
 // add a response intereceptor
 RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
@@ -19,9 +135,10 @@ var extractedData;
 extractedData = data.data;
 return extractedData;
 });
-});</description></item><item><title>When you have to use Angular inside of Drupal</title><link>https://alfrednutile.info/posts/89/</link><pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/89/</guid><description>The angularjs module for drupal will direct you to setup a menu path for Angular.js to get it&amp;rsquo;s template files.
-So the Angular route would look like this
-//app.js
+});
+&lt;/code>&lt;/pre></description></item><item><title>When you have to use Angular inside of Drupal</title><link>https://alfrednutile.info/posts/89/</link><pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/89/</guid><description>&lt;p>The angularjs module for drupal will direct you to setup a menu path for Angular.js to get it&amp;rsquo;s template files.&lt;/p>
+&lt;p>So the Angular route would look like this&lt;/p>
+&lt;pre>&lt;code>//app.js
 behat_reports.config(['$routeProvider',
 function ($routeProvider) {
 $routeProvider.
@@ -33,26 +150,245 @@ otherwise({
 redirectTo: '/'
 });
 }]);
-What I am suggesting is that when bootstraping Angular is to set the path to the &amp;ldquo;html&amp;rdquo; template folder. Then your Angular app route can look like this</description></item><item><title>Angular and Scope - or - How not to waste time figuring out why a scope value is not 'working'</title><link>https://alfrednutile.info/posts/62/</link><pubDate>Wed, 30 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/62/</guid><description>The creator of Angular notes it in this video which is well worth the watch.
-Basically when using includes or directives etc you may not be getting a scope value as easily because it is child scope and you may be looking in the parent scope.
-For example This include if I have an include and it references a model attribute like this
-//Some include
+&lt;/code>&lt;/pre>&lt;p>What I am suggesting is that when bootstraping Angular is to set the path to the &amp;ldquo;html&amp;rdquo; template folder. Then your Angular app route can look like this&lt;/p>
+&lt;pre>&lt;code>//app.js
+behat_reports.config(['$routeProvider',
+function ($routeProvider) {
+//Getting the path we set during our drupal modules function
+var path = Drupal.settings.behat_reporting_v2.path;
+$routeProvider.
+when('/', {
+templateUrl: '/' + path + '/templates/reports-all.html',
+controller: 'ReportsAll'
+}).
+otherwise({
+redirectTo: '/'
+});
+}]);
+&lt;/code>&lt;/pre>&lt;p>It gets the path from a setting I set below, which is the path that renders this drupal url and setups up Angular in your module.&lt;/p>
+&lt;pre>&lt;code>//some drupal module you are making
+function behat_reporting_v2_api_reports_ui() {
+angularjs_init_application('behat_reports_v2');
+$path = drupal_get_path('module', 'behat_reporting_v2');
+//Set the drupal path
+drupal_add_js(array('behat_reporting_v2' =&amp;gt; array('path' =&amp;gt; $path)), 'setting');
+drupal_add_js($path . '/js/services.js');
+drupal_add_js($path . '/js/reportsController.js');
+drupal_add_js($path . '/js/app.js');
+return theme('behat_reports_v2');
+}
+&lt;/code>&lt;/pre>&lt;p>You are basically allowing Angular to get the html files it needs without bootstrapping the template system in drupal. Yeah!&lt;/p></description></item><item><title>Angular and Scope - or - How not to waste time figuring out why a scope value is not 'working'</title><link>https://alfrednutile.info/posts/62/</link><pubDate>Wed, 30 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/62/</guid><description>&lt;p>The creator of Angular notes it in this &lt;a href="https://www.youtube.com/watch?v=ZhfUv0spHCY&amp;amp;list=FLZa3QWzy1z1G9FIw02pytdA&amp;amp;index=2">video&lt;/a> which is well worth the watch.&lt;/p>
+&lt;p>Basically when using includes or directives etc you may not be getting a scope value as easily because it is child scope and you may be looking in the parent scope.&lt;/p>
+&lt;h3 id="for-example">For example&lt;/h3>
+&lt;p>This include if I have an include and it references a model attribute like this&lt;/p>
+&lt;pre>&lt;code>//Some include
 &amp;lt;input ng-model=&amp;quot;firstname&amp;quot;&amp;gt;
-I may not get the results from that input that I expect.</description></item><item><title>Angular.js, CKEditor, and REST including file uploads</title><link>https://alfrednutile.info/posts/50/</link><pubDate>Mon, 14 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/50/</guid><description>I wanted to share the steps I followed to get this WYSIWYG editor working with Angular and to allow uploads. By the end of it you will see how to Plug CKeditor into your Angular app Setup the config options in your Angular Controller and your view Setup your REST endpoints to take the needed requests Show image gallery Upload image Show Files to link to Upload file to link to This can work for really any backend, Laravel, Drupal, Node etc.</description></item><item><title>Building the UI first with Angular, Mocked Data and REST</title><link>https://alfrednutile.info/posts/58/</link><pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/58/</guid><description>Lately I have had a few projects using a RESTful backend to output JSON formatted data and a javascript front end. All of them are different technologies but the front end is in Angular.js.
-So using the Angular mock module I have been able to build out the front end with no backend. I started to do this for speed reasons but realized a number of huge benefits.
-Angular has some good docs on how to mock this data and use this $httpbackend module here.</description></item><item><title>Angular Watching a model and it's filters</title><link>https://alfrednutile.info/posts/43/</link><pubDate>Thu, 20 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/43/</guid><description>I had to update other items on the page including an CSV export as the user made filter changes on the site.
-I had to pass the results of ng-repeat into a model and then the filters as seen here
-And in my controller I added a watcher to process the new results as needed.
-This simple solution I had some trouble grasping.</description></item><item><title>Angular Seed Testing Setup</title><link>https://alfrednutile.info/posts/19/</link><pubDate>Wed, 12 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/19/</guid><description>This took a few settings to get it working.
-For one I put the correct paths in for karma and webdriver
-I then had to download mocks http://code.angularjs.org/1.2.14/angular-mocks.js even though I used angular-seed and setup my module to include this &amp;#39;ngMockE2E&amp;#39;
-This page was a good starting point http://docs.angularjs.org/api/ngMockE2E/service/$httpBackend
-Then there is the testing end 2 end frame work https://github.com/angular/protractor/tree/master/docs/ that allowed me to easily write non-unit tests
-&amp;nbsp;</description></item><item><title>Angular Drupal and CSRF</title><link>https://alfrednutile.info/posts/48/</link><pubDate>Tue, 11 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/48/</guid><description>quick tip on getting and setting your token for drupal when doing a put, post, destroy against a drupal site.&amp;Acirc;&amp;nbsp;
-Mostly gotten from here
-Might even be better to reset the formant for X-CSRF-Token to the default one Angular is looking for X-CSRFToken</description></item><item><title>Angular.js Ticket System</title><link>https://alfrednutile.info/posts/18/</link><pubDate>Fri, 05 Jul 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/18/</guid><description>Fun side project to make a ticket system in Angular.js.
-Still have to build out the authentication system and ideally move the api into Rails.
-And of course wrap up a few other things ( -;
-http://angular.alfrednutile.info/
-Or the video
-http://www.youtube.com/watch?v=RjCJNn7wpj0</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>I may not get the results from that input that I expect. I may not get any. So to be safe it is best to make an Object for your data that then has keys to get the value from. For example&lt;/p>
+&lt;pre>&lt;code>//Some controller
+$scope.person = {};
+$scope.person.firstname = &amp;quot;Bob&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>Then back in that include&lt;/p>
+&lt;pre>&lt;code>//Some include
+&amp;lt;input ng-model=&amp;quot;person.firstname&amp;quot;&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>Tends to work better than fighting with $parent prefixes as such&lt;/p>
+&lt;pre>&lt;code>//Some include
+&amp;lt;input ng-model=&amp;quot;$parent.firstname&amp;quot;&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>Anyways glad I watched the video which meant I only wasted under an hour one this head scratcher.&lt;/p></description></item><item><title>Angular.js, CKEditor, and REST including file uploads</title><link>https://alfrednutile.info/posts/50/</link><pubDate>Mon, 14 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/50/</guid><description>&lt;h2 id="i-wanted-to-share-the-steps-i-followed-to-get-this-wysiwyg-editor-working-with-angular-and-to-allow-uploads-by-the-end-of-it-you-will-see-how-to">I wanted to share the steps I followed to get this WYSIWYG editor working with Angular and to allow uploads. By the end of it you will see how to&lt;/h2>
+&lt;ol>
+&lt;li>Plug CKeditor into your Angular app&lt;/li>
+&lt;li>Setup the config options in your Angular Controller and your view&lt;/li>
+&lt;li>Setup your REST endpoints to take the needed requests&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>Show image gallery&lt;/li>
+&lt;li>Upload image&lt;/li>
+&lt;li>Show Files to link to&lt;/li>
+&lt;li>Upload file to link to&lt;/li>
+&lt;/ul>
+&lt;p>This can work for really any backend, Laravel, Drupal, Node etc. It is mostly to share some of the undocumented settings I needed. Though ckeditor does have a good api page here &lt;a href="http://docs.ckeditor.com/">ckdocs&lt;/a>&lt;/p>
+&lt;p>Also what I hope for you to see how much you can really do with this. Your endpoints can easily be showing files from Dropbox, Evernote etc and offering those up in the interface for CKEditor.&lt;/p>
+&lt;p>###Plug in the CKEditor module&lt;/p>
+&lt;p>I downloaded this module &lt;a href="https://github.com/esvit/ng-ckeditor">ng-ckeditor&lt;/a>&lt;/p>
+&lt;p>for me I store it in&lt;/p>
+&lt;pre>&lt;code>/app/lib/ng-ckeditor
+&lt;/code>&lt;/pre>&lt;p>I also placed into the folder the &lt;a href="http://ckeditor.com/download">ckeditor download&lt;/a>.&lt;/p>
+&lt;p>That download will have a plugin folder in there I downloaded 2 plugins we will use.&lt;/p>
+&lt;p>&lt;a href="http://ckeditor.com/addon/imagebrowser">Imagebrowser&lt;/a> to get an easier api to JSON and &lt;a href="http://ckeditor.com/addon/mediaembed">MediaEmbed&lt;/a> which may show up in my code examples and is totally optional.&lt;/p>
+&lt;p>###Your Angular Controller&lt;/p>
+&lt;p>Depending on your framework you need to inject the module and then apply some settings.&lt;/p>
+&lt;h4 id="injecting-the-module">Injecting the module&lt;/h4>
+&lt;p>Of course you need to include the js files and css file in your &amp;ldquo;index.html&amp;rdquo; file.&lt;/p>
+&lt;ol>
+&lt;li>ng-ckeditor/ng-ckeditor.css&lt;/li>
+&lt;li>ng-ckeditor/libs/ckeditor/ckeditor.js&lt;/li>
+&lt;li>ng-ckeditor/ng-ckeditor.js&lt;/li>
+&lt;/ol>
+&lt;p>item #2 being the actual ckeditor library.&lt;/p>
+&lt;p>Finally inject it into your app.js file &amp;lsquo;ngCkeditor&amp;rsquo; so Angular makes it available to your controller.&lt;/p>
+&lt;h4 id="the-controller">The Controller####&lt;/h4>
+&lt;p>It is here I finally get to configure the editor&lt;/p>
+&lt;pre>&lt;code> $scope.editorOptions = {
+language: 'en',
+'skin': 'moono',
+'extraPlugins': &amp;quot;imagebrowser,mediaembed&amp;quot;,
+imageBrowser_listUrl: '/api/v1/ckeditor/gallery',
+filebrowserBrowseUrl: '/api/v1/ckeditor/files',
+filebrowserImageUploadUrl: '/api/v1/ckeditor/images',
+filebrowserUploadUrl: '/api/v1/ckeditor/files',
+toolbarLocation: 'bottom',
+toolbar: 'full',
+toolbar_full: [
+{ name: 'basicstyles',
+items: [ 'Bold', 'Italic', 'Strike', 'Underline' ] },
+{ name: 'paragraph', items: [ 'BulletedList', 'NumberedList', 'Blockquote' ] },
+{ name: 'editing', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+{ name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+{ name: 'tools', items: [ 'SpellChecker', 'Maximize' ] },
+{ name: 'clipboard', items: [ 'Undo', 'Redo' ] },
+{ name: 'styles', items: [ 'Format', 'FontSize', 'TextColor', 'PasteText', 'PasteFromWord', 'RemoveFormat' ] },
+{ name: 'insert', items: [ 'Image', 'Table', 'SpecialChar', 'MediaEmbed' ] },'/',
+]
+};
+&lt;/code>&lt;/pre>&lt;p>Can also be seen as a gist &lt;a href="https://gist.github.com/10678198">here&lt;/a>&lt;/p>
+&lt;p>So of course you can do no settings but this is where the fun is. I am telling CKEditor where the endpoints are that it needs to talk to to GET and POST data.&lt;/p>
+&lt;pre>&lt;code>filebrowserUploadUrl: '/api/v1/ckeditor/files',
+&lt;/code>&lt;/pre>&lt;p>Is telling it to POST the uploaded file to that url.&lt;/p>
+&lt;pre>&lt;code>filebrowserBrowseUrl: '/api/v1/ckeditor/files',
+&lt;/code>&lt;/pre>&lt;p>Is telling it to GET the files available from that url.&lt;/p>
+&lt;h4 id="the-view">The View&lt;/h4>
+&lt;p>The html for this to work is simple.&lt;/p>
+&lt;p>All I need to do is to tell the text area field to use this &amp;lsquo;directive&amp;rsquo;&lt;/p>
+&lt;pre>&lt;code>&amp;lt;textarea cols=&amp;quot;30&amp;quot; rows=&amp;quot;40&amp;quot;
+ng-model=&amp;quot;page.body&amp;quot;
+name=&amp;quot;pageBody&amp;quot;
+ckeditor=&amp;quot;editorOptions&amp;quot; rows=&amp;quot;100&amp;quot; required=&amp;quot;required&amp;quot;&amp;gt;
+&amp;lt;/textarea&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>Here I am using the &lt;strong>ckeditor&lt;/strong> directive to take over this textarea and pass the &amp;lsquo;editorOptions&amp;rsquo; info here as well.&lt;/p>
+&lt;p>That is it!&lt;/p>
+&lt;p>Now your ui in Angular has the editor.&lt;/p>
+&lt;p>##The REST endpoints&lt;/p>
+&lt;p>This was pretty hard to find in the documentations. Googling helped for sure but I figured it would good to put it here as well.&lt;/p>
+&lt;p>###GET&lt;/p>
+&lt;p>For getting/displaying the gallery of images I used that Imagebrowser plugin so when the GET request was made to the endpoint &amp;lsquo;/api/v1/ckeditor/gallery&amp;rsquo; it just had to respond with a certain format.&lt;/p>
+&lt;p>My Images Controller method looks like this&lt;/p>
+&lt;pre>&lt;code>
+$rel = '/assets/img/wysiwyg';
+$dir = public_path() . '/assets/img/wysiwyg';
+$iterator = $this-&amp;gt;finder-&amp;gt;in($dir)-&amp;gt;name('*.png')-&amp;gt;name('*.jpg');
+$files = [];
+$count = 0;
+foreach($iterator as $file) {
+$files[$count]['thumb'] = $rel . '/' . $file-&amp;gt;getFilename();
+$files[$count]['image'] = $rel . '/' . $file-&amp;gt;getFilename();
+$files[$count]['title'] = $file-&amp;gt;getFilename();
+$count ++;
+}
+return Response::json($files);
+&lt;/code>&lt;/pre>&lt;p>gist is &lt;a href="https://gist.github.com/alnutile/10678198#file-images-php">here&lt;/a>&lt;/p>
+&lt;p>Since I pulled in the Imagebrowser plugin I did not have to output html.&lt;/p>
+&lt;p>The file viewer work though (eg the non image gallery) one I had to output html but maybe I could have found a JSON method. Here is what my endpoint returns.&lt;/p>
+&lt;pre>&lt;code> $funcNum = $_GET['CKEditorFuncNum'];
+$message = &amp;quot;File chosen&amp;quot;;
+$script = &amp;quot;
+&amp;lt;script type='text/javascript' src='https://alfrednutile.info/assets/js/jquery.1.10.2.min.js'&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type='text/javascript'&amp;gt;
+var sendLink = function(event, url) {
+event.preventDefault();
+window.opener.CKEDITOR.tools.callFunction(\&amp;quot;$funcNum\&amp;quot;, url, \&amp;quot;$message\&amp;quot;);
+window.close();
+};
+&amp;lt;/script&amp;gt;&amp;quot;;
+$rel = '/assets/files/wysiwyg';
+$dir = public_path() . '/assets/files/wysiwyg/';
+$iterator = $this-&amp;gt;finder-&amp;gt;in($dir)-&amp;gt;name('*.pdf')-&amp;gt;name('*.doc');
+$files = [];
+$count = 0;
+foreach($iterator as $file) {
+$f = $rel . '/' . $file-&amp;gt;getFileName();
+$name = $file-&amp;gt;getFileName();
+$files[$count]['name'] = &amp;quot;&amp;lt;a href='&amp;quot; . $f . &amp;quot;' onclick='sendLink(event, \&amp;quot;$f\&amp;quot;)'&amp;gt;{$name}&amp;lt;/a&amp;gt;&amp;quot;;
+$files[$count]['choose'] =
+&amp;quot;&amp;lt;a href='&amp;quot; . $f . &amp;quot;' onclick='sendLink(event, \&amp;quot;$f\&amp;quot;)'&amp;gt;&amp;lt;i class='glyphicon glyphicon-new-window'&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/a&amp;gt;&amp;quot;;
+$count++;
+}
+return View::make('files.index', compact('files', 'script'));
+&lt;/code>&lt;/pre>&lt;p>The View::make is just a template file that goes through the array and makes a bootstrap formatted table. Nothing fancy. But the $script, though it could have been better, was the only way I could figure to pass back the chosen file to the editor.&lt;/p>
+&lt;p>&lt;strong>Keep in mind this is the html/output on the popup window you get when you click &amp;ldquo;Upload File&amp;rdquo; In CKEditor.&lt;/strong>&lt;/p>
+&lt;p>That takes care of GET so the user will see buttons in CKEditor and browse images and files to insert as we all know.&lt;/p>
+&lt;p>##POST / Uploading##&lt;/p>
+&lt;p>These 2 endpoints are the same. They are POST endpoints that process the data like this&lt;/p>
+&lt;pre>&lt;code> $rel = '/assets/files/wysiwyg';
+$dir = public_path() . $rel;
+$_FILES['upload']['type'] = strtolower($_FILES['upload']['type']);
+if ($_FILES['upload']['type'] == 'application/pdf'
+|| $_FILES['upload']['type'] == 'image/jpg'
+|| $_FILES['upload']['type'] == 'image/gif'
+|| $_FILES['upload']['type'] == 'image/jpeg'
+|| $_FILES['upload']['type'] == 'application/doc')
+{
+$tmp = $_FILES['upload']['tmp_name'];
+$dest = $dir . '/' . $_FILES['upload']['name'];
+$this-&amp;gt;filesystem-&amp;gt;copy($tmp, $dest, $override = TRUE);
+$file = '/assets/files/wysiwyg/'.$_FILES['upload']['name'];
+}
+$funcNum = $_GET['CKEditorFuncNum'];
+$message = &amp;quot;File uploaded&amp;quot;;
+$script = &amp;quot;&amp;lt;script type='text/javascript'&amp;gt;window.parent.CKEDITOR.tools.callFunction(\&amp;quot;$funcNum\&amp;quot;, \&amp;quot;$file\&amp;quot;, \&amp;quot;$message\&amp;quot;);&amp;lt;/script&amp;gt;&amp;quot;;
+return $script;
+&lt;/code>&lt;/pre>&lt;p>gist is &lt;a href="https://gist.github.com/alnutile/10678198#file-post-php">here&lt;/a>&lt;/p>
+&lt;p>Basically I take the input of $_FILES and make sure it is what I expected and save it to the folder. The tricky part was to switch the user back to the interface, closing the parent window so they now can finish linking their file.&lt;/p>
+&lt;p>##Final notes&lt;/p>
+&lt;p>This is a first draft of this working deployed system. So it may have changes to it. I will try to comment here as I learn more.&lt;/p>
+&lt;p>When getting info from CKEDITOR I would do a var_dump at the endpoint to see what it was sending me for data. You can always see this output in your Chrome Console under Networking.&lt;/p>
+&lt;p>##Some links&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/spantaleev/ckeditor-imagebrowser#usage">https://github.com/spantaleev/ckeditor-imagebrowser#usage&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://devture.com/projects/ckeditor-imagebrowser/demo/">http://devture.com/projects/ckeditor-imagebrowser/demo/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://ckeditor.com/addon/imagebrowser">http://ckeditor.com/addon/imagebrowser&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/spantaleev/ckeditor-imagebrowser#usage">https://github.com/spantaleev/ckeditor-imagebrowser#usage&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html">http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://docs.cksource.com/CKEditor_3.x/Developers_Guide/File_Browser_(Uploader)">http://docs.cksource.com/CKEditor_3.x/Developers_Guide/File_Browser_(Uploader)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://www.paulfp.net/blog/2010/10/how-to-add-and-upload-an-image-using-ckeditor/">http://www.paulfp.net/blog/2010/10/how-to-add-and-upload-an-image-using-ckeditor/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://www.mixedwaves.com/2010/02/integrating-fckeditor-filemanager-in-ckeditor/">http://www.mixedwaves.com/2010/02/integrating-fckeditor-filemanager-in-ckeditor/&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Building the UI first with Angular, Mocked Data and REST</title><link>https://alfrednutile.info/posts/58/</link><pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/58/</guid><description>&lt;p>&lt;span style="line-height: 1.6em;">Lately I have had a few projects using a RESTful backend to output JSON formatted data and a javascript front end. All of them are different technologies but the front end is in Angular.js.&lt;/span>&lt;/p>
+&lt;p>So using the Angular mock module I have been able to build out the front end with no backend. I started to do this for speed reasons but realized a number of huge benefits.&lt;/p>
+&lt;p>Angular has some good docs on how to mock this data and use this &lt;a href="http://docs.angularjs.org/api/ngMockE2E/service/$httpBackend" target="_blank">$httpbackend&lt;/a> module here.&lt;/p>
+&lt;p>Also I posted a quick video here on getting the json data from your app or from this great site &lt;a href="http://www.json-generator.com/" target="_blank">JsonGenerator&lt;/a>.&lt;/p>
+&lt;p>You can see the video &lt;a href="https://www.youtube.com/watch?v=jMJAfGX2Qak&amp;feature=youtu.be" target="_blank">here&lt;/a>&lt;/p>
+&lt;p>## User interfaces change&lt;/p>
+&lt;p>No matter what the mock up show the ui will change. By having such a quick interface to try out widgets and workflows I can easily change with the clients needs.&lt;/p>
+&lt;p>Also use &lt;a href="http://www.layoutit.com/">Layitout&lt;/a> to crank out the UI&lt;/p>
+&lt;p>## The UI building process helps me to really understand the data goals&lt;/p>
+&lt;p>If the ui is coming before the data end points are built then this really gives you time to rethink some assumptions on the data goals.&lt;/p>
+&lt;p>## Speed and Testing&lt;/p>
+&lt;p>Local testing is super fast.  Also the infamous page reload for viewing the latest change is instantaneous. &lt;/p>
+&lt;p>## UI fixes are separate from backend fixes and changes&lt;/p>
+&lt;p>A bug or feature added to the ui does not get tangled with the backend making for quick fixes and deployments. &lt;/p>
+&lt;p>## Lastly it is real code&lt;/p>
+&lt;p>The mocked routing code is pretty much a drop in for the final front end product. Just one file and it's one call to the mock module and run settings and it will call the real end points! And my data is structured to help guide me in building the RESTful part of the app&lt;/p>
+&lt;p>I will do a quick series on using Angula mock and in general a workflow for building like this that can be applied to different javascript front ends and back ends.&lt;/p>
+&lt;p> &lt;/p>
+&lt;h2>Links&lt;/h2>
+&lt;h3>Supports wildcard&lt;/h3>
+&lt;p>&lt;a href="http://docs.angularjs.org/api/ngMock/service/$httpBackend" target="_blank">http://docs.angularjs.org/api/ngMock/service/$httpBackend&lt;/a> and &lt;a href="http://stackoverflow.com/questions/18618532/is-it-possible-to-use-wild-cards-in-angularjs-mocks" target="_blank">http://stackoverflow.com/questions/18618532/is-it-possible-to-use-wild-cards-in-angularjs-mocks&lt;/a>&lt;/p>
+&lt;p>UPDATE: June 17 13:54 a friend just posted a link to http://jsonstub.com/ which looks really interesting&lt;/p></description></item><item><title>Angular Watching a model and it's filters</title><link>https://alfrednutile.info/posts/43/</link><pubDate>Thu, 20 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/43/</guid><description>&lt;p>I had to update other items on the page including an CSV export as the user made filter changes on the site.&lt;/p>
+&lt;p>I had to pass the results of ng-repeat into a model and then the filters as seen here&lt;/p>
+&lt;p>&lt;script src="https://gist.github.com/alnutile/9673298.js?file=index.html">&lt;/script>&lt;/p>
+&lt;p>And in my controller I added a watcher to process the new results as needed.&lt;/p>
+&lt;p>&lt;script src="https://gist.github.com/alnutile/9673298.js?file=reportController.js">&lt;/script>&lt;/p>
+&lt;p>This simple solution I had some trouble grasping.&lt;/p></description></item><item><title>Angular Seed Testing Setup</title><link>https://alfrednutile.info/posts/19/</link><pubDate>Wed, 12 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/19/</guid><description>&lt;p>This took a few settings to get it working.&lt;/p>
+&lt;p>For one I put the correct paths in for karma and webdriver&lt;/p>
+&lt;script src="https://gist.github.com/alnutile/9518483.js">&lt;/script>
+&lt;p>I then had to download mocks http://code.angularjs.org/1.2.14/angular-mocks.js even though I used angular-seed and setup my module to include this &amp;#39;ngMockE2E&amp;#39;&lt;/p>
+&lt;p>This page was a good starting point http://docs.angularjs.org/api/ngMockE2E/service/$httpBackend&lt;/p>
+&lt;p>Then there is the testing end 2 end frame work https://github.com/angular/protractor/tree/master/docs/ that allowed me to easily write non-unit tests&lt;/p>
+&lt;p>&amp;nbsp;&lt;/p></description></item><item><title>Angular Drupal and CSRF</title><link>https://alfrednutile.info/posts/48/</link><pubDate>Tue, 11 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/48/</guid><description>&lt;p>quick tip on getting and setting your token for drupal when doing a put, post, destroy against a drupal site.&amp;Acirc;&amp;nbsp;&lt;/p>
+&lt;p>Mostly gotten from &lt;a href="http://angularjs-best-practices.blogspot.com/2013/07/angularjs-and-xsrfcsrf-cross-site.html" target="_blank">here&lt;/a>&lt;/p>
+&lt;p>Might even be better to reset the formant for X-CSRF-Token to the default one Angular is looking for X-CSRFToken&lt;/p>
+&lt;p>&lt;script src="https://gist.github.com/alnutile/9484320.js">&lt;/script>&lt;/p></description></item><item><title>Angular.js Ticket System</title><link>https://alfrednutile.info/posts/18/</link><pubDate>Fri, 05 Jul 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/18/</guid><description>&lt;p>Fun side project to make a ticket system in Angular.js.&lt;br />
+Still have to build out the authentication system and ideally move the api into Rails.&lt;br />
+And of course wrap up a few other things ( -;&lt;br />
+http://angular.alfrednutile.info/&lt;br />
+Or the video&lt;br />
+http://www.youtube.com/watch?v=RjCJNn7wpj0&lt;br />
+&lt;iframe allowfullscreen="" frameborder="0" height="315" src="//www.youtube.com/embed/RjCJNn7wpj0" width="420">&lt;/iframe>&lt;/p></description></item></channel></rss>

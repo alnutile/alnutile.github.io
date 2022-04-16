@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>serverless on Alfred Nutile</title><link>https://alfrednutile.info/tags/serverless/</link><description>Recent content in serverless on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 06 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/serverless/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Python Lambda behind and ALB</title><link>https://alfrednutile.info/posts/266/</link><pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/266/</guid><description>Just a quick note to self about ALB and Lambda. When using Lambda behind and ALB for routing your response has to be formatted properly else you will get a 502.
-https://pypi.org/project/alb-response/ solved this problem.
-from alb_response import alb_response
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>serverless on Alfred Nutile</title><link>https://alfrednutile.info/tags/serverless/</link><description>Recent content in serverless on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 06 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/serverless/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Python Lambda behind and ALB</title><link>https://alfrednutile.info/posts/266/</link><pubDate>Thu, 06 Feb 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/266/</guid><description>&lt;p>Just a quick note to self about ALB and Lambda. When using Lambda behind and ALB for routing your response has to be formatted properly else you will get a 502.&lt;/p>
+&lt;p>&lt;a href="https://pypi.org/project/alb-response">https://pypi.org/project/alb-response/&lt;/a> solved this problem.&lt;/p>
+&lt;pre>&lt;code>from alb_response import alb_response
 def lambda_handler(event, context):
 response_dict = process_the_event(event)
 return alb_response(
@@ -8,9 +8,9 @@ http_status=200,
 json=response_dict,
 is_base64_encoded=False,
 )
-The results are easy enough to do by hand but I had a bit of time really finding out the format to respond with other than JavaScript and that casing there was a bit confusing.</description></item><item><title>Lambda and Github Webhooks</title><link>https://alfrednutile.info/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/245/</guid><description>Related to https://developer.github.com/webhooks/ and pushing data to Lambda AWS.
-I can check the token by just having this check in my handler.
-const crypto = require('crypto');
+&lt;/code>&lt;/pre>&lt;p>The results are easy enough to do by hand but I had a bit of time really finding out the format to respond with other than JavaScript and that casing there was a bit confusing.&lt;/p></description></item><item><title>Lambda and Github Webhooks</title><link>https://alfrednutile.info/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/245/</guid><description>&lt;p>Related to &lt;a href="https://developer.github.com/webhooks/">https://developer.github.com/webhooks/&lt;/a> and pushing data to Lambda AWS.&lt;/p>
+&lt;p>I can check the token by just having this check in my handler.&lt;/p>
+&lt;pre>&lt;code>const crypto = require('crypto');
 exports.handler = (event, context, callback) =&amp;gt; {
 let headers = event.headers;
 let body = event.body;
@@ -32,10 +32,73 @@ return;
 let github_signature = headers['X-Hub-Signature'];
 if (
 github_signature === undefined ||
-typeof github_signature !</description></item><item><title>Serverless Python and Example App WIP</title><link>https://alfrednutile.info/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/229/</guid><description>There are good docs on this http://serverless.com platform. For Python
-https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example https://github.com/serverless/examples I will cover some items here I need to do time after time.
-Tagging ENV settings Testing Testing Example file test_cf_backuper.py:
-import unittest
+typeof github_signature !== 'string' ||
+!github_signature.match(/sha1=\S+/)
+) {
+callback(null, {
+statusCode: 400,
+body: 'Missing X-Hub-Signature'
+});
+}
+let secret = process.env.SECRET;
+if (secret === undefined || secret.length &amp;lt; 1) {
+callback(null, {
+statusCode: 500,
+body: 'We are missing the secret in our server sorry'
+});
+return;
+}
+let signature = headers['X-Hub-Signature'];
+let computed_signature = crypto
+.createHmac('sha1', secret)
+.update(body)
+.digest('hex');
+if (`sha1=${computed_signature}` !== signature) {
+callback(null, {
+statusCode: 403,
+body: 'HMAC Output not Correct'
+});
+return;
+}
+//ready to process token
+callback(null, {
+statusCode: 204,
+body: 'OK'
+});
+};
+&lt;/code>&lt;/pre>&lt;p>With the serverless library from AWS &lt;a href="https://github.com/awslabs/serverless-application-model">https://github.com/awslabs/serverless-application-model&lt;/a> I can build a template to include this in the Resource&lt;/p>
+&lt;pre>&lt;code>Resources:
+GithubSecurityWebhook:
+Type: AWS::Serverless::Function
+DependsOn:
+- Stream
+Properties:
+Runtime: nodejs8.10
+Description: &amp;gt;-
+This will verify that the incoming data is from Github and hashed with the key
+we are using for this environment
+Environment:
+Variables:
+SECRET: !Sub ${Secret}
+APP_ENV: !Sub ${AppEnv}
+APP_REGION: &amp;quot;eu-west-1&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>then during the update command I can pass&lt;/p>
+&lt;pre>&lt;code>SECRET=FOO
+&lt;/code>&lt;/pre>&lt;p>or put a .env file on the system and use the &lt;code>dotenv&lt;/code> library&lt;/p></description></item><item><title>Serverless Python and Example App WIP</title><link>https://alfrednutile.info/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/229/</guid><description>&lt;p>There are good docs on this &lt;a href="http://serverless.com">http://serverless.com&lt;/a> platform.
+For Python&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example">https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/serverless/examples">https://github.com/serverless/examples&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>I will cover some items here I need to do time after time.&lt;/p>
+&lt;ul>
+&lt;li>Tagging&lt;/li>
+&lt;li>ENV settings&lt;/li>
+&lt;li>Testing&lt;/li>
+&lt;/ul>
+&lt;h2 id="testing">Testing&lt;/h2>
+&lt;p>Example file &lt;code>test_cf_backuper.py&lt;/code>:&lt;/p>
+&lt;pre>&lt;code>import unittest
 import mock
 from mock import MagicMock
 from get_buckets import GetBuckets
@@ -50,9 +113,33 @@ log.setLevel(logging.DEBUG)
 class TestHandler(unittest.TestCase):
 def test_get_one_template(self):
 client = CFBackuper()
-results = client.</description></item><item><title>Serverless and Custom Tags for Resources</title><link>https://alfrednutile.info/posts/217/</link><pubDate>Tue, 22 Aug 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/217/</guid><description>Because much of serveless.com is CloudFormation based, you can easily update existing resources. They talk about this feature here
-For me this was required for adding tags
-# you can add CloudFormation resource templates here
+results = client.handle()
+self.assertTrue(results)
+&lt;/code>&lt;/pre>&lt;p>This allows me to mock the client for example of boto, more on that later.&lt;/p>
+&lt;pre>&lt;code>python -m unittest test_cf_backuper.TestHandler.test_get_one_template
+&lt;/code>&lt;/pre>&lt;h2 id="pip-install">Pip Install&lt;/h2>
+&lt;p>Along the way I make a &lt;code>requirments.txt&lt;/code>
+for example&lt;/p>
+&lt;pre>&lt;code>requests
+boto3
+mock
+logging
+python-dotenv
+&lt;/code>&lt;/pre>&lt;p>then&lt;/p>
+&lt;pre>&lt;code>pip install -r requirements.txt
+&lt;/code>&lt;/pre>&lt;p>gets me setup locally&lt;/p>
+&lt;h2 id="aws-cli">AWS Cli&lt;/h2>
+&lt;p>It is key to have your profile setup per their docs &lt;a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html">here&lt;/a>&lt;/p>
+&lt;p>Then shift the default as needed:&lt;/p>
+&lt;pre>&lt;code>export AWS_DEFAULT_PROFILE=profile_name_here
+&lt;/code>&lt;/pre>&lt;p>Or in the &lt;code>servless.yml&lt;/code> file:&lt;/p>
+&lt;pre>&lt;code>provider:
+name: aws
+runtime: python2.7
+profile: profile_name_here
+&lt;/code>&lt;/pre>&lt;p>More info &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/credentials/#using-aws-profiles">here&lt;/a>&lt;/p></description></item><item><title>Serverless and Custom Tags for Resources</title><link>https://alfrednutile.info/posts/217/</link><pubDate>Tue, 22 Aug 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/217/</guid><description>&lt;p>Because much of serveless.com is CloudFormation based, you can easily update existing resources. They talk about this feature &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/resources/#override-aws-cloudformation-resource">here&lt;/a>&lt;/p>
+&lt;p>For me this was required for adding tags&lt;/p>
+&lt;pre>&lt;code># you can add CloudFormation resource templates here
 resources:
 Resources:
 ServerlessDeploymentBucket:
@@ -62,10 +149,39 @@ Tags:
 - { Key: &amp;quot;environment&amp;quot;, Value: &amp;quot;${opt:stage, self:provider.stage}&amp;quot; }
 - { Key: &amp;quot;parent_project&amp;quot;, Value: &amp;quot;${self:custom.parent}&amp;quot; }
 - { Key: &amp;quot;key_contact&amp;quot;, Value: &amp;quot;${self:custom.contact}&amp;quot; }
-- { Key: &amp;quot;billing_ref&amp;quot;, Value: &amp;quot;${self:custom.</description></item><item><title>Serverless, AWS API Gateway and Authentication</title><link>https://alfrednutile.info/posts/214/</link><pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/214/</guid><description>Just a note2self really.
-Setting up Auth was super easy
-As seen below I had to add to my serverless.yml authorizer
-addQuote:
+- { Key: &amp;quot;billing_ref&amp;quot;, Value: &amp;quot;${self:custom.billing_ref}&amp;quot; }
+&lt;/code>&lt;/pre>&lt;p>now that bucket, that Severless makes by default, will have tags.&lt;/p>
+&lt;p>Also I need to tag Lambda functions too for billing:&lt;/p>
+&lt;pre>&lt;code>functions:
+check_queue:
+handler: handler.check_queue
+tags:
+project: ${self:provider.project}
+environment: ${opt:stage, self:provider.stage}
+parent_project: ${self:custom.parent}
+key_contact: ${self:custom.contact}
+billing_ref: ${self:custom.billing_ref}
+events:
+&lt;/code>&lt;/pre>&lt;p>Some of this info I centralize in this area here&lt;/p>
+&lt;pre>&lt;code>custom:
+secrets: ${file(secrets.${opt:stage, self:provider.stage}.yml)}
+contact: AlfredNutile
+billing_ref: foo_app
+parent: foo_app
+&lt;/code>&lt;/pre>&lt;p>Some of this I can drive using this plugin &lt;code>serverless-secrets-plugin&lt;/code> &lt;a href="https://www.npmjs.com/package/serverless-secrets-plugin">here&lt;/a>&lt;/p>
+&lt;p>So I then pull in the secrets file and use it as needed.&lt;/p>
+&lt;pre>&lt;code>provider:
+name: aws
+stage: dev
+runtime: nodejs6.10
+environment:
+APP_ENV: ${self:custom.secrets.APP_ENV}
+REGION: ${self:custom.secrets.REGION}
+ACCOUNT_ID: 555555555
+&lt;/code>&lt;/pre></description></item><item><title>Serverless, AWS API Gateway and Authentication</title><link>https://alfrednutile.info/posts/214/</link><pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/214/</guid><description>&lt;p>Just a note2self really.&lt;/p>
+&lt;p>Setting up Auth was super easy&lt;/p>
+&lt;p>As seen below I had to add to my serverless.yml &lt;code>authorizer&lt;/code>&lt;/p>
+&lt;pre>&lt;code> addQuote:
 handler: quote/handler.add
 events:
 - http:
@@ -73,10 +189,11 @@ path: quote
 method: post
 cors: true
 authorizer: aws_iam
-authorizer: aws_iam
-From here I then needed, in this case Postman, to pass an AWS KEY and SECRET made for this app.
-When making the user I attached this Policy to the user
-{
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>authorizer: aws_iam&lt;/strong>&lt;/p>
+&lt;p>From here I then needed, in this case Postman, to pass an AWS KEY and SECRET made for this app.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/54mz7mxo0x7ei25/auth_aws.jpg?dl=0" alt="">&lt;/p>
+&lt;p>When making the user I attached this Policy to the user&lt;/p>
+&lt;pre>&lt;code>{
 &amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
 &amp;quot;Statement&amp;quot;: [
 {
@@ -88,4 +205,55 @@ When making the user I attached this Policy to the user
 }
 ]
 }
-I an easily make this in the serverless.</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>I an easily make this in the &lt;code>serverless.yml&lt;/code> file by adding the following:&lt;/p>
+&lt;pre>&lt;code>
+resources:
+Resources:
+s3Data:
+Type: AWS::S3::Bucket
+Properties:
+BucketName: &amp;quot;${self:custom.bucket}&amp;quot;
+VersioningConfiguration:
+Status: Enabled
+quotePolicy:
+Type: AWS::IAM::Policy
+Properties:
+PolicyName: &amp;quot;serverless-quotes-policy-${opt:stage, self:provider.stage}&amp;quot;
+PolicyDocument:
+Version: &amp;quot;2012-10-17&amp;quot;
+Statement:
+-
+Effect: &amp;quot;Allow&amp;quot;
+Action:
+- &amp;quot;execute-api:Invoke&amp;quot;
+Resource: &amp;quot;arn:aws:execute-api:#{AWS::Region}:#{AWS::AccountId}:*/${opt:stage, self:provider.stage}/POST/quote&amp;quot;
+Users:
+- &amp;quot;serverless-quotes-${opt:stage, self:provider.stage}&amp;quot;
+DependsOn:
+- authUser
+userKey:
+Type: AWS::IAM::AccessKey
+Properties:
+UserName: &amp;quot;serverless-quotes-${opt:stage, self:provider.stage}&amp;quot;
+DependsOn:
+- authUser
+authUser:
+Type: AWS::IAM::User
+Properties:
+UserName: &amp;quot;serverless-quotes-${opt:stage, self:provider.stage}&amp;quot;
+Outputs:
+UserSecret:
+Description: The user secret
+Value:
+&amp;quot;Fn::GetAtt&amp;quot;: [ userKey, SecretAccessKey ]
+UserKey:
+Description: The user key
+Value:
+&amp;quot;Ref&amp;quot;: userKey
+&lt;/code>&lt;/pre>&lt;p>This is after adding &lt;code>serverless-pseudo-parameters&lt;/code> plugin, see link below.&lt;/p>
+&lt;p>Now when I run &lt;code>sls deploy --stage dev&lt;/code> I get the User, IAM, Key and Secret (via the webui output), then I need to access this url.&lt;/p>
+&lt;p>That was it. With serverless.com I could have limited stage, production builds to the unique user per stack as well.&lt;/p>
+&lt;h2 id="links">Links&lt;/h2>
+&lt;p>&lt;a href="https://aws.amazon.com/premiumsupport/knowledge-center/iam-authentication-api-gateway/">https://aws.amazon.com/premiumsupport/knowledge-center/iam-authentication-api-gateway/&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html">http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference">https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference&lt;/a>&lt;/p></description></item></channel></rss>

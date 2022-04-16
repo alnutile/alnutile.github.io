@@ -1,7 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>wip on Alfred Nutile</title><link>https://alfrednutile.info/tags/wip/</link><description>Recent content in wip on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 31 Dec 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/wip/index.xml" rel="self" type="application/rss+xml"/><item><title>Serverless Python and Example App WIP</title><link>https://alfrednutile.info/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/229/</guid><description>There are good docs on this http://serverless.com platform. For Python
-https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example https://github.com/serverless/examples I will cover some items here I need to do time after time.
-Tagging ENV settings Testing Testing Example file test_cf_backuper.py:
-import unittest
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>wip on Alfred Nutile</title><link>https://alfrednutile.info/tags/wip/</link><description>Recent content in wip on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 31 Dec 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/wip/index.xml" rel="self" type="application/rss+xml"/><item><title>Serverless Python and Example App WIP</title><link>https://alfrednutile.info/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/229/</guid><description>&lt;p>There are good docs on this &lt;a href="http://serverless.com">http://serverless.com&lt;/a> platform.
+For Python&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example">https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/serverless/examples">https://github.com/serverless/examples&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>I will cover some items here I need to do time after time.&lt;/p>
+&lt;ul>
+&lt;li>Tagging&lt;/li>
+&lt;li>ENV settings&lt;/li>
+&lt;li>Testing&lt;/li>
+&lt;/ul>
+&lt;h2 id="testing">Testing&lt;/h2>
+&lt;p>Example file &lt;code>test_cf_backuper.py&lt;/code>:&lt;/p>
+&lt;pre>&lt;code>import unittest
 import mock
 from mock import MagicMock
 from get_buckets import GetBuckets
@@ -16,21 +27,123 @@ log.setLevel(logging.DEBUG)
 class TestHandler(unittest.TestCase):
 def test_get_one_template(self):
 client = CFBackuper()
-results = client.</description></item><item><title>Laravel Asset Notes WIP</title><link>https://alfrednutile.info/posts/227/</link><pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/227/</guid><description>This is just a reminder area of all the minor details as I find them that I need to remember
-FontAwesome yarn add font-awesome
-Then in my resources/assets/sass/app.scss
-// Fonts
+results = client.handle()
+self.assertTrue(results)
+&lt;/code>&lt;/pre>&lt;p>This allows me to mock the client for example of boto, more on that later.&lt;/p>
+&lt;pre>&lt;code>python -m unittest test_cf_backuper.TestHandler.test_get_one_template
+&lt;/code>&lt;/pre>&lt;h2 id="pip-install">Pip Install&lt;/h2>
+&lt;p>Along the way I make a &lt;code>requirments.txt&lt;/code>
+for example&lt;/p>
+&lt;pre>&lt;code>requests
+boto3
+mock
+logging
+python-dotenv
+&lt;/code>&lt;/pre>&lt;p>then&lt;/p>
+&lt;pre>&lt;code>pip install -r requirements.txt
+&lt;/code>&lt;/pre>&lt;p>gets me setup locally&lt;/p>
+&lt;h2 id="aws-cli">AWS Cli&lt;/h2>
+&lt;p>It is key to have your profile setup per their docs &lt;a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html">here&lt;/a>&lt;/p>
+&lt;p>Then shift the default as needed:&lt;/p>
+&lt;pre>&lt;code>export AWS_DEFAULT_PROFILE=profile_name_here
+&lt;/code>&lt;/pre>&lt;p>Or in the &lt;code>servless.yml&lt;/code> file:&lt;/p>
+&lt;pre>&lt;code>provider:
+name: aws
+runtime: python2.7
+profile: profile_name_here
+&lt;/code>&lt;/pre>&lt;p>More info &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/credentials/#using-aws-profiles">here&lt;/a>&lt;/p></description></item><item><title>Laravel Asset Notes WIP</title><link>https://alfrednutile.info/posts/227/</link><pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/227/</guid><description>&lt;p>This is just a reminder area of all the minor details as I find them that I need to remember&lt;/p>
+&lt;h2 id="fontawesome">FontAwesome&lt;/h2>
+&lt;pre>&lt;code>yarn add font-awesome
+&lt;/code>&lt;/pre>&lt;p>Then in my &lt;code>resources/assets/sass/app.scss&lt;/code>&lt;/p>
+&lt;pre>&lt;code>// Fonts
 @import url(&amp;quot;https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;quot;);
 // Variables
 @import &amp;quot;variables&amp;quot;;
 // Bootstrap
 @import &amp;quot;~bootstrap-sass/assets/stylesheets/bootstrap&amp;quot;;
-@import &amp;quot;~font-awesome/css/font-awesome&amp;quot;; My webpack is the default
-mix.js('resources/assets/js/app.js', 'public/js')
+@import &amp;quot;~font-awesome/css/font-awesome&amp;quot;;
+&lt;/code>&lt;/pre>&lt;p>My webpack is the default&lt;/p>
+&lt;pre>&lt;code>mix.js('resources/assets/js/app.js', 'public/js')
 .sass('resources/assets/sass/app.scss', 'public/css');
-set to go!
-If using Less
-#resources/assets/less/app.less
-@import &amp;quot;./../../../node_modules/font-awesome/less/font-awesome&amp;quot;;</description></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alfrednutile.info/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/220/</guid><description>Sending Docker Commands to Get A Task Done This article will show how to get started with AWS Batch and Docker to spin up a &amp;ldquo;worker&amp;rdquo;
-By the time you are done reading it you will:
-Have a Docker image to run your command in. Deploy the Docker image to AWS ECR And Run a Task on the AWS Batch system, or a 100 tasks, does not matter. Finally you will have the scripts needed to fully build AWS Batch with CloudFormation, e.</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>set to go!&lt;/p>
+&lt;p>If using Less&lt;/p>
+&lt;pre>&lt;code>#resources/assets/less/app.less
+@import &amp;quot;./../../../node_modules/font-awesome/less/font-awesome&amp;quot;;
+&lt;/code>&lt;/pre></description></item><item><title>WIP AWS Batch and Workers with Laravel</title><link>https://alfrednutile.info/posts/220/</link><pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/220/</guid><description>&lt;h1 id="sending-docker-commands-to-get-a-task-done">Sending Docker Commands to Get A Task Done&lt;/h1>
+&lt;p>This article will show how to get started with AWS Batch and Docker to spin up a &amp;ldquo;worker&amp;rdquo;&lt;/p>
+&lt;p>By the time you are done reading it you will:&lt;/p>
+&lt;ol>
+&lt;li>Have a Docker image to run your command in.&lt;/li>
+&lt;li>Deploy the Docker image to AWS ECR&lt;/li>
+&lt;li>And Run a Task on the AWS Batch system, or a 100 tasks, does not matter.&lt;/li>
+&lt;li>Finally you will have the scripts needed to fully build AWS Batch with CloudFormation, e.g. super simple&lt;/li>
+&lt;/ol>
+&lt;h2 id="building-the-laravel-worker">Building the Laravel Worker&lt;/h2>
+&lt;p>This can be any language you want, any framework or none! I will focus on Laravel.&lt;/p>
+&lt;p>Either way we need a git repo, so later we can push this and do a Docker build on the CI via the deploy scripts.&lt;/p>
+&lt;p>Note the 2 Commands&lt;/p>
+&lt;ul>
+&lt;li>One to manage all the Tasks and then stitch the results together&lt;/li>
+&lt;li>One to just covert the image to PDF
+&amp;ndash; depend on?&lt;/li>
+&lt;/ul>
+&lt;p>Install SDK&lt;/p>
+&lt;h3 id="the-command">The Command&lt;/h3>
+&lt;p>Before you get going install &lt;a href="https://aws.amazon.com/cli/">AWS CLI&lt;/a> on your machine.&lt;/p>
+&lt;p>Make sure you have your credentials and profiles setup per the docs &lt;a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html">here&lt;/a>&lt;/p>
+&lt;p>Then the rest will work off those credentials as we make new ones per application and you just place them into your profile via &lt;code>~/.aws/credentials&lt;/code> and &lt;code>~/.aws/config&lt;/code>&lt;/p>
+&lt;h3 id="installing-incomings">Installing Incomings&lt;/h3>
+&lt;h2 id="building-the-docker-container-to-run-this-work">Building the Docker container to run this work&lt;/h2>
+&lt;pre>&lt;code>docker-compose build //this will be needed locally
+docker-compose run --rm -w /app app php artisan
+docker-compose run app php artisan security:scan --git-repo=https://github.com/alnutile/security-scanner-show-error-poc
+docker-compose run -w /app app php artisan batch:convert_image_to_pdf --image-url=https://dl.dropboxusercontent.com/s/d2sx0wjheb7dk0p/example_batch.jpg --destination=batch-example/foo
+&lt;/code>&lt;/pre>&lt;h2 id="setting-up-aws-to-run-the-work-on">Setting up AWS to run the work on.&lt;/h2>
+&lt;h3 id="compute-environment">Compute Environment&lt;/h3>
+&lt;p>For starters there is the Compute Environment (CE). This is what manages the scaling of the EC2 instances.&lt;/p>
+&lt;p>The script is HERE. But this is only needed once. I will Explain in a moment.&lt;/p>
+&lt;h3 id="job-definition">Job Definition&lt;/h3>
+&lt;p>Then there is the JobDefinitions. This is where we can define the Job we want to run and the Compute Environment to run it on. Let the CE figure out the scaling, and hence we can just build one and share it with every one.
+So if you have a CE already build try putting your JobDefinition on that before making another one for your Worker.&lt;/p>
+&lt;p>The script is HERE.&lt;/p>
+&lt;p>Open the scripts, they are just JSON. Good docs are &lt;strong>HERE&lt;/strong> on how to make, or read these scripts.&lt;/p>
+&lt;p>Once those are all setup take the AWS KEY and Secret it gave you and use it to setup you local AWS CLI.&lt;/p>
+&lt;p>This is key for a sane workflow. Here is a link [&lt;strong>HERE&lt;/strong>] get your profile right.&lt;/p>
+&lt;p>Once you have this setup all the rest will fall into place.&lt;/p>
+&lt;h2 id="deploying-to-ci">Deploying to CI&lt;/h2>
+&lt;p>Before we push let&amp;rsquo;s make sure that &lt;code>.gitignore&lt;/code> has:&lt;/p>
+&lt;pre>&lt;code>docker/app/packaged/*
+!docker/app/packaged/.gitkeep
+&lt;/code>&lt;/pre>&lt;p>Plus all the default Laravel ignores including &lt;code>.env&lt;/code>&lt;/p>
+&lt;p>Deploy Script
+Now we need to get this work to CI&lt;/p>
+&lt;h2 id="going-to-aws-ui-to-run">Going to AWS UI to run&lt;/h2>
+&lt;p>This is annoying lets make a command for this&amp;hellip;&lt;/p>
+&lt;h3 id="the-testing-command">The Testing Command&lt;/h3>
+&lt;p>More import that is how a &amp;ldquo;requesting&amp;rdquo; app will call this.&lt;/p>
+&lt;p>&lt;strong>DIAGRAM HERE&lt;/strong>&lt;/p>
+&lt;h2 id="putting-it-all-together">Putting it all together&lt;/h2>
+&lt;p>Show running 10 jobs via the command&lt;/p>
+&lt;h2 id="now-taking-it-a-bit-further">Now Taking it a bit further&lt;/h2>
+&lt;p>The command did a lot&lt;/p>
+&lt;ul>
+&lt;li>Got Image&lt;/li>
+&lt;li>Made into PDF&lt;/li>
+&lt;li>Stitched them all together&lt;/li>
+&lt;/ul>
+&lt;p>But now let&amp;rsquo;s take this a bit further. I am going to make 2 JobDefinitions.&lt;/p>
+&lt;p>One will kick off an orchestrate the work by creating a job per image, tracking the progress of those jobs, and
+When all those jobs are done knit them together!&lt;/p>
+&lt;p>Here is how it will look.&lt;/p>
+&lt;h2 id="summary-of-install">Summary of Install&lt;/h2>
+&lt;p>Get Docker file in place docker/app/DockerFile
+Get Packaged file in place
+Setup Core CloudFormation&lt;/p>
+&lt;ul>
+&lt;li>ECR&lt;/li>
+&lt;li>JobDefinition&lt;/li>
+&lt;li>User Key/Secret
+Get docker-compose inlace
+Get Travis.yml in place and docker/deploy.bash
+See diagram on how this all comes together&lt;/li>
+&lt;/ul></description></item></channel></rss>

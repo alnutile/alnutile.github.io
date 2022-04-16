@@ -1,6 +1,58 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>workflows on Alfred Nutile</title><link>https://alfrednutile.info/tags/workflows/</link><description>Recent content in workflows on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 11 Jan 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/workflows/index.xml" rel="self" type="application/rss+xml"/><item><title>Then Benefits of Building a Clickable POC as a Developer</title><link>https://alfrednutile.info/posts/172/</link><pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/172/</guid><description>Listen here
-This article will focus on web applications and not really be about building websites eg a company blog, college website etc.
-This will cover two things. One, how helpful it can be to make a clickable Proof of Concepts (POC), not just with images, or tools the spit out html but instead just enough javascript and base theme to help &amp;ldquo;sell&amp;rdquo; the idea, or more importantly to help Product Owners see the possibilities that are not too far out of reach.</description></item><item><title>Put It All Into Version Control Even Composer!</title><link>https://alfrednutile.info/posts/171/</link><pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/171/</guid><description>Update: September 06 2016
-We stopped doing this. I do not think it is a bad idea but we ended up going with CodeDeploy on AWS. So after our CI does a Composer install and all passes, CodeDeploy will just bundle everything up as a Zip file and deploy that to the server.
-Or Listen here
-Another article about this written by Loran Jane Mitchell Using Composer Without GitIgnoring Vendor</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>workflows on Alfred Nutile</title><link>https://alfrednutile.info/tags/workflows/</link><description>Recent content in workflows on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 11 Jan 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/workflows/index.xml" rel="self" type="application/rss+xml"/><item><title>Then Benefits of Building a Clickable POC as a Developer</title><link>https://alfrednutile.info/posts/172/</link><pubDate>Mon, 11 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/172/</guid><description>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/p5at7k18vzmf7l6/balloon_and_monster_1_of_3.jpg?dl=0" alt="ballon 1 or 3">&lt;/p>
+&lt;p>&lt;strong>Listen &lt;a href="http://www.readorlisten.com/4">here&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>This article will focus on web applications and not really be about building websites eg a company blog, college website etc.&lt;/p>
+&lt;p>This will cover two things. One, how helpful it can be to make a clickable Proof of Concepts (POC), not just with images, or tools the spit out html but instead just enough javascript and base theme to help &amp;ldquo;sell&amp;rdquo; the idea, or more importantly to help Product Owners see the possibilities that are not too far out of reach. And the second, and maybe more important thing I will cover is that the developer has a lot to gain in taking on this seemingly non-coding path.&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;ldquo;Use it to make the &amp;ldquo;happy paths&amp;rdquo; that the Product Owners need to see&amp;rdquo;&lt;/p>
+&lt;/blockquote>
+&lt;p>To begin with I want to set a baseline for the user interface. If your project is new find a theme or base theme (WrapBootstrap, BootStrap, Zurb Foundation, etc). Something that you can easily plug a collection of pieces together to get going easily. This leaves your more time, energy and budget to focus on the business&amp;rsquo;s solution. But if this is an existing project then use the already established theme for your POC so people can really see the context of what you are showing them. Either way you want more than just a un-styled, out of context feature on a white background to help them, the Product Owners, see how their User Stories can work. And you want something more than a bunch of image maps in my opinion.&lt;/p>
+&lt;p>And to help with the above use Javascript, but keep the it &amp;ldquo;simple&amp;rdquo; while also keeping in realistic. Use it to make the &amp;ldquo;happy paths&amp;rdquo; that the Product Owners need to see. For example, I had to show a POC of turning on and off comments, different levels of diffs on images for comparing two states of a website page from 2 different time periods in 3 different widths. And in about two days, with the foundation theme we used before, I was able to show this interactive web application. And in this case the designer helped to translate the business needs into wireframes to help lay out a bare path for me to follow.&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;ldquo;&amp;hellip;only they (the developer) know the boundaries of the technologies being used and possibilities&amp;rdquo;&lt;/p>
+&lt;/blockquote>
+&lt;p>So why should the developer do this and not a person un-experienced in the technologies being used? Why not just use one of those tools that spit out html and make a clickable mock in the context of those tool? This is the key, in my opinion, because it is only the developer who will be able to push the technologies to the next level of possibilities for the solution because only they know the boundaries of the technologies being used and possibilities. And only they can discover new possibilities along the way. And what you will get is a solution that can confidently expose new ideas and possibilities that helps it exceed expectations.&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;ldquo;But the developer also &lt;strong>needs&lt;/strong> to do this for their own good&amp;rdquo;&lt;/p>
+&lt;/blockquote>
+&lt;p>But the developer also &lt;strong>needs&lt;/strong> to do this for their own good, to get into the business domain, to start thinking about the business needs and exploring, knowing it is not final, knowing it can be thrown away. And it is this process that helps the developer to see the many things they had not realized they had missed about the business domain model and grow in the knowledge needed to make the right product.&lt;/p>
+&lt;p>And when it is done it might have zero reusable code but that is fine. Maybe the developer can use it to build some acceptance tests out of it as he or she starts working with real code having a clear understanding of the goals.&lt;/p>
+&lt;h2 id="links-to-great-resources">Links to Great Resources&lt;/h2>
+&lt;h3 id="themes-that-have-lots-of-widgets-and-ui-elements">Themes that have lots of widgets and UI elements&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://wrapbootstrap.com/">https://wrapbootstrap.com/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.google.com/design/spec/material-design/introduction.html">https://www.google.com/design/spec/material-design/introduction.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://getbootstrap.com/">http://getbootstrap.com/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://material.angularjs.org/latest/">https://material.angularjs.org/latest/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://foundation.zurb.com/">http://foundation.zurb.com/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://angular-ui.github.io/bootstrap/">https://angular-ui.github.io/bootstrap/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="techniques">Techniques&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://alfrednutile.info/posts/58">https://alfrednutile.info/posts/58&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://laravel.com/docs/5.2/routing">https://laravel.com/docs/5.2/routing&lt;/a> See the Any route&lt;/li>
+&lt;/ul>
+&lt;h3 id="tools">Tools&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="http://www.json-generator.com/">http://www.json-generator.com/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://www.layoutit.com/">http://www.layoutit.com/&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Put It All Into Version Control Even Composer!</title><link>https://alfrednutile.info/posts/171/</link><pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/171/</guid><description>&lt;p>&lt;strong>Update: September 06 2016&lt;/strong>&lt;/p>
+&lt;p>We stopped doing this. I do not think it is a bad idea but we ended up going with CodeDeploy on AWS. So after our CI does a Composer install and all passes, CodeDeploy will just bundle everything up as a Zip file and deploy that to the server.&lt;/p>
+&lt;p>&lt;strong>Or Listen &lt;a href="http://www.readorlisten.com/2">here&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>Another article about this written by Loran Jane Mitchell &lt;a href="http://www.lornajane.net/posts/2014/using-composer-without-gitignoring">Using Composer Without GitIgnoring Vendor&lt;/a>&lt;/p>
+&lt;p>I have done this for sometime with node_modules because I use to hate waiting for npm to pull down during CI builds. I could have used the CI systems cache for this but I realized once the project starts it is rare that I needed to add more libraries. And when I did it was just as easy to wipe using &lt;code>git rm&lt;/code> and do them again fresh. This included my use of Bower.&lt;/p>
+&lt;p>But then there is Composer and PHP. The project starts and I might be pulling in libraries quite a bit but at some point we are just running &lt;code>composer install&lt;/code> and never &lt;code>composer update&lt;/code>. This step included &lt;code>rm -rf vendor&lt;/code> which helped with the speed. And this is going great BUT has a few draw backs I will cover below.&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;ldquo;I have seen it too many times. Our CI goes well even our stage goes well but then git via Github gets stuck on one repo out of the many you are installing&amp;rdquo;&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="speed-ci-and-deployment">Speed (CI, and Deployment)&lt;/h2>
+&lt;p>This is not HUGE but with workflow now each deployment, unless it is a &lt;code>quick&lt;/code> one, we tend to just use &lt;code>rm -rf vendor &amp;amp;&amp;amp; composer install&lt;/code>. And it does cost us 1/2 a minute. Again not huge but nice to not have that as down time to the user. For at this point the app is not usable. And even worse as I will talk about below. And we do a lot of builds a day in the CI.&lt;/p>
+&lt;h2 id="one-point-of-failure-vs-many">One Point of Failure VS Many&lt;/h2>
+&lt;p>This is the big reason in my opinion. I have seen it too many times. Our CI goes well even our stage goes well but then git via Github gets stuck on one repo out of the many you are installing. This can be caused due to a misconfiguration on our part, eg using anonymous Github connections but at times I have seen it even when authenticated and am not totally sure why.&lt;/p>
+&lt;p>Then there are those moments, and they happen, when Github is under DDOS attack! So then it is just a day of no deployments and that is not an option really. And with this technique we have a good chance of getting a deployment in since we are just hitting one repo and not trying our luck at many.&lt;/p>
+&lt;h2 id="rollback">Rollback&lt;/h2>
+&lt;p>Then there are Rollback moments. Zero down time would be great and this is one step closer. With our releases we use Tags. So if I was to release 1.2.2 and it had a bug I could rollback to tag 1.2.1 in moments. No need to rebuild composer. Sure it saves minor amount of time but when things are down on production 1/2 a minute can feel like a life time. This does not cover all migration issues but that is not a thing we do every deployment and honestly with the migration rollback feature we have in Laravel I think that becomes an edge case that can be dealt with using Artisan and some creative coding.&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;ldquo;when things are down on production 1/2 a minute can feel like a life time&amp;rdquo;&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="fixing-merge-conflicts">Fixing Merge Conflicts&lt;/h2>
+&lt;p>Well what happens when there is a conflict in this vendor folder? That is easy really just &lt;code>rm&lt;/code> the whole thing and do what I have been doing all along &lt;code>composer install&lt;/code> saving &lt;code>composer update&lt;/code> only for those moments you are looking for something to really be updated and feeling lucky (and patient).&lt;/p></description></item></channel></rss>

@@ -1,11 +1,93 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>sqlite on Alfred Nutile</title><link>https://alfrednutile.info/tags/sqlite/</link><description>Recent content in sqlite on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 18 Jan 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/sqlite/index.xml" rel="self" type="application/rss+xml"/><item><title>Sqlite and Laravel</title><link>https://alfrednutile.info/posts/128/</link><pubDate>Sun, 18 Jan 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/128/</guid><description>It is really really nice to use this for testing and local since any reseed work is quick.
-Overall the swap out is easy and I do not think, so far, there has been any issues going to mysql on production.
-The only two things to set over all is
-Seeding In my DatabaseSeeder.php file I set this
-&amp;lt;?php
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>sqlite on Alfred Nutile</title><link>https://alfrednutile.info/tags/sqlite/</link><description>Recent content in sqlite on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 18 Jan 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/sqlite/index.xml" rel="self" type="application/rss+xml"/><item><title>Sqlite and Laravel</title><link>https://alfrednutile.info/posts/128/</link><pubDate>Sun, 18 Jan 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/128/</guid><description>&lt;p>It is really really nice to use this for testing and local since any reseed work is quick.&lt;/p>
+&lt;p>Overall the swap out is easy and I do not think, so far, there has been any issues going to mysql on production.&lt;/p>
+&lt;p>The only two things to set over all is&lt;/p>
+&lt;h2 id="seeding">Seeding&lt;/h2>
+&lt;p>In my DatabaseSeeder.php file I set this&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 class DatabaseSeeder extends Seeder {
 /**
-* Run the database seeds.</description></item></channel></rss>
+* Run the database seeds.
+*
+* @return void
+*/
+public function run()
+{
+Eloquent::unguard();
+if(DB::getDriverName() != 'sqlite') {
+DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+}
+$this-&amp;gt;call('AppTableSeeder');
+if(DB::getDriverName() != 'sqlite') {
+DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;p>This allows me to reseed without issues.&lt;/p>
+&lt;h2 id="null-fields">Null fields&lt;/h2>
+&lt;p>On fields that are allowed to be null just add this&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+class AddGithubTokenToUsersTable extends Migration {
+/**
+* Run the migrations.
+*
+* @return void
+*/
+public function up()
+{
+Schema::table('users', function(Blueprint $table)
+{
+$table-&amp;gt;string('name')-&amp;gt;nullable();
+});
+}
+/**
+* Reverse the migrations.
+*
+* @return void
+*/
+public function down()
+{
+Schema::table('users', function(Blueprint $table)
+{
+$table-&amp;gt;dropColumn('name');
+});
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Check out &lt;a href="https://www.alfrednutile.info/posts/112">Speeding up PHPunit tests and Behat in Laravel for Database refreshes&lt;/a> to see more info of how you can use this.&lt;/p>
+&lt;p>Also see &lt;a href="https://www.alfrednutile.info/posts/63">php artisan migrate:reset not working&lt;/a> for some extra setup.&lt;/p>
+&lt;h2 id="update-2-11-2015">Update 2-11-2015&lt;/h2>
+&lt;p>&lt;a href="https://twitter.com/cavanaghacea">Andrew Cavanagh&lt;/a> noted that since renameColumn does not work with Sqlite you can do this to drop and make the column. Also without the two steps in &lt;code>up()&lt;/code> seeding failed.&lt;/p>
+&lt;pre>&lt;code> /**
+* Run the migrations.
+*
+* @return void
+*/
+public function up()
+{
+Schema::table('diff_requests', function(Blueprint $table)
+{
+$table-&amp;gt;dropColumn('bundle_id');
+});
+Schema::table('diff_requests', function(Blueprint $table)
+{
+$table-&amp;gt;string('project_id', 36)-&amp;gt;nullable();
+});
+}
+/**
+* Reverse the migrations.
+*
+* @return void
+*/
+public function down()
+{
+Schema::table('diff_requests', function(Blueprint $table)
+{
+$table-&amp;gt;dropColumn('project_id');
+$table-&amp;gt;string('bundle_id', 36)-&amp;gt;nullable();
+});
+}
+&lt;/code>&lt;/pre></description></item></channel></rss>

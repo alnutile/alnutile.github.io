@@ -1,5 +1,62 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bitbucket on Alfred Nutile</title><link>https://alfrednutile.info/tags/bitbucket/</link><description>Recent content in bitbucket on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 18 Sep 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/bitbucket/index.xml" rel="self" type="application/rss+xml"/><item><title>Bitbucket Pipeline</title><link>https://alfrednutile.info/posts/257/</link><pubDate>Tue, 18 Sep 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/257/</guid><description>BitBucket has a nice feature call Pipelines https://bitbucket.org/product/features/pipelines for $0 you can, even for private repos have a decent CI flow.
-Private repos CI Pipeline $0!!
-It took a bit to get going though since the docs do not talk about PHP and MySQL in enough details. Here is what I ended up with for a bitbucket-pipelines.yml
-# This is a sample build configuration for PHP.
-# Check our guides at https://confluence.</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bitbucket on Alfred Nutile</title><link>https://alfrednutile.info/tags/bitbucket/</link><description>Recent content in bitbucket on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 18 Sep 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/bitbucket/index.xml" rel="self" type="application/rss+xml"/><item><title>Bitbucket Pipeline</title><link>https://alfrednutile.info/posts/257/</link><pubDate>Tue, 18 Sep 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/257/</guid><description>&lt;p>BitBucket has a nice feature call Pipelines &lt;a href="https://bitbucket.org/product/features/pipelines">https://bitbucket.org/product/features/pipelines&lt;/a> for $0 you can, even for private repos have a decent CI flow.&lt;/p>
+&lt;blockquote>
+&lt;p>Private repos CI Pipeline $0!!&lt;/p>
+&lt;/blockquote>
+&lt;p>It took a bit to get going though since the docs do not talk about PHP and MySQL in enough details. Here is what I ended up with for a &lt;code>bitbucket-pipelines.yml&lt;/code>&lt;/p>
+&lt;pre>&lt;code># This is a sample build configuration for PHP.
+# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: php:7.2
+options:
+max-time: 120
+pipelines:
+default:
+- step:
+caches:
+- composer
+script:
+- apt-get update &amp;amp;&amp;amp; apt-get install -y unzip gnupg
+- docker-php-ext-install mysqli pdo pdo_mysql
+- curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+- cp .env.bitbucket .env
+- curl -sL https://deb.nodesource.com/setup_8.x | bash -
+#- apt-get install -y nodejs
+# hung on install so will have to come back to this
+#- npm install
+#- npm test
+- composer install
+- composer check-style
+- vendor/bin/phpunit
+services:
+- mysql
+- step:
+name: Deploy to staging
+image: aneitayang/aws-cli:1.0
+deployment: staging
+trigger: automatic
+script:
+- curl https://forge.laravel.com/servers/baz/sites/bar/deploy/http?token=foo
+definitions:
+services:
+mysql:
+image: mysql:5.7
+environment:
+MYSQL_DATABASE: 'test'
+MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+MYSQL_USER: 'test_user'
+MYSQL_PASSWORD: 'password'
+&lt;/code>&lt;/pre>&lt;p>So basically I install mysql and set it up to use then all just work. NPM just hangs right now so I am not 100% sure what to do there.&lt;/p>
+&lt;h2 id="debug">Debug&lt;/h2>
+&lt;p>Unlike TravisCI I could not just SSH in to debug I had to run docker.
+Here are some links&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://confluence.atlassian.com/bitbucket/debug-your-pipelines-locally-with-docker-838273569.html">https://confluence.atlassian.com/bitbucket/debug-your-pipelines-locally-with-docker-838273569.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://confluence.atlassian.com/bitbucket/php-with-bitbucket-pipelines-873907835.html">https://confluence.atlassian.com/bitbucket/php-with-bitbucket-pipelines-873907835.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://confluence.atlassian.com/bitbucket/configure-bitbucket-pipelines-yml-792298910.html">Config Info&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>running locally below worked for me&lt;/p>
+&lt;pre>&lt;code>docker run -it --volume=$(pwd):/var/www/html --memory=4g --memory-swap=4g --memory-swappiness=0 --entrypoint=/bin/bash php:7.2-apache
+&lt;/code>&lt;/pre>&lt;p>But I would have to install their mysql docker as well they note and map them together. ¯_(ツ)_/¯&lt;/p>
+&lt;p>Maybe the price is right for this vs TravisCI&lt;/p></description></item></channel></rss>

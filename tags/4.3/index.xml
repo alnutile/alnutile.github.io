@@ -1,4 +1,196 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>4.3 on Alfred Nutile</title><link>https://alfrednutile.info/tags/4.3/</link><description>Recent content in 4.3 on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 10 Sep 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/4.3/index.xml" rel="self" type="application/rss+xml"/><item><title>Multi Threaded Queue Processing</title><link>https://alfrednutile.info/posts/106/</link><pubDate>Wed, 10 Sep 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/106/</guid><description>I needed a way to run a bunch of jobs in parallel and I am use to using the Symfony Process Component for that.
-So this post will show how I did this in Laravel 4.3 via the Queue so I can remember next time.
-What will come out of this is a workflow as seen here
-We will create two Artisan Commands. This allows us to use Symfony Process to run numerous console commands in the background.</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>4.3 on Alfred Nutile</title><link>https://alfrednutile.info/tags/4.3/</link><description>Recent content in 4.3 on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 10 Sep 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/4.3/index.xml" rel="self" type="application/rss+xml"/><item><title>Multi Threaded Queue Processing</title><link>https://alfrednutile.info/posts/106/</link><pubDate>Wed, 10 Sep 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/106/</guid><description>&lt;p>I needed a way to run a bunch of jobs in parallel and I am use to using the Symfony Process Component for that.&lt;/p>
+&lt;p>So this post will show how I did this in Laravel 4.3 via the Queue so I can remember next time.&lt;/p>
+&lt;p>What will come out of this is a workflow as seen here&lt;/p>
+&lt;div markdown=0>
+&lt;img src=https://dl.dropboxusercontent.com/s/url0i1ibk40u5o7/Screenshot%202014-09-10%2007.59.23.png?dl=0 width=700>
+&lt;/div>
+&lt;p>We will create two Artisan Commands. This allows us to use Symfony Process to run numerous &lt;strong>console commands&lt;/strong> in the background.&lt;/p>
+&lt;p>I will not go over how to add a job to the queue there is plenty on that. I will show the class I used for the Queue and it&amp;rsquo;s attributes.&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;job&amp;quot;:&amp;quot;Foo\\\\Reporting\\\\RequestsCommandQueueRunner&amp;quot;,
+&amp;quot;data&amp;quot;:{
+&amp;quot;results_uuid&amp;quot;:&amp;quot;4a13aaee-4289-4f95-afe5-ea5abaaed869&amp;quot;
+}
+}
+&lt;/code>&lt;/pre>&lt;p>This gets pushed into the Queue. It is the &amp;ldquo;Parent&amp;rdquo; that will run x number of children commands. The x is defined in my .env.local.php or .env.production.php files. This way I can increase or decrease the number of threads it will run as needed.&lt;/p>
+&lt;p>The results_uuid is the data I need to get the children. In this case the children have that uuid in their table as belongsTo that parent.&lt;/p>
+&lt;h2 id="requestscommandqueuerunner">RequestsCommandQueueRunner&lt;/h2>
+&lt;p>This Artisan command is quite simple&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+#app/Foo/RequestsCommandQueueRunner.php
+namespace Foo\Reporting;
+use Foo\Models\ReportingOverviewBatchRequestJob;
+use Foo\QueueServices\QueueInterface;
+class RequestsCommandQueueRunner implements QueueInterface {
+protected $job_limit;
+protected $results_uuid;
+public function __construct()
+{
+$this-&amp;gt;job_limit = $_ENV['RESULTS_QUEUE_LIMIT'];
+}
+public function fire($job, $params)
+{
+$this-&amp;gt;results_uuid = $params['results_uuid'];
+exec(&amp;quot;php artisan request:trigger $this-&amp;gt;results_uuid&amp;quot;, $results);
+$job-&amp;gt;delete(); //@TODO make delete if all goes well catch error though and fail it
+}
+}
+&lt;/code>&lt;/pre>&lt;p>All it does is passes the parent id to the trigger command. Below is the trigger command.&lt;/p>
+&lt;p>Note too I am not using the job limit yet. Later I will make x number of Queue jobs as I divide the number of children that parent has by the limit set.&lt;/p>
+&lt;h2 id="requestsqueuecommand">RequestsQueueCommand&lt;/h2>
+&lt;pre>&lt;code>&amp;lt;?php namespace Foo\Console;
+#app/Foo/Console/RequestsQueueCommand.php
+use Foo\Models\ReportingOverviewBatchRequestJob;
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Process\Process;
+class RequestsQueueCommand extends Command {
+protected $name = 'request:trigger';
+protected $run = [];
+protected $description = 'Trigger the running of related jobs';
+protected $request_uuid;
+protected $projects;
+/**
+* @var \Foo\Models\ReportingOverviewBatchRequestJob
+*/
+private $reporting_overview_batch_request_jobs;
+public function __construct(
+ReportingOverviewBatchRequestJob $reporting_overview_batch_request_jobs
+)
+{
+parent::__construct();
+$this-&amp;gt;reporting_overview_batch_request_jobs = $reporting_overview_batch_request_jobs;
+}
+public function fire()
+{
+$this-&amp;gt;request_uuid = $this-&amp;gt;argument('request_uuid');
+$this-&amp;gt;setRelatedProjects();
+$this-&amp;gt;setRun();
+$this-&amp;gt;runRelatedProjectsCommand();
+return &amp;quot;Fired&amp;quot;;
+}
+protected function getArguments()
+{
+return array(
+array('request_uuid', InputArgument::REQUIRED, 'The uuid of the Request to trigger the jobs for'),
+);
+}
+protected function setRelatedProjects()
+{
+$projects =
+$this-&amp;gt;reporting_overview_batch_request_jobs-&amp;gt;getAllJobsForReportOverviewBatchRequestUuid($this-&amp;gt;request_uuid);
+$this-&amp;gt;projects = $projects-&amp;gt;toArray();
+return $this-&amp;gt;projects;
+}
+protected function setRun()
+{
+foreach($this-&amp;gt;projects as $project)
+{
+$this-&amp;gt;addToRun($project['id']);
+}
+}
+protected function runRelatedProjectsCommand()
+{
+foreach($this-&amp;gt;run as $process)
+{
+$process-&amp;gt;start();
+}
+while(count($this-&amp;gt;run) &amp;gt; 0)
+{
+foreach($this-&amp;gt;run as $key =&amp;gt; $process)
+{
+if(!$process-&amp;gt;isRunning())
+{
+\Log::info(&amp;quot;Done running process&amp;quot;);
+unset($this-&amp;gt;run[$key]);
+}
+}
+}
+}
+protected function addToRun($project_id)
+{
+$this-&amp;gt;run[] = new Process(&amp;quot;php artisan request:run $project_id&amp;quot;);
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Here is where things get interesting. I begin the work of finding the children Ids then making an array of &lt;strong>console commands&lt;/strong> to run using the children id as the argument I pass.&lt;/p>
+&lt;p>The Process Component allows me to &lt;strong>start them in the background&lt;/strong> and then check on them while they are running.&lt;/p>
+&lt;p>Now for the command it runs &amp;ldquo;php artisan request:run $project_id&amp;rdquo;&lt;/p>
+&lt;h2 id="requestsjobruncommand">RequestsJobRunCommand&lt;/h2>
+&lt;p>This is the process that does the long running work. In this case logs into Github, get some info and reports on it.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php namespace Foo\Console;
+use Foo\Models\ReportingOverviewBatchRequestJob;
+use Foo\Services\RequestJobRunService;
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
+class RequestsJobRunCommand extends Command {
+protected $name = 'request:run';
+protected $description = 'Run the related job';
+protected $job_uuid;
+/**
+* @var RequestJobRunService
+*/
+private $requestJobRunService;
+/**
+* Id of the job we will run
+* @var
+*/
+protected $related_job;
+public function __construct(RequestJobRunService $requestJobRunService)
+{
+parent::__construct();
+$this-&amp;gt;requestJobRunService = $requestJobRunService;
+}
+public function fire()
+{
+$this-&amp;gt;job_uuid = $this-&amp;gt;argument('job_uuid');
+$this-&amp;gt;loadTheJobsInfo();
+$this-&amp;gt;requestJobRunService-&amp;gt;getGithubApi()-&amp;gt;authenticate();
+$this-&amp;gt;getJobsAndCount();
+return &amp;quot;Fired&amp;quot;;
+}
+protected function getJobsAndCount()
+{
+try {
+$tests = $this-&amp;gt;getRelatedTests();
+$tests_count = count($tests);
+\Log::info(sprintf(&amp;quot;Updating ReportingOverviewRequest with uuid %s&amp;quot;, $this-&amp;gt;job_uuid));
+$this-&amp;gt;related_job-&amp;gt;status = 1;
+$this-&amp;gt;related_job-&amp;gt;number_of_tests = $tests_count;
+$this-&amp;gt;related_job-&amp;gt;save();
+} catch(\Exception $e) {
+$this-&amp;gt;related_job-&amp;gt;status = 1; // mark done for now though a fail noted in message box
+$this-&amp;gt;related_job-&amp;gt;message = $e-&amp;gt;getMessage();
+$this-&amp;gt;related_job-&amp;gt;save();
+\Log::error(sprintf(&amp;quot;Error processing job %s for request job request parent uuid %s error &amp;quot;, $this-&amp;gt;related_job-&amp;gt;id, $this-&amp;gt;related_job-&amp;gt;reporting_overview_batch_request_id, $e-&amp;gt;getMessage()));
+}
+}
+protected function getRelatedTests()
+{
+try {
+return $this-&amp;gt;requestJobRunService-&amp;gt;getGithubApi()
+-&amp;gt;setReponame($this-&amp;gt;related_job-&amp;gt;repo_name)
+-&amp;gt;setAccountName($this-&amp;gt;related_job-&amp;gt;account_name)
+-&amp;gt;setBranch($this-&amp;gt;related_job-&amp;gt;branch)
+-&amp;gt;index($this-&amp;gt;related_job-&amp;gt;folder);
+}
+catch(\Exception $e)
+{
+throw new \Exception(&amp;quot;Error getting index of github &amp;quot; . $e-&amp;gt;getMessage());
+}
+}
+protected function loadTheJobsInfo()
+{
+$this-&amp;gt;related_job = $this-&amp;gt;requestJobRunService-&amp;gt;getReportingOverviewBatchRepository()-&amp;gt;getReportingOverviewBatchRequestJobsModelInterface()
+-&amp;gt;findOrFail($this-&amp;gt;job_uuid);
+}
+protected function getArguments()
+{
+return array(
+array('job_uuid', InputArgument::REQUIRED, 'The uuid of the related request job to run'),
+);
+}
+}
+&lt;/code>&lt;/pre>&lt;p>There still is some work to do. I have to set the limit so my initial run does not timeout. I also need to clean up some code so that these classes are digging so deep into the other classes.&lt;/p>
+&lt;p>But this was just to show how to use Symfony Process Component, Laravel Queue, and Laravel Artisan to run a multi threaded task.&lt;/p></description></item></channel></rss>

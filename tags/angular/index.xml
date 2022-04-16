@@ -1,13 +1,396 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>angular on Alfred Nutile</title><link>https://alfrednutile.info/tags/angular/</link><description>Recent content in angular on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 18 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/angular/index.xml" rel="self" type="application/rss+xml"/><item><title>Image Uploads, Laravel, Angular and Flow.js</title><link>https://alfrednutile.info/posts/165/</link><pubDate>Fri, 18 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/165/</guid><description>Here is one combination out of many to make this happen.
-The libraries are
-https://github.com/flowjs/ng-flow
-and
-https://github.com/flowjs/flow-php-server
-Model and Imageable Resource What I like about this is we can make 1 controller to manage uploads. That controller will upload the file, place it into the correct folder, and setup the relationship to the resource.
-In this example the Resource will be a Contact.
-So I then follow Laravel docs to create the Polymorphic Imageable/Photo example http://laravel.</description></item><item><title>Laravel and Angular Widgets e.g. Non SPA (Single Page Application) Pattern</title><link>https://alfrednutile.info/posts/160/</link><pubDate>Wed, 26 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/160/</guid><description>Not all apps need to be an SPA (Single Page Application). Sure they have their place but in most cases the task might benefit from just a Blade template and Angular widget. This saves you from having to write an angular route which can be a tedious duplication of work. Also Blade is fast and fun to work with.
-Step One Add Data to Global Window Using the Transform PHP Vars to JavaScript you can easily start to inject some content into your templates, if needed, to setup the data your Angular widget can use to build out it&amp;rsquo;s elements.</description></item><item><title>Quick way to Request Json from Angular and return from Laravel</title><link>https://alfrednutile.info/posts/152/</link><pubDate>Mon, 06 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/152/</guid><description>I simply want to make sure to return json from my app more easily even on errors. So in Angular I set my app.js as such
-(function(){
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>angular on Alfred Nutile</title><link>https://alfrednutile.info/tags/angular/</link><description>Recent content in angular on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 18 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/angular/index.xml" rel="self" type="application/rss+xml"/><item><title>Image Uploads, Laravel, Angular and Flow.js</title><link>https://alfrednutile.info/posts/165/</link><pubDate>Fri, 18 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/165/</guid><description>&lt;p>Here is one combination out of many to make this happen.&lt;/p>
+&lt;p>The libraries are&lt;/p>
+&lt;p>&lt;a href="https://github.com/flowjs/ng-flow">https://github.com/flowjs/ng-flow&lt;/a>&lt;/p>
+&lt;p>and&lt;/p>
+&lt;p>&lt;a href="https://github.com/flowjs/flow-php-server">https://github.com/flowjs/flow-php-server&lt;/a>&lt;/p>
+&lt;h2 id="model-and-imageable-resource">Model and Imageable Resource&lt;/h2>
+&lt;p>What I like about this is we can make 1 controller to manage uploads. That controller will upload the file, place it into the correct folder, and setup the relationship to the resource.&lt;/p>
+&lt;p>In this example the Resource will be a Contact.&lt;/p>
+&lt;p>So I then follow Laravel docs to create the Polymorphic Imageable/Photo example &lt;a href="http://laravel.com/docs/master/eloquent-relationships#polymorphic-relations">http://laravel.com/docs/master/eloquent-relationships#polymorphic-relations&lt;/a>&lt;/p>
+&lt;p>Ending up with an image model like this&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+class Image extends Model
+{
+public $timestamps = false;
+/**
+* Get all of the owning imageable models.
+*/
+public function imageable()
+{
+return $this-&amp;gt;morphTo();
+}
+}
+&lt;/code>&lt;/pre>&lt;p>And a Contact.php file like this&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+use Rhumsaa\Uuid\Uuid;
+class Contact extends Model
+{
+protected $fillable = [
+'first_name',
+'last_name',
+'active'
+];
+public function images()
+{
+return $this-&amp;gt;morphMany(\App\Image::class, 'imageable');
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Nothing special really&lt;/p>
+&lt;p>Even the migration is right from the docs&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+class CreateTableImageable extends Migration
+{
+public function up()
+{
+Schema::create('images', function (Blueprint $table) {
+$table-&amp;gt;increments('id');
+$table-&amp;gt;string('path');
+$table-&amp;gt;integer('imageable_id');
+$table-&amp;gt;string('imageable_type');
+});
+}
+public function down()
+{
+Schema::drop('images');
+}
+}
+&lt;/code>&lt;/pre>&lt;h2 id="controller">Controller&lt;/h2>
+&lt;p>Now for the Controller.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App\Http\Controllers;
+use App\Image;
+use Flow\Config;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
+class ImageController extends Controller
+{
+public $model_id;
+public $model_class_path;
+public $destination_path;
+public $filename;
+public $config;
+public function uploadFile(Request $request, $model_id = false)
+{
+try
+{
+$this-&amp;gt;model_id = $model_id;
+$model_class_path = $this-&amp;gt;getClassName($request);
+$path = $this-&amp;gt;getImagePublicDestinationPath($request);
+$this-&amp;gt;model_class_path = $model_class_path;
+$this-&amp;gt;destination_path = $path;
+$this-&amp;gt;config = new Config(array(
+'tempDir' =&amp;gt; storage_path('chunks_temp_folder')
+));
+$this-&amp;gt;filename = Input::get('flowFilename');
+$this-&amp;gt;saveImagable();
+$flowRequest = new \Flow\Request();
+if(\Flow\Basic::save(
+public_path($this-&amp;gt;getDestinationPath()). '/' . $this-&amp;gt;filename,
+$this-&amp;gt;config,
+$flowRequest)) {
+return Response::json(['data' =&amp;gt; $model_id, 'message' =&amp;gt; &amp;quot;File Uploaded $this-&amp;gt;filename&amp;quot;], 200);
+} else {
+return Response::json([], 204);
+}
+}
+catch(\Exception $e)
+{
+throw new \Exception(sprintf(&amp;quot;Error saving image %s&amp;quot;, $e-&amp;gt;getMessage()));
+}
+}
+public function saveImagable()
+{
+$imageable = new Image();
+$imageable-&amp;gt;path = $this-&amp;gt;destination_path . '/' . $this-&amp;gt;filename;
+$imageable-&amp;gt;imageable_id = $this-&amp;gt;model_id;
+$imageable-&amp;gt;imageable_type = $this-&amp;gt;model_class_path;
+$imageable-&amp;gt;save();
+}
+public function getDestinationPath()
+{
+return $this-&amp;gt;destination_path;
+}
+public function setDestinationPath($destination_path)
+{
+$this-&amp;gt;destination_path = $destination_path;
+}
+private function getClassName($request)
+{
+return ($request-&amp;gt;input('model_class_path')) ? $request-&amp;gt;input('model_class_path') : 'App\Contact';
+}
+public function getImagePublicDestinationPath(Request $request)
+{
+return ($request-&amp;gt;input('path')) ? $request-&amp;gt;input('path') : 'images/contacts';
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Nothing special there just per the docs of the Flow php library &lt;a href="https://github.com/flowjs/flow-php-server">https://github.com/flowjs/flow-php-server&lt;/a>&lt;/p>
+&lt;p>And the route.php file&lt;/p>
+&lt;pre>&lt;code>Route::get('images/upload/{model_id}', 'ImageController@uploadFile');
+Route::post('images/upload/{model_id}', 'ImageController@uploadFile');
+&lt;/code>&lt;/pre>&lt;p>By the time this project is done though all of this is behind auth middleware. While being built it is behind htaccess.&lt;/p>
+&lt;p>One catch overall is the resource needs to exist before you can upload a file related to it so on Contact New type pages you may need to wait till the contact is created before you do the upload. There are ways around this but for now we are keeping it simple.&lt;/p>
+&lt;h2 id="angular">Angular&lt;/h2>
+&lt;p>This is a simple example.&lt;/p>
+&lt;p>The route I made a simple example path&lt;/p>
+&lt;pre>&lt;code>Route::get('/upload_example', function () {
+return view('upload');
+});
+&lt;/code>&lt;/pre>&lt;p>That view extends the example layout view&lt;/p>
+&lt;h3 id="defaultbladephp">default.blade.php&lt;/h3>
+&lt;pre>&lt;code>&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
+&amp;lt;head&amp;gt;
+&amp;lt;style&amp;gt;
+/* This helps the ng-show/ng-hide animations start at the right place. */
+/* Since Angular has this but needs to load, this gives us the class early. */
+.ng-hide { display: none!important; }
+&amp;lt;/style&amp;gt;
+&amp;lt;title ng-bind=&amp;quot;title&amp;quot;&amp;gt;Ratsoc v2.0&amp;lt;/title&amp;gt;
+&amp;lt;meta charset=&amp;quot;utf-8&amp;quot; /&amp;gt;
+&amp;lt;meta http-equiv=&amp;quot;X-UA-Compatible&amp;quot; content=&amp;quot;IE=edge, chrome=1&amp;quot; /&amp;gt;
+&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no&amp;quot; /&amp;gt;
+&amp;lt;base href=&amp;quot;/&amp;quot;&amp;gt;
+&amp;lt;!-- Latest compiled and minified CSS --&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css&amp;quot;&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body flow-prevent-drop&amp;gt;
+&amp;lt;div&amp;gt;
+&amp;lt;div ng-include=&amp;quot;'layout/shell.html'&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;div id=&amp;quot;splash-page&amp;quot; ng-show=&amp;quot;showSplash&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;page-splash&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;page-splash-message&amp;quot;&amp;gt;
+Ratsoc v2.0
+&amp;lt;/div&amp;gt;
+&amp;lt;div class=&amp;quot;progress progress-striped active page-progress-bar&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;bar&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+@yield('content')
+&amp;lt;script src=&amp;quot;/temp/jquery.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/temp/angular.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/temp/flow.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/temp/ng-flow.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;/temp/app.upload.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script src=&amp;quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>Of course this would be setup better with Gulp but for now keeping it simple. The the view that is the content.&lt;/p>
+&lt;h3 id="uploadbladephp">upload.blade.php&lt;/h3>
+&lt;pre>&lt;code>@extends('layouts.default')
+@section('content')
+&amp;lt;div ng-app=&amp;quot;app.upload&amp;quot; flow-init flow-prevent-drop&amp;gt;
+&amp;lt;div ng-controller=&amp;quot;MainController as vm&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;col-lg-8 col-lg-offset-2&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;&amp;quot;
+flow-init=&amp;quot;{
+target: '/images/upload/' + vm.contact.id, singleFile: true, testChunks: true,
+query: { '_token': vm.token, 'model_class_path': 'App\\Contact', 'path': 'images/contacts'}
+}&amp;quot;
+flow-files-submitted=&amp;quot;vm.upload( $files, $event, $flow )&amp;quot;
+flow-file-success=&amp;quot;vm.setFileName($flow.files)&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;alert alert-danger&amp;quot;
+flow-drop flow-drag-enter=&amp;quot;style={opacity: .5}&amp;quot;
+flow-drag-leave=&amp;quot;style={}&amp;quot; ng-style=&amp;quot;style&amp;quot;
+flow-drop-enabled=true&amp;gt;
+&amp;lt;strong&amp;gt;&amp;lt;i class=&amp;quot;fa fa-arrow-right&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; Upload image here by dragging here&amp;lt;/strong&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;a class=&amp;quot;btn btn-xs btn-default&amp;quot; ng-click=&amp;quot;vm.removeFile($flow)&amp;quot;
+ng-if=&amp;quot;($flow.files.length &amp;gt; 0)&amp;quot; name=&amp;quot;remove-file&amp;quot;&amp;gt; Remove File &amp;lt;/a&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;hr&amp;gt;
+&amp;lt;img ng-src=&amp;quot;@{{ vm.image }}&amp;quot; ng-show=&amp;quot;vm.image&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+@endsection
+&lt;/code>&lt;/pre>&lt;p>Not much of a looker here. This makes it super easy to work on things though before plugging it into your more complex applications.&lt;/p>
+&lt;p>Here I am adding a payload so when I use this on a page I can decide then is it at Contact, a Project, a Product etc. and setup the path eg &amp;lsquo;images/projects&amp;rsquo; or Model name &amp;lsquo;App\Contact&amp;rsquo; as needed.&lt;/p>
+&lt;p>Then for the app.js file to do all this, again you might break it up into more files just keeping this simple.&lt;/p>
+&lt;pre>&lt;code>(function () {
+'use strict';
+angular.module('app.upload', [
+'flow'
+]);
+function FlowConfig(flowFactoryProvider)
+{
+flowFactoryProvider.defaults = {
+speedSmoothingFactor: 0.2,
+maxChunkRetries: 10,
+simultaneousUploads: 10
+};
+}
+function MainController($http, $scope)
+{
+var vm = this;
+vm.contact = {};
+vm.contact.id = 'new';
+vm.token = false;
+vm.upload = upload;
+vm.setFileName = setFileName;
+vm.image_root = '/images/contacts/';
+activate();
+////
+function activate()
+{
+getToken();
+}
+function setFileName(flow_files)
+{
+vm.image = vm.image_root + flow_files[0].name;
+}
+function upload(files, event, flow)
+{
+angular.forEach(files, function(v,i) {
+files[i].flowObj.opts.query._token = vm.token;
+});
+flow.upload();
+}
+function getToken()
+{
+$http.get('/auth/token').then(
+successGettingToken,
+errorGettingToken
+);
+}
+function successGettingToken(response)
+{
+vm.token = response.data;
+}
+function errorGettingToken(response)
+{
+console.log(&amp;quot;Error&amp;quot;);
+console.log(response);
+}
+}
+angular.module('app.upload')
+.controller(&amp;quot;MainController&amp;quot;, MainController)
+.config(FlowConfig);
+})();
+&lt;/code>&lt;/pre>&lt;p>So we use the flow upload event to run our upload method. This then adds the token to the POST request for the CSRF middleware.&lt;/p>
+&lt;p>Keep in mind my Angular is just a widget in blade. There is no separate session situation that you may have in SPA (Single Page Applications)&lt;/p>
+&lt;p>Thats it, drag file, file uploads and you have Flow, Angular and Laravel.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/01l8psl1rpud4ee/laravel_flow_angular.png?dl=0" alt="">&lt;/p></description></item><item><title>Laravel and Angular Widgets e.g. Non SPA (Single Page Application) Pattern</title><link>https://alfrednutile.info/posts/160/</link><pubDate>Wed, 26 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/160/</guid><description>&lt;p>Not all apps need to be an SPA (Single Page Application). Sure they have their place but in most cases the task might benefit from just a Blade template and Angular widget. This saves you from having to write an angular route which can be a tedious duplication of work. Also Blade is fast and fun to work with.&lt;/p>
+&lt;h2 id="step-one-add-data-to-global-window">Step One Add Data to Global Window&lt;/h2>
+&lt;p>Using the &lt;a href="https://github.com/laracasts/PHP-Vars-To-Js-Transformer">Transform PHP Vars to JavaScript&lt;/a> you can easily start to inject some content into your templates, if needed, to setup the data your Angular widget can use to build out it&amp;rsquo;s elements.&lt;/p>
+&lt;p>For example the Controller below will push some info into the view that I can use later&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App\Http\Controllers;
+use App\Campaign;
+use App\Folder;
+use App\Helpers\ReturnWebhook;
+use App\Http\Requests;
+use App\Providers\WebhookExtendedProvider;
+use App\Utilities\GenerateSampleContent;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Response;
+use Michelf\MarkdownExtra;
+use Rhumsaa\Uuid\Uuid;
+class HelpController extends Controller
+{
+use GenerateSampleContent;
+use ReturnWebhook;
+public function api()
+{
+$url = url();
+$apis['campaigns'] = 'api/v1/campaigns';
+$apis['campaigns_get'] = 'api/v1/campaigns/';
+$campaigns = Campaign::select('id', 'name')-&amp;gt;groupBy('name')-&amp;gt;orderBy('name')-&amp;gt;get();
+$folders = Folder::with('meta_values')-&amp;gt;groupBy('folders.id')-&amp;gt;get();
+/**
+* Using the Javacript Library
+*/
+\JavaScript::put([
+'campaigns' =&amp;gt; $campaigns,
+'token' =&amp;gt; csrf_token(),
+'folders' =&amp;gt; $folders,
+'url' =&amp;gt; $url,
+'apis' =&amp;gt; $apis
+]);
+$text = file_get_contents(base_path('docs/webhooks.md'));
+$webhooks = MarkdownExtra::defaultTransform($text);
+$api = file_get_contents(base_path('docs/api.md'));
+$api = MarkdownExtra::defaultTransform($api);
+return view('help.api', compact('webhooks', 'api', 'campaigns', 'url', 'apis', 'folders'));
+}
+&lt;/code>&lt;/pre>&lt;h2 id="setting-up-the-view-and-angular">Setting Up the View and Angular&lt;/h2>
+&lt;p>Now in the view for the Controller above we use that info. Note the Angular brackets &lt;code>@{{&lt;/code>&lt;/p>
+&lt;p>&lt;a href="https://gist.github.com/alnutile/51662eac12d0cea9df60#file-partial-blade-php">See template here&lt;/a>&lt;/p>
+&lt;p>So now that view is rendering both Blade data &lt;code>{{&lt;/code> and Angular.&lt;/p>
+&lt;p>You will see too I setup the Angular controller &lt;code>vm.addMarketoFolderNameToQuery&lt;/code> keep in mind I already setup that &lt;code>ng-app&lt;/code> in my main template file &lt;code>layouts.default&lt;/code>&lt;/p>
+&lt;p>&lt;a href="https://gist.github.com/alnutile/51662eac12d0cea9df60#file-default-blade-php">See Default Layout Here&lt;/a>&lt;/p>
+&lt;h2 id="angular-controller">Angular Controller&lt;/h2>
+&lt;p>Here is the ApiController injected above. Notice we use Angular&amp;rsquo;s $window to get the data we passed in from the Laravel Controller. You can also see it making API requests later on as the user clicks buttons etc.&lt;/p>
+&lt;pre>&lt;code>(function(){
+'use strict';
+function ApiControllerUserShow($http, $window, toaster)
+{
+var vm = this;
+vm.getting_token = '';
+vm.user = $window.user;
+vm.url = $window.url;
+vm.message = &amp;quot;You do not have an API Key yet. Click the button below to make one&amp;quot;;
+vm.getNewApi = getNewApi;
+activate();
+///
+function activate()
+{
+console.log($window.user);
+setApiToken();
+}
+function getNewApi()
+{
+vm.getting_token = 'fa-spin';
+toaster.pop('info', &amp;quot;Getting new token&amp;quot;);
+$http.get('/api/v1/create_client_token')
+.success(function(response) {
+toaster.pop('info', &amp;quot;Loading new token&amp;quot;);
+console.log(response);
+vm.getting_token = ''
+vm.api_token = response.data;
+})
+.error(function(response) {
+toaster.pop('error', &amp;quot;Could not get token please contact support&amp;quot;);
+console.log(response);
+});
+}
+function setApiToken()
+{
+//$user-&amp;gt;oauth_client-&amp;gt;oauth_session-&amp;gt;oauth_access_tokens-&amp;gt;id
+if(!vm.user.oauth_client)
+{
+vm.api_token = vm.message;
+}
+else if(!vm.user.oauth_client.oauth_session)
+{
+vm.api_token = vm.message;
+}
+else if(!vm.user.oauth_client.oauth_session.oauth_access_tokens)
+{
+vm.api_token = vm.message;
+}
+else
+{
+vm.api_token = vm.user.oauth_client.oauth_session.oauth_access_tokens.id;
+}
+}
+}
+angular.module('app')
+.controller('ApiControllerUserShow', ApiControllerUserShow);
+})();
+&lt;/code>&lt;/pre>&lt;p>That is it. Keep in mind that Blade template can have numerous angular &amp;ldquo;widgets&amp;rdquo; so different sections of the page can benefit from Angular. Or the one page can have several places that the Angular controller controls some of the output.&lt;/p>
+&lt;p>So hopefully this sums up a quick way to start putting Angular widgets into your Laravel application and still benefit from all speed that these too tools offer both in developing and in rendering!&lt;/p></description></item><item><title>Quick way to Request Json from Angular and return from Laravel</title><link>https://alfrednutile.info/posts/152/</link><pubDate>Mon, 06 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/152/</guid><description>&lt;p>I simply want to make sure to return json from my app more easily even on errors. So in Angular I set my app.js as such&lt;/p>
+&lt;pre>&lt;code>(function(){
 'use strict';
 angular.module('app', []);
 angular.module('app').run(
@@ -17,8 +400,8 @@ $http.defaults.headers.common.Accept = 'application/json';
 }
 );
 })();
-Then in my Laravel routes I can
-public function index(Request $request)
+&lt;/code>&lt;/pre>&lt;p>Then in my Laravel routes I can&lt;/p>
+&lt;pre>&lt;code> public function index(Request $request)
 {
 $blogs = Blog::orderBy('created_at', 'desc')-&amp;gt;paginate(5);
 $customPagination = new CustomPagination($blogs);
@@ -26,9 +409,11 @@ if($request-&amp;gt;header('Accept') == 'application/json')
 return $blogs;
 return view('blogs.index', compact('blogs', 'customPagination'));
 }
-Then I can share the same route with Angular that I do with my Blade templates as needed.</description></item><item><title>Code for making a Shortcut tool for your App</title><link>https://alfrednutile.info/posts/141/</link><pubDate>Sun, 29 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/141/</guid><description>This allows the user to easily make shortcuts to urls they are on and give them names.
-video
-The Migration &amp;lt;?php
+&lt;/code>&lt;/pre>&lt;p>Then I can share the same route with Angular that I do with my Blade templates as needed.&lt;/p></description></item><item><title>Code for making a Shortcut tool for your App</title><link>https://alfrednutile.info/posts/141/</link><pubDate>Sun, 29 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/141/</guid><description>&lt;p>This allows the user to easily make shortcuts to urls they are on and give them names.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/bwnfydndpx6ic4l/widget_shortcuts.gif?dl=0" alt="image 1">&lt;/p>
+&lt;p>&lt;a href="http://youtu.be/tMi0tqPmnhg">video&lt;/a>&lt;/p>
+&lt;h1 id="the-migration">The Migration&lt;/h1>
+&lt;pre>&lt;code>&amp;lt;?php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 class CreateShortcutsTable extends Migration {
@@ -58,8 +443,264 @@ public function down()
 Schema::drop('shortcuts');
 }
 }
-The Model You will see me using scopes as I wanted to make a really simple POC</description></item><item><title>Sending Dates to Angular from Laravel</title><link>https://alfrednutile.info/posts/134/</link><pubDate>Tue, 24 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/134/</guid><description>This might not be ideal but so far it allows me to more easily sort dates and filter dates in Angular.
-From the Laravel model I add these two methods
+&lt;/code>&lt;/pre>&lt;h1 id="the-model">The Model&lt;/h1>
+&lt;p>You will see me using scopes as I wanted to make a really simple POC&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+/**
+* Created by PhpStorm.
+* User: alfrednutile
+* Date: 3/28/15
+* Time: 8:28 PM
+*/
+namespace BehatEditor\Models;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+class Shortcut extends BaseModel {
+public $incrementing = false;
+public static $rulesCreate = [
+'name' =&amp;gt; 'required|min:3',
+'url' =&amp;gt; 'required'
+];
+protected $fillable = [
+&amp;quot;id&amp;quot;,
+&amp;quot;url&amp;quot;,
+&amp;quot;name&amp;quot;,
+&amp;quot;user_id&amp;quot;
+];
+public function user()
+{
+return $this-&amp;gt;belongsTo('BehatEditor\User');
+}
+public function scopeGetAllForCurrentUser($query)
+{
+return $query-&amp;gt;where('user_id', Auth::user()-&amp;gt;id)-&amp;gt;get();
+}
+public function scopeDeleteForUser($query, $shortcut_id)
+{
+try
+{
+return ($results = $query-&amp;gt;where('id', $shortcut_id)-&amp;gt;where('user_id', Auth::user()-&amp;gt;id)-&amp;gt;first()) ? $results-&amp;gt;delete() : false;
+}
+catch(\Exception $e)
+{
+throw new \Exception(sprintf(&amp;quot;Could not delete the shortcut %s&amp;quot;, $shortcut_id));
+}
+}
+public function scopeCreateForUser($query, $input)
+{
+try
+{
+$uuid = $this-&amp;gt;generateNewId()-&amp;gt;toString();
+$this-&amp;gt;create(
+[
+'id' =&amp;gt; (isset($input['id'])) ? $input['id'] : $uuid,
+'url' =&amp;gt; $input['url'],
+'name' =&amp;gt; $input['name'],
+'user_id' =&amp;gt; Auth::user()-&amp;gt;id
+]
+);
+return $uuid;
+}
+catch(\Exception $e)
+{
+$this-&amp;gt;throw_and_log_error(sprintf(&amp;quot;Error making shortcut %s&amp;quot;, $e-&amp;gt;getMessage()));
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;h1 id="the-controller">The Controller&lt;/h1>
+&lt;p>Typically this is a no no too much logic in the controller.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+/**
+* Created by PhpStorm.
+* User: alfrednutile
+* Date: 3/28/15
+* Time: 8:45 PM
+*/
+namespace BehatEditor\Http\Controllers;
+use AlfredNutileInc\CoreApp\BaseController;
+use BehatEditor\Models\Shortcut;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
+class ShortcutsController extends BaseController {
+public function getUserShortCuts()
+{
+try
+{
+$results['shortcuts'] = Shortcut::getAllForCurrentUser();
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($results, &amp;quot;Loaded Shortcuts&amp;quot;), 200);
+}
+catch(\Exception $e) {
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;getMessage(), sprintf(&amp;quot;Error Getting Shortcuts Failed %s&amp;quot;, $e-&amp;gt;getMessage())), 422);
+}
+}
+public function deleteUserShortCut($shortcut_id)
+{
+try
+{
+$results = Shortcut::deleteForUser($shortcut_id);
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($results, &amp;quot;Deleted Shortcut&amp;quot;), 200);
+}
+catch(\Exception $e) {
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;getMessage(), sprintf(&amp;quot;Error Getting Shortcuts Failed %s&amp;quot;, $e-&amp;gt;getMessage())), 422);
+}
+}
+public function postShortcut()
+{
+try
+{
+$input = $this-&amp;gt;getInput();
+$validator = Validator::make($input, Shortcut::$rulesCreate);
+if(!$validator-&amp;gt;passes()) {
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($validator-&amp;gt;messages(), &amp;quot;Validation failed&amp;quot;), 422);
+}
+}
+catch(\Exception $e)
+{
+Log::debug(sprintf(&amp;quot;Error making shortcut during validaiton %s&amp;quot;, $e-&amp;gt;getMessage()));
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond([], &amp;quot;Creation Error&amp;quot;), 500);
+}
+try
+{
+$results = Shortcut::createForUser($input);
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($results, &amp;quot;Created Shortcut&amp;quot;), 200);
+}
+catch(\Exception $e) {
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;getMessage(), sprintf(&amp;quot;Error Getting Shortcuts Failed %s&amp;quot;, $e-&amp;gt;getMessage())), 422);
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Then for the nav area&lt;/p>
+&lt;pre>&lt;code>&amp;lt;li class=&amp;quot;shortcut-form&amp;quot;&amp;gt;
+&amp;lt;form class=&amp;quot;navbar-form navbar-left&amp;quot; role=&amp;quot;shortcuts&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;input-group&amp;quot;&amp;gt;
+&amp;lt;input
+placeholder=&amp;quot;shortcut name&amp;quot;
+type=&amp;quot;text&amp;quot;
+class=&amp;quot;form-control input-sm&amp;quot;
+ng-model=&amp;quot;main.shortcut_new.name&amp;quot;&amp;gt;
+&amp;lt;span class=&amp;quot;input-group-btn&amp;quot;&amp;gt;
+&amp;lt;button
+ng-disabled=&amp;quot;!main.shortcut_new.name&amp;quot;
+type=&amp;quot;button&amp;quot;
+class=&amp;quot;btn btn-default&amp;quot;
+ng-click=&amp;quot;main.addShortCut()&amp;quot;&amp;gt;
+&amp;lt;i class=&amp;quot;fa fa-plus-circle&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;
+&amp;lt;/button&amp;gt;
+&amp;lt;/span&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/form&amp;gt;
+&amp;lt;/li&amp;gt;
+&amp;lt;li class=&amp;quot;dropdown&amp;quot;&amp;gt;
+&amp;lt;a class=&amp;quot;dropdown-toggle&amp;quot; href=&amp;quot;#&amp;quot;&amp;gt;
+&amp;lt;i class=&amp;quot;fa fa-thumb-tack&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; 
+Your Shortcuts&amp;lt;span class=&amp;quot;caret&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;
+&amp;lt;/a&amp;gt;
+&amp;lt;ul class=&amp;quot;dropdown-menu dropdown-messages&amp;quot;&amp;gt;
+&amp;lt;li&amp;gt;
+&amp;lt;input
+class=&amp;quot;form-control&amp;quot;
+type=&amp;quot;text&amp;quot;
+autofocus=&amp;quot;{{ form_focus == 'nav' }}&amp;quot;
+placeholder=&amp;quot;Click Tab to enter mouse into input and search&amp;quot;
+data-ng-model=&amp;quot;search_shortcuts&amp;quot;
+&amp;gt;
+&amp;lt;/li&amp;gt;
+&amp;lt;li class=&amp;quot;divider&amp;quot;&amp;gt;&amp;lt;/li&amp;gt;
+&amp;lt;li ng-repeat=&amp;quot;shortcut in main.shortcuts | filter:search_shortcuts&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;dropdown-messages-box&amp;quot;&amp;gt;
+&amp;lt;div&amp;gt;
+&amp;lt;span ng-bind-html=&amp;quot;shortcut.shortcut&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;
+&amp;lt;a class=&amp;quot;pull-right&amp;quot; href=&amp;quot;#&amp;quot; ng-click=&amp;quot;main.deleteShortcut(shortcut.id)&amp;quot;&amp;gt;
+&amp;lt;i class=&amp;quot;fa fa-trash&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;
+&amp;lt;/a&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;div class=&amp;quot;divider&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&amp;lt;/li&amp;gt;
+&lt;/code>&lt;/pre>&lt;h1 id="the-angular">The Angular&lt;/h1>
+&lt;p>We have a MainController for initial app setup then after that ui-router has controllers.&lt;/p>
+&lt;p>Also you can get the shortcuts via a http request on page load. I just inject the initial load into the blade render. But either is fine really.&lt;/p>
+&lt;pre>&lt;code># controller.js
+function addShortCut()
+{
+vm.shortcut_new.url = $location.url();
+vm.ShortcutsService.create(vm.shortcut_new, vm.callbackCreateShortcutSuccess, vm.callbackShortcutError);
+}
+function loadShortcuts()
+{
+vm.shortcuts = [];
+angular.forEach(vm.ENV.shortcuts, function(v,i){
+var link = vm.makeLink(v);
+vm.shortcuts.push( { &amp;quot;id&amp;quot;: v.id, &amp;quot;shortcut&amp;quot;: link } );
+});
+}
+function deleteShortcut(id)
+{
+vm.shortcut_to_delete = id;
+vm.ShortcutsService.deleteShortcut(id, vm.callbackShortcutSuccess, vm.callbackShortcutError);
+}
+function callbackShortcutSuccess(response)
+{
+vm._.remove(vm.shortcuts, function(s) {
+return s.id == vm.shortcut_to_delete;
+});
+vm.toaster.pop(&amp;quot;success&amp;quot;, &amp;quot;Success updating shortcut&amp;quot;);
+}
+function callbackCreateShortcutSuccess(response)
+{
+vm.shortcut_new.id = response.data;
+var link = vm.makeLink(vm.shortcut_new);
+vm.shortcuts.push( { &amp;quot;id&amp;quot;: vm.shortcut_new.id, &amp;quot;shortcut&amp;quot;: link } );
+vm.shortcut_new = {};
+vm.toaster.pop('info', &amp;quot;Success creating shortcut&amp;quot;);
+}
+function makeLink(shortcut)
+{
+return &amp;quot;&amp;lt;a href='https://alfrednutile.info/behat#&amp;quot; + shortcut.url + &amp;quot;'&amp;gt;&amp;quot; + shortcut.name + &amp;quot;&amp;lt;/a&amp;gt;&amp;quot;;
+}
+function callbackShortcutError(response)
+{
+vm.toaster.pop(&amp;quot;error&amp;quot;, &amp;quot;Error updating your shortcut&amp;quot;);
+}
+&lt;/code>&lt;/pre>&lt;h1 id="the-behat-api-tests">The Behat API Tests&lt;/h1>
+&lt;pre>&lt;code>@api
+Feature: Shortcuts
+Shortcuts for quick access
+As an authenticated user
+So I can make and use shortcuts to get from place to place
+Background: Login
+Given I do basic auth on behat
+Scenario: Get My Shortcuts
+When I request &amp;quot;GET /api/v1/shortcuts&amp;quot;
+Then I get a &amp;quot;200&amp;quot; response
+And scope into the &amp;quot;data.shortcuts.0&amp;quot; property
+And the properties exist:
+&amp;quot;&amp;quot;&amp;quot;
+url
+user_id
+&amp;quot;&amp;quot;&amp;quot;
+Scenario: Delete My Shortcuts
+When I request &amp;quot;DELETE /api/v1/shortcuts/mock-shortcut-5&amp;quot;
+Then I get a &amp;quot;200&amp;quot; response
+Scenario: Can Create a Shortcut
+Given I reseed the database
+Given I have the payload:
+&amp;quot;&amp;quot;&amp;quot;
+{ &amp;quot;data&amp;quot;:
+{
+&amp;quot;name&amp;quot;: &amp;quot;New ShortCut&amp;quot;,
+&amp;quot;url&amp;quot;: &amp;quot;/dashboard&amp;quot;
+}
+}
+&amp;quot;&amp;quot;&amp;quot;
+When I request &amp;quot;POST /api/v1/shortcuts&amp;quot;
+Then I get a &amp;quot;200&amp;quot; response
+&lt;/code>&lt;/pre></description></item><item><title>Sending Dates to Angular from Laravel</title><link>https://alfrednutile.info/posts/134/</link><pubDate>Tue, 24 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/134/</guid><description>&lt;p>This might not be ideal but so far it allows me to more easily sort dates and filter dates in Angular.&lt;/p>
+&lt;p>From the Laravel model I add these two methods&lt;/p>
+&lt;pre>&lt;code>
 /**
 * See docs http://laravel.com/docs/5.0/eloquent#date-mutators
 */
@@ -70,26 +711,680 @@ return array('created_at');
 public function getCreatedAtAttribute($attr) {
 return Carbon::parse($attr)-&amp;gt;timestamp; //Change the format to whichever you desire
 }
-Then in Angular I can use the filters
-{{ vm.created_at | date:'medium'}}</description></item><item><title>Laravel Behat and Selenium</title><link>https://alfrednutile.info/posts/130/</link><pubDate>Mon, 02 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/130/</guid><description>Laracasts has some great videos and libraries for Laravel 5 and Behat integration.
-Examples
-https://github.com/laracasts/Behat-Laravel-Extension
-and
-https://laracasts.com/lessons/laravel-5-and-behat-bffs
-Two things that I still need and get from this though that I do not think I can get from those are
-Laravel 4.2 support which obviously is not going to work with the above L5 libraries :) Mocking APIs when running under APP_ENV=local or testing Also I think with the libraries above only goutte drivers work for the APP_ENV setting.</description></item><item><title>Reusable UI/API CRUD Laravel and Angular</title><link>https://alfrednutile.info/posts/126/</link><pubDate>Fri, 26 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/126/</guid><description>related repo
-Working on a recent project it finally hit me how repetitive then need was to make a Resource at the API level and to make the UI to Create, Retrieve, Update, Delete, Index. And how easy it would be to make a foundation for this to use for each Resource keeping the UI goals consistent and simple between these Resources. With this came also a set of API tests in Behat that could also be used with the project.</description></item><item><title>Redirecting back to original Angular.js destination from Laravel Auth</title><link>https://alfrednutile.info/posts/119/</link><pubDate>Fri, 21 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/119/</guid><description>UPDATE
-You can see in the comments some updated info.
-When a user visits an Angular url (not html5) like http://foo.com/app#some/long/path
-Then gets redirected to http://foo.com/auth/login because they are not logged in. It would be nice to send them right back after that.
-These steps will make that possible.
-Include this file in your authentication page.
-#intended.js
+&lt;/code>&lt;/pre>&lt;p>Then in Angular I can use the filters&lt;/p>
+&lt;pre>&lt;code>{{ vm.created_at | date:'medium'}}
+&lt;/code>&lt;/pre></description></item><item><title>Laravel Behat and Selenium</title><link>https://alfrednutile.info/posts/130/</link><pubDate>Mon, 02 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/130/</guid><description>&lt;p>Laracasts has some great videos and libraries for Laravel 5 and Behat integration.&lt;/p>
+&lt;p>Examples&lt;/p>
+&lt;p>&lt;a href="https://github.com/laracasts/Behat-Laravel-Extension">https://github.com/laracasts/Behat-Laravel-Extension&lt;/a>&lt;/p>
+&lt;p>and&lt;/p>
+&lt;p>&lt;a href="https://laracasts.com/lessons/laravel-5-and-behat-bffs">https://laracasts.com/lessons/laravel-5-and-behat-bffs&lt;/a>&lt;/p>
+&lt;p>Two things that I still need and get from this though that I do not think I can get from those are&lt;/p>
+&lt;ul>
+&lt;li>Laravel 4.2 support which obviously is not going to work with the above L5 libraries :)&lt;/li>
+&lt;li>Mocking APIs when running under APP_ENV=local or testing&lt;/li>
+&lt;/ul>
+&lt;p>Also I think with the libraries above only goutte drivers work for the APP_ENV setting.&lt;/p>
+&lt;h2 id="dealing-with-apis">Dealing with APIs&lt;/h2>
+&lt;p>We use a lot of APIs. One for example is Github so make a provider like this&lt;/p>
+&lt;h3 id="the-provider">The Provider&lt;/h3>
+&lt;p>I register an API Provider like this&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace BehatEditor\Services;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\ServiceProvider;
+class GitApiServiceProvider extends ServiceProvider {
+/**
+* Register the service provider.
+*
+* @return void
+*/
+public function register()
+{
+if(App::environment() == 'testing' || Config::get('app.mock') == true)
+{
+$this-&amp;gt;app-&amp;gt;singleton('GithubClientInstance', function($app){
+$git = new GithubApiMockService();
+$username = getenv('GIT_USERNAME');
+$token = getenv('GIT_TOKEN');
+$git-&amp;gt;setUsername($username);
+$git-&amp;gt;setToken($token);
+$git-&amp;gt;setLogger($app['log']);
+$git-&amp;gt;setLogging(true);
+$git-&amp;gt;authenticate();
+return $git;
+});
+} else
+{
+$this-&amp;gt;app-&amp;gt;singleton('GithubClientInstance', function($app){
+$git = new GithubApiService();
+$username = getenv('GIT_USERNAME');
+$token = getenv('GIT_TOKEN');
+$git-&amp;gt;setUsername($username);
+$git-&amp;gt;setToken($token);
+$git-&amp;gt;setLogger($app['log']);
+$git-&amp;gt;setLogging(true);
+$git-&amp;gt;authenticate();
+return $git;
+});
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;p>The &amp;ldquo;app.mock&amp;rdquo; I set in two places&lt;/p>
+&lt;pre>&lt;code>config/local/app.php
+&lt;/code>&lt;/pre>&lt;p>and&lt;/p>
+&lt;pre>&lt;code>config/testing/app.php
+&lt;/code>&lt;/pre>&lt;pre>&lt;code>&amp;lt;?php
+return array(
+'chat_on' =&amp;gt; false,
+'mock' =&amp;gt; true,
+'debug' =&amp;gt; true,
+'providers' =&amp;gt; append_config(array(
+'GuilhermeGuitte\BehatLaravel\BehatLaravelServiceProvider'
+))
+);
+&lt;/code>&lt;/pre>&lt;p>Testing works well for Codeship.&lt;/p>
+&lt;p>Then if we have mock as true for local and I run&lt;/p>
+&lt;pre>&lt;code>php artisan behat:run --profile=als_local_ui --stop-on-failure ui/people_ui.feature
+&lt;/code>&lt;/pre>&lt;p>I can test all my Angular ui for People&lt;/p>
+&lt;p>Here is the behat.yml for that, keep in mind I run this from inside of Vagrant (Homestead) and Selenium is running on my Mac thanks to &amp;ldquo;webdriver-manager&amp;rdquo; and brew install chromedriver you can see more on that &lt;a href="https://www.alfrednutile.info/posts/129">here&lt;/a>&lt;/p>
+&lt;pre>&lt;code>default:
+filters:
+tags: &amp;quot;~@wip&amp;quot;
+formatter:
+name: pretty
+parameters:
+decorated: true
+verbose: false
+time: true
+language: en
+output_path: null
+multiline_arguments: true
+paths:
+features: app/tests/acceptance/features
+bootstrap: app/tests/acceptance/contexts
+context:
+parameters:
+base_url: http://behat.dev
+asset_path: '/tmp/'
+als_local_ui:
+extensions:
+Behat\MinkExtension\Extension:
+default_session: selenium2
+goutte:
+guzzle_parameters:
+curl.options:
+CURLOPT_SSL_VERIFYPEER: false
+CURLOPT_CERTINFO: false
+CURLOPT_TIMEOUT: 120
+ssl.certificate_authority: false
+selenium2:
+wd_host: &amp;quot;http://192.168.33.1:4444/wd/hub&amp;quot;
+base_url: 'https://admin:foo@behat.dev:44300'
+browser_name: chrome
+&lt;/code>&lt;/pre>&lt;h3 id="the-mock-class">The Mock Class&lt;/h3>
+&lt;p>The mock class just extends the real class but takes over&lt;/p>
+&lt;p>If mock is on it looks for a matching fixture file and uses that, else it makes one real call, saves the fixture and then uses that next time.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace BehatEditor\Services;
+use AlfredNutileInc\Fixturizer\FixturizerReader;
+use BehatEditor\Exceptions\ModelException;
+use BehatEditor\Helpers\BuildFileObject;
+use BehatEditor\Helpers\ThrowAndLogErrors;
+use BehatEditor\Providers\GithubClientInterface;
+use Github\Client;
+use Github\ResultPager;
+use BehatEditor\Interfaces\BehatUIInterface;
+use BehatEditor\Repositories\ProjectsRepository;
+use Illuminate\Support\Facades\Log;
+class GithubApiMockService extends GithubApiService implements GithubClientInterface {
+public $sha;
+protected $application;
+/**
+* @var \Github\Client
+*/
+public $client;
+protected $username;
+protected $token;
+protected $branch;
+protected $parent_file;
+protected $reponame;
+protected $folder;
+protected $logging = false;
+protected $logger;
+/**
+* @var RepoSettingRepository
+*/
+private $repoSettingRepository;
+public function __construct(Client $client)
+{
+$this-&amp;gt;client = $client;
+$this-&amp;gt;path = base_path() . '/tests/fixtures/';
+}
+public function seeIfRepoHasCustomSteps()
+{
+$this-&amp;gt;logMock('repo_has_custom_steps');
+$results = FixturizerReader::getFixture('git_show_repo_custom_steps.yml', $this-&amp;gt;path);
+return $results;
+}
+&lt;/code>&lt;/pre>&lt;p>I am using this library to quickly make fixtures &lt;a href="https://packagist.org/packages/alfred-nutile-inc/fixturizer">https://packagist.org/packages/alfred-nutile-inc/fixturizer&lt;/a>&lt;/p>
+&lt;p>That makes our tests super fast since we are never hitting out APIs like Github, Pusher, etc.&lt;/p>
+&lt;p>I cover it &lt;a href="https://www.alfrednutile.info/posts/120">Mocking Queue Service for faster Behat Testing&lt;/a> as well.&lt;/p>
+&lt;h2 id="api-testing">API Testing&lt;/h2>
+&lt;p>We use Behat to test our API endpoints as seen in the book &lt;a href="https://leanpub.com/build-apis-you-wont-hate">Build APIs You Won&amp;rsquo;t Hate&lt;/a>&lt;/p>
+&lt;p>For hitting the API we use basic.once&lt;/p>
+&lt;pre>&lt;code>#filter.php
+Route::filter('basic.once', function()
+{
+if(Auth::guest())
+{
+/**
+* First authenticate as normal
+*/
+if ($results = Auth::onceBasic() )
+{
+return $results;
+}
+}
+});
+&lt;/code>&lt;/pre>&lt;p>And the route would be&lt;/p>
+&lt;pre>&lt;code>Route::group(['prefix' =&amp;gt; 'api/v1', 'before' =&amp;gt; 'basic.once|auth'], function() {
+///routes
+}
+&lt;/code>&lt;/pre>&lt;p>This allows our Angular app which happens to live inside the same codebase of the API to login using a standar Laravel Form but also allows other apps to access the API (Oauth coming soon)&lt;/p>
+&lt;h2 id="reseeding-the-db">Reseeding the DB&lt;/h2>
+&lt;p>This step helps with that&lt;/p>
+&lt;pre>&lt;code> /**
+* @Given /^I reseed the database$/
+*/
+public function iReseedTheDatabase()
+{
+$env = getenv('APP_ENV');
+if(getenv('APP_ENV') != 'production')
+{
+try
+{
+if(getenv('APP_ENV') == 'testing')
+{
+copy(__DIR__ . '/../../../../app/database/stubdb.sqlite', __DIR__ . '/../../../../app/database/testing.sqlite');
+}
+else
+{
+exec(&amp;quot;php artisan migrate:refresh --seed -n --env=$env&amp;quot;);
+}
+}
+catch(\Exception $e)
+{
+throw new \Exception(sprintf(&amp;quot;Error seeding the database %s&amp;quot;, $e-&amp;gt;getMessage()));
+}
+} else {
+throw new \Exception(sprintf(&amp;quot;You can not seed production&amp;quot;));
+}
+}
+&lt;/code>&lt;/pre>&lt;p>I cover more on that &lt;a href="https://www.alfrednutile.info/posts/117">PHP quick fixture data for phpunit testing&lt;/a>&lt;/p>
+&lt;h2 id="loading-app">Loading APP&lt;/h2>
+&lt;p>FeatureContext has a BaseContext that has these methods&lt;/p>
+&lt;pre>&lt;code> public function setApp()
+{
+$app = new Illuminate\Foundation\Application;
+$env = $app-&amp;gt;detectEnvironment(
+function()
+{
+if(!getenv('APP_ENV'))
+{
+Dotenv::load(__DIR__ .'/../../../../');
+}
+return getenv('APP_ENV');
+}
+);
+$app-&amp;gt;bindInstallPaths(require __DIR__ . '/../../../../bootstrap/paths.php');
+$framework = $app['path.base'].
+'/vendor/laravel/framework/src';
+require $framework.'/Illuminate/Foundation/start.php';
+$this-&amp;gt;app = $app;
+$this-&amp;gt;app-&amp;gt;boot();
+$this-&amp;gt;env = $env;
+}
+public function getApp()
+{
+return $this-&amp;gt;app;
+}
+&lt;/code>&lt;/pre>&lt;p>On the __construct it does&lt;/p>
+&lt;pre>&lt;code> public function __construct(array $parameters) {
+$config = isset($parameters['guzzle']) &amp;amp;&amp;amp; is_array($parameters['guzzle']) ? $parameters['guzzle'] : [];
+$config['base_url'] = (isset($parameters['base_url'])) ? $parameters['base_url'] : false;
+$this-&amp;gt;parameters = $parameters;
+$this-&amp;gt;client = new Client($config);
+$this-&amp;gt;iSetCredentials();
+Factory::$factoriesPath = 'app/tests/factories';
+$this-&amp;gt;setApp();
+}
+&lt;/code>&lt;/pre>&lt;h2 id="laracast-testdummy--factories">Laracast TestDummy / Factories&lt;/h2>
+&lt;p>One example of using factories is a step like this&lt;/p>
+&lt;pre>&lt;code> /**
+* @Given /^I create person fixture with &amp;quot;([^&amp;quot;]*)&amp;quot; id$/
+*/
+public function iCreatePersonFixtureWithId($arg1)
+{
+Factory::create('TheHub\Profile\User', [ 'id' =&amp;gt; $arg1 ]);
+}
+&lt;/code>&lt;/pre>&lt;p>Using the Laracast TestDummy library I can quickly stub out data for the test.&lt;/p></description></item><item><title>Reusable UI/API CRUD Laravel and Angular</title><link>https://alfrednutile.info/posts/126/</link><pubDate>Fri, 26 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/126/</guid><description>&lt;p>&lt;a href="https://github.com/alnutile/angular_stubber">related repo&lt;/a>&lt;/p>
+&lt;p>Working on a recent project it finally hit me how repetitive then need was to make a Resource at the API level and to make the UI to Create, Retrieve, Update, Delete, Index. And how easy it would be to make a foundation for this to use for each Resource keeping the UI goals consistent and simple between these Resources. With this came also a set of API tests in Behat that could also be used with the project.&lt;/p>
+&lt;p>What I will cover below is building out the foundation for this code and using it in a &amp;lsquo;real life&amp;rsquo; example.&lt;/p>
+&lt;p>You will end up with a UI like this&lt;/p>
+&lt;h2 id="index">Index&lt;/h2>
+&lt;p>Simple search, create and edit&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/9hwu9xzxvlriapc/index.png?dl=0" alt="index">&lt;/p>
+&lt;h2 id="modal-create">Modal Create&lt;/h2>
+&lt;p>Simple Create leaving complexities for Edit&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/x5k1zkixgp3a95j/create.png?dl=0" alt="create">&lt;/p>
+&lt;h2 id="modal-edit">Modal Edit&lt;/h2>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/tix8hql68omwvxh/edit.png?dl=0" alt="edit">&lt;/p>
+&lt;h1 id="now-for-the-code">Now for the code&lt;/h1>
+&lt;h2 id="api">API&lt;/h2>
+&lt;p>The API follows this pattern&lt;/p>
+&lt;h3 id="route">Route&lt;/h3>
+&lt;p>Build all the info into one namespace. For example using the a resource like the one in the images above call People and a name space of CoreApp.&lt;/p>
+&lt;pre>&lt;code>CoreApp\PeopleApi
+&lt;/code>&lt;/pre>&lt;p>What is in here is (we will cover each in detail)&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/2go33ai45av8syr/people.png?dl=0" alt="people">&lt;/p>
+&lt;p>The route file then has&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+Route::get('people', 'CoreApp\People\PeopleController@getAll');
+Route::get('people/{uuid}', 'CoreApp\People\PeopleController@getOne');
+Route::post('people', 'CoreApp\People\PeopleController@postResource');
+Route::put('people/{uuid}', 'CoreApp\People\PeopleController@putResource');
+&lt;/code>&lt;/pre>&lt;p>By using put and post Resource we all of this easier to reuse.&lt;/p>
+&lt;p>Then include this in your main route file for Laravel or register it with a provider.&lt;/p>
+&lt;pre>&lt;code>#app/routes.php
+require_once(__DIR__ . '/App/PeopleApi/routes.php');
+&lt;/code>&lt;/pre>&lt;p>So now the routes are in place lets go to the Controller&lt;/p>
+&lt;h3 id="controller">Controller&lt;/h3>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App\People;
+use App\Teams\Team; //some other model
+use App\Users\User; //some other model we rely on
+use App\BaseController;
+use App\People\PeopleService;//keep logic out of controller
+use App\Services\ResponseServices; //just an example of a consistent response patter
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
+class PeopleController extends BaseController {
+/**
+* @var PeopleService
+*/
+private $peopleService;
+public function __construct(PeopleService $service, ResponseServices $responseServices)
+{
+$this-&amp;gt;service = $peopleService; //@NOTE name it service not people service to ease the reuse.
+$this-&amp;gt;responseServices = $responseServices;
+}
+/**
+* @Get('api/v1/people
+*/
+public function getAll()
+{
+try
+{
+$results['people'] = $this-&amp;gt;service-&amp;gt;getAll();
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($results, &amp;quot;Loaded People&amp;quot;), 200);
+}
+catch(\Exception $e) {
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;getMessage(), sprintf(&amp;quot;Error Getting People Failed %s&amp;quot;, $e-&amp;gt;getMessage())), 422);
+}
+}
+/**
+* @Get('api/v1/people/{uuid}
+*/
+public function getOne($uuid)
+{
+try
+{
+$results['person'] = $this-&amp;gt;service-&amp;gt;getOne($uuid);
+if(!empty($results['person']))
+{
+$results['roles'] = Role::all();
+$results['teams'] = Team::all();
+}
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($results, &amp;quot;Loaded People&amp;quot;), 200);
+}
+catch(\Exception $e) {
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;getMessage(), sprintf(&amp;quot;Error Getting People Failed %s&amp;quot;, $e-&amp;gt;getMessage())), 422);
+}
+}
+/**
+* @Post('api/v1/people')
+*/
+public function postResource()
+{
+try
+{
+$store = $this-&amp;gt;getInput();
+} catch(\Exception $e)
+{
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;getMessage(), &amp;quot;PUT Failed&amp;quot;), 422);
+}
+$validator = Validator::make($store, $this-&amp;gt;service-&amp;gt;rulesCreate);
+if(!$validator-&amp;gt;passes()) {
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($validator-&amp;gt;messages(), &amp;quot;Validation failed&amp;quot;), 422);
+}
+try
+{
+$results['person'] = $this-&amp;gt;service-&amp;gt;postPerson($store);
+/**
+* @TODO move Response to a class to not have it tightly coupled here
+*/
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($results, &amp;quot;Updated Team&amp;quot;), 200);
+}
+catch(\Exception $e) {
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;getMessage(), sprintf(&amp;quot;Error Updating Person %s&amp;quot;, $e-&amp;gt;getMessage())), 422);
+}
+}
+/**
+* @Put('api/v1/people/{uuid}
+*/
+public function putResource($uuid)
+{
+try
+{
+$store = $this-&amp;gt;getInput();
+} catch(\Exception $e)
+{
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;getMessage(), &amp;quot;PUT Failed&amp;quot;), 422);
+}
+$validator = Validator::make($store, $this-&amp;gt;service-&amp;gt;rulesCreate);
+if(!$validator-&amp;gt;passes()) {
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($validator-&amp;gt;messages(), &amp;quot;Validation failed&amp;quot;), 422);
+}
+try
+{
+$results = $this-&amp;gt;service-&amp;gt;updatePerson($store);
+/**
+* @TODO move Response to a class to not have it tightly coupled here
+*/
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($results, &amp;quot;Updated Person&amp;quot;), 200);
+}
+catch(\Exception $e) {
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;getMessage(), sprintf(&amp;quot;Error Updating Person %s&amp;quot;, $e-&amp;gt;getMessage())), 422);
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;p>The Controller talks to the service to get the respond to the request and the consistently responds back using the responseService. (more on that shortly)&lt;/p>
+&lt;h3 id="the-service">The Service&lt;/h3>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace CoreApp\People;
+use CoreApp\Models\User;
+use CoreApp\Services\UserService;
+use CoreApp\Helpers\RoleHelper;
+use CoreApp\Helpers\ThrowAndLogErrors;
+use CoreApp\Services\BaseServices;
+use CoreApp\Helpers\UuidHelper;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+class PeopleService extends BaseServices {
+use RoleHelper;
+use ThrowAndLogErrors;
+use UuidHelper;
+/**
+* @var User
+*/
+private $user;
+public $rulesCreate = [
+'email' =&amp;gt; 'required|email'
+];
+public function __construct(UserService $user)
+{
+$this-&amp;gt;user = $user;
+}
+public function getAll()
+{
+try
+{
+$user_id = Auth::user()-&amp;gt;id;
+if($this-&amp;gt;isInRole($user_id, ['role-admin']))
+{
+$results = $this-&amp;gt;user-&amp;gt;all();
+} else {
+$results = [];
+}
+}
+catch(NotInRoleException $e)
+{
+$results = [];
+}
+catch(\Exception $e)
+{
+throw new \Exception(&amp;quot;Error getting people message &amp;quot; . $e-&amp;gt;getMessage());
+}
+return $results;
+}
+public function getOne($uuid)
+{
+try
+{
+if($this-&amp;gt;isAdminRoleOrOwner($uuid))
+{
+$results = $this-&amp;gt;user-&amp;gt;getPerson($uuid);
+} else {
+$results = [];
+}
+}
+catch(\Exception $e)
+{
+throw new \Exception(&amp;quot;Error getting people message &amp;quot; . $e-&amp;gt;getMessage());
+}
+return $results;
+}
+public function updatePerson($store)
+{
+$this-&amp;gt;isCurrentUserInRoleAdmin();
+try
+{
+$user = User::findOrFail($store['id']);
+$store = (array) $store;
+$user-&amp;gt;email = $store['email'];
+(isset($store['image'])) ? $user-&amp;gt;image = $store['image'] : false;
+$user-&amp;gt;save();
+if(isset($store['roles']))
+{
+$user = $this-&amp;gt;syncRoles($user, $store);
+}
+}
+catch(\Exception $e)
+{
+$message = sprintf(&amp;quot;Error updating team %s&amp;quot;, $e-&amp;gt;getMessage());
+$this-&amp;gt;throw_and_log_error($message);
+}
+return $user;
+}
+public function postPerson($store)
+{
+$this-&amp;gt;isCurrentUserInRoleAdmin();
+$user = new User();
+try
+{
+/**
+* @TODO move this into a CoreApp service
+* I am moving away from the BehatEditor Service
+*/
+$uuid = (!isset($store['id'])) ? $this-&amp;gt;generateNewId()-&amp;gt;toString() : $store['id'];
+$user-&amp;gt;id = $uuid;
+$user-&amp;gt;email = $store['email'];
+$user-&amp;gt;password = Hash::make(Str::random(32));
+$user-&amp;gt;image = $user-&amp;gt;default_image;
+$user-&amp;gt;save();
+$user = User::with('roles')-&amp;gt;find($uuid); //due to uuid work
+if(isset($store['roles']))
+{
+$user = $this-&amp;gt;syncRoles($user, $store);
+}
+}
+catch(\Exception $e)
+{
+$message = sprintf(&amp;quot;Error creating user %s&amp;quot;, $e-&amp;gt;getMessage());
+$this-&amp;gt;throw_and_log_error($message);
+}
+return $user;
+}
+protected function syncRoles($user, $store)
+{
+if(isset($store['roles']))
+{
+foreach($store['roles'] as $role)
+{
+$roles[] = $role['id'];
+}
+$user-&amp;gt;roles()-&amp;gt;sync($roles);
+}
+return $user;
+}
+}
+&lt;/code>&lt;/pre></description></item><item><title>Redirecting back to original Angular.js destination from Laravel Auth</title><link>https://alfrednutile.info/posts/119/</link><pubDate>Fri, 21 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/119/</guid><description>&lt;p>&lt;strong>UPDATE&lt;/strong>&lt;/p>
+&lt;p>You can see in the &lt;a href="https://www.alfrednutile.info/posts/119#comment-2448723710">comments&lt;/a> some updated info.&lt;/p>
+&lt;p>When a user visits an Angular url (not html5) like &lt;a href="http://foo.com/app#some/long/path">http://foo.com/app#some/long/path&lt;/a>&lt;/p>
+&lt;p>Then gets redirected to &lt;a href="http://foo.com/auth/login">http://foo.com/auth/login&lt;/a> because they are not logged in. It would be nice to send them right back after that.&lt;/p>
+&lt;p>These steps will make that possible.&lt;/p>
+&lt;p>Include this file in your authentication page.&lt;/p>
+&lt;pre>&lt;code>#intended.js
 (function(){
 'use strict';
 var intended = window.location.hash;
-(intended.length &amp;gt; 0) ? jQuery.cookie('intended', '/app' + intended) : jQuery.</description></item><item><title>Angular Pusher Factory to Centralize Code (also using Laravel to set constants and properties)</title><link>https://alfrednutile.info/posts/111/</link><pubDate>Fri, 24 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/111/</guid><description>This will cover
-Making an Angular factory to centralize Pusher setup in Angular Passing settings form Laravel to Angular (though could be just Angular and a .env file as well) Passing Constants into the Angular App to pass these settings around, in this case to the Pusher Factory. Setup your constants This is where I call in the info I need to use later on.
-(function(){
+(intended.length &amp;gt; 0) ? jQuery.cookie('intended', '/app' + intended) : jQuery.cookie('intended', '/app');
+})();
+&lt;/code>&lt;/pre>&lt;p>Then add this library to your app jquery.cookies.js and load that, this script and of course jquery.&lt;/p>
+&lt;p>Finally after an successful auth add this&lt;/p>
+&lt;pre>&lt;code>return Redirect::to($_COOKIE['intended']);
+&lt;/code>&lt;/pre>&lt;p>Laravel 4.2 = app/controllers/AuthController.php:61&lt;/p>
+&lt;p>Laravel 5 = app/Http/Controllers/AuthController.php:52&lt;/p></description></item><item><title>Angular Pusher Factory to Centralize Code (also using Laravel to set constants and properties)</title><link>https://alfrednutile.info/posts/111/</link><pubDate>Fri, 24 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/111/</guid><description>&lt;p>This will cover&lt;/p>
+&lt;ul>
+&lt;li>Making an Angular factory to centralize Pusher setup in Angular&lt;/li>
+&lt;li>Passing settings form Laravel to Angular (though could be just Angular and a .env file as well)&lt;/li>
+&lt;li>Passing Constants into the Angular App to pass these settings around, in this case to the Pusher Factory.&lt;/li>
+&lt;/ul>
+&lt;h2 id="setup-your-constants">Setup your constants&lt;/h2>
+&lt;p>This is where I call in the info I need to use later on.&lt;/p>
+&lt;pre>&lt;code>(function(){
 function config($stateProvider, $urlRouterProvider) {
-$urlRouterProvider.</description></item></channel></rss>
+$urlRouterProvider.otherwise(&amp;quot;/dashboard&amp;quot;);
+$stateProvider
+.state('dashboard', {
+url: &amp;quot;/dashboard&amp;quot;,
+views: {
+'': {
+controller: 'DashCtrl',
+controllerAs: 'vm',
+resolve: {
+reports: ['ReportsService', function(ReportsService)
+{
+return ReportsService.get();
+}]
+},
+templateUrl: &amp;quot;/assets/js/dashboard/templates/dashboard.html&amp;quot;
+};
+}
+function constants() {
+return { 'pusher_public_key': window.pusher_public_key }
+}
+angular
+.module('app')
+.config(config)
+.constant('ENV', constants())
+.run(function($rootScope, $state) {
+$rootScope.$state = $state;
+});
+})();
+&lt;/code>&lt;/pre>&lt;p>So now we have the constants in place that are used by our factory below&lt;/p>
+&lt;h2 id="the-pusher-factory">The Pusher Factory&lt;/h2>
+&lt;pre>&lt;code>(function(){
+'use strict';
+function PusherService(ENV)
+{
+var vm = this;
+vm.pusher = {};
+vm.ENV = ENV; //We set this up above on the constants area.
+vm.channelSet = {};
+vm.activate = activate;
+vm._subscribeToChannel = _subscribeToChannel;
+vm._channelBind = _channelBind;
+vm.PusherService = {
+setPusher: setPusher
+};
+vm.activate();
+////
+function activate()
+{
+console.log(vm.ENV);
+vm.pusher = new Pusher(vm.ENV.pusher_public_key);
+}
+function setPusher(channel, event, callback)
+{
+vm._subscribeToChannel(channel);
+vm._channelBind(event, callback);
+}
+function _subscribeToChannel(channel)
+{
+vm.channelSet = vm.pusher.subscribe(channel);
+}
+function _channelBind(event_name, callback)
+{
+vm.channelSet.bind(event_name, callback);
+}
+return vm.PusherService;
+}
+angular.module('app')
+.factory('PusherService', PusherService);
+})();
+&lt;/code>&lt;/pre>&lt;h2 id="laravel-now-need-to-load-the-settings-in-the-env-file-so-angular-can-access-them-later">Laravel now need to load the settings in the .env file so Angular can access them later.&lt;/h2>
+&lt;p>Of course this could purely be Angular.js loading them from a config file that is not in git but relative to a server, local dev area etc.&lt;/p>
+&lt;p>I set this all up user &lt;a href="https://github.com/laracasts/PHP-Vars-To-Js-Transformer">https://github.com/laracasts/PHP-Vars-To-Js-Transformer&lt;/a>&lt;/p>
+&lt;p>I run the config command &lt;em>note the change&lt;/em>&lt;/p>
+&lt;pre>&lt;code>php artisan publish:config laracasts/utilities
+&lt;/code>&lt;/pre>&lt;p>Then I edit that file&lt;/p>
+&lt;pre>&lt;code>config/packages/laracasts/utilities/config.php
+&lt;/code>&lt;/pre>&lt;p>To be&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+return [
+/*
+|--------------------------------------------------------------------------
+| View to Bind JavaScript Vars To
+|--------------------------------------------------------------------------
+|
+| Set this value to the name of the view (or partial) that
+| you want to prepend the JavaScript variables to.
+|
+*/
+'bind_js_vars_to_this_view' =&amp;gt; 'layouts/main',
+/*
+|--------------------------------------------------------------------------
+| JavaScript Namespace
+|--------------------------------------------------------------------------
+|
+| By default, we'll add variables to the global window object.
+| It's recommended that you change this to some namespace - anything.
+| That way, from your JS, you may do something like `Laracasts.myVar`.
+|
+*/
+'js_namespace' =&amp;gt; 'window'
+];
+&lt;/code>&lt;/pre>&lt;p>The resources/views/layouts/main.blade.php the only trick here is any Angular related {{ brackets need to be @{{ to tell blade to ignore them.&lt;/p>
+&lt;p>Finally my AngularController which renders the ONE page Laravel is in charge of besides login.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php namespace App\Http\Controllers;
+use Laracasts\Utilities\JavaScript\Facades\JavaScript;
+/**
+* @Middleware(&amp;quot;auth&amp;quot;)
+*/
+class AngularController extends BaseController {
+/**
+* @Get(&amp;quot;dash&amp;quot;, as=&amp;quot;dash&amp;quot;)
+*/
+public function index()
+{
+JavaScript::put([
+'pusher_public_key' =&amp;gt; $_ENV['PUSHER_PUBLIC']]);
+return view('layouts.main');
+}
+}
+&lt;/code>&lt;/pre>&lt;p>If you have more than on View the share option might work &lt;a href="http://laravel.com/docs/master/views">http://laravel.com/docs/master/views&lt;/a>&lt;/p></description></item></channel></rss>

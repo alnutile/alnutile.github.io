@@ -1,15 +1,48 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>gulp on Alfred Nutile</title><link>https://alfrednutile.info/tags/gulp/</link><description>Recent content in gulp on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 25 May 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/gulp/index.xml" rel="self" type="application/rss+xml"/><item><title>Quick Gulp file to run php-unit tests</title><link>https://alfrednutile.info/posts/85/</link><pubDate>Sun, 25 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/85/</guid><description>MUCH BETTER WAY HERE
-This is setup for Laravel but can work for any app. Most of this is due to the great Laracasts on Gulp
-Download and setup gulp
-First make a package.json file in the root of your app and just put curly brackets in it.
-touch package.json
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>gulp on Alfred Nutile</title><link>https://alfrednutile.info/tags/gulp/</link><description>Recent content in gulp on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 25 May 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/gulp/index.xml" rel="self" type="application/rss+xml"/><item><title>Quick Gulp file to run php-unit tests</title><link>https://alfrednutile.info/posts/85/</link><pubDate>Sun, 25 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/85/</guid><description>&lt;p>&lt;strong>MUCH BETTER WAY &lt;a href="https://gist.github.com/laracasts/8659865">HERE&lt;/a>&lt;/strong>&lt;/p>
+&lt;hr>
+&lt;p>This is setup for Laravel but can work for any app. Most of this is due to the great &lt;a href="https://laracasts.com/lessons/gulp-this">Laracasts on Gulp&lt;/a>&lt;/p>
+&lt;p>Download and setup gulp&lt;/p>
+&lt;p>First make a package.json file in the root of your app and just put curly brackets in it.&lt;/p>
+&lt;pre>&lt;code>touch package.json
 vim package.json
-//package.json
+&lt;/code>&lt;/pre>&lt;pre>&lt;code>//package.json
 {
 }
-Then run the needed node commands
-npm install -g gulp
+&lt;/code>&lt;/pre>&lt;p>Then run the needed node commands&lt;/p>
+&lt;pre>&lt;code>npm install -g gulp
 npm install gulp --save-dev
 npm install gulp-notify --save-dev
 npm install gulp-phpunit --save-dev
-Now the package.</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>Now the package.json should look like this thanks to the save switch.&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;devDependencies&amp;quot;: {
+&amp;quot;gulp&amp;quot;: &amp;quot;^3.6.2&amp;quot;,
+&amp;quot;gulp-phpunit&amp;quot;: &amp;quot;^0.5.3&amp;quot;,
+&amp;quot;gulp-notify&amp;quot;: &amp;quot;^1.3.0&amp;quot;
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Now to setup the gulpfile, again in the root of your app&lt;/p>
+&lt;pre>&lt;code>//gulpfile.js
+var phpunit = require('gulp-phpunit');
+var gulp = require('gulp'),
+notify = require('gulp-notify'),
+phpunit = require('gulp-phpunit');
+gulp.task('phpunit', function() {
+var options = {debug: false, notify: true};
+gulp.src('app/tests/*.php')
+.pipe(phpunit('', options))
+.on('error', notify.onError({
+title: &amp;quot;Failed Tests!&amp;quot;,
+message: &amp;quot;Error(s) occurred during testing...&amp;quot;
+}));
+});
+gulp.task('default', function(){
+gulp.run('phpunit');
+gulp.watch('app/**/*.php', function(){
+gulp.run('phpunit');
+});
+});
+&lt;/code>&lt;/pre>&lt;p>Basically we are saying watch the app folder recursively for file changes to files ending in php then run all the tests in app/tests/*.php.&lt;/p>
+&lt;p>Finally run gulp at the command line and it will run keeping an eye on changes.&lt;/p>
+&lt;pre>&lt;code>gulp
+&lt;/code>&lt;/pre>&lt;p>That is it. From here you will get typically phpunit output as you work BUT also a notice if you break something.&lt;/p></description></item></channel></rss>

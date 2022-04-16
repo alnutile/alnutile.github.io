@@ -1,11 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>passport on Alfred Nutile</title><link>https://alfrednutile.info/tags/passport/</link><description>Recent content in passport on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/passport/index.xml" rel="self" type="application/rss+xml"/><item><title>Machine to Machine Laravel Passport</title><link>https://alfrednutile.info/posts/211/</link><pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/211/</guid><description>Recently I needed to create an OAuth around Machine to Machine authentication here
-The docs are good but I must have missed something obvious or maybe I just well missed something obvious.
-Basically I just kept getting Unauthenticated. and this makes sense since I received the token using
-grant_type:client_credentials
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>passport on Alfred Nutile</title><link>https://alfrednutile.info/tags/passport/</link><description>Recent content in passport on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 02 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/passport/index.xml" rel="self" type="application/rss+xml"/><item><title>Machine to Machine Laravel Passport</title><link>https://alfrednutile.info/posts/211/</link><pubDate>Fri, 02 Jun 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/211/</guid><description>&lt;p>Recently I needed to create an OAuth around Machine to Machine authentication &lt;a href="https://laravel.com/docs/master/passport#client-credentials-grant-tokens">here&lt;/a>&lt;/p>
+&lt;p>The docs are good but I must have missed something obvious or maybe I just well missed something obvious.&lt;/p>
+&lt;p>Basically I just kept getting &lt;code>Unauthenticated.&lt;/code> and this makes sense since I received the token using&lt;/p>
+&lt;pre>&lt;code>grant_type:client_credentials
 client_id:1
 client_secret:foobar
-So after following the docs I had to then to the following
-Route::middleware('auth:api')-&amp;gt;get('/user', function (Request $request) {
+&lt;/code>&lt;/pre>&lt;p>So after following the docs I had to then to the following&lt;/p>
+&lt;pre>&lt;code>Route::middleware('auth:api')-&amp;gt;get('/user', function (Request $request) {
 return $request;
 });
-with</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>with&lt;/p>
+&lt;pre>&lt;code>Route::middleware('auth.client')-&amp;gt;get('/user', function (Request $request) {
+return &amp;quot;FOO&amp;quot;;
+});
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>&amp;lsquo;auth.client&amp;rsquo;&lt;/strong> being key!&lt;/p>
+&lt;p>And updated &lt;code>app/Http/Kernel.php&lt;/code>:&lt;/p>
+&lt;pre>&lt;code> protected $routeMiddleware = [
+'auth' =&amp;gt; \Illuminate\Auth\Middleware\Authenticate::class,
+'auth.basic' =&amp;gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+'bindings' =&amp;gt; \Illuminate\Routing\Middleware\SubstituteBindings::class,
+'can' =&amp;gt; \Illuminate\Auth\Middleware\Authorize::class,
+'guest' =&amp;gt; \App\Http\Middleware\RedirectIfAuthenticated::class,
+'throttle' =&amp;gt; \Illuminate\Routing\Middleware\ThrottleRequests::class,
+'auth.client' =&amp;gt; \Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
+];
+&lt;/code>&lt;/pre>&lt;p>Adding &lt;code>auth.client&lt;/code> then I was back in business.&lt;/p></description></item></channel></rss>

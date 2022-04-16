@@ -1,16 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>assets on Alfred Nutile</title><link>https://alfrednutile.info/tags/assets/</link><description>Recent content in assets on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 16 Dec 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/assets/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel Asset Notes WIP</title><link>https://alfrednutile.info/posts/227/</link><pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/227/</guid><description>This is just a reminder area of all the minor details as I find them that I need to remember
-FontAwesome yarn add font-awesome
-Then in my resources/assets/sass/app.scss
-// Fonts
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>assets on Alfred Nutile</title><link>https://alfrednutile.info/tags/assets/</link><description>Recent content in assets on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 16 Dec 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/assets/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel Asset Notes WIP</title><link>https://alfrednutile.info/posts/227/</link><pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/227/</guid><description>&lt;p>This is just a reminder area of all the minor details as I find them that I need to remember&lt;/p>
+&lt;h2 id="fontawesome">FontAwesome&lt;/h2>
+&lt;pre>&lt;code>yarn add font-awesome
+&lt;/code>&lt;/pre>&lt;p>Then in my &lt;code>resources/assets/sass/app.scss&lt;/code>&lt;/p>
+&lt;pre>&lt;code>// Fonts
 @import url(&amp;quot;https://fonts.googleapis.com/css?family=Raleway:300,400,600&amp;quot;);
 // Variables
 @import &amp;quot;variables&amp;quot;;
 // Bootstrap
 @import &amp;quot;~bootstrap-sass/assets/stylesheets/bootstrap&amp;quot;;
-@import &amp;quot;~font-awesome/css/font-awesome&amp;quot;; My webpack is the default
-mix.js('resources/assets/js/app.js', 'public/js')
+@import &amp;quot;~font-awesome/css/font-awesome&amp;quot;;
+&lt;/code>&lt;/pre>&lt;p>My webpack is the default&lt;/p>
+&lt;pre>&lt;code>mix.js('resources/assets/js/app.js', 'public/js')
 .sass('resources/assets/sass/app.scss', 'public/css');
-set to go!
-If using Less
-#resources/assets/less/app.less
-@import &amp;quot;./../../../node_modules/font-awesome/less/font-awesome&amp;quot;;</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>set to go!&lt;/p>
+&lt;p>If using Less&lt;/p>
+&lt;pre>&lt;code>#resources/assets/less/app.less
+@import &amp;quot;./../../../node_modules/font-awesome/less/font-awesome&amp;quot;;
+&lt;/code>&lt;/pre></description></item></channel></rss>

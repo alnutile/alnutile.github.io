@@ -1,3 +1,153 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>swift on Alfred Nutile</title><link>https://alfrednutile.info/tags/swift/</link><description>Recent content in swift on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 12 Feb 2022 06:32:07 -0400</lastBuildDate><atom:link href="https://alfrednutile.info/tags/swift/index.xml" rel="self" type="application/rss+xml"/><item><title>SwiftUI: Switching to a page when a user clicks on notification</title><link>https://alfrednutile.info/posts/swift_notifications/</link><pubDate>Sat, 12 Feb 2022 06:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/swift_notifications/</guid><description>Quick Notes to Self on how to have the user go to a specific page after clicking on a Notification in iOS. The two main articles that helped are https://stackoverflow.com/questions/62504400/programmatically-change-to-another-tab-in-swiftui
-https://stackoverflow.com/questions/62309251/how-can-i-open-a-specific-view-in-swiftui-when-a-user-opens-a-notification
-One helped me to see how in a more “modern” SwiftUI way get the state of the Notification from the UIDelegate up to the SwiftUI view. The second one was key since I am using TabView and needed to change the view when this was updated.</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>swift on Alfred Nutile</title><link>https://alfrednutile.info/tags/swift/</link><description>Recent content in swift on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 12 Feb 2022 06:32:07 -0400</lastBuildDate><atom:link href="https://alfrednutile.info/tags/swift/index.xml" rel="self" type="application/rss+xml"/><item><title>SwiftUI: Switching to a page when a user clicks on notification</title><link>https://alfrednutile.info/posts/swift_notifications/</link><pubDate>Sat, 12 Feb 2022 06:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/swift_notifications/</guid><description>&lt;h3 id="quick-notes-to-self-on-how-to-have-the-user-go-to-a-specific-page-after-clicking-on-a-notification-in-ios">Quick Notes to Self on how to have the user go to a specific page after clicking on a Notification in iOS.&lt;/h3>
+&lt;img src="images/notifications.gif" width="600">
+&lt;p>The two main articles that helped are &lt;a href="https://stackoverflow.com/questions/62504400/programmatically-change-to-another-tab-in-swiftui">https://stackoverflow.com/questions/62504400/programmatically-change-to-another-tab-in-swiftui&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://stackoverflow.com/questions/62309251/how-can-i-open-a-specific-view-in-swiftui-when-a-user-opens-a-notification">https://stackoverflow.com/questions/62309251/how-can-i-open-a-specific-view-in-swiftui-when-a-user-opens-a-notification&lt;/a>&lt;/p>
+&lt;p>One helped me to see how in a more “modern” SwiftUI way get the state of the Notification from the UIDelegate up to the SwiftUI view. The second one was key since I am using TabView and needed to change the view when this was updated.&lt;/p>
+&lt;p>This will assume you have Firebase notifications already working. The pattern I used there can be seen in &lt;a href="https://designcode.io/swiftui-advanced-handbook-push-notifications-part-1">https://designcode.io/swiftui-advanced-handbook-push-notifications-part-1&lt;/a> some really great material here as well as &lt;a href="https://seanallen.teachable.com">https://seanallen.teachable.com&lt;/a>&lt;/p>
+&lt;h2 id="setup-up-notificationmanager">Setup up &lt;code>NotificationManager&lt;/code>&lt;/h2>
+&lt;p>I followed the first post but I was a bit more specific since I just, for now, have one page.&lt;/p>
+&lt;p>For example when that person setups up the &lt;code>pageToNavigateTo&lt;/code> a number I just set it to&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-swift" data-lang="swift">notificationManager?.pageToNavigationTo = &lt;span style="color:#e6db74">&amp;#34;myRecalls&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>This means I had to set the class as well&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-swift" data-lang="swift">&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">NotificationManager&lt;/span>: ObservableObject {
+&lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">let&lt;/span> shared = NotificationManager()
+@Published &lt;span style="color:#66d9ef">var&lt;/span> pageToNavigationTo : String?
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>From here, I followed along with everything else till they get to the page with the Navigation since I am using tabs. That is where the second article comes in. I set my tags on the Tabs and then set the default.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-swift" data-lang="swift"> @State &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">var&lt;/span> tabSelection = &lt;span style="color:#e6db74">&amp;#34;topics&amp;#34;&lt;/span>
+&lt;span style="color:#66d9ef">var&lt;/span> body: some View {
+ZStack {
+VStack {
+&lt;span style="color:#66d9ef">if&lt;/span>(authState.signedIn) {
+TabView(selection: &lt;span style="color:#960050;background-color:#1e0010">$&lt;/span>tabSelection) {
+TopicsParentsView()
+.tabItem {
+Label(&lt;span style="color:#e6db74">&amp;#34;Topics&amp;#34;&lt;/span>, systemImage: &lt;span style="color:#e6db74">&amp;#34;house&amp;#34;&lt;/span>)
+}
+.tag(&lt;span style="color:#e6db74">&amp;#34;topics&amp;#34;&lt;/span>)
+MyRecallsView() .tabItem {
+Label(&lt;span style="color:#e6db74">&amp;#34;My Recalls&amp;#34;&lt;/span>, systemImage: &lt;span style="color:#e6db74">&amp;#34;person.crop.rectangle&amp;#34;&lt;/span>)
+}
+.tag(&lt;span style="color:#e6db74">&amp;#34;myRecalls&amp;#34;&lt;/span>)
+RecallsView() .tabItem {
+Label(&lt;span style="color:#e6db74">&amp;#34;Recalls&amp;#34;&lt;/span>, systemImage: &lt;span style="color:#e6db74">&amp;#34;list.dash&amp;#34;&lt;/span>)
+}
+.tag(&lt;span style="color:#e6db74">&amp;#34;recalls&amp;#34;&lt;/span>)
+AccountView()
+.tabItem {
+Label(&lt;span style="color:#e6db74">&amp;#34;My Account&amp;#34;&lt;/span>, systemImage: &lt;span style="color:#e6db74">&amp;#34;person.crop.circle&amp;#34;&lt;/span>)
+}
+.tag(&lt;span style="color:#e6db74">&amp;#34;account&amp;#34;&lt;/span>)
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>That was it. After a rebuild my notifications brought me right to the page. For me the articles, when I actually followed all the details, worked perfectly. Below are the full examples.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-swift" data-lang="swift">@main
+&lt;span style="color:#66d9ef">struct&lt;/span> &lt;span style="color:#a6e22e">TotalRecallsIoApp&lt;/span>: App {
+@UIApplicationDelegateAdaptor(AppDelegate.&lt;span style="color:#66d9ef">self&lt;/span>) &lt;span style="color:#66d9ef">var&lt;/span> appDelegate
+&lt;span style="color:#66d9ef">let&lt;/span> notificationManager = NotificationManager()
+&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">setUpdNotificationManager&lt;/span>() {
+appDelegate.notificationManager = notificationManager
+}
+&lt;span style="color:#66d9ef">var&lt;/span> body: some Scene {
+&lt;span style="color:#66d9ef">let&lt;/span> authState = AuthState()
+WindowGroup {
+HomeView()
+.environmentObject(authState)
+.environmentObject(notificationManager)
+.onAppear {
+setUpdNotificationManager()
+}
+}
+}
+}
+&lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">NotificationManager&lt;/span>: ObservableObject {
+&lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">let&lt;/span> shared = NotificationManager()
+@Published &lt;span style="color:#66d9ef">var&lt;/span> pageToNavigationTo : String?
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then the AppDelegate&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-swift" data-lang="swift">@available(iOS &lt;span style="color:#ae81ff">10&lt;/span>, &lt;span style="color:#f92672">*&lt;/span>)
+&lt;span style="color:#66d9ef">extension&lt;/span> &lt;span style="color:#a6e22e">AppDelegate&lt;/span> : UNUserNotificationCenterDelegate {
+&lt;span style="color:#75715e">// Receive displayed notifications for iOS 10 devices.&lt;/span>
+&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">userNotificationCenter&lt;/span>(&lt;span style="color:#66d9ef">_&lt;/span> center: UNUserNotificationCenter,
+willPresent notification: UNNotification,
+withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -&amp;gt; Void) {
+&lt;span style="color:#66d9ef">let&lt;/span> userInfo = notification.request.content.userInfo
+&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#66d9ef">let&lt;/span> messageID = userInfo[gcmMessageIDKey] {
+print(&lt;span style="color:#e6db74">&amp;#34;Message ID: &lt;/span>&lt;span style="color:#e6db74">\(&lt;/span>messageID&lt;span style="color:#e6db74">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+}
+print(userInfo)
+&lt;span style="color:#75715e">// Change this to your preferred presentation option&lt;/span>
+completionHandler([[.banner, .badge, .sound]])
+}
+&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">application&lt;/span>(&lt;span style="color:#66d9ef">_&lt;/span> application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+}
+&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">application&lt;/span>(&lt;span style="color:#66d9ef">_&lt;/span> application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+}
+&lt;span style="color:#66d9ef">func&lt;/span> &lt;span style="color:#a6e22e">userNotificationCenter&lt;/span>(&lt;span style="color:#66d9ef">_&lt;/span> center: UNUserNotificationCenter,
+didReceive response: UNNotificationResponse,
+withCompletionHandler completionHandler: @escaping () -&amp;gt; Void) {
+&lt;span style="color:#66d9ef">let&lt;/span> userInfo = response.notification.request.content.userInfo
+&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#66d9ef">let&lt;/span> messageID = userInfo[gcmMessageIDKey] {
+print(&lt;span style="color:#e6db74">&amp;#34;Message ID from userNotificationCenter didReceive: &lt;/span>&lt;span style="color:#e6db74">\(&lt;/span>messageID&lt;span style="color:#e6db74">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+}
+print(userInfo)
+print(&lt;span style="color:#e6db74">&amp;#34;DEBUG: User clicks on notifications&amp;#34;&lt;/span>)
+notificationManager?.pageToNavigationTo = &lt;span style="color:#e6db74">&amp;#34;myRecalls&amp;#34;&lt;/span>
+print(&lt;span style="color:#e6db74">&amp;#34;DEBUG: Done setting page &lt;/span>&lt;span style="color:#e6db74">\(&lt;/span>notificationManager?.pageToNavigationTo&lt;span style="color:#e6db74">)&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>)
+completionHandler()
+}
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Finally the page with TabView&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-swift" data-lang="swift">&lt;span style="color:#66d9ef">import&lt;/span> &lt;span style="color:#a6e22e">SwiftUI&lt;/span>
+&lt;span style="color:#66d9ef">import&lt;/span> &lt;span style="color:#a6e22e">Firebase&lt;/span>
+&lt;span style="color:#66d9ef">struct&lt;/span> &lt;span style="color:#a6e22e">HomeView&lt;/span>: View {
+@EnvironmentObject &lt;span style="color:#66d9ef">var&lt;/span> authState: AuthState
+@EnvironmentObject &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">var&lt;/span> notificationManager: NotificationManager
+@State &lt;span style="color:#66d9ef">var&lt;/span> email = &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>
+@State &lt;span style="color:#66d9ef">var&lt;/span> password = &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>
+@State &lt;span style="color:#66d9ef">var&lt;/span> signedIn = &lt;span style="color:#66d9ef">false&lt;/span>
+@State &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">var&lt;/span> tabSelection = &lt;span style="color:#e6db74">&amp;#34;topics&amp;#34;&lt;/span>
+&lt;span style="color:#66d9ef">var&lt;/span> body: some View {
+ZStack {
+VStack {
+&lt;span style="color:#66d9ef">if&lt;/span>(authState.signedIn) {
+TabView(selection: &lt;span style="color:#960050;background-color:#1e0010">$&lt;/span>tabSelection) {
+TopicsParentsView()
+.tabItem {
+Label(&lt;span style="color:#e6db74">&amp;#34;Topics&amp;#34;&lt;/span>, systemImage: &lt;span style="color:#e6db74">&amp;#34;house&amp;#34;&lt;/span>)
+}
+.tag(&lt;span style="color:#e6db74">&amp;#34;topics&amp;#34;&lt;/span>)
+MyRecallsView() .tabItem {
+Label(&lt;span style="color:#e6db74">&amp;#34;My Recalls&amp;#34;&lt;/span>, systemImage: &lt;span style="color:#e6db74">&amp;#34;person.crop.rectangle&amp;#34;&lt;/span>)
+}
+.tag(&lt;span style="color:#e6db74">&amp;#34;myRecalls&amp;#34;&lt;/span>)
+RecallsView() .tabItem {
+Label(&lt;span style="color:#e6db74">&amp;#34;Recalls&amp;#34;&lt;/span>, systemImage: &lt;span style="color:#e6db74">&amp;#34;list.dash&amp;#34;&lt;/span>)
+}
+.tag(&lt;span style="color:#e6db74">&amp;#34;recalls&amp;#34;&lt;/span>)
+AccountView()
+.tabItem {
+Label(&lt;span style="color:#e6db74">&amp;#34;My Account&amp;#34;&lt;/span>, systemImage: &lt;span style="color:#e6db74">&amp;#34;person.crop.circle&amp;#34;&lt;/span>)
+}
+.tag(&lt;span style="color:#e6db74">&amp;#34;account&amp;#34;&lt;/span>)
+}
+} &lt;span style="color:#66d9ef">else&lt;/span> {
+LoginView()
+}
+}
+.onAppear {
+authState.signedIn = authState.isSignedIn
+}
+.onReceive(notificationManager.&lt;span style="color:#960050;background-color:#1e0010">$&lt;/span>pageToNavigationTo) {
+&lt;span style="color:#66d9ef">guard&lt;/span> &lt;span style="color:#66d9ef">let&lt;/span> notificationSelection = $0 &lt;span style="color:#66d9ef">else&lt;/span> { &lt;span style="color:#66d9ef">return&lt;/span> }
+&lt;span style="color:#66d9ef">self&lt;/span>.tabSelection = notificationSelection
+}
+}
+}
+}
+&lt;span style="color:#66d9ef">struct&lt;/span> &lt;span style="color:#a6e22e">HomeView_Previews&lt;/span>: PreviewProvider {
+@EnvironmentObject &lt;span style="color:#66d9ef">var&lt;/span> firebaseManager: FirebaseManager
+&lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">var&lt;/span> previews: some View {
+&lt;span style="color:#66d9ef">let&lt;/span> authState = AuthState()
+HomeView().environmentObject(authState)
+}
+}
+&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

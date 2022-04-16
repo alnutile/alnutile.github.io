@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>lambda on Alfred Nutile</title><link>https://alfrednutile.info/tags/lambda/</link><description>Recent content in lambda on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 08 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/lambda/index.xml" rel="self" type="application/rss+xml"/><item><title>Lambda and Github Webhooks</title><link>https://alfrednutile.info/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/245/</guid><description>Related to https://developer.github.com/webhooks/ and pushing data to Lambda AWS.
-I can check the token by just having this check in my handler.
-const crypto = require('crypto');
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>lambda on Alfred Nutile</title><link>https://alfrednutile.info/tags/lambda/</link><description>Recent content in lambda on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 08 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/lambda/index.xml" rel="self" type="application/rss+xml"/><item><title>Lambda and Github Webhooks</title><link>https://alfrednutile.info/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/245/</guid><description>&lt;p>Related to &lt;a href="https://developer.github.com/webhooks/">https://developer.github.com/webhooks/&lt;/a> and pushing data to Lambda AWS.&lt;/p>
+&lt;p>I can check the token by just having this check in my handler.&lt;/p>
+&lt;pre>&lt;code>const crypto = require('crypto');
 exports.handler = (event, context, callback) =&amp;gt; {
 let headers = event.headers;
 let body = event.body;
@@ -22,4 +22,56 @@ return;
 let github_signature = headers['X-Hub-Signature'];
 if (
 github_signature === undefined ||
-typeof github_signature !</description></item></channel></rss>
+typeof github_signature !== 'string' ||
+!github_signature.match(/sha1=\S+/)
+) {
+callback(null, {
+statusCode: 400,
+body: 'Missing X-Hub-Signature'
+});
+}
+let secret = process.env.SECRET;
+if (secret === undefined || secret.length &amp;lt; 1) {
+callback(null, {
+statusCode: 500,
+body: 'We are missing the secret in our server sorry'
+});
+return;
+}
+let signature = headers['X-Hub-Signature'];
+let computed_signature = crypto
+.createHmac('sha1', secret)
+.update(body)
+.digest('hex');
+if (`sha1=${computed_signature}` !== signature) {
+callback(null, {
+statusCode: 403,
+body: 'HMAC Output not Correct'
+});
+return;
+}
+//ready to process token
+callback(null, {
+statusCode: 204,
+body: 'OK'
+});
+};
+&lt;/code>&lt;/pre>&lt;p>With the serverless library from AWS &lt;a href="https://github.com/awslabs/serverless-application-model">https://github.com/awslabs/serverless-application-model&lt;/a> I can build a template to include this in the Resource&lt;/p>
+&lt;pre>&lt;code>Resources:
+GithubSecurityWebhook:
+Type: AWS::Serverless::Function
+DependsOn:
+- Stream
+Properties:
+Runtime: nodejs8.10
+Description: &amp;gt;-
+This will verify that the incoming data is from Github and hashed with the key
+we are using for this environment
+Environment:
+Variables:
+SECRET: !Sub ${Secret}
+APP_ENV: !Sub ${AppEnv}
+APP_REGION: &amp;quot;eu-west-1&amp;quot;
+&lt;/code>&lt;/pre>&lt;p>then during the update command I can pass&lt;/p>
+&lt;pre>&lt;code>SECRET=FOO
+&lt;/code>&lt;/pre>&lt;p>or put a .env file on the system and use the &lt;code>dotenv&lt;/code> library&lt;/p></description></item></channel></rss>

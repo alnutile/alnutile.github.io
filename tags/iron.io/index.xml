@@ -1,1 +1,198 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>iron.io on Alfred Nutile</title><link>https://alfrednutile.info/tags/iron.io/</link><description>Recent content in iron.io on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 09 Mar 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/iron.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Iron.io Laravel and Workers, Microservices</title><link>https://alfrednutile.info/posts/136/</link><pubDate>Mon, 09 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/136/</guid><description>We are starting to use Iron.io and their workers for a lot of the tasks that our apps need to do. For example one app needs to scan websites for images and text and report on them. In our case that is 2 workers, one with the code needed to get the text we want and the other images. Another worker runs behat tests to take screenshots and reports back to the called with the results.</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>iron.io on Alfred Nutile</title><link>https://alfrednutile.info/tags/iron.io/</link><description>Recent content in iron.io on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 09 Mar 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/iron.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Iron.io Laravel and Workers, Microservices</title><link>https://alfrednutile.info/posts/136/</link><pubDate>Mon, 09 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/136/</guid><description>&lt;p>We are starting to use Iron.io and their workers for a lot of the tasks that our apps need to do. For example one app needs to scan websites for images and text and report on them. In our case that is 2 workers, one with the code needed to get the text we want and the other images. Another worker runs behat tests to take screenshots and reports back to the called with the results.&lt;/p>
+&lt;p>Using Iron.io has made this whole process easy and scalable. One request can be for say 100 urls and with Iron.io we can run one worker per url or using the Symfony Process library we can even use a worker to run a multi-threaded processes.&lt;/p>
+&lt;p>Some of the resources out there like &lt;a href="https://github.com/iron-io/iron_worker_examples/tree/master/php/laravel">iron`s example&lt;/a> are great. And using &lt;a href="https://github.com/iron-io/laraworker">this&lt;/a> library has made it super easy. Below I cover how exactly to set this up. (hopefully this week we will have a Laravel 5 version of it out)&lt;/p>
+&lt;h2 id="step-1-install">Step 1 Install&lt;/h2>
+&lt;p>Install 4.2 work. (5 might be ready soon)&lt;/p>
+&lt;pre>&lt;code>composer create-project laravel/laravel=4.2 example_worker --prefer-dist
+&lt;/code>&lt;/pre>&lt;p>Set your minimum stability in your composer.json&lt;/p>
+&lt;pre>&lt;code> },
+&amp;quot;config&amp;quot;: {
+&amp;quot;preferred-install&amp;quot;: &amp;quot;dist&amp;quot;
+},
+&amp;quot;minimum-stability&amp;quot;: &amp;quot;dev&amp;quot;
+}
+&lt;/code>&lt;/pre>&lt;p>Then pull in the library&lt;/p>
+&lt;pre>&lt;code>composer require iron-io/laraworker
+&lt;/code>&lt;/pre>&lt;p>And add this one patch for PHP 5.6 &lt;strong>TODO add code snippet&lt;/strong>&lt;/p>
+&lt;p>&lt;a href="https://github.com/iron-io/laraworker/issues/5">https://github.com/iron-io/laraworker/issues/5&lt;/a>&lt;/p>
+&lt;p>and&lt;/p>
+&lt;p>&lt;a href="https://github.com/iron-io/iron_core_php/blob/master/src/IronCore.php#L269">https://github.com/iron-io/iron_core_php/blob/master/src/IronCore.php#L269&lt;/a>&lt;/p>
+&lt;p>And of course as the readme.md notes for Laraworker&lt;/p>
+&lt;pre>&lt;code>php vendor/iron-io/laraworker/LaraWorker.php -i true
+&lt;/code>&lt;/pre>&lt;p>As the developer notes this makes a new folder and file&lt;/p>
+&lt;p>&lt;a href="https://github.com/alnutile/laravel_guide/blob/master/projects/example_worker/workers/libs/worker_boot.php">/worker/libs/worker_boot.php&lt;/a>
+and
+&lt;a href="https://github.com/alnutile/laravel_guide/blob/master/projects/example_worker/workers/ExampleLaraWorker.php">/worker/ExampleLaraWorker.php&lt;/a>&lt;/p>
+&lt;h2 id="step-2-configure">Step 2 Configure&lt;/h2>
+&lt;p>We will use the .env to do configuration not the way noted in the laraworker docs so lets install that. Just use &lt;a href="https://alfrednutile.info/posts/113">this post&lt;/a> to set that up.&lt;/p>
+&lt;p>So after you are done your, as in the Laraworker docs, we need to set the queue config.&lt;/p>
+&lt;blockquote>
+&lt;p>Set Iron.io credentials in app/config/queue.php and set default to iron &amp;ndash;&amp;gt; &amp;lsquo;default&amp;rsquo; =&amp;gt; &amp;lsquo;iron&amp;rsquo;,&lt;/p>
+&lt;/blockquote>
+&lt;p>So yours will look like&lt;/p>
+&lt;pre>&lt;code># https://github.com/alnutile/laravel_guide/blob/master/projects/example_worker/app/config/queue.php
+'default' =&amp;gt; getenv('QUEUE_DRIVER'),
+'connections' =&amp;gt; array(
+'iron' =&amp;gt; array(
+'driver' =&amp;gt; 'iron',
+'host' =&amp;gt; 'mq-aws-us-east-1.iron.io',
+'token' =&amp;gt; getenv('IRON_TOKEN'),
+'project' =&amp;gt; getenv('IRON_PROJECT_ID'),
+'queue' =&amp;gt; 'your-queue-name',
+'encrypt' =&amp;gt; true,
+),
+),
+&lt;/code>&lt;/pre>&lt;p>Then make your project on Iron and get the Token and Project ID&lt;/p>
+&lt;h2 id="step-3-see-if-example-worker-works">Step 3 See if Example Worker works&lt;/h2>
+&lt;p>Lets see if the Example works before we move forward.&lt;/p>
+&lt;pre>&lt;code>php artisan ironworker:upload --worker_name=ExampleLaraWorker --exec_worker_file_name=ExampleLaraWorker.php
+&lt;/code>&lt;/pre>&lt;p>If it worked you will see&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/u/54803135/example_command.png" alt="example">&lt;/p>
+&lt;p>This will upload a worker related queue&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/u/54803135/example_queue.png" alt="example">&lt;/p>
+&lt;h2 id="step-4-make-our-own-worker">Step 4 Make our own worker!&lt;/h2>
+&lt;p>The goal of this worker&lt;/p>
+&lt;ul>
+&lt;li>It will get a JSON object of the info needed to do a job&lt;/li>
+&lt;li>It will do the job by getting the json file from the S3 file system where it lives (it could live in a db or other location)&lt;/li>
+&lt;li>Using the JSON object&amp;rsquo;s callback it will send back the results to the caller&lt;/li>
+&lt;/ul>
+&lt;p>That is it.&lt;/p>
+&lt;p>This example will be used in real life to later on parse say 100 urls for already created json render tree objects of the urls data including images and text. This job only cares about the text. Cause the job is fairly easy I will be sending to each worker 5 urls to process.&lt;/p>
+&lt;h3 id="copy-the-worker-in-workers-folder-to-the-new-worker-name">Copy the worker in /workers folder to the new Worker name&lt;/h3>
+&lt;p>Due to bad naming abilities I am calling this &lt;code>RenderTreeTextGrepper.php&lt;/code>&lt;/p>
+&lt;p>So now my worker folder has&lt;/p>
+&lt;pre>&lt;code>RenderTreeTextGrepper.php
+&lt;/code>&lt;/pre>&lt;p>But I do not want that class to have all my code so I will start to build out a namespace for all of this and the 2 classes I want to manage ALL of this work.&lt;/p>
+&lt;h3 id="class-1-fire">Class 1 @fire&lt;/h3>
+&lt;p>So the worker will fire the class I have to handle all of this.&lt;/p>
+&lt;pre>&lt;code> &amp;quot;autoload&amp;quot;: {
+&amp;quot;classmap&amp;quot;: [
+&amp;quot;app/commands&amp;quot;,
+&amp;quot;app/controllers&amp;quot;,
+&amp;quot;app/models&amp;quot;,
+&amp;quot;app/database/migrations&amp;quot;,
+&amp;quot;app/database/seeds&amp;quot;,
+&amp;quot;app/tests/TestCase.php&amp;quot;
+],
+&amp;quot;psr-4&amp;quot;: {
+&amp;quot;AlfredNutileInc\\RenderTreeTextGrepperWorker\\&amp;quot;: &amp;quot;app/&amp;quot;
+}
+},
+&lt;/code>&lt;/pre>&lt;p>then&lt;/p>
+&lt;pre>&lt;code>composer dump
+&lt;/code>&lt;/pre>&lt;p>Then in &lt;code>app/RenderTreeTextGrepperWorker&lt;/code> folder I have&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/u/54803135/example_folders.png" alt="example_folder">&lt;/p>
+&lt;p>&lt;a href="https://github.com/alnutile/laravel_guide/blob/master/projects/example_worker/app/RenderTreeTextGrepperWorker/RenderTreeGrepperHandler.php">/projects/example_worker/app/RenderTreeTextGrepperWorker/RenderTreeGrepperHandler.php&lt;/a> is the class to handle the incoming request and process it.&lt;/p>
+&lt;h3 id="class-2-event-listener">Class 2 Event Listener&lt;/h3>
+&lt;p>Then I register the event listener with the app/config/app.php to make it easier to handle the results of the output. You can do all of this in class 1
+as well.&lt;/p>
+&lt;pre>&lt;code>#app/config/app.php
+'AlfredNutileInc\RenderTreeTextGrepperWorker\GrepCallbackListener'
+&lt;/code>&lt;/pre>&lt;p>And that is it.&lt;/p>
+&lt;p>What is it?&lt;/p>
+&lt;p>So we are going to upload and run this and here is what will happen. NO WAIT!&lt;/p>
+&lt;p>First lets make a test so we can see locally if all the logic is there.&lt;/p>
+&lt;h3 id="local-test">Local Test&lt;/h3>
+&lt;p>Just a quick test to see if the handler will handle things and pass results&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+class RenderTreeTextTest extends \TestCase {
+/**
+* @test
+*/
+public function should_populate_results()
+{
+$handle = new \AlfredNutileInc\RenderTreeTextGrepperWorker\RenderTreeGrepperHandler();
+$payload = new \AlfredNutileInc\RenderTreeTextGrepperWorker\RenderTreeTextDTO(
+'foo-bar',
+['foo', 'bar', 'baz'],
+['text1', 'text2'],
+[
+'caller' =&amp;gt; 'http://someposturl.dev/rendertree_results',
+'params' =&amp;gt; ['foo', 'bar']
+],
+false,
+false
+);
+$results = $handle-&amp;gt;handle($payload);
+var_dump($results);
+$this-&amp;gt;assertNotNull($results);
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Running this&lt;/p>
+&lt;pre>&lt;code>phpunit --filter=should_populate_results
+&lt;/code>&lt;/pre>&lt;p>Produces this&lt;/p>
+&lt;pre>&lt;code> class AlfredNutileInc\RenderTreeTextGrepperWorker\RenderTreeTextDTO#334 (6) {
+public $uuid =&amp;gt;
+string(7) &amp;quot;foo-bar&amp;quot;
+public $urls =&amp;gt;
+array(3) {
+[0] =&amp;gt;
+string(3) &amp;quot;foo&amp;quot;
+[1] =&amp;gt;
+string(3) &amp;quot;bar&amp;quot;
+[2] =&amp;gt;
+string(3) &amp;quot;baz&amp;quot;
+}
+public $text =&amp;gt;
+array(2) {
+[0] =&amp;gt;
+string(5) &amp;quot;text1&amp;quot;
+[1] =&amp;gt;
+string(5) &amp;quot;text2&amp;quot;
+}
+public $callback =&amp;gt;
+array(2) {
+'caller' =&amp;gt;
+string(41) &amp;quot;http://someposturl.dev/rendertree_results&amp;quot;
+'params' =&amp;gt;
+array(2) {
+...
+}
+}
+public $results =&amp;gt;
+array(1) {
+[0] =&amp;gt;
+string(21) &amp;quot;Listener is listening&amp;quot;
+}
+public $status =&amp;gt;
+bool(false)
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Of course I need to go into more testing for the two classes to see how they react to different data going in but just to see that there are not obvious issues before I upload the worker.&lt;/p>
+&lt;h3 id="upload-the-worker-we-just-made">Upload the worker we just made&lt;/h3>
+&lt;pre>&lt;code>php artisan ironworker:upload --worker_name=RenderTreeTextGrepper --exec_worker_file_name=RenderTreeTextGrepper.php
+&lt;/code>&lt;/pre>&lt;p>And then we see on Iron.io&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/u/54803135/example_worker_run.png" alt="new worker">&lt;/p>
+&lt;p>Then we run it&lt;/p>
+&lt;pre>&lt;code>php artisan ironworker:run --queue_name=RenderTreeTextGrepper
+&lt;/code>&lt;/pre>&lt;p>Before that though I updated &lt;a href="https://github.com/alnutile/laravel_guide/blob/master/projects/example_worker/app/commands/RunWorker.php#L26">app/commands/RunWorker.php:26&lt;/a> to make a better payload&lt;/p>
+&lt;pre>&lt;code> public function fire()
+{
+$queue_name = $this-&amp;gt;option('queue_name');
+$payload = &amp;quot;This is Hello World payload :)&amp;quot;;
+if($queue_name == 'RenderTreeTextGrepper')
+{
+$payload = new \AlfredNutileInc\RenderTreeTextGrepperWorker\RenderTreeTextDTO(
+'foo-bar',
+['foo', 'bar', 'baz'],
+['text1', 'text2'],
+[
+'caller' =&amp;gt; 'http://someposturl.dev/rendertree_results',
+'params' =&amp;gt; ['foo', 'bar']
+],
+false,
+false
+);
+}
+&lt;/code>&lt;/pre>&lt;p>We then see the Task&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/u/54803135/task.png" alt="task">&lt;/p>
+&lt;p>And the example log output&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/u/54803135/log.png" alt="log">&lt;/p>
+&lt;h2 id="guzzle-and-the-callback">Guzzle and the Callback&lt;/h2>
+&lt;p>How to format the callback?&lt;/p>
+&lt;p>Let&amp;rsquo;s require guzzle&lt;/p>
+&lt;pre>&lt;code>composer require guzzlehttp/guzzle
+&lt;/code>&lt;/pre>&lt;p>At this point we have a working example. The queue takes the json and the worker processes it!&lt;/p>
+&lt;p>&lt;a href="https://github.com/alnutile/laravel_guide/blob/master/projects/example_worker/app/RenderTreeTextGrepperWorker/GrepCallbackListener.php">/projects/example_worker/app/RenderTreeTextGrepperWorker/GrepCallbackListener.php&lt;/a>&lt;/p>
+&lt;p>Thanks to the library and Iron.io it really is that simple.&lt;/p></description></item></channel></rss>

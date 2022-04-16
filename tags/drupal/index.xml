@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>drupal on Alfred Nutile</title><link>https://alfrednutile.info/tags/drupal/</link><description>Recent content in drupal on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 20 Jul 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/drupal/index.xml" rel="self" type="application/rss+xml"/><item><title>Drush and Homestead Vagrant Box</title><link>https://alfrednutile.info/posts/100/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/100/</guid><description>Had some trouble doing the normal composer install so I went with the manual install noted here https://github.com/drush-ops/drush
-Basically I downloaded and unzipped the repo to /usr/local/sbin. Then I did a symlink to /usr/bin
-cd /usr/bin
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>drupal on Alfred Nutile</title><link>https://alfrednutile.info/tags/drupal/</link><description>Recent content in drupal on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 20 Jul 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/drupal/index.xml" rel="self" type="application/rss+xml"/><item><title>Drush and Homestead Vagrant Box</title><link>https://alfrednutile.info/posts/100/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/100/</guid><description>&lt;p>Had some trouble doing the normal composer install so I went with the manual install noted here &lt;a href="https://github.com/drush-ops/drush">https://github.com/drush-ops/drush&lt;/a>&lt;/p>
+&lt;p>Basically I downloaded and unzipped the repo to /usr/local/sbin. Then I did a symlink to /usr/bin&lt;/p>
+&lt;pre>&lt;code>cd /usr/bin
 sudo ln -s /usr/local/sbin/drush/drush .
-Then in /usr/local/sbin/drush I ran
-sudo composer install</description></item><item><title>When you have to use Angular inside of Drupal</title><link>https://alfrednutile.info/posts/89/</link><pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/89/</guid><description>The angularjs module for drupal will direct you to setup a menu path for Angular.js to get it&amp;rsquo;s template files.
-So the Angular route would look like this
-//app.js
+&lt;/code>&lt;/pre>&lt;p>Then in /usr/local/sbin/drush I ran&lt;/p>
+&lt;pre>&lt;code>sudo composer install
+&lt;/code>&lt;/pre></description></item><item><title>When you have to use Angular inside of Drupal</title><link>https://alfrednutile.info/posts/89/</link><pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/89/</guid><description>&lt;p>The angularjs module for drupal will direct you to setup a menu path for Angular.js to get it&amp;rsquo;s template files.&lt;/p>
+&lt;p>So the Angular route would look like this&lt;/p>
+&lt;pre>&lt;code>//app.js
 behat_reports.config(['$routeProvider',
 function ($routeProvider) {
 $routeProvider.
@@ -17,8 +18,44 @@ otherwise({
 redirectTo: '/'
 });
 }]);
-What I am suggesting is that when bootstraping Angular is to set the path to the &amp;ldquo;html&amp;rdquo; template folder. Then your Angular app route can look like this</description></item><item><title>Drupal and Composer install or update</title><link>https://alfrednutile.info/posts/65/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/65/</guid><description>Using composer and drupal, even d7, is great. But an update or install can leave you with a broken drupal registry.
-So here is a workflow that is pretty bullet proof.
-In this example drupal&amp;rsquo;s composer folder where composer.json lives is located in /var/www/drupal/sites/default/files/composer
-So in there is composer.json and composer.lock
-So when you need to install a new composer library and you updated your json file you can run</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>What I am suggesting is that when bootstraping Angular is to set the path to the &amp;ldquo;html&amp;rdquo; template folder. Then your Angular app route can look like this&lt;/p>
+&lt;pre>&lt;code>//app.js
+behat_reports.config(['$routeProvider',
+function ($routeProvider) {
+//Getting the path we set during our drupal modules function
+var path = Drupal.settings.behat_reporting_v2.path;
+$routeProvider.
+when('/', {
+templateUrl: '/' + path + '/templates/reports-all.html',
+controller: 'ReportsAll'
+}).
+otherwise({
+redirectTo: '/'
+});
+}]);
+&lt;/code>&lt;/pre>&lt;p>It gets the path from a setting I set below, which is the path that renders this drupal url and setups up Angular in your module.&lt;/p>
+&lt;pre>&lt;code>//some drupal module you are making
+function behat_reporting_v2_api_reports_ui() {
+angularjs_init_application('behat_reports_v2');
+$path = drupal_get_path('module', 'behat_reporting_v2');
+//Set the drupal path
+drupal_add_js(array('behat_reporting_v2' =&amp;gt; array('path' =&amp;gt; $path)), 'setting');
+drupal_add_js($path . '/js/services.js');
+drupal_add_js($path . '/js/reportsController.js');
+drupal_add_js($path . '/js/app.js');
+return theme('behat_reports_v2');
+}
+&lt;/code>&lt;/pre>&lt;p>You are basically allowing Angular to get the html files it needs without bootstrapping the template system in drupal. Yeah!&lt;/p></description></item><item><title>Drupal and Composer install or update</title><link>https://alfrednutile.info/posts/65/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/65/</guid><description>&lt;p>Using composer and drupal, even d7, is great.
+But an update or install can leave you with a broken drupal registry.&lt;/p>
+&lt;p>So here is a workflow that is pretty bullet proof.&lt;/p>
+&lt;p>In this example drupal&amp;rsquo;s composer folder where composer.json lives is located in /var/www/drupal/sites/default/files/composer&lt;/p>
+&lt;p>So in there is composer.json and composer.lock&lt;/p>
+&lt;p>So when you need to install a new composer library and you updated your json file you can run&lt;/p>
+&lt;pre>&lt;code>cd /var/www/drupal/
+drush composer-rebuild-file
+composer --working-dir=/var/www/drupal/sites/default/files/composer update
+&lt;/code>&lt;/pre>&lt;p>If you get an broken registry issue the typically happens when you run&lt;/p>
+&lt;pre>&lt;code>drush composer-manager update
+&lt;/code>&lt;/pre>&lt;p>You can clear that up with&lt;/p>
+&lt;pre>&lt;code>drush rr
+&lt;/code>&lt;/pre>&lt;p>And then use composer directly as I did above to update/install your composer related files.&lt;/p></description></item></channel></rss>

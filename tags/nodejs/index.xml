@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>nodejs on Alfred Nutile</title><link>https://alfrednutile.info/tags/nodejs/</link><description>Recent content in nodejs on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 19 Jan 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/nodejs/index.xml" rel="self" type="application/rss+xml"/><item><title>Node.js error</title><link>https://alfrednutile.info/posts/39/</link><pubDate>Sun, 19 Jan 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/39/</guid><description>&amp;quot;failed to fetch from registry&amp;quot;
-But it was json endpoint was at that url so it was not a problem with the endpoint.
-http://stackoverflow.com/questions/12913141/installing-from-npm-fails had a command that helped
-npm config set registry http://registry.npmjs.org/
-Now it all worked.
-Though this article may have been a better one to follow&amp;nbsp;http://shashikantjagtap.net/using-zombie-js-driver-with-behats-minkextension/</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>nodejs on Alfred Nutile</title><link>https://alfrednutile.info/tags/nodejs/</link><description>Recent content in nodejs on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 19 Jan 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/nodejs/index.xml" rel="self" type="application/rss+xml"/><item><title>Node.js error</title><link>https://alfrednutile.info/posts/39/</link><pubDate>Sun, 19 Jan 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/39/</guid><description>&lt;p>&amp;quot;failed to fetch from registry&amp;quot;&lt;/p>
+&lt;p>But it was json endpoint was at that url so it was not a problem with the endpoint.&lt;/p>
+&lt;p>http://stackoverflow.com/questions/12913141/installing-from-npm-fails had a command that helped&lt;/p>
+&lt;blockquote>
+&lt;p>npm config set registry http://registry.npmjs.org/&lt;/p>
+&lt;/blockquote>
+&lt;p>Now it all worked.&lt;/p>
+&lt;p>Though this article may have been a better one to follow&amp;nbsp;&lt;a href="http://shashikantjagtap.net/using-zombie-js-driver-with-behats-minkextension/" target="_blank">http://shashikantjagtap.net/using-zombie-js-driver-with-behats-minkextension/&lt;/a>&lt;/p></description></item></channel></rss>

@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>clean code on Alfred Nutile</title><link>https://alfrednutile.info/tags/clean-code/</link><description>Recent content in clean code on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 17 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/clean-code/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Example of Making Code Easier to Read</title><link>https://alfrednutile.info/posts/164/</link><pubDate>Thu, 17 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/164/</guid><description>Just a quick example
-Before
-public function updateMarketoFolder($folder)
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>clean code on Alfred Nutile</title><link>https://alfrednutile.info/tags/clean-code/</link><description>Recent content in clean code on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 17 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/clean-code/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Example of Making Code Easier to Read</title><link>https://alfrednutile.info/posts/164/</link><pubDate>Thu, 17 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/164/</guid><description>&lt;p>Just a quick example&lt;/p>
+&lt;p>Before&lt;/p>
+&lt;pre>&lt;code> public function updateMarketoFolder($folder)
 {
 /**
 * If parent id found in array then use it else use root
@@ -21,4 +21,39 @@ if(isset($folder['name']))
 $this-&amp;gt;names[] = $folder['name'] . '--' . $folder_meta_data-&amp;gt;id;
 $this-&amp;gt;folders_and_meta_data[$folder['id']] = $folder_meta_data;
 }
-Here is what we can do to make it easier to come back to six months later.</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>Here is what we can do to make it easier to come back to six months later.&lt;/p>
+&lt;pre>&lt;code> public function updateMarketoFolder($folder)
+{
+if($this-&amp;gt;hasOwnFolder($folder))
+{
+$folder_meta_data = $this-&amp;gt;folders_and_meta_data[$folder['id']];
+}
+elseif($this-&amp;gt;hasAParentAndParentHasFolder($folder))
+{
+$folder_meta_data = $this-&amp;gt;folders_and_meta_data[$folder['parent']['id']];
+}
+else
+{
+$folder_meta_data = $this-&amp;gt;getRootFolder();
+}
+if($this-&amp;gt;checkItHasAName($folder))
+$this-&amp;gt;names[] = $folder['name'] . '--' . $folder_meta_data-&amp;gt;id;
+$this-&amp;gt;folders_and_meta_data[$folder['id']] = $folder_meta_data;
+}
+private function hasOwnFolder($folder)
+{
+return isset($this-&amp;gt;folders_and_meta_data[$folder['id']]);
+}
+private function hasAParentAndParentHasFolder($folder)
+{
+return isset($folder['parent']) &amp;amp;&amp;amp; isset($folder['parent']['id']) &amp;amp;&amp;amp; isset($this-&amp;gt;folders_and_meta_data[$folder['parent']['id']]);
+}
+private function getRootFolder()
+{
+return $this-&amp;gt;folders_and_meta_data['root'];
+}
+private function checkItHasAName($folder)
+{
+return isset($folder['name']);
+}
+&lt;/code>&lt;/pre>&lt;p>Just a lot easier to come back to an remember why and what I am doing in the if statements. Also just to read a bit more easily what the needs are here of the data.&lt;/p></description></item></channel></rss>

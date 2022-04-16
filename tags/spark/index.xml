@@ -1,8 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>spark on Alfred Nutile</title><link>https://alfrednutile.info/tags/spark/</link><description>Recent content in spark on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 15 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/spark/index.xml" rel="self" type="application/rss+xml"/><item><title>Spark Setup Issue</title><link>https://alfrednutile.info/posts/163/</link><pubDate>Tue, 15 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/163/</guid><description>During the install https://github.com/laravel/spark I kept getting this error
-Problem 1
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>spark on Alfred Nutile</title><link>https://alfrednutile.info/tags/spark/</link><description>Recent content in spark on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 15 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/spark/index.xml" rel="self" type="application/rss+xml"/><item><title>Spark Setup Issue</title><link>https://alfrednutile.info/posts/163/</link><pubDate>Tue, 15 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/163/</guid><description>&lt;p>During the install &lt;a href="https://github.com/laravel/spark">https://github.com/laravel/spark&lt;/a> I kept getting this error&lt;/p>
+&lt;pre>&lt;code> Problem 1
 - Installation request for laravel/spark-installer ~1.0 -&amp;gt; satisfiable by laravel/spark-installer[v1.0.0].
 - Conclusion: remove illuminate/support v4.2.17
 - laravel/spark-installer v1.0.0 requires illuminate/support ~5.0 -&amp;gt; satisfiable by illuminate/support[v5.0.0, v5.0.22, v5.0.25, v5.0.26, v5.0.28, v5.0.33, v5.0.4, v5.1.1, v5.1.13, v5.1.16, v5.1.2, v5.1.6, v5.1.8].
 - Can only install one of: illuminate/support[v5.0.0, v4.2.17].
 - Can only install one of: illuminate/support[v5.0.22, v4.2.17].
-- Can only install one of: illuminate/support[v5.</description></item></channel></rss>
+- Can only install one of: illuminate/support[v5.0.25, v4.2.17].
+- Can only install one of: illuminate/support[v5.0.26, v4.2.17].
+- Can only install one of: illuminate/support[v5.0.28, v4.2.17].
+- Can only install one of: illuminate/support[v5.0.33, v4.2.17].
+- Can only install one of: illuminate/support[v5.0.4, v4.2.17].
+- Can only install one of: illuminate/support[v5.1.1, v4.2.17].
+- Can only install one of: illuminate/support[v5.1.13, v4.2.17].
+- Can only install one of: illuminate/support[v5.1.16, v4.2.17].
+- Can only install one of: illuminate/support[v5.1.2, v4.2.17].
+- Can only install one of: illuminate/support[v5.1.6, v4.2.17].
+- Can only install one of: illuminate/support[v5.1.8, v4.2.17].
+- Installation request for illuminate/support == 4.2.17.0 -&amp;gt; satisfiable by illuminate/support[v4.2.17].
+&lt;/code>&lt;/pre>&lt;p>Finally I went into my ~/.composer folder. Removed &lt;code>composer.lock&lt;/code> then I edited the &lt;code>composer.json&lt;/code> to look like this&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;require&amp;quot;: {
+&amp;quot;laravel/envoy&amp;quot;: &amp;quot;~1.0&amp;quot;,
+&amp;quot;laravel/installer&amp;quot;: &amp;quot;~1.1&amp;quot;,
+&amp;quot;laravel/spark-installer&amp;quot;: &amp;quot;~1.0&amp;quot;
+}
+}
+&lt;/code>&lt;/pre>&lt;p>I use Envoy for a lot of my projects so I left that there and made sure to update my installer.&lt;/p>
+&lt;p>Then I ran, in that folder composer update.&lt;/p>
+&lt;p>Finally I made sure to add the path to my ~/.bash_profile as&lt;/p>
+&lt;pre>&lt;code>export PATH=$PATH:/Users/alfrednutile/.composer/vendor/bin/
+&lt;/code>&lt;/pre>&lt;p>Then ran &lt;code>source ~/.bash_profile&lt;/code>&lt;/p>
+&lt;p>With all that in place I could go to my new Laravel install to run &lt;code>spark install&lt;/code>&lt;/p></description></item></channel></rss>
