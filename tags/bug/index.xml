@@ -16,4 +16,5 @@ drupal_goto($row[&amp;#39;redirect&amp;#39;], $query = NULL, $fragment = NULL, $
 }
 }
 &lt;/pre>
-&lt;p>The http://drupal.org/project/fast_404 module used hook_boot which may have worked as well. Also this is d6 and d7 has the hook_url_inbound_alter and hook_url_outbound_alter whereas d6 closest option to these is custom_url_rewrite_inbound&lt;/p></description><category>bug</category></item></channel></rss>
+&lt;p>The http://drupal.org/project/fast_404 module used hook_boot which may have worked as well. Also this is d6 and d7 has the hook_url_inbound_alter and hook_url_outbound_alter whereas d6 closest option to these is custom_url_rewrite_inbound&lt;/p></description>
+bug</item></channel></rss>

@@ -83,4 +83,5 @@ vm.fail(response);
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/hilfee68v8acyx7/intheform.png?dl=0" alt="form">&lt;/p>
 &lt;p>And you can remove it to show the form fail.&lt;/p>
 &lt;p>You can also see it in the payload we are posting.&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/4vy90lut4l12o55/Screenshot%202014-10-15%2014.38.35.png?dl=0" alt="post">&lt;/p></description><category>angularjs</category><category>laravel</category><category>l5</category><category>csrf</category></item></channel></rss>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/4vy90lut4l12o55/Screenshot%202014-10-15%2014.38.35.png?dl=0" alt="post">&lt;/p></description>
+angularjs, laravel, l5, csrf</item></channel></rss>

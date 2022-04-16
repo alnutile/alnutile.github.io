@@ -45,4 +45,5 @@ gulp.run('phpunit');
 &lt;/code>&lt;/pre>&lt;p>Basically we are saying watch the app folder recursively for file changes to files ending in php then run all the tests in app/tests/*.php.&lt;/p>
 &lt;p>Finally run gulp at the command line and it will run keeping an eye on changes.&lt;/p>
 &lt;pre>&lt;code>gulp
-&lt;/code>&lt;/pre>&lt;p>That is it. From here you will get typically phpunit output as you work BUT also a notice if you break something.&lt;/p></description><category>gulp</category><category>phpunit</category><category>laravel</category></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>That is it. From here you will get typically phpunit output as you work BUT also a notice if you break something.&lt;/p></description>
+gulp, phpunit, laravel</item></channel></rss>

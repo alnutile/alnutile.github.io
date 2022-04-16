@@ -9,7 +9,8 @@
 &lt;li>Build APIs You Won&amp;rsquo;t Hate &lt;a href="https://leanpub.com/build-apis-you-wont-hate">https://leanpub.com/build-apis-you-wont-hate&lt;/a>&lt;/li>
 &lt;li>Fractal &lt;a href="http://fractal.thephpleague.com/simple-example/">http://fractal.thephpleague.com/simple-example/&lt;/a>&lt;/li>
 &lt;li>Fractal Class &lt;a href="https://github.com/thephpleague/fractal">https://github.com/thephpleague/fractal&lt;/a>&lt;/li>
-&lt;/ul></description><category>REST</category><category>php</category><category>patterns</category></item><item><title>Javascript Based Product Viewer</title><link>https://alfrednutile.info/posts/6/</link><pubDate>Fri, 22 Mar 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/6/</guid><description>&lt;p>Due to NDA limitations I had to remove links to the final product
+&lt;/ul></description>
+REST, php, patterns</item><item><title>Javascript Based Product Viewer</title><link>https://alfrednutile.info/posts/6/</link><pubDate>Fri, 22 Mar 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/6/</guid><description>&lt;p>Due to NDA limitations I had to remove links to the final product
 Latest Project Virtual Design Tool. [ url removed due to nda issues ) -: ]Some points that were fun, new, and
 challenging.&lt;ol>&lt;li>Model, View, Controller mindet.&lt;/li>&lt;li>Building the
 RESTful service/API first&lt;/li>&lt;li>Trying to follow a feature driven development
@@ -79,4 +80,5 @@ peak my interest as well but so far the IDE from these people was really good &l
 had jshint built in, integration to git that was “better” than Coda.
 Sure the command line is great for git but there gui was not bad at times to
 have as well. It was not slow at all, my Core 2 Duo on an SSD never seemed
-slow.&lt;/span>&lt;/p></description><category>REST</category></item></channel></rss>
+slow.&lt;/span>&lt;/p></description>
+REST</item></channel></rss>

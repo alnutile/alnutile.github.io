@@ -10,4 +10,5 @@ rake refinery:override view=refinery/_content_page&lt;/span>&lt;/p>&lt;p class="
 &lt;/code>&lt;/p>&lt;p class="c0 c2">&lt;span class="c3">&lt;/span>&lt;/p>&lt;p class="c0">&lt;span>After all this you should have this type of layout in your file system&lt;/span>&lt;/p>&lt;p class="c0">&lt;span class="c4">&lt;a class="c1" href="https://dl.dropboxusercontent.com/u/54803135/refinery_twitter1.png">&lt;img src="https://dl.dropboxusercontent.com/u/54803135/refinery_twitter1.png">&lt;/a>&lt;/span>&lt;/p>&lt;p class="c0 c2">&lt;span>&lt;/span>&lt;/p>&lt;p class="c0">&lt;/p>&lt;p class="c0 c2">&lt;span>&lt;/span>&lt;/p>&lt;p class="c0">&lt;span>Finally you need to do all the hard work to edit these files.&lt;/span>&lt;/p>&lt;p class="c0">&lt;span>Here is what I ended up with.&lt;/span>&lt;/p>&lt;p class="c0">&lt;span class="c4">&lt;a class="c1" href="https://gist.github.com/alnutile/5943019">https://gist.github.com/alnutile/5943019&lt;/a>&lt;/span>&lt;/p>
 &lt;p>
 &lt;script src="https://gist.github.com/alnutile/5943019.js">&lt;/script>
-&lt;/p></description><category>twitterbootstrap</category></item></channel></rss>
+&lt;/p></description>
+twitterbootstrap</item></channel></rss>

@@ -30,4 +30,5 @@ for either of them.&lt;/p>
 &lt;pre>&lt;code>key('link-' . $import-&amp;gt;id))
 &lt;/code>&lt;/pre>&lt;p>Did not work when I was using &lt;code>key($import-&amp;gt;id)&lt;/code>&lt;/p>
 &lt;p>The table and search all just stopped :(&lt;/p>
-&lt;p>Anyways hope this saves the future me an hour!&lt;/p></description><category>laravel</category><category>livewire</category><category>note</category></item></channel></rss>
+&lt;p>Anyways hope this saves the future me an hour!&lt;/p></description>
+laravel, livewire, note</item></channel></rss>

@@ -86,4 +86,5 @@ $router-&amp;gt;get('sites', ['uses' =&amp;gt; 'App\Http\Controllers\SitesContro
 0 =&amp;gt; 'App\\Http\\Middleware\\AuthMiddleware',
 ), 'where' =&amp;gt; array (
 )]);
-&lt;/code>&lt;/pre></description><category>laravel</category><category>laravel 5</category><category>auth</category></item></channel></rss>
+&lt;/code>&lt;/pre></description>
+laravel, laravel 5, auth</item></channel></rss>

@@ -33,4 +33,5 @@ return $core;
 $core = require_once __DIR__.'/../bootstrap/start.php';
 $core = require_once __DIR__.'/../app/routes.php';
 $core-&amp;gt;getApp()-&amp;gt;run();
-&lt;/code>&lt;/pre>&lt;p>At this point, as seen in the video we can interact with the core app and other methods!&lt;/p></description><category>boris</category><category>php</category><category>silex</category></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>At this point, as seen in the video we can interact with the core app and other methods!&lt;/p></description>
+boris, php, silex</item></channel></rss>

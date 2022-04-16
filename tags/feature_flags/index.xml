@@ -144,4 +144,5 @@ $view-&amp;gt;with('links', array_merge($links_original, $links));
 &lt;li>Use Model Events to do that level of work&lt;/li>
 &lt;li>Cache of the FeatureFlag Settings and update Cache on Change&lt;/li>
 &lt;li>Show how it works in the menu and other areas eg include and Provider&lt;/li>
-&lt;/ul></description><category>laravel</category><category>feature_flags</category><category>php</category></item></channel></rss>
+&lt;/ul></description>
+laravel, feature_flags, php</item></channel></rss>

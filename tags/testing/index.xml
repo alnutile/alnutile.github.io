@@ -22,7 +22,8 @@ client = SnykReport()
 results = client.get_report_for_current_week(
 &amp;quot;98873-8ecc-46f0-b077-39322abc4390&amp;quot;)
 assert results == 1989
-&lt;/code>&lt;/pre>&lt;p>I no longer hit their API and &lt;code>post&lt;/code> returns the response I wanted.&lt;/p></description><category>python</category><category>testing</category><category>mocking</category><category>pytest</category></item><item><title>PHPUnit CodeCoverage</title><link>https://alfrednutile.info/posts/260/</link><pubDate>Wed, 09 Jan 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/260/</guid><description>&lt;h1 id="phpunit-codecoverage">PHPUnit CodeCoverage&lt;/h1>
+&lt;/code>&lt;/pre>&lt;p>I no longer hit their API and &lt;code>post&lt;/code> returns the response I wanted.&lt;/p></description>
+python, testing, mocking, pytest</item><item><title>PHPUnit CodeCoverage</title><link>https://alfrednutile.info/posts/260/</link><pubDate>Wed, 09 Jan 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/260/</guid><description>&lt;h1 id="phpunit-codecoverage">PHPUnit CodeCoverage&lt;/h1>
 &lt;p>&lt;a href="https://phpunit.de/manual/6.5/en/code-coverage-analysis.html">PHPUnit CodeCoverage&lt;/a>&lt;/p>
 &lt;p>There is a ton of information about your code PHPUNit CodeCoverage can provide. At the root just making sure your coverage is at a certain level and if not where is it lacking.&lt;/p>
 &lt;p>With it&amp;rsquo;s xml output I use a script found &lt;a href="https://ocramius.github.io/blog/automated-code-coverage-check-for-github-pull-requests-with-travis/">here&lt;/a> to check during our TravisCI builds if the code is meeting a required level.&lt;/p>
@@ -177,7 +178,8 @@ $this-&amp;gt;get(&amp;quot;/admin&amp;quot;)-&amp;gt;assertStatus(422);
 &lt;h3 id="phpmetrics">PHPMetrics&lt;/h3>
 &lt;p>This tool &lt;a href="http://www.phpmetrics.org/">http://www.phpmetrics.org/&lt;/a> can easily be setup and run showing more details about your classes and their state of &amp;ldquo;complexity&amp;rdquo; etc.&lt;/p>
 &lt;h3 id="larastan">LaraStan&lt;/h3>
-&lt;p>This tool &lt;a href="https://github.com/nunomaduro/larastan">https://github.com/nunomaduro/larastan&lt;/a> when it does not go overboard in it&amp;rsquo;s reading your code (set it to a low level) can do a good job of finding issues in your code that you did not find in your tests. It runs over your code including exceptions you did not cover in your tests etc. Really does find some interesting things.&lt;/p></description><category>laravel</category><category>testing</category><category>phpunit</category></item><item><title>Python3 Fixtures</title><link>https://alfrednutile.info/posts/252/</link><pubDate>Fri, 10 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/252/</guid><description>&lt;p>Just a reminder using pickle I can easily make fixtures for testing.&lt;/p>
+&lt;p>This tool &lt;a href="https://github.com/nunomaduro/larastan">https://github.com/nunomaduro/larastan&lt;/a> when it does not go overboard in it&amp;rsquo;s reading your code (set it to a low level) can do a good job of finding issues in your code that you did not find in your tests. It runs over your code including exceptions you did not cover in your tests etc. Really does find some interesting things.&lt;/p></description>
+laravel, testing, phpunit</item><item><title>Python3 Fixtures</title><link>https://alfrednutile.info/posts/252/</link><pubDate>Fri, 10 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/252/</guid><description>&lt;p>Just a reminder using pickle I can easily make fixtures for testing.&lt;/p>
 &lt;p>When I get results from AWS SDK for example I can just&lt;/p>
 &lt;pre>&lt;code>import pickle
 with open(&amp;quot;fixtures/describe_task_defination.pickle&amp;quot;, 'wb') as fixture:
@@ -200,7 +202,8 @@ self.task_image = TaskImage()
 def test_gets_service(self, _getService, _getTaskDefinition):
 self.results = self.task_image.handle('default', 'cat-teamdocs-production-122')
 self.assertEqual('cat-teamdocs:latest', self.results)
-&lt;/code>&lt;/pre>&lt;p>Pretty easy and then I am not hitting the service&lt;/p></description><category>note2self</category><category>python3</category><category>testing</category></item><item><title>Dusk Screenshots to S3 of Failing tests</title><link>https://alfrednutile.info/posts/248/</link><pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/248/</guid><description>&lt;p>I can be really annoying to troubleshoot a failed test in Dusk when using CI systems. What I ended up doing was setting up my project to send these files to S3 on fail.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Pretty easy and then I am not hitting the service&lt;/p></description>
+note2self, python3, testing</item><item><title>Dusk Screenshots to S3 of Failing tests</title><link>https://alfrednutile.info/posts/248/</link><pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/248/</guid><description>&lt;p>I can be really annoying to troubleshoot a failed test in Dusk when using CI systems. What I ended up doing was setting up my project to send these files to S3 on fail.&lt;/p>
 &lt;p>Here are the steps&lt;/p>
 &lt;h2 id="setup-you-app">Setup You App&lt;/h2>
 &lt;p>This is just S3 storage so make sure you have a bucket and a folder in the bucket to write to. Basically for AWS you make an IAM with a key and secret and let it read/write to this folder. Might look like this policy&lt;/p>
@@ -299,7 +302,8 @@ parent::tearDown();
 AWS_ACCESS_KEY_ID=bar
 &lt;/code>&lt;/pre>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/nez8f4hz4anmghl/Screenshot%202018-06-26%2009.36.26.png?dl=0" alt="">&lt;/p>
 &lt;h2 id="now-you-are-ready-to-fail">Now You are Ready to Fail!&lt;/h2>
-&lt;p>Ok so on your next fail you will see in your s3 bucket some of those super handy screenshots.&lt;/p></description><category>dusk</category><category>laravel</category><category>testing</category><category>aws</category></item><item><title>Getting Started with Orchestra Testbench for Laravel Package Development</title><link>https://alfrednutile.info/posts/241/</link><pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/241/</guid><description>&lt;p>The goal of this article will allow one to setup a stand alone package working with it&amp;rsquo;s own tests and has access to all of the normal Laravel workflows outside of Laravel. So you can build it using the easier conventions and helpers Laravel offers.&lt;/p>
+&lt;p>Ok so on your next fail you will see in your s3 bucket some of those super handy screenshots.&lt;/p></description>
+dusk, laravel, testing, aws</item><item><title>Getting Started with Orchestra Testbench for Laravel Package Development</title><link>https://alfrednutile.info/posts/241/</link><pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/241/</guid><description>&lt;p>The goal of this article will allow one to setup a stand alone package working with it&amp;rsquo;s own tests and has access to all of the normal Laravel workflows outside of Laravel. So you can build it using the easier conventions and helpers Laravel offers.&lt;/p>
 &lt;p>Since my work will include database usage I will grab both packages:&lt;/p>
 &lt;pre>&lt;code>composer require --dev &amp;quot;orchestra/testbench:&amp;lt;=3.5&amp;quot; &amp;quot;orchestra/database:v3.5.0&amp;quot;
 &lt;/code>&lt;/pre>&lt;p>I will setup my &lt;code>composer.json&lt;/code> after this as such:&lt;/p>
@@ -413,7 +417,8 @@ And I can see logs in &lt;code>logs/laravel.log&lt;/code>&lt;/p>
 &amp;lt;env name=&amp;quot;QUEUE_DRIVER&amp;quot; value=&amp;quot;sync&amp;quot;/&amp;gt;
 &amp;lt;env name=&amp;quot;MAIL_DRIVER&amp;quot; value=&amp;quot;array&amp;quot;/&amp;gt;
 &amp;lt;/php&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>To my &lt;code>phpunit.xml.dist&lt;/code> so it can set defaults as Laravel does.&lt;/p></description><category>laravel</category><category>testing</category><category>orchestra</category></item><item><title>Testing Laravel API, Spark with Authentication</title><link>https://alfrednutile.info/posts/231/</link><pubDate>Sun, 04 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/231/</guid><description>&lt;p>Just a reminder to self, if I want to test an API I made and need to pass and &lt;code>api_token&lt;/code>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>To my &lt;code>phpunit.xml.dist&lt;/code> so it can set defaults as Laravel does.&lt;/p></description>
+laravel, testing, orchestra</item><item><title>Testing Laravel API, Spark with Authentication</title><link>https://alfrednutile.info/posts/231/</link><pubDate>Sun, 04 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/231/</guid><description>&lt;p>Just a reminder to self, if I want to test an API I made and need to pass and &lt;code>api_token&lt;/code>&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php
 namespace Tests\Feature;
 use Tests\TestCase;
@@ -463,7 +468,8 @@ return factory(User::class)-&amp;gt;create()-&amp;gt;id;
 }
 ];
 });
-&lt;/code>&lt;/pre></description><category>laravel</category><category>note2self</category><category>testing</category></item><item><title>Laravel, Dusk and Valet</title><link>https://alfrednutile.info/posts/221/</link><pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/221/</guid><description>&lt;p>By default I set my &lt;code>phpunit.xml&lt;/code> to use &lt;code>test&lt;/code> as my database:&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, note2self, testing</item><item><title>Laravel, Dusk and Valet</title><link>https://alfrednutile.info/posts/221/</link><pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/221/</guid><description>&lt;p>By default I set my &lt;code>phpunit.xml&lt;/code> to use &lt;code>test&lt;/code> as my database:&lt;/p>
 &lt;pre>&lt;code> &amp;lt;php&amp;gt;
 &amp;lt;env name=&amp;quot;APP_ENV&amp;quot; value=&amp;quot;testing&amp;quot;/&amp;gt;
 &amp;lt;env name=&amp;quot;CACHE_DRIVER&amp;quot; value=&amp;quot;array&amp;quot;/&amp;gt;
@@ -475,7 +481,8 @@ return factory(User::class)-&amp;gt;create()-&amp;gt;id;
 &lt;/code>&lt;/pre>&lt;p>But with &lt;a href="https://laravel.com/docs/5.5/valet">Valet&lt;/a> and &lt;a href="https://laravel.com/docs/5.5/dusk">Dusk&lt;/a> this led to the browser using my default database and not &lt;code>test&lt;/code>
 but the PHPUnit test itself was using &lt;code>test&lt;/code> so the user I created and logged in as was not available in the browser.&lt;/p>
 &lt;p>I tried to set &lt;code>.env.dusk.local&lt;/code> and I tried &lt;code>phpuni.dusk.xml&lt;/code> none of it worked so I had to remove &lt;code>&amp;lt;env name=&amp;quot;DB_DATABASE&amp;quot; value=&amp;quot;test&amp;quot;/&amp;gt;&lt;/code>&lt;/p>
-&lt;p>This is a bummer and I am sure I am missing something. What this means and my tests reset my database for my local app which ideally it would not since it is really nice to keep state.&lt;/p></description><category>note2self</category><category>laravel</category><category>testing</category></item><item><title>Testing a trait with PHPUnit</title><link>https://alfrednutile.info/posts/212/</link><pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/212/</guid><description>&lt;p>In an effort to start recording test coverage using &lt;code>vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover&lt;/code> I had some issues with traits being seen.&lt;/p>
+&lt;p>This is a bummer and I am sure I am missing something. What this means and my tests reset my database for my local app which ideally it would not since it is really nice to keep state.&lt;/p></description>
+note2self, laravel, testing</item><item><title>Testing a trait with PHPUnit</title><link>https://alfrednutile.info/posts/212/</link><pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/212/</guid><description>&lt;p>In an effort to start recording test coverage using &lt;code>vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover&lt;/code> I had some issues with traits being seen.&lt;/p>
 &lt;p>I tried numerous approaches my default being just to &lt;code>Use&lt;/code> the trait in the test class. I ended up with this as I found some online info about trait testing &lt;a href="http://blog.florianwolters.de/educational/2012/09/20/Testing-Traits-with-PHPUnit/">here&lt;/a> that references a now missing post by Sebastian Bergman the maker of PHPUnit&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php
 use Symfony\Component\Yaml\Yaml;
@@ -593,7 +600,8 @@ highLowerBound=&amp;quot;70&amp;quot;
 /&amp;gt;
 &amp;lt;/logging&amp;gt;
 &lt;/code>&lt;/pre>&lt;p>Gave me some really nice code coverage information&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/2hbocuv8qfyv2u9/code_coverage.png?dl=0" alt="">&lt;/p></description><category>php</category><category>testing</category><category>phpunit</category></item><item><title>Instantiate Request for Testing</title><link>https://alfrednutile.info/posts/206/</link><pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/206/</guid><description>&lt;p>When I need to make a request for a test in which the Class is expecting a &lt;code>\Illuminate\Http\Request&lt;/code> I can do this for a file based or non file based request.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/2hbocuv8qfyv2u9/code_coverage.png?dl=0" alt="">&lt;/p></description>
+php, testing, phpunit</item><item><title>Instantiate Request for Testing</title><link>https://alfrednutile.info/posts/206/</link><pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/206/</guid><description>&lt;p>When I need to make a request for a test in which the Class is expecting a &lt;code>\Illuminate\Http\Request&lt;/code> I can do this for a file based or non file based request.&lt;/p>
 &lt;pre>&lt;code> /**
 * @Then I should be able to upload an image file
 */
@@ -620,7 +628,8 @@ $request-&amp;gt;shouldReceive('all')-&amp;gt;andReturn($fixture);
 /** @var \App\PlannerSlackReport $report */
 $report = new \App\PlannerSlackReport();
 $report-&amp;gt;handle($request);
-&lt;/code>&lt;/pre></description><category>laravel</category><category>note2self</category><category>php</category><category>testing</category></item><item><title>Contract Testing</title><link>https://alfrednutile.info/posts/182/</link><pubDate>Fri, 27 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/182/</guid><description>&lt;p>Sometimes we need to make sure external APIs have not changed. Some of those we have control over some of those we do not.&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, note2self, php, testing</item><item><title>Contract Testing</title><link>https://alfrednutile.info/posts/182/</link><pubDate>Fri, 27 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/182/</guid><description>&lt;p>Sometimes we need to make sure external APIs have not changed. Some of those we have control over some of those we do not.&lt;/p>
 &lt;p>Either way we can run tests daily, weekly or as needed, outside of our tests we run with every push to Github, that will make sure this API is still delivering what we expect.&lt;/p>
 &lt;p>This &lt;a href="https://www.youtube.com/watch?v=NAF7HWW_eJs">video&lt;/a> gave me some good tips on this one being to keep your Contract tests outside of your Domain Logic. Secondly to focus on the KEYS and VALUES you care about.&lt;/p>
 &lt;h2 id="keys">KEYS&lt;/h2>
@@ -657,7 +666,8 @@ $report-&amp;gt;handle($request);
 &amp;lt;directory&amp;gt;./tests/contracts/&amp;lt;/directory&amp;gt;
 &amp;lt;/testsuite&amp;gt;
 &amp;lt;/testsuites&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>And just run those &lt;code>phpunit --testsuite Contracts Test Suite&lt;/code>&lt;/p></description><category>php</category><category>testing</category></item><item><title>Codeship and Laravel for Continuous Integration</title><link>https://alfrednutile.info/posts/148/</link><pubDate>Sun, 07 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/148/</guid><description>&lt;p>Getting going on Codeship and Laravel is pretty easy.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>And just run those &lt;code>phpunit --testsuite Contracts Test Suite&lt;/code>&lt;/p></description>
+php, testing</item><item><title>Codeship and Laravel for Continuous Integration</title><link>https://alfrednutile.info/posts/148/</link><pubDate>Sun, 07 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/148/</guid><description>&lt;p>Getting going on Codeship and Laravel is pretty easy.&lt;/p>
 &lt;p>Once you setup codeship to work with your github account just pull in your repo and set your Testing scripts as follows. (they have a ui for ENV variables as well)&lt;/p>
 &lt;h2 id="codeship-testing-settings-easier-copy-paste-bottom-of-article">Codeship Testing Settings [easier copy paste bottom of article]&lt;/h2>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/fh6vv3g5wpqw7ac/codeship1.png?dl=0" alt="codeship">&lt;/p>
@@ -734,7 +744,8 @@ echo &amp;quot;MAIL_ENCRYPTION=true&amp;quot; &amp;gt;&amp;gt; .env
 echo &amp;quot;STRIPE_API_SECRET='foo'&amp;quot; &amp;gt;&amp;gt; .env
 echo &amp;quot;STRIPE_PUBLIC='foo'&amp;quot; &amp;gt;&amp;gt; .env
 composer install --dev
-&lt;/code>&lt;/pre></description><category>laravel</category><category>testing</category><category>phpunit</category><category>php</category><category>ci</category><category>codeship</category></item><item><title>Easily Create Fixture Data from Remote Services and Refresh Mock Data</title><link>https://alfrednutile.info/posts/145/</link><pubDate>Wed, 27 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/145/</guid><description>&lt;p>&lt;strong>Oops Codeship and Laravel is &lt;a href="https://goo.gl/k62TEB">here&lt;/a>&lt;/strong>&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, testing, phpunit, php, ci, codeship</item><item><title>Easily Create Fixture Data from Remote Services and Refresh Mock Data</title><link>https://alfrednutile.info/posts/145/</link><pubDate>Wed, 27 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/145/</guid><description>&lt;p>&lt;strong>Oops Codeship and Laravel is &lt;a href="https://goo.gl/k62TEB">here&lt;/a>&lt;/strong>&lt;/p>
 &lt;h1 id="easily-create-fixture-data-from-remote-services-and-refresh-mock-data">Easily Create Fixture Data from Remote Services and Refresh Mock Data&lt;/h1>
 &lt;p>We have integration tests that hit remote apis like Github, S3, DynomoDB, our own APIs etc and we do not want to hit those during out tests but we also want to make sure we have the real data. So when one of those APIs change then our mock data can be refreshed to see if our systems really work with it.&lt;/p>
 &lt;p>Using Laravel&amp;rsquo;s new integration tests, though this works with any framework, we will swap out these Service classes with a Wrapper class ONLY if we have a matching file. This allows us to delete those files and get another one on the fly.&lt;/p>
@@ -878,7 +889,8 @@ $this-&amp;gt;app-&amp;gt;bind('App\ExampleRepo', 'App\ExampleRepo');
 }
 &lt;/code>&lt;/pre>&lt;p>Then register as normal in your config/app.php . This can be kinda tedious but would produce the same results.&lt;/p>
 &lt;p>Great book on the topic &lt;a href="https://leanpub.com/laravel-testing-decoded">Laravel Testing Decoded&lt;/a>&lt;/p>
-&lt;p>&lt;img src="https://s3.amazonaws.com/titlepages.leanpub.com/laravel-testing-decoded/large?1425536214" alt="decoded">&lt;/p></description><category>testing</category><category>laravel</category><category>php</category><category>phpunit</category><category>integration</category></item><item><title>Timing PHPUnit Tests</title><link>https://alfrednutile.info/posts/127/</link><pubDate>Wed, 31 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/127/</guid><description>&lt;p>Maybe there is a better way to do this? But using this article &lt;a href="https://fatalfailure.wordpress.com/2011/08/22/detecting-slow-tests-with-phpunit/">https://fatalfailure.wordpress.com/2011/08/22/detecting-slow-tests-with-phpunit/&lt;/a> I was able to find a hanging test.&lt;/p>
+&lt;p>&lt;img src="https://s3.amazonaws.com/titlepages.leanpub.com/laravel-testing-decoded/large?1425536214" alt="decoded">&lt;/p></description>
+testing, laravel, php, phpunit, integration</item><item><title>Timing PHPUnit Tests</title><link>https://alfrednutile.info/posts/127/</link><pubDate>Wed, 31 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/127/</guid><description>&lt;p>Maybe there is a better way to do this? But using this article &lt;a href="https://fatalfailure.wordpress.com/2011/08/22/detecting-slow-tests-with-phpunit/">https://fatalfailure.wordpress.com/2011/08/22/detecting-slow-tests-with-phpunit/&lt;/a> I was able to find a hanging test.&lt;/p>
 &lt;h1 id="setup">Setup&lt;/h1>
 &lt;p>I already have an xml file at the root of my project so I added to that that listener.&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
@@ -972,7 +984,8 @@ public function tearDown()
 $this-&amp;gt;listener-&amp;gt;endTest($this, time());
 parent::tearDown();
 }
-&lt;/code>&lt;/pre>&lt;p>Overall it is pretty simple once the other post pointed it out. Now to use all the other listeners.&lt;/p></description><category>php</category><category>phpunit</category><category>testing</category></item><item><title>PHP quick fixture data for phpunit testing</title><link>https://alfrednutile.info/posts/117/</link><pubDate>Thu, 20 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/117/</guid><description>&lt;p>You can use VCR or other libraries to make fixture data. But sometimes you can just make the request and save the results using this technique. From then on you mock and return the data.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Overall it is pretty simple once the other post pointed it out. Now to use all the other listeners.&lt;/p></description>
+php, phpunit, testing</item><item><title>PHP quick fixture data for phpunit testing</title><link>https://alfrednutile.info/posts/117/</link><pubDate>Thu, 20 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/117/</guid><description>&lt;p>You can use VCR or other libraries to make fixture data. But sometimes you can just make the request and save the results using this technique. From then on you mock and return the data.&lt;/p>
 &lt;h1 id="get-the-data">Get the data.&lt;/h1>
 &lt;p>In this example I had a Client that would get data and return it for import. I was testing out the class that would take this data and import it and do other things. So I make my phpunit test methods of that class (not the Client it is fully tested)&lt;/p>
 &lt;pre>&lt;code>
@@ -1011,7 +1024,8 @@ $classTesting new ClassTest($client); //we inject the mock into it
 $classTesting-&amp;gt;importData();
 $this-&amp;gt;assertCount(100, $classTesting-&amp;gt;getDataImported());
 }
-&lt;/code>&lt;/pre>&lt;p>The client in this case if a fully tested standalone client so I am not testing it. Just my use of it to migrate data.&lt;/p></description><category>php</category><category>phpunit</category><category>testing</category></item><item><title>Using VCR for PHP API Testing</title><link>https://alfrednutile.info/posts/97/</link><pubDate>Wed, 16 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/97/</guid><description>&lt;p>Testing that your code works against an API can take up lots of un-needed time. With this &lt;a href="https://github.com/php-vcr/php-vcr">php-vcr&lt;/a> library you can do ONE real request that saves a fixture file that will automatically be used with each additional requests!&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>The client in this case if a fully tested standalone client so I am not testing it. Just my use of it to migrate data.&lt;/p></description>
+php, phpunit, testing</item><item><title>Using VCR for PHP API Testing</title><link>https://alfrednutile.info/posts/97/</link><pubDate>Wed, 16 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/97/</guid><description>&lt;p>Testing that your code works against an API can take up lots of un-needed time. With this &lt;a href="https://github.com/php-vcr/php-vcr">php-vcr&lt;/a> library you can do ONE real request that saves a fixture file that will automatically be used with each additional requests!&lt;/p>
 &lt;p>They have decent docs on setting up but I will walk through them here.&lt;/p>
 &lt;p>I will base this off a seed phpunit repo I have &lt;a href="https://github.com/alnutile/base_library_repo">https://github.com/alnutile/base_library_repo&lt;/a>&lt;/p>
 &lt;p>You will need to add to the composer.json the packages for this library&lt;/p>
@@ -1149,10 +1163,12 @@ Transfer-Encoding: chunked
 Connection: keep-alive
 X-Backend: mix
 body: '[{&amp;quot;id&amp;quot;: &amp;quot;3a4136e1bb6f4f6b8cae6fbd0bf2e6aa&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;1cde7b77e8744ff5b6198489ceffce81&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;79bd34f42d584da6ad59c051388134d9&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;d75177a863ec4a458c7222813e10ee84&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;67591976001c4c5a9522b93281e0e8ef&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;ada6876f799d4b589ef0e2c4069c7438&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;3e676ac921aa43f5a5628d231ca7115d&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;222cdddafb9e4c3fb0722bccc9891a15&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;6393dc7ca1ea447eb509b5e1dd6821ac&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;789004fc2ec34d0d8e03945759fc25b0&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;3331badd2da140d08613a786257d177d&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;9437a50a354e4fca8252447b03d21348&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;dec07ca1c30e40f4a693de7f7a102eab&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;3a1a0fb2d4be4580b00a3e35b86aa6fa&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;55de27651bf14c92b901cbd0a62b1603&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;7e12ec786ad544008c5f4e3e4340d5a8&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;a8edb7ab8a8f408a9b0829cc45ca4563&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;b67a4d7187cc4dc8ad661ef7045d15e9&amp;quot;}]'
-&lt;/code>&lt;/pre>&lt;p>That library should be a big help to try it out. You just need a Saucelabs account and make a file in the root of your folder called .env as noted in the README with your username and token for saucelabs and then run bin/phpunit.&lt;/p></description><category>php</category><category>api</category><category>testing</category></item><item><title>Saucelabs PHP Client</title><link>https://alfrednutile.info/posts/96/</link><pubDate>Fri, 11 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/96/</guid><description>&lt;p>It is built off of the php-github-api client seen &lt;a href="https://github.com/KnpLabs/php-github-api">here&lt;/a> by KnpLabs . They made a really nice client that uses Guzzle and an AbstractionAPI to make it easy to code out different classes around the API endpoints.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>That library should be a big help to try it out. You just need a Saucelabs account and make a file in the root of your folder called .env as noted in the README with your username and token for saucelabs and then run bin/phpunit.&lt;/p></description>
+php, api, testing</item><item><title>Saucelabs PHP Client</title><link>https://alfrednutile.info/posts/96/</link><pubDate>Fri, 11 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/96/</guid><description>&lt;p>It is built off of the php-github-api client seen &lt;a href="https://github.com/KnpLabs/php-github-api">here&lt;/a> by KnpLabs . They made a really nice client that uses Guzzle and an AbstractionAPI to make it easy to code out different classes around the API endpoints.&lt;/p>
 &lt;p>Anyways I have had such a good experience with github one I figured it would be nice to have one for the Saucelabs work I do.&lt;/p>
 &lt;p>&lt;a href="https://github.com/alnutile/saucelabs_client">https://github.com/alnutile/saucelabs_client&lt;/a> more features will be added shortly as it is being used in a couple of decent size projects.&lt;/p>
-&lt;p>There are plenty of Tests to show how to use it.&lt;/p></description><category>bdd</category><category>testing</category><category>php</category></item><item><title>Mocking drupal database queries</title><link>https://alfrednutile.info/posts/46/</link><pubDate>Fri, 07 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/46/</guid><description>&lt;p>&lt;b>formatting issue will update the code examples soon&lt;/b>&lt;/p>
+&lt;p>There are plenty of Tests to show how to use it.&lt;/p></description>
+bdd, testing, php</item><item><title>Mocking drupal database queries</title><link>https://alfrednutile.info/posts/46/</link><pubDate>Fri, 07 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/46/</guid><description>&lt;p>&lt;b>formatting issue will update the code examples soon&lt;/b>&lt;/p>
 &lt;p>&lt;span style="line-height: 1.6em;">I have a Class I want to test with phpunit but it makes several queries to a drupal database. I rather not bootstrapdrupal just to make sure this Class is returning the results as expected.&lt;/span>&lt;/p>
 &lt;p>For example the SiteClass has a method called index. That method takes the uuid for a user and finds all the sites related to that user. Then using that uuid I have some other non drupal data that relates to it. So my class might look like this&lt;/p>
 &lt;div class="code prettify" style="background:#eee;border:1px solid #ccc;padding:5px 10px;">
@@ -1213,4 +1229,5 @@ $this-&amp;gt;repo-&amp;gt;shouldReceive(&amp;#39;getSitesForUserUuid&amp;#39;)-
 &lt;p>$results = db_query(foo);&lt;/p>
 &lt;p>return $results;&lt;/p>
 &lt;p>}&lt;/p>
-&lt;/div></description><category>testing</category></item></channel></rss>
+&lt;/div></description>
+testing</item></channel></rss>

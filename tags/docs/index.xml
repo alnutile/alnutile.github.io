@@ -37,4 +37,5 @@ return view('help.api', compact('webhooks'));
 &lt;pre>&lt;code>$webhooks = strip_tags($webhooks, &amp;quot;tags you allow here&amp;quot;);
 &lt;/code>&lt;/pre>&lt;p>Will help out there.&lt;/p>
 &lt;h2 id="the-markdown">The Markdown&lt;/h2>
-&lt;p>Then just write your file as normal in markdown!&lt;/p></description><category>laravel</category><category>php</category><category>docs</category></item></channel></rss>
+&lt;p>Then just write your file as normal in markdown!&lt;/p></description>
+laravel, php, docs</item></channel></rss>

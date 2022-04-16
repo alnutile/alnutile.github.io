@@ -21,4 +21,5 @@ self.task_image = TaskImage()
 def test_gets_service(self, _getService, _getTaskDefinition):
 self.results = self.task_image.handle('default', 'cat-teamdocs-production-122')
 self.assertEqual('cat-teamdocs:latest', self.results)
-&lt;/code>&lt;/pre>&lt;p>Pretty easy and then I am not hitting the service&lt;/p></description><category>note2self</category><category>python3</category><category>testing</category></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>Pretty easy and then I am not hitting the service&lt;/p></description>
+note2self, python3, testing</item></channel></rss>

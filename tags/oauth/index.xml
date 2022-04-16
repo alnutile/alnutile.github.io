@@ -52,7 +52,8 @@ return Response::json(&amp;quot;Welcome&amp;quot;);
 &lt;p>Just to show it all working you will see in the video me using postman. You will see that in the repo &lt;a href="https://github.com/alnutile/oauth_how_to/blob/master/oauth_try_2.json.postman_collection">here&lt;/a>&lt;/p>
 &lt;h2 id="now-what">Now What&lt;/h2>
 &lt;p>Between the links above and Postman you have a working&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/bbt0fmfflm2zq7x/oauth_token.gif?dl=0" alt="">&lt;/p></description><category>oauth</category><category>laravel</category></item><item><title>Dealing with Oauth2 Server and Laravel for both a local app login and for remote apps using Lucadegasperi/oauth2-server-laravel</title><link>https://alfrednutile.info/posts/133/</link><pubDate>Mon, 23 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/133/</guid><description>&lt;p>This is all based around this library &lt;a href="https://github.com/lucadegasperi/oauth2-server-laravel">https://github.com/lucadegasperi/oauth2-server-laravel&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/bbt0fmfflm2zq7x/oauth_token.gif?dl=0" alt="">&lt;/p></description>
+oauth, laravel</item><item><title>Dealing with Oauth2 Server and Laravel for both a local app login and for remote apps using Lucadegasperi/oauth2-server-laravel</title><link>https://alfrednutile.info/posts/133/</link><pubDate>Mon, 23 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/133/</guid><description>&lt;p>This is all based around this library &lt;a href="https://github.com/lucadegasperi/oauth2-server-laravel">https://github.com/lucadegasperi/oauth2-server-laravel&lt;/a>&lt;/p>
 &lt;p>I am building and API to be used by an iOs and Android client I will be making soon. &lt;strong>But&lt;/strong> I also needed the filter system to deal with my local Laravel view that was using the api via an Angular driven widget so the user can go to the website as well.&lt;/p>
 &lt;p>So the website is where the user can go to do change settings, subscription updates etc, but in that case they are logged in via the Laravel login form. From there they land on the profile page where the Angular widget will do n xhr request to the api to fill in the table/settings.&lt;/p>
 &lt;p>The routes ends up looking like this&lt;/p>
@@ -133,4 +134,5 @@ $user_id = Authorizer::getResourceOwnerId();
 Auth::loginUsingId($user_id);
 }
 });
-&lt;/code>&lt;/pre></description><category>oauth</category><category>laravel</category><category>apis</category></item></channel></rss>
+&lt;/code>&lt;/pre></description>
+oauth, laravel, apis</item></channel></rss>

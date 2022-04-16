@@ -22,7 +22,8 @@ client = SnykReport()
 results = client.get_report_for_current_week(
 &amp;quot;98873-8ecc-46f0-b077-39322abc4390&amp;quot;)
 assert results == 1989
-&lt;/code>&lt;/pre>&lt;p>I no longer hit their API and &lt;code>post&lt;/code> returns the response I wanted.&lt;/p></description><category>python</category><category>testing</category><category>mocking</category><category>pytest</category></item><item><title>Mocking in Python</title><link>https://alfrednutile.info/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/263/</guid><description>&lt;p>Serious note to self.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>I no longer hit their API and &lt;code>post&lt;/code> returns the response I wanted.&lt;/p></description>
+python, testing, mocking, pytest</item><item><title>Mocking in Python</title><link>https://alfrednutile.info/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/263/</guid><description>&lt;p>Serious note to self.&lt;/p>
 &lt;p>I wanted to mock the Github module for python.&lt;/p>
 &lt;p>My simple class will get the ID of the team.&lt;/p>
 &lt;pre>&lt;code>from github import Github, Team
@@ -115,4 +116,5 @@ return False
 &lt;li>&lt;a href="https://docs.python.org/3/library/unittest.mock.html">https://docs.python.org/3/library/unittest.mock.html&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.toptal.com/python/an-introduction-to-mocking-in-python">https://www.toptal.com/python/an-introduction-to-mocking-in-python&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832">https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832&lt;/a>&lt;/li>
-&lt;/ul></description><category>python</category><category>mocking</category><category>tdd</category><category>unittest</category></item></channel></rss>
+&lt;/ul></description>
+python, mocking, tdd, unittest</item></channel></rss>

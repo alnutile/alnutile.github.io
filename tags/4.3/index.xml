@@ -193,4 +193,5 @@ array('job_uuid', InputArgument::REQUIRED, 'The uuid of the related request job 
 }
 }
 &lt;/code>&lt;/pre>&lt;p>There still is some work to do. I have to set the limit so my initial run does not timeout. I also need to clean up some code so that these classes are digging so deep into the other classes.&lt;/p>
-&lt;p>But this was just to show how to use Symfony Process Component, Laravel Queue, and Laravel Artisan to run a multi threaded task.&lt;/p></description><category>laravel</category><category>php</category><category>note2self</category><category>4.3</category></item></channel></rss>
+&lt;p>But this was just to show how to use Symfony Process Component, Laravel Queue, and Laravel Artisan to run a multi threaded task.&lt;/p></description>
+laravel, php, note2self, 4.3</item></channel></rss>

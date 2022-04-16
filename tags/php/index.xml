@@ -62,7 +62,8 @@ and mock it from then on&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
 &lt;span style="color:#f92672">&amp;#34;foo&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;bar&amp;#34;&lt;/span>
 }
-&lt;/code>&lt;/pre>&lt;/div></description><category>laravel</category><category>php</category><category>note2self</category><category>helpers</category></item><item><title>Windows Dev Box Try 3 2020</title><link>https://alfrednutile.info/posts/267/</link><pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/267/</guid><description>&lt;p>Yes this is try number 3. See &lt;a href="https://alfrednutile.info/posts/247">here&lt;/a> for the first 2 goes at it.&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div></description>
+laravel, php, note2self, helpers</item><item><title>Windows Dev Box Try 3 2020</title><link>https://alfrednutile.info/posts/267/</link><pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/267/</guid><description>&lt;p>Yes this is try number 3. See &lt;a href="https://alfrednutile.info/posts/247">here&lt;/a> for the first 2 goes at it.&lt;/p>
 &lt;p>With WSL2 out and a great laptop I wanted to give this another try.&lt;/p>
 &lt;h2 id="mariadb">MariaDB&lt;/h2>
 &lt;p>Even though the install is super simple see &lt;a href="https://alfrednutile.info/posts/267/">https://alfrednutile.info/posts/267&lt;/a>&lt;/p>
@@ -109,7 +110,8 @@ xdebug.remote_log = /var/log/xdebug.log
 }
 ]
 }
-&lt;/code>&lt;/pre></description><category>windows</category><category>linux</category><category>wsl</category><category>php</category></item><item><title>PHP Xdebug Visual Code</title><link>https://alfrednutile.info/posts/262/</link><pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/262/</guid><description>&lt;blockquote>
+&lt;/code>&lt;/pre></description>
+windows, linux, wsl, php</item><item><title>PHP Xdebug Visual Code</title><link>https://alfrednutile.info/posts/262/</link><pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/262/</guid><description>&lt;blockquote>
 &lt;p>UPDATE: PHP 8 and Xdebug 3 2021.07.18&lt;/p>
 &lt;/blockquote>
 &lt;p>Ok this took a bit since the Xdebug site talks about &lt;code>arch -x86_64 sudo pecl install xdebug&lt;/code> which did not work.&lt;/p>
@@ -243,7 +245,8 @@ Additional .ini files parsed: /usr/local/etc/php/7.2/conf.d/ext-opcache.ini,
 }
 ]
 }
-&lt;/code>&lt;/pre></description><category>php</category><category>xdebug</category></item><item><title>IronFunctions and PHP</title><link>https://alfrednutile.info/posts/213/</link><pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/213/</guid><description>&lt;p>A colleague of mine &lt;a href="https://twitter.com/skwashd">Dave Hall&lt;/a> poing out &lt;a href="https://github.com/iron-io/functions">IronFunctions&lt;/a>. And being in the pursuit of serverless options especially ones that even have examples of PHP I had to give it a try. This post is a note2self in that the intro &lt;a href="https://github.com/iron-io/functions/tree/master/examples/hello/php">here&lt;/a> has some bits that need fixing BUT I think it is close and I hope to add more updates here about the tool.&lt;/p>
+&lt;/code>&lt;/pre></description>
+php, xdebug</item><item><title>IronFunctions and PHP</title><link>https://alfrednutile.info/posts/213/</link><pubDate>Wed, 12 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/213/</guid><description>&lt;p>A colleague of mine &lt;a href="https://twitter.com/skwashd">Dave Hall&lt;/a> poing out &lt;a href="https://github.com/iron-io/functions">IronFunctions&lt;/a>. And being in the pursuit of serverless options especially ones that even have examples of PHP I had to give it a try. This post is a note2self in that the intro &lt;a href="https://github.com/iron-io/functions/tree/master/examples/hello/php">here&lt;/a> has some bits that need fixing BUT I think it is close and I hope to add more updates here about the tool.&lt;/p>
 &lt;p>All the steps below will only work once you take on the initial hello world &lt;a href="https://github.com/iron-io/functions/blob/master/README.md">here&lt;/a>. After that you have the &lt;code>fn&lt;/code> cli tool installed and a running local iron-functions server.&lt;/p>
 &lt;p>For one I needed to apply each patch seen &lt;a href="https://github.com/iron-io/functions/pull/444/files">here&lt;/a>&lt;/p>
 &lt;p>Once I had all that in place I re-reran the &lt;code>fn&lt;/code> install command from the folder where I download the &lt;code>iron-io/functions&lt;/code> repo into&lt;/p>
@@ -306,7 +309,8 @@ fn bump &amp;amp;&amp;amp; fn build &amp;amp;&amp;amp; fn push
 # then update the route
 fn routes update phpapp1 /hello
 &lt;/code>&lt;/pre>&lt;p>just to save some time there.&lt;/p>
-&lt;p>More soon on using this with Lumen and other options. I tried this but some PHP items are missing on the Alpine docker image to make this work.&lt;/p></description><category>php</category><category>ironfunctions</category><category>note2self</category></item><item><title>Testing a trait with PHPUnit</title><link>https://alfrednutile.info/posts/212/</link><pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/212/</guid><description>&lt;p>In an effort to start recording test coverage using &lt;code>vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover&lt;/code> I had some issues with traits being seen.&lt;/p>
+&lt;p>More soon on using this with Lumen and other options. I tried this but some PHP items are missing on the Alpine docker image to make this work.&lt;/p></description>
+php, ironfunctions, note2self</item><item><title>Testing a trait with PHPUnit</title><link>https://alfrednutile.info/posts/212/</link><pubDate>Thu, 08 Jun 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/212/</guid><description>&lt;p>In an effort to start recording test coverage using &lt;code>vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover&lt;/code> I had some issues with traits being seen.&lt;/p>
 &lt;p>I tried numerous approaches my default being just to &lt;code>Use&lt;/code> the trait in the test class. I ended up with this as I found some online info about trait testing &lt;a href="http://blog.florianwolters.de/educational/2012/09/20/Testing-Traits-with-PHPUnit/">here&lt;/a> that references a now missing post by Sebastian Bergman the maker of PHPUnit&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php
 use Symfony\Component\Yaml\Yaml;
@@ -424,7 +428,8 @@ highLowerBound=&amp;quot;70&amp;quot;
 /&amp;gt;
 &amp;lt;/logging&amp;gt;
 &lt;/code>&lt;/pre>&lt;p>Gave me some really nice code coverage information&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/2hbocuv8qfyv2u9/code_coverage.png?dl=0" alt="">&lt;/p></description><category>php</category><category>testing</category><category>phpunit</category></item><item><title>Instantiate Request for Testing</title><link>https://alfrednutile.info/posts/206/</link><pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/206/</guid><description>&lt;p>When I need to make a request for a test in which the Class is expecting a &lt;code>\Illuminate\Http\Request&lt;/code> I can do this for a file based or non file based request.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/2hbocuv8qfyv2u9/code_coverage.png?dl=0" alt="">&lt;/p></description>
+php, testing, phpunit</item><item><title>Instantiate Request for Testing</title><link>https://alfrednutile.info/posts/206/</link><pubDate>Tue, 28 Feb 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/206/</guid><description>&lt;p>When I need to make a request for a test in which the Class is expecting a &lt;code>\Illuminate\Http\Request&lt;/code> I can do this for a file based or non file based request.&lt;/p>
 &lt;pre>&lt;code> /**
 * @Then I should be able to upload an image file
 */
@@ -451,7 +456,8 @@ $request-&amp;gt;shouldReceive('all')-&amp;gt;andReturn($fixture);
 /** @var \App\PlannerSlackReport $report */
 $report = new \App\PlannerSlackReport();
 $report-&amp;gt;handle($request);
-&lt;/code>&lt;/pre></description><category>laravel</category><category>note2self</category><category>php</category><category>testing</category></item><item><title>Super Simple Sending Messages to Slack from Laravel</title><link>https://alfrednutile.info/posts/202/</link><pubDate>Thu, 29 Dec 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/202/</guid><description>&lt;p>Laravel 5.3 has this feature. But for those not using that version or who just want to see how easy this is, I will show here how I been doing this for some time now.&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, note2self, php, testing</item><item><title>Super Simple Sending Messages to Slack from Laravel</title><link>https://alfrednutile.info/posts/202/</link><pubDate>Thu, 29 Dec 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/202/</guid><description>&lt;p>Laravel 5.3 has this feature. But for those not using that version or who just want to see how easy this is, I will show here how I been doing this for some time now.&lt;/p>
 &lt;p>Here is the main Class I call to send a message. As you can see I am using Guzzle, in this case &lt;code>&amp;quot;guzzlehttp/guzzle&amp;quot;: &amp;quot;^6.1&amp;quot;&lt;/code> but others versions can work.&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php
 namespace App\Services;
@@ -507,9 +513,11 @@ return $this;
 }
 &lt;/code>&lt;/pre>&lt;p>And that is it. As long as I set this &lt;code>env('SLACK_URL')&lt;/code> in my .env OR in the class instantiation it will get to that endpoint.&lt;/p>
 &lt;p>Then in slack just add get the webhook/room you want to post to&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/rk2gd4c5tpflpmi/webhooks_slack.png?dl=0" alt="">&lt;/p></description><category>php</category><category>laravel</category><category>slack</category></item><item><title>Pusher and PHP 'Error Failed to connect to Pusher'</title><link>https://alfrednutile.info/posts/201/</link><pubDate>Mon, 28 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/201/</guid><description>&lt;p>Note to self. Getting this error &amp;ldquo;Error Failed to connect to Pusher&amp;rdquo; but the front end is working. And you know your credentials are correct, AND it was working just a day ago check the date and time on your machine/vm.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/rk2gd4c5tpflpmi/webhooks_slack.png?dl=0" alt="">&lt;/p></description>
+php, laravel, slack</item><item><title>Pusher and PHP 'Error Failed to connect to Pusher'</title><link>https://alfrednutile.info/posts/201/</link><pubDate>Mon, 28 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/201/</guid><description>&lt;p>Note to self. Getting this error &amp;ldquo;Error Failed to connect to Pusher&amp;rdquo; but the front end is working. And you know your credentials are correct, AND it was working just a day ago check the date and time on your machine/vm.&lt;/p>
 &lt;p>Mine had drift and since it was behind by 20 minutes I would end up with this error.&lt;/p>
-&lt;p>Oy what a waste or time x 2 :(&lt;/p></description><category>php</category><category>note2self</category><category>laravel</category></item><item><title>Guzzle 5 or 6 or ????</title><link>https://alfrednutile.info/posts/198/</link><pubDate>Fri, 11 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/198/</guid><description>&lt;p>Sometimes Guzzle can be a real pain to use in an library. You choose 5.x and then some other library needed 6.x and heck you really did not care either way.&lt;/p>
+&lt;p>Oy what a waste or time x 2 :(&lt;/p></description>
+php, note2self, laravel</item><item><title>Guzzle 5 or 6 or ????</title><link>https://alfrednutile.info/posts/198/</link><pubDate>Fri, 11 Nov 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/198/</guid><description>&lt;p>Sometimes Guzzle can be a real pain to use in an library. You choose 5.x and then some other library needed 6.x and heck you really did not care either way.&lt;/p>
 &lt;p>One interesting package example is &lt;a href="https://packagist.org/packages/aws/aws-sdk-php">aws/aws-sdk-php&lt;/a>&lt;/p>
 &lt;p>If you look in it&amp;rsquo;s composer.json you will see this&lt;/p>
 &lt;pre>&lt;code> &amp;quot;require&amp;quot;: {
@@ -532,7 +540,8 @@ return new \Aws\Handler\GuzzleV6\GuzzleHandler();
 throw new \RuntimeException('Unknown Guzzle version: ' . $version);
 }
 }
-&lt;/code>&lt;/pre>&lt;p>Then each class deals with instantiating the &lt;code>GuzzleHttp\Client&lt;/code> as needed.&lt;/p></description><category>php</category><category>note2self</category></item><item><title>Mockery Behat and Laravel</title><link>https://alfrednutile.info/posts/190/</link><pubDate>Wed, 31 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/190/</guid><description>&lt;p>This is a quick view of using this library &lt;a href="https://github.com/laracasts/Behat-Laravel-Extension">https://github.com/laracasts/Behat-Laravel-Extension&lt;/a> and a Mockery Trait (should be included soon but for now put the below in your &lt;code>features/bootstrap&lt;/code> folder and run &lt;code>composer dump&lt;/code>).&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Then each class deals with instantiating the &lt;code>GuzzleHttp\Client&lt;/code> as needed.&lt;/p></description>
+php, note2self</item><item><title>Mockery Behat and Laravel</title><link>https://alfrednutile.info/posts/190/</link><pubDate>Wed, 31 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/190/</guid><description>&lt;p>This is a quick view of using this library &lt;a href="https://github.com/laracasts/Behat-Laravel-Extension">https://github.com/laracasts/Behat-Laravel-Extension&lt;/a> and a Mockery Trait (should be included soon but for now put the below in your &lt;code>features/bootstrap&lt;/code> folder and run &lt;code>composer dump&lt;/code>).&lt;/p>
 &lt;p>The example here is a method that looks like this&lt;/p>
 &lt;p>&lt;code>features/bootstrap/ExampleContext.php&lt;/code>&lt;/p>
 &lt;pre>&lt;code> $partial = Mockery::mock(\App\Broadcasts\ColumnsAndRowsDoneProcessingEmail::class, [$this-&amp;gt;segment])-&amp;gt;makePartial();
@@ -647,7 +656,8 @@ return false;
 }
 }
 &lt;/code>&lt;/pre>&lt;p>This pulls in a trait Laravel uses in PHPUnit.&lt;/p>
-&lt;p>So now when I run that test I get red and when I set it back to &lt;code>zero&lt;/code> I get green!&lt;/p></description><category>php</category><category>laravel</category><category>behat</category><category>bdd</category></item><item><title>Uploading Images in Behat both at Domain Level and UI Level</title><link>https://alfrednutile.info/posts/188/</link><pubDate>Thu, 11 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/188/</guid><description>&lt;p>The goal here is as follows&lt;/p>
+&lt;p>So now when I run that test I get red and when I set it back to &lt;code>zero&lt;/code> I get green!&lt;/p></description>
+php, laravel, behat, bdd</item><item><title>Uploading Images in Behat both at Domain Level and UI Level</title><link>https://alfrednutile.info/posts/188/</link><pubDate>Thu, 11 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/188/</guid><description>&lt;p>The goal here is as follows&lt;/p>
 &lt;pre>&lt;code> @fileCleanup @javascript
 Scenario: Uploading File
 Given I already made a Segmentation and am editing it
@@ -755,7 +765,8 @@ PHPUnit::assertTrue(File::exists(public_path('storage/' . $this-&amp;gt;user-&am
 &lt;p>&lt;a href="http://stackoverflow.com/questions/28510155/how-to-get-the-mink-selenium-2-driver-to-wait-for-the-page-to-load-with-behat">http://stackoverflow.com/questions/28510155/how-to-get-the-mink-selenium-2-driver-to-wait-for-the-page-to-load-with-behat&lt;/a>&lt;/p>
 &lt;p>&lt;a href="http://docs.behat.org/en/v2.5/cookbook/using_spin_functions.html">http://docs.behat.org/en/v2.5/cookbook/using_spin_functions.html&lt;/a>&lt;/p>
 &lt;p>And a bit more on that
-&lt;a href="http://www.tentacode.net/10-tips-with-behat-and-mink">http://www.tentacode.net/10-tips-with-behat-and-mink&lt;/a>&lt;/p></description><category>behat</category><category>bdd</category><category>php</category><category>laravel</category></item><item><title>Behat Laravel Domain Testing Inside Out</title><link>https://alfrednutile.info/posts/187/</link><pubDate>Wed, 10 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/187/</guid><description>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/055lj0hcljvpp7u/4_pane_guy_and_getting_started.png?dl=0" alt="">&lt;/p>
+&lt;a href="http://www.tentacode.net/10-tips-with-behat-and-mink">http://www.tentacode.net/10-tips-with-behat-and-mink&lt;/a>&lt;/p></description>
+behat, bdd, php, laravel</item><item><title>Behat Laravel Domain Testing Inside Out</title><link>https://alfrednutile.info/posts/187/</link><pubDate>Wed, 10 Aug 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/187/</guid><description>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/055lj0hcljvpp7u/4_pane_guy_and_getting_started.png?dl=0" alt="">&lt;/p>
 &lt;p>I will cover the use of &lt;code>FormRequest&lt;/code>, &lt;code>Mockery&lt;/code>, &lt;code>Behat&lt;/code> and more in this article.&lt;/p>
 &lt;p>The article will show how to test your Domain code, in this case I mean testing how the code will work outside of the Routing and Controller layer of your Application. But what this will lead to is a &amp;ldquo;lego&amp;rdquo; like moment of plugging in these parts to your Controller so you know it will work. Of course it will be tested as well during the UI testing.&lt;/p>
 &lt;p>I will start off with this Behat Feature&lt;/p>
@@ -924,7 +935,8 @@ return redirect()-&amp;gt;route('home')-&amp;gt;with('message', &amp;quot;Error 
 &lt;p>After that it asks the repo to take care of the request and it deals with the response or inevitable exception!&lt;/p>
 &lt;p>So right away I can go to my ui test and make it so you can see the &lt;strong>&lt;a href="https://github.com/alnutile/recipes/blob/a5f2522e702ee49d21711d9416c5a659e7761ddc/features/bootstrap/LoginPageUIContext.php">code here&lt;/a>&lt;/strong>&lt;/p>
 &lt;h2 id="follow-up">Follow Up&lt;/h2>
-&lt;p>All code for this can be seen at &lt;a href="https://github.com/alnutile/recipes">https://github.com/alnutile/recipes&lt;/a> this is a foundation repo for a new book coming out in 2 months with many day to day Laravel Recipes!&lt;/p></description><category>behat</category><category>bdd</category><category>php</category><category>laravel</category></item><item><title>Example of Mixing it up Behat BDD and PHPUnit</title><link>https://alfrednutile.info/posts/185/</link><pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/185/</guid><description>&lt;p>Just wanted to show two things here. One is how sometimes I end up in PHPUnit to work out some ideas. And two how awesome it is to refactor thanks to PHPUnit.&lt;/p>
+&lt;p>All code for this can be seen at &lt;a href="https://github.com/alnutile/recipes">https://github.com/alnutile/recipes&lt;/a> this is a foundation repo for a new book coming out in 2 months with many day to day Laravel Recipes!&lt;/p></description>
+behat, bdd, php, laravel</item><item><title>Example of Mixing it up Behat BDD and PHPUnit</title><link>https://alfrednutile.info/posts/185/</link><pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/185/</guid><description>&lt;p>Just wanted to show two things here. One is how sometimes I end up in PHPUnit to work out some ideas. And two how awesome it is to refactor thanks to PHPUnit.&lt;/p>
 &lt;p>In this example I had a Class responsible for saving data, we&amp;rsquo;ll call FooSaveData. But before that save it has to process some incoming information against another set of data to save the results of that. So I made another class we&amp;rsquo;ll call FooProcessData.&lt;/p>
 &lt;p>The BDD Story for this worked out well in that just like in Konstantin Kudryashov noted in this &lt;a href="http://stakeholderwhisperer.com/posts/2014/10/introducing-modelling-by-example#_=_">article&lt;/a> I had a great reading business driven gherkin feature that I then, using &lt;a href="http://docs.behat.org/en/v3.0/guides/5.suites.html">Behat 3 and Suites&lt;/a> was able to make some really great names for my classes and methods.&lt;/p>
 &lt;p>But this was fine as I was working on FooSaveData, but the fact that FooProcessData had to iterate over a large complex array of data I did not want to do inside of this Gherkin test. It would mean that I had to deal with 5 other steps, x number of model states I needed etc. Instead I just made a unit test for that class &amp;ldquo;FooProcessData&amp;rdquo; and focused on it for a bit outside the rest of this work.&lt;/p>
@@ -937,7 +949,8 @@ return redirect()-&amp;gt;route('home')-&amp;gt;with('message', &amp;quot;Error 
 &lt;blockquote>
 &lt;p>Let&amp;rsquo;s Plan for a Future Where We&amp;rsquo;re All As Stupid as We Are Today - Dan Milstein&lt;/p>
 &lt;/blockquote>
-&lt;p>At this point that &amp;ldquo;lego&amp;rdquo; like piece is done and I can go back to my Behat BDD Gherkin test to finish off where I left off.&lt;/p></description><category>php</category><category>laravel</category><category>bdd</category><category>behat</category><category>phpunit</category></item><item><title>Keeping a Controller Method Simple</title><link>https://alfrednutile.info/posts/186/</link><pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/186/</guid><description>&lt;p>When I am done with a controller, done mocking up ideas and ready for some long term code, then I think this is the most information a Controller method should have.&lt;/p>
+&lt;p>At this point that &amp;ldquo;lego&amp;rdquo; like piece is done and I can go back to my Behat BDD Gherkin test to finish off where I left off.&lt;/p></description>
+php, laravel, bdd, behat, phpunit</item><item><title>Keeping a Controller Method Simple</title><link>https://alfrednutile.info/posts/186/</link><pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/186/</guid><description>&lt;p>When I am done with a controller, done mocking up ideas and ready for some long term code, then I think this is the most information a Controller method should have.&lt;/p>
 &lt;pre>&lt;code>public function updateFoor($id, $foo) {
         try {
            
@@ -951,7 +964,8 @@ return redirect()-&amp;gt;route('home')-&amp;gt;with('message', &amp;quot;Error 
         }
 }
 &lt;/code>&lt;/pre>&lt;p>At this point I have &lt;code>someRepoOrServiceClass&lt;/code> well tested outside of this Controller. And I do not need to do much to this controller since it is just returning the results or dealing with an error.&lt;/p>
-&lt;p>Even using &lt;a href="https://laravel.com/docs/5.2/validation#form-request-validation">Form Request Validation&lt;/a> I can create logic and test logic outside of my Controller. Making the moment I come back to my controller just about plugging in these &amp;ldquo;lego&amp;rdquo; like pieces.&lt;/p></description><category>php</category><category>coding</category></item><item><title>API Token Based Access Laravel 5.1 (Yet another article on this)</title><link>https://alfrednutile.info/posts/183/</link><pubDate>Tue, 31 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/183/</guid><description>&lt;h2 id="api-token">API Token&lt;/h2>
+&lt;p>Even using &lt;a href="https://laravel.com/docs/5.2/validation#form-request-validation">Form Request Validation&lt;/a> I can create logic and test logic outside of my Controller. Making the moment I come back to my controller just about plugging in these &amp;ldquo;lego&amp;rdquo; like pieces.&lt;/p></description>
+php, coding</item><item><title>API Token Based Access Laravel 5.1 (Yet another article on this)</title><link>https://alfrednutile.info/posts/183/</link><pubDate>Tue, 31 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/183/</guid><description>&lt;h2 id="api-token">API Token&lt;/h2>
 &lt;p>Laravel 5.2 introduces the auth token guard setup which is way simpler than Oauth. Also it does not assume a certain level of complexity in needs like Scopes and expirations of tokens that we do not need for our internal app to app communications.&lt;/p>
 &lt;p>We are using 5.1 so this will implement it.&lt;/p>
 &lt;p>See some docs here &lt;a href="https://gistlog.co/JacobBennett/090369fbab0b31130b51">https://gistlog.co/JacobBennett/090369fbab0b31130b51&lt;/a>&lt;/p>
@@ -1221,7 +1235,8 @@ return &amp;quot;foo&amp;quot;;
 &lt;/ul>
 &lt;p>Note the token might change if you seed the database. You can ssh into the server and run&lt;/p>
 &lt;pre>&lt;code>php artisan cat:create-token foo@gmail.com --show
-&lt;/code>&lt;/pre>&lt;p>To get the token.&lt;/p></description><category>php</category><category>auth</category><category>laravel</category><category>api</category></item><item><title>Contract Testing</title><link>https://alfrednutile.info/posts/182/</link><pubDate>Fri, 27 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/182/</guid><description>&lt;p>Sometimes we need to make sure external APIs have not changed. Some of those we have control over some of those we do not.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>To get the token.&lt;/p></description>
+php, auth, laravel, api</item><item><title>Contract Testing</title><link>https://alfrednutile.info/posts/182/</link><pubDate>Fri, 27 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/182/</guid><description>&lt;p>Sometimes we need to make sure external APIs have not changed. Some of those we have control over some of those we do not.&lt;/p>
 &lt;p>Either way we can run tests daily, weekly or as needed, outside of our tests we run with every push to Github, that will make sure this API is still delivering what we expect.&lt;/p>
 &lt;p>This &lt;a href="https://www.youtube.com/watch?v=NAF7HWW_eJs">video&lt;/a> gave me some good tips on this one being to keep your Contract tests outside of your Domain Logic. Secondly to focus on the KEYS and VALUES you care about.&lt;/p>
 &lt;h2 id="keys">KEYS&lt;/h2>
@@ -1258,7 +1273,8 @@ return &amp;quot;foo&amp;quot;;
 &amp;lt;directory&amp;gt;./tests/contracts/&amp;lt;/directory&amp;gt;
 &amp;lt;/testsuite&amp;gt;
 &amp;lt;/testsuites&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>And just run those &lt;code>phpunit --testsuite Contracts Test Suite&lt;/code>&lt;/p></description><category>php</category><category>testing</category></item><item><title>AWS, S3 Storage and limited Visibility</title><link>https://alfrednutile.info/posts/180/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/180/</guid><description>&lt;p>Storing files on S3 is great. And many times those files are private so I only want to give temporary access to them. Using Laravel Storage I can interact with the file-system quite easily and seamlessly especially between Cloud and Local.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>And just run those &lt;code>phpunit --testsuite Contracts Test Suite&lt;/code>&lt;/p></description>
+php, testing</item><item><title>AWS, S3 Storage and limited Visibility</title><link>https://alfrednutile.info/posts/180/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/180/</guid><description>&lt;p>Storing files on S3 is great. And many times those files are private so I only want to give temporary access to them. Using Laravel Storage I can interact with the file-system quite easily and seamlessly especially between Cloud and Local.&lt;/p>
 &lt;p>In this case I want to return a file only for 10 minutes&lt;/p>
 &lt;pre>&lt;code> public function getSignedUrl($filename_and_path, $expires_minutes = '10')
 {
@@ -1272,7 +1288,8 @@ $request = $client-&amp;gt;createPresignedRequest($command, Carbon::now()-&amp;g
 return (string) $request-&amp;gt;getUri();
 }
 &lt;/code>&lt;/pre>&lt;p>That is it!&lt;/p>
-&lt;p>Thanks to this &lt;a href="https://github.com/minio/minio/issues/1285">post&lt;/a> for the help.&lt;/p></description><category>php</category><category>aws</category></item><item><title>Behat and Uploading Files to a Form Even on Remote Selenium2 Servers</title><link>https://alfrednutile.info/posts/179/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/179/</guid><description>&lt;p>Just had to tackle this issue so making some notes for later here :)&lt;/p>
+&lt;p>Thanks to this &lt;a href="https://github.com/minio/minio/issues/1285">post&lt;/a> for the help.&lt;/p></description>
+php, aws</item><item><title>Behat and Uploading Files to a Form Even on Remote Selenium2 Servers</title><link>https://alfrednutile.info/posts/179/</link><pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/179/</guid><description>&lt;p>Just had to tackle this issue so making some notes for later here :)&lt;/p>
 &lt;p>&lt;strong>Updated and more detailed &lt;a href="https://alfrednutile.info/posts/188">here&lt;/a>&lt;/strong>&lt;/p>
 &lt;p>I run selenium on my Windows PC and before that my Mac, either one would have had this issue since my test is running side my VM. This meant when I needed to run a test to interact with a form to upload an image that image path was relative to the machine (VM) that I started the test on and not the Browser that was being manipulated by Selenium2.&lt;/p>
 &lt;p>The solution was &amp;ldquo;easy&amp;rdquo; thanks to this &lt;a href="https://github.com/minkphp/MinkSelenium2Driver/issues/187#issuecomment-112106857">thread&lt;/a>&lt;/p>
@@ -1296,7 +1313,8 @@ unlink($tempZip);
 $this-&amp;gt;pressButton('Save');
 }
 &lt;/code>&lt;/pre>&lt;p>I also had to add &lt;code>@javascript&lt;/code> to the test to allow this WebDriver feature to work.&lt;/p>
-&lt;p>That was it, saved me a ton of time suffering through this gotcha moment.&lt;/p></description><category>behat</category><category>bdd</category><category>php</category><category>note2self</category></item><item><title>Laravel, PHPUnit, Require_Once on Routes</title><link>https://alfrednutile.info/posts/178/</link><pubDate>Tue, 22 Mar 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/178/</guid><description>&lt;p>Going crazy running PHPUnit all and getting fail but you run the one route and it works!&lt;/p>
+&lt;p>That was it, saved me a ton of time suffering through this gotcha moment.&lt;/p></description>
+behat, bdd, php, note2self</item><item><title>Laravel, PHPUnit, Require_Once on Routes</title><link>https://alfrednutile.info/posts/178/</link><pubDate>Tue, 22 Mar 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/178/</guid><description>&lt;p>Going crazy running PHPUnit all and getting fail but you run the one route and it works!&lt;/p>
 &lt;p>The difference is &lt;code>require&lt;/code> versus &lt;code>require_once&lt;/code> in PHPUnit tests.&lt;/p>
 &lt;p>For example&lt;/p>
 &lt;pre>&lt;code>require __DIR__ . '/../ConfigurationExamples/routes.php';
@@ -1335,7 +1353,8 @@ $this-&amp;gt;assertEquals(&amp;quot;foo&amp;quot;, $results-&amp;gt;getContent(
 }
 &lt;/code>&lt;/pre>&lt;p>The moment I change it to &lt;code>require_once&lt;/code> I get fails on the last or second to last one, it is not consistant except that it will fail. I immediately run that one and it passes.&lt;/p>
 &lt;p>It is not the database and I can change the order of these tests to have the bottom one fail.&lt;/p>
-&lt;p>So &lt;code>require&lt;/code> is your friend!!&lt;/p></description><category>note2self</category><category>php</category><category>laravel</category></item><item><title>Feature Flags In Laravel</title><link>https://alfrednutile.info/posts/175/</link><pubDate>Tue, 26 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/175/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
+&lt;p>So &lt;code>require&lt;/code> is your friend!!&lt;/p></description>
+note2self, php, laravel</item><item><title>Feature Flags In Laravel</title><link>https://alfrednutile.info/posts/175/</link><pubDate>Tue, 26 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/175/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>&lt;strong>Library is &lt;a href="https://github.com/friendsofcat/laravel-feature-flag/">https://github.com/friendsofcat/laravel-feature-flag/&lt;/a>&lt;/strong>&lt;/p>
 &lt;p>&lt;strong>Listen &lt;a href="http://www.readorlisten.com/10">here&lt;/a>&lt;/strong>&lt;/p>
 &lt;p>&lt;strong>Watch &lt;a href="https://youtu.be/4nq7FyHQj8I">https://youtu.be/4nq7FyHQj8I&lt;/a>&lt;/strong>&lt;/p>
@@ -1481,7 +1500,8 @@ $view-&amp;gt;with('links', array_merge($links_original, $links));
 &lt;li>Use Model Events to do that level of work&lt;/li>
 &lt;li>Cache of the FeatureFlag Settings and update Cache on Change&lt;/li>
 &lt;li>Show how it works in the menu and other areas eg include and Provider&lt;/li>
-&lt;/ul></description><category>laravel</category><category>feature_flags</category><category>php</category></item><item><title>Slack Custom Commands and Laravel to Make an American to British Translater</title><link>https://alfrednutile.info/posts/173/</link><pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/173/</guid><description>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/b8vwn1peb7s5cet/a2b.gif?dl=0" alt="in use">&lt;/p>
+&lt;/ul></description>
+laravel, feature_flags, php</item><item><title>Slack Custom Commands and Laravel to Make an American to British Translater</title><link>https://alfrednutile.info/posts/173/</link><pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/173/</guid><description>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/b8vwn1peb7s5cet/a2b.gif?dl=0" alt="in use">&lt;/p>
 &lt;p>Laravel or anything you are comfortable with making a Route and Response will work fine really.&lt;/p>
 &lt;p>This &amp;ldquo;messaging as a platform&amp;rdquo; is a new world for me, challenging my way of thinking in many ways. Some things just do not need a authentication of their own, a UI, etc they just need a place to get info from, or do something with some info etc.&lt;/p>
 &lt;p>In this case I made a really simple &amp;ldquo;Custom Slash Command&amp;rdquo; to translate British Slang to American and American to British (so I can sound cooler!)&lt;/p>
@@ -1612,7 +1632,8 @@ Make sure you exclude this route from the &amp;ldquo;app/Http/Middleware/VerifyC
 &lt;pre>&lt;code> protected $except = [
 'api/v1/imports'
 ];
-&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category><category>slack</category></item><item><title>Put It All Into Version Control Even Composer!</title><link>https://alfrednutile.info/posts/171/</link><pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/171/</guid><description>&lt;p>&lt;strong>Update: September 06 2016&lt;/strong>&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, php, slack</item><item><title>Put It All Into Version Control Even Composer!</title><link>https://alfrednutile.info/posts/171/</link><pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/171/</guid><description>&lt;p>&lt;strong>Update: September 06 2016&lt;/strong>&lt;/p>
 &lt;p>We stopped doing this. I do not think it is a bad idea but we ended up going with CodeDeploy on AWS. So after our CI does a Composer install and all passes, CodeDeploy will just bundle everything up as a Zip file and deploy that to the server.&lt;/p>
 &lt;p>&lt;strong>Or Listen &lt;a href="http://www.readorlisten.com/2">here&lt;/a>&lt;/strong>&lt;/p>
 &lt;p>Another article about this written by Loran Jane Mitchell &lt;a href="http://www.lornajane.net/posts/2014/using-composer-without-gitignoring">Using Composer Without GitIgnoring Vendor&lt;/a>&lt;/p>
@@ -1632,7 +1653,8 @@ Make sure you exclude this route from the &amp;ldquo;app/Http/Middleware/VerifyC
 &lt;p>&amp;ldquo;when things are down on production 1/2 a minute can feel like a life time&amp;rdquo;&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="fixing-merge-conflicts">Fixing Merge Conflicts&lt;/h2>
-&lt;p>Well what happens when there is a conflict in this vendor folder? That is easy really just &lt;code>rm&lt;/code> the whole thing and do what I have been doing all along &lt;code>composer install&lt;/code> saving &lt;code>composer update&lt;/code> only for those moments you are looking for something to really be updated and feeling lucky (and patient).&lt;/p></description><category>laravel</category><category>php</category><category>workflows</category><category>coding</category><category>best practices</category></item><item><title>Do I Really Need This Route Anymore?</title><link>https://alfrednutile.info/posts/169/</link><pubDate>Thu, 17 Dec 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/169/</guid><description>&lt;p>Clean out old code can be hard. When your application has numerous javascript widgets, blade templates and forms you can not easily say what routes are being used. But with just a few artisan commands we can easily make this happen.&lt;/p>
+&lt;p>Well what happens when there is a conflict in this vendor folder? That is easy really just &lt;code>rm&lt;/code> the whole thing and do what I have been doing all along &lt;code>composer install&lt;/code> saving &lt;code>composer update&lt;/code> only for those moments you are looking for something to really be updated and feeling lucky (and patient).&lt;/p></description>
+laravel, php, workflows, coding, best practices</item><item><title>Do I Really Need This Route Anymore?</title><link>https://alfrednutile.info/posts/169/</link><pubDate>Thu, 17 Dec 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/169/</guid><description>&lt;p>Clean out old code can be hard. When your application has numerous javascript widgets, blade templates and forms you can not easily say what routes are being used. But with just a few artisan commands we can easily make this happen.&lt;/p>
 &lt;p>Also this can help with knowing what routes your Tests are NOT covering.&lt;/p>
 &lt;p>Package can be found &lt;a href="https://packagist.org/packages/alfred-nutile-inc/route-tracking">here&lt;/a> as well.&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/892qdyoy099835b/route_report.png?dl=0" alt="route report">&lt;/p>
@@ -1762,7 +1784,8 @@ $this-&amp;gt;table($this-&amp;gt;headers, $report-&amp;gt;toArray()['data']);
 }
 &lt;/code>&lt;/pre>&lt;pre>&lt;code>php artisan route:report --count
 &lt;/code>&lt;/pre>&lt;p>Can give us&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/kh042i76j6oa6w9/route_counted.png?dl=0" alt="counted">&lt;/p></description><category>php</category></item><item><title>Logout User After Inactivity Laravel and Milddleware</title><link>https://alfrednutile.info/posts/168/</link><pubDate>Sat, 14 Nov 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/168/</guid><description>&lt;p>&lt;strong>Original Post&lt;/strong> &lt;a href="http://laravel-tricks.com/tricks/session-timeout-for-logged-in-user">http://laravel-tricks.com/tricks/session-timeout-for-logged-in-user&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/kh042i76j6oa6w9/route_counted.png?dl=0" alt="counted">&lt;/p></description>
+php</item><item><title>Logout User After Inactivity Laravel and Milddleware</title><link>https://alfrednutile.info/posts/168/</link><pubDate>Sat, 14 Nov 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/168/</guid><description>&lt;p>&lt;strong>Original Post&lt;/strong> &lt;a href="http://laravel-tricks.com/tricks/session-timeout-for-logged-in-user">http://laravel-tricks.com/tricks/session-timeout-for-logged-in-user&lt;/a>&lt;/p>
 &lt;p>This Middleware made it super easy to satisfy a requirement to log the user out after 15 minutes of in activity.&lt;/p>
 &lt;p>I added only a few touchups.&lt;/p>
 &lt;p>One was the &lt;code>getTimeOut&lt;/code> this was so I can work locally and override this by setting it to a large number. I could even use it to just bypass the whole things for a bit since on &lt;code>local&lt;/code> I rather not deal with this.&lt;/p>
@@ -1801,7 +1824,8 @@ protected function getTimeOut()
 return (env('TIMEOUT')) ?: $this-&amp;gt;timeout;
 }
 }
-&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category></item><item><title>Quick Tip Forcing More Complex Passwords in Laravel</title><link>https://alfrednutile.info/posts/166/</link><pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/166/</guid><description>&lt;p>With the great &lt;a href="http://laravel.com/docs/5.1/validation">Laravel Docs&lt;/a> I will quickly show how to &amp;ldquo;encourage&amp;rdquo; the user to set a better password.&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, php</item><item><title>Quick Tip Forcing More Complex Passwords in Laravel</title><link>https://alfrednutile.info/posts/166/</link><pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/166/</guid><description>&lt;p>With the great &lt;a href="http://laravel.com/docs/5.1/validation">Laravel Docs&lt;/a> I will quickly show how to &amp;ldquo;encourage&amp;rdquo; the user to set a better password.&lt;/p>
 &lt;p>Going through the standard docs for &lt;a href="http://laravel.com/docs/5.1/authentication">Authentication&lt;/a> we end up with a registration form.&lt;/p>
 &lt;p>Then in the &lt;a href="https://github.com/laravel/laravel/blob/master/app/Http/Controllers/Auth/AuthController.php">AuthController&lt;/a> that comes with Laravel I modify it a bit.&lt;/p>
 &lt;pre>&lt;code> protected function validator(array $data)
@@ -1816,7 +1840,8 @@ return Validator::make($data, [
 &lt;/code>&lt;/pre>&lt;p>Using the &lt;code>regex&lt;/code> rule seen in the &lt;a href="http://laravel.com/docs/5.1/validation#available-validation-rules">docs&lt;/a> &lt;a href="http://php.net/manual/en/function.preg-match.php">http://php.net/manual/en/function.preg-match.php&lt;/a> and the Laravel docs I can then set an expression to check for these characters, and I can also set a custom message if it fails.&lt;/p>
 &lt;p>And with that little bit of work we get an error message to help the user make a better password.&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/y9jloa191jwryfg/regex_error.png?dl=0" alt="https://dl.dropboxusercontent.com/s/y9jloa191jwryfg/regex_error.png?dl=0">&lt;/p>
-&lt;p>btw this is coming about as I start this &lt;a href="https://onemonth.com/courses/web-security">Web Security Course&lt;/a> and try to consider some of these ideas in my day to day Laravel work.&lt;/p></description><category>laravel</category><category>php</category><category>security</category></item><item><title>Image Uploads, Laravel, Angular and Flow.js</title><link>https://alfrednutile.info/posts/165/</link><pubDate>Fri, 18 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/165/</guid><description>&lt;p>Here is one combination out of many to make this happen.&lt;/p>
+&lt;p>btw this is coming about as I start this &lt;a href="https://onemonth.com/courses/web-security">Web Security Course&lt;/a> and try to consider some of these ideas in my day to day Laravel work.&lt;/p></description>
+laravel, php, security</item><item><title>Image Uploads, Laravel, Angular and Flow.js</title><link>https://alfrednutile.info/posts/165/</link><pubDate>Fri, 18 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/165/</guid><description>&lt;p>Here is one combination out of many to make this happen.&lt;/p>
 &lt;p>The libraries are&lt;/p>
 &lt;p>&lt;a href="https://github.com/flowjs/ng-flow">https://github.com/flowjs/ng-flow&lt;/a>&lt;/p>
 &lt;p>and&lt;/p>
@@ -2097,7 +2122,8 @@ angular.module('app.upload')
 &lt;/code>&lt;/pre>&lt;p>So we use the flow upload event to run our upload method. This then adds the token to the POST request for the CSRF middleware.&lt;/p>
 &lt;p>Keep in mind my Angular is just a widget in blade. There is no separate session situation that you may have in SPA (Single Page Applications)&lt;/p>
 &lt;p>Thats it, drag file, file uploads and you have Flow, Angular and Laravel.&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/01l8psl1rpud4ee/laravel_flow_angular.png?dl=0" alt="">&lt;/p></description><category>laravel</category><category>php</category><category>angular</category></item><item><title>Simple Example of Making Code Easier to Read</title><link>https://alfrednutile.info/posts/164/</link><pubDate>Thu, 17 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/164/</guid><description>&lt;p>Just a quick example&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/01l8psl1rpud4ee/laravel_flow_angular.png?dl=0" alt="">&lt;/p></description>
+laravel, php, angular</item><item><title>Simple Example of Making Code Easier to Read</title><link>https://alfrednutile.info/posts/164/</link><pubDate>Thu, 17 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/164/</guid><description>&lt;p>Just a quick example&lt;/p>
 &lt;p>Before&lt;/p>
 &lt;pre>&lt;code> public function updateMarketoFolder($folder)
 {
@@ -2155,7 +2181,8 @@ private function checkItHasAName($folder)
 {
 return isset($folder['name']);
 }
-&lt;/code>&lt;/pre>&lt;p>Just a lot easier to come back to an remember why and what I am doing in the if statements. Also just to read a bit more easily what the needs are here of the data.&lt;/p></description><category>php</category><category>clean code</category></item><item><title>Spark Setup Issue</title><link>https://alfrednutile.info/posts/163/</link><pubDate>Tue, 15 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/163/</guid><description>&lt;p>During the install &lt;a href="https://github.com/laravel/spark">https://github.com/laravel/spark&lt;/a> I kept getting this error&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Just a lot easier to come back to an remember why and what I am doing in the if statements. Also just to read a bit more easily what the needs are here of the data.&lt;/p></description>
+php, clean code</item><item><title>Spark Setup Issue</title><link>https://alfrednutile.info/posts/163/</link><pubDate>Tue, 15 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/163/</guid><description>&lt;p>During the install &lt;a href="https://github.com/laravel/spark">https://github.com/laravel/spark&lt;/a> I kept getting this error&lt;/p>
 &lt;pre>&lt;code> Problem 1
 - Installation request for laravel/spark-installer ~1.0 -&amp;gt; satisfiable by laravel/spark-installer[v1.0.0].
 - Conclusion: remove illuminate/support v4.2.17
@@ -2187,7 +2214,8 @@ return isset($folder['name']);
 &lt;p>Finally I made sure to add the path to my ~/.bash_profile as&lt;/p>
 &lt;pre>&lt;code>export PATH=$PATH:/Users/alfrednutile/.composer/vendor/bin/
 &lt;/code>&lt;/pre>&lt;p>Then ran &lt;code>source ~/.bash_profile&lt;/code>&lt;/p>
-&lt;p>With all that in place I could go to my new Laravel install to run &lt;code>spark install&lt;/code>&lt;/p></description><category>spark</category><category>laravel</category><category>php</category></item><item><title>Adding Expose IDS to Laravel MiddleWare</title><link>https://alfrednutile.info/posts/162/</link><pubDate>Thu, 03 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/162/</guid><description>&lt;p>The library is &lt;a href="https://github.com/enygma/expose">https://github.com/enygma/expose&lt;/a>&lt;/p>
+&lt;p>With all that in place I could go to my new Laravel install to run &lt;code>spark install&lt;/code>&lt;/p></description>
+spark, laravel, php</item><item><title>Adding Expose IDS to Laravel MiddleWare</title><link>https://alfrednutile.info/posts/162/</link><pubDate>Thu, 03 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/162/</guid><description>&lt;p>The library is &lt;a href="https://github.com/enygma/expose">https://github.com/enygma/expose&lt;/a>&lt;/p>
 &lt;blockquote>
 &lt;p>&amp;ldquo;Expose is an Intrusion Detection System for PHP loosely based on the PHPIDS project (and using it&amp;rsquo;s ruleset for detecting potential threats).&amp;rdquo;&lt;/p>
 &lt;/blockquote>
@@ -2271,7 +2299,8 @@ throw new TokenMismatchException;
 &lt;li>Keep track of issues and notify the team of issues&lt;/li>
 &lt;li>Cut through a can without getting dull&lt;/li>
 &lt;/ul>
-&lt;p>Anyways I have a ways to go with this but just seeing the different tools I could use to make my applications more secure.&lt;/p></description><category>security</category><category>laravel</category><category>php</category></item><item><title>Laravel and Angular Widgets e.g. Non SPA (Single Page Application) Pattern</title><link>https://alfrednutile.info/posts/160/</link><pubDate>Wed, 26 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/160/</guid><description>&lt;p>Not all apps need to be an SPA (Single Page Application). Sure they have their place but in most cases the task might benefit from just a Blade template and Angular widget. This saves you from having to write an angular route which can be a tedious duplication of work. Also Blade is fast and fun to work with.&lt;/p>
+&lt;p>Anyways I have a ways to go with this but just seeing the different tools I could use to make my applications more secure.&lt;/p></description>
+security, laravel, php</item><item><title>Laravel and Angular Widgets e.g. Non SPA (Single Page Application) Pattern</title><link>https://alfrednutile.info/posts/160/</link><pubDate>Wed, 26 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/160/</guid><description>&lt;p>Not all apps need to be an SPA (Single Page Application). Sure they have their place but in most cases the task might benefit from just a Blade template and Angular widget. This saves you from having to write an angular route which can be a tedious duplication of work. Also Blade is fast and fun to work with.&lt;/p>
 &lt;h2 id="step-one-add-data-to-global-window">Step One Add Data to Global Window&lt;/h2>
 &lt;p>Using the &lt;a href="https://github.com/laracasts/PHP-Vars-To-Js-Transformer">Transform PHP Vars to JavaScript&lt;/a> you can easily start to inject some content into your templates, if needed, to setup the data your Angular widget can use to build out it&amp;rsquo;s elements.&lt;/p>
 &lt;p>For example the Controller below will push some info into the view that I can use later&lt;/p>
@@ -2381,7 +2410,8 @@ angular.module('app')
 .controller('ApiControllerUserShow', ApiControllerUserShow);
 })();
 &lt;/code>&lt;/pre>&lt;p>That is it. Keep in mind that Blade template can have numerous angular &amp;ldquo;widgets&amp;rdquo; so different sections of the page can benefit from Angular. Or the one page can have several places that the Angular controller controls some of the output.&lt;/p>
-&lt;p>So hopefully this sums up a quick way to start putting Angular widgets into your Laravel application and still benefit from all speed that these too tools offer both in developing and in rendering!&lt;/p></description><category>laravel</category><category>php</category><category>angular</category></item><item><title>Talking to the Methods Not the Properties</title><link>https://alfrednutile.info/posts/158/</link><pubDate>Wed, 12 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/158/</guid><description>&lt;p>Just a team related style guide item.&lt;/p>
+&lt;p>So hopefully this sums up a quick way to start putting Angular widgets into your Laravel application and still benefit from all speed that these too tools offer both in developing and in rendering!&lt;/p></description>
+laravel, php, angular</item><item><title>Talking to the Methods Not the Properties</title><link>https://alfrednutile.info/posts/158/</link><pubDate>Wed, 12 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/158/</guid><description>&lt;p>Just a team related style guide item.&lt;/p>
 &lt;p>When talking to properties in a class talk via a getter.&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php
 class Foo {
@@ -2435,7 +2465,8 @@ $this-&amp;gt;client = $client;
 return $this;
 }
 }
-&lt;/code>&lt;/pre>&lt;p>This makes it simple to mock during testing and simple to instantiate as needed.&lt;/p></description><category>team</category><category>laravel</category><category>php</category></item><item><title>Using your project docs inside the application</title><link>https://alfrednutile.info/posts/157/</link><pubDate>Wed, 05 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/157/</guid><description>&lt;p>The applications I work on have markdown docs. These can be in the docs/ folder for example as &lt;code>docs/webhooks.md&lt;/code>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>This makes it simple to mock during testing and simple to instantiate as needed.&lt;/p></description>
+team, laravel, php</item><item><title>Using your project docs inside the application</title><link>https://alfrednutile.info/posts/157/</link><pubDate>Wed, 05 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/157/</guid><description>&lt;p>The applications I work on have markdown docs. These can be in the docs/ folder for example as &lt;code>docs/webhooks.md&lt;/code>&lt;/p>
 &lt;p>But some of these docs have value to the user of the UI not just the developer, and when we include these docs inside the application repo it is a TON easier to just update them as you fix and make new features in the codebase.&lt;/p>
 &lt;p>You can have the best of both worlds with a simple to use library &lt;a href="https://github.com/michelf/php-markdown">https://github.com/michelf/php-markdown&lt;/a>&lt;/p>
 &lt;h2 id="the-controller">The Controller&lt;/h2>
@@ -2474,7 +2505,8 @@ return view('help.api', compact('webhooks'));
 &lt;pre>&lt;code>$webhooks = strip_tags($webhooks, &amp;quot;tags you allow here&amp;quot;);
 &lt;/code>&lt;/pre>&lt;p>Will help out there.&lt;/p>
 &lt;h2 id="the-markdown">The Markdown&lt;/h2>
-&lt;p>Then just write your file as normal in markdown!&lt;/p></description><category>laravel</category><category>php</category><category>docs</category></item><item><title>HasMany Through a Many to Many</title><link>https://alfrednutile.info/posts/155/</link><pubDate>Wed, 29 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/155/</guid><description>&lt;p>This thread helped a lot &lt;a href="http://laravel.io/forum/03-04-2014-hasmanythrough-with-many-to-many">http://laravel.io/forum/03-04-2014-hasmanythrough-with-many-to-many&lt;/a>&lt;/p>
+&lt;p>Then just write your file as normal in markdown!&lt;/p></description>
+laravel, php, docs</item><item><title>HasMany Through a Many to Many</title><link>https://alfrednutile.info/posts/155/</link><pubDate>Wed, 29 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/155/</guid><description>&lt;p>This thread helped a lot &lt;a href="http://laravel.io/forum/03-04-2014-hasmanythrough-with-many-to-many">http://laravel.io/forum/03-04-2014-hasmanythrough-with-many-to-many&lt;/a>&lt;/p>
 &lt;p>In the end I had this query&lt;/p>
 &lt;pre>&lt;code> class MetaData extends Model
 {
@@ -2492,7 +2524,8 @@ return $this-&amp;gt;belongsToMany(\App\MetaValue::class)
 }
 &lt;/code>&lt;/pre>&lt;p>Model &lt;code>meta_data_types&lt;/code> had not direct relation to this MetaData model class. But MetaData did relate to meta_values.&lt;/p>
 &lt;p>So using that info I could get the related MetaValues and then the related MetaDataTypes and that was it.&lt;/p>
-&lt;p>It is a lot easier if just doing this through a One to Many &lt;a href="http://laravel.com/docs/5.1/eloquent-relationships#has-many-through">http://laravel.com/docs/5.1/eloquent-relationships#has-many-through&lt;/a>&lt;/p></description><category>laravel</category><category>php</category></item><item><title>Adding RSS to Your Site</title><link>https://alfrednutile.info/posts/154/</link><pubDate>Sun, 12 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/154/</guid><description>&lt;p>Using this library &lt;a href="https://packagist.org/packages/thujohn/rss">https://packagist.org/packages/thujohn/rss&lt;/a>&lt;/p>
+&lt;p>It is a lot easier if just doing this through a One to Many &lt;a href="http://laravel.com/docs/5.1/eloquent-relationships#has-many-through">http://laravel.com/docs/5.1/eloquent-relationships#has-many-through&lt;/a>&lt;/p></description>
+laravel, php</item><item><title>Adding RSS to Your Site</title><link>https://alfrednutile.info/posts/154/</link><pubDate>Sun, 12 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/154/</guid><description>&lt;p>Using this library &lt;a href="https://packagist.org/packages/thujohn/rss">https://packagist.org/packages/thujohn/rss&lt;/a>&lt;/p>
 &lt;p>We simply install but using a forked version so it works with L5&lt;/p>
 &lt;pre>&lt;code> &amp;quot;require&amp;quot;: {
 &amp;quot;php&amp;quot;: &amp;quot;&amp;gt;=5.5.9&amp;quot;,
@@ -2520,7 +2553,8 @@ $feed-&amp;gt;item(array('title' =&amp;gt; $blog-&amp;gt;title, 'description|cda
 }
 return Response::make($feed, 200, array('Content-Type' =&amp;gt; 'text/xml'));
 });
-&lt;/code>&lt;/pre>&lt;p>And nothing fancy here I just output my blog model. I could limit to the latest 10 or output the data better but for now.&lt;/p></description><category>laravel</category><category>php</category></item><item><title>Laravel 5.1 Behat and Codeship</title><link>https://alfrednutile.info/posts/151/</link><pubDate>Sat, 04 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/151/</guid><description>&lt;p>The new integration testing features with Laravel 5.1 make Behat almost not needed BUT we do a lot of AngularJs work and instead of using karma to test the ui we enjoy using behat since we like the Gherkin Syntax and how we can easily code custom steps in PHP.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>And nothing fancy here I just output my blog model. I could limit to the latest 10 or output the data better but for now.&lt;/p></description>
+laravel, php</item><item><title>Laravel 5.1 Behat and Codeship</title><link>https://alfrednutile.info/posts/151/</link><pubDate>Sat, 04 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/151/</guid><description>&lt;p>The new integration testing features with Laravel 5.1 make Behat almost not needed BUT we do a lot of AngularJs work and instead of using karma to test the ui we enjoy using behat since we like the Gherkin Syntax and how we can easily code custom steps in PHP.&lt;/p>
 &lt;p>Here are some steps to getting behat going on Codeship so you get full CI even of Angular.&lt;/p>
 &lt;p>This is all based off of &lt;a href="https://github.com/laracasts/Behat-Laravel-Extension">https://github.com/laracasts/Behat-Laravel-Extension&lt;/a>&lt;/p>
 &lt;h2 id="behatyml">Behat.yml&lt;/h2>
@@ -2599,7 +2633,8 @@ php artisan migrate
 php artisan db:seed
 vendor/bin/behat --profile=codeship --stop-on-failure
 &lt;/code>&lt;/pre>&lt;p>I run the migration one more time to get it ready for behat&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/2uadht5426s40p8/behat_codeship.png?dl=0" alt="behat">&lt;/p></description><category>laravel</category><category>php</category><category>bdd</category></item><item><title>Conventions to Help Minimize your ENV File</title><link>https://alfrednutile.info/posts/150/</link><pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/150/</guid><description>&lt;p>&lt;strong>UPDATE&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/2uadht5426s40p8/behat_codeship.png?dl=0" alt="behat">&lt;/p></description>
+laravel, php, bdd</item><item><title>Conventions to Help Minimize your ENV File</title><link>https://alfrednutile.info/posts/150/</link><pubDate>Tue, 09 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/150/</guid><description>&lt;p>&lt;strong>UPDATE&lt;/strong>&lt;/p>
 &lt;blockquote>
 &lt;p>I think we can also do AWS_BUCKET=foo_$APP_ENV directly in the env file, see &lt;a href="https://mattstauffer.co/blog/laravel-5.0-environment-detection-and-environment-variables"> https://mattstauffer.co/blog/laravel-5.0-environment-detection-and-environment-variables&lt;/a>&lt;/p>
 &lt;/blockquote>
@@ -2666,7 +2701,8 @@ DYNAMO_OCR_RT_TABLE='some_table'
 OCR_IRON_TOKEN='sometoken'
 OCR_IRON_PROJECT_ID='somekey'
 OCR_IRON_QUEUE='foo'
-&lt;/code>&lt;/pre>&lt;p>Convention over configuration so simple yet so easy for me to forget :)&lt;/p></description><category>laravel</category><category>php</category></item><item><title>Codeship and Laravel for Continuous Integration</title><link>https://alfrednutile.info/posts/148/</link><pubDate>Sun, 07 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/148/</guid><description>&lt;p>Getting going on Codeship and Laravel is pretty easy.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Convention over configuration so simple yet so easy for me to forget :)&lt;/p></description>
+laravel, php</item><item><title>Codeship and Laravel for Continuous Integration</title><link>https://alfrednutile.info/posts/148/</link><pubDate>Sun, 07 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/148/</guid><description>&lt;p>Getting going on Codeship and Laravel is pretty easy.&lt;/p>
 &lt;p>Once you setup codeship to work with your github account just pull in your repo and set your Testing scripts as follows. (they have a ui for ENV variables as well)&lt;/p>
 &lt;h2 id="codeship-testing-settings-easier-copy-paste-bottom-of-article">Codeship Testing Settings [easier copy paste bottom of article]&lt;/h2>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/fh6vv3g5wpqw7ac/codeship1.png?dl=0" alt="codeship">&lt;/p>
@@ -2743,7 +2779,8 @@ echo &amp;quot;MAIL_ENCRYPTION=true&amp;quot; &amp;gt;&amp;gt; .env
 echo &amp;quot;STRIPE_API_SECRET='foo'&amp;quot; &amp;gt;&amp;gt; .env
 echo &amp;quot;STRIPE_PUBLIC='foo'&amp;quot; &amp;gt;&amp;gt; .env
 composer install --dev
-&lt;/code>&lt;/pre></description><category>laravel</category><category>testing</category><category>phpunit</category><category>php</category><category>ci</category><category>codeship</category></item><item><title>Writing Commands and Scheduling in Laravel 5.1</title><link>https://alfrednutile.info/posts/146/</link><pubDate>Fri, 29 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/146/</guid><description>&lt;p>Wow, writing &lt;a href="http://laravel.com/docs/master/artisan#command-structure">Artisan Commands&lt;/a> just become even easier. And plugging it into &lt;a href="http://laravel.com/docs/master/scheduling">Scheduler&lt;/a> makes for a great combination.&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, testing, phpunit, php, ci, codeship</item><item><title>Writing Commands and Scheduling in Laravel 5.1</title><link>https://alfrednutile.info/posts/146/</link><pubDate>Fri, 29 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/146/</guid><description>&lt;p>Wow, writing &lt;a href="http://laravel.com/docs/master/artisan#command-structure">Artisan Commands&lt;/a> just become even easier. And plugging it into &lt;a href="http://laravel.com/docs/master/scheduling">Scheduler&lt;/a> makes for a great combination.&lt;/p>
 &lt;p>For example we need to clean out a folder every so many minutes. The example below I also for fun play around with &lt;code>progress&lt;/code> and table output.&lt;/p>
 &lt;p>Note too &lt;code>protected $signature = 'approve:cleanuploads {--minutes=10}';&lt;/code> simplifies the&lt;code>argument&lt;/code> and &lt;code>options&lt;/code> features.&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php namespace App\Console\Commands;
@@ -2849,7 +2886,8 @@ $schedule-&amp;gt;command('approve:cleanuploads --minutes=10')
 }
 &lt;/code>&lt;/pre>&lt;p>And that is it.&lt;/p>
 &lt;p>One big thing about Commands is the power of Asynchronous processing that libraries like &lt;a href="http://symfony.com/doc/current/components/process.html">Symfony Process&lt;/a> gives us the ability to run numerous commands at once!&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/cu1v0wl61ul29qr/cleanFiles.gif?dl=0" alt="running">&lt;/p></description><category>laravel</category><category>php</category><category>commands</category></item><item><title>Easily Create Fixture Data from Remote Services and Refresh Mock Data</title><link>https://alfrednutile.info/posts/145/</link><pubDate>Wed, 27 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/145/</guid><description>&lt;p>&lt;strong>Oops Codeship and Laravel is &lt;a href="https://goo.gl/k62TEB">here&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/cu1v0wl61ul29qr/cleanFiles.gif?dl=0" alt="running">&lt;/p></description>
+laravel, php, commands</item><item><title>Easily Create Fixture Data from Remote Services and Refresh Mock Data</title><link>https://alfrednutile.info/posts/145/</link><pubDate>Wed, 27 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/145/</guid><description>&lt;p>&lt;strong>Oops Codeship and Laravel is &lt;a href="https://goo.gl/k62TEB">here&lt;/a>&lt;/strong>&lt;/p>
 &lt;h1 id="easily-create-fixture-data-from-remote-services-and-refresh-mock-data">Easily Create Fixture Data from Remote Services and Refresh Mock Data&lt;/h1>
 &lt;p>We have integration tests that hit remote apis like Github, S3, DynomoDB, our own APIs etc and we do not want to hit those during out tests but we also want to make sure we have the real data. So when one of those APIs change then our mock data can be refreshed to see if our systems really work with it.&lt;/p>
 &lt;p>Using Laravel&amp;rsquo;s new integration tests, though this works with any framework, we will swap out these Service classes with a Wrapper class ONLY if we have a matching file. This allows us to delete those files and get another one on the fly.&lt;/p>
@@ -2993,7 +3031,8 @@ $this-&amp;gt;app-&amp;gt;bind('App\ExampleRepo', 'App\ExampleRepo');
 }
 &lt;/code>&lt;/pre>&lt;p>Then register as normal in your config/app.php . This can be kinda tedious but would produce the same results.&lt;/p>
 &lt;p>Great book on the topic &lt;a href="https://leanpub.com/laravel-testing-decoded">Laravel Testing Decoded&lt;/a>&lt;/p>
-&lt;p>&lt;img src="https://s3.amazonaws.com/titlepages.leanpub.com/laravel-testing-decoded/large?1425536214" alt="decoded">&lt;/p></description><category>testing</category><category>laravel</category><category>php</category><category>phpunit</category><category>integration</category></item><item><title>Iron.io and Lumen</title><link>https://alfrednutile.info/posts/143/</link><pubDate>Tue, 28 Apr 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/143/</guid><description>&lt;h1 id="lumen-iron-worker">Lumen Iron Worker&lt;/h1>
+&lt;p>&lt;img src="https://s3.amazonaws.com/titlepages.leanpub.com/laravel-testing-decoded/large?1425536214" alt="decoded">&lt;/p></description>
+testing, laravel, php, phpunit, integration</item><item><title>Iron.io and Lumen</title><link>https://alfrednutile.info/posts/143/</link><pubDate>Tue, 28 Apr 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/143/</guid><description>&lt;h1 id="lumen-iron-worker">Lumen Iron Worker&lt;/h1>
 &lt;h2 id="what-and-why">What and why&lt;/h2>
 &lt;p>A worker is a great way to run tasks as needed taking the load off your applications server and greatly speeding up the process of a task as you can run numerous workers at once.&lt;/p>
 &lt;p>A lot of this comes from &lt;a href="http://dev.iron.io/worker/beta/getting_started/">http://dev.iron.io/worker/beta/getting_started/&lt;/a> and
@@ -3270,7 +3309,8 @@ zip -r PDF2PagesWorker.zip .
 &lt;p>another example &lt;a href="https://github.com/alnutile/thumbnail-maker">Thumbnail Maker&lt;/a>&lt;/p>
 &lt;p>[1] These seems to be a part of the iron worker for version 1 but not sure why not for 2 maybe there is a better pattern for this.&lt;/p>
 &lt;p>[2] I renamed it to ExampleOneLumen&lt;/p>
-&lt;p>[3] So far this is a 50/50 solution it did not work for pdf2svg but it did work for pdftk&lt;/p></description><category>laravel</category><category>php</category><category>iron</category><category>lumen</category></item><item><title>Quick way to mock data for Behat in Laravel</title><link>https://alfrednutile.info/posts/142/</link><pubDate>Mon, 30 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/142/</guid><description>&lt;p>Below allows me to use this type of step in my tests&lt;/p>
+&lt;p>[3] So far this is a 50/50 solution it did not work for pdf2svg but it did work for pdftk&lt;/p></description>
+laravel, php, iron, lumen</item><item><title>Quick way to mock data for Behat in Laravel</title><link>https://alfrednutile.info/posts/142/</link><pubDate>Mon, 30 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/142/</guid><description>&lt;p>Below allows me to use this type of step in my tests&lt;/p>
 &lt;pre>&lt;code>Scenario: Given I update a Domain get 200
 Given I mock &amp;quot;App\Sites\Domain&amp;quot; with properties:
 &amp;quot;&amp;quot;&amp;quot;
@@ -3365,7 +3405,8 @@ public function setModel($model)
 {
 $this-&amp;gt;model = new $model;
 }
-&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category><category>behat</category></item><item><title>Simple Look at Laravel Events</title><link>https://alfrednutile.info/posts/132/</link><pubDate>Sun, 08 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/132/</guid><description>&lt;h1 id="events">Events&lt;/h1>
+&lt;/code>&lt;/pre></description>
+laravel, php, behat</item><item><title>Simple Look at Laravel Events</title><link>https://alfrednutile.info/posts/132/</link><pubDate>Sun, 08 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/132/</guid><description>&lt;h1 id="events">Events&lt;/h1>
 &lt;h2 id="getting-started">Getting Started&lt;/h2>
 &lt;p>This is part of a larger &lt;a href="https://github.com/alnutile/laravel_guide/blob/master/index.md">Laravel Guide&lt;/a> I am working on in this case the example is in the Events &lt;a href="https://github.com/alnutile/laravel_guide/tree/master/projects/events">folder&lt;/a>&lt;/p>
 &lt;p>Start the example&lt;/p>
@@ -3428,7 +3469,8 @@ Event::fire('example2', array($state));
 return sprintf(&amp;quot;Event Example 2 data total state %s&amp;quot;, $state-&amp;gt;total);
 });
 &lt;/code>&lt;/pre>&lt;p>This one you just see in the browser&lt;/p>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/alnutile/laravel_guide/master/docs/img/events/example2.png" alt="example2">&lt;/p></description><category>laravel</category><category>events</category><category>php</category></item><item><title>Laravel-Flysystem and Creating Time Limited Public Urls on S3</title><link>https://alfrednutile.info/posts/131/</link><pubDate>Thu, 05 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/131/</guid><description>&lt;p>We needed to offer timed links to the urls and we are using &lt;a href="https://github.com/GrahamCampbell/Laravel-Flysystem">Laravel-Flysystem&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/alnutile/laravel_guide/master/docs/img/events/example2.png" alt="example2">&lt;/p></description>
+laravel, events, php</item><item><title>Laravel-Flysystem and Creating Time Limited Public Urls on S3</title><link>https://alfrednutile.info/posts/131/</link><pubDate>Thu, 05 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/131/</guid><description>&lt;p>We needed to offer timed links to the urls and we are using &lt;a href="https://github.com/GrahamCampbell/Laravel-Flysystem">Laravel-Flysystem&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://github.com/crypticsymbols">Aaron Smith&lt;/a> found this &lt;a href="https://coderwall.com/p/pr-gwg/create-aws-s3-signed-requests-with-php">how to&lt;/a> but I wanted it to work with existing use of FlySystem.&lt;/p>
 &lt;p>I ended up moving the code into a trait so we could use this one feature&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php namespace AlfredNutileInc\CoreApp\Helpers;
@@ -3519,7 +3561,8 @@ return ['images' =&amp;gt; $files, 'videos' =&amp;gt; []];
 throw new \Exception(sprintf(&amp;quot;Error getting files %s&amp;quot;, $e-&amp;gt;getMessage()));
 }
 }
-&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category></item><item><title>Laravel Behat and Selenium</title><link>https://alfrednutile.info/posts/130/</link><pubDate>Mon, 02 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/130/</guid><description>&lt;p>Laracasts has some great videos and libraries for Laravel 5 and Behat integration.&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, php</item><item><title>Laravel Behat and Selenium</title><link>https://alfrednutile.info/posts/130/</link><pubDate>Mon, 02 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/130/</guid><description>&lt;p>Laracasts has some great videos and libraries for Laravel 5 and Behat integration.&lt;/p>
 &lt;p>Examples&lt;/p>
 &lt;p>&lt;a href="https://github.com/laracasts/Behat-Laravel-Extension">https://github.com/laracasts/Behat-Laravel-Extension&lt;/a>&lt;/p>
 &lt;p>and&lt;/p>
@@ -3774,7 +3817,8 @@ public function iCreatePersonFixtureWithId($arg1)
 {
 Factory::create('TheHub\Profile\User', [ 'id' =&amp;gt; $arg1 ]);
 }
-&lt;/code>&lt;/pre>&lt;p>Using the Laracast TestDummy library I can quickly stub out data for the test.&lt;/p></description><category>laravel</category><category>php</category><category>behat</category><category>angular</category></item><item><title>Sqlite and Laravel</title><link>https://alfrednutile.info/posts/128/</link><pubDate>Sun, 18 Jan 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/128/</guid><description>&lt;p>It is really really nice to use this for testing and local since any reseed work is quick.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Using the Laracast TestDummy library I can quickly stub out data for the test.&lt;/p></description>
+laravel, php, behat, angular</item><item><title>Sqlite and Laravel</title><link>https://alfrednutile.info/posts/128/</link><pubDate>Sun, 18 Jan 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/128/</guid><description>&lt;p>It is really really nice to use this for testing and local since any reseed work is quick.&lt;/p>
 &lt;p>Overall the swap out is easy and I do not think, so far, there has been any issues going to mysql on production.&lt;/p>
 &lt;p>The only two things to set over all is&lt;/p>
 &lt;h2 id="seeding">Seeding&lt;/h2>
@@ -3866,7 +3910,8 @@ $table-&amp;gt;dropColumn('project_id');
 $table-&amp;gt;string('bundle_id', 36)-&amp;gt;nullable();
 });
 }
-&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category><category>sqlite</category></item><item><title>Timing PHPUnit Tests</title><link>https://alfrednutile.info/posts/127/</link><pubDate>Wed, 31 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/127/</guid><description>&lt;p>Maybe there is a better way to do this? But using this article &lt;a href="https://fatalfailure.wordpress.com/2011/08/22/detecting-slow-tests-with-phpunit/">https://fatalfailure.wordpress.com/2011/08/22/detecting-slow-tests-with-phpunit/&lt;/a> I was able to find a hanging test.&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, php, sqlite</item><item><title>Timing PHPUnit Tests</title><link>https://alfrednutile.info/posts/127/</link><pubDate>Wed, 31 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/127/</guid><description>&lt;p>Maybe there is a better way to do this? But using this article &lt;a href="https://fatalfailure.wordpress.com/2011/08/22/detecting-slow-tests-with-phpunit/">https://fatalfailure.wordpress.com/2011/08/22/detecting-slow-tests-with-phpunit/&lt;/a> I was able to find a hanging test.&lt;/p>
 &lt;h1 id="setup">Setup&lt;/h1>
 &lt;p>I already have an xml file at the root of my project so I added to that that listener.&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
@@ -3960,7 +4005,8 @@ public function tearDown()
 $this-&amp;gt;listener-&amp;gt;endTest($this, time());
 parent::tearDown();
 }
-&lt;/code>&lt;/pre>&lt;p>Overall it is pretty simple once the other post pointed it out. Now to use all the other listeners.&lt;/p></description><category>php</category><category>phpunit</category><category>testing</category></item><item><title>Reusable UI/API CRUD Laravel and Angular</title><link>https://alfrednutile.info/posts/126/</link><pubDate>Fri, 26 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/126/</guid><description>&lt;p>&lt;a href="https://github.com/alnutile/angular_stubber">related repo&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Overall it is pretty simple once the other post pointed it out. Now to use all the other listeners.&lt;/p></description>
+php, phpunit, testing</item><item><title>Reusable UI/API CRUD Laravel and Angular</title><link>https://alfrednutile.info/posts/126/</link><pubDate>Fri, 26 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/126/</guid><description>&lt;p>&lt;a href="https://github.com/alnutile/angular_stubber">related repo&lt;/a>&lt;/p>
 &lt;p>Working on a recent project it finally hit me how repetitive then need was to make a Resource at the API level and to make the UI to Create, Retrieve, Update, Delete, Index. And how easy it would be to make a foundation for this to use for each Resource keeping the UI goals consistent and simple between these Resources. With this came also a set of API tests in Behat that could also be used with the project.&lt;/p>
 &lt;p>What I will cover below is building out the foundation for this code and using it in a &amp;lsquo;real life&amp;rsquo; example.&lt;/p>
 &lt;p>You will end up with a UI like this&lt;/p>
@@ -4234,7 +4280,8 @@ $user-&amp;gt;roles()-&amp;gt;sync($roles);
 return $user;
 }
 }
-&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category><category>angular</category></item><item><title>Embed Template Data in View (Angular, Laravel)</title><link>https://alfrednutile.info/posts/122/</link><pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/122/</guid><description>&lt;p>Sometimes, when your frontend shares the same view rendering of the backend, you can store data in the window object. This can save you queries to the backend when, for example, Profile Data that shows on every pages request.&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, php, angular</item><item><title>Embed Template Data in View (Angular, Laravel)</title><link>https://alfrednutile.info/posts/122/</link><pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/122/</guid><description>&lt;p>Sometimes, when your frontend shares the same view rendering of the backend, you can store data in the window object. This can save you queries to the backend when, for example, Profile Data that shows on every pages request.&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/app0y31xxi3uk80/profile_example.png?dl=0" alt="profile">&lt;/p>
 &lt;h1 id="embed-output-into-window-or-window">Embed output into window or $window&lt;/h1>
 &lt;p>In the Controller I am using to output the Angular template (app/views/main.blade.php for example) I inject the window data that I want all pages to have.&lt;/p>
@@ -4310,7 +4357,8 @@ angular
 BE
 &amp;lt;/div&amp;gt;
 &amp;lt;/li&amp;gt;
-&lt;/code>&lt;/pre></description><category>php</category><category>laravel</category><category>angularjs</category></item><item><title>Quick fixture data and mocking external APIs</title><link>https://alfrednutile.info/posts/121/</link><pubDate>Mon, 01 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/121/</guid><description>&lt;p>We are using a number of external APIs on a project (Pusher, Iron.io, Github, Saucelabs etc). Github is key as we are using it to store and retrieve files from for editing on the site. When running phpunit it is easy to mock these Classes but when running behat tests or protractor we had to do to things to make it possible to mock the tests and not hit the external APIs.&lt;/p>
+&lt;/code>&lt;/pre></description>
+php, laravel, angularjs</item><item><title>Quick fixture data and mocking external APIs</title><link>https://alfrednutile.info/posts/121/</link><pubDate>Mon, 01 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/121/</guid><description>&lt;p>We are using a number of external APIs on a project (Pusher, Iron.io, Github, Saucelabs etc). Github is key as we are using it to store and retrieve files from for editing on the site. When running phpunit it is easy to mock these Classes but when running behat tests or protractor we had to do to things to make it possible to mock the tests and not hit the external APIs.&lt;/p>
 &lt;h1 id="swapping-out-providers">Swapping out Providers&lt;/h1>
 &lt;p>Using Laravel&amp;rsquo;s config/app.php settings we can easily swap out providers for different environments. For example config/testing/app.php could register my GithubMock class.&lt;/p>
 &lt;p>The GithubMock class just extends the real Github Service but overrides the methods that I do not want to really call out to Github eg create file, update file etc.&lt;/p>
@@ -4326,7 +4374,8 @@ $files = FixturizerReader::getFixture('github_token_show.yml', $this-&amp;gt;pat
 return $files;
 }
 &lt;/code>&lt;/pre>&lt;p>The method overrides the parent class (the real provider) &amp;ldquo;tokens&amp;rdquo; and returns the needed fixture info. I log it as well so I can double check the status of it.&lt;/p>
-&lt;p>Now the tests not only run faster but are less fragile since sometimes the services would timeout.&lt;/p></description><category>laravel</category><category>php</category></item><item><title>Mocking Queue Service for faster Behat Testing</title><link>https://alfrednutile.info/posts/120/</link><pubDate>Sun, 23 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/120/</guid><description>&lt;p>As I wrote about &lt;a href="http://www.alfrednutile.info/posts/103/edit">here&lt;/a> I am using behat to tests our APIs. I could have used Laravel&amp;rsquo;s guzzle and phpunit integration to test the controllers but I decided to go with Behat. But this means when hitting those endpoints I need to find another way to mock services.&lt;/p>
+&lt;p>Now the tests not only run faster but are less fragile since sometimes the services would timeout.&lt;/p></description>
+laravel, php</item><item><title>Mocking Queue Service for faster Behat Testing</title><link>https://alfrednutile.info/posts/120/</link><pubDate>Sun, 23 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/120/</guid><description>&lt;p>As I wrote about &lt;a href="http://www.alfrednutile.info/posts/103/edit">here&lt;/a> I am using behat to tests our APIs. I could have used Laravel&amp;rsquo;s guzzle and phpunit integration to test the controllers but I decided to go with Behat. But this means when hitting those endpoints I need to find another way to mock services.&lt;/p>
 &lt;p>Since Laravel has you register Providers you can easily replace or override a provider. In this case the &amp;ldquo;&amp;lsquo;Illuminate\Queue\QueueServiceProvider&amp;rsquo;&amp;rdquo; provider with my own.&lt;/p>
 &lt;p>This allows me to test in my endpoints leaving the queue related classes to be tested during phpunit testing. Using the queue &amp;ldquo;sync&amp;rdquo; driver would help too but it would then cause this to not be an isolated tests since the queue would trigger another classes method. (@fire).&lt;/p>
 &lt;h2 id="setup-a-class-to-use-as-the-new-provider">Setup a class to use as the new provider&lt;/h2>
@@ -4367,7 +4416,8 @@ parent::register();
 &lt;pre>&lt;code>'Illuminate\Queue\QueueServiceProvider',
 &lt;/code>&lt;/pre>&lt;p>becomes&lt;/p>
 &lt;pre>&lt;code>'App\Providers\QueueMockProvider',
-&lt;/code>&lt;/pre>&lt;p>That was it. From there on my queue related API tests did not trigger a queued job which in this case was supper helpful those where calling external APIs.&lt;/p></description><category>behat</category><category>laravel</category><category>php</category></item><item><title>Docker, MailCatcher and Laravel</title><link>https://alfrednutile.info/posts/118/</link><pubDate>Fri, 21 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/118/</guid><description>&lt;p>I wrote an article on Mailcatcher and Homestead &lt;a href="http://www.alfrednutile.info/posts/93">here&lt;/a> but as I move into docker I wanted the same setup for my docker website container which was super easy.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>That was it. From there on my queue related API tests did not trigger a queued job which in this case was supper helpful those where calling external APIs.&lt;/p></description>
+behat, laravel, php</item><item><title>Docker, MailCatcher and Laravel</title><link>https://alfrednutile.info/posts/118/</link><pubDate>Fri, 21 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/118/</guid><description>&lt;p>I wrote an article on Mailcatcher and Homestead &lt;a href="http://www.alfrednutile.info/posts/93">here&lt;/a> but as I move into docker I wanted the same setup for my docker website container which was super easy.&lt;/p>
 &lt;p>First I downloaded this &lt;a href="https://registry.hub.docker.com/u/schickling/mailcatcher/">docker images&lt;/a> and ran the command as he noted. Once done I had the website up and running.&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/w1mxwcw8129raxg/docker_behat.png?dl=0" alt="mailcatcher_docker">&lt;/p>
 &lt;p>From there I just started my website container and made a link.&lt;/p>
@@ -4384,7 +4434,8 @@ return array(
 'password' =&amp;gt; null,
 'pretend' =&amp;gt; false,
 );
-&lt;/code>&lt;/pre>&lt;p>Now I get to see the email as a user would see it and click around as needed!&lt;/p></description><category>laravel</category><category>php</category></item><item><title>Redirecting back to original Angular.js destination from Laravel Auth</title><link>https://alfrednutile.info/posts/119/</link><pubDate>Fri, 21 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/119/</guid><description>&lt;p>&lt;strong>UPDATE&lt;/strong>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Now I get to see the email as a user would see it and click around as needed!&lt;/p></description>
+laravel, php</item><item><title>Redirecting back to original Angular.js destination from Laravel Auth</title><link>https://alfrednutile.info/posts/119/</link><pubDate>Fri, 21 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/119/</guid><description>&lt;p>&lt;strong>UPDATE&lt;/strong>&lt;/p>
 &lt;p>You can see in the &lt;a href="https://www.alfrednutile.info/posts/119#comment-2448723710">comments&lt;/a> some updated info.&lt;/p>
 &lt;p>When a user visits an Angular url (not html5) like &lt;a href="http://foo.com/app#some/long/path">http://foo.com/app#some/long/path&lt;/a>&lt;/p>
 &lt;p>Then gets redirected to &lt;a href="http://foo.com/auth/login">http://foo.com/auth/login&lt;/a> because they are not logged in. It would be nice to send them right back after that.&lt;/p>
@@ -4400,7 +4451,8 @@ var intended = window.location.hash;
 &lt;p>Finally after an successful auth add this&lt;/p>
 &lt;pre>&lt;code>return Redirect::to($_COOKIE['intended']);
 &lt;/code>&lt;/pre>&lt;p>Laravel 4.2 = app/controllers/AuthController.php:61&lt;/p>
-&lt;p>Laravel 5 = app/Http/Controllers/AuthController.php:52&lt;/p></description><category>laravel</category><category>php</category><category>angular</category></item><item><title>PHP quick fixture data for phpunit testing</title><link>https://alfrednutile.info/posts/117/</link><pubDate>Thu, 20 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/117/</guid><description>&lt;p>You can use VCR or other libraries to make fixture data. But sometimes you can just make the request and save the results using this technique. From then on you mock and return the data.&lt;/p>
+&lt;p>Laravel 5 = app/Http/Controllers/AuthController.php:52&lt;/p></description>
+laravel, php, angular</item><item><title>PHP quick fixture data for phpunit testing</title><link>https://alfrednutile.info/posts/117/</link><pubDate>Thu, 20 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/117/</guid><description>&lt;p>You can use VCR or other libraries to make fixture data. But sometimes you can just make the request and save the results using this technique. From then on you mock and return the data.&lt;/p>
 &lt;h1 id="get-the-data">Get the data.&lt;/h1>
 &lt;p>In this example I had a Client that would get data and return it for import. I was testing out the class that would take this data and import it and do other things. So I make my phpunit test methods of that class (not the Client it is fully tested)&lt;/p>
 &lt;pre>&lt;code>
@@ -4439,7 +4491,8 @@ $classTesting new ClassTest($client); //we inject the mock into it
 $classTesting-&amp;gt;importData();
 $this-&amp;gt;assertCount(100, $classTesting-&amp;gt;getDataImported());
 }
-&lt;/code>&lt;/pre>&lt;p>The client in this case if a fully tested standalone client so I am not testing it. Just my use of it to migrate data.&lt;/p></description><category>php</category><category>phpunit</category><category>testing</category></item><item><title>Laravel and Angular Time/Date Display</title><link>https://alfrednutile.info/posts/114/</link><pubDate>Mon, 10 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/114/</guid><description>&lt;p>Angular seems to, by default, easily deal with milliseconds, &lt;a href="https://docs.angularjs.org/api/ng/filter/date">https://docs.angularjs.org/api/ng/filter/date&lt;/a>.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>The client in this case if a fully tested standalone client so I am not testing it. Just my use of it to migrate data.&lt;/p></description>
+php, phpunit, testing</item><item><title>Laravel and Angular Time/Date Display</title><link>https://alfrednutile.info/posts/114/</link><pubDate>Mon, 10 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/114/</guid><description>&lt;p>Angular seems to, by default, easily deal with milliseconds, &lt;a href="https://docs.angularjs.org/api/ng/filter/date">https://docs.angularjs.org/api/ng/filter/date&lt;/a>.&lt;/p>
 &lt;p>Laravel outputs created_at as a YYYY-MM-DD HH:MM:SS format that just does not work well with the Angular date filter.&lt;/p>
 &lt;p>It is really simple to change the output of the date in Laravel just add this to your Model or BaseModel or even better Trait&lt;/p>
 &lt;pre>&lt;code> /**
@@ -4463,7 +4516,8 @@ return $value * 1000;
 &lt;/code>&lt;/pre>&lt;p>This is noted in the docs as well &lt;a href="http://laravel.com/docs/4.2/eloquent#date-mutators">http://laravel.com/docs/4.2/eloquent#date-mutators&lt;/a> and &lt;a href="http://laravel.com/docs/4.2/eloquent#accessors-and-mutators">http://laravel.com/docs/4.2/eloquent#accessors-and-mutators&lt;/a>&lt;/p>
 &lt;p>Then in Angular I can easily format the date&lt;/p>
 &lt;pre>&lt;code>&amp;lt;small&amp;gt;Created: {{ project.created_at | date:'yyyy-MM-dd' }}&amp;lt;/small&amp;gt;
-&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category></item><item><title>Moving Forge Deploy Script to Envoy</title><link>https://alfrednutile.info/posts/115/</link><pubDate>Mon, 10 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/115/</guid><description>&lt;p>As we start to move off of Forge I still want the automation to take place after all tests pass.&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, php</item><item><title>Moving Forge Deploy Script to Envoy</title><link>https://alfrednutile.info/posts/115/</link><pubDate>Mon, 10 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/115/</guid><description>&lt;p>As we start to move off of Forge I still want the automation to take place after all tests pass.&lt;/p>
 &lt;p>In Codeship or Locally I just follow some instructions from here &lt;a href="http://laravel.com/docs/4.2/ssh">http://laravel.com/docs/4.2/ssh&lt;/a>&lt;/p>
 &lt;h1 id="locally">Locally&lt;/h1>
 &lt;p>Setup Envoy globally as noted.&lt;/p>
@@ -4506,7 +4560,8 @@ cat id_rsa.pub &amp;gt;&amp;gt; authorized_keys
 &lt;/code>&lt;/pre>&lt;p>Then setup codeship&lt;/p>
 &lt;p>Under the Deployment settings use script&lt;/p>
 &lt;pre>&lt;code>ssh forge@104.111.111.111 'cd ~/foo-dev &amp;amp;&amp;amp; envoy run deploy_dev'
-&lt;/code>&lt;/pre>&lt;p>Make sure you codeship public key is also on the destination server&lt;/p></description><category>laravel</category><category>php</category></item><item><title>Laravel 4.2 and Dotenv to set environment</title><link>https://alfrednutile.info/posts/113/</link><pubDate>Sun, 09 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/113/</guid><description>&lt;p>To start using Dotenv now it is very simple.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Make sure you codeship public key is also on the destination server&lt;/p></description>
+laravel, php</item><item><title>Laravel 4.2 and Dotenv to set environment</title><link>https://alfrednutile.info/posts/113/</link><pubDate>Sun, 09 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/113/</guid><description>&lt;p>To start using Dotenv now it is very simple.&lt;/p>
 &lt;h1 id="one-include-the-library">One include the library&lt;/h1>
 &lt;pre>&lt;code>#composer.js
 &amp;quot;require&amp;quot;: {
@@ -4538,7 +4593,8 @@ Dotenv::load(__DIR__ .'/../');
 return getenv('APP_ENV');
 }
 );
-&lt;/code>&lt;/pre>&lt;p>Setting the initial APP_ENV using heroku config:set APP_ENV=stage&lt;/p></description><category>laravel</category><category>php</category></item><item><title>Speeding up PHPunit tests and Behat in Laravel for Database refreshes</title><link>https://alfrednutile.info/posts/112/</link><pubDate>Thu, 06 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/112/</guid><description>&lt;p>This &lt;a href="http://www.chrisduell.com/blog/development/speeding-up-unit-tests-in-php/">article&lt;/a> covers some good tips on this. Ideally you do not hit the database in unit tests but sometimes you do. Also in behat it hits the db all the time since it is at the Acceptance level.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Setting the initial APP_ENV using heroku config:set APP_ENV=stage&lt;/p></description>
+laravel, php</item><item><title>Speeding up PHPunit tests and Behat in Laravel for Database refreshes</title><link>https://alfrednutile.info/posts/112/</link><pubDate>Thu, 06 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/112/</guid><description>&lt;p>This &lt;a href="http://www.chrisduell.com/blog/development/speeding-up-unit-tests-in-php/">article&lt;/a> covers some good tips on this. Ideally you do not hit the database in unit tests but sometimes you do. Also in behat it hits the db all the time since it is at the Acceptance level.&lt;/p>
 &lt;h1 id="sqlite">Sqlite&lt;/h1>
 &lt;p>It is a great database and works. We easily can use it on running tests. When seeding the db I have my main seeding class doing this&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php
@@ -4652,7 +4708,8 @@ throw new \Exception(sprintf(&amp;quot;Error seeding the database %s&amp;quot;, 
 &lt;/code>&lt;/pre>&lt;p>So as we test the ui or api we can reload the data.&lt;/p>
 &lt;p>#Behat / Laravel&lt;/p>
 &lt;p>This package &lt;a href="https://github.com/GuilhermeGuitte/behat-laravel">https://github.com/GuilhermeGuitte/behat-laravel&lt;/a>&lt;/p>
-&lt;p>This integrates behat into artisan command line helping with environment settings for behat.&lt;/p></description><category>laravel</category><category>php</category><category>behat</category><category>phpunit</category></item><item><title>Multi Threaded Queue Processing</title><link>https://alfrednutile.info/posts/106/</link><pubDate>Wed, 10 Sep 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/106/</guid><description>&lt;p>I needed a way to run a bunch of jobs in parallel and I am use to using the Symfony Process Component for that.&lt;/p>
+&lt;p>This integrates behat into artisan command line helping with environment settings for behat.&lt;/p></description>
+laravel, php, behat, phpunit</item><item><title>Multi Threaded Queue Processing</title><link>https://alfrednutile.info/posts/106/</link><pubDate>Wed, 10 Sep 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/106/</guid><description>&lt;p>I needed a way to run a bunch of jobs in parallel and I am use to using the Symfony Process Component for that.&lt;/p>
 &lt;p>So this post will show how I did this in Laravel 4.3 via the Queue so I can remember next time.&lt;/p>
 &lt;p>What will come out of this is a workflow as seen here&lt;/p>
 &lt;div markdown=0>
@@ -4847,7 +4904,8 @@ array('job_uuid', InputArgument::REQUIRED, 'The uuid of the related request job 
 }
 }
 &lt;/code>&lt;/pre>&lt;p>There still is some work to do. I have to set the limit so my initial run does not timeout. I also need to clean up some code so that these classes are digging so deep into the other classes.&lt;/p>
-&lt;p>But this was just to show how to use Symfony Process Component, Laravel Queue, and Laravel Artisan to run a multi threaded task.&lt;/p></description><category>laravel</category><category>php</category><category>note2self</category><category>4.3</category></item><item><title>Team Style Guides and Mind Set</title><link>https://alfrednutile.info/posts/105/</link><pubDate>Sun, 24 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/105/</guid><description>&lt;p>Been sharing this info with team members a bit lately and want to post it here for reference.
+&lt;p>But this was just to show how to use Symfony Process Component, Laravel Queue, and Laravel Artisan to run a multi threaded task.&lt;/p></description>
+laravel, php, note2self, 4.3</item><item><title>Team Style Guides and Mind Set</title><link>https://alfrednutile.info/posts/105/</link><pubDate>Sun, 24 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/105/</guid><description>&lt;p>Been sharing this info with team members a bit lately and want to post it here for reference.
 Though there is no ONE way to do any of this there are ways that scale better than others. But more importantly having one way as a team to do things can be key to projects from beginning to end (eg the rest of the projects life!)&lt;/p>
 &lt;h1 id="project-style-guides">Project Style Guides&lt;/h1>
 &lt;p>&lt;a href="https://kindle.amazon.com/work/the-clean-coder-professional-programmers-ebook/B004SJU478/B0050JLC9Y">The Clean Coder&lt;/a> by Robert Martin book is a look at being a &amp;ldquo;Professional&amp;rdquo; coder and all that comes with it.
@@ -4895,7 +4953,8 @@ A great look at being a programmer that not only makes code but more importantly
 &lt;h2 id="the-pragmatic-programmer-from-journeyman-to-masterhttpskindleamazoncomworknode-js-right-way-server-side-javascript-ebookb00hsocscyb00hso6yd8">&lt;a href="https://kindle.amazon.com/work/node-js-right-way-server-side-javascript-ebook/B00HSOCSCY/B00HSO6YD8">The Pragmatic Programmer: From Journeyman to Master&lt;/a>&lt;/h2>
 &lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/41oqLxoTYsL._SS130_.jpg" alt="https://images-na.ssl-images-amazon.com/images/I/41oqLxoTYsL.SS130.jpg">&lt;/p>
 &lt;h2 id="restful-web-apishttpskindleamazoncomworkrestful-web-apis-leonard-richardson-ebookb00dduvtr2b00f5bs966">&lt;a href="https://kindle.amazon.com/work/restful-web-apis-leonard-richardson-ebook/B00DDUVTR2/B00F5BS966">RESTful Web APIs&lt;/a>&lt;/h2>
-&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/51KhFuo-5%2BL._SS130_.jpg" alt="https://images-na.ssl-images-amazon.com/images/I/51KhFuo-5%2BL.SS130.jpg">&lt;/p></description><category>php</category><category>angular.js</category><category>coder</category></item><item><title>Sorting related models in Laravel</title><link>https://alfrednutile.info/posts/104/</link><pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/104/</guid><description>&lt;p>There are a number of related models to this one model that I store in the Models $relations property&lt;/p>
+&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/51KhFuo-5%2BL._SS130_.jpg" alt="https://images-na.ssl-images-amazon.com/images/I/51KhFuo-5%2BL.SS130.jpg">&lt;/p></description>
+php, angular.js, coder</item><item><title>Sorting related models in Laravel</title><link>https://alfrednutile.info/posts/104/</link><pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/104/</guid><description>&lt;p>There are a number of related models to this one model that I store in the Models $relations property&lt;/p>
 &lt;pre>&lt;code> protected static $relations = [
 'owner',
 'apns',
@@ -4920,7 +4979,8 @@ $query-&amp;gt;with('user.profiles')-&amp;gt;orderBy('id', 'DESC');
 },
 ])-&amp;gt;findOrFail($id);
 $found = $found-&amp;gt;load(static::$relations);
-&lt;/code>&lt;/pre>&lt;p>veifiers was part of the protected static $relations list but I moved it out since, for each query, I need to sort them from last to first.&lt;/p></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Behat for testing RESTful APIs</title><link>https://alfrednutile.info/posts/103/</link><pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/103/</guid><description>&lt;p>The code for behat&amp;rsquo;s FeatureContext comes from this repo and book &lt;a href="https://github.com/philsturgeon/build-apis-you-wont-hate">https://github.com/philsturgeon/build-apis-you-wont-hate&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>veifiers was part of the protected static $relations list but I moved it out since, for each query, I need to sort them from last to first.&lt;/p></description>
+laravel, php, note2self</item><item><title>Behat for testing RESTful APIs</title><link>https://alfrednutile.info/posts/103/</link><pubDate>Wed, 13 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/103/</guid><description>&lt;p>The code for behat&amp;rsquo;s FeatureContext comes from this repo and book &lt;a href="https://github.com/philsturgeon/build-apis-you-wont-hate">https://github.com/philsturgeon/build-apis-you-wont-hate&lt;/a>&lt;/p>
 &lt;p>I will bring it together so before long you can run tests like this&lt;/p>
 &lt;p>&lt;a href="http://youtu.be/K4DoYv9X-bQ">&lt;img src="https://dl.dropboxusercontent.com/s/u7v2uw6ged5uz9g/behat_api_youtube.png?dl=0" alt="test">&lt;/a>&lt;/p>
 &lt;p>The road map will be&lt;/p>
@@ -5140,7 +5200,8 @@ exec(&amp;quot;php $path&amp;quot;);
 }
 &lt;/code>&lt;/pre>&lt;h2 id="put-coming-soon">PUT Coming soon&lt;/h2>
 &lt;h2 id="delete-coming-soon">Delete Coming Soon&lt;/h2>
-&lt;h2 id="auth-coming-soon">Auth Coming soon&lt;/h2></description><category>behat</category><category>php</category></item><item><title>Boris REPL and you Applicatoin (Silex in this case)</title><link>https://alfrednutile.info/posts/102/</link><pubDate>Sun, 10 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/102/</guid><description>&lt;p>This video will cover the details &lt;a href="http://youtu.be/RHdxSsCDmNQ">http://youtu.be/RHdxSsCDmNQ&lt;/a>&lt;/p>
+&lt;h2 id="auth-coming-soon">Auth Coming soon&lt;/h2></description>
+behat, php</item><item><title>Boris REPL and you Applicatoin (Silex in this case)</title><link>https://alfrednutile.info/posts/102/</link><pubDate>Sun, 10 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/102/</guid><description>&lt;p>This video will cover the details &lt;a href="http://youtu.be/RHdxSsCDmNQ">http://youtu.be/RHdxSsCDmNQ&lt;/a>&lt;/p>
 &lt;p>&lt;img src="https://camo.githubusercontent.com/18c23fa613beeb044a7ba1ba58a5dfefe120ca6f/687474703a2f2f646c2e64726f70626f782e636f6d2f752f3530383630372f426f72697344656d6f2d76342e676966" alt="boris">&lt;/p>
 &lt;p>Just a few notes though &lt;a href="https://github.com/d11wtq/boris">https://github.com/d11wtq/boris&lt;/a> is a better place for getting started overall.&lt;/p>
 &lt;h2 id="borisrc">Borisrc&lt;/h2>
@@ -5175,7 +5236,8 @@ return $core;
 $core = require_once __DIR__.'/../bootstrap/start.php';
 $core = require_once __DIR__.'/../app/routes.php';
 $core-&amp;gt;getApp()-&amp;gt;run();
-&lt;/code>&lt;/pre>&lt;p>At this point, as seen in the video we can interact with the core app and other methods!&lt;/p></description><category>boris</category><category>php</category><category>silex</category></item><item><title>Polymorphic relationship Laravel</title><link>https://alfrednutile.info/posts/99/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/99/</guid><description>&lt;p>This example will show a typical &amp;ldquo;Attachment&amp;rdquo; need. The Laravel docs really do cover alot as seen &lt;a href="http://laravel.com/docs/eloquent#polymorphic-relations">here&lt;/a> especially &lt;strong>&amp;ldquo;Polymorphic Relation Table Structure”&lt;/strong>. I cover many to many polymorphic relationships &lt;a href="http://www.alfrednutile.info/posts/95">here&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>At this point, as seen in the video we can interact with the core app and other methods!&lt;/p></description>
+boris, php, silex</item><item><title>Polymorphic relationship Laravel</title><link>https://alfrednutile.info/posts/99/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/99/</guid><description>&lt;p>This example will show a typical &amp;ldquo;Attachment&amp;rdquo; need. The Laravel docs really do cover alot as seen &lt;a href="http://laravel.com/docs/eloquent#polymorphic-relations">here&lt;/a> especially &lt;strong>&amp;ldquo;Polymorphic Relation Table Structure”&lt;/strong>. I cover many to many polymorphic relationships &lt;a href="http://www.alfrednutile.info/posts/95">here&lt;/a>&lt;/p>
 &lt;p>I will cover an example of an Attachment that has some fields. And it is related to a model, in this example &amp;ldquo;Post&amp;rdquo;&lt;/p>
 &lt;p>Using the &lt;a href="https://github.com/JeffreyWay/Laravel-4-Generators">Way Generators&lt;/a> to make this resource.&lt;/p>
 &lt;pre>&lt;code>php artisan generate:resource attachment --fields=&amp;quot;attachable_type:string, attachable_id:integer, name:string, file_name:string, note:text, tag:string”
@@ -5217,7 +5279,8 @@ return $this-&amp;gt;morphTo();
 &lt;/code>&lt;/pre>&lt;p>Finally if we where to seed the db or add content the table for Attachments would look like this&lt;/p>
 &lt;p>&lt;img src="https://photos-1.dropbox.com/t/0/AADRAfBTNcMG8puEahtElixkH6F6rsoCXD1zgM_aFoUiRQ/12/54803135/png/1024x768/3/1405868400/0/2/Screenshot%202014-07-20%2009.12.12.png/bA938wfNJbWkPlOIKMlD5gJKsBGGGJCH-RTweCGQqwk" alt="example">&lt;/p>
 &lt;p>the attachable_type is the model class so if the namespace was Acme\Post then that would be &amp;ldquo;Acme\Post&lt;/p>
-&lt;p>That is it. As long as you include it in your results you will see it in your output.&lt;/p></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Quick way to traverse a nested php arrray</title><link>https://alfrednutile.info/posts/98/</link><pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/98/</guid><description>&lt;p>The &lt;a href="http://php.net/manual/en/class.recursiveiteratoriterator.php">RecursiveIteratorIterator&lt;/a> makes it super easy to traverse a nested array.&lt;/p>
+&lt;p>That is it. As long as you include it in your results you will see it in your output.&lt;/p></description>
+laravel, php, note2self</item><item><title>Quick way to traverse a nested php arrray</title><link>https://alfrednutile.info/posts/98/</link><pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/98/</guid><description>&lt;p>The &lt;a href="http://php.net/manual/en/class.recursiveiteratoriterator.php">RecursiveIteratorIterator&lt;/a> makes it super easy to traverse a nested array.&lt;/p>
 &lt;p>Here is an example though the docs are pretty clear there. For me it was in a class so I defined the array keys at the top of the Class&lt;/p>
 &lt;pre>&lt;code> protected $merged_profile_options = [];
 protected $data_values = [
@@ -5250,7 +5313,8 @@ public function setDataValues($key, $value)
 {
 $this-&amp;gt;data_values[$key] = $value;
 }
-&lt;/code>&lt;/pre>&lt;p>Super easy. This array was 4 levels deep.&lt;/p></description><category>php</category><category>note2self</category></item><item><title>Using VCR for PHP API Testing</title><link>https://alfrednutile.info/posts/97/</link><pubDate>Wed, 16 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/97/</guid><description>&lt;p>Testing that your code works against an API can take up lots of un-needed time. With this &lt;a href="https://github.com/php-vcr/php-vcr">php-vcr&lt;/a> library you can do ONE real request that saves a fixture file that will automatically be used with each additional requests!&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Super easy. This array was 4 levels deep.&lt;/p></description>
+php, note2self</item><item><title>Using VCR for PHP API Testing</title><link>https://alfrednutile.info/posts/97/</link><pubDate>Wed, 16 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/97/</guid><description>&lt;p>Testing that your code works against an API can take up lots of un-needed time. With this &lt;a href="https://github.com/php-vcr/php-vcr">php-vcr&lt;/a> library you can do ONE real request that saves a fixture file that will automatically be used with each additional requests!&lt;/p>
 &lt;p>They have decent docs on setting up but I will walk through them here.&lt;/p>
 &lt;p>I will base this off a seed phpunit repo I have &lt;a href="https://github.com/alnutile/base_library_repo">https://github.com/alnutile/base_library_repo&lt;/a>&lt;/p>
 &lt;p>You will need to add to the composer.json the packages for this library&lt;/p>
@@ -5388,10 +5452,12 @@ Transfer-Encoding: chunked
 Connection: keep-alive
 X-Backend: mix
 body: '[{&amp;quot;id&amp;quot;: &amp;quot;3a4136e1bb6f4f6b8cae6fbd0bf2e6aa&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;1cde7b77e8744ff5b6198489ceffce81&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;79bd34f42d584da6ad59c051388134d9&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;d75177a863ec4a458c7222813e10ee84&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;67591976001c4c5a9522b93281e0e8ef&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;ada6876f799d4b589ef0e2c4069c7438&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;3e676ac921aa43f5a5628d231ca7115d&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;222cdddafb9e4c3fb0722bccc9891a15&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;6393dc7ca1ea447eb509b5e1dd6821ac&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;789004fc2ec34d0d8e03945759fc25b0&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;3331badd2da140d08613a786257d177d&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;9437a50a354e4fca8252447b03d21348&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;dec07ca1c30e40f4a693de7f7a102eab&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;3a1a0fb2d4be4580b00a3e35b86aa6fa&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;55de27651bf14c92b901cbd0a62b1603&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;7e12ec786ad544008c5f4e3e4340d5a8&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;a8edb7ab8a8f408a9b0829cc45ca4563&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;b67a4d7187cc4dc8ad661ef7045d15e9&amp;quot;}]'
-&lt;/code>&lt;/pre>&lt;p>That library should be a big help to try it out. You just need a Saucelabs account and make a file in the root of your folder called .env as noted in the README with your username and token for saucelabs and then run bin/phpunit.&lt;/p></description><category>php</category><category>api</category><category>testing</category></item><item><title>Saucelabs PHP Client</title><link>https://alfrednutile.info/posts/96/</link><pubDate>Fri, 11 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/96/</guid><description>&lt;p>It is built off of the php-github-api client seen &lt;a href="https://github.com/KnpLabs/php-github-api">here&lt;/a> by KnpLabs . They made a really nice client that uses Guzzle and an AbstractionAPI to make it easy to code out different classes around the API endpoints.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>That library should be a big help to try it out. You just need a Saucelabs account and make a file in the root of your folder called .env as noted in the README with your username and token for saucelabs and then run bin/phpunit.&lt;/p></description>
+php, api, testing</item><item><title>Saucelabs PHP Client</title><link>https://alfrednutile.info/posts/96/</link><pubDate>Fri, 11 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/96/</guid><description>&lt;p>It is built off of the php-github-api client seen &lt;a href="https://github.com/KnpLabs/php-github-api">here&lt;/a> by KnpLabs . They made a really nice client that uses Guzzle and an AbstractionAPI to make it easy to code out different classes around the API endpoints.&lt;/p>
 &lt;p>Anyways I have had such a good experience with github one I figured it would be nice to have one for the Saucelabs work I do.&lt;/p>
 &lt;p>&lt;a href="https://github.com/alnutile/saucelabs_client">https://github.com/alnutile/saucelabs_client&lt;/a> more features will be added shortly as it is being used in a couple of decent size projects.&lt;/p>
-&lt;p>There are plenty of Tests to show how to use it.&lt;/p></description><category>bdd</category><category>testing</category><category>php</category></item><item><title>Many to Many Polymorphic Relations from Laravel to Angular and back</title><link>https://alfrednutile.info/posts/95/</link><pubDate>Sat, 05 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/95/</guid><description>&lt;p>This will cover having a polymorphic relationship in Laravel, showing it on a form in Angular and saving it back to Laravel. Overall it is well documented &lt;a href="http://laravel.com/docs/eloquent#many-to-many-polymorphic-relations">here&lt;/a> at the great docs at Laravel but this post might help in a few areas.&lt;/p>
+&lt;p>There are plenty of Tests to show how to use it.&lt;/p></description>
+bdd, testing, php</item><item><title>Many to Many Polymorphic Relations from Laravel to Angular and back</title><link>https://alfrednutile.info/posts/95/</link><pubDate>Sat, 05 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/95/</guid><description>&lt;p>This will cover having a polymorphic relationship in Laravel, showing it on a form in Angular and saving it back to Laravel. Overall it is well documented &lt;a href="http://laravel.com/docs/eloquent#many-to-many-polymorphic-relations">here&lt;/a> at the great docs at Laravel but this post might help in a few areas.&lt;/p>
 &lt;p>As someone defines Polymorphic Relationships there&lt;/p>
 &lt;blockquote>
 &lt;p>&amp;ldquo;Polymorphic relations allow a model to belong to more than one other model, on a single association. For example, you might have a photo model that belongs to either a staff model or an order model. &amp;quot;&lt;/p>
@@ -5462,7 +5528,8 @@ $user-&amp;gt;specialties()-&amp;gt;sync($this-&amp;gt;original_specialities);
 return $user;
 }
 &lt;/code>&lt;/pre>&lt;p>Finally back to Angular with the results.&lt;/p>
-&lt;p>Another good way to tie all this together is the Model Observer Pattern noted here &lt;a href="http://laravel.com/docs/eloquent#model-observers">http://laravel.com/docs/eloquent#model-observers&lt;/a>&lt;/p></description><category>laravel</category><category>php</category><category>angular.js</category></item><item><title>Laravel Homestead and MailCatcher</title><link>https://alfrednutile.info/posts/93/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/93/</guid><description>&lt;p>Using MailCatcher &lt;a href="http://mailcatcher.me/">http://mailcatcher.me/&lt;/a> I can see the emails sent by the website.&lt;/p>
+&lt;p>Another good way to tie all this together is the Model Observer Pattern noted here &lt;a href="http://laravel.com/docs/eloquent#model-observers">http://laravel.com/docs/eloquent#model-observers&lt;/a>&lt;/p></description>
+laravel, php, angular.js</item><item><title>Laravel Homestead and MailCatcher</title><link>https://alfrednutile.info/posts/93/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/93/</guid><description>&lt;p>Using MailCatcher &lt;a href="http://mailcatcher.me/">http://mailcatcher.me/&lt;/a> I can see the emails sent by the website.&lt;/p>
 &lt;p>First checkout &lt;a href="https://github.com/fideloper/Vaprobash/pull/348">https://github.com/fideloper/Vaprobash/pull/348&lt;/a> to get your box ready
 All I did was&lt;/p>
 &lt;h2 id="log-into-the-vagrant-box-and-run">Log into the vagrant box and run&lt;/h2>
@@ -5493,7 +5560,8 @@ return array(
 &lt;h3 id="links">Links&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://laracasts.com/forum/?p=1896-mailcatcher-vagrant-and-multiple-developers/0">https://laracasts.com/forum/?p=1896-mailcatcher-vagrant-and-multiple-developers/0&lt;/a>&lt;/li>
-&lt;/ul></description><category>laravel</category><category>php</category><category>homestead</category></item><item><title>Laravel Sentry and UUID</title><link>https://alfrednutile.info/posts/94/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/94/</guid><description>&lt;h2 id="update-october-10-1007">Update October 10 10:07&lt;/h2>
+&lt;/ul></description>
+laravel, php, homestead</item><item><title>Laravel Sentry and UUID</title><link>https://alfrednutile.info/posts/94/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/94/</guid><description>&lt;h2 id="update-october-10-1007">Update October 10 10:07&lt;/h2>
 &lt;p>Have hit a few issues with this model but still working okay.&lt;/p>
 &lt;p>To start this trait does some of the work to manage incoming POST data.&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php namespace BehatEditor\Helpers;
@@ -5670,7 +5738,8 @@ public function down()
 Schema::drop('users');
 }
 }
-&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category></item><item><title>Behat Test more than number of elements</title><link>https://alfrednutile.info/posts/90/</link><pubDate>Fri, 20 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/90/</guid><description>&lt;p>There is a Mink step to check for the number of elements&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, php</item><item><title>Behat Test more than number of elements</title><link>https://alfrednutile.info/posts/90/</link><pubDate>Fri, 20 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/90/</guid><description>&lt;p>There is a Mink step to check for the number of elements&lt;/p>
 &lt;pre>&lt;code>//MinkDictionary.php
 /**
 * Checks, that (?P&amp;lt;num&amp;gt;\d+) CSS elements exist on the page
@@ -5697,7 +5766,8 @@ $message = sprintf('%d elements less than %s &amp;quot;%s&amp;quot; found on the
 throw new ExpectationException($message, $this-&amp;gt;session);
 }
 }
-&lt;/code>&lt;/pre></description><category>behat</category><category>php</category></item><item><title>Transforming Output from the Database to the View/REST layer</title><link>https://alfrednutile.info/posts/88/</link><pubDate>Sat, 14 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/88/</guid><description>&lt;p>Having watched the screen cast &lt;a href="https://laracasts.com/series/incremental-api-development/episodes/4">here&lt;/a> by Jeffery Way and reading Phil Sturgeon&amp;rsquo;s &lt;a href="https://leanpub.com/build-apis-you-wont-hate">Build APIs You Won&amp;rsquo;t Hate&lt;/a> I used this approach on a recent project.&lt;/p>
+&lt;/code>&lt;/pre></description>
+behat, php</item><item><title>Transforming Output from the Database to the View/REST layer</title><link>https://alfrednutile.info/posts/88/</link><pubDate>Sat, 14 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/88/</guid><description>&lt;p>Having watched the screen cast &lt;a href="https://laracasts.com/series/incremental-api-development/episodes/4">here&lt;/a> by Jeffery Way and reading Phil Sturgeon&amp;rsquo;s &lt;a href="https://leanpub.com/build-apis-you-wont-hate">Build APIs You Won&amp;rsquo;t Hate&lt;/a> I used this approach on a recent project.&lt;/p>
 &lt;p>Basically, and they both cover it really well, instead of returning the data right to the ui/rest endpoint from the database I pass it through a class to transform the data formats, field name etc. This has been extremely helpful as we also work out some wording of fields that I can not do easily in this one class.&lt;/p>
 &lt;p>Also I can do output alterations using this Class and replace text depending on say a users permission level or maybe just to set a default image if there is none. So that user gets and Address Value Object that only shows the State.&lt;/p>
 &lt;p>Another good example was one server was LAMP and the other Nginx. Same db, etc but one has a setting to output a boolean as &amp;ldquo;1&amp;rdquo; and the other 1 so again I could verify and set these as needed as I built out the output. (yes I could have just Google the setting or better yet use a Vagrant box running Nginx to dev on)&lt;/p>
@@ -5708,7 +5778,8 @@ throw new ExpectationException($message, $this-&amp;gt;session);
 &lt;li>Build APIs You Won&amp;rsquo;t Hate &lt;a href="https://leanpub.com/build-apis-you-wont-hate">https://leanpub.com/build-apis-you-wont-hate&lt;/a>&lt;/li>
 &lt;li>Fractal &lt;a href="http://fractal.thephpleague.com/simple-example/">http://fractal.thephpleague.com/simple-example/&lt;/a>&lt;/li>
 &lt;li>Fractal Class &lt;a href="https://github.com/thephpleague/fractal">https://github.com/thephpleague/fractal&lt;/a>&lt;/li>
-&lt;/ul></description><category>REST</category><category>php</category><category>patterns</category></item><item><title>Showing nested relationships details</title><link>https://alfrednutile.info/posts/87/</link><pubDate>Mon, 09 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/87/</guid><description>&lt;p>This is soooo easy but this is always something this easy can be missed.
+&lt;/ul></description>
+REST, php, patterns</item><item><title>Showing nested relationships details</title><link>https://alfrednutile.info/posts/87/</link><pubDate>Mon, 09 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/87/</guid><description>&lt;p>This is soooo easy but this is always something this easy can be missed.
 In this example we have a Property Model with Buildings that have an address.&lt;/p>
 &lt;p>So the model files look like this&lt;/p>
 &lt;pre>&lt;code>//Property.php
@@ -5749,7 +5820,8 @@ $found = $this-&amp;gt;property-&amp;gt;with('structures.address')
 -&amp;gt;get();
 return $found;
 }
-&lt;/code>&lt;/pre>&lt;p>the dot notation basically showing load Structures and the Address data related to those.&lt;/p></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Simple Laravel CMS Example</title><link>https://alfrednutile.info/posts/86/</link><pubDate>Mon, 02 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/86/</guid><description>&lt;h2 id="quick-intro-to-laravel-using-a-custom-cms-app-i-made">Quick intro to Laravel using a custom CMS app I made&lt;/h2>
+&lt;/code>&lt;/pre>&lt;p>the dot notation basically showing load Structures and the Address data related to those.&lt;/p></description>
+laravel, php, note2self</item><item><title>Simple Laravel CMS Example</title><link>https://alfrednutile.info/posts/86/</link><pubDate>Mon, 02 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/86/</guid><description>&lt;h2 id="quick-intro-to-laravel-using-a-custom-cms-app-i-made">Quick intro to Laravel using a custom CMS app I made&lt;/h2>
 &lt;p>The repo is &lt;a href="https://github.com/alnutile/l4cms">here&lt;/a>&lt;/p>
 &lt;p>&lt;img src="https://dl-web.dropbox.com/get/Screenshots/intro_image.png?_subject_uid=54803135&amp;amp;w=AADdI8YLw5iRjK91_3LjSHq7b7z0ibM8KY4P7MicRH9UFA" alt="intro">&lt;/p>
 &lt;p>This is mainly to show an example of a small CMS being built in Laravel. CMS (Content Management System) that is at it&amp;rsquo;s most basic level, Authentication, Simple Content Types etc.&lt;/p>
@@ -5820,7 +5892,8 @@ Portfolio::find(1)-&amp;gt;tags()-&amp;gt;attach(1);
 &lt;li>[1] This will be refactored shortly&lt;/li>
 &lt;li>[2] This will be moved shortly to make it way more extendable but leaving the core easy to manage.&lt;/li>
 &lt;li>[3] Refactor this out so menu is a manyToMany relationship with the models that will use it.&lt;/li>
-&lt;/ul></description><category>laravel</category><category>php</category><category>cms</category></item><item><title>Laravel and non email authentication</title><link>https://alfrednutile.info/posts/84/</link><pubDate>Tue, 20 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/84/</guid><description>&lt;p>Note to self. The Laravel docs are here that cover Authentication. But when it came time to use a filter and a non email based user name I had to modify the auth.basic filter, or any filter you want to use.&lt;/p>
+&lt;/ul></description>
+laravel, php, cms</item><item><title>Laravel and non email authentication</title><link>https://alfrednutile.info/posts/84/</link><pubDate>Tue, 20 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/84/</guid><description>&lt;p>Note to self. The Laravel docs are here that cover Authentication. But when it came time to use a filter and a non email based user name I had to modify the auth.basic filter, or any filter you want to use.&lt;/p>
 &lt;p>It ended up looking like this since I wanted user_account and not email to be the username for authentication.&lt;/p>
 &lt;pre>&lt;code>//app/filters.php
 Route::filter('auth.basic', function()
@@ -5830,7 +5903,8 @@ return Auth::basic('user_account');
 &lt;/code>&lt;/pre>&lt;p>You can see this option here&lt;/p>
 &lt;pre>&lt;code>//vendor/laravel/framework/src/Illuminate/Auth/Guard.php
 public function basic($field = 'email', Request $request = null)
-&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Using Beanstalkd to Schedule the release of a post in Laravel</title><link>https://alfrednutile.info/posts/78/</link><pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/78/</guid><description>&lt;p>Phase 1 of my master plan is to regularly write more posts on misc web and coding in general related topics. And sometimes I can sit and write a few of them but it would be best not to release them all at once for a lot of reason.&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, php, note2self</item><item><title>Using Beanstalkd to Schedule the release of a post in Laravel</title><link>https://alfrednutile.info/posts/78/</link><pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/78/</guid><description>&lt;p>Phase 1 of my master plan is to regularly write more posts on misc web and coding in general related topics. And sometimes I can sit and write a few of them but it would be best not to release them all at once for a lot of reason.&lt;/p>
 &lt;p>So this will cover the way I setup a schedule feature to my post creation process. Yes there are libraries for this but I just wanted to have fun making this feature. There are three key posts that helped me get through this.&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="http://laravel.com/docs/queues">Laravel Docs&lt;/a>&lt;/li>
@@ -5904,7 +5978,8 @@ $job-&amp;gt;release(30);
 &lt;p>This was really not bad. I ended up using the existing server but will move to another server shortly. One thing to keep in mind is your firewall. You really want to make sure that you are only allowing certain IPs to visit this server or limit beanstalkd to localhost.&lt;/p>
 &lt;p>As noted this tutorial handles most of this really well &lt;a href="http://fideloper.com/ubuntu-beanstalkd-and-laravel4">Fideloper&lt;/a>&lt;/p>
 &lt;p>Finally &lt;a href="https://github.com/ptrofimov/beanstalk_console">beanstalk console&lt;/a> is a great way, especially locally if you are not using &amp;ldquo;sync&amp;rdquo; driver to see what is going on. Just make sure to block it with htaccess so no one can just visit it on your server.&lt;/p>
-&lt;p>That is about it. Later I will add an even to allow other things to be triggered maybe via IFTT!&lt;/p></description><category>laravel</category><category>php</category><category>queue</category></item><item><title>Using Dot Env files to manage settings</title><link>https://alfrednutile.info/posts/76/</link><pubDate>Sun, 18 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/76/</guid><description>&lt;p>Wow. Included in Laravel &lt;a href="http://laravel.com/docs/configuration#protecting-sensitive-configuration">http://laravel.com/docs/configuration#protecting-sensitive-configuration&lt;/a>&lt;/p>
+&lt;p>That is about it. Later I will add an even to allow other things to be triggered maybe via IFTT!&lt;/p></description>
+laravel, php, queue</item><item><title>Using Dot Env files to manage settings</title><link>https://alfrednutile.info/posts/76/</link><pubDate>Sun, 18 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/76/</guid><description>&lt;p>Wow. Included in Laravel &lt;a href="http://laravel.com/docs/configuration#protecting-sensitive-configuration">http://laravel.com/docs/configuration#protecting-sensitive-configuration&lt;/a>&lt;/p>
 &lt;ol>
 &lt;li>
 &lt;p>removed due to old news&lt;/p>
@@ -5924,7 +5999,8 @@ return include(__DIR__ . '/../.env');
 return 'production';
 }
 });
-&lt;/code>&lt;/pre>&lt;p>Quite simple at that point to separate all of the environments.&lt;/p></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Using Scopes in Laravel</title><link>https://alfrednutile.info/posts/69/</link><pubDate>Fri, 16 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/69/</guid><description>&lt;p>I have about 4 models that all share 2 common queries. I want all of them that are &amp;ldquo;Published&amp;rdquo; and or Ordered by a field called Order.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Quite simple at that point to separate all of the environments.&lt;/p></description>
+laravel, php, note2self</item><item><title>Using Scopes in Laravel</title><link>https://alfrednutile.info/posts/69/</link><pubDate>Fri, 16 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/69/</guid><description>&lt;p>I have about 4 models that all share 2 common queries. I want all of them that are &amp;ldquo;Published&amp;rdquo; and or Ordered by a field called Order.&lt;/p>
 &lt;p>This does help with some &lt;a href="http://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY&lt;/a> goals, but you could easily change or add to a scope as needed to update all the queries involved etc. Especially if at a later point you break this out into a Repository Patter to use a different ORM.&lt;/p>
 &lt;p>So using &lt;a href="http://laravel.com/docs/eloquent#query-scopes">Scopes&lt;/a> I can make one shared query. All my Model classes extend a BaseModel class I made that looks like this&lt;/p>
 &lt;pre>&lt;code>//app/models/BaseModel.php
@@ -5952,7 +6028,8 @@ public function projects()
 {
 return $this-&amp;gt;hasMany('Project')-&amp;gt;Published()-&amp;gt;OrderByOrder();
 }
-&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Quick way to add text to a hidden ckeditor field</title><link>https://alfrednutile.info/posts/68/</link><pubDate>Thu, 15 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/68/</guid><description>&lt;p>Since I am not testing ckeditor this is a way to get text into a sometimes required field.&lt;/p>
+&lt;/code>&lt;/pre></description>
+laravel, php, note2self</item><item><title>Quick way to add text to a hidden ckeditor field</title><link>https://alfrednutile.info/posts/68/</link><pubDate>Thu, 15 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/68/</guid><description>&lt;p>Since I am not testing ckeditor this is a way to get text into a sometimes required field.&lt;/p>
 &lt;pre>&lt;code>//FeaturesContext.php
 /**
 * @Then /^I fill in wysiwyg on field &amp;quot;([^&amp;quot;]*)&amp;quot; with &amp;quot;([^&amp;quot;]*)&amp;quot;$/
@@ -5968,10 +6045,12 @@ $this-&amp;gt;fillField($arg, $arg2);
 }
 &lt;/code>&lt;/pre>&lt;p>This will go into FeaturesContext.php. Then to you test you can pass the name and text to place into the field&lt;/p>
 &lt;pre>&lt;code> Then I fill in wysiwyg on field &amp;quot;body&amp;quot; with &amp;quot;Project via Test 1&amp;quot;
-&lt;/code>&lt;/pre>&lt;p>If you want to test Ckeditor then just look for a class that it applies to your text editor to know it is showing. Otherwise assume it is tested and working if it is there.&lt;/p></description><category>behat</category><category>php</category></item><item><title>Github CLI to get Teams and Members of an Org</title><link>https://alfrednutile.info/posts/67/</link><pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/67/</guid><description>&lt;p>Needed to make a quick library for pulling down this info and making it a CSV file.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>If you want to test Ckeditor then just look for a class that it applies to your text editor to know it is showing. Otherwise assume it is tested and working if it is there.&lt;/p></description>
+behat, php</item><item><title>Github CLI to get Teams and Members of an Org</title><link>https://alfrednutile.info/posts/67/</link><pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/67/</guid><description>&lt;p>Needed to make a quick library for pulling down this info and making it a CSV file.&lt;/p>
 &lt;p>The libraries made this super easy. But it was hard to get all the emails since these can only been seen if in the users profile.&lt;/p>
 &lt;h3 id="the-link">the link&lt;/h3>
-&lt;p>&lt;a href="https://github.com/alnutile/org_reports">https://github.com/alnutile/org_reports&lt;/a>&lt;/p></description><category>github</category><category>tools</category><category>apis</category><category>php</category></item><item><title>Adding Column using sqlite caused error 'Cannot add a NOT NULL column with default value NULL'</title><link>https://alfrednutile.info/posts/64/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/64/</guid><description>&lt;p>After the &lt;a href="http://laravel.com/docs/upgrade#upgrade-4.1.26">security update&lt;/a> I had to add a remember_token to my user table.
+&lt;p>&lt;a href="https://github.com/alnutile/org_reports">https://github.com/alnutile/org_reports&lt;/a>&lt;/p></description>
+github, tools, apis, php</item><item><title>Adding Column using sqlite caused error 'Cannot add a NOT NULL column with default value NULL'</title><link>https://alfrednutile.info/posts/64/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/64/</guid><description>&lt;p>After the &lt;a href="http://laravel.com/docs/upgrade#upgrade-4.1.26">security update&lt;/a> I had to add a remember_token to my user table.
 &lt;a href="">security update&lt;/a>&lt;/p>
 &lt;p>Since I am using sqllite locally I ended up with this error&lt;/p>
 &lt;pre>&lt;code>&amp;gt;php artisan migrate
@@ -5991,7 +6070,8 @@ Schema::table('users', function(Blueprint $table)
 $table-&amp;gt;text('remember_token')-&amp;gt;nullable();
 });
 }
-&lt;/code>&lt;/pre></description><category>laravel</category><category>php</category><category>note2self</category></item><item><title>Drupal and Composer install or update</title><link>https://alfrednutile.info/posts/65/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/65/</guid><description>&lt;p>Using composer and drupal, even d7, is great.
+&lt;/code>&lt;/pre></description>
+laravel, php, note2self</item><item><title>Drupal and Composer install or update</title><link>https://alfrednutile.info/posts/65/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/65/</guid><description>&lt;p>Using composer and drupal, even d7, is great.
 But an update or install can leave you with a broken drupal registry.&lt;/p>
 &lt;p>So here is a workflow that is pretty bullet proof.&lt;/p>
 &lt;p>In this example drupal&amp;rsquo;s composer folder where composer.json lives is located in /var/www/drupal/sites/default/files/composer&lt;/p>
@@ -6004,7 +6084,8 @@ composer --working-dir=/var/www/drupal/sites/default/files/composer update
 &lt;pre>&lt;code>drush composer-manager update
 &lt;/code>&lt;/pre>&lt;p>You can clear that up with&lt;/p>
 &lt;pre>&lt;code>drush rr
-&lt;/code>&lt;/pre>&lt;p>And then use composer directly as I did above to update/install your composer related files.&lt;/p></description><category>composer</category><category>drupal</category><category>php</category></item><item><title>php artisan migrate:reset not working</title><link>https://alfrednutile.info/posts/63/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/63/</guid><description>&lt;p>This was an issue for me using sqlite. There was a simple fix noted in the &lt;a href="http://irclogs.laravel.io/2014-03-02/04:41#log-5312b66d1937b8f547005cde">irclogs&lt;/a> of Laravel!&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>And then use composer directly as I did above to update/install your composer related files.&lt;/p></description>
+composer, drupal, php</item><item><title>php artisan migrate:reset not working</title><link>https://alfrednutile.info/posts/63/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/63/</guid><description>&lt;p>This was an issue for me using sqlite. There was a simple fix noted in the &lt;a href="http://irclogs.laravel.io/2014-03-02/04:41#log-5312b66d1937b8f547005cde">irclogs&lt;/a> of Laravel!&lt;/p>
 &lt;p>So under my require-dev or require I placed&lt;/p>
 &lt;pre>&lt;code>//composer.json
 &amp;quot;require&amp;quot;: {
@@ -6012,7 +6093,8 @@ composer --working-dir=/var/www/drupal/sites/default/files/composer update
 &amp;quot;way/generators&amp;quot;: &amp;quot;dev-master&amp;quot;,
 &amp;quot;doctrine/dbal&amp;quot;: &amp;quot;~2.3&amp;quot;
 },
-&lt;/code>&lt;/pre>&lt;p>ran composer update and all was well again!&lt;/p></description><category>laravel</category><category>php</category></item><item><title>Adding Markdown Editor to your Blog/CMS</title><link>https://alfrednutile.info/posts/60/</link><pubDate>Mon, 28 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/60/</guid><description>&lt;p>In this case it is Laravel but any PHP framework could use this.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>ran composer update and all was well again!&lt;/p></description>
+laravel, php</item><item><title>Adding Markdown Editor to your Blog/CMS</title><link>https://alfrednutile.info/posts/60/</link><pubDate>Mon, 28 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/60/</guid><description>&lt;p>In this case it is Laravel but any PHP framework could use this.&lt;/p>
 &lt;h2 id="get-the-library">Get the Library&lt;/h2>
 &lt;p>I used the &lt;a href="https://github.com/dflydev/dflydev-markdown">dflydev-markdown&lt;/a> library which uses &lt;a href="http://michelf.ca/projects/php-markdown/extra/">php-markdown&lt;/a> as it&amp;rsquo;s base. &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
 &lt;p>As it notes I load it up with composer.json and I am ready to use it.&lt;/p>
@@ -6091,4 +6173,5 @@ $this-&amp;gt;mk = ($mk == null) ? new MarkdownExtraParser() : $mk;
 &lt;li id="fn:2" role="doc-endnote">
 &lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/li>
 &lt;/ol>
-&lt;/section></description><category>laravel</category><category>php</category></item></channel></rss>
+&lt;/section></description>
+laravel, php</item></channel></rss>

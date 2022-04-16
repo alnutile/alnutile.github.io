@@ -4,7 +4,8 @@
 &lt;p>After that, on an update or a create I check if the domain exists.&lt;/p>
 &lt;p>There was another post on github in the issue queue to help me figure out how to &lt;strong>rescue out of an error&lt;/strong>. Ideally though I would direct the user back to the edit page with an error message or autocomplete as they type. But right now I save their settings to the Partner model and show the error.&lt;/p>
 &lt;p>This allows me to use the &amp;quot;heroku domain:add --app APPNAME domain_name&amp;quot; command from within the app.&lt;/p>
-&lt;p>Setting up the ENV variables are explained on setting up heroku pages like this one&amp;nbsp;&lt;a href="https://devcenter.heroku.com/articles/config-vars" target="_blank">https://devcenter.heroku.com/articles/config-vars&lt;/a>&amp;nbsp;so you can do this at the command line and note store it in a file on git.&amp;nbsp;&lt;/p></description><category>rails</category></item><item><title>HerokuApps and Multiple Domains</title><link>https://alfrednutile.info/posts/27/</link><pubDate>Sun, 01 Sep 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/27/</guid><description>&lt;p>There are some great docs online for figuring out how to setup heroku domains.&lt;/p>
+&lt;p>Setting up the ENV variables are explained on setting up heroku pages like this one&amp;nbsp;&lt;a href="https://devcenter.heroku.com/articles/config-vars" target="_blank">https://devcenter.heroku.com/articles/config-vars&lt;/a>&amp;nbsp;so you can do this at the command line and note store it in a file on git.&amp;nbsp;&lt;/p></description>
+rails</item><item><title>HerokuApps and Multiple Domains</title><link>https://alfrednutile.info/posts/27/</link><pubDate>Sun, 01 Sep 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/27/</guid><description>&lt;p>There are some great docs online for figuring out how to setup heroku domains.&lt;/p>
 &lt;p>&lt;a href="https://devcenter.heroku.com/articles/custom-domains">https://devcenter.heroku.com/articles/custom-domains&lt;/a> as well as others.&lt;/p>
 &lt;p>The feature I had to get setup was that for &lt;strong>every new herokuapp&lt;/strong> I spun up under my account/clients account it had to make a sub-domain under that SaaS owners zone/domain.&lt;/p>
 &lt;p>For example the owner wanted all of these apps to show up under freesurvey.com (not really but just an example url)&amp;nbsp;so each one they spun up would be, for example yoursite.freesurvey.com but also later the person who &amp;quot;subscribed&amp;quot; for the product&amp;nbsp;can also use their real domain like www.mysite.com or survey.mysite.com so it would be fully branded under their name as well.&lt;/p>
@@ -26,7 +27,8 @@ So now it works for NAMEHERE.freesurvey.com, survey.mydomain.com and of course t
 &lt;p>This was already setup for the client who owns the survey making SaaS site in this case for example &amp;quot;freesurvey.com&amp;quot; (not really this domain just an example)&lt;/p>
 &lt;p>So Zerigo was the Name Server&amp;nbsp;provider for this domain. And was linked to heroku account I made for the client.&amp;nbsp;&lt;/p>
 &lt;p>&amp;nbsp;&lt;/p>
-&lt;p>&lt;sup>1&lt;/sup>This name is made by Time.now.to_i via the ruby script prefixed with a consistent string of characters like freesurvey so I would end up with an App Name like freesurvey1234556789 which I could error check and make another until heroku says that was available. But that name is pretty rare so so far they are always available.&lt;/p></description><category>rails</category></item><item><title>Going Angular.js</title><link>https://alfrednutile.info/posts/2/</link><pubDate>Fri, 12 Apr 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/2/</guid><description>&lt;p>Going Angular&lt;/p>
+&lt;p>&lt;sup>1&lt;/sup>This name is made by Time.now.to_i via the ruby script prefixed with a consistent string of characters like freesurvey so I would end up with an App Name like freesurvey1234556789 which I could error check and make another until heroku says that was available. But that name is pretty rare so so far they are always available.&lt;/p></description>
+rails</item><item><title>Going Angular.js</title><link>https://alfrednutile.info/posts/2/</link><pubDate>Fri, 12 Apr 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/2/</guid><description>&lt;p>Going Angular&lt;/p>
 &lt;p>
 Took some time to rewrite my drupal/bootstrap site into Angular.js and slim php.
 Using slim and a seed project I quickly had a rest api to get the different content types, Blog, Page etc.
@@ -58,4 +60,5 @@ https://github.com/angular/angular-seed
 &lt;br>
 This seems like it could have been a good starter to build out the site
 http://yeoman.io/
-But I already had a Twitter Bootstrap theme in place and ready.</description><category>rails</category></item></channel></rss>
+But I already had a Twitter Bootstrap theme in place and ready.</description>
+rails</item></channel></rss>

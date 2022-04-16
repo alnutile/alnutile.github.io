@@ -59,4 +59,5 @@ Here are some links&lt;/p>
 &lt;p>running locally below worked for me&lt;/p>
 &lt;pre>&lt;code>docker run -it --volume=$(pwd):/var/www/html --memory=4g --memory-swap=4g --memory-swappiness=0 --entrypoint=/bin/bash php:7.2-apache
 &lt;/code>&lt;/pre>&lt;p>But I would have to install their mysql docker as well they note and map them together. ¯_(ツ)_/¯&lt;/p>
-&lt;p>Maybe the price is right for this vs TravisCI&lt;/p></description><category>laravel</category><category>bitbucket</category></item></channel></rss>
+&lt;p>Maybe the price is right for this vs TravisCI&lt;/p></description>
+laravel, bitbucket</item></channel></rss>

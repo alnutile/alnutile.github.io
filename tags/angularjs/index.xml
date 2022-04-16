@@ -42,7 +42,8 @@ JavaScript::put(
 return View::make('layouts.main', compact('chat_on'));
 }
 }
-&lt;/code>&lt;/pre>&lt;p>Thanks to &lt;a href="http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs">http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs&lt;/a> for the tip&lt;/p></description><category>note2self</category><category>angularjs</category><category>laravel</category></item><item><title>Angular History Based BreadCrumbs</title><link>https://alfrednutile.info/posts/123/</link><pubDate>Fri, 12 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/123/</guid><description>&lt;p>Originally I was going to go with one of the more well known packages but then I realized I wanted to show the history of the users states not the children of the state they are on. For example when the user lands on the website at say the path projects and then goes to projects/foo their breadcrumbs will look like this&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Thanks to &lt;a href="http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs">http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs&lt;/a> for the tip&lt;/p></description>
+note2self, angularjs, laravel</item><item><title>Angular History Based BreadCrumbs</title><link>https://alfrednutile.info/posts/123/</link><pubDate>Fri, 12 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/123/</guid><description>&lt;p>Originally I was going to go with one of the more well known packages but then I realized I wanted to show the history of the users states not the children of the state they are on. For example when the user lands on the website at say the path projects and then goes to projects/foo their breadcrumbs will look like this&lt;/p>
 &lt;pre>&lt;code>Projects / Project Foo
 &lt;/code>&lt;/pre>&lt;p>And if they then go to project/foo/reports then it would be&lt;/p>
 &lt;pre>&lt;code>Projects / Project Foo / Reports
@@ -113,7 +114,8 @@ angular.module('app')
 &lt;pre>&lt;code>&amp;lt;app-header page-title=&amp;quot;vm.pageTitle&amp;quot; history=&amp;quot;history&amp;quot;&amp;gt;&amp;lt;/app-header&amp;gt;
 &lt;/code>&lt;/pre>&lt;p>You end up with something like this
 &lt;img src="https://dl.dropboxusercontent.com/s/g1uac6y848mk6or/Screenshot%202014-12-11%2020.18.17.png?dl=0" alt="bc">&lt;/p>
-&lt;p>Next step is to inject the title into the pageTitle so it would be the Project name. But right now I rather have the above so as a user I can easily go back to say &amp;ldquo;Batches&amp;rdquo; from where I am in the state.&lt;/p></description><category>angularjs</category></item><item><title>Embed Template Data in View (Angular, Laravel)</title><link>https://alfrednutile.info/posts/122/</link><pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/122/</guid><description>&lt;p>Sometimes, when your frontend shares the same view rendering of the backend, you can store data in the window object. This can save you queries to the backend when, for example, Profile Data that shows on every pages request.&lt;/p>
+&lt;p>Next step is to inject the title into the pageTitle so it would be the Project name. But right now I rather have the above so as a user I can easily go back to say &amp;ldquo;Batches&amp;rdquo; from where I am in the state.&lt;/p></description>
+angularjs</item><item><title>Embed Template Data in View (Angular, Laravel)</title><link>https://alfrednutile.info/posts/122/</link><pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/122/</guid><description>&lt;p>Sometimes, when your frontend shares the same view rendering of the backend, you can store data in the window object. This can save you queries to the backend when, for example, Profile Data that shows on every pages request.&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/app0y31xxi3uk80/profile_example.png?dl=0" alt="profile">&lt;/p>
 &lt;h1 id="embed-output-into-window-or-window">Embed output into window or $window&lt;/h1>
 &lt;p>In the Controller I am using to output the Angular template (app/views/main.blade.php for example) I inject the window data that I want all pages to have.&lt;/p>
@@ -189,7 +191,8 @@ angular
 BE
 &amp;lt;/div&amp;gt;
 &amp;lt;/li&amp;gt;
-&lt;/code>&lt;/pre></description><category>php</category><category>laravel</category><category>angularjs</category></item><item><title>CSRF Tokens and Angular.js</title><link>https://alfrednutile.info/posts/110/</link><pubDate>Wed, 15 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/110/</guid><description>&lt;p>This is key to preventing &lt;a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">Cross-site request forgery&lt;/a>. Basically you log in and do some work on one site, then go to a malicious site and now they can send POST requests to the sites you have authentication to. But by passing a token we can prevent that issue.&lt;/p>
+&lt;/code>&lt;/pre></description>
+php, laravel, angularjs</item><item><title>CSRF Tokens and Angular.js</title><link>https://alfrednutile.info/posts/110/</link><pubDate>Wed, 15 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/110/</guid><description>&lt;p>This is key to preventing &lt;a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">Cross-site request forgery&lt;/a>. Basically you log in and do some work on one site, then go to a malicious site and now they can send POST requests to the sites you have authentication to. But by passing a token we can prevent that issue.&lt;/p>
 &lt;p>The steps&lt;/p>
 &lt;ul>
 &lt;li>Make a token path&lt;/li>
@@ -274,4 +277,5 @@ vm.fail(response);
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/hilfee68v8acyx7/intheform.png?dl=0" alt="form">&lt;/p>
 &lt;p>And you can remove it to show the form fail.&lt;/p>
 &lt;p>You can also see it in the payload we are posting.&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/4vy90lut4l12o55/Screenshot%202014-10-15%2014.38.35.png?dl=0" alt="post">&lt;/p></description><category>angularjs</category><category>laravel</category><category>l5</category><category>csrf</category></item></channel></rss>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/4vy90lut4l12o55/Screenshot%202014-10-15%2014.38.35.png?dl=0" alt="post">&lt;/p></description>
+angularjs, laravel, l5, csrf</item></channel></rss>

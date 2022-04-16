@@ -45,4 +45,5 @@ xdebug.remote_log = /var/log/xdebug.log
 }
 ]
 }
-&lt;/code>&lt;/pre></description><category>windows</category><category>linux</category><category>wsl</category><category>php</category></item></channel></rss>
+&lt;/code>&lt;/pre></description>
+windows, linux, wsl, php</item></channel></rss>

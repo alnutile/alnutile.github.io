@@ -34,4 +34,5 @@ and see
 &lt;h3 id="queue-listen">Queue Listen&lt;/h3>
 &lt;pre>&lt;code>#folder of project
 php artisan queue:listen
-&lt;/code>&lt;/pre>&lt;p>Now as you put things in the queue you can see them come and go at &lt;a href="http://beanstalkd.dev">http://beanstalkd.dev&lt;/a>:8000/&lt;/p></description><category>laravel</category><category>beanstalkd</category><category>vagrant</category><category>homestead</category></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>Now as you put things in the queue you can see them come and go at &lt;a href="http://beanstalkd.dev">http://beanstalkd.dev&lt;/a>:8000/&lt;/p></description>
+laravel, beanstalkd, vagrant, homestead</item></channel></rss>

@@ -12,13 +12,15 @@
 &lt;pre>&lt;code>cd ~/Homestead
 vagrant provision
 &lt;/code>&lt;/pre>&lt;p>That is it now your /etc/hosts file will look like this&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/91u5omdgwoij006/homestead_hosts.png?dl=0" alt="homestead">&lt;/p></description><category>homestead</category><category>laravel</category></item><item><title>Drush and Homestead Vagrant Box</title><link>https://alfrednutile.info/posts/100/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/100/</guid><description>&lt;p>Had some trouble doing the normal composer install so I went with the manual install noted here &lt;a href="https://github.com/drush-ops/drush">https://github.com/drush-ops/drush&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/91u5omdgwoij006/homestead_hosts.png?dl=0" alt="homestead">&lt;/p></description>
+homestead, laravel</item><item><title>Drush and Homestead Vagrant Box</title><link>https://alfrednutile.info/posts/100/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/100/</guid><description>&lt;p>Had some trouble doing the normal composer install so I went with the manual install noted here &lt;a href="https://github.com/drush-ops/drush">https://github.com/drush-ops/drush&lt;/a>&lt;/p>
 &lt;p>Basically I downloaded and unzipped the repo to /usr/local/sbin. Then I did a symlink to /usr/bin&lt;/p>
 &lt;pre>&lt;code>cd /usr/bin
 sudo ln -s /usr/local/sbin/drush/drush .
 &lt;/code>&lt;/pre>&lt;p>Then in /usr/local/sbin/drush I ran&lt;/p>
 &lt;pre>&lt;code>sudo composer install
-&lt;/code>&lt;/pre></description><category>drush</category><category>drupal</category><category>laravel</category><category>homestead</category></item><item><title>SSL and Homestead</title><link>https://alfrednutile.info/posts/101/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/101/</guid><description>&lt;p>This is like most nginx the only trick was adding the port forward on Homestead&lt;/p>
+&lt;/code>&lt;/pre></description>
+drush, drupal, laravel, homestead</item><item><title>SSL and Homestead</title><link>https://alfrednutile.info/posts/101/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/101/</guid><description>&lt;p>This is like most nginx the only trick was adding the port forward on Homestead&lt;/p>
 &lt;pre>&lt;code>#scripts/homestead.rb
 # Configure Port Forwarding To The Box
 config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 80, host: 8000
@@ -28,7 +30,8 @@ config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 5432, host: 54320
 config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 11300, host: 11300
 &lt;/code>&lt;/pre>&lt;p>I set it to 44300&lt;/p>
 &lt;p>Then just follow along here&lt;/p>
-&lt;p>&lt;a href="http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm">http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm&lt;/a> which leads to here &lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04">https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04&lt;/a> for the rest&lt;/p></description><category>homestead</category><category>nginx</category></item><item><title>Laravel Homestead and MailCatcher</title><link>https://alfrednutile.info/posts/93/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/93/</guid><description>&lt;p>Using MailCatcher &lt;a href="http://mailcatcher.me/">http://mailcatcher.me/&lt;/a> I can see the emails sent by the website.&lt;/p>
+&lt;p>&lt;a href="http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm">http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm&lt;/a> which leads to here &lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04">https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04&lt;/a> for the rest&lt;/p></description>
+homestead, nginx</item><item><title>Laravel Homestead and MailCatcher</title><link>https://alfrednutile.info/posts/93/</link><pubDate>Wed, 02 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/93/</guid><description>&lt;p>Using MailCatcher &lt;a href="http://mailcatcher.me/">http://mailcatcher.me/&lt;/a> I can see the emails sent by the website.&lt;/p>
 &lt;p>First checkout &lt;a href="https://github.com/fideloper/Vaprobash/pull/348">https://github.com/fideloper/Vaprobash/pull/348&lt;/a> to get your box ready
 All I did was&lt;/p>
 &lt;h2 id="log-into-the-vagrant-box-and-run">Log into the vagrant box and run&lt;/h2>
@@ -59,7 +62,8 @@ return array(
 &lt;h3 id="links">Links&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://laracasts.com/forum/?p=1896-mailcatcher-vagrant-and-multiple-developers/0">https://laracasts.com/forum/?p=1896-mailcatcher-vagrant-and-multiple-developers/0&lt;/a>&lt;/li>
-&lt;/ul></description><category>laravel</category><category>php</category><category>homestead</category></item><item><title>Laravel Homestead and Beanstalkd Console</title><link>https://alfrednutile.info/posts/92/</link><pubDate>Mon, 30 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/92/</guid><description>&lt;p>I am doing some queue work and wanted beanstalkd console installed so I can see the status of the queue&lt;/p>
+&lt;/ul></description>
+laravel, php, homestead</item><item><title>Laravel Homestead and Beanstalkd Console</title><link>https://alfrednutile.info/posts/92/</link><pubDate>Mon, 30 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/92/</guid><description>&lt;p>I am doing some queue work and wanted beanstalkd console installed so I can see the status of the queue&lt;/p>
 &lt;p>&lt;img src="https://camo.githubusercontent.com/1465416717c26b64eb6bc2647a2e8def90ee6da0/68747470733a2f2f7261772e6769746875622e636f6d2f7074726f66696d6f762f6265616e7374616c6b5f636f6e736f6c652f6d61737465722f636f7665722f6274636f6e736f6c652e706e67" alt="beanstalkd_console">&lt;/p>
 &lt;p>Using Laravel Homestead as the vagrant box &lt;a href="http://laravel.com/docs/homestead">http://laravel.com/docs/homestead&lt;/a> I needed to&lt;/p>
 &lt;ul>
@@ -95,4 +99,5 @@ and see
 &lt;h3 id="queue-listen">Queue Listen&lt;/h3>
 &lt;pre>&lt;code>#folder of project
 php artisan queue:listen
-&lt;/code>&lt;/pre>&lt;p>Now as you put things in the queue you can see them come and go at &lt;a href="http://beanstalkd.dev">http://beanstalkd.dev&lt;/a>:8000/&lt;/p></description><category>laravel</category><category>beanstalkd</category><category>vagrant</category><category>homestead</category></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>Now as you put things in the queue you can see them come and go at &lt;a href="http://beanstalkd.dev">http://beanstalkd.dev&lt;/a>:8000/&lt;/p></description>
+laravel, beanstalkd, vagrant, homestead</item></channel></rss>

@@ -67,4 +67,5 @@ return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;
 &lt;/ul>
 &lt;p>Since 422 is an HTTP Response&lt;/p>
 &lt;pre>&lt;code>vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php:64
-&lt;/code>&lt;/pre>&lt;p>We should have possible a response transformer class to consider the non HTTP response. Then let the Controller pick from that to find its related HTTP response. See the &lt;a href="https://leanpub.com/build-apis-you-wont-hate">Build API&amp;rsquo;s You Wont&amp;rsquo;t Hate&lt;/a> for more on that. Covered in the other guide shortly too.&lt;/p></description><category>ioc</category><category>style guides</category></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>We should have possible a response transformer class to consider the non HTTP response. Then let the Controller pick from that to find its related HTTP response. See the &lt;a href="https://leanpub.com/build-apis-you-wont-hate">Build API&amp;rsquo;s You Wont&amp;rsquo;t Hate&lt;/a> for more on that. Covered in the other guide shortly too.&lt;/p></description>
+ioc, style guides</item></channel></rss>
