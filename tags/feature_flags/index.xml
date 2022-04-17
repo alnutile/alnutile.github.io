@@ -1,7 +1,50 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>feature_flags on Alfred Nutile</title><link>https://alfrednutile.info/tags/feature_flags/</link><description>Recent content in feature_flags on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 26 Jan 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/feature_flags/index.xml" rel="self" type="application/rss+xml"/><item><title>Feature Flags In Laravel</title><link>https://alfrednutile.info/posts/175/</link><pubDate>Tue, 26 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/175/</guid><description><h2 id="overview">Overview</h2><p><strong>Library is<a href="https://github.com/friendsofcat/laravel-feature-flag/">https://github.com/friendsofcat/laravel-feature-flag/</a></strong></p><p><strong>Listen<a href="http://www.readorlisten.com/10">here</a></strong></p><p><strong>Watch<a href="https://youtu.be/4nq7FyHQj8I">https://youtu.be/4nq7FyHQj8I</a></strong></p><p>We are working on using FeatureFlags or Toggles in our applications. For one we are aiming to do all our work on mainline branch at all times so this would be a key coding discipline to use FeatureFlags so we can hide a feature in progress knowing it will not interfere with the application. For example if a hotfix or another feature is ready to go to production we can push that with no worries of the in progress feature.</p><blockquote><p>FeatureFlags so we can hide a feature in progress knowing it will not interfere with the application</p></blockquote><p>You can see many of the reasons in this article<a href="http://martinfowler.com/articles/feature-toggles.html">http://martinfowler.com/articles/feature-toggles.html</a> by Pete Hodgson for using this system. So not just the more common situations of permissions but also Release Toggles, Experiment Toggles and more see list and image below</p><p><img src="http://martinfowler.com/articles/feature-toggles/chart-4.png" alt="flag_types"/><p><strong>[image from martin fowler feature-toggles article</strong></p><ul><li>Release Toggles</li><li>Ops Toggles</li><li>Permission Toggles</li><li>Experiment Toggles</li></ul><p>The core coding logic I will be using is this library<a href="https://github.com/Atriedes/feature">Atriedes/feature</a> as it has the logic needed to consider common feature flag states eg user, users, on, off, groups, admin, internal, random etc.</p><ul><li>on or off value simple!</li><li>on for users</li><li>on for groups</li><li>on for a user</li><li>bucketing random</li><li>random</li><li>percentage</li><li>url query string</li></ul><blockquote><p>The core coding logic I will be using is this library<a href="https://github.com/Atriedes/feature">Atriedes/feature</a></p></blockquote><p>One key thing, as I use this in Laravel, is I will try and mix this with the existing<a href="https://laravel.com/docs/5.2/authorization">Authorization</a> workflow that is already present. This gives me some already prepared ways to think about this both at the view layer, model layer and controller layer and where to register these states. Plus we then get great Laravel docs to help explain some of it.</p><p>For example I can use this in my theme<a href="https://gist.github.com/alnutile/3007022c9880f1c656e1#file-snippet-blade-php">snippet</a></p><h2 id="installing">Installing</h2><p>This will install two things. The library I made to do this and the Example library I am using to show it in action.</p><h3 id="providers">Providers</h3><p>Add the below to your config/app.php</p><pre><code>AlfredNutileInc\LaravelFeatureFlags\FeatureFlagsProvider::class,
-AlfredNutileInc\LaravelFeatureFlags\ExampleFeatureProvider::class,</code></pre><h3 id="the-core-library-featureflagsprovider">The Core Library FeatureFlagsProvider</h3><p>What does this do?</p><p>It does some basic Laravel work for registering views for settings, routes for managing settings CRUD and some cache on model changes so we can update the World as needed.</p><p>The big thing it does do is instantiate World.</p><pre><code> public function boot()
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>feature_flags on Alfred Nutile</title><link>https://alfrednutile.info/tags/feature_flags/</link><description>Recent content in feature_flags on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 26 Jan 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/feature_flags/index.xml" rel="self" type="application/rss+xml"/><item><title>Feature Flags In Laravel</title><link>https://alfrednutile.info/posts/175/</link><pubDate>Tue, 26 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/175/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
+&lt;p>&lt;strong>Library is &lt;a href="https://github.com/friendsofcat/laravel-feature-flag/">https://github.com/friendsofcat/laravel-feature-flag/&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Listen &lt;a href="http://www.readorlisten.com/10">here&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Watch &lt;a href="https://youtu.be/4nq7FyHQj8I">https://youtu.be/4nq7FyHQj8I&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>We are working on using FeatureFlags or Toggles in our applications. For one we are aiming to do all our work on mainline branch at all times so this would be a key coding discipline to use FeatureFlags so we can hide a feature in progress knowing it will not interfere with the application. For example if a hotfix or another feature is ready to go to production we can push that with no worries of the in progress feature.&lt;/p>
+&lt;blockquote>
+&lt;p>FeatureFlags so we can hide a feature in progress knowing it will not interfere with the application&lt;/p>
+&lt;/blockquote>
+&lt;p>You can see many of the reasons in this article &lt;a href="http://martinfowler.com/articles/feature-toggles.html">http://martinfowler.com/articles/feature-toggles.html&lt;/a> by Pete Hodgson for using this system. So not just the more common situations of permissions but also Release Toggles, Experiment Toggles and more see list and image below&lt;/p>
+&lt;p>&lt;img src="http://martinfowler.com/articles/feature-toggles/chart-4.png" alt="flag_types">&lt;/p>
+&lt;p>&lt;strong>[image from martin fowler feature-toggles article&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Release Toggles&lt;/li>
+&lt;li>Ops Toggles&lt;/li>
+&lt;li>Permission Toggles&lt;/li>
+&lt;li>Experiment Toggles&lt;/li>
+&lt;/ul>
+&lt;p>The core coding logic I will be using is this library &lt;a href="https://github.com/Atriedes/feature">Atriedes/feature&lt;/a> as it has the logic needed to consider common feature flag states eg user, users, on, off, groups, admin, internal, random etc.&lt;/p>
+&lt;ul>
+&lt;li>on or off value simple!&lt;/li>
+&lt;li>on for users&lt;/li>
+&lt;li>on for groups&lt;/li>
+&lt;li>on for a user&lt;/li>
+&lt;li>bucketing random&lt;/li>
+&lt;li>random&lt;/li>
+&lt;li>percentage&lt;/li>
+&lt;li>url query string&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>The core coding logic I will be using is this library &lt;a href="https://github.com/Atriedes/feature">Atriedes/feature&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>One key thing, as I use this in Laravel, is I will try and mix this with the existing &lt;a href="https://laravel.com/docs/5.2/authorization">Authorization&lt;/a> workflow that is already present. This gives me some already prepared ways to think about this both at the view layer, model layer and controller layer and where to register these states. Plus we then get great Laravel docs to help explain some of it.&lt;/p>
+&lt;p>For example I can use this in my theme &lt;a href="https://gist.github.com/alnutile/3007022c9880f1c656e1#file-snippet-blade-php">snippet&lt;/a>&lt;/p>
+&lt;h2 id="installing">Installing&lt;/h2>
+&lt;p>This will install two things. The library I made to do this and the Example library I am using to show it in action.&lt;/p>
+&lt;h3 id="providers">Providers&lt;/h3>
+&lt;p>Add the below to your config/app.php&lt;/p>
+&lt;pre>&lt;code>AlfredNutileInc\LaravelFeatureFlags\FeatureFlagsProvider::class,
+AlfredNutileInc\LaravelFeatureFlags\ExampleFeatureProvider::class,
+&lt;/code>&lt;/pre>&lt;h3 id="the-core-library-featureflagsprovider">The Core Library FeatureFlagsProvider&lt;/h3>
+&lt;p>What does this do?&lt;/p>
+&lt;p>It does some basic Laravel work for registering views for settings, routes for managing settings CRUD and some cache on model changes so we can update the World as needed.&lt;/p>
+&lt;p>The big thing it does do is instantiate World.&lt;/p>
+&lt;pre>&lt;code> public function boot()
 {
-$this->registerViewFiles();<pre><code> $this-&amp;gt;injectLinks();
+$this-&amp;gt;registerViewFiles();
+$this-&amp;gt;injectLinks();
 $this-&amp;gt;registerFeatureFlags();
 }
 private function registerFeatureFlags()
@@ -20,9 +63,32 @@ private function transformFeatures($features, $value, $key)
 $features[$value['key']] = $value;
 $features[$value['key']]['users'] = (isset($value['variants']['users'])) ? $value['variants']['users'] : [];
 return $features;
-}</code></pre><p/></pre><blockquote/><p>The big thing it does do is instantiate World.</p></blockquote><p>The database saves the data in a way that I will talk about below. Above is the transformation of that data into a more compatible form to this library.</p><p>So at this point we have World, which is where we set our way of finding truth and<code>$features</code> which is the state of all features.</p><h4 id="world">World</h4><p>This class implements the interface that comes with the library</p><p>You can see that<a href="https://gist.github.com/anonymous/c508101f0a85a4751c93">here</a></p><p>I simply do some logic in there based off User email since that is all I am using right now instead of user id or name. More can be added as needed to react to all the other options.</p><p>But this is how we find things like &lsquo;can this user see this feature&rsquo;, &lsquo;what users are active for this feature&rsquo; etc. Basically it is the class you use to tie your framework into the FeatureFlag logic. So when it asks for groups, users, etc it has the methods and logic needed to compare your data to the feature flag requirements.</p><h3 id="then-the-examplefeature-provider">Then the ExampleFeature Provider</h3><p>Just so I could try out this library on something so I could wrap my head around it I made an example feature that added a twitter field to the user data.</p><p>This was great cause it was a schema change so I had to make sure the field was<code>nullable</code> and it offered some view level interactions with the FeatureFlag.</p><h3 id="in-the-view">In the View</h3><p>I made a view of it<a href="https://gist.github.com/alnutile/3007022c9880f1c656e1#file-partial-blade-php">partial</a></p><p>That can be injected into the main view that this feature will be altering<a href="https://gist.github.com/alnutile/3007022c9880f1c656e1#file-example-blade-php">example.blade.php</a></p><p>All of this is registered in the Provider setup above</p><pre><code>public function boot(GateContract $gate)
-{<p>$this->registerPolicies($gate);</p><p>$gate->define(&lsquo;add-twitter-field&rsquo;, &lsquo;\AlfredNutileInc\LaravelFeatureFlags\ExampleFeatureFlagLogic@addTwitterField&rsquo;);</p><p>$gate->define(&lsquo;see-twitter-field&rsquo;, &lsquo;\AlfredNutileInc\LaravelFeatureFlags\ExampleFeatureFlagLogic@seeTwitterField&rsquo;);
-}</code></pre><p>Those logic classes are super simple thanks to this library and really could just have been Closures.</p></p><pre><code>&lt;?php
+}
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>The big thing it does do is instantiate World.&lt;/p>
+&lt;/blockquote>
+&lt;p>The database saves the data in a way that I will talk about below. Above is the transformation of that data into a more compatible form to this library.&lt;/p>
+&lt;p>So at this point we have World, which is where we set our way of finding truth and &lt;code>$features&lt;/code> which is the state of all features.&lt;/p>
+&lt;h4 id="world">World&lt;/h4>
+&lt;p>This class implements the interface that comes with the library&lt;/p>
+&lt;p>You can see that &lt;a href="https://gist.github.com/anonymous/c508101f0a85a4751c93">here&lt;/a>&lt;/p>
+&lt;p>I simply do some logic in there based off User email since that is all I am using right now instead of user id or name. More can be added as needed to react to all the other options.&lt;/p>
+&lt;p>But this is how we find things like &amp;lsquo;can this user see this feature&amp;rsquo;, &amp;lsquo;what users are active for this feature&amp;rsquo; etc. Basically it is the class you use to tie your framework into the FeatureFlag logic. So when it asks for groups, users, etc it has the methods and logic needed to compare your data to the feature flag requirements.&lt;/p>
+&lt;h3 id="then-the-examplefeature-provider">Then the ExampleFeature Provider&lt;/h3>
+&lt;p>Just so I could try out this library on something so I could wrap my head around it I made an example feature that added a twitter field to the user data.&lt;/p>
+&lt;p>This was great cause it was a schema change so I had to make sure the field was &lt;code>nullable&lt;/code> and it offered some view level interactions with the FeatureFlag.&lt;/p>
+&lt;h3 id="in-the-view">In the View&lt;/h3>
+&lt;p>I made a view of it &lt;a href="https://gist.github.com/alnutile/3007022c9880f1c656e1#file-partial-blade-php">partial&lt;/a>&lt;/p>
+&lt;p>That can be injected into the main view that this feature will be altering &lt;a href="https://gist.github.com/alnutile/3007022c9880f1c656e1#file-example-blade-php">example.blade.php&lt;/a>&lt;/p>
+&lt;p>All of this is registered in the Provider setup above&lt;/p>
+&lt;pre>&lt;code>public function boot(GateContract $gate)
+{
+$this-&amp;gt;registerPolicies($gate);
+$gate-&amp;gt;define('add-twitter-field', '\AlfredNutileInc\LaravelFeatureFlags\ExampleFeatureFlagLogic@addTwitterField');
+$gate-&amp;gt;define('see-twitter-field', '\AlfredNutileInc\LaravelFeatureFlags\ExampleFeatureFlagLogic@seeTwitterField');
+}
+&lt;/code>&lt;/pre>&lt;p>Those logic classes are super simple thanks to this library and really could just have been Closures.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 namespace AlfredNutileInc\LaravelFeatureFlags;
 class ExampleFeatureFlagLogic
 {
@@ -34,12 +100,29 @@ public function seeTwitterField($user)
 {
 return \Feature\Feature::isEnabled('see-twitter-field');
 }
-}</code></pre><p>Now you can turn off this info as needed. And in your Controllers/Repository just remember to not assume that field is coming in via request or that it even exists in the Model.</p><pre><code>$user->twitter = ($request->input("twitter")) ? $request->input("twitter") : null;</code></pre><p>Honestly I think it is better to add this to a Laravel Model Event. Then as you listen to that Event you can react to it. And when not having the feature on or installed any longer it is one less place your code is being injected into the application.</p><h3 id="featureflag-migration">FeatureFlag Migration</h3><p>The Migration will make one table for<code>feature_flags</code> and add a column to the user table for the example twitter field feature.</p><p>Note the Example Provider will add the<code>twitter</code> column to the<code>user</code> table. It is nullable so it will not be an issue if other parts of the app do not consider this data.</p><p>In the<code>feature_flags</code> table there we have the id column, the key column, active column to even consider the feature flag and then the variants column if any. I might get rid of the active column but thought it might speed up queries.</p><p>The variant column being json allows us to store unstructured data to hold any data for different situations so we can cover all the possible variants listed above.</p><p>For example</p><pre><code>
-$server_config['show-twitter'] => array('users' => array('on' => array('fred')))<p/></pre><p>would store as</p></p><pre><code>|ID |KEY |ACTIVE |VARIANT |
+}
+&lt;/code>&lt;/pre>&lt;p>Now you can turn off this info as needed. And in your Controllers/Repository just remember to not assume that field is coming in via request or that it even exists in the Model.&lt;/p>
+&lt;pre>&lt;code>$user-&amp;gt;twitter = ($request-&amp;gt;input(&amp;quot;twitter&amp;quot;)) ? $request-&amp;gt;input(&amp;quot;twitter&amp;quot;) : null;
+&lt;/code>&lt;/pre>&lt;p>Honestly I think it is better to add this to a Laravel Model Event. Then as you listen to that Event you can react to it. And when not having the feature on or installed any longer it is one less place your code is being injected into the application.&lt;/p>
+&lt;h3 id="featureflag-migration">FeatureFlag Migration&lt;/h3>
+&lt;p>The Migration will make one table for &lt;code>feature_flags&lt;/code> and add a column to the user table for the example twitter field feature.&lt;/p>
+&lt;p>Note the Example Provider will add the &lt;code>twitter&lt;/code> column to the &lt;code>user&lt;/code> table. It is nullable so it will not be an issue if other parts of the app do not consider this data.&lt;/p>
+&lt;p>In the &lt;code>feature_flags&lt;/code> table there we have the id column, the key column, active column to even consider the feature flag and then the variants column if any. I might get rid of the active column but thought it might speed up queries.&lt;/p>
+&lt;p>The variant column being json allows us to store unstructured data to hold any data for different situations so we can cover all the possible variants listed above.&lt;/p>
+&lt;p>For example&lt;/p>
+&lt;pre>&lt;code>
+$server_config['show-twitter'] =&amp;gt; array('users' =&amp;gt; array('on' =&amp;gt; array('fred')))
+&lt;/code>&lt;/pre>&lt;p>would store as&lt;/p>
+&lt;pre>&lt;code>|ID |KEY |ACTIVE |VARIANT |
 |---|--------------|---------|---------------------------------|
 | 2 | show-twitter | 1 |{ 'users': [ 'on': [ 'fred' ] ] }|
-| | | | |</code></pre><h2 id="menu">Menu</h2><p>Just a note the demo has the Feature Flag menu. Because this core app uses the ViewComposer pattern to create a &ldquo;links&rdquo; array I can add to that later on in my FeatureFlagProvider</p><p><img src="https://dl.dropbox.com/s/daftzzfq7it6wxx/feature_flag_menu.png?dl=0" alt="menu"/><pre><code> private function injectLinks()
-{<pre><code> view()-&amp;gt;composer(
+| | | | |
+&lt;/code>&lt;/pre>&lt;h2 id="menu">Menu&lt;/h2>
+&lt;p>Just a note the demo has the Feature Flag menu. Because this core app uses the ViewComposer pattern to create a &amp;ldquo;links&amp;rdquo; array I can add to that later on in my FeatureFlagProvider&lt;/p>
+&lt;p>&lt;img src="https://dl.dropbox.com/s/daftzzfq7it6wxx/feature_flag_menu.png?dl=0" alt="menu">&lt;/p>
+&lt;pre>&lt;code> private function injectLinks()
+{
+view()-&amp;gt;composer(
 'layouts.default', function($view) {
 if ($view-&amp;gt;offsetExists('links')) {
 $links_original = $view-&amp;gt;offsetGet('links');
@@ -50,4 +133,15 @@ $view-&amp;gt;with('links', array_merge($links_original, $links));
 }
 }
 );
-}</code></pre><p/></pre><p>But that is for another post!</p></p><h2 id="video">Video</h2><p><iframe width="420" height="315" src="https://www.youtube.com/embed/4nq7FyHQj8I" frameborder="0" allowfullscreen=/></p><h2 id="todo">TODO</h2><ul><li>Use Model Events to do that level of work</li><li>Cache of the FeatureFlag Settings and update Cache on Change</li><li>Show how it works in the menu and other areas eg include and Provider</li></ul></description><tags>laravel, feature_flags, php</tags></item></channel></rss>
+}
+&lt;/code>&lt;/pre>&lt;p>But that is for another post!&lt;/p>
+&lt;h2 id="video">Video&lt;/h2>
+&lt;p>
+&lt;iframe width="420" height="315" src="https://www.youtube.com/embed/4nq7FyHQj8I" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;/p>
+&lt;h2 id="todo">TODO&lt;/h2>
+&lt;ul>
+&lt;li>Use Model Events to do that level of work&lt;/li>
+&lt;li>Cache of the FeatureFlag Settings and update Cache on Change&lt;/li>
+&lt;li>Show how it works in the menu and other areas eg include and Provider&lt;/li>
+&lt;/ul></description><tags>laravel, feature_flags, php</tags></item></channel></rss>

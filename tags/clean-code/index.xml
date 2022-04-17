@@ -1,5 +1,8 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>clean code on Alfred Nutile</title><link>https://alfrednutile.info/tags/clean-code/</link><description>Recent content in clean code on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 17 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/clean-code/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Example of Making Code Easier to Read</title><link>https://alfrednutile.info/posts/164/</link><pubDate>Thu, 17 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/164/</guid><description><p>Just a quick example</p><p>Before</p><pre><code> public function updateMarketoFolder($folder)
-{<pre><code> /**
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>clean code on Alfred Nutile</title><link>https://alfrednutile.info/tags/clean-code/</link><description>Recent content in clean code on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 17 Sep 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/clean-code/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Example of Making Code Easier to Read</title><link>https://alfrednutile.info/posts/164/</link><pubDate>Thu, 17 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/164/</guid><description>&lt;p>Just a quick example&lt;/p>
+&lt;p>Before&lt;/p>
+&lt;pre>&lt;code> public function updateMarketoFolder($folder)
+{
+/**
 * If parent id found in array then use it else use root
 */
 if(isset($this-&amp;gt;folders_and_meta_data[$folder['id']]))
@@ -17,37 +20,40 @@ $folder_meta_data = $this-&amp;gt;folders_and_meta_data['root'];
 if(isset($folder['name']))
 $this-&amp;gt;names[] = $folder['name'] . '--' . $folder_meta_data-&amp;gt;id;
 $this-&amp;gt;folders_and_meta_data[$folder['id']] = $folder_meta_data;
-}</code></pre><p/></pre><p>Here is what we can do to make it easier to come back to six months later.</p></p><pre><code> public function updateMarketoFolder($folder)
-{
-if($this->hasOwnFolder($folder))
-{
-$folder_meta_data = $this->folders_and_meta_data[$folder['id']];
 }
-elseif($this->hasAParentAndParentHasFolder($folder))
+&lt;/code>&lt;/pre>&lt;p>Here is what we can do to make it easier to come back to six months later.&lt;/p>
+&lt;pre>&lt;code> public function updateMarketoFolder($folder)
 {
-$folder_meta_data = $this->folders_and_meta_data[$folder['parent']['id']];
+if($this-&amp;gt;hasOwnFolder($folder))
+{
+$folder_meta_data = $this-&amp;gt;folders_and_meta_data[$folder['id']];
+}
+elseif($this-&amp;gt;hasAParentAndParentHasFolder($folder))
+{
+$folder_meta_data = $this-&amp;gt;folders_and_meta_data[$folder['parent']['id']];
 }
 else
 {
-$folder_meta_data = $this->getRootFolder();
+$folder_meta_data = $this-&amp;gt;getRootFolder();
 }
-if($this->checkItHasAName($folder))
-$this->names[] = $folder['name'] . '--' . $folder_meta_data->id;
-$this->folders_and_meta_data[$folder['id']] = $folder_meta_data;
+if($this-&amp;gt;checkItHasAName($folder))
+$this-&amp;gt;names[] = $folder['name'] . '--' . $folder_meta_data-&amp;gt;id;
+$this-&amp;gt;folders_and_meta_data[$folder['id']] = $folder_meta_data;
 }
 private function hasOwnFolder($folder)
 {
-return isset($this->folders_and_meta_data[$folder['id']]);
+return isset($this-&amp;gt;folders_and_meta_data[$folder['id']]);
 }
 private function hasAParentAndParentHasFolder($folder)
 {
-return isset($folder['parent']) &amp;&amp; isset($folder['parent']['id']) &amp;&amp; isset($this->folders_and_meta_data[$folder['parent']['id']]);
+return isset($folder['parent']) &amp;amp;&amp;amp; isset($folder['parent']['id']) &amp;amp;&amp;amp; isset($this-&amp;gt;folders_and_meta_data[$folder['parent']['id']]);
 }
 private function getRootFolder()
 {
-return $this->folders_and_meta_data['root'];
+return $this-&amp;gt;folders_and_meta_data['root'];
 }
 private function checkItHasAName($folder)
 {
 return isset($folder['name']);
-}</code></pre><p>Just a lot easier to come back to an remember why and what I am doing in the if statements. Also just to read a bit more easily what the needs are here of the data.</p></description><tags>php, clean code</tags></item></channel></rss>
+}
+&lt;/code>&lt;/pre>&lt;p>Just a lot easier to come back to an remember why and what I am doing in the if statements. Also just to read a bit more easily what the needs are here of the data.&lt;/p></description><tags>php, clean code</tags></item></channel></rss>

@@ -1,42 +1,64 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>angularjs on Alfred Nutile</title><link>https://alfrednutile.info/tags/angularjs/</link><description>Recent content in angularjs on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 19 Dec 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/angularjs/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel Blade and Angular brackets</title><link>https://alfrednutile.info/posts/124/</link><pubDate>Fri, 19 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/124/</guid><description><p>I use one AngularController.php to render main.blade.php file that then renders angular. The only other blade file is the login page.
-I could have done this in the routes.php file but since the routes file has the login page I decided to place it in this controller.</p><pre><code>&lt;?php namespace App\Http\Controllers;<p>use Illuminate\Support\Facades\Blade;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>angularjs on Alfred Nutile</title><link>https://alfrednutile.info/tags/angularjs/</link><description>Recent content in angularjs on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 19 Dec 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/angularjs/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel Blade and Angular brackets</title><link>https://alfrednutile.info/posts/124/</link><pubDate>Fri, 19 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/124/</guid><description>&lt;p>I use one AngularController.php to render main.blade.php file that then renders angular. The only other blade file is the login page.
+I could have done this in the routes.php file but since the routes file has the login page I decided to place it in this controller.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
-use Laracasts\Utilities\JavaScript\Facades\JavaScript;</p><p>/**</p><ul><li><p>@Middleware("auth")
+use Laracasts\Utilities\JavaScript\Facades\JavaScript;
+/**
+* @Middleware(&amp;quot;auth&amp;quot;)
 */
-class AngularController extends BaseController {</p><p>use UserHelper;</p><p>/**</p><ul><li>@var UserService
+class AngularController extends BaseController {
+use UserHelper;
+/**
+* @var UserService
 */
-private $userService;</li></ul><p>public function __construct(UserService $userService)
+private $userService;
+public function __construct(UserService $userService)
 {
-$this->userService = $userService;
-}</p><p>/**</p><ul><li><p>@Get("behat", as="behat.dash")
+$this-&amp;gt;userService = $userService;
+}
+/**
+* @Get(&amp;quot;behat&amp;quot;, as=&amp;quot;behat.dash&amp;quot;)
 */
 public function index()
-{</p><p>Blade::setContentTags('&lt;%', &lsquo;%>'); // for variables and all things Blade
-Blade::setEscapedContentTags('&lt;%%&rsquo;, &lsquo;%%>'); // for escaped data
-$user_id = $this->getUserId();
-$profile = $this->userService->getPerson($user_id);
+{
+Blade::setContentTags('&amp;lt;%', '%&amp;gt;'); // for variables and all things Blade
+Blade::setEscapedContentTags('&amp;lt;%%', '%%&amp;gt;'); // for escaped data
+$user_id = $this-&amp;gt;getUserId();
+$profile = $this-&amp;gt;userService-&amp;gt;getPerson($user_id);
 $token = csrf_token();
-$chat_on = Config::get(&lsquo;app.chat_on&rsquo;, true);
+$chat_on = Config::get('app.chat_on', true);
 JavaScript::put(
 [
-&lsquo;pusher_public_key&rsquo; => $_ENV[&lsquo;PUSHER_PUBLIC&rsquo;],
-&lsquo;sauce_key&rsquo; => $_ENV[&lsquo;SAUCE_TOKEN&rsquo;],
-&lsquo;sauce_user&rsquo; => $_ENV[&lsquo;SAUCE_USER&rsquo;],
-&lsquo;profile&rsquo; => $profile,
-&lsquo;token&rsquo; => $token,
-&lsquo;debug&rsquo; => Config::get(&lsquo;app.debug&rsquo;),
+'pusher_public_key' =&amp;gt; $_ENV['PUSHER_PUBLIC'],
+'sauce_key' =&amp;gt; $_ENV['SAUCE_TOKEN'],
+'sauce_user' =&amp;gt; $_ENV['SAUCE_USER'],
+'profile' =&amp;gt; $profile,
+'token' =&amp;gt; $token,
+'debug' =&amp;gt; Config::get('app.debug'),
 ]
 );
-return View::make(&lsquo;layouts.main&rsquo;, compact(&lsquo;chat_on&rsquo;));
-}</p></li></ul></li></ul><p>}</code></pre><p>Thanks to<a href="http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs"><a href="http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs">http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs</a></a> for the tip</p></p></description><tags>note2self, angularjs, laravel</tags></item><item><title>Angular History Based BreadCrumbs</title><link>https://alfrednutile.info/posts/123/</link><pubDate>Fri, 12 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/123/</guid><description><p>Originally I was going to go with one of the more well known packages but then I realized I wanted to show the history of the users states not the children of the state they are on. For example when the user lands on the website at say the path projects and then goes to projects/foo their breadcrumbs will look like this</p><pre><code>Projects / Project Foo</code></pre><p>And if they then go to project/foo/reports then it would be</p><pre><code>Projects / Project Foo / Reports</code></pre><p>So no matter where they go it just keeps saving the from state to the history object and loads that.</p><p>Ideally like many of the other modules this would be a good mix of a directive and a service. Right now it is setup like this but I will move it later into a package. (unless there already is one out there that I just could not google well enough?)</p><h2 id="config">Config</h2><p>This is where I look at the &ldquo;from state&rdquo; to see if it has what I want and then save it to history. I also take a moment to keep history down to 5 items.</p><pre><code> angular
+return View::make('layouts.main', compact('chat_on'));
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Thanks to &lt;a href="http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs">http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs&lt;/a> for the tip&lt;/p></description><tags>note2self, angularjs, laravel</tags></item><item><title>Angular History Based BreadCrumbs</title><link>https://alfrednutile.info/posts/123/</link><pubDate>Fri, 12 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/123/</guid><description>&lt;p>Originally I was going to go with one of the more well known packages but then I realized I wanted to show the history of the users states not the children of the state they are on. For example when the user lands on the website at say the path projects and then goes to projects/foo their breadcrumbs will look like this&lt;/p>
+&lt;pre>&lt;code>Projects / Project Foo
+&lt;/code>&lt;/pre>&lt;p>And if they then go to project/foo/reports then it would be&lt;/p>
+&lt;pre>&lt;code>Projects / Project Foo / Reports
+&lt;/code>&lt;/pre>&lt;p>So no matter where they go it just keeps saving the from state to the history object and loads that.&lt;/p>
+&lt;p>Ideally like many of the other modules this would be a good mix of a directive and a service. Right now it is setup like this but I will move it later into a package. (unless there already is one out there that I just could not google well enough?)&lt;/p>
+&lt;h2 id="config">Config&lt;/h2>
+&lt;p>This is where I look at the &amp;ldquo;from state&amp;rdquo; to see if it has what I want and then save it to history. I also take a moment to keep history down to 5 items.&lt;/p>
+&lt;pre>&lt;code> angular
 .module('app')
 .config(config)
 .constant('ENV', constants())
 .run(function ($rootScope, $state, editableOptions, $location, $stateParams) {
 editableOptions.theme = 'bs3';
 $rootScope.$state = $state;
-$rootScope.history = [];<pre><code> $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+$rootScope.history = [];
+$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
 if($state.href(fromState, fromParams) &amp;amp;&amp;amp; fromState.data &amp;amp;&amp;amp; fromState.data.pageTitle)
 {
 if($rootScope.history.length &amp;gt; 5)
@@ -46,10 +68,13 @@ $rootScope.history = $rootScope.history.slice(1, $rootScope.history.length);
 $rootScope.history.push({ label: fromState.data.pageTitle, url: $state.href(fromState, fromParams)});
 }
 });
-});</code></pre><p/></pre><h2 id="pagetitle">PageTitle</h2></p><p>This happen to be a data object I had set on all my routes to begin with</p><pre><code> $stateProvider
+});
+&lt;/code>&lt;/pre>&lt;h2 id="pagetitle">PageTitle&lt;/h2>
+&lt;p>This happen to be a data object I had set on all my routes to begin with&lt;/p>
+&lt;pre>&lt;code> $stateProvider
 .state('profile', {
-url: "/profile",
-templateUrl: "/assets/js/profiles/templates/profile.html",
+url: &amp;quot;/profile&amp;quot;,
+templateUrl: &amp;quot;/assets/js/profiles/templates/profile.html&amp;quot;,
 controller: 'ProfileEditCtrl',
 controllerAs: 'vm',
 resolve: {
@@ -59,7 +84,11 @@ return ProfilesService.getFull();
 },
 data: {pageTitle: 'Profile'}
 });
-}</code></pre><h2 id="the-directive">The Directive</h2><p>The directive is doing two things. I need to make it into two directives but for style reasons and timing I can not do that right now.</p><p>Just taking the history and pageTitle and putting it into html</p><pre><code>(function(){
+}
+&lt;/code>&lt;/pre>&lt;h2 id="the-directive">The Directive&lt;/h2>
+&lt;p>The directive is doing two things. I need to make it into two directives but for style reasons and timing I can not do that right now.&lt;/p>
+&lt;p>Just taking the history and pageTitle and putting it into html&lt;/p>
+&lt;pre>&lt;code>(function(){
 'use strict';
 function appHeader() {
 var directive = {
@@ -70,24 +99,44 @@ scope: {
 pageTitle: '=',
 history: '='
 },
-templateUrl: "/assets/js/directives/templates/_header.directive.html"
-};<pre><code> return directive;
+templateUrl: &amp;quot;/assets/js/directives/templates/_header.directive.html&amp;quot;
+};
+return directive;
 }
 angular.module('app')
-.directive('appHeader', appHeader)</code></pre><p>})();</code></pre><p>The directives template file you see above</p></p><p><img src="https://dl.dropboxusercontent.com/s/vk5pmf52217e6ec/Screenshot%202014-12-11%2020.23.36.png?dl=0" alt="directive"/><h2 id="the-html--page-showing-the-breadcrumbs">The HTML / Page showing the breadcrumbs</h2><p>After all the above is in place you just need to add this to the pages you want this to be seen, or on some main page (ideally)</p><pre><code>&lt;app-header page-title="vm.pageTitle" history="history">&lt;/app-header></code></pre><p>You end up with something like this<img src="https://dl.dropboxusercontent.com/s/g1uac6y848mk6or/Screenshot%202014-12-11%2020.18.17.png?dl=0" alt="bc"/><p>Next step is to inject the title into the pageTitle so it would be the Project name. But right now I rather have the above so as a user I can easily go back to say &ldquo;Batches&rdquo; from where I am in the state.</p></description><tags>angularjs</tags></item><item><title>Embed Template Data in View (Angular, Laravel)</title><link>https://alfrednutile.info/posts/122/</link><pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/122/</guid><description><p>Sometimes, when your frontend shares the same view rendering of the backend, you can store data in the window object. This can save you queries to the backend when, for example, Profile Data that shows on every pages request.</p><p><img src="https://dl.dropboxusercontent.com/s/app0y31xxi3uk80/profile_example.png?dl=0" alt="profile"/><h1 id="embed-output-into-window-or-window">Embed output into window or $window</h1><p>In the Controller I am using to output the Angular template (app/views/main.blade.php for example) I inject the window data that I want all pages to have.</p><pre><code> public function index()
+.directive('appHeader', appHeader)
+})();
+&lt;/code>&lt;/pre>&lt;p>The directives template file you see above&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/vk5pmf52217e6ec/Screenshot%202014-12-11%2020.23.36.png?dl=0" alt="directive">&lt;/p>
+&lt;h2 id="the-html--page-showing-the-breadcrumbs">The HTML / Page showing the breadcrumbs&lt;/h2>
+&lt;p>After all the above is in place you just need to add this to the pages you want this to be seen, or on some main page (ideally)&lt;/p>
+&lt;pre>&lt;code>&amp;lt;app-header page-title=&amp;quot;vm.pageTitle&amp;quot; history=&amp;quot;history&amp;quot;&amp;gt;&amp;lt;/app-header&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>You end up with something like this
+&lt;img src="https://dl.dropboxusercontent.com/s/g1uac6y848mk6or/Screenshot%202014-12-11%2020.18.17.png?dl=0" alt="bc">&lt;/p>
+&lt;p>Next step is to inject the title into the pageTitle so it would be the Project name. But right now I rather have the above so as a user I can easily go back to say &amp;ldquo;Batches&amp;rdquo; from where I am in the state.&lt;/p></description><tags>angularjs</tags></item><item><title>Embed Template Data in View (Angular, Laravel)</title><link>https://alfrednutile.info/posts/122/</link><pubDate>Tue, 02 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/122/</guid><description>&lt;p>Sometimes, when your frontend shares the same view rendering of the backend, you can store data in the window object. This can save you queries to the backend when, for example, Profile Data that shows on every pages request.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/app0y31xxi3uk80/profile_example.png?dl=0" alt="profile">&lt;/p>
+&lt;h1 id="embed-output-into-window-or-window">Embed output into window or $window&lt;/h1>
+&lt;p>In the Controller I am using to output the Angular template (app/views/main.blade.php for example) I inject the window data that I want all pages to have.&lt;/p>
+&lt;pre>&lt;code> public function index()
 {
-$user_id = $this->getUserId();
-$profile = $this->userService->getJustProfile($user_id);
+$user_id = $this-&amp;gt;getUserId();
+$profile = $this-&amp;gt;userService-&amp;gt;getJustProfile($user_id);
 $token = csrf_token();
 JavaScript::put(
 [
-'profile' => $profile,
-'token' => $token
+'profile' =&amp;gt; $profile,
+'token' =&amp;gt; $token
 ]
 );
 return View::make('layouts.main');
-}</code></pre><p>So every time the template is rendered it will add this data to the output. Later on I make use of that inside my Angular app using a MainCtrl.</p><h1 id="mainctrl-wrapping-it-all">MainCtrl Wrapping it All</h1><pre><code>&lt;body ng-controller="MainCtrl as main"></code></pre><p>This controller gets called at every page load to setup this base info for the site.</p><pre><code>(function(){
-'use strict';<pre><code>function MainCtrl($rootScope, $window) {
+}
+&lt;/code>&lt;/pre>&lt;p>So every time the template is rendered it will add this data to the output. Later on I make use of that inside my Angular app using a MainCtrl.&lt;/p>
+&lt;h1 id="mainctrl-wrapping-it-all">MainCtrl Wrapping it All&lt;/h1>
+&lt;pre>&lt;code>&amp;lt;body ng-controller=&amp;quot;MainCtrl as main&amp;quot;&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>This controller gets called at every page load to setup this base info for the site.&lt;/p>
+&lt;pre>&lt;code>(function(){
+'use strict';
+function MainCtrl($rootScope, $window) {
 var vm = this;
 vm.profile = {};
 vm.activate = activate;
@@ -104,10 +153,15 @@ vm.profile = $window.profile;
 */
 angular
 .module('app')
-.controller('MainCtrl ', MainCtrl)</code></pre><p>})();</code></pre><h1 id="template-calling-to-main">Template calling to Main</h1></p><p>Now on those page that renders the profile image, name and email on the top left of the site I call to that scope.</p><pre><code>&lt;nav class="navbar-default navbar-static-side" role="navigation">
-&lt;div class="sidebar-collapse">
-&lt;ul side-navigation class="nav" id="side-menu">
-&lt;li class="nav-header"><pre><code> &amp;lt;div class=&amp;quot;dropdown profile-element&amp;quot;&amp;gt;
+.controller('MainCtrl ', MainCtrl)
+})();
+&lt;/code>&lt;/pre>&lt;h1 id="template-calling-to-main">Template calling to Main&lt;/h1>
+&lt;p>Now on those page that renders the profile image, name and email on the top left of the site I call to that scope.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;nav class=&amp;quot;navbar-default navbar-static-side&amp;quot; role=&amp;quot;navigation&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;sidebar-collapse&amp;quot;&amp;gt;
+&amp;lt;ul side-navigation class=&amp;quot;nav&amp;quot; id=&amp;quot;side-menu&amp;quot;&amp;gt;
+&amp;lt;li class=&amp;quot;nav-header&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;dropdown profile-element&amp;quot;&amp;gt;
 &amp;lt;div class=&amp;quot;row&amp;quot;&amp;gt;
 &amp;lt;div class=&amp;quot;col-lg-6 col-md-6 col-sm-6 col-xs-6&amp;quot;&amp;gt;
 &amp;lt;a ui-sref=&amp;quot;profile&amp;quot;&amp;gt;
@@ -134,14 +188,29 @@ angular
 &amp;lt;div class=&amp;quot;logo-element&amp;quot;&amp;gt;
 BE
 &amp;lt;/div&amp;gt;
-&amp;lt;/li&amp;gt;</code></pre><p/></pre></p></description><tags>php, laravel, angularjs</tags></item><item><title>CSRF Tokens and Angular.js</title><link>https://alfrednutile.info/posts/110/</link><pubDate>Wed, 15 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/110/</guid><description><p>This is key to preventing<a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">Cross-site request forgery</a>. Basically you log in and do some work on one site, then go to a malicious site and now they can send POST requests to the sites you have authentication to. But by passing a token we can prevent that issue.</p><p>The steps</p><ul><li>Make a token path</li><li>Make a token service to use again and again in Angular.js</li><li>Add it as a resolve to the route in Angular.js</li><li>Add it to your forms</li></ul><h2 id="make-a-token-path">Make a token path</h2><p>In this case it is Laravel and I just add this route (in a Controller or route.php same idea)</p><pre><code> /**
-* @Get("auth/token")
+&amp;lt;/li&amp;gt;
+&lt;/code>&lt;/pre></description><tags>php, laravel, angularjs</tags></item><item><title>CSRF Tokens and Angular.js</title><link>https://alfrednutile.info/posts/110/</link><pubDate>Wed, 15 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/110/</guid><description>&lt;p>This is key to preventing &lt;a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">Cross-site request forgery&lt;/a>. Basically you log in and do some work on one site, then go to a malicious site and now they can send POST requests to the sites you have authentication to. But by passing a token we can prevent that issue.&lt;/p>
+&lt;p>The steps&lt;/p>
+&lt;ul>
+&lt;li>Make a token path&lt;/li>
+&lt;li>Make a token service to use again and again in Angular.js&lt;/li>
+&lt;li>Add it as a resolve to the route in Angular.js&lt;/li>
+&lt;li>Add it to your forms&lt;/li>
+&lt;/ul>
+&lt;h2 id="make-a-token-path">Make a token path&lt;/h2>
+&lt;p>In this case it is Laravel and I just add this route (in a Controller or route.php same idea)&lt;/p>
+&lt;pre>&lt;code> /**
+* @Get(&amp;quot;auth/token&amp;quot;)
 */
 public function getToken()
 {
 return csrf_token();
-}</code></pre><h2 id="make-your-angular-service-and-inject-it-into-the-controller">Make your Angular Service and inject it into the Controller</h2><p>Service in this case is</p><pre><code>(function(){
-'use strict';<pre><code>function TokenService($http)
+}
+&lt;/code>&lt;/pre>&lt;h2 id="make-your-angular-service-and-inject-it-into-the-controller">Make your Angular Service and inject it into the Controller&lt;/h2>
+&lt;p>Service in this case is&lt;/p>
+&lt;pre>&lt;code>(function(){
+'use strict';
+function TokenService($http)
 {
 return {
 get: get
@@ -162,7 +231,10 @@ return response;
 }
 angular
 .module('app')
-.factory('TokenService', TokenService);</code></pre><p>})();</code></pre><p>The ui router passes it in on this POST related route</p></p><pre><code> .state('projects_create', {
+.factory('TokenService', TokenService);
+})();
+&lt;/code>&lt;/pre>&lt;p>The ui router passes it in on this POST related route&lt;/p>
+&lt;pre>&lt;code> .state('projects_create', {
 url: '/projects/create',
 views: {
 '': {
@@ -179,10 +251,15 @@ controller: 'ProjectsCreateCtrl',
 controllerAs: 'vm'
 }
 }
-})</code></pre><p>Since it is a promise and in the resolve we get the benefits of not loading the page till this is done loading. A nice addition here could be getting is current_user info etc.</p><p>Add it to your Angular Controller</p><pre><code> function ProjectsCreateCtrl(project, token, ProjectHelpers, $window, Noty)
+})
+&lt;/code>&lt;/pre>&lt;p>Since it is a promise and in the resolve we get the benefits of not loading the page till this is done loading. A nice addition here could be getting is current_user info etc.&lt;/p>
+&lt;p>Add it to your Angular Controller&lt;/p>
+&lt;pre>&lt;code> function ProjectsCreateCtrl(project, token, ProjectHelpers, $window, Noty)
 {
 var vm = this;
-vm.token = token.data;</code></pre><p>Later, using<a href="https://github.com/mgonto/restangular">Restangular</a>, during the post I add it to the payload. So when the user clicks Create Project they trigger this.</p><pre><code>function saveProject()
+vm.token = token.data;
+&lt;/code>&lt;/pre>&lt;p>Later, using &lt;a href="https://github.com/mgonto/restangular">Restangular&lt;/a>, during the post I add it to the payload. So when the user clicks Create Project they trigger this.&lt;/p>
+&lt;pre>&lt;code>function saveProject()
 {
 vm.rest.route = 'api/v1/projects';
 vm.rest._token = vm.token;
@@ -192,4 +269,9 @@ vm.success(response);
 }, function(response){
 vm.fail(response);
 });
-}</code></pre><p>That is it. You can see it in the form</p><p><img src="https://dl.dropboxusercontent.com/s/hilfee68v8acyx7/intheform.png?dl=0" alt="form"/><p>And you can remove it to show the form fail.</p><p>You can also see it in the payload we are posting.</p><p><img src="https://dl.dropboxusercontent.com/s/4vy90lut4l12o55/Screenshot%202014-10-15%2014.38.35.png?dl=0" alt="post"/></description><tags>angularjs, laravel, l5, csrf</tags></item></channel></rss>
+}
+&lt;/code>&lt;/pre>&lt;p>That is it. You can see it in the form&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/hilfee68v8acyx7/intheform.png?dl=0" alt="form">&lt;/p>
+&lt;p>And you can remove it to show the form fail.&lt;/p>
+&lt;p>You can also see it in the payload we are posting.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/4vy90lut4l12o55/Screenshot%202014-10-15%2014.38.35.png?dl=0" alt="post">&lt;/p></description><tags>angularjs, laravel, l5, csrf</tags></item></channel></rss>

@@ -1,59 +1,78 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>elixir on Alfred Nutile</title><link>https://alfrednutile.info/tags/elixir/</link><description>Recent content in elixir on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 07 Jul 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/elixir/index.xml" rel="self" type="application/rss+xml"/><item><title>Bower and Elixir</title><link>https://alfrednutile.info/posts/153/</link><pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/153/</guid><description><p>Trying to make this workflow more easy. Right now it seems that since bower ends up putting all assets into bower_components (css and js) and elixir wants assets by default in resources/assets/css and js that I need to have an easy way to get the files via bower and then get them to the needed folders.</p><p>For most project we actually leave the files in the git repo for faster ui testing builds and we rarely run updates but when we do it would be nice for bower to also be able to work and not mess any of the above settings not cause me to have to manually move files around.</p><h2 id="setting-up-bower">Setting up Bower</h2><p>Following this<a href="https://github.com/blittle/bower-installer">https://github.com/blittle/bower-installer</a> I have bower-installer ready to go.</p><p>Then I setup my<code>bower.json</code> to get my long list of way to many files ready to gulp / elixir</p><pre><code>{
-"name": "demo",
-"version": "0.0.0",
-"homepage": "https://github.com/alnutile/demo",
-"license": "MIT",
-"ignore": [
-"**/.*",
-"node_modules",
-"bower_components",
-"test",
-"tests"
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>elixir on Alfred Nutile</title><link>https://alfrednutile.info/tags/elixir/</link><description>Recent content in elixir on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 07 Jul 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/elixir/index.xml" rel="self" type="application/rss+xml"/><item><title>Bower and Elixir</title><link>https://alfrednutile.info/posts/153/</link><pubDate>Tue, 07 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/153/</guid><description>&lt;p>Trying to make this workflow more easy. Right now it seems that since bower ends up putting all assets into bower_components (css and js) and elixir wants assets by default in resources/assets/css and js that I need to have an easy way to get the files via bower and then get them to the needed folders.&lt;/p>
+&lt;p>For most project we actually leave the files in the git repo for faster ui testing builds and we rarely run updates but when we do it would be nice for bower to also be able to work and not mess any of the above settings not cause me to have to manually move files around.&lt;/p>
+&lt;h2 id="setting-up-bower">Setting up Bower&lt;/h2>
+&lt;p>Following this &lt;a href="https://github.com/blittle/bower-installer">https://github.com/blittle/bower-installer&lt;/a> I have bower-installer ready to go.&lt;/p>
+&lt;p>Then I setup my &lt;code>bower.json&lt;/code> to get my long list of way to many files ready to gulp / elixir&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;name&amp;quot;: &amp;quot;demo&amp;quot;,
+&amp;quot;version&amp;quot;: &amp;quot;0.0.0&amp;quot;,
+&amp;quot;homepage&amp;quot;: &amp;quot;https://github.com/alnutile/demo&amp;quot;,
+&amp;quot;license&amp;quot;: &amp;quot;MIT&amp;quot;,
+&amp;quot;ignore&amp;quot;: [
+&amp;quot;**/.*&amp;quot;,
+&amp;quot;node_modules&amp;quot;,
+&amp;quot;bower_components&amp;quot;,
+&amp;quot;test&amp;quot;,
+&amp;quot;tests&amp;quot;
 ],
-"install": {
-"path": {
-"css": "resources/assets/css/vendor",
-"js": "resources/assets/js/vendor"
+&amp;quot;install&amp;quot;: {
+&amp;quot;path&amp;quot;: {
+&amp;quot;css&amp;quot;: &amp;quot;resources/assets/css/vendor&amp;quot;,
+&amp;quot;js&amp;quot;: &amp;quot;resources/assets/js/vendor&amp;quot;
 }
 },
-"dependencies": {
-"angular": "1.3.*",
-"angular-bootstrap": "0.11.*",
-"angular-animate": "1.3.*",
-"angular-sanitize": "1.3.*",
-"angular-resource": "1.3.*",
-"restangular": "1.4.0",
-"ng-flow": "~2",
-"angular-xeditable": "~0.1.8",
-"jquery": "2.1.1",
-"bootstrap": "~3.2.0",
-"checklist-model": "0.1.3",
-"pace": "0.5.*",
-"moment": "latest",
-"jasny-bootstrap": "*",
-"angular-ui-router": "*",
-"angularjs-toaster": "~0.4.10",
-"angular-strap": "~2.1.6",
-"iCheck": "~1.0.2",
-"angular-spinner": "~0.6.1",
-"fontawesome": "~4.3.0",
-"ng-table": "~0.5.4",
-"angular-ui-select": "~0.11.2",
-"jquery-ui": "~1.11.4"
+&amp;quot;dependencies&amp;quot;: {
+&amp;quot;angular&amp;quot;: &amp;quot;1.3.*&amp;quot;,
+&amp;quot;angular-bootstrap&amp;quot;: &amp;quot;0.11.*&amp;quot;,
+&amp;quot;angular-animate&amp;quot;: &amp;quot;1.3.*&amp;quot;,
+&amp;quot;angular-sanitize&amp;quot;: &amp;quot;1.3.*&amp;quot;,
+&amp;quot;angular-resource&amp;quot;: &amp;quot;1.3.*&amp;quot;,
+&amp;quot;restangular&amp;quot;: &amp;quot;1.4.0&amp;quot;,
+&amp;quot;ng-flow&amp;quot;: &amp;quot;~2&amp;quot;,
+&amp;quot;angular-xeditable&amp;quot;: &amp;quot;~0.1.8&amp;quot;,
+&amp;quot;jquery&amp;quot;: &amp;quot;2.1.1&amp;quot;,
+&amp;quot;bootstrap&amp;quot;: &amp;quot;~3.2.0&amp;quot;,
+&amp;quot;checklist-model&amp;quot;: &amp;quot;0.1.3&amp;quot;,
+&amp;quot;pace&amp;quot;: &amp;quot;0.5.*&amp;quot;,
+&amp;quot;moment&amp;quot;: &amp;quot;latest&amp;quot;,
+&amp;quot;jasny-bootstrap&amp;quot;: &amp;quot;*&amp;quot;,
+&amp;quot;angular-ui-router&amp;quot;: &amp;quot;*&amp;quot;,
+&amp;quot;angularjs-toaster&amp;quot;: &amp;quot;~0.4.10&amp;quot;,
+&amp;quot;angular-strap&amp;quot;: &amp;quot;~2.1.6&amp;quot;,
+&amp;quot;iCheck&amp;quot;: &amp;quot;~1.0.2&amp;quot;,
+&amp;quot;angular-spinner&amp;quot;: &amp;quot;~0.6.1&amp;quot;,
+&amp;quot;fontawesome&amp;quot;: &amp;quot;~4.3.0&amp;quot;,
+&amp;quot;ng-table&amp;quot;: &amp;quot;~0.5.4&amp;quot;,
+&amp;quot;angular-ui-select&amp;quot;: &amp;quot;~0.11.2&amp;quot;,
+&amp;quot;jquery-ui&amp;quot;: &amp;quot;~1.11.4&amp;quot;
 }
-}</code></pre><p>Now I have bower_components which I do not need or push around anymore (thanks to this) but I also have<code>resources/assets/js</code> and<code>resources/assets/css</code> which I can now keep in the repo saving up npm and bower speed issues when running acceptance tests on Codeship<a href="https://alfrednutile.info/posts/151">more on that here</a>.</p><p>That gets my<code>gulpfile.js</code> for the base libraries down to</p><pre><code>var elixir = require('laravel-elixir');<p>elixir(function(mix) {
+}
+&lt;/code>&lt;/pre>&lt;p>Now I have bower_components which I do not need or push around anymore (thanks to this) but I also have &lt;code>resources/assets/js&lt;/code> and &lt;code>resources/assets/css&lt;/code> which I can now keep in the repo saving up npm and bower speed issues when running acceptance tests on Codeship &lt;a href="https://alfrednutile.info/posts/151">more on that here&lt;/a>.&lt;/p>
+&lt;p>That gets my &lt;code>gulpfile.js&lt;/code> for the base libraries down to&lt;/p>
+&lt;pre>&lt;code>var elixir = require('laravel-elixir');
+elixir(function(mix) {
 mix
-.styles(["vendor/<strong>/*.css" ], "public/css/vendor.css")
-.scripts( ["vendor/angular/angular.js", "vendor/</strong>/*.js"], "public/js/vendor.js");
-});</p><p/></pre><p>I still would like to controller the ordering more. For example not sure angular just happened to be in the right order due to alphabetical order, or if it was included twice etc.</p></p><p>Lastly adding versioning</p><pre><code>var elixir = require('laravel-elixir');<p>elixir(function(mix) {
+.styles([&amp;quot;vendor/**/*.css&amp;quot; ], &amp;quot;public/css/vendor.css&amp;quot;)
+.scripts( [&amp;quot;vendor/angular/angular.js&amp;quot;, &amp;quot;vendor/**/*.js&amp;quot;], &amp;quot;public/js/vendor.js&amp;quot;);
+});
+&lt;/code>&lt;/pre>&lt;p>I still would like to controller the ordering more. For example not sure angular just happened to be in the right order due to alphabetical order, or if it was included twice etc.&lt;/p>
+&lt;p>Lastly adding versioning&lt;/p>
+&lt;pre>&lt;code>var elixir = require('laravel-elixir');
+elixir(function(mix) {
 mix
-.styles(["vendor/<strong>/*.css" ], "public/css/vendor.css")
-.scripts( ["vendor/angular/angular.js", "vendor/</strong>/*.js"], "public/js/vendor.js")
-.version( ["css/vendor.css", "js/vendor.js"]);
-});</code></pre><p>As noted in the docs<a href="http://laravel.com/docs/5.1/elixir#versioning-and-cache-busting"><a href="http://laravel.com/docs/5.1/elixir#versioning-and-cache-busting">http://laravel.com/docs/5.1/elixir#versioning-and-cache-busting</a></a></p></p><p>From here I still need to setup a workflow for all my app files.</p><p>For example a page like &ldquo;/projects&rdquo; in angular will need a service, controller and route file.</p><p>So do I put those in resources/assets/js and add a new section to the gulp file list</p><pre><code>elixir(function(mix) {
+.styles([&amp;quot;vendor/**/*.css&amp;quot; ], &amp;quot;public/css/vendor.css&amp;quot;)
+.scripts( [&amp;quot;vendor/angular/angular.js&amp;quot;, &amp;quot;vendor/**/*.js&amp;quot;], &amp;quot;public/js/vendor.js&amp;quot;)
+.version( [&amp;quot;css/vendor.css&amp;quot;, &amp;quot;js/vendor.js&amp;quot;]);
+});
+&lt;/code>&lt;/pre>&lt;p>As noted in the docs &lt;a href="http://laravel.com/docs/5.1/elixir#versioning-and-cache-busting">http://laravel.com/docs/5.1/elixir#versioning-and-cache-busting&lt;/a>&lt;/p>
+&lt;p>From here I still need to setup a workflow for all my app files.&lt;/p>
+&lt;p>For example a page like &amp;ldquo;/projects&amp;rdquo; in angular will need a service, controller and route file.&lt;/p>
+&lt;p>So do I put those in resources/assets/js and add a new section to the gulp file list&lt;/p>
+&lt;pre>&lt;code>elixir(function(mix) {
 mix
-.styles(["vendor/**/*.css" ], "public/css/vendor.css")
-.scripts( ["vendor/angular/angular.js", "vendor/**/*.js"], "public/js/vendor.js")
-.scripts( ["custom/**/*.js"], "public/js/custom.js")
-.version( ["css/vendor.css", "js/vendor.js"]);
-});</code></pre><p>and run<code>gulp watch</code>. This is not my normal workflow but it sure beats putting all the files in my html file and then also doing this to concatenate them.</p></description><tags>laravel, elixir</tags></item></channel></rss>
+.styles([&amp;quot;vendor/**/*.css&amp;quot; ], &amp;quot;public/css/vendor.css&amp;quot;)
+.scripts( [&amp;quot;vendor/angular/angular.js&amp;quot;, &amp;quot;vendor/**/*.js&amp;quot;], &amp;quot;public/js/vendor.js&amp;quot;)
+.scripts( [&amp;quot;custom/**/*.js&amp;quot;], &amp;quot;public/js/custom.js&amp;quot;)
+.version( [&amp;quot;css/vendor.css&amp;quot;, &amp;quot;js/vendor.js&amp;quot;]);
+});
+&lt;/code>&lt;/pre>&lt;p>and run &lt;code>gulp watch&lt;/code>. This is not my normal workflow but it sure beats putting all the files in my html file and then also doing this to concatenate them.&lt;/p></description><tags>laravel, elixir</tags></item></channel></rss>

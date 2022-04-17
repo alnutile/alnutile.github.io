@@ -1,13 +1,18 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>mocking on Alfred Nutile</title><link>https://alfrednutile.info/tags/mocking/</link><description>Recent content in mocking on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 04 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/mocking/index.xml" rel="self" type="application/rss+xml"/><item><title>Mocking, Python, Pytest</title><link>https://alfrednutile.info/posts/268/</link><pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/268/</guid><description><p>Ok this is going to be a collection of notes to self.</p><p>This<a href="https://medium.com/@bfortuner/python-unit-testing-with-pytest-and-mock-197499c4623c">post</a> does a good job of summing up some mock patterns with PyTest.</p><p>I then had to mock the Snyk client which depended on the Requests library. I chose not to mock the requests library but the methods in the snyk library.</p><p>The thing was the method I mocked returned the &ldquo;Response&rdquo; object and I wanted to use the<code>json()</code> feature of that object/class to return the results.</p><p>45 minutes later this worked.</p><pre><code> def test_get_week_of_scans(self, mocker):
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>mocking on Alfred Nutile</title><link>https://alfrednutile.info/tags/mocking/</link><description>Recent content in mocking on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 04 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/mocking/index.xml" rel="self" type="application/rss+xml"/><item><title>Mocking, Python, Pytest</title><link>https://alfrednutile.info/posts/268/</link><pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/268/</guid><description>&lt;p>Ok this is going to be a collection of notes to self.&lt;/p>
+&lt;p>This &lt;a href="https://medium.com/@bfortuner/python-unit-testing-with-pytest-and-mock-197499c4623c">post&lt;/a> does a good job of summing up some mock patterns with PyTest.&lt;/p>
+&lt;p>I then had to mock the Snyk client which depended on the Requests library. I chose not to mock the requests library but the methods in the snyk library.&lt;/p>
+&lt;p>The thing was the method I mocked returned the &amp;ldquo;Response&amp;rdquo; object and I wanted to use the &lt;code>json()&lt;/code> feature of that object/class to return the results.&lt;/p>
+&lt;p>45 minutes later this worked.&lt;/p>
+&lt;pre>&lt;code> def test_get_week_of_scans(self, mocker):
 mocker.patch.object(SnykClient, 'post')
 response = Response()
 response.status_code = 200
-response.reason = "OK"
-response.encoding = "utf-8"
+response.reason = &amp;quot;OK&amp;quot;
+response.encoding = &amp;quot;utf-8&amp;quot;
 results = json.dumps({
-"results": [
+&amp;quot;results&amp;quot;: [
 {
-"count": 1989
+&amp;quot;count&amp;quot;: 1989
 }
 ]
 }).encode('utf-8')
@@ -15,27 +20,36 @@ response._content = results
 SnykClient.post.return_value = response
 client = SnykReport()
 results = client.get_report_for_current_week(
-"98873-8ecc-46f0-b077-39322abc4390")
-assert results == 1989</code></pre><p>I no longer hit their API and<code>post</code> returns the response I wanted.</p></description><tags>python, testing, mocking, pytest</tags></item><item><title>Mocking in Python</title><link>https://alfrednutile.info/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/263/</guid><description><p>Serious note to self.</p><p>I wanted to mock the Github module for python.</p><p>My simple class will get the ID of the team.</p><pre><code>from github import Github, Team
+&amp;quot;98873-8ecc-46f0-b077-39322abc4390&amp;quot;)
+assert results == 1989
+&lt;/code>&lt;/pre>&lt;p>I no longer hit their API and &lt;code>post&lt;/code> returns the response I wanted.&lt;/p></description><tags>python, testing, mocking, pytest</tags></item><item><title>Mocking in Python</title><link>https://alfrednutile.info/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/263/</guid><description>&lt;p>Serious note to self.&lt;/p>
+&lt;p>I wanted to mock the Github module for python.&lt;/p>
+&lt;p>My simple class will get the ID of the team.&lt;/p>
+&lt;pre>&lt;code>from github import Github, Team
 from dotenv import load_dotenv
 import os
 import sys
-import json<p>class GetTeamId:
-def<strong>init</strong>(self):
+import json
+class GetTeamId:
+def __init__(self):
 load_dotenv()
 self.team_id = 5555
-self.token = os.environ.get("GITHUB_TOKEN")
+self.token = os.environ.get(&amp;quot;GITHUB_TOKEN&amp;quot;)
 self.client = Github(self.token)
-self.org = self.client.get_organization(&lsquo;FooBar&rsquo;)</p><pre><code>def handle(self, team_name):
+self.org = self.client.get_organization('FooBar')
+def handle(self, team_name):
 teams = self.org.get_teams()
 for team in teams:
 if team_name == team.name:
 print(&amp;quot;Team id&amp;quot;, team.id)
-return team.id</code></pre><p>if<strong>name</strong> == "<strong>main</strong>":
+return team.id
+if __name__ == &amp;quot;__main__&amp;quot;:
 client = GetTeamId()
 team = sys.argv[1]
-print("Going to get team", team)
-client.handle(team)</p><p/></pre><p>But I need test coverage on this so I made this test.</p></p><pre><code>from unittest import TestCase
+print(&amp;quot;Going to get team&amp;quot;, team)
+client.handle(team)
+&lt;/code>&lt;/pre>&lt;p>But I need test coverage on this so I made this test.&lt;/p>
+&lt;pre>&lt;code>from unittest import TestCase
 import unittest
 from unittest.mock import patch, Mock
 import json
@@ -43,20 +57,26 @@ from src.get_team_id import GetTeamId
 class Team:
 def __init__(self):
 self.id = 4444444
-self.name = "foo-team"
+self.name = &amp;quot;foo-team&amp;quot;
 class TestGetTeamId(TestCase):
-@patch("src.get_team_id.Github.get_organization")
+@patch(&amp;quot;src.get_team_id.Github.get_organization&amp;quot;)
 def test_can_get_id(self, mock_github):
 mock_github.return_value.get_teams.return_value = [
 Team()
 ]
 client = GetTeamId()
-results = client.handle("foo-team")
-self.assertEqual(4444444, results)</code></pre><p>Know how long that took!</p><h2 id="example-two">Example Two</h2><p>Mocking JIRA:</p><pre><code>from unittest import TestCase
+results = client.handle(&amp;quot;foo-team&amp;quot;)
+self.assertEqual(4444444, results)
+&lt;/code>&lt;/pre>&lt;p>Know how long that took!&lt;/p>
+&lt;h2 id="example-two">Example Two&lt;/h2>
+&lt;p>Mocking JIRA:&lt;/p>
+&lt;pre>&lt;code>from unittest import TestCase
 import unittest
 from unittest.mock import patch, Mock
 import json
-from src.jira_ticket import JiraTicket<p>class TestJiraCreateTicket(TestCase):</p><pre><code>@patch(&amp;quot;src.jira_ticket.JIRA.create_issue&amp;quot;)
+from src.jira_ticket import JiraTicket
+class TestJiraCreateTicket(TestCase):
+@patch(&amp;quot;src.jira_ticket.JIRA.create_issue&amp;quot;)
 def test_can_make_ticket(self, mock_jira):
 mock_jira.return_value.create_issue.return_value.update.return_value = True
 client = JiraTicket()
@@ -65,7 +85,9 @@ project = &amp;quot;PENG&amp;quot;
 message = &amp;quot;\nTitle: Foo Bar\nIssue Url: https://boo.baz\nState: open\n&amp;quot;
 label = &amp;quot;renovate&amp;quot;
 client.create_ticket(title, message, project, label)
-mock_jira.assert_called_once()</code></pre><p/></pre><p>and the class:</p></p><pre><code>import json
+mock_jira.assert_called_once()
+&lt;/code>&lt;/pre>&lt;p>and the class:&lt;/p>
+&lt;pre>&lt;code>import json
 from dotenv import load_dotenv
 from collections import Counter
 from jira import JIRA
@@ -76,15 +98,21 @@ self.jira = None
 self.auth()
 def auth(self):
 load_dotenv()
-username = os.getenv("JIRA_USERNAME")
-password = os.getenv("JIRA_PASSWORD")
-self.jira = JIRA(server="https://foo.atlassian.net",
+username = os.getenv(&amp;quot;JIRA_USERNAME&amp;quot;)
+password = os.getenv(&amp;quot;JIRA_PASSWORD&amp;quot;)
+self.jira = JIRA(server=&amp;quot;https://foo.atlassian.net&amp;quot;,
 basic_auth=(username, password))
-def handle(self, title, message=None, label=None, project="FOO"):
-""" see if exists if does update """
+def handle(self, title, message=None, label=None, project=&amp;quot;FOO&amp;quot;):
+&amp;quot;&amp;quot;&amp;quot; see if exists if does update &amp;quot;&amp;quot;&amp;quot;
 def see_if_exists(self, title, project):
-results = self.jira.search_issues("title ~ \"%s\" and project= \"%s\"" % (title, project))
-if len(results) > 0:
+results = self.jira.search_issues(&amp;quot;title ~ \&amp;quot;%s\&amp;quot; and project= \&amp;quot;%s\&amp;quot;&amp;quot; % (title, project))
+if len(results) &amp;gt; 0:
 for issue in results:
 print(issue)
-return False</code></pre><h2 id="good-reads">Good reads</h2><ul><li><a href="https://docs.python.org/3/library/unittest.mock.html">https://docs.python.org/3/library/unittest.mock.html</a></li><li><a href="https://www.toptal.com/python/an-introduction-to-mocking-in-python">https://www.toptal.com/python/an-introduction-to-mocking-in-python</a></li><li><a href="https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832">https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832</a></li></ul></description><tags>python, mocking, tdd, unittest</tags></item></channel></rss>
+return False
+&lt;/code>&lt;/pre>&lt;h2 id="good-reads">Good reads&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://docs.python.org/3/library/unittest.mock.html">https://docs.python.org/3/library/unittest.mock.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.toptal.com/python/an-introduction-to-mocking-in-python">https://www.toptal.com/python/an-introduction-to-mocking-in-python&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832">https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832&lt;/a>&lt;/li>
+&lt;/ul></description><tags>python, mocking, tdd, unittest</tags></item></channel></rss>

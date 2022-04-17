@@ -1,33 +1,69 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>stripe on Alfred Nutile</title><link>https://alfrednutile.info/tags/stripe/</link><description>Recent content in stripe on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 07 Jun 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/stripe/index.xml" rel="self" type="application/rss+xml"/><item><title>Start to end Billing using Stripe, Cashier and Laravel 5.1</title><link>https://alfrednutile.info/posts/149/</link><pubDate>Sun, 07 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/149/</guid><description><h1 id="start-to-end-billing-and-laravel">Start to end Billing and Laravel</h1><p>As usual the Laravel docs rock but sometimes it is nice to see this from start to end.</p><p>With that said read those<a href="http://laravel.com/docs/master/billing">docs</a> first and then come back here. Also the public repo can be seen<a href="https://github.com/alnutile/sponsors">here</a></p><h2 id="setup-your-stripe">Setup your Stripe</h2><p>Yup this is easy. Note the test/live dash board. Super nice to see the different processes.</p><p><img src="https://dl.dropboxusercontent.com/s/9k39kbjzb1eqiri/dash.png?dl=0" alt="dash"/><p>Turn it to test and make your plans. Keep in mind you will have to make the same plans for Live after the fact.</p><p>Go to Accounts -> Settings and get your API keys.</p><p>Plug them into the .env file (try this super cool<a href="https://github.com/alfred-nutile-inc/env-deployer">.env deployer tool</a> to make life easier)</p><p>So now your .env has the right settings, your config/app.php has the right<code>env</code> calls</p><pre><code> 'stripe' => [
-'model' => 'App\User',
-'key' => env('STRIPE_PUBLIC'),
-'secret' => env('STRIPE_API_SECRET'),
-],</code></pre><p>You are ready to code.</p><p>Add this to your composer.json if you are using linux</p><pre><code> "scripts": {
-"post-install-cmd": [
-"php artisan clear-compiled",
-"php artisan optimize",
-"php -r \"exec('chmod -R +x vendor/laravel/cashier/src/Laravel/Cashier/bin');\"",
-],</code></pre><p>Or just remember you need to do this to print</p><p>Like that docs say go ahead and install it and setup your app.php for the Provider</p><h2 id="routes">Routes</h2><p>My main route file looked like this when I was done</p><pre><code>&lt;?php
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>stripe on Alfred Nutile</title><link>https://alfrednutile.info/tags/stripe/</link><description>Recent content in stripe on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 07 Jun 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/stripe/index.xml" rel="self" type="application/rss+xml"/><item><title>Start to end Billing using Stripe, Cashier and Laravel 5.1</title><link>https://alfrednutile.info/posts/149/</link><pubDate>Sun, 07 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/149/</guid><description>&lt;h1 id="start-to-end-billing-and-laravel">Start to end Billing and Laravel&lt;/h1>
+&lt;p>As usual the Laravel docs rock but sometimes it is nice to see this from start to end.&lt;/p>
+&lt;p>With that said read those &lt;a href="http://laravel.com/docs/master/billing">docs&lt;/a> first and then come back here. Also the public repo can be seen &lt;a href="https://github.com/alnutile/sponsors">here&lt;/a>&lt;/p>
+&lt;h2 id="setup-your-stripe">Setup your Stripe&lt;/h2>
+&lt;p>Yup this is easy. Note the test/live dash board. Super nice to see the different processes.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/9k39kbjzb1eqiri/dash.png?dl=0" alt="dash">&lt;/p>
+&lt;p>Turn it to test and make your plans. Keep in mind you will have to make the same plans for Live after the fact.&lt;/p>
+&lt;p>Go to Accounts -&amp;gt; Settings and get your API keys.&lt;/p>
+&lt;p>Plug them into the .env file (try this super cool &lt;a href="https://github.com/alfred-nutile-inc/env-deployer">.env deployer tool&lt;/a> to make life easier)&lt;/p>
+&lt;p>So now your .env has the right settings, your config/app.php has the right &lt;code>env&lt;/code> calls&lt;/p>
+&lt;pre>&lt;code> 'stripe' =&amp;gt; [
+'model' =&amp;gt; 'App\User',
+'key' =&amp;gt; env('STRIPE_PUBLIC'),
+'secret' =&amp;gt; env('STRIPE_API_SECRET'),
+],
+&lt;/code>&lt;/pre>&lt;p>You are ready to code.&lt;/p>
+&lt;p>Add this to your composer.json if you are using linux&lt;/p>
+&lt;pre>&lt;code> &amp;quot;scripts&amp;quot;: {
+&amp;quot;post-install-cmd&amp;quot;: [
+&amp;quot;php artisan clear-compiled&amp;quot;,
+&amp;quot;php artisan optimize&amp;quot;,
+&amp;quot;php -r \&amp;quot;exec('chmod -R +x vendor/laravel/cashier/src/Laravel/Cashier/bin');\&amp;quot;&amp;quot;,
+],
+&lt;/code>&lt;/pre>&lt;p>Or just remember you need to do this to print&lt;/p>
+&lt;p>Like that docs say go ahead and install it and setup your app.php for the Provider&lt;/p>
+&lt;h2 id="routes">Routes&lt;/h2>
+&lt;p>My main route file looked like this when I was done&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 Route::get('/', function() {
 return Redirect::to('/sponsor');
-});<p>require<strong>DIR</strong> . &lsquo;/routes.sponsor.php&rsquo;;</p><p>require<strong>DIR</strong> . &lsquo;/routes.profile.php&rsquo;;</p><p>require<strong>DIR</strong> . &lsquo;/routes.auth.php&rsquo;;</code></pre><p>Which is not much help :)</p></p><p>The profile one is this</p><pre><code>&lt;?php<p>Route::group([&lsquo;prefix&rsquo; => &lsquo;profile&rsquo;, &lsquo;middleware&rsquo; => &lsquo;auth&rsquo;], function () {</p><pre><code>Route::get('/', 'ProfileController@getUser');
+});
+require __DIR__ . '/routes.sponsor.php';
+require __DIR__ . '/routes.profile.php';
+require __DIR__ . '/routes.auth.php';
+&lt;/code>&lt;/pre>&lt;p>Which is not much help :)&lt;/p>
+&lt;p>The profile one is this&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+Route::group(['prefix' =&amp;gt; 'profile', 'middleware' =&amp;gt; 'auth'], function () {
+Route::get('/', 'ProfileController@getUser');
 Route::post('edit', 'ProfileController@postEdit');
 Route::get('invoice/{invoice}', 'ProfileController@getPrintInvoice');
-Route::get('cancel', 'ProfileController@getCancel');</code></pre><p>});</code></pre><p>And the sponsor one is</p></p><pre><code>&lt;?php
-Route::group(['prefix' => 'sponsor'], function() {
+Route::get('cancel', 'ProfileController@getCancel');
+});
+&lt;/code>&lt;/pre>&lt;p>And the sponsor one is&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+Route::group(['prefix' =&amp;gt; 'sponsor'], function() {
 Route::get('/', 'SubscribeController@getSponsorPage');
 Route::post('1show', 'SubscribeController@post1Show');
 Route::post('2show', 'SubscribeController@post2Show');
 Route::post('fan', 'SubscribeController@postFan');
-});</code></pre><h2 id="stripe-controller">Stripe Controller</h2><p>Pretty simple, which is my goal. Basically take the requests, check the plans and setup the user.</p><pre><code>&lt;?php<p>namespace App\Http\Controllers;</p><p>use Illuminate\Routing\Controller;
+});
+&lt;/code>&lt;/pre>&lt;h2 id="stripe-controller">Stripe Controller&lt;/h2>
+&lt;p>Pretty simple, which is my goal. Basically take the requests, check the plans and setup the user.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Routing\Controller;
 use App\Plans;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Str;</p><p>class SubscribeController extends Controller
-{</p><pre><code>public function registerUser($input, $level)
+use Illuminate\Support\Str;
+class SubscribeController extends Controller
+{
+public function registerUser($input, $level)
 {
 if($user = User::where(&amp;quot;email&amp;quot;, $input['stripeEmail'])-&amp;gt;first())
 {
@@ -83,5 +119,18 @@ return Redirect::back();
 $user = $this-&amp;gt;registerUser($input, Plans::$FAN);
 Auth::login($user);
 return Redirect::to('profile')-&amp;gt;with(&amp;quot;message&amp;quot;, &amp;quot;Thanks!&amp;quot;);
-}</code></pre><p>}</code></pre><p>We will hit the UI now</p></p><h2 id="stripe-ui">Stripe Ui</h2><p>I ended up with these view files and a theme file from<a href="https://wrapbootstrap.com/theme/responsive-pricing-tables-WB0PF9PH7">WrapBootstrap</a> which I can not include of course but just use default bootstrap and it will all work.</p><p><img src="https://dl.dropboxusercontent.com/s/nd761k0gztvj4qg/sponsor_files.png?dl=0" alt="files"/><p>You can see them all<a href="https://gist.github.com/alnutile/f6f9d49efc39fd431cca">here</a></p><p>So at this point you could have something like this</p><p><img src="https://dl.dropboxusercontent.com/s/2rrapm04wwma4dd/sponsor_page.png?dl=0" alt="page"/><p>Now how do they manage all this?</p><h2 id="profile-controller">Profile Controller</h2><p>This controller takes on the profile route to manage their subscriptions and print.
-You can see those files for the view about in the image and the gist link provided above.</p><p>When all that is in place they can see this</p><p><img src="https://dl.dropboxusercontent.com/s/9dhd81vxyu78yph/subscribe.gif?dl=0" alt="the site"/></description><tags>stripe, laravel</tags></item></channel></rss>
+}
+}
+&lt;/code>&lt;/pre>&lt;p>We will hit the UI now&lt;/p>
+&lt;h2 id="stripe-ui">Stripe Ui&lt;/h2>
+&lt;p>I ended up with these view files and a theme file from &lt;a href="https://wrapbootstrap.com/theme/responsive-pricing-tables-WB0PF9PH7">WrapBootstrap&lt;/a> which I can not include of course but just use default bootstrap and it will all work.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/nd761k0gztvj4qg/sponsor_files.png?dl=0" alt="files">&lt;/p>
+&lt;p>You can see them all &lt;a href="https://gist.github.com/alnutile/f6f9d49efc39fd431cca">here&lt;/a>&lt;/p>
+&lt;p>So at this point you could have something like this&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/2rrapm04wwma4dd/sponsor_page.png?dl=0" alt="page">&lt;/p>
+&lt;p>Now how do they manage all this?&lt;/p>
+&lt;h2 id="profile-controller">Profile Controller&lt;/h2>
+&lt;p>This controller takes on the profile route to manage their subscriptions and print.
+You can see those files for the view about in the image and the gist link provided above.&lt;/p>
+&lt;p>When all that is in place they can see this&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/9dhd81vxyu78yph/subscribe.gif?dl=0" alt="the site">&lt;/p></description><tags>stripe, laravel</tags></item></channel></rss>

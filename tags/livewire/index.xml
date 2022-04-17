@@ -1,7 +1,12 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>livewire on Alfred Nutile</title><link>https://alfrednutile.info/tags/livewire/</link><description>Recent content in livewire on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 17 Aug 2021 14:32:07 -0400</lastBuildDate><atom:link href="https://alfrednutile.info/tags/livewire/index.xml" rel="self" type="application/rss+xml"/><item><title>Odd Livewire Error(s)</title><link>https://alfrednutile.info/posts/livewire/</link><pubDate>Tue, 17 Aug 2021 14:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/livewire/</guid><description><p>Just keeping track of some nuances to LiveWire</p><h2 id="initialdatafingerprint">initialData.fingerprint</h2><p>The table with rows was not interating. The rows had two columns of for-each loops so
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>livewire on Alfred Nutile</title><link>https://alfrednutile.info/tags/livewire/</link><description>Recent content in livewire on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 17 Aug 2021 14:32:07 -0400</lastBuildDate><atom:link href="https://alfrednutile.info/tags/livewire/index.xml" rel="self" type="application/rss+xml"/><item><title>Odd Livewire Error(s)</title><link>https://alfrednutile.info/posts/livewire/</link><pubDate>Tue, 17 Aug 2021 14:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/livewire/</guid><description>&lt;p>Just keeping track of some nuances to LiveWire&lt;/p>
+&lt;h2 id="initialdatafingerprint">initialData.fingerprint&lt;/h2>
+&lt;p>The table with rows was not interating. The rows had two columns of for-each loops so
 as always you need keys, but I think my mistake was not making the keys different
-for either of them.</p><p>You can see the table below</p><pre><code>@foreach( $imports as $import)
-&lt;tr class="bg-emerald-200"><pre><code> &amp;lt;td class=&amp;quot;border px-8 py-4&amp;quot;&amp;gt;{{ $import-&amp;gt;id }}&amp;lt;/td&amp;gt;
+for either of them.&lt;/p>
+&lt;p>You can see the table below&lt;/p>
+&lt;pre>&lt;code>@foreach( $imports as $import)
+&amp;lt;tr class=&amp;quot;bg-emerald-200&amp;quot;&amp;gt;
+&amp;lt;td class=&amp;quot;border px-8 py-4&amp;quot;&amp;gt;{{ $import-&amp;gt;id }}&amp;lt;/td&amp;gt;
 &amp;lt;td class=&amp;quot;border px-8 py-4&amp;quot;&amp;gt;{{ $import-&amp;gt;name }}&amp;lt;/td&amp;gt;
 &amp;lt;td class=&amp;quot;border px-8 py-4&amp;quot;&amp;gt;{{ optional($import-&amp;gt;source)-&amp;gt;type }}&amp;lt;/td&amp;gt;
 &amp;lt;td class=&amp;quot;border px-8 py-4&amp;quot;&amp;gt;
@@ -18,4 +23,11 @@ for either of them.</p><p>You can see the table below</p><pre><code>@foreach( $i
 ], key('link-' . $import-&amp;gt;id))
 &amp;lt;/td&amp;gt;
 &amp;lt;/tr&amp;gt;
-@endforeach</code></pre><p/></pre><p>The keys</p></p><pre><code>key('download-' . $import->id))</code></pre><p>and</p><pre><code>key('link-' . $import->id))</code></pre><p>Did not work when I was using<code>key($import->id)</code></p><p>The table and search all just stopped :(</p><p>Anyways hope this saves the future me an hour!</p></description><tags>laravel, livewire, note</tags></item></channel></rss>
+@endforeach
+&lt;/code>&lt;/pre>&lt;p>The keys&lt;/p>
+&lt;pre>&lt;code>key('download-' . $import-&amp;gt;id))
+&lt;/code>&lt;/pre>&lt;p>and&lt;/p>
+&lt;pre>&lt;code>key('link-' . $import-&amp;gt;id))
+&lt;/code>&lt;/pre>&lt;p>Did not work when I was using &lt;code>key($import-&amp;gt;id)&lt;/code>&lt;/p>
+&lt;p>The table and search all just stopped :(&lt;/p>
+&lt;p>Anyways hope this saves the future me an hour!&lt;/p></description><tags>laravel, livewire, note</tags></item></channel></rss>

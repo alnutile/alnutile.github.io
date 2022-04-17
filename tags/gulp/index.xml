@@ -1,15 +1,28 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>gulp on Alfred Nutile</title><link>https://alfrednutile.info/tags/gulp/</link><description>Recent content in gulp on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 25 May 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/gulp/index.xml" rel="self" type="application/rss+xml"/><item><title>Quick Gulp file to run php-unit tests</title><link>https://alfrednutile.info/posts/85/</link><pubDate>Sun, 25 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/85/</guid><description><p><strong>MUCH BETTER WAY<a href="https://gist.github.com/laracasts/8659865">HERE</a></strong></p><hr><p>This is setup for Laravel but can work for any app. Most of this is due to the great<a href="https://laracasts.com/lessons/gulp-this">Laracasts on Gulp</a></p><p>Download and setup gulp</p><p>First make a package.json file in the root of your app and just put curly brackets in it.</p><pre><code>touch package.json
-vim package.json</code></pre><pre><code>//package.json
-{<p>}</code></pre><p>Then run the needed node commands</p></p><pre><code>npm install -g gulp
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>gulp on Alfred Nutile</title><link>https://alfrednutile.info/tags/gulp/</link><description>Recent content in gulp on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 25 May 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/gulp/index.xml" rel="self" type="application/rss+xml"/><item><title>Quick Gulp file to run php-unit tests</title><link>https://alfrednutile.info/posts/85/</link><pubDate>Sun, 25 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/85/</guid><description>&lt;p>&lt;strong>MUCH BETTER WAY &lt;a href="https://gist.github.com/laracasts/8659865">HERE&lt;/a>&lt;/strong>&lt;/p>
+&lt;hr>
+&lt;p>This is setup for Laravel but can work for any app. Most of this is due to the great &lt;a href="https://laracasts.com/lessons/gulp-this">Laracasts on Gulp&lt;/a>&lt;/p>
+&lt;p>Download and setup gulp&lt;/p>
+&lt;p>First make a package.json file in the root of your app and just put curly brackets in it.&lt;/p>
+&lt;pre>&lt;code>touch package.json
+vim package.json
+&lt;/code>&lt;/pre>&lt;pre>&lt;code>//package.json
+{
+}
+&lt;/code>&lt;/pre>&lt;p>Then run the needed node commands&lt;/p>
+&lt;pre>&lt;code>npm install -g gulp
 npm install gulp --save-dev
 npm install gulp-notify --save-dev
-npm install gulp-phpunit --save-dev</code></pre><p>Now the package.json should look like this thanks to the save switch.</p><pre><code>{
-"devDependencies": {
-"gulp": "^3.6.2",
-"gulp-phpunit": "^0.5.3",
-"gulp-notify": "^1.3.0"
+npm install gulp-phpunit --save-dev
+&lt;/code>&lt;/pre>&lt;p>Now the package.json should look like this thanks to the save switch.&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;devDependencies&amp;quot;: {
+&amp;quot;gulp&amp;quot;: &amp;quot;^3.6.2&amp;quot;,
+&amp;quot;gulp-phpunit&amp;quot;: &amp;quot;^0.5.3&amp;quot;,
+&amp;quot;gulp-notify&amp;quot;: &amp;quot;^1.3.0&amp;quot;
 }
-}</code></pre><p>Now to setup the gulpfile, again in the root of your app</p><pre><code>//gulpfile.js
+}
+&lt;/code>&lt;/pre>&lt;p>Now to setup the gulpfile, again in the root of your app&lt;/p>
+&lt;pre>&lt;code>//gulpfile.js
 var phpunit = require('gulp-phpunit');
 var gulp = require('gulp'),
 notify = require('gulp-notify'),
@@ -19,8 +32,8 @@ var options = {debug: false, notify: true};
 gulp.src('app/tests/*.php')
 .pipe(phpunit('', options))
 .on('error', notify.onError({
-title: "Failed Tests!",
-message: "Error(s) occurred during testing..."
+title: &amp;quot;Failed Tests!&amp;quot;,
+message: &amp;quot;Error(s) occurred during testing...&amp;quot;
 }));
 });
 gulp.task('default', function(){
@@ -28,4 +41,8 @@ gulp.run('phpunit');
 gulp.watch('app/**/*.php', function(){
 gulp.run('phpunit');
 });
-});</code></pre><p>Basically we are saying watch the app folder recursively for file changes to files ending in php then run all the tests in app/tests/*.php.</p><p>Finally run gulp at the command line and it will run keeping an eye on changes.</p><pre><code>gulp</code></pre><p>That is it. From here you will get typically phpunit output as you work BUT also a notice if you break something.</p></description><tags>gulp, phpunit, laravel</tags></item></channel></rss>
+});
+&lt;/code>&lt;/pre>&lt;p>Basically we are saying watch the app folder recursively for file changes to files ending in php then run all the tests in app/tests/*.php.&lt;/p>
+&lt;p>Finally run gulp at the command line and it will run keeping an eye on changes.&lt;/p>
+&lt;pre>&lt;code>gulp
+&lt;/code>&lt;/pre>&lt;p>That is it. From here you will get typically phpunit output as you work BUT also a notice if you break something.&lt;/p></description><tags>gulp, phpunit, laravel</tags></item></channel></rss>

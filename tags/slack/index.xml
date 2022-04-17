@@ -1,39 +1,93 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>slack on Alfred Nutile</title><link>https://alfrednutile.info/tags/slack/</link><description>Recent content in slack on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 24 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/slack/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Slack Trait Get Request and return Response</title><link>https://alfrednutile.info/posts/208/</link><pubDate>Fri, 24 Mar 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/208/</guid><description><p>In this example I get a message from Slack (but this can be any message) and then send results back to Slack.</p><p>One thing to keep in mind you really want to get your code working out side of Slack since you cannot easily do a push, test, fix, push, test as we normally do when working locally with a browser.</p><p>Get your PHPUnit working for a class that will handle the payload, then you know when you plug it in to the Slack Route it will &ldquo;just work&rdquo;.</p><p>More on that shortly&hellip;</p><p><a name="receive"/></p><h3 id="getting-a-message">Getting a message</h3><p>Going with the POST settings we will setup Slack to send a POST request to a URL we are building.</p><p>So I will show some tests first<a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runreportslacktest-php">here</a> and then trait<a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-slacktrait-php">here</a></p><p>We have a few features going on to consider</p><p>All of which I use this fixture to replicate the incoming Slack Message</p><pre><code>[
-{"token": "foo"},
-{"team_id": "bar"},
-{"team_domain": "baz"},
-{"channel_id": "C0JKRSDEV"},
-{"channel_name": "test"},
-{"user_id": "U02NC4UL2"},
-{"user_name": "alfrednutile"},
-{"command": "/hp:report"},
-{"text": "not really needed yet"},
-{"response_url": "https://hooks.slack.com/commands/foo/bar/baz"}
-]</code></pre><p>see<a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-slack_incoming_run_report-json">here</a> too.</p><h4 id="is-this-coming-from-the-right-token">Is this coming from the right token?</h4><p><code>testSuccessVerifiesToken</code> and bad<code>testVerifiesToken</code></p><p>see example<a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runreportslacktest-php-L34">here</a></p><h3 id="is-this-even-coming-from-slack">Is this even coming from Slack?</h3><p><code>testSuccessSlackURL</code> and<code>testFailWrongURL</code></p><p>see example<a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runreportslacktest-php-L61">here</a></p><h3 id="is-this-person-even-allowed-to-do-this">Is this person even allowed to do this?</h3><p><code>testSuccessVerifiesPerson</code>
-see example<a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runreportslacktest-php-L49">here</a></p><h3 id="is-there-infotext-in-the-incoming-message-for-me-to-consider">Is there info/text in the incoming message for me to consider</h3><p><code>testKeepSheetsAsTrue</code> shows me looking for text.</p><p>Again easy stuff to test outside of Slack.<a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runreportslacktest-php-L95">here</a></p><p><a name="send"/></p><h2 id="okay-now-the-message-is-good-how-to-send-one-back">Okay Now the message is good how to send one back?</h2><p>The route has to becomes a non-auth and non-basic auth protected route so Slack can POST to it</p><p>Here is my<code>nginx</code><code>default.conf</code>config (see docs on how to update this using CloudFormation)</p><pre><code>location /api/v1/slack/ { auth_basic "off"; allow all; satisfy any; try_files $uri $uri/ /index.php?$query_string; }</code></pre><p>To allow this to happen see the full file here LINK.</p><p>Then the route is simple<code>routes/api.php</code></p><pre><code>Route::group(['prefix' => 'v1'], function(){
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>slack on Alfred Nutile</title><link>https://alfrednutile.info/tags/slack/</link><description>Recent content in slack on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 24 Mar 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/slack/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Slack Trait Get Request and return Response</title><link>https://alfrednutile.info/posts/208/</link><pubDate>Fri, 24 Mar 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/208/</guid><description>&lt;p>In this example I get a message from Slack (but this can be any message) and then send results back to Slack.&lt;/p>
+&lt;p>One thing to keep in mind you really want to get your code working out side of Slack since you cannot easily do a push, test, fix, push, test as we normally do when working locally with a browser.&lt;/p>
+&lt;p>Get your PHPUnit working for a class that will handle the payload, then you know when you plug it in to the Slack Route it will &amp;ldquo;just work&amp;rdquo;.&lt;/p>
+&lt;p>More on that shortly&amp;hellip;&lt;/p>
+&lt;p>&lt;a name="receive">&lt;/a>&lt;/p>
+&lt;h3 id="getting-a-message">Getting a message&lt;/h3>
+&lt;p>Going with the POST settings we will setup Slack to send a POST request to a URL we are building.&lt;/p>
+&lt;p>So I will show some tests first &lt;a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runreportslacktest-php">here&lt;/a> and then trait &lt;a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-slacktrait-php">here&lt;/a>&lt;/p>
+&lt;p>We have a few features going on to consider&lt;/p>
+&lt;p>All of which I use this fixture to replicate the incoming Slack Message&lt;/p>
+&lt;pre>&lt;code>[
+{&amp;quot;token&amp;quot;: &amp;quot;foo&amp;quot;},
+{&amp;quot;team_id&amp;quot;: &amp;quot;bar&amp;quot;},
+{&amp;quot;team_domain&amp;quot;: &amp;quot;baz&amp;quot;},
+{&amp;quot;channel_id&amp;quot;: &amp;quot;C0JKRSDEV&amp;quot;},
+{&amp;quot;channel_name&amp;quot;: &amp;quot;test&amp;quot;},
+{&amp;quot;user_id&amp;quot;: &amp;quot;U02NC4UL2&amp;quot;},
+{&amp;quot;user_name&amp;quot;: &amp;quot;alfrednutile&amp;quot;},
+{&amp;quot;command&amp;quot;: &amp;quot;/hp:report&amp;quot;},
+{&amp;quot;text&amp;quot;: &amp;quot;not really needed yet&amp;quot;},
+{&amp;quot;response_url&amp;quot;: &amp;quot;https://hooks.slack.com/commands/foo/bar/baz&amp;quot;}
+]
+&lt;/code>&lt;/pre>&lt;p>see &lt;a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-slack_incoming_run_report-json">here&lt;/a> too.&lt;/p>
+&lt;h4 id="is-this-coming-from-the-right-token">Is this coming from the right token?&lt;/h4>
+&lt;p>&lt;code>testSuccessVerifiesToken&lt;/code> and bad &lt;code>testVerifiesToken&lt;/code>&lt;/p>
+&lt;p>see example &lt;a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runreportslacktest-php-L34">here&lt;/a>&lt;/p>
+&lt;h3 id="is-this-even-coming-from-slack">Is this even coming from Slack?&lt;/h3>
+&lt;p>&lt;code>testSuccessSlackURL&lt;/code> and &lt;code>testFailWrongURL&lt;/code>&lt;/p>
+&lt;p>see example &lt;a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runreportslacktest-php-L61">here&lt;/a>&lt;/p>
+&lt;h3 id="is-this-person-even-allowed-to-do-this">Is this person even allowed to do this?&lt;/h3>
+&lt;p>&lt;code>testSuccessVerifiesPerson&lt;/code>
+see example &lt;a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runreportslacktest-php-L49">here&lt;/a>&lt;/p>
+&lt;h3 id="is-there-infotext-in-the-incoming-message-for-me-to-consider">Is there info/text in the incoming message for me to consider&lt;/h3>
+&lt;p>&lt;code>testKeepSheetsAsTrue&lt;/code> shows me looking for text.&lt;/p>
+&lt;p>Again easy stuff to test outside of Slack. &lt;a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runreportslacktest-php-L95">here&lt;/a>&lt;/p>
+&lt;p>&lt;a name="send">&lt;/a>&lt;/p>
+&lt;h2 id="okay-now-the-message-is-good-how-to-send-one-back">Okay Now the message is good how to send one back?&lt;/h2>
+&lt;p>The route has to becomes a non-auth and non-basic auth protected route so Slack can POST to it&lt;/p>
+&lt;p>Here is my &lt;code>nginx&lt;/code> &lt;code>default.conf&lt;/code>config (see docs on how to update this using CloudFormation)&lt;/p>
+&lt;pre>&lt;code>location /api/v1/slack/ { auth_basic &amp;quot;off&amp;quot;; allow all; satisfy any; try_files $uri $uri/ /index.php?$query_string; }
+&lt;/code>&lt;/pre>&lt;p>To allow this to happen see the full file here LINK.&lt;/p>
+&lt;p>Then the route is simple &lt;code>routes/api.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code>Route::group(['prefix' =&amp;gt; 'v1'], function(){
 Route::post('slack/hp_reports', 'RunReportSlackController@handle');
-Route::post('slack/hp_user_reports', 'RunUserLevelReportSlackController@handle');<p>});</code></pre><p>The Controller<a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runuserlevelreportslackcontroller-php-L21">here</a> does as little work as possible.</p></p><p>Though I would like to move these into a Validation</p><pre><code> if(!$this->token) {
-$this->setToken(env('SLACK_TOKEN_REPORT_REQUEST'));
-}<pre><code> if($this-&amp;gt;notASlackUrl($request)) {
+Route::post('slack/hp_user_reports', 'RunUserLevelReportSlackController@handle');
+});
+&lt;/code>&lt;/pre>&lt;p>The Controller &lt;a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runuserlevelreportslackcontroller-php-L21">here&lt;/a> does as little work as possible.&lt;/p>
+&lt;p>Though I would like to move these into a Validation&lt;/p>
+&lt;pre>&lt;code> if(!$this-&amp;gt;token) {
+$this-&amp;gt;setToken(env('SLACK_TOKEN_REPORT_REQUEST'));
+}
+if($this-&amp;gt;notASlackUrl($request)) {
 $message = sprintf(&amp;quot;Not a Slack URL&amp;quot;);
 throw new NotSlackUrlException($message);
-}</code></pre><p/></pre><p>Again the Controller should not have to do too much.</p></p><p>But the logic is outside the controller and which now is outside the scope of the example since at this point we just have, as seen in the fixture above so do what you want with the incoming JSON.</p><p>Once done it sends it back to the Controller<a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runuserlevelreportslackcontroller-php-L43">here</a> to respond back to Slack using<code>respondToSlack</code> seen in<code>SlackTrait.php</code><a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-slacktrait-php-L89">here</a></p><p>Which simple breaks it up into an array</p><pre><code> public function respondToSlack($message, $attachment, $type = 'in_channel')
+}
+&lt;/code>&lt;/pre>&lt;p>Again the Controller should not have to do too much.&lt;/p>
+&lt;p>But the logic is outside the controller and which now is outside the scope of the example since at this point we just have, as seen in the fixture above so do what you want with the incoming JSON.&lt;/p>
+&lt;p>Once done it sends it back to the Controller &lt;a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-runuserlevelreportslackcontroller-php-L43">here&lt;/a> to respond back to Slack using &lt;code>respondToSlack&lt;/code> seen in &lt;code>SlackTrait.php&lt;/code> &lt;a href="https://gist.github.com/alnutile/822ec5907a4752b74d38dd63e6eeba39#file-slacktrait-php-L89">here&lt;/a>&lt;/p>
+&lt;p>Which simple breaks it up into an array&lt;/p>
+&lt;pre>&lt;code> public function respondToSlack($message, $attachment, $type = 'in_channel')
 {
-return ['response_type' => $type, 'text' => $message, 'attachments' => [ ['text' => $attachment ] ] ];
-}</code></pre><p>Attachments in this case just being more text. For our team you can see it when you type<code>/sd behat</code> in Slack. This request goes to our app, looks for the word(s) behat in the docs and replies back to Slack as such</p><pre><code>slash-command APP [11:43 AM]
+return ['response_type' =&amp;gt; $type, 'text' =&amp;gt; $message, 'attachments' =&amp;gt; [ ['text' =&amp;gt; $attachment ] ] ];
+}
+&lt;/code>&lt;/pre>&lt;p>Attachments in this case just being more text. For our team you can see it when you type &lt;code>/sd behat&lt;/code> in Slack. This request goes to our app, looks for the word(s) behat in the docs and replies back to Slack as such&lt;/p>
+&lt;pre>&lt;code>slash-command APP [11:43 AM]
 Your original search slack total found 3
 Title: Holiday and other Team Processes URL: https://foo.com/team-managment
 Title: Getting Started New to the Team URL: https://foo.com/new-to-the-team
-Title: Onboarding Links URL: https://foo.com/onboarding-links</code></pre><p>&ldquo;Your original search slack total found 3&rdquo; in the text and the rest the &ldquo;attachments&rdquo; is the results we get from Slack</p><h2 id="env">ENV</h2><p>One tricky part here is the<code>.env</code></p><p>I am looking for<code>SLACK_TOKEN</code> but this will get old soon if I do a few of these since they all have different tokens. I would suggest an<code>config/slack.php</code> to then have areas for this.</p><pre><code>&lt;?php<p>return [
-&lsquo;slack_report&rsquo; => env(&lsquo;SLACK_TOKEN_FEATURE_FOO&rsquo;, &lsquo;12345&rsquo;),
-];</code></pre></p></description><tags>slack, laravel</tags></item><item><title>Super Simple Sending Messages to Slack from Laravel</title><link>https://alfrednutile.info/posts/202/</link><pubDate>Thu, 29 Dec 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/202/</guid><description><p>Laravel 5.3 has this feature. But for those not using that version or who just want to see how easy this is, I will show here how I been doing this for some time now.</p><p>Here is the main Class I call to send a message. As you can see I am using Guzzle, in this case<code>"guzzlehttp/guzzle": "^6.1"</code> but others versions can work.</p><pre><code>&lt;?php
-namespace App\Services;<p>use Illuminate\Support\Facades\Log;
-use GuzzleHttp\Client;</p><p>class SlackWrapper
+Title: Onboarding Links URL: https://foo.com/onboarding-links
+&lt;/code>&lt;/pre>&lt;p>&amp;ldquo;Your original search slack total found 3&amp;rdquo; in the text and the rest the &amp;ldquo;attachments&amp;rdquo; is the results we get from Slack&lt;/p>
+&lt;h2 id="env">ENV&lt;/h2>
+&lt;p>One tricky part here is the &lt;code>.env&lt;/code>&lt;/p>
+&lt;p>I am looking for &lt;code>SLACK_TOKEN&lt;/code> but this will get old soon if I do a few of these since they all have different tokens. I would suggest an &lt;code>config/slack.php&lt;/code> to then have areas for this.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+return [
+'slack_report' =&amp;gt; env('SLACK_TOKEN_FEATURE_FOO', '12345'),
+];
+&lt;/code>&lt;/pre></description><tags>slack, laravel</tags></item><item><title>Super Simple Sending Messages to Slack from Laravel</title><link>https://alfrednutile.info/posts/202/</link><pubDate>Thu, 29 Dec 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/202/</guid><description>&lt;p>Laravel 5.3 has this feature. But for those not using that version or who just want to see how easy this is, I will show here how I been doing this for some time now.&lt;/p>
+&lt;p>Here is the main Class I call to send a message. As you can see I am using Guzzle, in this case &lt;code>&amp;quot;guzzlehttp/guzzle&amp;quot;: &amp;quot;^6.1&amp;quot;&lt;/code> but others versions can work.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App\Services;
+use Illuminate\Support\Facades\Log;
+use GuzzleHttp\Client;
+class SlackWrapper
 {
 /**
 * @var Client $client
 */
-protected $client;</p><pre><code>protected $slack_url = false;
+protected $client;
+protected $slack_url = false;
 public function __construct(Client $client)
 {
 $this-&amp;gt;client = $client;
@@ -73,7 +127,57 @@ public function setSlackUrl($slack_url)
 {
 $this-&amp;gt;slack_url = $slack_url;
 return $this;
-}</code></pre><p>}</code></pre><p>And that is it. As long as I set this<code>env(&lsquo;SLACK_URL&rsquo;)</code> in my .env OR in the class instantiation it will get to that endpoint.</p></p><p>Then in slack just add get the webhook/room you want to post to</p><p><img src="https://dl.dropboxusercontent.com/s/rk2gd4c5tpflpmi/webhooks_slack.png?dl=0" alt=""/></description><tags>php, laravel, slack</tags></item><item><title>Slack Custom Commands and Laravel to Make an American to British Translater</title><link>https://alfrednutile.info/posts/173/</link><pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/173/</guid><description><p><img src="https://dl.dropboxusercontent.com/s/b8vwn1peb7s5cet/a2b.gif?dl=0" alt="in use"/><p>Laravel or anything you are comfortable with making a Route and Response will work fine really.</p><p>This &ldquo;messaging as a platform&rdquo; is a new world for me, challenging my way of thinking in many ways. Some things just do not need a authentication of their own, a UI, etc they just need a place to get info from, or do something with some info etc.</p><p>In this case I made a really simple &ldquo;Custom Slash Command&rdquo; to translate British Slang to American and American to British (so I can sound cooler!)</p><p>Later I will look into bots etc but for now here is a look at a custom slash commands.</p><h2 id="getting-api-endpoint-setup">Getting API Endpoint Setup</h2><p>I still do not have a great local workflow for this. There are articles about this online with secure tunnels etc. My next step is to use my wildcard cert or using<a href="https://letsencrypt.org/">https://letsencrypt.org/</a> to have a local url so I can make this workflow a ton easier.</p><p>But to get going I had to setup a domain with valid HTTPS. As linked above, Let&rsquo;s Encrypt might be a great way to setup a play area and solutions like Forge<a href="https://forge.laravel.com/">https://forge.laravel.com/</a> Heroku<a href="https://www.heroku.com/">https://www.heroku.com/</a> are great ways to get going quickly on getting a &ldquo;POSTABLE&rdquo; API in place.</p><p>What I mean by POSTABLE is that your API needs to take a POST from Slack (it can take a GET but not sure the advantage to that) but consider App you are setting up the foundation to so many cool integrations you can do with Slack all using this one server your are setting up, until of course something needs it&rsquo;s own space. One POSTABLE API can be like your own &ldquo;If This Then That&rdquo;<a href="https://ifttt.com/">https://ifttt.com/</a> solution in my opinion. Fun for some of us that is for sure.</p><p>Once that was setup I could start playing around.</p><h2 id="setting-up-the-slack-endpoint">Setting up the Slack Endpoint</h2><p>Once I log into the slack.com website and read up on the API went over to Custom Integrations. Making a Slack App will come later but for not this was more than enough to have some fun.</p><p>In there I added a configuration.</p><p>There are several settings here that matter.</p><p><img src="https://dl.dropboxusercontent.com/s/jbnl2yn9e9odfhg/slack_image_1.png?dl=0" alt="example image"/><ul><li>Command: /b2a</li><li>URL:<a href="https://foo.com/api/v1/brit_to_us">https://foo.com/api/v1/brit_to_us</a></li><li>Method: POST</li><li>Token: TOP_SECRET</li><li>Customize Name: brit2american</li><li>Custom Icon: speaking_head_in_silhouette</li><li>Help Text:</li><li>Description: Translate British slang to American Slang</li><li>Usage hint: Throw A Spanner In The Works</li><li>Descriptive Label: Brit to American Slang</li></ul><p>I made two of them since I also need to turn my boring American into cool British Slang</p><ul><li>Command: /a2b</li><li>URL:<a href="https://foo.com/api/v1/us_to_brit">https://foo.com/api/v1/us_to_brit</a></li><li>Method: POST</li><li>Token: TOP_SECRET</li><li>Customize Name: american2brit</li><li>Custom Icon: speaking_head_in_silhouette</li><li>Help Text:</li><li>Description: Translate American to Cool British Slang</li><li>Usage hint: Throw A Spanner In The Works</li><li>Descriptive Label: Good Morning All!</li></ul><p>Once these are setup we are ready to build our Routes!</p><h2 id="setting-up-the-receiving-api">Setting Up the Receiving API</h2><p>This part could have gone better if I had a local environment setup to receive these Slack commands and next time I will, I just did not realize how easy it was to just setup my own local environment with a good signed cert which Slack requires until I started writing this article.</p><p>This was for fun so I did not go crazy with design. All of it could have been in the route file really. But I do want this domain and Laravel install I made to allow me to plug in other Custom Commands and later Slack App.</p><h3 id="slack-payload">Slack Payload</h3><p>Note this page on Slack<a href="https://api.slack.com/slash-commands">https://api.slack.com/slash-commands</a> you will get a payload like this</p><pre><code>token=gIkuvaNzQIHg97ATvDxqgjtO
+}
+}
+&lt;/code>&lt;/pre>&lt;p>And that is it. As long as I set this &lt;code>env('SLACK_URL')&lt;/code> in my .env OR in the class instantiation it will get to that endpoint.&lt;/p>
+&lt;p>Then in slack just add get the webhook/room you want to post to&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/rk2gd4c5tpflpmi/webhooks_slack.png?dl=0" alt="">&lt;/p></description><tags>php, laravel, slack</tags></item><item><title>Slack Custom Commands and Laravel to Make an American to British Translater</title><link>https://alfrednutile.info/posts/173/</link><pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/173/</guid><description>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/b8vwn1peb7s5cet/a2b.gif?dl=0" alt="in use">&lt;/p>
+&lt;p>Laravel or anything you are comfortable with making a Route and Response will work fine really.&lt;/p>
+&lt;p>This &amp;ldquo;messaging as a platform&amp;rdquo; is a new world for me, challenging my way of thinking in many ways. Some things just do not need a authentication of their own, a UI, etc they just need a place to get info from, or do something with some info etc.&lt;/p>
+&lt;p>In this case I made a really simple &amp;ldquo;Custom Slash Command&amp;rdquo; to translate British Slang to American and American to British (so I can sound cooler!)&lt;/p>
+&lt;p>Later I will look into bots etc but for now here is a look at a custom slash commands.&lt;/p>
+&lt;h2 id="getting-api-endpoint-setup">Getting API Endpoint Setup&lt;/h2>
+&lt;p>I still do not have a great local workflow for this. There are articles about this online with secure tunnels etc. My next step is to use my wildcard cert or using &lt;a href="https://letsencrypt.org/">https://letsencrypt.org/&lt;/a> to have a local url so I can make this workflow a ton easier.&lt;/p>
+&lt;p>But to get going I had to setup a domain with valid HTTPS. As linked above, Let&amp;rsquo;s Encrypt might be a great way to setup a play area and solutions like Forge &lt;a href="https://forge.laravel.com/">https://forge.laravel.com/&lt;/a> Heroku &lt;a href="https://www.heroku.com/">https://www.heroku.com/&lt;/a> are great ways to get going quickly on getting a &amp;ldquo;POSTABLE&amp;rdquo; API in place.&lt;/p>
+&lt;p>What I mean by POSTABLE is that your API needs to take a POST from Slack (it can take a GET but not sure the advantage to that) but consider App you are setting up the foundation to so many cool integrations you can do with Slack all using this one server your are setting up, until of course something needs it&amp;rsquo;s own space. One POSTABLE API can be like your own &amp;ldquo;If This Then That&amp;rdquo; &lt;a href="https://ifttt.com/">https://ifttt.com/&lt;/a> solution in my opinion. Fun for some of us that is for sure.&lt;/p>
+&lt;p>Once that was setup I could start playing around.&lt;/p>
+&lt;h2 id="setting-up-the-slack-endpoint">Setting up the Slack Endpoint&lt;/h2>
+&lt;p>Once I log into the slack.com website and read up on the API went over to Custom Integrations. Making a Slack App will come later but for not this was more than enough to have some fun.&lt;/p>
+&lt;p>In there I added a configuration.&lt;/p>
+&lt;p>There are several settings here that matter.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/jbnl2yn9e9odfhg/slack_image_1.png?dl=0" alt="example image">&lt;/p>
+&lt;ul>
+&lt;li>Command: /b2a&lt;/li>
+&lt;li>URL: &lt;a href="https://foo.com/api/v1/brit_to_us">https://foo.com/api/v1/brit_to_us&lt;/a>&lt;/li>
+&lt;li>Method: POST&lt;/li>
+&lt;li>Token: TOP_SECRET&lt;/li>
+&lt;li>Customize Name: brit2american&lt;/li>
+&lt;li>Custom Icon: speaking_head_in_silhouette&lt;/li>
+&lt;li>Help Text:&lt;/li>
+&lt;li>Description: Translate British slang to American Slang&lt;/li>
+&lt;li>Usage hint: Throw A Spanner In The Works&lt;/li>
+&lt;li>Descriptive Label: Brit to American Slang&lt;/li>
+&lt;/ul>
+&lt;p>I made two of them since I also need to turn my boring American into cool British Slang&lt;/p>
+&lt;ul>
+&lt;li>Command: /a2b&lt;/li>
+&lt;li>URL: &lt;a href="https://foo.com/api/v1/us_to_brit">https://foo.com/api/v1/us_to_brit&lt;/a>&lt;/li>
+&lt;li>Method: POST&lt;/li>
+&lt;li>Token: TOP_SECRET&lt;/li>
+&lt;li>Customize Name: american2brit&lt;/li>
+&lt;li>Custom Icon: speaking_head_in_silhouette&lt;/li>
+&lt;li>Help Text:&lt;/li>
+&lt;li>Description: Translate American to Cool British Slang&lt;/li>
+&lt;li>Usage hint: Throw A Spanner In The Works&lt;/li>
+&lt;li>Descriptive Label: Good Morning All!&lt;/li>
+&lt;/ul>
+&lt;p>Once these are setup we are ready to build our Routes!&lt;/p>
+&lt;h2 id="setting-up-the-receiving-api">Setting Up the Receiving API&lt;/h2>
+&lt;p>This part could have gone better if I had a local environment setup to receive these Slack commands and next time I will, I just did not realize how easy it was to just setup my own local environment with a good signed cert which Slack requires until I started writing this article.&lt;/p>
+&lt;p>This was for fun so I did not go crazy with design. All of it could have been in the route file really. But I do want this domain and Laravel install I made to allow me to plug in other Custom Commands and later Slack App.&lt;/p>
+&lt;h3 id="slack-payload">Slack Payload&lt;/h3>
+&lt;p>Note this page on Slack &lt;a href="https://api.slack.com/slash-commands">https://api.slack.com/slash-commands&lt;/a> you will get a payload like this&lt;/p>
+&lt;pre>&lt;code>token=gIkuvaNzQIHg97ATvDxqgjtO
 team_id=T0001
 team_domain=example
 channel_id=C2147483705
@@ -82,14 +186,25 @@ user_id=U2147483697
 user_name=Steve
 command=/weather
 text=94070
-response_url=https://hooks.slack.com/commands/1234/5678</code></pre><p>For me that meant keeping some things in the .env file as needed to look for a specific Token, User etc BUT later I can see making a Provider class and Config file to setup up for each Slash Command or App I make so that I keep the settings as needed in one grouped place and not in a huge file.</p><p>For now I just use the<code>text</code> and the<code>response_url</code> to my advantage the rest I am not worried about right now.</p><p>This is also I good example of an easy<code>Webhook</code> workflow. Give me your object and where to send the results back to.</p><p>Keeping the routing simple my<code>routes.php</code> file is just this</p><pre><code>Route::post('/api/v1/brit_to_us', 'BritToUSController@britToUs');
-Route::post('/api/v1/us_to_brit', 'BritToUSController@usToBrit');</code></pre><p>And that controller is just this</p><pre><code>&lt;?php<p>namespace App\Http\Controllers;</p><p>use Illuminate\Http\Request;
+response_url=https://hooks.slack.com/commands/1234/5678
+&lt;/code>&lt;/pre>&lt;p>For me that meant keeping some things in the .env file as needed to look for a specific Token, User etc BUT later I can see making a Provider class and Config file to setup up for each Slash Command or App I make so that I keep the settings as needed in one grouped place and not in a huge file.&lt;/p>
+&lt;p>For now I just use the &lt;code>text&lt;/code> and the &lt;code>response_url&lt;/code> to my advantage the rest I am not worried about right now.&lt;/p>
+&lt;p>This is also I good example of an easy &lt;code>Webhook&lt;/code> workflow. Give me your object and where to send the results back to.&lt;/p>
+&lt;p>Keeping the routing simple my &lt;code>routes.php&lt;/code> file is just this&lt;/p>
+&lt;pre>&lt;code>Route::post('/api/v1/brit_to_us', 'BritToUSController@britToUs');
+Route::post('/api/v1/us_to_brit', 'BritToUSController@usToBrit');
+&lt;/code>&lt;/pre>&lt;p>And that controller is just this&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Goutte\Client as GoutteClient;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Response;</p><p>class BritToUSController extends Controller
-{</p><pre><code>protected $url = 'http://www.translatebritish.com/';
+use Illuminate\Support\Facades\Response;
+class BritToUSController extends Controller
+{
+protected $url = 'http://www.translatebritish.com/';
 /**
 * @var GoutteClient
 */
@@ -137,7 +252,14 @@ return $this-&amp;gt;url;
 public function setUrl($url)
 {
 $this-&amp;gt;url = $url;
-}</code></pre><p>}</p><p/></pre><p>The gist of it is to take the incoming<code>text</code> and pass it to the Translation Site, and return it to the<code>response_url</code> using the Response::json Facade.</p></p><p>Pretty easy. Later I can validate tokens, validate users or query info based on a user eg &ldquo;Get me my tickets from JIRA&rdquo; for example</p><p>That is some of my goals later, how to use Slack to automate some of my, and my teams, day to day needs and workflows.</p><p><strong>UPDATE</strong>
-Make sure you exclude this route from the &ldquo;app/Http/Middleware/VerifyCsrfToken.php&rdquo; middleware</p><pre><code> protected $except = [
+}
+}
+&lt;/code>&lt;/pre>&lt;p>The gist of it is to take the incoming &lt;code>text&lt;/code> and pass it to the Translation Site, and return it to the &lt;code>response_url&lt;/code> using the Response::json Facade.&lt;/p>
+&lt;p>Pretty easy. Later I can validate tokens, validate users or query info based on a user eg &amp;ldquo;Get me my tickets from JIRA&amp;rdquo; for example&lt;/p>
+&lt;p>That is some of my goals later, how to use Slack to automate some of my, and my teams, day to day needs and workflows.&lt;/p>
+&lt;p>&lt;strong>UPDATE&lt;/strong>
+Make sure you exclude this route from the &amp;ldquo;app/Http/Middleware/VerifyCsrfToken.php&amp;rdquo; middleware&lt;/p>
+&lt;pre>&lt;code> protected $except = [
 'api/v1/imports'
-];</code></pre></description><tags>laravel, php, slack</tags></item></channel></rss>
+];
+&lt;/code>&lt;/pre></description><tags>laravel, php, slack</tags></item></channel></rss>

@@ -1,4 +1,24 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>queue on Alfred Nutile</title><link>https://alfrednutile.info/tags/queue/</link><description>Recent content in queue on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 19 May 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/queue/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Beanstalkd to Schedule the release of a post in Laravel</title><link>https://alfrednutile.info/posts/78/</link><pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/78/</guid><description><p>Phase 1 of my master plan is to regularly write more posts on misc web and coding in general related topics. And sometimes I can sit and write a few of them but it would be best not to release them all at once for a lot of reason.</p><p>So this will cover the way I setup a schedule feature to my post creation process. Yes there are libraries for this but I just wanted to have fun making this feature. There are three key posts that helped me get through this.</p><ul><li><a href="http://laravel.com/docs/queues">Laravel Docs</a></li><li><a href="http://fideloper.com/ubuntu-beanstalkd-and-laravel4">Fideloper</a></li><li><a href="https://laracasts.com/search?q=beanstalkd">Laracasts</a></li><li><a href="https://help.ubuntu.com/community/UFW">Ubuntu Firewall Rules</a></li></ul><p>I will not repeat what they offer but link to them as needed.</p><h4 id="we-will-cover">We will cover</h4><ul><li>Setup up a schedule field</li><li>Setting up a Beanstalkd server</li></ul><h4 id="setting-up-the-field">Setting up the field</h4><p>My Post model has a published or active field and now a scheduled field. It is just a timestamp format field. I could have done other solutions and tighten this up a bit so any feedback is welcome below. When making a post I have two options at the bottom.</p><p>I also use the<a href="http://trentrichardson.com/examples/timepicker">Timepicker addon</a></p><p><img src="https://photos-1.dropbox.com/t/0/AAAsUCPPbu9uo1HSy-yLiCUzN2lytkbgUtaef0dYAGMUyg/12/54803135/png/2048x1536/3/1400529600/0/2/Screenshot%202014-05-19%2014.44.00.png/xW1tZgTGBYh1YDH0M1ThFzeg7PnA1tegBAscZQDwM6E" alt="Schedule Options"/><p>If the new post is not Active &amp;&amp; has a Scheduled date then this method kicks into place in my Posts controller during the creation process. I will most likely move this to a Service or Model since it really is not the job of the Controller but this is v1 of my idea.</p><pre><code>//app/controllers/PostsController.php<pre><code> public function __construct(MarkdownExtraParser $mk = null, SchedulerAls $scheduler = null)
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>queue on Alfred Nutile</title><link>https://alfrednutile.info/tags/queue/</link><description>Recent content in queue on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 19 May 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/queue/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Beanstalkd to Schedule the release of a post in Laravel</title><link>https://alfrednutile.info/posts/78/</link><pubDate>Mon, 19 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/78/</guid><description>&lt;p>Phase 1 of my master plan is to regularly write more posts on misc web and coding in general related topics. And sometimes I can sit and write a few of them but it would be best not to release them all at once for a lot of reason.&lt;/p>
+&lt;p>So this will cover the way I setup a schedule feature to my post creation process. Yes there are libraries for this but I just wanted to have fun making this feature. There are three key posts that helped me get through this.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="http://laravel.com/docs/queues">Laravel Docs&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://fideloper.com/ubuntu-beanstalkd-and-laravel4">Fideloper&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://laracasts.com/search?q=beanstalkd">Laracasts&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://help.ubuntu.com/community/UFW">Ubuntu Firewall Rules&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>I will not repeat what they offer but link to them as needed.&lt;/p>
+&lt;h4 id="we-will-cover">We will cover&lt;/h4>
+&lt;ul>
+&lt;li>Setup up a schedule field&lt;/li>
+&lt;li>Setting up a Beanstalkd server&lt;/li>
+&lt;/ul>
+&lt;h4 id="setting-up-the-field">Setting up the field&lt;/h4>
+&lt;p>My Post model has a published or active field and now a scheduled field. It is just a timestamp format field. I could have done other solutions and tighten this up a bit so any feedback is welcome below. When making a post I have two options at the bottom.&lt;/p>
+&lt;p>I also use the &lt;a href="http://trentrichardson.com/examples/timepicker">Timepicker addon&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://photos-1.dropbox.com/t/0/AAAsUCPPbu9uo1HSy-yLiCUzN2lytkbgUtaef0dYAGMUyg/12/54803135/png/2048x1536/3/1400529600/0/2/Screenshot%202014-05-19%2014.44.00.png/xW1tZgTGBYh1YDH0M1ThFzeg7PnA1tegBAscZQDwM6E" alt="Schedule Options">&lt;/p>
+&lt;p>If the new post is not Active &amp;amp;&amp;amp; has a Scheduled date then this method kicks into place in my Posts controller during the creation process. I will most likely move this to a Service or Model since it really is not the job of the Controller but this is v1 of my idea.&lt;/p>
+&lt;pre>&lt;code>//app/controllers/PostsController.php
+public function __construct(MarkdownExtraParser $mk = null, SchedulerAls $scheduler = null)
 {
 //other code here
 $this-&amp;gt;scheduler = ($scheduler == null) ? new SchedulerAls() : $scheduler;
@@ -11,13 +31,25 @@ $this-&amp;gt;scheduler = ($scheduler == null) ? new SchedulerAls() : $scheduler
 public function store()
 {
 //basic code here for laravel
-$this-&amp;gt;scheduler-&amp;gt;sendToQueue($post);</code></pre><p/></pre><h4 id="first">First</h4></p><p>The<strong>SchedulerAls Class</strong> is pretty simple, using the<a href="http://laravel.com/docs/queues">Laravel Queue</a></p><p>The sendToQueue($post) method just does that</p><pre><code>//app/Als/Services/SchedulerAls.php<p>class SchedulerAls</p><p>public function sendToQueue($post) {
-if(!empty($post->scheduled)) {
-\Log::info("Testing: PushJob {$post->id}");
-\Queue::push(&lsquo;Als\Services\SchedulerAls&rsquo;, array(&lsquo;post&rsquo; => $post->id));
+$this-&amp;gt;scheduler-&amp;gt;sendToQueue($post);
+&lt;/code>&lt;/pre>&lt;h4 id="first">First&lt;/h4>
+&lt;p>The &lt;strong>SchedulerAls Class&lt;/strong> is pretty simple, using the &lt;a href="http://laravel.com/docs/queues">Laravel Queue&lt;/a>&lt;/p>
+&lt;p>The sendToQueue($post) method just does that&lt;/p>
+&lt;pre>&lt;code>//app/Als/Services/SchedulerAls.php
+class SchedulerAls
+public function sendToQueue($post) {
+if(!empty($post-&amp;gt;scheduled)) {
+\Log::info(&amp;quot;Testing: PushJob {$post-&amp;gt;id}&amp;quot;);
+\Queue::push('Als\Services\SchedulerAls', array('post' =&amp;gt; $post-&amp;gt;id));
 }
-}</code></pre><p>This adds a row to the queue to check the “Als\Services|SchedulerAls” class and trigger the fire method (more on that below) passing it the $post->id.</p></p><p>I make my fire method call to a<strong>processPost</strong> method that decides if this post is not active and if it has a date set. If so and that date is not greater than today make it active else release it for 30 minutes and the next command needed into the queue.</p><p>Eg if I post 1 for tomorrow (#100) and after that one for today (#101), it will see #100 is not ready and move on to #101.</p><p>Here is that the fire method and the processPost. Really it can all be in the fire method.</p><pre><code>//app/Als/Facades/Services/SchedulerAls.php
-class SchedulerAls {<pre><code>public function fire($job, $data)
+}
+&lt;/code>&lt;/pre>&lt;p>This adds a row to the queue to check the &amp;ldquo;Als\Services|SchedulerAls&amp;rdquo; class and trigger the fire method (more on that below) passing it the $post-&amp;gt;id.&lt;/p>
+&lt;p>I make my fire method call to a &lt;strong>processPost&lt;/strong> method that decides if this post is not active and if it has a date set. If so and that date is not greater than today make it active else release it for 30 minutes and the next command needed into the queue.&lt;/p>
+&lt;p>Eg if I post 1 for tomorrow (#100) and after that one for today (#101), it will see #100 is not ready and move on to #101.&lt;/p>
+&lt;p>Here is that the fire method and the processPost. Really it can all be in the fire method.&lt;/p>
+&lt;pre>&lt;code>//app/Als/Facades/Services/SchedulerAls.php
+class SchedulerAls {
+public function fire($job, $data)
 {
 $this-&amp;gt;processPost($job, $data);
 }
@@ -34,4 +66,10 @@ $job-&amp;gt;delete();
 } else {
 $job-&amp;gt;release(30);
 }
-}</code></pre><p/></pre><p>So that is it really. Set to active or not. Delete job or release it back to the queue with a 30 minute delay etc.</p></p><h3 id="setting-up-the-server">Setting up the server.</h3><p>This was really not bad. I ended up using the existing server but will move to another server shortly. One thing to keep in mind is your firewall. You really want to make sure that you are only allowing certain IPs to visit this server or limit beanstalkd to localhost.</p><p>As noted this tutorial handles most of this really well<a href="http://fideloper.com/ubuntu-beanstalkd-and-laravel4">Fideloper</a></p><p>Finally<a href="https://github.com/ptrofimov/beanstalk_console">beanstalk console</a> is a great way, especially locally if you are not using &ldquo;sync&rdquo; driver to see what is going on. Just make sure to block it with htaccess so no one can just visit it on your server.</p><p>That is about it. Later I will add an even to allow other things to be triggered maybe via IFTT!</p></description><tags>laravel, php, queue</tags></item></channel></rss>
+}
+&lt;/code>&lt;/pre>&lt;p>So that is it really. Set to active or not. Delete job or release it back to the queue with a 30 minute delay etc.&lt;/p>
+&lt;h3 id="setting-up-the-server">Setting up the server.&lt;/h3>
+&lt;p>This was really not bad. I ended up using the existing server but will move to another server shortly. One thing to keep in mind is your firewall. You really want to make sure that you are only allowing certain IPs to visit this server or limit beanstalkd to localhost.&lt;/p>
+&lt;p>As noted this tutorial handles most of this really well &lt;a href="http://fideloper.com/ubuntu-beanstalkd-and-laravel4">Fideloper&lt;/a>&lt;/p>
+&lt;p>Finally &lt;a href="https://github.com/ptrofimov/beanstalk_console">beanstalk console&lt;/a> is a great way, especially locally if you are not using &amp;ldquo;sync&amp;rdquo; driver to see what is going on. Just make sure to block it with htaccess so no one can just visit it on your server.&lt;/p>
+&lt;p>That is about it. Later I will add an even to allow other things to be triggered maybe via IFTT!&lt;/p></description><tags>laravel, php, queue</tags></item></channel></rss>

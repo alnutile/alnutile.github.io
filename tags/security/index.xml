@@ -1,4 +1,9 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>security on Alfred Nutile</title><link>https://alfrednutile.info/tags/security/</link><description>Recent content in security on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 29 Dec 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/security/index.xml" rel="self" type="application/rss+xml"/><item><title>LarScanner simple foundation for building a good Laravel Security Scanner</title><link>https://alfrednutile.info/posts/203/</link><pubDate>Thu, 29 Dec 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/203/</guid><description><p>Just the start to a new library that I hope others will help out on<a href="https://github.com/alfred-nutile-inc/larscanner">https://github.com/alfred-nutile-inc/larscanner</a></p><p>There is a roadmap in the readme.md but basically how to start adding more and more features on this to protect our applications built in Laravel.</p></description><tags>laravel, security</tags></item><item><title>Laravel Throttle Feature using IP address as Key</title><link>https://alfrednutile.info/posts/193/</link><pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/193/</guid><description><p><strong>NOTE: 5.3, for 5.2 see ending update</strong></p><p>The Laravel Throttle feature<a href="https://laravel.com/docs/5.3/authentication#login-throttling">here</a> is a great addition to the framework. By default it uses the<code>username</code> and the IP for the key to count<code>attempts</code>.</p><p>But I want to cover how to switch that to use an IP only and not the username. A good example of why is a hacker running through a list of emails and passwords just trying to break into sites where that user would use the same password as the site the got the list from. This person could try this 5000 long list against your server and not once will Throttle care about that.</p><p>The fix is fairly simple in your<code>app/Http/Controllers/Auth/AuthController.php</code> add</p><pre><code> /**
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>security on Alfred Nutile</title><link>https://alfrednutile.info/tags/security/</link><description>Recent content in security on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 29 Dec 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/security/index.xml" rel="self" type="application/rss+xml"/><item><title>LarScanner simple foundation for building a good Laravel Security Scanner</title><link>https://alfrednutile.info/posts/203/</link><pubDate>Thu, 29 Dec 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/203/</guid><description>&lt;p>Just the start to a new library that I hope others will help out on &lt;a href="https://github.com/alfred-nutile-inc/larscanner">https://github.com/alfred-nutile-inc/larscanner&lt;/a>&lt;/p>
+&lt;p>There is a roadmap in the readme.md but basically how to start adding more and more features on this to protect our applications built in Laravel.&lt;/p></description><tags>laravel, security</tags></item><item><title>Laravel Throttle Feature using IP address as Key</title><link>https://alfrednutile.info/posts/193/</link><pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/193/</guid><description>&lt;p>&lt;strong>NOTE: 5.3, for 5.2 see ending update&lt;/strong>&lt;/p>
+&lt;p>The Laravel Throttle feature &lt;a href="https://laravel.com/docs/5.3/authentication#login-throttling">here&lt;/a> is a great addition to the framework. By default it uses the &lt;code>username&lt;/code> and the IP for the key to count &lt;code>attempts&lt;/code>.&lt;/p>
+&lt;p>But I want to cover how to switch that to use an IP only and not the username. A good example of why is a hacker running through a list of emails and passwords just trying to break into sites where that user would use the same password as the site the got the list from. This person could try this 5000 long list against your server and not once will Throttle care about that.&lt;/p>
+&lt;p>The fix is fairly simple in your &lt;code>app/Http/Controllers/Auth/AuthController.php&lt;/code> add&lt;/p>
+&lt;pre>&lt;code> /**
 * Get the throttle key for the given request.
 *
 * @param \Illuminate\Http\Request $request
@@ -7,11 +12,13 @@
 protected function throttleKey(Request $request)
 {
 if (Config::get('auth.throttle_key') == 'ip') {
-return $request->ip();
+return $request-&amp;gt;ip();
 } else {
-return Str::lower($request->input($this->username())).'|'.$request->ip();
+return Str::lower($request-&amp;gt;input($this-&amp;gt;username())).'|'.$request-&amp;gt;ip();
 }
-}</code></pre><p>Then in your<code>config/auth.php</code> add</p><pre><code> /*
+}
+&lt;/code>&lt;/pre>&lt;p>Then in your &lt;code>config/auth.php&lt;/code> add&lt;/p>
+&lt;pre>&lt;code> /*
 |--------------------------------------------------------------------------
 | Throttle Key
 |--------------------------------------------------------------------------
@@ -19,17 +26,39 @@ return Str::lower($request->input($this->username())).'|'.$request->ip();
 | You may choose to block ip address from failed attempts
 | of a combination of IP and Username
 |
-| Supported: "ip", "username|ip"
+| Supported: &amp;quot;ip&amp;quot;, &amp;quot;username|ip&amp;quot;
 |
 */
-'throttle_key' => 'ip'</code></pre><p>This way you can switch it later back if needed</p><p>From here on the IP will track the failed attempts.</p><p><img src="https://dl.dropboxusercontent.com/s/0n2v4f1o6jxbmmm/login_throttle_fail.png?dl=0" alt=""/><h2 id="laravel-52">Laravel 5.2</h2><p>In 5.2 I had to change<code> protected function throttleKey</code> to<code> protected function throttleKey</code></p></description><tags>laravel, security</tags></item><item><title>Throttle Password Reset</title><link>https://alfrednutile.info/posts/194/</link><pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/194/</guid><description><p>Laravel Throttle works on failed auth attempts but how about password resets?</p><p>Here is what I made my<code>app/Http/Controllers/Auth/PasswordController.php</code> look like</p><h2 id="53">5.3</h2><pre><code>&lt;?php<p>namespace App\Http\Controllers\Auth;</p><p>use App\Http\Controllers\Controller;
+'throttle_key' =&amp;gt; 'ip'
+&lt;/code>&lt;/pre>&lt;p>This way you can switch it later back if needed&lt;/p>
+&lt;p>From here on the IP will track the failed attempts.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/0n2v4f1o6jxbmmm/login_throttle_fail.png?dl=0" alt="">&lt;/p>
+&lt;h2 id="laravel-52">Laravel 5.2&lt;/h2>
+&lt;p>In 5.2 I had to change &lt;code> protected function throttleKey&lt;/code> to &lt;code> protected function throttleKey&lt;/code>&lt;/p></description><tags>laravel, security</tags></item><item><title>Throttle Password Reset</title><link>https://alfrednutile.info/posts/194/</link><pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/194/</guid><description>&lt;p>Laravel Throttle works on failed auth attempts but how about password resets?&lt;/p>
+&lt;p>Here is what I made my &lt;code>app/Http/Controllers/Auth/PasswordController.php&lt;/code> look like&lt;/p>
+&lt;h2 id="53">5.3&lt;/h2>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App\Http\Controllers\Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;</p><p>class PasswordController extends Controller
-{</p><table><thead><tr><th>/*</th></tr></thead><tbody><tr><td>Password Reset Controller</td></tr><tr><td>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;</td></tr><tr><td/></tr><tr><td>This controller is responsible for handling password reset requests</td></tr><tr><td>and uses a simple trait to include this behavior. You&rsquo;re free to</td></tr><tr><td>explore this trait and override any methods you wish to tweak.</td></tr><tr><td/></tr><tr><td>*/</td></tr></tbody></table><pre><code>use ResetsPasswords, ThrottlesLogins;
+use Illuminate\Support\Facades\Validator;
+class PasswordController extends Controller
+{
+/*
+|--------------------------------------------------------------------------
+| Password Reset Controller
+|--------------------------------------------------------------------------
+|
+| This controller is responsible for handling password reset requests
+| and uses a simple trait to include this behavior. You're free to
+| explore this trait and override any methods you wish to tweak.
+|
+*/
+use ResetsPasswords, ThrottlesLogins;
 protected $username;
 /**
 * Create a new password controller instance.
@@ -73,7 +102,11 @@ return property_exists($this, 'username') ? $this-&amp;gt;username : 'email';
 protected function getThrottleKey(Request $request)
 {
 return $request-&amp;gt;ip();
-}</code></pre><p>}</code></pre><h2 id="52">5.2</h2></p><p>The controller ended up looking like this</p><pre><code>&lt;?php
+}
+}
+&lt;/code>&lt;/pre>&lt;h2 id="52">5.2&lt;/h2>
+&lt;p>The controller ended up looking like this&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -93,7 +126,8 @@ class PasswordController extends Controller
 | explore this trait and override any methods you wish to tweak.
 |
 */
-use ResetsPasswords, ThrottlesLogins;<pre><code>protected $username;
+use ResetsPasswords, ThrottlesLogins;
+protected $username;
 /**
 * Create a new password controller instance.
 *
@@ -137,31 +171,59 @@ return property_exists($this, 'username') ? $this-&amp;gt;username : 'email';
 protected function getThrottleKey(Request $request)
 {
 return $request-&amp;gt;ip();
-}</code></pre><p>}</code></pre><h2 id="tip-while-your-add-it-leak-even-less-about-your-apps-user-emails">TIP: While your add it leak even less about your app’s user emails</h2></p><p>On other thing here is take a moment to change your error message<code>resources/lang/en/passwords.php</code></p><pre><code> 'password' => 'Passwords must be at least six characters and match the confirmation.',
-'reset' => 'Your password has been reset!',
-'sent' => 'We have e-mailed your password reset link!',
-'token' => 'This password reset token is invalid.',
-'user' => "If you are a user in the system an a reset email has been sent",</code></pre><p>Where<code>user</code> does not leak out any information about the email being correct or not.</p></description><tags>laravel, security</tags></item><item><title>Quick Tip Forcing More Complex Passwords in Laravel</title><link>https://alfrednutile.info/posts/166/</link><pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/166/</guid><description><p>With the great<a href="http://laravel.com/docs/5.1/validation">Laravel Docs</a> I will quickly show how to &ldquo;encourage&rdquo; the user to set a better password.</p><p>Going through the standard docs for<a href="http://laravel.com/docs/5.1/authentication">Authentication</a> we end up with a registration form.</p><p>Then in the<a href="https://github.com/laravel/laravel/blob/master/app/Http/Controllers/Auth/AuthController.php">AuthController</a> that comes with Laravel I modify it a bit.</p><pre><code> protected function validator(array $data)
+}
+}
+&lt;/code>&lt;/pre>&lt;h2 id="tip-while-your-add-it-leak-even-less-about-your-apps-user-emails">TIP: While your add it leak even less about your app&amp;rsquo;s user emails&lt;/h2>
+&lt;p>On other thing here is take a moment to change your error message &lt;code>resources/lang/en/passwords.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code> 'password' =&amp;gt; 'Passwords must be at least six characters and match the confirmation.',
+'reset' =&amp;gt; 'Your password has been reset!',
+'sent' =&amp;gt; 'We have e-mailed your password reset link!',
+'token' =&amp;gt; 'This password reset token is invalid.',
+'user' =&amp;gt; &amp;quot;If you are a user in the system an a reset email has been sent&amp;quot;,
+&lt;/code>&lt;/pre>&lt;p>Where &lt;code>user&lt;/code> does not leak out any information about the email being correct or not.&lt;/p></description><tags>laravel, security</tags></item><item><title>Quick Tip Forcing More Complex Passwords in Laravel</title><link>https://alfrednutile.info/posts/166/</link><pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/166/</guid><description>&lt;p>With the great &lt;a href="http://laravel.com/docs/5.1/validation">Laravel Docs&lt;/a> I will quickly show how to &amp;ldquo;encourage&amp;rdquo; the user to set a better password.&lt;/p>
+&lt;p>Going through the standard docs for &lt;a href="http://laravel.com/docs/5.1/authentication">Authentication&lt;/a> we end up with a registration form.&lt;/p>
+&lt;p>Then in the &lt;a href="https://github.com/laravel/laravel/blob/master/app/Http/Controllers/Auth/AuthController.php">AuthController&lt;/a> that comes with Laravel I modify it a bit.&lt;/p>
+&lt;pre>&lt;code> protected function validator(array $data)
 {
-$messages = ['password.regex' => "Your password must contain 1 lower case character 1 upper case character one number"];
+$messages = ['password.regex' =&amp;gt; &amp;quot;Your password must contain 1 lower case character 1 upper case character one number&amp;quot;];
 return Validator::make($data, [
-'name' => 'required|max:255',
-'email' => 'required|email|max:255|unique:users',
-'password' => 'required|confirmed|min:8|regex:/^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/',
+'name' =&amp;gt; 'required|max:255',
+'email' =&amp;gt; 'required|email|max:255|unique:users',
+'password' =&amp;gt; 'required|confirmed|min:8|regex:/^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/',
 ], $messages);
-}</code></pre><p>Using the<code>regex</code> rule seen in the<a href="http://laravel.com/docs/5.1/validation#available-validation-rules">docs</a><a href="http://php.net/manual/en/function.preg-match.php">http://php.net/manual/en/function.preg-match.php</a> and the Laravel docs I can then set an expression to check for these characters, and I can also set a custom message if it fails.</p><p>And with that little bit of work we get an error message to help the user make a better password.</p><p><img src="https://dl.dropboxusercontent.com/s/y9jloa191jwryfg/regex_error.png?dl=0" alt="https://dl.dropboxusercontent.com/s/y9jloa191jwryfg/regex_error.png?dl=0"/><p>btw this is coming about as I start this<a href="https://onemonth.com/courses/web-security">Web Security Course</a> and try to consider some of these ideas in my day to day Laravel work.</p></description><tags>laravel, php, security</tags></item><item><title>Adding Expose IDS to Laravel MiddleWare</title><link>https://alfrednutile.info/posts/162/</link><pubDate>Thu, 03 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/162/</guid><description><p>The library is<a href="https://github.com/enygma/expose">https://github.com/enygma/expose</a></p><blockquote><p>&ldquo;Expose is an Intrusion Detection System for PHP loosely based on the PHPIDS project (and using it&rsquo;s ruleset for detecting potential threats).&rdquo;</p></blockquote><p>After seeing it in the latest PHPArch<a href="https://www.phparch.com/2015/09/september-2015-issue-release-security-boot-camp/">magazine</a> on security I wanted to give it a try.</p><p>Of course this is far from a complete look.</p><p>Step 1 Make the MiddleWare</p><p><code>php artisan make:middleware ExposeMiddleware</code></p><p>Then add Expose as noted in the docs.</p><pre><code>&lt;?php<p>namespace App\Http\Middleware;</p><p>use Closure;
+}
+&lt;/code>&lt;/pre>&lt;p>Using the &lt;code>regex&lt;/code> rule seen in the &lt;a href="http://laravel.com/docs/5.1/validation#available-validation-rules">docs&lt;/a> &lt;a href="http://php.net/manual/en/function.preg-match.php">http://php.net/manual/en/function.preg-match.php&lt;/a> and the Laravel docs I can then set an expression to check for these characters, and I can also set a custom message if it fails.&lt;/p>
+&lt;p>And with that little bit of work we get an error message to help the user make a better password.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/y9jloa191jwryfg/regex_error.png?dl=0" alt="https://dl.dropboxusercontent.com/s/y9jloa191jwryfg/regex_error.png?dl=0">&lt;/p>
+&lt;p>btw this is coming about as I start this &lt;a href="https://onemonth.com/courses/web-security">Web Security Course&lt;/a> and try to consider some of these ideas in my day to day Laravel work.&lt;/p></description><tags>laravel, php, security</tags></item><item><title>Adding Expose IDS to Laravel MiddleWare</title><link>https://alfrednutile.info/posts/162/</link><pubDate>Thu, 03 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/162/</guid><description>&lt;p>The library is &lt;a href="https://github.com/enygma/expose">https://github.com/enygma/expose&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;ldquo;Expose is an Intrusion Detection System for PHP loosely based on the PHPIDS project (and using it&amp;rsquo;s ruleset for detecting potential threats).&amp;rdquo;&lt;/p>
+&lt;/blockquote>
+&lt;p>After seeing it in the latest PHPArch &lt;a href="https://www.phparch.com/2015/09/september-2015-issue-release-security-boot-camp/">magazine&lt;/a> on security I wanted to give it a try.&lt;/p>
+&lt;p>Of course this is far from a complete look.&lt;/p>
+&lt;p>Step 1 Make the MiddleWare&lt;/p>
+&lt;p>&lt;code>php artisan make:middleware ExposeMiddleware&lt;/code>&lt;/p>
+&lt;p>Then add Expose as noted in the docs.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+namespace App\Http\Middleware;
+use Closure;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Log;</p><p>class ExposeMiddleware
+use Illuminate\Support\Facades\Log;
+class ExposeMiddleware
 {
 public function handle($request, Closure $next)
 {
 $filters = new \Expose\FilterCollection();
-$filters->load();
-$logger = App::make(&lsquo;log&rsquo;);
+$filters-&amp;gt;load();
+$logger = App::make('log');
 $manager = new \Expose\Manager($filters, $logger);
-$manager->run($request->input());</p><pre><code> Log::info(sprintf(&amp;quot;Logging results from Expose %d&amp;quot;, $manager-&amp;gt;getImpact()));
+$manager-&amp;gt;run($request-&amp;gt;input());
+Log::info(sprintf(&amp;quot;Logging results from Expose %d&amp;quot;, $manager-&amp;gt;getImpact()));
 return $next($request);
-}</code></pre><p>}</p><p/></pre><p>Then in<code>app/Http/Kernel.php</code></p></p><pre><code> protected $middleware = [
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Then in &lt;code>app/Http/Kernel.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code> protected $middleware = [
 \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
 \App\Http\Middleware\EncryptCookies::class,
 \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
@@ -169,35 +231,52 @@ return $next($request);
 \Illuminate\View\Middleware\ShareErrorsFromSession::class,
 \App\Http\Middleware\ExposeMiddleware::class,
 \App\Http\Middleware\VerifyCsrfToken::class,
-];</code></pre><p>Now to make the route for testing</p><pre><code>&lt;?php
+];
+&lt;/code>&lt;/pre>&lt;p>Now to make the route for testing&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 Route::get('/', function () {
 return view('welcome');
 });
 Route::post('/post', function() {
-return "Yo";
-});</code></pre><p>And now a phpunit test to hit the route</p><pre><code> public function testPost()
+return &amp;quot;Yo&amp;quot;;
+});
+&lt;/code>&lt;/pre>&lt;p>And now a phpunit test to hit the route&lt;/p>
+&lt;pre>&lt;code> public function testPost()
 {
 $token = csrf_token();
 $data = array(
-'_token' => $token,
-'test' => 'foo',
-'bar' => array(
-'baz' => 'quux',
-'testing' => '&lt;script>test&lt;/script>'
+'_token' =&amp;gt; $token,
+'test' =&amp;gt; 'foo',
+'bar' =&amp;gt; array(
+'baz' =&amp;gt; 'quux',
+'testing' =&amp;gt; '&amp;lt;script&amp;gt;test&amp;lt;/script&amp;gt;'
 )
 );
-$this->call('POST', '/post', $data);
-}</code></pre><p>One more thing is to set the<code>app/Http/Middleware/VerifyCsrfToken.php</code> as such</p><pre><code>
+$this-&amp;gt;call('POST', '/post', $data);
+}
+&lt;/code>&lt;/pre>&lt;p>One more thing is to set the &lt;code>app/Http/Middleware/VerifyCsrfToken.php&lt;/code> as such&lt;/p>
+&lt;pre>&lt;code>
 public function handle($request, Closure $next)
 {
-if ( 'testing' === App::environment() &amp;&amp; $request->exists('_token') ) {
-$input = $request->all();
-$input['_token'] = $request->session()->token();
-$request->replace( $input );
+if ( 'testing' === App::environment() &amp;amp;&amp;amp; $request-&amp;gt;exists('_token') ) {
+$input = $request-&amp;gt;all();
+$input['_token'] = $request-&amp;gt;session()-&amp;gt;token();
+$request-&amp;gt;replace( $input );
 }
-if ($this->isReading($request) || $this->shouldPassThrough($request) || $this->tokensMatch($request)) {
-return $this->addCookieToResponse($request, $next($request));
+if ($this-&amp;gt;isReading($request) || $this-&amp;gt;shouldPassThrough($request) || $this-&amp;gt;tokensMatch($request)) {
+return $this-&amp;gt;addCookieToResponse($request, $next($request));
 }
 throw new TokenMismatchException;
-}</code></pre><p>Okay so now we can tail the log file in the terminal and hit the route with phpunit</p><p><img src="https://dl.dropboxusercontent.com/s/fgoax2z12mhhf0t/expose.png?dl=0" alt=""/><p>And the logs should output</p><pre><code>[2015-09-02 23:50:44] testing.INFO: Match found on Filter ID 38 [{"id":"38","rule":"(?:\\&lt;[\\/]?(?:[i]?frame|applet|isindex|marquee|keygen|script|audio|video|input|button|textarea|style|base|body|meta|link|object|embed|param|plaintext|xm\\w+|image|im(?:g|port)))","description":"Detects possibly malicious html elements including some attributes","tags":"xss, csrf, id, rfe, lfi","impact":"4"}]
-[2015-09-02 23:50:44] testing.INFO: Logging results from Expose 8<p/></pre><p>At this point the MiddleWare can do numerous things</p></p><ul><li>Log to an in memory db IP addresses that violates a rule of a certain level and block them.</li><li>Keep track of issues and notify the team of issues</li><li>Cut through a can without getting dull</li></ul><p>Anyways I have a ways to go with this but just seeing the different tools I could use to make my applications more secure.</p></description><tags>security, laravel, php</tags></item></channel></rss>
+}
+&lt;/code>&lt;/pre>&lt;p>Okay so now we can tail the log file in the terminal and hit the route with phpunit&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/fgoax2z12mhhf0t/expose.png?dl=0" alt="">&lt;/p>
+&lt;p>And the logs should output&lt;/p>
+&lt;pre>&lt;code>[2015-09-02 23:50:44] testing.INFO: Match found on Filter ID 38 [{&amp;quot;id&amp;quot;:&amp;quot;38&amp;quot;,&amp;quot;rule&amp;quot;:&amp;quot;(?:\\&amp;lt;[\\/]?(?:[i]?frame|applet|isindex|marquee|keygen|script|audio|video|input|button|textarea|style|base|body|meta|link|object|embed|param|plaintext|xm\\w+|image|im(?:g|port)))&amp;quot;,&amp;quot;description&amp;quot;:&amp;quot;Detects possibly malicious html elements including some attributes&amp;quot;,&amp;quot;tags&amp;quot;:&amp;quot;xss, csrf, id, rfe, lfi&amp;quot;,&amp;quot;impact&amp;quot;:&amp;quot;4&amp;quot;}]
+[2015-09-02 23:50:44] testing.INFO: Logging results from Expose 8
+&lt;/code>&lt;/pre>&lt;p>At this point the MiddleWare can do numerous things&lt;/p>
+&lt;ul>
+&lt;li>Log to an in memory db IP addresses that violates a rule of a certain level and block them.&lt;/li>
+&lt;li>Keep track of issues and notify the team of issues&lt;/li>
+&lt;li>Cut through a can without getting dull&lt;/li>
+&lt;/ul>
+&lt;p>Anyways I have a ways to go with this but just seeing the different tools I could use to make my applications more secure.&lt;/p></description><tags>security, laravel, php</tags></item></channel></rss>

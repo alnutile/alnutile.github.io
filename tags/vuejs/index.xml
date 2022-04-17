@@ -1,10 +1,12 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vuejs on Alfred Nutile</title><link>https://alfrednutile.info/tags/vuejs/</link><description>Recent content in vuejs on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 20 Aug 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/vuejs/index.xml" rel="self" type="application/rss+xml"/><item><title>JSONEditor, Vue and Vuex</title><link>https://alfrednutile.info/posts/256/</link><pubDate>Mon, 20 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/256/</guid><description><p>As I post<a href="https://alfrednutile.info/posts/222">here</a> I wanted to use JSONEditor as a component. But with Vuex I was able to reduce the work quite a ton.<img src="https://dl.dropboxusercontent.com/s/g8n5brbtjom1ulp/Screenshot%202017-11-02%2013.17.32.png?dl=0" alt="">
-Here is my store for the json_field:</p><pre><code>export default {
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vuejs on Alfred Nutile</title><link>https://alfrednutile.info/tags/vuejs/</link><description>Recent content in vuejs on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 20 Aug 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/vuejs/index.xml" rel="self" type="application/rss+xml"/><item><title>JSONEditor, Vue and Vuex</title><link>https://alfrednutile.info/posts/256/</link><pubDate>Mon, 20 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/256/</guid><description>&lt;p>As I post &lt;a href="https://alfrednutile.info/posts/222">here&lt;/a> I wanted to use JSONEditor as a component. But with Vuex I was able to reduce the work quite a ton.
+&lt;img src="https://dl.dropboxusercontent.com/s/g8n5brbtjom1ulp/Screenshot%202017-11-02%2013.17.32.png?dl=0" alt="">
+Here is my store for the json_field:&lt;/p>
+&lt;pre>&lt;code>export default {
 state: {
 json_field: null,
 },
 getters: {
-json_field: state => {
+json_field: state =&amp;gt; {
 return state.json_field;
 }
 },
@@ -13,11 +15,15 @@ jsonField(state, json_field) {
 state.json_field = json_field;
 }
 },
-};</code></pre><p>Then my JSONEditor.vue component:</p><pre><code>&lt;template>
-&lt;div id="jsoneditor" ref="editor">&lt;/div>
-&lt;/template><p>&lt;script>
-import JSONEditor from &lsquo;jsoneditor&rsquo;;
-import { mapGetters } from &lsquo;vuex&rsquo;</p><pre><code>export default Vue.extend({
+};
+&lt;/code>&lt;/pre>&lt;p>Then my JSONEditor.vue component:&lt;/p>
+&lt;pre>&lt;code>&amp;lt;template&amp;gt;
+&amp;lt;div id=&amp;quot;jsoneditor&amp;quot; ref=&amp;quot;editor&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+&amp;lt;script&amp;gt;
+import JSONEditor from 'jsoneditor';
+import { mapGetters } from 'vuex'
+export default Vue.extend({
 computed: {
 ...mapGetters(
 { json_field: 'json_field' }
@@ -36,22 +42,26 @@ if(container) {
 editor.set(this.json_field);
 }
 }
-});</code></pre><p>&lt;/script></p><p>&lt;style type="text/css">
+});
+&amp;lt;/script&amp;gt;
+&amp;lt;style type=&amp;quot;text/css&amp;quot;&amp;gt;
 #jsoneditor {
 width: 1000px;
 height: 600px;
 }
-&lt;/style></p><p/></pre><p>Finally the component that will use it:</p></p><pre><code>&lt;template>
-    &lt;section>
-&lt;b-form-group id="metrics"
-label="Metrics"
-label-for="metrics"
-description="Paste as it should be">
-&lt;cat-json-editor v-if="show_editor">&lt;/cat-json-editor>
-&lt;/b-form-group>
-&lt;/section>
-&lt;/template>
-&lt;script>
+&amp;lt;/style&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>Finally the component that will use it:&lt;/p>
+&lt;pre>&lt;code>&amp;lt;template&amp;gt;
+    &amp;lt;section&amp;gt;
+&amp;lt;b-form-group id=&amp;quot;metrics&amp;quot;
+label=&amp;quot;Metrics&amp;quot;
+label-for=&amp;quot;metrics&amp;quot;
+description=&amp;quot;Paste as it should be&amp;quot;&amp;gt;
+&amp;lt;cat-json-editor v-if=&amp;quot;show_editor&amp;quot;&amp;gt;&amp;lt;/cat-json-editor&amp;gt;
+&amp;lt;/b-form-group&amp;gt;
+&amp;lt;/section&amp;gt;
+&amp;lt;/template&amp;gt;
+&amp;lt;script&amp;gt;
 import JSONEditor from 'jsoneditor';
 export default {
 data() {
@@ -65,20 +75,28 @@ this.getStandardMetrics();
 },
 methods: {
 getStandardMetrics() {
-axios.get('/api/standards').then(res => {
-this.$snotify.success("Loading Standards", "Success");
-this.$store.commit("jsonField", res.data);
+axios.get('/api/standards').then(res =&amp;gt; {
+this.$snotify.success(&amp;quot;Loading Standards&amp;quot;, &amp;quot;Success&amp;quot;);
+this.$store.commit(&amp;quot;jsonField&amp;quot;, res.data);
 this.show_editor = true;
-}).catch(err => {
-this.$snotify.warning("error getting metric standars", "Error");
+}).catch(err =&amp;gt; {
+this.$snotify.warning(&amp;quot;error getting metric standars&amp;quot;, &amp;quot;Error&amp;quot;);
 })
 }
 }
 }
-&lt;/script></code></pre><p>If do the<code>v-if</code> to load the editor AFTER I have some state for it. I am sure I could have done some watcher but this worked.</p></description><tags>vuejs, laravel</tags></item><item><title>Query Strings, Vue and Bootstrap Active Tab</title><link>https://alfrednutile.info/posts/254/</link><pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/254/</guid><description><p>In order to have the tabs and URL change as needed when the user lands on the page or clicks the tab I had to setup a few things.</p><p><img src="https://dl.dropboxusercontent.com/s/bdawx8hl7gisijs/tabs.gif?dl=0" alt=""/><p>First I setup the Vue.js router as seen<a href="https://alfrednutile.info/posts/244">here</a></p><p>Then my component will work out the rest.</p><p>Using<a href="https://bootstrap-vue.js.org/docs/components/tabs">BV</a></p><p>I have tabs and then I set those tabs as needed.</p><pre><code> &lt;b-tabs v-model="activeTab">
-&lt;b-tab title="Settings" active >
-&lt;div class="mt-4 alert alert-info">
-Manage related policies by clicking on the Tabs.<pre><code> &amp;lt;ul&amp;gt;
+&amp;lt;/script&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>If do the &lt;code>v-if&lt;/code> to load the editor AFTER I have some state for it. I am sure I could have done some watcher but this worked.&lt;/p></description><tags>vuejs, laravel</tags></item><item><title>Query Strings, Vue and Bootstrap Active Tab</title><link>https://alfrednutile.info/posts/254/</link><pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/254/</guid><description>&lt;p>In order to have the tabs and URL change as needed when the user lands on the page or clicks the tab I had to setup a few things.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/bdawx8hl7gisijs/tabs.gif?dl=0" alt="">&lt;/p>
+&lt;p>First I setup the Vue.js router as seen &lt;a href="https://alfrednutile.info/posts/244">here&lt;/a>&lt;/p>
+&lt;p>Then my component will work out the rest.&lt;/p>
+&lt;p>Using &lt;a href="https://bootstrap-vue.js.org/docs/components/tabs">BV&lt;/a>&lt;/p>
+&lt;p>I have tabs and then I set those tabs as needed.&lt;/p>
+&lt;pre>&lt;code> &amp;lt;b-tabs v-model=&amp;quot;activeTab&amp;quot;&amp;gt;
+&amp;lt;b-tab title=&amp;quot;Settings&amp;quot; active &amp;gt;
+&amp;lt;div class=&amp;quot;mt-4 alert alert-info&amp;quot;&amp;gt;
+Manage related policies by clicking on the Tabs.
+&amp;lt;ul&amp;gt;
 &amp;lt;li&amp;gt;See Results&amp;lt;/li&amp;gt;
 &amp;lt;li&amp;gt;Add Policies&amp;lt;/li&amp;gt;
 &amp;lt;li&amp;gt;Update Policies&amp;lt;/li&amp;gt;
@@ -91,7 +109,9 @@ Manage related policies by clicking on the Tabs.<pre><code> &amp;lt;ul&amp;gt;
 &amp;lt;b-tab title=&amp;quot;Travis File Report&amp;quot;&amp;gt;
 &amp;lt;travis-subscription-root class=&amp;quot;mt-4&amp;quot; v-if=&amp;quot;this.$store.state.tabIndex == 2&amp;quot;&amp;gt;&amp;lt;/travis-subscription-root&amp;gt;
 &amp;lt;/b-tab&amp;gt;
-&amp;lt;/b-tabs&amp;gt;</code></pre><p/></pre><p>When I user clicks on the tabs the state changes since the<code>activeTab</code> is a computed property.</p></p><pre><code> computed: {
+&amp;lt;/b-tabs&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>When I user clicks on the tabs the state changes since the &lt;code>activeTab&lt;/code> is a computed property.&lt;/p>
+&lt;pre>&lt;code> computed: {
 activeTab: {
 get: function() {
 return this.$store.state.tabIndex;
@@ -106,16 +126,24 @@ query: tabs
 console.log(this.$router.history.current);
 this.$store.commit('tabIndex', newTab);
 },
-},</code></pre><p>Using lodash I can easily find my tab name from the value of the tabe we are looking at.</p><pre><code> data() {
+},
+&lt;/code>&lt;/pre>&lt;p>Using lodash I can easily find my tab name from the value of the tabe we are looking at.&lt;/p>
+&lt;pre>&lt;code> data() {
 return {
 tabs: { travis_policy_results: 2, quality_metrics_report: 1 }
 }
-},</code></pre><p>That takes care of the user clicking. I could store the state right in the component but I am doing this in vuex which should not matter here really.</p><p>Now when the user lands on the page my<code>mounted</code> method acts on the url:</p><pre><code> mounted() {
+},
+&lt;/code>&lt;/pre>&lt;p>That takes care of the user clicking. I could store the state right in the component but I am doing this in vuex which should not matter here really.&lt;/p>
+&lt;p>Now when the user lands on the page my &lt;code>mounted&lt;/code> method acts on the url:&lt;/p>
+&lt;pre>&lt;code> mounted() {
 if(this.$router.history.current['query']['tab']) {
 let tab = this.$router.history.current['query']['tab'];
 this.$store.commit('tabIndex', this.tabs[tab]);
 }
-},</code></pre><p>That is it now the state changes on page land and on click.</p><p>I can also have it change as the user clicks on their Back button.</p><pre><code> methods: {
+},
+&lt;/code>&lt;/pre>&lt;p>That is it now the state changes on page land and on click.&lt;/p>
+&lt;p>I can also have it change as the user clicks on their Back button.&lt;/p>
+&lt;pre>&lt;code> methods: {
 changeTab() {
 let tab = this.$router.history.current['query']['tab'];
 this.$store.commit('tabIndex', this.tabs[tab]);
@@ -132,13 +160,16 @@ if (to.fullPath != from.fullPath) {
 this.changeTab();
 }
 }
-},</code></pre></description><tags>vuejs, laravel</tags></item><item><title>Vuex External File</title><link>https://alfrednutile.info/posts/250/</link><pubDate>Tue, 03 Jul 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/250/</guid><description><p>Setup Vuex with external file<a href="https://vuex.vuejs.org/installation.html">https://vuex.vuejs.org/installation.html</a></p><p>But after this make a file in the<code>resources/assets/js</code> called<code>store.js</code> then set it up as needed
-Here I will have one loading state</p><pre><code>export default {
+},
+&lt;/code>&lt;/pre></description><tags>vuejs, laravel</tags></item><item><title>Vuex External File</title><link>https://alfrednutile.info/posts/250/</link><pubDate>Tue, 03 Jul 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/250/</guid><description>&lt;p>Setup Vuex with external file &lt;a href="https://vuex.vuejs.org/installation.html">https://vuex.vuejs.org/installation.html&lt;/a>&lt;/p>
+&lt;p>But after this make a file in the &lt;code>resources/assets/js&lt;/code> called &lt;code>store.js&lt;/code> then set it up as needed
+Here I will have one loading state&lt;/p>
+&lt;pre>&lt;code>export default {
 state: {
 loading: true,
 },
 getters: {
-loading: state => {
+loading: state =&amp;gt; {
 return state.loading;
 },
 },
@@ -147,65 +178,113 @@ loading(state, loading) {
 state.loading = loading;
 }
 }
-};</code></pre><p>now import it into your app.js</p><p><code>import store from './store';</code></p><p>and</p><pre><code>var app = new Vue({
+};
+&lt;/code>&lt;/pre>&lt;p>now import it into your app.js&lt;/p>
+&lt;p>&lt;code>import store from './store';&lt;/code>&lt;/p>
+&lt;p>and&lt;/p>
+&lt;pre>&lt;code>var app = new Vue({
 mixins: [require('spark')],
 store: new Vuex.Store(store),
 router
-});</code></pre><p>That should do it. I do load some state in my<code>resources/views/layouts/app.blade.php</code></p><pre><code> &lt;script>
+});
+&lt;/code>&lt;/pre>&lt;p>That should do it. I do load some state in my &lt;code>resources/views/layouts/app.blade.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code> &amp;lt;script&amp;gt;
 window.Laravel = {!! json_encode([
-"apiToken" => auth()->user()->api_token ?? null
+&amp;quot;apiToken&amp;quot; =&amp;gt; auth()-&amp;gt;user()-&amp;gt;api_token ?? null
 ]) !!};
-&lt;/script></code></pre><p>Just to help with some basic stuff</p></description><tags>note2self, vuejs, laravel</tags></item><item><title>Simple API_Token Auth for VueJS Components and Laravel</title><link>https://alfrednutile.info/posts/249/</link><pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/249/</guid><description><p>For those non Passport moments just a simple site that has VueJS Components that need to access routes with authentication in place.</p><p>Thanks to</p><ul><li><a href="https://pineco.de/vue-components-laravel-based-apis/">https://pineco.de/vue-components-laravel-based-apis/</a></li><li><a href="https://andrew.cool/blog/64/How-to-use-API-tokens-for-authentication-in-Laravel-5-2">https://andrew.cool/blog/64/How-to-use-API-tokens-for-authentication-in-Laravel-5-2</a></li></ul><h2 id="route-file">Route File</h2><p><code>routes/api.php</code></p><pre><code>Route::get('/trigger_contacts', function (Request $request) {
-\Log::info("Triggering Contacts");
-return response()->json(null, 200);
-})->middleware('auth:api');</code></pre><p>This will not work out of the box, you will get a 401. Let&rsquo;s plug some things in.</p><h2 id="blade">Blade</h2><p>My main<code>resources/views/layouts/app.blade.php</code></p><pre><code> &lt;script>
+&amp;lt;/script&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>Just to help with some basic stuff&lt;/p></description><tags>note2self, vuejs, laravel</tags></item><item><title>Simple API_Token Auth for VueJS Components and Laravel</title><link>https://alfrednutile.info/posts/249/</link><pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/249/</guid><description>&lt;p>For those non Passport moments just a simple site that has VueJS Components that need to access routes with authentication in place.&lt;/p>
+&lt;p>Thanks to&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://pineco.de/vue-components-laravel-based-apis/">https://pineco.de/vue-components-laravel-based-apis/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://andrew.cool/blog/64/How-to-use-API-tokens-for-authentication-in-Laravel-5-2">https://andrew.cool/blog/64/How-to-use-API-tokens-for-authentication-in-Laravel-5-2&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="route-file">Route File&lt;/h2>
+&lt;p>&lt;code>routes/api.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code>Route::get('/trigger_contacts', function (Request $request) {
+\Log::info(&amp;quot;Triggering Contacts&amp;quot;);
+return response()-&amp;gt;json(null, 200);
+})-&amp;gt;middleware('auth:api');
+&lt;/code>&lt;/pre>&lt;p>This will not work out of the box, you will get a 401. Let&amp;rsquo;s plug some things in.&lt;/p>
+&lt;h2 id="blade">Blade&lt;/h2>
+&lt;p>My main &lt;code>resources/views/layouts/app.blade.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code> &amp;lt;script&amp;gt;
 window.Laravel = {!! json_encode([
-"apiToken" => auth()->user()->api_token ?? null
+&amp;quot;apiToken&amp;quot; =&amp;gt; auth()-&amp;gt;user()-&amp;gt;api_token ?? null
 ]) !!};
-&lt;/script>
-&lt;/head></code></pre><h2 id="okay-now-for-vuejs">Okay now for VueJS</h2><p><code>resources/assets/js/bootstrap.js</code></p><pre><code>window.axios = require('axios');<p>window.axios.defaults.headers.common[&lsquo;X-Requested-With&rsquo;] = &lsquo;XMLHttpRequest&rsquo;;
-window.axios.defaults.headers.common[&lsquo;Authorization&rsquo;] = &lsquo;Bearer ' + Laravel.apiToken;</p><p/></pre><h2 id="now-the-migration-and-model">Now the migration and model</h2></p><pre><code>php artisan make:migration alter_users_add_api_token --table=users</code></pre><p>Then the migration file:</p><pre><code> Schema::table('users', function (Blueprint $table) {
-$table->char('api_token', 60)->nullable()->after('remember_token');
-});</code></pre><p>And the User.php model (which is not in the App\Model folder :) ):</p><pre><code> protected $hidden = [
-'password', 'remember_token', "api_token"
+&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+&lt;/code>&lt;/pre>&lt;h2 id="okay-now-for-vuejs">Okay now for VueJS&lt;/h2>
+&lt;p>&lt;code>resources/assets/js/bootstrap.js&lt;/code>&lt;/p>
+&lt;pre>&lt;code>window.axios = require('axios');
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + Laravel.apiToken;
+&lt;/code>&lt;/pre>&lt;h2 id="now-the-migration-and-model">Now the migration and model&lt;/h2>
+&lt;pre>&lt;code>php artisan make:migration alter_users_add_api_token --table=users
+&lt;/code>&lt;/pre>&lt;p>Then the migration file:&lt;/p>
+&lt;pre>&lt;code> Schema::table('users', function (Blueprint $table) {
+$table-&amp;gt;char('api_token', 60)-&amp;gt;nullable()-&amp;gt;after('remember_token');
+});
+&lt;/code>&lt;/pre>&lt;p>And the User.php model (which is not in the App\Model folder :) ):&lt;/p>
+&lt;pre>&lt;code> protected $hidden = [
+'password', 'remember_token', &amp;quot;api_token&amp;quot;
 ];
 public function getApiTokenAttribute($value)
 {
 if (!$value) {
 $value = str_random(60);
-$this->api_token = $value;
-$this->save();
+$this-&amp;gt;api_token = $value;
+$this-&amp;gt;save();
 }
 return $value;
-}</code></pre><h2 id="component">Component</h2><p>This is nothing out of the ordinary:</p><pre><code> triggerContacts() {
+}
+&lt;/code>&lt;/pre>&lt;h2 id="component">Component&lt;/h2>
+&lt;p>This is nothing out of the ordinary:&lt;/p>
+&lt;pre>&lt;code> triggerContacts() {
 this.loading = true;
 axios
 .get('/api/trigger_contacts')
-.then(results => {
+.then(results =&amp;gt; {
 console.log(results);
 this.status_message = 'Triggered Contacts';
-setTimeout(() => {
+setTimeout(() =&amp;gt; {
 this.loading = false;
 this.status_message = null;
 }, 3000);
 })
-.catch(err => {
+.catch(err =&amp;gt; {
 console.log('issue with trigger');
 });
-}</code></pre><p>That is it now your component will work with the route.</p></description><tags>vuejs, laravel</tags></item><item><title>Query Strings and VueJS</title><link>https://alfrednutile.info/posts/244/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/244/</guid><description><p>Quick way to make the url reflect the query string so the user can share the url and filters.</p><p>This is component based VueJS building so not an SPA
-But I still install<code>"vue-router": "^3.0.1"</code></p><p>And load it</p><pre><code>import VueRouter from 'vue-router';<p>Vue.use(VueRouter);</code></pre><p>The on the component I set a watch on the router.</p></p><pre><code> watch: {
+}
+&lt;/code>&lt;/pre>&lt;p>That is it now your component will work with the route.&lt;/p></description><tags>vuejs, laravel</tags></item><item><title>Query Strings and VueJS</title><link>https://alfrednutile.info/posts/244/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/244/</guid><description>&lt;p>Quick way to make the url reflect the query string so the user can share the url and filters.&lt;/p>
+&lt;p>This is component based VueJS building so not an SPA
+But I still install &lt;code>&amp;quot;vue-router&amp;quot;: &amp;quot;^3.0.1&amp;quot;&lt;/code>&lt;/p>
+&lt;p>And load it&lt;/p>
+&lt;pre>&lt;code>import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+&lt;/code>&lt;/pre>&lt;p>The on the component I set a watch on the router.&lt;/p>
+&lt;pre>&lt;code> watch: {
 $route(to, from) {
 this.setModelFromQueryString();
 this.search();
 }
-},</code></pre><p>In this case it will set the query strings then trigger the &ldquo;search&rdquo; to load the data into the page. This search becomes the go to to get state<p>when the page is loaded (as seen below) or when the users clicks “search”</p></p><p>Created kicks this off the state:</p><pre><code> created: function() {
+},
+&lt;/code>&lt;/pre>&lt;p>In this case it will set the query strings then trigger the &amp;ldquo;search&amp;rdquo; to load the data into the page. This search becomes the go to to get state
+when the page is loaded (as seen below) or when the users clicks &amp;ldquo;search&amp;rdquo;&lt;/p>
+&lt;p>Created kicks this off the state:&lt;/p>
+&lt;pre>&lt;code> created: function() {
 this.setModelFromQueryString();
 this.search();
-},</code></pre><p>Here is<code>setModelFromQueryString</code>:</p><pre><code> setModelFromQueryString() {
-this.params.forEach(param => {
+},
+&lt;/code>&lt;/pre>&lt;p>Here is &lt;code>setModelFromQueryString&lt;/code>:&lt;/p>
+&lt;pre>&lt;code> setModelFromQueryString() {
+this.params.forEach(param =&amp;gt; {
 this[param.model] = this.getParam(param.display_name);
 });
-},</code></pre><p>Make sure the model matches the state the user wants. The states or filters that I am trying to set are stored in data.</p><p>The data model stores theys keys and related model values that I want to focus on keeping and restoring:</p><pre><code> data() {
+},
+&lt;/code>&lt;/pre>&lt;p>Make sure the model matches the state the user wants. The states or filters that I am trying to set are stored in data.&lt;/p>
+&lt;p>The data model stores theys keys and related model values that I want to focus on keeping and restoring:&lt;/p>
+&lt;pre>&lt;code> data() {
 return {
 params: [
 {
@@ -228,16 +307,24 @@ display_name: 'language'
 model: 'search_name',
 display_name: 'name'
 }
-],</code></pre><p>Now that the model is there I can iterate over these in a few other areas I will show below.</p><p>Page load, and search call the method<code>search</code> and this takes care of a few things</p><ul><li>make sure the the query string reflects the latest model, e.g. what the user set on the page form</li><li>updates the api url to have these params<code>this.getParams('/api/libraries')</code></li></ul><p>Here is search plus those methods:</p><pre><code>search() {
+],
+&lt;/code>&lt;/pre>&lt;p>Now that the model is there I can iterate over these in a few other areas I will show below.&lt;/p>
+&lt;p>Page load, and search call the method &lt;code>search&lt;/code> and this takes care of a few things&lt;/p>
+&lt;ul>
+&lt;li>make sure the the query string reflects the latest model, e.g. what the user set on the page form&lt;/li>
+&lt;li>updates the api url to have these params &lt;code>this.getParams('/api/libraries')&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>Here is search plus those methods:&lt;/p>
+&lt;pre>&lt;code>search() {
 this.setQueryString();
 this.loading = true;
 axios
 .get(this.getParams('/api/libraries'))
-.then(results => {
+.then(results =&amp;gt; {
 this.libraries = results.data;
 this.loading = false;
 })
-.catch(error => {
+.catch(error =&amp;gt; {
 console.log(error);
 $alerts.send('Error', 'Could not get next page', true);
 });
@@ -245,14 +332,14 @@ $alerts.send('Error', 'Could not get next page', true);
 getParams(prefix) {
 let url_string = prefix + '?';
 let query = [];
-this.params.forEach(param => {
+this.params.forEach(param =&amp;gt; {
 if (this[param.model]) {
 let value = this[param.model];
 let name = param.display_name;
 query.push(`${name}=${value}`);
 }
 });
-query = query.join('&amp;');
+query = query.join('&amp;amp;');
 return `${url_string}${query}`;
 },
 getParam(param) {
@@ -263,7 +350,8 @@ this.current_page = page;
 this.search();
 },
 setQueryString() { //This method builds up the url so the user will see the filter on page load based on their search
-let items = {};<pre><code> this.params.forEach(param =&amp;gt; {
+let items = {};
+this.params.forEach(param =&amp;gt; {
 if (this[param.model] != undefined) {
 items[param.display_name] = this[param.model];
 }
@@ -271,22 +359,46 @@ items[param.display_name] = this[param.model];
 this.$router.push({
 query: items
 });
-},</code></pre><p/></pre><p><img src="https://dl.dropboxusercontent.com/s/lmnyjw7aub0ggb2/filters.gif?dl=0" alt=""/></p></description><tags>vuejs, note2self, laravel</tags></item><item><title>BrowserSync and Laravel</title><link>https://alfrednutile.info/posts/239/</link><pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/239/</guid><description><p>Quick reminder to take advantage of this amazing feature<a href="https://laravel.com/docs/5.6/mix#browsersync-reloading">https://laravel.com/docs/5.6/mix#browsersync-reloading</a></p><p>No more reloading your browser.</p><pre><code>yarn add browser-sync --dev</code></pre><p>then to your<code>webpack.mix.js</code> e.g. the domain of the site you are working on.</p><pre><code> mix.browserSync('foo.test');</code></pre><p>finally</p><pre><code>yarn run watch</code></pre><blockquote><p>Note turn off sourceMaps when running this else it can be kinda slow</p></blockquote></description><tags>laravel, note2self, vuejs</tags></item><item><title>Passing from Blade to VueJs</title><link>https://alfrednutile.info/posts/236/</link><pubDate>Sat, 24 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/236/</guid><description><p>A lot of posts had<a href="https://medium.com/@m_ramsden/passing-data-from-laravel-to-vue-98b9d2a4bd23">this</a> style.</p><p>I ended up just needing this:</p><p><img src="https://dl.dropboxusercontent.com/s/huucm3vx4uyklq7/Screenshot%202018-02-23%2020.29.22.png?dl=0" alt=""/><p>The controller simply does this:</p><p><img src="https://dl.dropboxusercontent.com/s/qw7x7u7ayr7j441/Screenshot%202018-02-23%2020.29.52.png?dl=0" alt=""/></description><tags>laravel, note2self, vuejs</tags></item><item><title>VueJS Transition Helper</title><link>https://alfrednutile.info/posts/228/</link><pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/228/</guid><description><p>There are docs on how to get a Transition to take effect when an item loads<a href="https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components">https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components</a></p><p>But I was not having much luck with this using<a href="https://uiv.wxsm.space/carousel">https://uiv.wxsm.space/carousel</a>.</p><p>I ended up making a quick helper function to keep it from looking like exploded elements.</p><p>You can see the results of this change here</p><p><img src="https://dl.dropboxusercontent.com/s/osmd4p5zor2jgah/featured_blog.gif?dl=0" alt=""/><p>So the steps followed per the docs above for the most part.</p><p>Add to my scss file:</p><pre><code>
+},
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/lmnyjw7aub0ggb2/filters.gif?dl=0" alt="">&lt;/p></description><tags>vuejs, note2self, laravel</tags></item><item><title>BrowserSync and Laravel</title><link>https://alfrednutile.info/posts/239/</link><pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/239/</guid><description>&lt;p>Quick reminder to take advantage of this amazing feature &lt;a href="https://laravel.com/docs/5.6/mix#browsersync-reloading">https://laravel.com/docs/5.6/mix#browsersync-reloading&lt;/a>&lt;/p>
+&lt;p>No more reloading your browser.&lt;/p>
+&lt;pre>&lt;code>yarn add browser-sync --dev
+&lt;/code>&lt;/pre>&lt;p>then to your &lt;code>webpack.mix.js&lt;/code> e.g. the domain of the site you are working on.&lt;/p>
+&lt;pre>&lt;code> mix.browserSync('foo.test');
+&lt;/code>&lt;/pre>&lt;p>finally&lt;/p>
+&lt;pre>&lt;code>yarn run watch
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>Note turn off sourceMaps when running this else it can be kinda slow&lt;/p>
+&lt;/blockquote></description><tags>laravel, note2self, vuejs</tags></item><item><title>Passing from Blade to VueJs</title><link>https://alfrednutile.info/posts/236/</link><pubDate>Sat, 24 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/236/</guid><description>&lt;p>A lot of posts had &lt;a href="https://medium.com/@m_ramsden/passing-data-from-laravel-to-vue-98b9d2a4bd23">this&lt;/a> style.&lt;/p>
+&lt;p>I ended up just needing this:&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/huucm3vx4uyklq7/Screenshot%202018-02-23%2020.29.22.png?dl=0" alt="">&lt;/p>
+&lt;p>The controller simply does this:&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/qw7x7u7ayr7j441/Screenshot%202018-02-23%2020.29.52.png?dl=0" alt="">&lt;/p></description><tags>laravel, note2self, vuejs</tags></item><item><title>VueJS Transition Helper</title><link>https://alfrednutile.info/posts/228/</link><pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/228/</guid><description>&lt;p>There are docs on how to get a Transition to take effect when an item loads &lt;a href="https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components">https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components&lt;/a>&lt;/p>
+&lt;p>But I was not having much luck with this using &lt;a href="https://uiv.wxsm.space/carousel">https://uiv.wxsm.space/carousel&lt;/a>.&lt;/p>
+&lt;p>I ended up making a quick helper function to keep it from looking like exploded elements.&lt;/p>
+&lt;p>You can see the results of this change here&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/osmd4p5zor2jgah/featured_blog.gif?dl=0" alt="">&lt;/p>
+&lt;p>So the steps followed per the docs above for the most part.&lt;/p>
+&lt;p>Add to my scss file:&lt;/p>
+&lt;pre>&lt;code>
 .ibox-content.text-center.carousel {
 min-height: 400px;
-}<p>.fade-enter-active, .fade-leave-active {
+}
+.fade-enter-active, .fade-leave-active {
 transition: opacity .5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
 opacity: 0;
-}</code></pre><p>Make a<code>TransitionHelper.vue</code> componenent:</p></p><pre><code>&lt;template>
-&lt;transition name="fade">
-&lt;div v-show="show" >
-&lt;slot>&lt;/slot>
-&lt;/div>
-&lt;/transition>
-&lt;/template>
-&lt;script>
+}
+&lt;/code>&lt;/pre>&lt;p>Make a &lt;code>TransitionHelper.vue&lt;/code> componenent:&lt;/p>
+&lt;pre>&lt;code>&amp;lt;template&amp;gt;
+&amp;lt;transition name=&amp;quot;fade&amp;quot;&amp;gt;
+&amp;lt;div v-show=&amp;quot;show&amp;quot; &amp;gt;
+&amp;lt;slot&amp;gt;&amp;lt;/slot&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;/transition&amp;gt;
+&amp;lt;/template&amp;gt;
+&amp;lt;script&amp;gt;
 export default {
 data() {
 return {
@@ -297,15 +409,21 @@ mounted() {
 this.show = true;
 }
 };
-&lt;/script></code></pre><p>Then added to my<code>app.js</code></p><pre><code>Vue.component('transition-helper', require('./components/TransitionHelper.vue'));</code></pre><p>Finally wrapped my blade file output in this helper.</p><pre><code> &lt;transition-helper style="display: none;">
-&lt;carousel class="homepage-featured-carousel" :indicators="false" :controls="true" :interval="0">
-@foreach($featured_documents->chunk(6) as $chunk)
-&lt;slide>
-&lt;div class="row-fluid">
+&amp;lt;/script&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>Then added to my &lt;code>app.js&lt;/code>&lt;/p>
+&lt;pre>&lt;code>Vue.component('transition-helper', require('./components/TransitionHelper.vue'));
+&lt;/code>&lt;/pre>&lt;p>Finally wrapped my blade file output in this helper.&lt;/p>
+&lt;pre>&lt;code> &amp;lt;transition-helper style=&amp;quot;display: none;&amp;quot;&amp;gt;
+&amp;lt;carousel class=&amp;quot;homepage-featured-carousel&amp;quot; :indicators=&amp;quot;false&amp;quot; :controls=&amp;quot;true&amp;quot; :interval=&amp;quot;0&amp;quot;&amp;gt;
+@foreach($featured_documents-&amp;gt;chunk(6) as $chunk)
+&amp;lt;slide&amp;gt;
+&amp;lt;div class=&amp;quot;row-fluid&amp;quot;&amp;gt;
 @foreach($chunk as $item)
-&lt;div class="col-xs-2">
-&lt;div class="ibox float-e-margins homepage-featured-item">
-&lt;div class="ibox-title">
-&lt;img class="img-responsive" src="images/ces/image_placeholder.svg" alt="">
-&lt;/div>
-&lt;div class="ibox-content"></code></pre><p>You can see the<code>display:none</code> kicking in before the page loads<code>js</code> etc keeping it well hidden.<p>Then once it is all loaded and we are ready I show it and transition it in.</p></p></description><tags>vuejs, note2self</tags></item></channel></rss>
+&amp;lt;div class=&amp;quot;col-xs-2&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;ibox float-e-margins homepage-featured-item&amp;quot;&amp;gt;
+&amp;lt;div class=&amp;quot;ibox-title&amp;quot;&amp;gt;
+&amp;lt;img class=&amp;quot;img-responsive&amp;quot; src=&amp;quot;images/ces/image_placeholder.svg&amp;quot; alt=&amp;quot;&amp;quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;div class=&amp;quot;ibox-content&amp;quot;&amp;gt;
+&lt;/code>&lt;/pre>&lt;p>You can see the &lt;code>display:none&lt;/code> kicking in before the page loads &lt;code>js&lt;/code> etc keeping it well hidden.
+Then once it is all loaded and we are ready I show it and transition it in.&lt;/p></description><tags>vuejs, note2self</tags></item></channel></rss>

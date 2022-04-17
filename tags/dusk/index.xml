@@ -1,65 +1,74 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>dusk on Alfred Nutile</title><link>https://alfrednutile.info/tags/dusk/</link><description>Recent content in dusk on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 26 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/dusk/index.xml" rel="self" type="application/rss+xml"/><item><title>Dusk Screenshots to S3 of Failing tests</title><link>https://alfrednutile.info/posts/248/</link><pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/248/</guid><description><p>I can be really annoying to troubleshoot a failed test in Dusk when using CI systems. What I ended up doing was setting up my project to send these files to S3 on fail.</p><p>Here are the steps</p><h2 id="setup-you-app">Setup You App</h2><p>This is just S3 storage so make sure you have a bucket and a folder in the bucket to write to. Basically for AWS you make an IAM with a key and secret and let it read/write to this folder. Might look like this policy</p><pre><code>{
-"Version": "2012-10-17",
-"Statement": [
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>dusk on Alfred Nutile</title><link>https://alfrednutile.info/tags/dusk/</link><description>Recent content in dusk on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 26 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/dusk/index.xml" rel="self" type="application/rss+xml"/><item><title>Dusk Screenshots to S3 of Failing tests</title><link>https://alfrednutile.info/posts/248/</link><pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/248/</guid><description>&lt;p>I can be really annoying to troubleshoot a failed test in Dusk when using CI systems. What I ended up doing was setting up my project to send these files to S3 on fail.&lt;/p>
+&lt;p>Here are the steps&lt;/p>
+&lt;h2 id="setup-you-app">Setup You App&lt;/h2>
+&lt;p>This is just S3 storage so make sure you have a bucket and a folder in the bucket to write to. Basically for AWS you make an IAM with a key and secret and let it read/write to this folder. Might look like this policy&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
+&amp;quot;Statement&amp;quot;: [
 {
-"Action": [
-"s3:ListBucket"
+&amp;quot;Action&amp;quot;: [
+&amp;quot;s3:ListBucket&amp;quot;
 ],
-"Resource": [
-"arn:aws:s3:::your-bucket"
+&amp;quot;Resource&amp;quot;: [
+&amp;quot;arn:aws:s3:::your-bucket&amp;quot;
 ],
-"Effect": "Allow"
+&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;
 },
 {
-"Action": [
-"*"
+&amp;quot;Action&amp;quot;: [
+&amp;quot;*&amp;quot;
 ],
-"Resource": [
-"arn:aws:s3:::your-bucket/*"
+&amp;quot;Resource&amp;quot;: [
+&amp;quot;arn:aws:s3:::your-bucket/*&amp;quot;
 ],
-"Effect": "Allow"
+&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;
 }
 ]
-}</code></pre><p>or limited it just to the folder<code>screenshots</code></p><pre><code>{
-"Version": "2012-10-17",
-"Statement": [
+}
+&lt;/code>&lt;/pre>&lt;p>or limited it just to the folder &lt;code>screenshots&lt;/code>&lt;/p>
+&lt;pre>&lt;code>{
+&amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
+&amp;quot;Statement&amp;quot;: [
 {
-"Action": [
-"s3:ListAllMyBuckets",
-"s3:HeadBucket"
+&amp;quot;Action&amp;quot;: [
+&amp;quot;s3:ListAllMyBuckets&amp;quot;,
+&amp;quot;s3:HeadBucket&amp;quot;
 ],
-"Resource": "*",
-"Effect": "Allow",
-"Sid": "VisualEditor1"
+&amp;quot;Resource&amp;quot;: &amp;quot;*&amp;quot;,
+&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
+&amp;quot;Sid&amp;quot;: &amp;quot;VisualEditor1&amp;quot;
 },
 {
-"Action": [
-"s3:ListBucket",
-"s3:GetBucketLocation"
+&amp;quot;Action&amp;quot;: [
+&amp;quot;s3:ListBucket&amp;quot;,
+&amp;quot;s3:GetBucketLocation&amp;quot;
 ],
-"Resource": [
-"arn:aws:s3:::your-bucket",
-"arn:aws:s3:::your-bucket/*"
+&amp;quot;Resource&amp;quot;: [
+&amp;quot;arn:aws:s3:::your-bucket&amp;quot;,
+&amp;quot;arn:aws:s3:::your-bucket/*&amp;quot;
 ],
-"Effect": "Allow",
-"Sid": "VisualEditor0"
+&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
+&amp;quot;Sid&amp;quot;: &amp;quot;VisualEditor0&amp;quot;
 },
 {
-"Action": [
-"s3:GetObject"
+&amp;quot;Action&amp;quot;: [
+&amp;quot;s3:GetObject&amp;quot;
 ],
-"Resource": [
-"arn:aws:s3:::your-bucket/screenshots",
-"arn:aws:s3:::your-bucket/screenshots/*"
+&amp;quot;Resource&amp;quot;: [
+&amp;quot;arn:aws:s3:::your-bucket/screenshots&amp;quot;,
+&amp;quot;arn:aws:s3:::your-bucket/screenshots/*&amp;quot;
 ],
-"Effect": "Allow",
-"Sid": "VisualEditor2"
+&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
+&amp;quot;Sid&amp;quot;: &amp;quot;VisualEditor2&amp;quot;
 }
 ]
-}</code></pre><p>Now in your<code>tests/DuskTestCase.php</code> file add this:</p><pre><code> public function tearDown()
+}
+&lt;/code>&lt;/pre>&lt;p>Now in your &lt;code>tests/DuskTestCase.php&lt;/code> file add this:&lt;/p>
+&lt;pre>&lt;code> public function tearDown()
 {
-if (env("TRAVIS")) {
-$files = \File::files(base_path("tests/Browser/screenshots"));<pre><code> if ($files) {
+if (env(&amp;quot;TRAVIS&amp;quot;)) {
+$files = \File::files(base_path(&amp;quot;tests/Browser/screenshots&amp;quot;));
+if ($files) {
 foreach ($files as $file) {
 Storage::disk('travis_fails')
 -&amp;gt;put($file-&amp;gt;getFileName(), $file-&amp;gt;getContents());
@@ -67,33 +76,55 @@ Storage::disk('travis_fails')
 }
 }
 parent::tearDown();
-}</code></pre><p/></pre><p>This will run on Travis based tests saving files to the bucket.</p></p><p>I added to my<code>config/filesystems.php</code> file this:</p><pre><code> 'disks' => [
-'travis_fails' => [
-'driver' => 's3',
-'key' => env('AWS_ACCESS_KEY_ID'),
-'secret' => env('AWS_SECRET_ACCESS_KEY'),
-'region' => "eu-west-1",
-'root' => "screenshots",
-'bucket' => 'foo-bucket',
-'url' => env('AWS_URL'),
+}
+&lt;/code>&lt;/pre>&lt;p>This will run on Travis based tests saving files to the bucket.&lt;/p>
+&lt;p>I added to my &lt;code>config/filesystems.php&lt;/code> file this:&lt;/p>
+&lt;pre>&lt;code> 'disks' =&amp;gt; [
+'travis_fails' =&amp;gt; [
+'driver' =&amp;gt; 's3',
+'key' =&amp;gt; env('AWS_ACCESS_KEY_ID'),
+'secret' =&amp;gt; env('AWS_SECRET_ACCESS_KEY'),
+'region' =&amp;gt; &amp;quot;eu-west-1&amp;quot;,
+'root' =&amp;gt; &amp;quot;screenshots&amp;quot;,
+'bucket' =&amp;gt; 'foo-bucket',
+'url' =&amp;gt; env('AWS_URL'),
 ],
-///</code></pre><p>Now for TravisCI</p><h2 id="setup-travisci">Setup TravisCI</h2><p>Then in Travis under Settings -> Environment Variables we make sure to add our key and secret with the proper key format:</p><pre><code>AWS_SECRET_ACCESS_KEY=foo
-AWS_ACCESS_KEY_ID=bar</code></pre><p><img src="https://dl.dropboxusercontent.com/s/nez8f4hz4anmghl/Screenshot%202018-06-26%2009.36.26.png?dl=0" alt=""/><h2 id="now-you-are-ready-to-fail">Now You are Ready to Fail!</h2><p>Ok so on your next fail you will see in your s3 bucket some of those super handy screenshots.</p></description><tags>dusk, laravel, testing, aws</tags></item><item><title>Dusk Notes</title><link>https://alfrednutile.info/posts/225/</link><pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/225/</guid><description><p>Just keeping a list of gotchas around dusk.</p><h2 id="use-refreshdatabase-not-working">use RefreshDatabase not working</h2><p>Cost: 1 hour lost</p><p>Basically I had to go back to the slower &ldquo;use DatabaseMigrations;&rdquo; otherwise it would not work. The user was null.</p><p>Links:<a href="https://laracasts.com/discuss/channels/testing/dusk-problem-databasetransactions">This thread helped</a></p><h2 id="headless-or-not">Headless or not</h2><p>Cost: 1 hour lost or less</p><p>For some odd reasons my tests started coming up blank.</p><p>I turned off headless in this class<code>DuskTestCase</code></p><pre><code> protected function driver()
+///
+&lt;/code>&lt;/pre>&lt;p>Now for TravisCI&lt;/p>
+&lt;h2 id="setup-travisci">Setup TravisCI&lt;/h2>
+&lt;p>Then in Travis under Settings -&amp;gt; Environment Variables we make sure to add our key and secret with the proper key format:&lt;/p>
+&lt;pre>&lt;code>AWS_SECRET_ACCESS_KEY=foo
+AWS_ACCESS_KEY_ID=bar
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/nez8f4hz4anmghl/Screenshot%202018-06-26%2009.36.26.png?dl=0" alt="">&lt;/p>
+&lt;h2 id="now-you-are-ready-to-fail">Now You are Ready to Fail!&lt;/h2>
+&lt;p>Ok so on your next fail you will see in your s3 bucket some of those super handy screenshots.&lt;/p></description><tags>dusk, laravel, testing, aws</tags></item><item><title>Dusk Notes</title><link>https://alfrednutile.info/posts/225/</link><pubDate>Sun, 10 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/225/</guid><description>&lt;p>Just keeping a list of gotchas around dusk.&lt;/p>
+&lt;h2 id="use-refreshdatabase-not-working">use RefreshDatabase not working&lt;/h2>
+&lt;p>Cost: 1 hour lost&lt;/p>
+&lt;p>Basically I had to go back to the slower &amp;ldquo;use DatabaseMigrations;&amp;rdquo; otherwise it would not work. The user was null.&lt;/p>
+&lt;p>Links:
+&lt;a href="https://laracasts.com/discuss/channels/testing/dusk-problem-databasetransactions">This thread helped&lt;/a>&lt;/p>
+&lt;h2 id="headless-or-not">Headless or not&lt;/h2>
+&lt;p>Cost: 1 hour lost or less&lt;/p>
+&lt;p>For some odd reasons my tests started coming up blank.&lt;/p>
+&lt;p>I turned off headless in this class &lt;code>DuskTestCase&lt;/code>&lt;/p>
+&lt;pre>&lt;code> protected function driver()
 {
 $args = [
 '--disable-gpu',
 '--headless'
 ];
-if (env("HEADLESS_OFF")) {
+if (env(&amp;quot;HEADLESS_OFF&amp;quot;)) {
 $args = [
 '--disable-gpu'
 ];
 }
-$options = (new ChromeOptions)->addArguments($args);<pre><code> return RemoteWebDriver::create(
+$options = (new ChromeOptions)-&amp;gt;addArguments($args);
+return RemoteWebDriver::create(
 'http://localhost:9515',
 DesiredCapabilities::chrome()-&amp;gt;setCapability(
 ChromeOptions::CAPABILITY,
 $options
 )
 );
-}</code></pre><p/></pre><p>And this way it still works on travis.</p></p></description><tags>note2self, laravel, dusk</tags></item></channel></rss>
+}
+&lt;/code>&lt;/pre>&lt;p>And this way it still works on travis.&lt;/p></description><tags>note2self, laravel, dusk</tags></item></channel></rss>

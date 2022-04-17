@@ -1,13 +1,18 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>pytest on Alfred Nutile</title><link>https://alfrednutile.info/tags/pytest/</link><description>Recent content in pytest on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 04 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/pytest/index.xml" rel="self" type="application/rss+xml"/><item><title>Mocking, Python, Pytest</title><link>https://alfrednutile.info/posts/268/</link><pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/268/</guid><description><p>Ok this is going to be a collection of notes to self.</p><p>This<a href="https://medium.com/@bfortuner/python-unit-testing-with-pytest-and-mock-197499c4623c">post</a> does a good job of summing up some mock patterns with PyTest.</p><p>I then had to mock the Snyk client which depended on the Requests library. I chose not to mock the requests library but the methods in the snyk library.</p><p>The thing was the method I mocked returned the &ldquo;Response&rdquo; object and I wanted to use the<code>json()</code> feature of that object/class to return the results.</p><p>45 minutes later this worked.</p><pre><code> def test_get_week_of_scans(self, mocker):
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>pytest on Alfred Nutile</title><link>https://alfrednutile.info/tags/pytest/</link><description>Recent content in pytest on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 04 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/pytest/index.xml" rel="self" type="application/rss+xml"/><item><title>Mocking, Python, Pytest</title><link>https://alfrednutile.info/posts/268/</link><pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/268/</guid><description>&lt;p>Ok this is going to be a collection of notes to self.&lt;/p>
+&lt;p>This &lt;a href="https://medium.com/@bfortuner/python-unit-testing-with-pytest-and-mock-197499c4623c">post&lt;/a> does a good job of summing up some mock patterns with PyTest.&lt;/p>
+&lt;p>I then had to mock the Snyk client which depended on the Requests library. I chose not to mock the requests library but the methods in the snyk library.&lt;/p>
+&lt;p>The thing was the method I mocked returned the &amp;ldquo;Response&amp;rdquo; object and I wanted to use the &lt;code>json()&lt;/code> feature of that object/class to return the results.&lt;/p>
+&lt;p>45 minutes later this worked.&lt;/p>
+&lt;pre>&lt;code> def test_get_week_of_scans(self, mocker):
 mocker.patch.object(SnykClient, 'post')
 response = Response()
 response.status_code = 200
-response.reason = "OK"
-response.encoding = "utf-8"
+response.reason = &amp;quot;OK&amp;quot;
+response.encoding = &amp;quot;utf-8&amp;quot;
 results = json.dumps({
-"results": [
+&amp;quot;results&amp;quot;: [
 {
-"count": 1989
+&amp;quot;count&amp;quot;: 1989
 }
 ]
 }).encode('utf-8')
@@ -15,5 +20,6 @@ response._content = results
 SnykClient.post.return_value = response
 client = SnykReport()
 results = client.get_report_for_current_week(
-"98873-8ecc-46f0-b077-39322abc4390")
-assert results == 1989</code></pre><p>I no longer hit their API and<code>post</code> returns the response I wanted.</p></description><tags>python, testing, mocking, pytest</tags></item></channel></rss>
+&amp;quot;98873-8ecc-46f0-b077-39322abc4390&amp;quot;)
+assert results == 1989
+&lt;/code>&lt;/pre>&lt;p>I no longer hit their API and &lt;code>post&lt;/code> returns the response I wanted.&lt;/p></description><tags>python, testing, mocking, pytest</tags></item></channel></rss>

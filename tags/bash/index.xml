@@ -1,9 +1,18 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bash on Alfred Nutile</title><link>https://alfrednutile.info/tags/bash/</link><description>Recent content in bash on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 28 Dec 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Bash History</title><link>https://alfrednutile.info/posts/32/</link><pubDate>Sat, 28 Dec 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/32/</guid><description><p>This simple command "history" shows a numbered list of your past commands.</p><blockquote><p>&nbsp;1720 &nbsp;sudo chgrp -R www-data batch<br/>
-&nbsp;1721 &nbsp;sudo chmod -R 766 batch<br/>
-&nbsp;1722 &nbsp;ls -al<br/>
-&nbsp;1723 &nbsp;sudo chmod -R 776 batch<br/>
-&nbsp;1724 &nbsp;cd batch/full/<br/>
-&nbsp;1725 &nbsp;pwd<br/>
-&nbsp;1726 &nbsp;exit<br/>
-&nbsp;1727 &nbsp;mv build.xml.ant /var/www/test/site/sites/default/files/behat_yml/batch/full/<br/>
-&nbsp;1728 &nbsp;cd /var/www/test/site/sites/default/files/behat_yml/batch/full/</p></blockquote><p>&nbsp;</p><p>From there you can choose a number from the output and run</p><blockquote><p>!1725</p></blockquote><p>To quickly rerun the command</p></description><tags>bash</tags></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bash on Alfred Nutile</title><link>https://alfrednutile.info/tags/bash/</link><description>Recent content in bash on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 28 Dec 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/bash/index.xml" rel="self" type="application/rss+xml"/><item><title>Bash History</title><link>https://alfrednutile.info/posts/32/</link><pubDate>Sat, 28 Dec 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/32/</guid><description>&lt;p>This simple command &amp;quot;history&amp;quot; shows a numbered list of your past commands.&lt;/p>
+&lt;blockquote>
+&lt;p>&amp;nbsp;1720 &amp;nbsp;sudo chgrp -R www-data batch&lt;br />
+&amp;nbsp;1721 &amp;nbsp;sudo chmod -R 766 batch&lt;br />
+&amp;nbsp;1722 &amp;nbsp;ls -al&lt;br />
+&amp;nbsp;1723 &amp;nbsp;sudo chmod -R 776 batch&lt;br />
+&amp;nbsp;1724 &amp;nbsp;cd batch/full/&lt;br />
+&amp;nbsp;1725 &amp;nbsp;pwd&lt;br />
+&amp;nbsp;1726 &amp;nbsp;exit&lt;br />
+&amp;nbsp;1727 &amp;nbsp;mv build.xml.ant /var/www/test/site/sites/default/files/behat_yml/batch/full/&lt;br />
+&amp;nbsp;1728 &amp;nbsp;cd /var/www/test/site/sites/default/files/behat_yml/batch/full/&lt;/p>
+&lt;/blockquote>
+&lt;p>&amp;nbsp;&lt;/p>
+&lt;p>From there you can choose a number from the output and run&lt;/p>
+&lt;blockquote>
+&lt;p>!1725&lt;/p>
+&lt;/blockquote>
+&lt;p>To quickly rerun the command&lt;/p></description><tags>bash</tags></item></channel></rss>

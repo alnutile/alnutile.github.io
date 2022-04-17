@@ -1,8 +1,12 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>nginx on Alfred Nutile</title><link>https://alfrednutile.info/tags/nginx/</link><description>Recent content in nginx on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 18 Nov 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>Nginx force SSL</title><link>https://alfrednutile.info/posts/116/</link><pubDate>Tue, 18 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/116/</guid><description><p>Need to quickly setup ssl and default to that for our sites.</p><p>This<a href="https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04">article</a> made it simple stupid for getting the certs setup.</p><p>Then I wrapped up the redirect as seen below</p><pre><code>server {
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>nginx on Alfred Nutile</title><link>https://alfrednutile.info/tags/nginx/</link><description>Recent content in nginx on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 18 Nov 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>Nginx force SSL</title><link>https://alfrednutile.info/posts/116/</link><pubDate>Tue, 18 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/116/</guid><description>&lt;p>Need to quickly setup ssl and default to that for our sites.&lt;/p>
+&lt;p>This &lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-an-ssl-certificate-on-nginx-for-ubuntu-14-04">article&lt;/a> made it simple stupid for getting the certs setup.&lt;/p>
+&lt;p>Then I wrapped up the redirect as seen below&lt;/p>
+&lt;pre>&lt;code>server {
 listen 80;
 listen 443 ssl;
 server_name somesite-dev.stagingarea.info;
-root /home/someuser/somesite-dev.stagingarea.info/public;<pre><code>ssl on;
+root /home/someuser/somesite-dev.stagingarea.info/public;
+ssl on;
 ssl_certificate /etc/nginx/ssl/nginx.crt;
 ssl_certificate_key /etc/nginx/ssl/nginx.key;
 # Prevent a look
@@ -10,10 +14,21 @@ if ($ssl_protocol = &amp;quot;&amp;quot;) {
 rewrite ^ https://$server_name$request_uri? permanent;
 }
 index index.html index.htm index.php;
-charset utf-8;</code></pre><p>}</code></pre><p>Thanks to this post as well<a href="http://serverfault.com/a/298803"><a href="http://serverfault.com/a/298803">http://serverfault.com/a/298803</a></a></p></p><p>Still a mystery but</p><pre><code>service nginx restart</code></pre><p>was not working had to do</p><pre><code>/etc/init.d/nginx restart</code></pre><p>to get the server to reload.</p></description><tags>nginx</tags></item><item><title>SSL and Homestead</title><link>https://alfrednutile.info/posts/101/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/101/</guid><description><p>This is like most nginx the only trick was adding the port forward on Homestead</p><pre><code>#scripts/homestead.rb
+charset utf-8;
+}
+&lt;/code>&lt;/pre>&lt;p>Thanks to this post as well &lt;a href="http://serverfault.com/a/298803">http://serverfault.com/a/298803&lt;/a>&lt;/p>
+&lt;p>Still a mystery but&lt;/p>
+&lt;pre>&lt;code>service nginx restart
+&lt;/code>&lt;/pre>&lt;p>was not working had to do&lt;/p>
+&lt;pre>&lt;code>/etc/init.d/nginx restart
+&lt;/code>&lt;/pre>&lt;p>to get the server to reload.&lt;/p></description><tags>nginx</tags></item><item><title>SSL and Homestead</title><link>https://alfrednutile.info/posts/101/</link><pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/101/</guid><description>&lt;p>This is like most nginx the only trick was adding the port forward on Homestead&lt;/p>
+&lt;pre>&lt;code>#scripts/homestead.rb
 # Configure Port Forwarding To The Box
-config.vm.network "forwarded_port", guest: 80, host: 8000
-config.vm.network "forwarded_port", guest: 443, host: 44300
-config.vm.network "forwarded_port", guest: 3306, host: 33060
-config.vm.network "forwarded_port", guest: 5432, host: 54320
-config.vm.network "forwarded_port", guest: 11300, host: 11300</code></pre><p>I set it to 44300</p><p>Then just follow along here</p><p><a href="http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm">http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm</a> which leads to here<a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04">https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04</a> for the rest</p></description><tags>homestead, nginx</tags></item></channel></rss>
+config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 80, host: 8000
+config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 443, host: 44300
+config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 3306, host: 33060
+config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 5432, host: 54320
+config.vm.network &amp;quot;forwarded_port&amp;quot;, guest: 11300, host: 11300
+&lt;/code>&lt;/pre>&lt;p>I set it to 44300&lt;/p>
+&lt;p>Then just follow along here&lt;/p>
+&lt;p>&lt;a href="http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm">http://laravel.io/forum/07-06-2014-enabling-ssl-on-a-homestead-vm&lt;/a> which leads to here &lt;a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04">https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04&lt;/a> for the rest&lt;/p></description><tags>homestead, nginx</tags></item></channel></rss>

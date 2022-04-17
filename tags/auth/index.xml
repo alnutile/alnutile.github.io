@@ -1,27 +1,40 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>auth on Alfred Nutile</title><link>https://alfrednutile.info/tags/auth/</link><description>Recent content in auth on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 31 May 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/auth/index.xml" rel="self" type="application/rss+xml"/><item><title>API Token Based Access Laravel 5.1 (Yet another article on this)</title><link>https://alfrednutile.info/posts/183/</link><pubDate>Tue, 31 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/183/</guid><description><h2 id="api-token">API Token</h2><p>Laravel 5.2 introduces the auth token guard setup which is way simpler than Oauth. Also it does not assume a certain level of complexity in needs like Scopes and expirations of tokens that we do not need for our internal app to app communications.</p><p>We are using 5.1 so this will implement it.</p><p>See some docs here<a href="https://gistlog.co/JacobBennett/090369fbab0b31130b51">https://gistlog.co/JacobBennett/090369fbab0b31130b51</a></p><p>For creating a user the AppServiceProvider boots the user record and if no api_token
-is present it will set one. As well as the UUID (we use<a href="https://packagist.org/packages/ramsey/uuid">https://packagist.org/packages/ramsey/uuid</a> for this)</p><p><code>app/Providers/AppServiceProvider.php:18</code></p><pre><code> User::creating(function($user) {
-if (!$user->id)
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>auth on Alfred Nutile</title><link>https://alfrednutile.info/tags/auth/</link><description>Recent content in auth on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 31 May 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/auth/index.xml" rel="self" type="application/rss+xml"/><item><title>API Token Based Access Laravel 5.1 (Yet another article on this)</title><link>https://alfrednutile.info/posts/183/</link><pubDate>Tue, 31 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/183/</guid><description>&lt;h2 id="api-token">API Token&lt;/h2>
+&lt;p>Laravel 5.2 introduces the auth token guard setup which is way simpler than Oauth. Also it does not assume a certain level of complexity in needs like Scopes and expirations of tokens that we do not need for our internal app to app communications.&lt;/p>
+&lt;p>We are using 5.1 so this will implement it.&lt;/p>
+&lt;p>See some docs here &lt;a href="https://gistlog.co/JacobBennett/090369fbab0b31130b51">https://gistlog.co/JacobBennett/090369fbab0b31130b51&lt;/a>&lt;/p>
+&lt;p>For creating a user the AppServiceProvider boots the user record and if no api_token
+is present it will set one. As well as the UUID (we use &lt;a href="https://packagist.org/packages/ramsey/uuid">https://packagist.org/packages/ramsey/uuid&lt;/a> for this)&lt;/p>
+&lt;p>&lt;code>app/Providers/AppServiceProvider.php:18&lt;/code>&lt;/p>
+&lt;pre>&lt;code> User::creating(function($user) {
+if (!$user-&amp;gt;id)
 {
-$user->id = Uuid::uuid4()->toString();
-}<pre><code> if (!$user-&amp;gt;api_token)
+$user-&amp;gt;id = Uuid::uuid4()-&amp;gt;toString();
+}
+if (!$user-&amp;gt;api_token)
 {
 $user-&amp;gt;api_token = Uuid::uuid4()-&amp;gt;toString();
 }
-});</code></pre><p/></pre><p>The factory includes this as well<code>database/factories/ModelFactory.php</code></p></p><pre><code>$factory->define(App\User::class, function ($faker) {
+});
+&lt;/code>&lt;/pre>&lt;p>The factory includes this as well &lt;code>database/factories/ModelFactory.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code>$factory-&amp;gt;define(App\User::class, function ($faker) {
 return [
-'id' => $faker->uuid,
-'name' => $faker->name,
-'email' => $faker->email,
-'api_token' => $faker->uuid,
-'password' => str_random(10),
-'remember_token' => str_random(10),
+'id' =&amp;gt; $faker-&amp;gt;uuid,
+'name' =&amp;gt; $faker-&amp;gt;name,
+'email' =&amp;gt; $faker-&amp;gt;email,
+'api_token' =&amp;gt; $faker-&amp;gt;uuid,
+'password' =&amp;gt; str_random(10),
+'remember_token' =&amp;gt; str_random(10),
 ];
-});</code></pre><p>Note in the<code>\App\User</code> model has this field hidden like the password field<code>app/User.php</code></p><pre><code>///
+});
+&lt;/code>&lt;/pre>&lt;p>Note in the &lt;code>\App\User&lt;/code> model has this field hidden like the password field &lt;code>app/User.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code>///
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
 use Authenticatable, CanResetPassword;
 protected $hidden = ['password', 'remember_token', 'api_token'];
-///</code></pre><p>And of course we need the migration for this</p><pre><code>&lt;?php
+///
+&lt;/code>&lt;/pre>&lt;p>And of course we need the migration for this&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 class AddApiTokenToUsersTable extends Migration
@@ -35,7 +48,7 @@ public function up()
 {
 Schema::table('users', function(Blueprint $table)
 {
-$table->string('api_token', 60)->unique();
+$table-&amp;gt;string('api_token', 60)-&amp;gt;unique();
 });
 }
 /**
@@ -48,10 +61,12 @@ public function down()
 Schema::table('users', function(Blueprint $table)
 {
 if(Schema::hasColumn('users', 'api_token'))
-$table->dropColumn('api_token');
+$table-&amp;gt;dropColumn('api_token');
 });
 }
-}</code></pre><p>This is all happening using the<code>api_token</code> middleware seen here<code>app/Http/Middleware/ApiToken.php</code></p><pre><code>&lt;?php
+}
+&lt;/code>&lt;/pre>&lt;p>This is all happening using the &lt;code>api_token&lt;/code> middleware seen here &lt;code>app/Http/Middleware/ApiToken.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 namespace App\Http\Middleware;
 use App\User;
 use Closure;
@@ -62,22 +77,22 @@ class ApiToken
 protected $auth;
 public function __construct(Guard $auth)
 {
-$this->auth = $auth;
+$this-&amp;gt;auth = $auth;
 }
 public function handle($request, Closure $next)
 {
-if($request->input('api_token') &amp;&amp; $this->hasMatchingToken($request->input('api_token'))) {
+if($request-&amp;gt;input('api_token') &amp;amp;&amp;amp; $this-&amp;gt;hasMatchingToken($request-&amp;gt;input('api_token'))) {
 return $next($request);
 }
 /**
 * This assumes it is behind auth at all times
 * so if the above fails we then let auth manage it
 */
-if ($this->auth->guest()) {
-if ($request->ajax()) {
+if ($this-&amp;gt;auth-&amp;gt;guest()) {
+if ($request-&amp;gt;ajax()) {
 return response('Unauthorized.', 401);
 } else {
-return redirect()->guest('auth/login');
+return redirect()-&amp;gt;guest('auth/login');
 }
 }
 return $next($request);
@@ -93,10 +108,12 @@ return $next($request);
 */
 public function hasMatchingToken($token)
 {
-if($user = User::where('api_token', $token)->first())
+if($user = User::where('api_token', $token)-&amp;gt;first())
 return true;
 }
-}</code></pre><p>And plug that into the Kernel<code>app/Http/Kernel.php</code></p><pre><code>&lt;?php
+}
+&lt;/code>&lt;/pre>&lt;p>And plug that into the Kernel &lt;code>app/Http/Kernel.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 namespace App\Http;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 class Kernel extends HttpKernel
@@ -120,12 +137,15 @@ protected $middleware = [
 * @var array
 */
 protected $routeMiddleware = [
-'auth' => \App\Http\Middleware\Authenticate::class,
-'auth.token' => \App\Http\Middleware\ApiToken::class,
-'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+'auth' =&amp;gt; \App\Http\Middleware\Authenticate::class,
+'auth.token' =&amp;gt; \App\Http\Middleware\ApiToken::class,
+'auth.basic' =&amp;gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+'guest' =&amp;gt; \App\Http\Middleware\RedirectIfAuthenticated::class,
 ];
-}</code></pre><h2 id="tests">Tests</h2><p>You can see the tests<code>tests/UserTokenTest.php</code></p><pre><code>&lt;?php
+}
+&lt;/code>&lt;/pre>&lt;h2 id="tests">Tests&lt;/h2>
+&lt;p>You can see the tests &lt;code>tests/UserTokenTest.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -137,31 +157,34 @@ use DatabaseMigrations;
 */
 public function should_pass_auth_with_no_token_since_they_auth()
 {
-$user = factory(\App\User::class)->create();
-$this->be($user);
-$results = $this->call('GET', '/example/auth_token');
-$this->assertEquals(200, $results->status());
-$this->assertEquals("foo", $results->getContent());
+$user = factory(\App\User::class)-&amp;gt;create();
+$this-&amp;gt;be($user);
+$results = $this-&amp;gt;call('GET', '/example/auth_token');
+$this-&amp;gt;assertEquals(200, $results-&amp;gt;status());
+$this-&amp;gt;assertEquals(&amp;quot;foo&amp;quot;, $results-&amp;gt;getContent());
 }
 /**
 * @test
 */
 public function should_auth_user_since_they_have_token()
 {
-$user = factory(\App\User::class)->create();
-$results = $this->call('GET', sprintf("/example/auth_token?api_token=%s", $user->api_token));
-$this->assertEquals(200, $results->status());
-$this->assertEquals("foo", $results->getContent());
+$user = factory(\App\User::class)-&amp;gt;create();
+$results = $this-&amp;gt;call('GET', sprintf(&amp;quot;/example/auth_token?api_token=%s&amp;quot;, $user-&amp;gt;api_token));
+$this-&amp;gt;assertEquals(200, $results-&amp;gt;status());
+$this-&amp;gt;assertEquals(&amp;quot;foo&amp;quot;, $results-&amp;gt;getContent());
 }
 /**
 * @test
 */
 public function should_fail_user_no_token_no_auth()
 {
-$results = $this->call('GET', '/example/auth_token');
-$this->assertEquals(302, $results->status());
+$results = $this-&amp;gt;call('GET', '/example/auth_token');
+$this-&amp;gt;assertEquals(302, $results-&amp;gt;status());
 }
-}</code></pre><h2 id="console-commands-to-make-tokens">Console Commands to Make Tokens</h2><p>You can see the commands<code>app/Console/Commands/UserTokenCrud.php</code></p><pre><code>&lt;?php
+}
+&lt;/code>&lt;/pre>&lt;h2 id="console-commands-to-make-tokens">Console Commands to Make Tokens&lt;/h2>
+&lt;p>You can see the commands &lt;code>app/Console/Commands/UserTokenCrud.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 namespace App\Console\Commands;
 use App\User;
 use Illuminate\Console\Command;
@@ -182,25 +205,27 @@ public function handle()
 {
 try
 {
-$user = User::where('email', $this->argument('user_email'))->first();
+$user = User::where('email', $this-&amp;gt;argument('user_email'))-&amp;gt;first();
 if(!$user)
-throw new \Exception(sprintf("User not found for %s", $this->argument("user_email")));
-if($this->option('show'))
+throw new \Exception(sprintf(&amp;quot;User not found for %s&amp;quot;, $this-&amp;gt;argument(&amp;quot;user_email&amp;quot;)));
+if($this-&amp;gt;option('show'))
 {
-$this->info(sprintf("User token is %s", $user->api_token));
+$this-&amp;gt;info(sprintf(&amp;quot;User token is %s&amp;quot;, $user-&amp;gt;api_token));
 return false;
 }
-$token = Uuid::uuid4()->toString();
-$user->api_token = $token;
-$user->save();
-$this->info(sprintf("User with email %s now has token %s", $user->email, $token));
+$token = Uuid::uuid4()-&amp;gt;toString();
+$user-&amp;gt;api_token = $token;
+$user-&amp;gt;save();
+$this-&amp;gt;info(sprintf(&amp;quot;User with email %s now has token %s&amp;quot;, $user-&amp;gt;email, $token));
 }
 catch(\Exception $e)
 {
-$this->error(sprintf("Error finding user %s", $e->getMessage()));
+$this-&amp;gt;error(sprintf(&amp;quot;Error finding user %s&amp;quot;, $e-&amp;gt;getMessage()));
 }
 }
-}</code></pre><p>Plug that into the Console Kernel<code>Console/Kernel.php</code></p><pre><code>&lt;?php
+}
+&lt;/code>&lt;/pre>&lt;p>Plug that into the Console Kernel &lt;code>Console/Kernel.php&lt;/code>&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
 namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -223,15 +248,35 @@ protected $commands = [
 */
 protected function schedule(Schedule $schedule)
 {
-//$schedule->command('inspire')
-->hourly();
+//$schedule-&amp;gt;command('inspire')
+-&amp;gt;hourly();
 }
-}</code></pre><p>Allowing to update, delete and see tokens</p><h2 id="example-routes">Example Routes</h2><pre><code>Route::group(['middleware' => 'auth.token'], function () {
+}
+&lt;/code>&lt;/pre>&lt;p>Allowing to update, delete and see tokens&lt;/p>
+&lt;h2 id="example-routes">Example Routes&lt;/h2>
+&lt;pre>&lt;code>Route::group(['middleware' =&amp;gt; 'auth.token'], function () {
 Route::get('example/auth_token', function () {
-return "foo";
+return &amp;quot;foo&amp;quot;;
 });
-});</code></pre><p>I added some testing / example routes. Once you have your api_token give them a try</p><ul><li>/example/auth_token?api_token=foo to show the API Token working</li><li>/s3?api_token=foo</li><li>/rds?api_token=foo</li><li>/dynamodb?api_token=foo</li></ul><p>Note the token might change if you seed the database. You can ssh into the server and run</p><pre><code>php artisan cat:create-token foo@gmail.com --show</code></pre><p>To get the token.</p></description><tags>php, auth, laravel, api</tags></item><item><title>Temporary Auth Updates L5</title><link>https://alfrednutile.info/posts/109/</link><pubDate>Sun, 12 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/109/</guid><description><h1 id="auth-updates">Auth updates</h1><p>First make sure your composer update has the latest Laravel and check that
-there are not relevant fixes already via laravel/docs master laravel/framework master or laravel/laravel dev</p><p>Moved evn files to the new format and only 1 is needed now having the</p><pre><code>APP_ENV='local'</code></pre><p>setting for the environment.</p><p>Then update the path in the AuthController to go to auth/login</p><pre><code>#app/Http/Controllers/Auth/AuthController<pre><code>public function login(LoginRequest $request)
+});
+&lt;/code>&lt;/pre>&lt;p>I added some testing / example routes. Once you have your api_token give them a try&lt;/p>
+&lt;ul>
+&lt;li>/example/auth_token?api_token=foo to show the API Token working&lt;/li>
+&lt;li>/s3?api_token=foo&lt;/li>
+&lt;li>/rds?api_token=foo&lt;/li>
+&lt;li>/dynamodb?api_token=foo&lt;/li>
+&lt;/ul>
+&lt;p>Note the token might change if you seed the database. You can ssh into the server and run&lt;/p>
+&lt;pre>&lt;code>php artisan cat:create-token foo@gmail.com --show
+&lt;/code>&lt;/pre>&lt;p>To get the token.&lt;/p></description><tags>php, auth, laravel, api</tags></item><item><title>Temporary Auth Updates L5</title><link>https://alfrednutile.info/posts/109/</link><pubDate>Sun, 12 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/109/</guid><description>&lt;h1 id="auth-updates">Auth updates&lt;/h1>
+&lt;p>First make sure your composer update has the latest Laravel and check that
+there are not relevant fixes already via laravel/docs master laravel/framework master or laravel/laravel dev&lt;/p>
+&lt;p>Moved evn files to the new format and only 1 is needed now having the&lt;/p>
+&lt;pre>&lt;code>APP_ENV='local'
+&lt;/code>&lt;/pre>&lt;p>setting for the environment.&lt;/p>
+&lt;p>Then update the path in the AuthController to go to auth/login&lt;/p>
+&lt;pre>&lt;code>#app/Http/Controllers/Auth/AuthController
+public function login(LoginRequest $request)
 {
 if ($this-&amp;gt;auth-&amp;gt;attempt($request-&amp;gt;only('email', 'password')))
 {
@@ -240,54 +285,75 @@ return redirect('/');
 return redirect('/auth/login')-&amp;gt;withErrors([
 'email' =&amp;gt; 'The credentials you entered did not match our records. Try again?',
 ]);
-}</code></pre><p/></pre><p>Here is a good article on using annotations which are needed now in the controller.</p></p><p><a href="http://mattstauffer.co/blog/laravel-5.0-route-annotations">http://mattstauffer.co/blog/laravel-5.0-route-annotations</a></p><p>For example I remove api/v1/projects from routes.php (which is key it can not be in both)</p><p>Then in the ProjectsController.php I added this to the top of the class</p><pre><code>/**
-* @Middleware("BehatEditor\Http\Middleware\AuthMiddleware")
-* @Before("auth")
+}
+&lt;/code>&lt;/pre>&lt;p>Here is a good article on using annotations which are needed now in the controller.&lt;/p>
+&lt;p>&lt;a href="http://mattstauffer.co/blog/laravel-5.0-route-annotations">http://mattstauffer.co/blog/laravel-5.0-route-annotations&lt;/a>&lt;/p>
+&lt;p>For example I remove api/v1/projects from routes.php (which is key it can not be in both)&lt;/p>
+&lt;p>Then in the ProjectsController.php I added this to the top of the class&lt;/p>
+&lt;pre>&lt;code>/**
+* @Middleware(&amp;quot;BehatEditor\Http\Middleware\AuthMiddleware&amp;quot;)
+* @Before(&amp;quot;auth&amp;quot;)
 */
-class ProjectsController extends BaseController {</code></pre><p>and in the index function</p><pre><code>
+class ProjectsController extends BaseController {
+&lt;/code>&lt;/pre>&lt;p>and in the index function&lt;/p>
+&lt;pre>&lt;code>
 /**
-* @Get("api/v1/projects", as="api.v1.projects")
+* @Get(&amp;quot;api/v1/projects&amp;quot;, as=&amp;quot;api.v1.projects&amp;quot;)
 * @return mixed
 */
 public function index()
 {
 try
 {
-$results = $this->service->getAllProjectsForThisUser();
+$results = $this-&amp;gt;service-&amp;gt;getAllProjectsForThisUser();
 /**
 * @TODO move Response to a class to not have it tightly coupled here
 */
-return Response::json($this->responseServices->respond($results, "Loaded Projects"), 200);
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($results, &amp;quot;Loaded Projects&amp;quot;), 200);
 }
 catch(\Exception $e) {
-return Response::json($this->responseServices->respond($e->getMessage(), "Error Getting Project Failed"), 422);
-}<pre><code>}</code></pre><p/></pre><p>So the route is now api/v1/projects using Get and the route name for ease of use is api.v1.projects</p></p><p>Then I ran</p><pre><code>php artisan route:scan</code></pre><p>to get this file made for me</p><pre><code>storage/framework/routes.scanned.php</code></pre><p>Inside we see</p><pre><code>&lt;?php<p>$router->get(&lsquo;auth/login&rsquo;, [&lsquo;uses&rsquo; => &lsquo;App\Http\Controllers\Auth\AuthController@showLoginForm&rsquo;, &lsquo;domain&rsquo; => NULL, &lsquo;as&rsquo; => NULL, &lsquo;middleware&rsquo; => array (
-0 => &lsquo;csrf&rsquo;,
-1 => &lsquo;guest&rsquo;,
-), &lsquo;where&rsquo; => array (
+return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;getMessage(), &amp;quot;Error Getting Project Failed&amp;quot;), 422);
+}
+}
+&lt;/code>&lt;/pre>&lt;p>So the route is now api/v1/projects using Get and the route name for ease of use is api.v1.projects&lt;/p>
+&lt;p>Then I ran&lt;/p>
+&lt;pre>&lt;code>php artisan route:scan
+&lt;/code>&lt;/pre>&lt;p>to get this file made for me&lt;/p>
+&lt;pre>&lt;code>storage/framework/routes.scanned.php
+&lt;/code>&lt;/pre>&lt;p>Inside we see&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+$router-&amp;gt;get('auth/login', ['uses' =&amp;gt; 'App\Http\Controllers\Auth\AuthController@showLoginForm', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; NULL, 'middleware' =&amp;gt; array (
+0 =&amp;gt; 'csrf',
+1 =&amp;gt; 'guest',
+), 'where' =&amp;gt; array (
 )]);
-$router->post(&lsquo;auth/login&rsquo;, [&lsquo;uses&rsquo; => &lsquo;App\Http\Controllers\Auth\AuthController@login&rsquo;, &lsquo;domain&rsquo; => NULL, &lsquo;as&rsquo; => NULL, &lsquo;middleware&rsquo; => array (
-0 => &lsquo;csrf&rsquo;,
-1 => &lsquo;guest&rsquo;,
-), &lsquo;where&rsquo; => array (
+$router-&amp;gt;post('auth/login', ['uses' =&amp;gt; 'App\Http\Controllers\Auth\AuthController@login', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; NULL, 'middleware' =&amp;gt; array (
+0 =&amp;gt; 'csrf',
+1 =&amp;gt; 'guest',
+), 'where' =&amp;gt; array (
 )]);
-$router->get(&lsquo;auth/logout&rsquo;, [&lsquo;uses&rsquo; => &lsquo;App\Http\Controllers\Auth\AuthController@logout&rsquo;, &lsquo;domain&rsquo; => NULL, &lsquo;as&rsquo; => NULL, &lsquo;middleware&rsquo; => array (
-0 => &lsquo;csrf&rsquo;,
-1 => &lsquo;guest&rsquo;,
-), &lsquo;where&rsquo; => array (
+$router-&amp;gt;get('auth/logout', ['uses' =&amp;gt; 'App\Http\Controllers\Auth\AuthController@logout', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; NULL, 'middleware' =&amp;gt; array (
+0 =&amp;gt; 'csrf',
+1 =&amp;gt; 'guest',
+), 'where' =&amp;gt; array (
 )]);
-$router->get(&lsquo;api/v1/sites/reports&rsquo;, [&lsquo;uses&rsquo; => &lsquo;App\Http\Controllers\DashController@getDash&rsquo;, &lsquo;domain&rsquo; => NULL, &lsquo;as&rsquo; => &lsquo;sites.reports&rsquo;, &lsquo;middleware&rsquo; => array (
-0 => &lsquo;App\Http\Middleware\AuthMiddleware&rsquo;,
-), &lsquo;where&rsquo; => array (
+$router-&amp;gt;get('api/v1/sites/reports', ['uses' =&amp;gt; 'App\Http\Controllers\DashController@getDash', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; 'sites.reports', 'middleware' =&amp;gt; array (
+0 =&amp;gt; 'App\\Http\\Middleware\\AuthMiddleware',
+), 'where' =&amp;gt; array (
 )]);
-$router->get(&lsquo;api/v1/projects&rsquo;, [&lsquo;uses&rsquo; => &lsquo;App\Http\Controllers\ProjectsController@index&rsquo;, &lsquo;domain&rsquo; => NULL, &lsquo;as&rsquo; => &lsquo;api.v1.projects&rsquo;, &lsquo;middleware&rsquo; => array (
-0 => &lsquo;App\Http\Middleware\AuthMiddleware&rsquo;,
-), &lsquo;where&rsquo; => array (
+$router-&amp;gt;get('api/v1/projects', ['uses' =&amp;gt; 'App\Http\Controllers\ProjectsController@index', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; 'api.v1.projects', 'middleware' =&amp;gt; array (
+0 =&amp;gt; 'App\\Http\\Middleware\\AuthMiddleware',
+), 'where' =&amp;gt; array (
 )]);
-$router->get(&lsquo;sites&rsquo;, [&lsquo;uses&rsquo; => &lsquo;App\Http\Controllers\SitesController@index&rsquo;, &lsquo;domain&rsquo; => NULL, &lsquo;as&rsquo; => &lsquo;sites.index&rsquo;, &lsquo;middleware&rsquo; => array (
-0 => &lsquo;App\Http\Middleware\AuthMiddleware&rsquo;,
-), &lsquo;where&rsquo; => array (
-)]);</p><p/></pre><p>All the App namespaces can really be your App or the default Laravel app files.</p></p><p>This file is auto generated from that command so do not edit it.</p><p>The one we just made is</p><pre><code>$router->get('api/v1/projects', ['uses' => 'App\Http\Controllers\ProjectsController@index', 'domain' => NULL, 'as' => 'api.v1.projects', 'middleware' => array (
-0 => 'App\\Http\\Middleware\\AuthMiddleware',
-), 'where' => array (
-)]);</code></pre></description><tags>laravel, laravel 5, auth</tags></item></channel></rss>
+$router-&amp;gt;get('sites', ['uses' =&amp;gt; 'App\Http\Controllers\SitesController@index', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; 'sites.index', 'middleware' =&amp;gt; array (
+0 =&amp;gt; 'App\\Http\\Middleware\\AuthMiddleware',
+), 'where' =&amp;gt; array (
+)]);
+&lt;/code>&lt;/pre>&lt;p>All the App namespaces can really be your App or the default Laravel app files.&lt;/p>
+&lt;p>This file is auto generated from that command so do not edit it.&lt;/p>
+&lt;p>The one we just made is&lt;/p>
+&lt;pre>&lt;code>$router-&amp;gt;get('api/v1/projects', ['uses' =&amp;gt; 'App\Http\Controllers\ProjectsController@index', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; 'api.v1.projects', 'middleware' =&amp;gt; array (
+0 =&amp;gt; 'App\\Http\\Middleware\\AuthMiddleware',
+), 'where' =&amp;gt; array (
+)]);
+&lt;/code>&lt;/pre></description><tags>laravel, laravel 5, auth</tags></item></channel></rss>

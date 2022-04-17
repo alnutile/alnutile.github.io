@@ -1,6 +1,13 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>git on Alfred Nutile</title><link>https://alfrednutile.info/tags/git/</link><description>Recent content in git on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 14 Apr 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Great tip on Git and Jenkins to auto deploy</title><link>https://alfrednutile.info/posts/3/</link><pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/3/</guid><description><p>
-with every git push I would like jenkins to run it's tests then deploy the branch if it passes.</p><p>
-This git plugin for jenkins notes you can setup a post-receive hook in git.<a href="https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin" target="blan">https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin</a></p><p>
-Git goes over what is available here<a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks" target="blan">http://git-scm.com/book/en/Customizing-Git-Git-Hooks</a></p><p>
-All I did was add post-receive to the git repo and added the curl command in the script noted in the plugin above and now Jenkins will auto run on every git push origin development</p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>git on Alfred Nutile</title><link>https://alfrednutile.info/tags/git/</link><description>Recent content in git on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 14 Apr 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Great tip on Git and Jenkins to auto deploy</title><link>https://alfrednutile.info/posts/3/</link><pubDate>Sun, 14 Apr 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/3/</guid><description>&lt;p>
+with every git push I would like jenkins to run it's tests then deploy the branch if it passes.
+&lt;/p>
+&lt;p>
+This git plugin for jenkins notes you can setup a post-receive hook in git.
+&lt;a href="https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin" target=_blank>https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin&lt;/a>
+&lt;/p>&lt;p>
+Git goes over what is available here
+&lt;a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks" target=_blank>http://git-scm.com/book/en/Customizing-Git-Git-Hooks&lt;/a>
+&lt;/p>&lt;p>
+All I did was add post-receive to the git repo and added the curl command in the script noted in the plugin above and now Jenkins will auto run on every git push origin development
+&lt;/p>
 Nice!</description><tags>git</tags></item></channel></rss>

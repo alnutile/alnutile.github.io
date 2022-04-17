@@ -1,4 +1,7 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>phantom on Alfred Nutile</title><link>https://alfrednutile.info/tags/phantom/</link><description>Recent content in phantom on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 16 Mar 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/phantom/index.xml" rel="self" type="application/rss+xml"/><item><title>Behat and PhantomJs</title><link>https://alfrednutile.info/posts/138/</link><pubDate>Mon, 16 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/138/</guid><description><h1 id="using-phantomjs-both-with-selenium-and-in-replace-of-selenium">Using PhantomJS both with Selenium and in replace of Selenium</h1><h2 id="with-selenium">With Selenium</h2><p>Here is my example behat profile for this one</p><pre><code>phantom_via_selenium:
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>phantom on Alfred Nutile</title><link>https://alfrednutile.info/tags/phantom/</link><description>Recent content in phantom on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 16 Mar 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/phantom/index.xml" rel="self" type="application/rss+xml"/><item><title>Behat and PhantomJs</title><link>https://alfrednutile.info/posts/138/</link><pubDate>Mon, 16 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/138/</guid><description>&lt;h1 id="using-phantomjs-both-with-selenium-and-in-replace-of-selenium">Using PhantomJS both with Selenium and in replace of Selenium&lt;/h1>
+&lt;h2 id="with-selenium">With Selenium&lt;/h2>
+&lt;p>Here is my example behat profile for this one&lt;/p>
+&lt;pre>&lt;code>phantom_via_selenium:
 paths:
 features: app/tests/acceptance/features/ui
 bootstrap: app/tests/acceptance/contexts
@@ -17,17 +20,25 @@ CURLOPT_CERTINFO: false
 CURLOPT_TIMEOUT: 120
 ssl.certificate_authority: false
 selenium2:
-wd_host: "http://selenium-server.dev:4444/wd/hub"
+wd_host: &amp;quot;http://selenium-server.dev:4444/wd/hub&amp;quot;
 capabilities:
 browser: phantomjs
 base_url: 'https://behat.dev:443'
-browser_name: 'phantomjs'</code></pre><p>And as usual you start up selenium.</p><p>In both cases the test is this one</p><pre><code>@javascript @thisone
+browser_name: 'phantomjs'
+&lt;/code>&lt;/pre>&lt;p>And as usual you start up selenium.&lt;/p>
+&lt;p>In both cases the test is this one&lt;/p>
+&lt;pre>&lt;code>@javascript @thisone
 Feature: Testing
 Scenario: Testing Wiki
-Given I am on "http://en.wikipedia.org/wiki/Main_Page"
-Then I should see "Wiki"
-And I take a screenshot</code></pre><p>This allows me to take screenshots as well<a href="https://dl.dropboxusercontent.com/u/54803135/phantom.jpg">screenshot</a>
-which is super handy.</p><p>Also note<code>http://selenium-server.dev:4444/wd/hub</code> works because in my /etc/hosts file I set 127.0.0.1 to be that domain. You could easily do<code>http://127.0.0.1:4444/wd/hub</code></p><h2 id="without-selenium">Without Selenium</h2><p>This one will now run via phantom as the &ldquo;selenium&rdquo; server</p><pre><code>phantom_ui:
+Given I am on &amp;quot;http://en.wikipedia.org/wiki/Main_Page&amp;quot;
+Then I should see &amp;quot;Wiki&amp;quot;
+And I take a screenshot
+&lt;/code>&lt;/pre>&lt;p>This allows me to take screenshots as well &lt;a href="https://dl.dropboxusercontent.com/u/54803135/phantom.jpg">screenshot&lt;/a>
+which is super handy.&lt;/p>
+&lt;p>Also note &lt;code>http://selenium-server.dev:4444/wd/hub&lt;/code> works because in my /etc/hosts file I set 127.0.0.1 to be that domain. You could easily do &lt;code>http://127.0.0.1:4444/wd/hub&lt;/code>&lt;/p>
+&lt;h2 id="without-selenium">Without Selenium&lt;/h2>
+&lt;p>This one will now run via phantom as the &amp;ldquo;selenium&amp;rdquo; server&lt;/p>
+&lt;pre>&lt;code>phantom_ui:
 paths:
 features: app/tests/acceptance/features/ui
 bootstrap: app/tests/acceptance/contexts
@@ -46,8 +57,13 @@ CURLOPT_CERTINFO: false
 CURLOPT_TIMEOUT: 120
 ssl.certificate_authority: false
 selenium2:
-wd_host: "http://localhost:8643/wd/hub"
+wd_host: &amp;quot;http://localhost:8643/wd/hub&amp;quot;
 capabilities:
 browser: phantomjs
 base_url: 'https://behat.dev:443'
-browser_name: 'phantomjs'</code></pre><p>This is really thanks to<a href="http://shashikantjagtap.net/running-behat-scenarios-with-pahntomjs/">http://shashikantjagtap.net</a></p><p>Running phantom in the background as<code>phantomjs --webdriver=8643</code></p><h2 id="coming-up">Coming up</h2><h3 id="self-signed-ssl">Self Signed SSL</h3><h3 id="render-tree-dumps-of-the-site-for-later-parsing">Render Tree dumps of the site for later parsing</h3></description><tags>behat, phantom</tags></item></channel></rss>
+browser_name: 'phantomjs'
+&lt;/code>&lt;/pre>&lt;p>This is really thanks to &lt;a href="http://shashikantjagtap.net/running-behat-scenarios-with-pahntomjs/">http://shashikantjagtap.net&lt;/a>&lt;/p>
+&lt;p>Running phantom in the background as &lt;code>phantomjs --webdriver=8643&lt;/code>&lt;/p>
+&lt;h2 id="coming-up">Coming up&lt;/h2>
+&lt;h3 id="self-signed-ssl">Self Signed SSL&lt;/h3>
+&lt;h3 id="render-tree-dumps-of-the-site-for-later-parsing">Render Tree dumps of the site for later parsing&lt;/h3></description><tags>behat, phantom</tags></item></channel></rss>

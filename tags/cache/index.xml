@@ -1,30 +1,52 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>cache on Alfred Nutile</title><link>https://alfrednutile.info/tags/cache/</link><description>Recent content in cache on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 22 May 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/cache/index.xml" rel="self" type="application/rss+xml"/><item><title>Adding Cache to your Laravel Site</title><link>https://alfrednutile.info/posts/144/</link><pubDate>Fri, 22 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/144/</guid><description><p>Using Laravel&rsquo;s built in Cache facade is super easy. I will quickly cover how to use it for showing your Posts and showing a Post.</p><h2 id="example-1-show-a-post">Example 1 Show a Post</h2><p>This example will first check the Cache to see if there is a match for post_ID of the post if not it will make one. Also I happen to do the same for the sidebar.</p><pre><code>public function show($id)
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>cache on Alfred Nutile</title><link>https://alfrednutile.info/tags/cache/</link><description>Recent content in cache on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 22 May 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/cache/index.xml" rel="self" type="application/rss+xml"/><item><title>Adding Cache to your Laravel Site</title><link>https://alfrednutile.info/posts/144/</link><pubDate>Fri, 22 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/144/</guid><description>&lt;p>Using Laravel&amp;rsquo;s built in Cache facade is super easy. I will quickly cover how to use it for showing your Posts and showing a Post.&lt;/p>
+&lt;h2 id="example-1-show-a-post">Example 1 Show a Post&lt;/h2>
+&lt;p>This example will first check the Cache to see if there is a match for post_ID of the post if not it will make one. Also I happen to do the same for the sidebar.&lt;/p>
+&lt;pre>&lt;code>public function show($id)
 {
 $post = Cache::rememberForever('post_' . $id, function() use ($id)
 {
 return Post::findOrFail($id);
-});<pre><code> $posts = Cache::rememberForever('posts_sidebar', function()
+});
+$posts = Cache::rememberForever('posts_sidebar', function()
 {
 return Post::all()-&amp;gt;sortBy(&amp;quot;created_at&amp;quot;, null, TRUE);
 });
 $active = $post-&amp;gt;id;
 return View::make('posts.show', compact('post', 'posts', 'active'));
-}</code></pre><p/></pre><p>Of course this could be moved into a Service and out of the Controller.</p></p><p>It really is that simple</p><h2 id="all-posts">All Posts</h2><p>Same thing.</p><p>If you are not authenticated, eg all users but me, and there is no posts cache make one else show it.</p><pre><code>if(Auth::user()) {<pre><code> $posts = Post::OrderByCreatedAt()-&amp;gt;get();
+}
+&lt;/code>&lt;/pre>&lt;p>Of course this could be moved into a Service and out of the Controller.&lt;/p>
+&lt;p>It really is that simple&lt;/p>
+&lt;h2 id="all-posts">All Posts&lt;/h2>
+&lt;p>Same thing.&lt;/p>
+&lt;p>If you are not authenticated, eg all users but me, and there is no posts cache make one else show it.&lt;/p>
+&lt;pre>&lt;code>if(Auth::user()) {
+$posts = Post::OrderByCreatedAt()-&amp;gt;get();
 } else {
 $posts = Cache::rememberForever('posts', function()
 {
 return Post::Published()-&amp;gt;OrderByCreatedAt()-&amp;gt;get();
-});</code></pre><p>}</code></pre><h2 id="clearing-cache">Clearing Cache</h2></p><p>For this I made a PostsObeserver Class</p><p>This will reset Cache for the related caches whenever a post is made or updated.</p><pre><code>&lt;?php
-use Illuminate\Support\Facades\Cache;<p>class PostObserver {</p><pre><code>public function saved($model)
+});
+}
+&lt;/code>&lt;/pre>&lt;h2 id="clearing-cache">Clearing Cache&lt;/h2>
+&lt;p>For this I made a PostsObeserver Class&lt;/p>
+&lt;p>This will reset Cache for the related caches whenever a post is made or updated.&lt;/p>
+&lt;pre>&lt;code>&amp;lt;?php
+use Illuminate\Support\Facades\Cache;
+class PostObserver {
+public function saved($model)
 {
 foreach(['posts_sidebar', 'posts'] as $value)
 {
 Cache::forget($value);
 }
 Cache::forget('post_' . $model-&amp;gt;id);
-}</code></pre><p>}</code></pre><p>Then I register it in the model</p></p><pre><code>
+}
+}
+&lt;/code>&lt;/pre>&lt;p>Then I register it in the model&lt;/p>
+&lt;pre>&lt;code>
 public static function boot()
 {
 parent::boot();
 Post::observe(new PostObserver());
-}</code></pre><blockquote/></description><tags>laravel, cache</tags></item></channel></rss>
+}
+&lt;/code>&lt;/pre></description><tags>laravel, cache</tags></item></channel></rss>
