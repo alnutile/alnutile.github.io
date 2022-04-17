@@ -1,90 +1,64 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>fargate on Alfred Nutile</title><link>https://alfrednutile.info/tags/fargate/</link><description>Recent content in fargate on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 27 Oct 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/fargate/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploying Fargate</title><link>https://alfrednutile.info/posts/259/</link><pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/259/</guid><description>&lt;p>Just some notes on the process. This will show how to deploy both a Staging build and then Production.&lt;/p>
-&lt;h2 id="staging">Staging&lt;/h2>
-&lt;p>Staging is done by TravisCI after all tests pass&lt;/p>
-&lt;p>Here is the gist of it the deploy step calls to a bash file.&lt;/p>
-&lt;pre>&lt;code>deploy:
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>fargate on Alfred Nutile</title><link>https://alfrednutile.info/tags/fargate/</link><description>Recent content in fargate on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 27 Oct 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/fargate/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploying Fargate</title><link>https://alfrednutile.info/posts/259/</link><pubDate>Sat, 27 Oct 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/259/</guid><description><p>Just some notes on the process. This will show how to deploy both a Staging build and then Production.</p><h2 id="staging">Staging</h2><p>Staging is done by TravisCI after all tests pass</p><p>Here is the gist of it the deploy step calls to a bash file.</p><pre><code>deploy:
 skip_cleanup: true
 provider: script
 script: bash deploy/travis_deploy.sh
 on:
-branch: mainline
-&lt;/code>&lt;/pre>&lt;p>Then&lt;/p>
-&lt;pre>&lt;code>#!/usr/bin/env bash
-# Bail out on first error
-set -e
-## Get the directory of the build script
-DIR=&amp;quot;$( cd &amp;quot;$( dirname &amp;quot;${BASH_SOURCE[0]}&amp;quot; )&amp;quot; &amp;amp;&amp;amp; pwd )&amp;quot;
-## Get the current git commit sha
-HASH=$(git rev-parse HEAD)
-## Get any secret files
-aws s3 cp s3://foo/environments/$STACK_ENV_FILE $DIR/app/packaged/.env
-##we only want non-dev vendors
-composer config -g github-oauth.github.com $GITHUB_TOKEN &amp;amp;&amp;amp; composer install --no-dev
-echo &amp;quot;Region $STACK_AWS_REGION is the target region&amp;quot;
-eval $(aws ecr get-login --no-include-email --region $STACK_AWS_REGION)
-echo &amp;quot;Tagging images $STACK_APP_NAME&amp;quot;
-docker build --pull -t $STACK_APP_NAME .
+branch: mainline</code></pre><p>Then</p><pre><code>#!/usr/bin/env bash<h1 id="bail-out-on-first-error">Bail out on first error</h1><p>set -e</p><h2 id="get-the-directory-of-the-build-script">Get the directory of the build script</h2><p>DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &amp;&amp; pwd )"</p><h2 id="get-the-current-git-commit-sha">Get the current git commit sha</h2><p>HASH=$(git rev-parse HEAD)</p><h2 id="get-any-secret-files">Get any secret files</h2><p>aws s3 cp s3://foo/environments/$STACK_ENV_FILE $DIR/app/packaged/.env</p><p>##we only want non-dev vendors
+composer config -g github-oauth.github.com $GITHUB_TOKEN &amp;&amp; composer install &ndash;no-dev</p><p>echo "Region $STACK_AWS_REGION is the target region"
+eval $(aws ecr get-login &ndash;no-include-email &ndash;region $STACK_AWS_REGION)
+echo "Tagging images $STACK_APP_NAME"
+docker build &ndash;pull -t $STACK_APP_NAME .
 docker tag $STACK_APP_NAME:latest 1111111111.dkr.ecr.$STACK_AWS_REGION.amazonaws.com/$STACK_APP_NAME:latest
-echo &amp;quot;Pushing up image $STACK_APP_NAME:latest&amp;quot;
-docker push 1111111111.dkr.ecr.us-east-1.amazonaws.com/$STACK_APP_NAME:latest
-## Now Run again for Production WILL COME BACK TO THIS IN A MOMENT
-## if production set???
-if [[ &amp;quot;$STACK_ENV_FILE_PRODUCTION&amp;quot; ]]; then
-echo &amp;quot;Running Production build&amp;quot;
+echo "Pushing up image $STACK_APP_NAME:latest"
+docker push 1111111111.dkr.ecr.us-east-1.amazonaws.com/$STACK_APP_NAME:latest</p><h2 id="now-run-again-for-production-will-come-back-to-this-in-a-moment">Now Run again for Production WILL COME BACK TO THIS IN A MOMENT</h2><h2 id="if-production-set">if production set???</h2><p>if [[ "$STACK_ENV_FILE_PRODUCTION" ]]; then
+echo "Running Production build"
 aws s3 cp s3://foo/environments/$STACK_ENV_FILE_PRODUCTION $DIR/app/packaged/.env
-echo &amp;quot;Building Production Image&amp;quot;
-docker build --pull -t $STACK_APP_NAME .
+echo "Building Production Image"
+docker build &ndash;pull -t $STACK_APP_NAME .
 docker tag $STACK_APP_NAME:latest 1111111111.dkr.ecr.us-east-1.amazonaws.com/$STACK_APP_NAME:production_$HASH
-echo &amp;quot;Pushing up production image using has production_$HASH&amp;quot;
+echo "Pushing up production image using has production_$HASH"
 docker push 1111111111.dkr.ecr.us-east-1.amazonaws.com/$STACK_APP_NAME:production_$HASH
-fi
-&lt;/code>&lt;/pre>&lt;p>So Staging will build and push right to the AWS ECR which means Fargate by default will get the Latest tagged image since the TaskDefinition says so. So staging is done. Next task will run this one.&lt;/p>
-&lt;h2 id="production">Production&lt;/h2>
-&lt;p>This we want to happen by choice not by Travis. So you can see the step in Travis &lt;code>STACK_ENV_FILE_PRODUCTION&lt;/code> that looks for an environment variable and if true it will push the same working image but with it&amp;rsquo;s own secrets to ECR but with the tag &lt;code>production_GIT_HASH&lt;/code>&lt;/p>
-&lt;p>Then we ready we have a UI to push it BUT really it is just CloudFormation that updates the TaskDefinition using the build in Params to make it reference this HASH. This can be done pretty easily with Python, PHP etc and the AWS SDK that allows you to update CloudFormation and the Parameter that then fills in the TaskDefinition Field and updates it, from there the next time the Production Fargate runs it runs that latest version.&lt;/p>
-&lt;p>Example Task Definition:&lt;/p>
-&lt;pre>&lt;code> &amp;quot;TaskDefinition&amp;quot;: {
-&amp;quot;Type&amp;quot;: &amp;quot;AWS::ECS::TaskDefinition&amp;quot;,
-&amp;quot;Properties&amp;quot;: {
-&amp;quot;ExecutionRoleArn&amp;quot;: &amp;quot;&amp;quot;,
-&amp;quot;Memory&amp;quot;: 250,
-&amp;quot;NetworkMode&amp;quot;: &amp;quot;bridge&amp;quot;,
-&amp;quot;TaskRoleArn&amp;quot;: &amp;quot;arn:aws:iam::364215618558:role/foo&amp;quot;,
-&amp;quot;ContainerDefinitions&amp;quot;: [{
-&amp;quot;Name&amp;quot;: {
-&amp;quot;Fn::Sub&amp;quot;: &amp;quot;${AppName}-${AppEnv}&amp;quot;
+fi</code></pre><p>So Staging will build and push right to the AWS ECR which means Fargate by default will get the Latest tagged image since the TaskDefinition says so. So staging is done. Next task will run this one.</p></p><h2 id="production">Production</h2><p>This we want to happen by choice not by Travis. So you can see the step in Travis<code>STACK_ENV_FILE_PRODUCTION</code> that looks for an environment variable and if true it will push the same working image but with it&rsquo;s own secrets to ECR but with the tag<code>production_GIT_HASH</code></p><p>Then we ready we have a UI to push it BUT really it is just CloudFormation that updates the TaskDefinition using the build in Params to make it reference this HASH. This can be done pretty easily with Python, PHP etc and the AWS SDK that allows you to update CloudFormation and the Parameter that then fills in the TaskDefinition Field and updates it, from there the next time the Production Fargate runs it runs that latest version.</p><p>Example Task Definition:</p><pre><code> "TaskDefinition": {
+"Type": "AWS::ECS::TaskDefinition",
+"Properties": {
+"ExecutionRoleArn": "",
+"Memory": 250,
+"NetworkMode": "bridge",
+"TaskRoleArn": "arn:aws:iam::364215618558:role/foo",
+"ContainerDefinitions": [{
+"Name": {
+"Fn::Sub": "${AppName}-${AppEnv}"
 },
-&amp;quot;Image&amp;quot;: {
-&amp;quot;Fn::Sub&amp;quot;: &amp;quot;${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${AppName}:${ProductionTag}&amp;quot;
+"Image": {
+"Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${AppName}:${ProductionTag}"
 },
-&amp;quot;PortMappings&amp;quot;: [{
-&amp;quot;ContainerPort&amp;quot;: 80,
-&amp;quot;HostPort&amp;quot;: {
-&amp;quot;Ref&amp;quot;: &amp;quot;AppPort&amp;quot;
+"PortMappings": [{
+"ContainerPort": 80,
+"HostPort": {
+"Ref": "AppPort"
 }
 },
 {
-&amp;quot;ContainerPort&amp;quot;: 443,
-&amp;quot;HostPort&amp;quot;: {
-&amp;quot;Ref&amp;quot;: &amp;quot;AppPortSSL&amp;quot;
+"ContainerPort": 443,
+"HostPort": {
+"Ref": "AppPortSSL"
 }
 }
 ],
-&amp;quot;Memory&amp;quot;: 250,
-&amp;quot;MountPoints&amp;quot;: [{
-&amp;quot;SourceVolume&amp;quot;: &amp;quot;shared&amp;quot;,
-&amp;quot;ContainerPath&amp;quot;: &amp;quot;/opt/shared&amp;quot;
+"Memory": 250,
+"MountPoints": [{
+"SourceVolume": "shared",
+"ContainerPath": "/opt/shared"
 }]
 }],
-&amp;quot;Volumes&amp;quot;: [{
-&amp;quot;Name&amp;quot;: &amp;quot;shared&amp;quot;,
-&amp;quot;Host&amp;quot;: {
-&amp;quot;SourcePath&amp;quot;: &amp;quot;/opt/shared&amp;quot;
+"Volumes": [{
+"Name": "shared",
+"Host": {
+"SourcePath": "/opt/shared"
 }
 }]
 },
-&amp;quot;DependsOn&amp;quot;: [
-&amp;quot;ECR&amp;quot;
+"DependsOn": [
+"ECR"
 ]
-},
-&lt;/code>&lt;/pre>&lt;p>So when I update this I can just update the &lt;code>ProductionTag&lt;/code> and this will take effect.&lt;/p></description><tags>aws, fargate</tags></item></channel></rss>
+},<p/></pre><p>So when I update this I can just update the<code>ProductionTag</code> and this will take effect.</p></p></description><tags>aws, fargate</tags></item></channel></rss>

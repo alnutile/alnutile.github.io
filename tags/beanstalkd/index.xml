@@ -1,37 +1,10 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>beanstalkd on Alfred Nutile</title><link>https://alfrednutile.info/tags/beanstalkd/</link><description>Recent content in beanstalkd on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 30 Jun 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/beanstalkd/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel Homestead and Beanstalkd Console</title><link>https://alfrednutile.info/posts/92/</link><pubDate>Mon, 30 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/92/</guid><description>&lt;p>I am doing some queue work and wanted beanstalkd console installed so I can see the status of the queue&lt;/p>
-&lt;p>&lt;img src="https://camo.githubusercontent.com/1465416717c26b64eb6bc2647a2e8def90ee6da0/68747470733a2f2f7261772e6769746875622e636f6d2f7074726f66696d6f762f6265616e7374616c6b5f636f6e736f6c652f6d61737465722f636f7665722f6274636f6e736f6c652e706e67" alt="beanstalkd_console">&lt;/p>
-&lt;p>Using Laravel Homestead as the vagrant box &lt;a href="http://laravel.com/docs/homestead">http://laravel.com/docs/homestead&lt;/a> I needed to&lt;/p>
-&lt;ul>
-&lt;li>Download beanstalkd console &lt;a href="https://github.com/ptrofimov/beanstalk_console">https://github.com/ptrofimov/beanstalk_console&lt;/a>&lt;/li>
-&lt;li>Setup Homesteads yml file&lt;/li>
-&lt;li>Provision the box&lt;/li>
-&lt;li>Setup my local hosts file to a url&lt;/li>
-&lt;li>Finally run php artisan queue:listen to have my app call to the queue.&lt;/li>
-&lt;/ul>
-&lt;p>And that was about it.&lt;/p>
-&lt;h3 id="download-beanstalkd-console">Download Beanstalkd Console&lt;/h3>
-&lt;p>&lt;a href="https://github.com/ptrofimov/beanstalk_console">https://github.com/ptrofimov/beanstalk_console&lt;/a>
-have it stored in the&lt;/p>
-&lt;pre>&lt;code>/home/vagrant/Code/
-vagrant@homestead:~/Code/
-&lt;/code>&lt;/pre>&lt;h3 id="homestead-yml-file">Homestead YML file&lt;/h3>
-&lt;pre>&lt;code>//Homestead.yaml in root of your Homestead Vagrant install
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>beanstalkd on Alfred Nutile</title><link>https://alfrednutile.info/tags/beanstalkd/</link><description>Recent content in beanstalkd on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 30 Jun 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/beanstalkd/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel Homestead and Beanstalkd Console</title><link>https://alfrednutile.info/posts/92/</link><pubDate>Mon, 30 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/92/</guid><description><p>I am doing some queue work and wanted beanstalkd console installed so I can see the status of the queue</p><p><img src="https://camo.githubusercontent.com/1465416717c26b64eb6bc2647a2e8def90ee6da0/68747470733a2f2f7261772e6769746875622e636f6d2f7074726f66696d6f762f6265616e7374616c6b5f636f6e736f6c652f6d61737465722f636f7665722f6274636f6e736f6c652e706e67" alt="beanstalkd_console"/><p>Using Laravel Homestead as the vagrant box<a href="http://laravel.com/docs/homestead">http://laravel.com/docs/homestead</a> I needed to</p><ul><li>Download beanstalkd console<a href="https://github.com/ptrofimov/beanstalk_console">https://github.com/ptrofimov/beanstalk_console</a></li><li>Setup Homesteads yml file</li><li>Provision the box</li><li>Setup my local hosts file to a url</li><li>Finally run php artisan queue:listen to have my app call to the queue.</li></ul><p>And that was about it.</p><h3 id="download-beanstalkd-console">Download Beanstalkd Console</h3><p><a href="https://github.com/ptrofimov/beanstalk_console">https://github.com/ptrofimov/beanstalk_console</a>
+have it stored in the</p><pre><code>/home/vagrant/Code/
+vagrant@homestead:~/Code/</code></pre><h3 id="homestead-yml-file">Homestead YML file</h3><pre><code>//Homestead.yaml in root of your Homestead Vagrant install
 sites:
 - map: beanstalkd.dev
-to: /home/vagrant/Code/beanstalk_console/public
-&lt;/code>&lt;/pre>&lt;h3 id="provision-the-new-site">Provision the new site&lt;/h3>
-&lt;p>With Vagrant running do&lt;/p>
-&lt;pre>&lt;code>#on my local box not in vagrant
-&amp;gt; vagrant provision
-&lt;/code>&lt;/pre>&lt;h3 id="host-file">Host file&lt;/h3>
-&lt;p>Just make sure to match 127.0.0.1 to what the domain above or what ever you want&lt;/p>
-&lt;pre>&lt;code>#/etc/hosts
-127.0.0.1 beanstalkd.dev
-&lt;/code>&lt;/pre>&lt;p>Then in the vagrant box make sure beanstalkd is running ideally every time you start the box. Which by default the box does this.&lt;/p>
-&lt;p>Finally you should be able to go to &lt;a href="http://beanstalkd.dev">http://beanstalkd.dev&lt;/a>:8000/
-and see
-&lt;img src="https://photos-5.dropbox.com/t/0/AACD6vphteXY02OPF-VQUHG2lqRAXmp9UM4eLAltF-yRmQ/12/54803135/png/1024x768/3/1404136800/0/2/Screenshot%202014-06-30%2008.13.36.png/MO7OiL6camSR4kN6RVakDKfDYAwXCatCA5R1x00sCT4" alt="done">&lt;/p>
-&lt;h3 id="queue-listen">Queue Listen&lt;/h3>
-&lt;pre>&lt;code>#folder of project
-php artisan queue:listen
-&lt;/code>&lt;/pre>&lt;p>Now as you put things in the queue you can see them come and go at &lt;a href="http://beanstalkd.dev">http://beanstalkd.dev&lt;/a>:8000/&lt;/p></description><tags>laravel, beanstalkd, vagrant, homestead</tags></item></channel></rss>
+to: /home/vagrant/Code/beanstalk_console/public</code></pre><h3 id="provision-the-new-site">Provision the new site</h3><p>With Vagrant running do</p><pre><code>#on my local box not in vagrant
+> vagrant provision</code></pre><h3 id="host-file">Host file</h3><p>Just make sure to match 127.0.0.1 to what the domain above or what ever you want</p><pre><code>#/etc/hosts
+127.0.0.1 beanstalkd.dev</code></pre><p>Then in the vagrant box make sure beanstalkd is running ideally every time you start the box. Which by default the box does this.</p><p>Finally you should be able to go to<a href="http://beanstalkd.dev">http://beanstalkd.dev</a>:8000/
+and see<img src="https://photos-5.dropbox.com/t/0/AACD6vphteXY02OPF-VQUHG2lqRAXmp9UM4eLAltF-yRmQ/12/54803135/png/1024x768/3/1404136800/0/2/Screenshot%202014-06-30%2008.13.36.png/MO7OiL6camSR4kN6RVakDKfDYAwXCatCA5R1x00sCT4" alt="done"/><h3 id="queue-listen">Queue Listen</h3><pre><code>#folder of project
+php artisan queue:listen</code></pre><p>Now as you put things in the queue you can see them come and go at<a href="http://beanstalkd.dev">http://beanstalkd.dev</a>:8000/</p></description><tags>laravel, beanstalkd, vagrant, homestead</tags></item></channel></rss>

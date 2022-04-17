@@ -1,18 +1,8 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>docker on Alfred Nutile</title><link>https://alfrednutile.info/tags/docker/</link><description>Recent content in docker on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 16 Feb 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Docker Laravel and Cron</title><link>https://alfrednutile.info/posts/234/</link><pubDate>Fri, 16 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/234/</guid><description>&lt;p>This to this post &lt;a href="https://laracasts.com/discuss/channels/servers/run-the-scheduler-in-a-docker-image/replies/325422">here&lt;/a>&lt;/p>
-&lt;p>for the idea.&lt;/p>
-&lt;p>Basically running cron in Docker is easy BUT once the Host had more than one Docker client cron stopped working. No clue why but to solve this I did two things&lt;/p>
-&lt;p>One made a script that was on the Docker Client&lt;/p>
-&lt;p>&lt;code>/scheduler.sh&lt;/code>&lt;/p>
-&lt;pre>&lt;code>#!/bin/bash
-php /app/artisan schedule:run --verbose --no-interaction &amp;gt;&amp;gt; /dev/null 2&amp;gt;&amp;amp;1
-sleep 60
-&lt;/code>&lt;/pre>&lt;p>Then I did this in the &lt;code>Dockerfile&lt;/code>&lt;/p>
-&lt;pre>&lt;code>COPY scheduler.sh /
-RUN chmod 755 /scheduler.sh
-&lt;/code>&lt;/pre>&lt;p>Finally &lt;code>supervisord&lt;/code> manages it:&lt;/p>
-&lt;pre>&lt;code>[supervisord]
-nodaemon=true
-[program:scheduler]
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>docker on Alfred Nutile</title><link>https://alfrednutile.info/tags/docker/</link><description>Recent content in docker on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 16 Feb 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Docker Laravel and Cron</title><link>https://alfrednutile.info/posts/234/</link><pubDate>Fri, 16 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/234/</guid><description><p>This to this post<a href="https://laracasts.com/discuss/channels/servers/run-the-scheduler-in-a-docker-image/replies/325422">here</a></p><p>for the idea.</p><p>Basically running cron in Docker is easy BUT once the Host had more than one Docker client cron stopped working. No clue why but to solve this I did two things</p><p>One made a script that was on the Docker Client</p><p><code>/scheduler.sh</code></p><pre><code>#!/bin/bash
+php /app/artisan schedule:run --verbose --no-interaction >> /dev/null 2>&amp;1
+sleep 60</code></pre><p>Then I did this in the<code>Dockerfile</code></p><pre><code>COPY scheduler.sh /
+RUN chmod 755 /scheduler.sh</code></pre><p>Finally<code>supervisord</code> manages it:</p><pre><code>[supervisord]
+nodaemon=true<p>[program:scheduler]
 command=/scheduler.sh
 autostart=true
 autorestart=true
@@ -22,44 +12,30 @@ numprocs=1
 redirect_stderr=true
 stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
-stderr_logfile=/dev/stderr
-&lt;/code>&lt;/pre>&lt;p>the &lt;code>startsecs&lt;/code> allows it not to be seen as a failing script&lt;/p>
-&lt;h3 id="full-dockerfile">Full Dockerfile&lt;/h3>
-&lt;pre>&lt;code>FROM ubuntu:16.04
-#https://github.com/shipping-docker/dockerized-app/blob/master/docker/app/Dockerfile
-MAINTAINER Alfred Nutile
-RUN apt-get update \
-&amp;amp;&amp;amp; apt-get install -y locales \
-&amp;amp;&amp;amp; locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
+stderr_logfile=/dev/stderr</p><p/></pre><p>the<code>startsecs</code> allows it not to be seen as a failing script</p></p><h3 id="full-dockerfile">Full Dockerfile</h3><pre><code>FROM ubuntu:16.04<p>#https://github.com/shipping-docker/dockerized-app/blob/master/docker/app/Dockerfile
+MAINTAINER Alfred Nutile</p><p>RUN apt-get update<br>
+&amp;&amp; apt-get install -y locales<br>
+&amp;&amp; locale-gen en_US.UTF-8</p><p>ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
-## had to leave both update requests
-RUN apt-get update \
-&amp;amp;&amp;amp; DEBIAN_FRONTEND=noninteractive apt-get install -y cron anacron nginx curl zip unzip git software-properties-common supervisor sqlite3 \
-&amp;amp;&amp;amp; add-apt-repository -y ppa:ondrej/php \
-&amp;amp;&amp;amp; apt-get update \
-&amp;amp;&amp;amp; apt-get install -y screen vim php7.1-fpm php7.1-cli php7.1-mcrypt php7.1-gd php7.1-mysql \
-php7.1-pgsql php7.1-imap php-memcached php7.1-mbstring php7.1-xml php7.1-curl \
-php7.1-sqlite3 php7.1-xdebug imagemagick php7.1-intl php7.1-zip \
-&amp;amp;&amp;amp; php -r &amp;quot;readfile('http://getcomposer.org/installer');&amp;quot; | php -- --install-dir=/usr/bin/ --filename=composer \
-&amp;amp;&amp;amp; mkdir /run/php \
-&amp;amp;&amp;amp; apt-get remove -y --purge software-properties-common \
-&amp;amp;&amp;amp; apt-get -y autoremove \
-&amp;amp;&amp;amp; apt-get clean \
-&amp;amp;&amp;amp; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN mkdir /etc/nginx/ssl
+ENV LC_ALL en_US.UTF-8</p><h2 id="had-to-leave-both-update-requests">had to leave both update requests</h2><p>RUN apt-get update<br>
+&amp;&amp; DEBIAN_FRONTEND=noninteractive apt-get install -y cron anacron nginx curl zip unzip git software-properties-common supervisor sqlite3<br>
+&amp;&amp; add-apt-repository -y ppa:ondrej/php<br>
+&amp;&amp; apt-get update<br>
+&amp;&amp; apt-get install -y screen vim php7.1-fpm php7.1-cli php7.1-mcrypt php7.1-gd php7.1-mysql<br>
+php7.1-pgsql php7.1-imap php-memcached php7.1-mbstring php7.1-xml php7.1-curl<br>
+php7.1-sqlite3 php7.1-xdebug imagemagick php7.1-intl php7.1-zip<br>
+&amp;&amp; php -r "readfile(&lsquo;<a href="http://getcomposer.org/installer');">http://getcomposer.org/installer');</a>" | php &ndash; &ndash;install-dir=/usr/bin/ &ndash;filename=composer<br>
+&amp;&amp; mkdir /run/php<br>
+&amp;&amp; apt-get remove -y &ndash;purge software-properties-common<br>
+&amp;&amp; apt-get -y autoremove<br>
+&amp;&amp; apt-get clean<br>
+&amp;&amp; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*</p><p>RUN mkdir /etc/nginx/ssl
 COPY nginx.crt /etc/nginx/ssl/nginx.crt
 COPY nginx.key /etc/nginx/ssl/nginx.key
 COPY default /etc/nginx/sites-available/default
 COPY php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
-COPY xdebug.ini /etc/php/7.1/mods-available/xdebug.ini
-# 2018 02 16 09 13 39
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY xdebug.ini /etc/php/7.1/mods-available/xdebug.ini</p><h1 id="2018-02-16-09-13-39">2018 02 16 09 13 39</h1><p>COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY start-container /usr/local/bin/start-container
-RUN chmod +x /usr/local/bin/start-container
-## Deal with cron issues
-COPY scheduler.sh /
+RUN chmod +x /usr/local/bin/start-container</p><h2 id="deal-with-cron-issues">Deal with cron issues</h2><p>COPY scheduler.sh /
 RUN chmod 755 /scheduler.sh
-CMD [ &amp;quot;start-container&amp;quot; ]
-&lt;/code>&lt;/pre></description><tags>laravel, note2self, docker</tags></item></channel></rss>
+CMD [ "start-container" ]</code></pre></p></description><tags>laravel, note2self, docker</tags></item></channel></rss>

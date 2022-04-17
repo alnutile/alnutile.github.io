@@ -1,64 +1,25 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>events on Alfred Nutile</title><link>https://alfrednutile.info/tags/events/</link><description>Recent content in events on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 08 Feb 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/events/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Look at Laravel Events</title><link>https://alfrednutile.info/posts/132/</link><pubDate>Sun, 08 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/132/</guid><description>&lt;h1 id="events">Events&lt;/h1>
-&lt;h2 id="getting-started">Getting Started&lt;/h2>
-&lt;p>This is part of a larger &lt;a href="https://github.com/alnutile/laravel_guide/blob/master/index.md">Laravel Guide&lt;/a> I am working on in this case the example is in the Events &lt;a href="https://github.com/alnutile/laravel_guide/tree/master/projects/events">folder&lt;/a>&lt;/p>
-&lt;p>Start the example&lt;/p>
-&lt;pre>&lt;code>php artisan serve --port=8081
-&lt;/code>&lt;/pre>&lt;p>Then visit&lt;/p>
-&lt;pre>&lt;code>http://localhost:8081/example1
-&lt;/code>&lt;/pre>&lt;p>So if you look in&lt;/p>
-&lt;pre>&lt;code>app/routes.php
-&lt;/code>&lt;/pre>&lt;p>You see route example1 will fire and event and there are two listeners&lt;/p>
-&lt;h2 id="do-they-run-async-or-sync">Do they run async or sync&lt;/h2>
-&lt;p>If you hit that &lt;a href="http://localhost:8081/example1">route&lt;/a> you see the sleep taking effect so it is syncronous&lt;/p>
-&lt;p>See in the image below an example. I reload the page and the results are staggered by the sleep amount in the route.&lt;/p>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/alnutile/laravel_guide/master/docs/img/events/events_delay.png" alt="sleep">&lt;/p>
-&lt;p>On the left I have&lt;/p>
-&lt;pre>&lt;code>php artisan tail
-&lt;/code>&lt;/pre>&lt;p>Here is the route&lt;/p>
-&lt;pre>&lt;code>Event::listen('example1', function()
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>events on Alfred Nutile</title><link>https://alfrednutile.info/tags/events/</link><description>Recent content in events on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 08 Feb 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/events/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Look at Laravel Events</title><link>https://alfrednutile.info/posts/132/</link><pubDate>Sun, 08 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/132/</guid><description><h1 id="events">Events</h1><h2 id="getting-started">Getting Started</h2><p>This is part of a larger<a href="https://github.com/alnutile/laravel_guide/blob/master/index.md">Laravel Guide</a> I am working on in this case the example is in the Events<a href="https://github.com/alnutile/laravel_guide/tree/master/projects/events">folder</a></p><p>Start the example</p><pre><code>php artisan serve --port=8081</code></pre><p>Then visit</p><pre><code>http://localhost:8081/example1</code></pre><p>So if you look in</p><pre><code>app/routes.php</code></pre><p>You see route example1 will fire and event and there are two listeners</p><h2 id="do-they-run-async-or-sync">Do they run async or sync</h2><p>If you hit that<a href="http://localhost:8081/example1">route</a> you see the sleep taking effect so it is syncronous</p><p>See in the image below an example. I reload the page and the results are staggered by the sleep amount in the route.</p><p><img src="https://raw.githubusercontent.com/alnutile/laravel_guide/master/docs/img/events/events_delay.png" alt="sleep"/><p>On the left I have</p><pre><code>php artisan tail</code></pre><p>Here is the route</p><pre><code>Event::listen('example1', function()
 {
 sleep(5);
-Log::info(&amp;quot;Event one is Triggered&amp;quot;);
-});
-Event::listen('example1', function()
+Log::info("Event one is Triggered");
+});<p>Event::listen(&lsquo;example1&rsquo;, function()
 {
 sleep(5);
-Log::info(&amp;quot;Event two is Triggered&amp;quot;);
-});
-Route::get('/example1', function()
+Log::info("Event two is Triggered");
+});</p><p>Route::get('/example1', function()
 {
-Event::fire('example1');
-return &amp;quot;Event Example 1&amp;quot;;
-});
-&lt;/code>&lt;/pre>&lt;p>So if you did not want to hold up the process you would place these into a queue.&lt;/p>
-&lt;h2 id="passing-data-to-events">Passing data to events&lt;/h2>
-&lt;p>How can Event 1 alter Event 2 and Event 3&lt;/p>
-&lt;p>See route would be &lt;a href="http://localhost:8081/example2">/example2&lt;/a>&lt;/p>
-&lt;p>Also there is a registered event listener seen in the route file
-that&lt;/p>
-&lt;pre>&lt;code>$subscriber = new \Acme\ExampleEventHandler;
-Event::subscribe($subscriber);
-&lt;/code>&lt;/pre>&lt;p>Which shows how that made it hard to pass a state&lt;/p>
-&lt;pre>&lt;code>$subscriber = new \Acme\ExampleEventHandler;
-Event::subscribe($subscriber);
-Event::listen('example2', function($state)
+Event::fire(&lsquo;example1&rsquo;);
+return "Event Example 1";
+});</code></pre><p>So if you did not want to hold up the process you would place these into a queue.</p></p><h2 id="passing-data-to-events">Passing data to events</h2><p>How can Event 1 alter Event 2 and Event 3</p><p>See route would be<a href="http://localhost:8081/example2">/example2</a></p><p>Also there is a registered event listener seen in the route file
+that</p><pre><code>$subscriber = new \Acme\ExampleEventHandler;
+Event::subscribe($subscriber);</code></pre><p>Which shows how that made it hard to pass a state</p><pre><code>$subscriber = new \Acme\ExampleEventHandler;<p>Event::subscribe($subscriber);</p><p>Event::listen(&lsquo;example2&rsquo;, function($state)
 {
-$state-&amp;gt;total = $state-&amp;gt;total + 5;
-var_dump(sprintf(&amp;quot;From The listener one state %s &amp;lt;br&amp;gt;&amp;quot;, $state-&amp;gt;total));
-Log::info(sprintf(&amp;quot;Event two listener 1 is Triggered total %s&amp;quot;, $state-&amp;gt;total));
-});
-Event::listen('example2', function($state)
+$state->total = $state->total + 5;
+var_dump(sprintf("From The listener one state %s &lt;br>", $state->total));</p><pre><code>Log::info(sprintf(&amp;quot;Event two listener 1 is Triggered total %s&amp;quot;, $state-&amp;gt;total));</code></pre><p>});</p><p>Event::listen(&lsquo;example2&rsquo;, function($state)
 {
-$state-&amp;gt;total = $state-&amp;gt;total + 5;
-var_dump(sprintf(&amp;quot;From The listener two state %s &amp;lt;br&amp;gt;&amp;quot;, $state-&amp;gt;total));
-Log::info(sprintf(&amp;quot;Event two listener 2 is Triggered total %s&amp;quot;, $state-&amp;gt;total));
-});
-Route::get('/example2', function()
+$state->total = $state->total + 5;
+var_dump(sprintf("From The listener two state %s &lt;br>", $state->total));</p><pre><code>Log::info(sprintf(&amp;quot;Event two listener 2 is Triggered total %s&amp;quot;, $state-&amp;gt;total));</code></pre><p>});</p><p>Route::get('/example2', function()
 {
 $state = new stdClass();
-$state-&amp;gt;total = 0;
-Event::fire('example2', array($state));
-return sprintf(&amp;quot;Event Example 2 data total state %s&amp;quot;, $state-&amp;gt;total);
-});
-&lt;/code>&lt;/pre>&lt;p>This one you just see in the browser&lt;/p>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/alnutile/laravel_guide/master/docs/img/events/example2.png" alt="example2">&lt;/p></description><tags>laravel, events, php</tags></item></channel></rss>
+$state->total = 0;
+Event::fire(&lsquo;example2&rsquo;, array($state));</p><pre><code>return sprintf(&amp;quot;Event Example 2 data total state %s&amp;quot;, $state-&amp;gt;total);</code></pre><p>});</code></pre><p>This one you just see in the browser</p></p><p><img src="https://raw.githubusercontent.com/alnutile/laravel_guide/master/docs/img/events/example2.png" alt="example2"/></description><tags>laravel, events, php</tags></item></channel></rss>

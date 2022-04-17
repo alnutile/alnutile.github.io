@@ -1,49 +1,24 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>travis on Alfred Nutile</title><link>https://alfrednutile.info/tags/travis/</link><description>Recent content in travis on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 08 Jul 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/travis/index.xml" rel="self" type="application/rss+xml"/><item><title>Capistrano for non-rails sites</title><link>https://alfrednutile.info/posts/20/</link><pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/20/</guid><description>&lt;p>
-I've been using capistrano for Rails and really impressed by how easy it makes deployment and rolllback. Sometimes though I need this type of automation on non-rails work. This type of automation can include setting up a vhost in Apache as well as Travis CI work. I know Chef-solo might be best for this but since I am already in Capistrano I might as well push it a little more.
-&lt;/p>
-&lt;p>
-To use this on a static page I am building all I had to do, after making sure Ruby was installed of course was install the gem
-&lt;a herf=https://github.com/leehambley/railsless-deploy/>railsless-deploy&lt;/a>.
-&lt;/p>
-&lt;p>
-After I did that install I ran "capify ." in the folder I was working on.
-&lt;/p>
-&lt;p>
-From there I edited the file Capify in the root of the folder so, as noted on the page above, it required this gem.
-&lt;/p>
-&lt;p>
-In my case all I needed was a simple apache_vhost recipe and template to store the configurations using dynamic variables so I can use this on other sites quite easily. As well as updating the deploy.rb. You can see those in a github gist &lt;a href="#">here&lt;/a> and below.
-&lt;br>
-Also your folder layout will look like this
-&lt;br>
-/&lt;br>
-/Capfile&lt;br>
-/config&lt;br>
-/config/deploy.rb&lt;br>
-/config/recipes/base.rb&lt;br>
-/config/recipes/apachevhost.rb&lt;br>
-/config/recipes/templates/apache_vhost.erb&lt;br>
-&lt;/br>
-&lt;script src="https://gist.github.com/alnutile/5947574.js">&lt;/script>
-&lt;/p>
-&lt;p>
-Thanks to the RailsCast episode &lt;a href=http://railscasts.com/episodes/337-capistrano-recipes>#337&lt;/a> I shown also the trick to setup a base config file to add some shared methods.
-&lt;/p>
-&lt;p>
-One odd error before I could get this to work was to make an empty Gemfile in the root of the folder and run &lt;br>
-bundle install
-&lt;/br>
-Even though I assumed the railsless gem would do that. But I posted this question on their github page and will see what I was missing.
-&lt;br>
-Finally I ran &lt;br>
-&lt;/br>
-cap deploy:install&lt;br>
-cap deploy:setup&lt;br>
-cap deploy:cold
-&lt;/p>
-&lt;p>
-At this point Apache is set, the folders are set and the site can be accessed. And with all new pushes I just run cap deploy to update the server with the latest work from github "master"
-&lt;/p>
-&lt;p>
-The next steps will be to integrate this into Travis CI to test and deploy via the github/git webhook feature.
-&lt;/p></description><tags>travis</tags></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>travis on Alfred Nutile</title><link>https://alfrednutile.info/tags/travis/</link><description>Recent content in travis on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 08 Jul 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/travis/index.xml" rel="self" type="application/rss+xml"/><item><title>Capistrano for non-rails sites</title><link>https://alfrednutile.info/posts/20/</link><pubDate>Mon, 08 Jul 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/20/</guid><description><p>
+I've been using capistrano for Rails and really impressed by how easy it makes deployment and rolllback. Sometimes though I need this type of automation on non-rails work. This type of automation can include setting up a vhost in Apache as well as Travis CI work. I know Chef-solo might be best for this but since I am already in Capistrano I might as well push it a little more.</p><p>
+To use this on a static page I am building all I had to do, after making sure Ruby was installed of course was install the gem<a herf="ttps://github.com/leehambley/railsless-deplo"/>railsless-deploy</a>.</p><p>
+After I did that install I ran "capify ." in the folder I was working on.</p><p>
+From there I edited the file Capify in the root of the folder so, as noted on the page above, it required this gem.</p><p>
+In my case all I needed was a simple apache_vhost recipe and template to store the configurations using dynamic variables so I can use this on other sites quite easily. As well as updating the deploy.rb. You can see those in a github gist<a href="#">here</a> and below.<br>
+Also your folder layout will look like this<br>
+/<br>
+/Capfile<br>
+/config<br>
+/config/deploy.rb<br>
+/config/recipes/base.rb<br>
+/config/recipes/apachevhost.rb<br>
+/config/recipes/templates/apache_vhost.erb<br/><script src="https://gist.github.com/alnutile/5947574.js"/></p><p>
+Thanks to the RailsCast episode<a href="ttp://railscasts.com/episodes/337-capistrano-recipe">#337</a> I shown also the trick to setup a base config file to add some shared methods.</p><p>
+One odd error before I could get this to work was to make an empty Gemfile in the root of the folder and run<br>
+bundle install</br>
+Even though I assumed the railsless gem would do that. But I posted this question on their github page and will see what I was missing.<br>
+Finally I ran<br/>
+cap deploy:install<br>
+cap deploy:setup<br>
+cap deploy:cold</p><p>
+At this point Apache is set, the folders are set and the site can be accessed. And with all new pushes I just run cap deploy to update the server with the latest work from github "master"</p><p>
+The next steps will be to integrate this into Travis CI to test and deploy via the github/git webhook feature.</p></description><tags>travis</tags></item></channel></rss>

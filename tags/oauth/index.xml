@@ -1,62 +1,16 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>oauth on Alfred Nutile</title><link>https://alfrednutile.info/tags/oauth/</link><description>Recent content in oauth on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 14 Aug 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/oauth/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel 5.1 and Oauth</title><link>https://alfrednutile.info/posts/159/</link><pubDate>Fri, 14 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/159/</guid><description>&lt;h1 id="laravel-51-and-oauth2-server">Laravel 5.1 and Oauth2 Server&lt;/h1>
-&lt;p>Video coming soon&amp;hellip;&lt;/p>
-&lt;p>Example repo is here &lt;a href="https://github.com/alnutile/oauth_how_to">https://github.com/alnutile/oauth_how_to&lt;/a>&lt;/p>
-&lt;p>The library we will use is&lt;/p>
-&lt;p>&lt;a href="https://github.com/lucadegasperi/oauth2-server-laravel">https://github.com/lucadegasperi/oauth2-server-laravel&lt;/a>&lt;/p>
-&lt;p>This will setup a server both client_type and password_type for Grant Types.&lt;/p>
-&lt;h1 id="coming-to-terms-with-oauth">Coming to Terms with Oauth&lt;/h1>
-&lt;p>Coming to terms with this stuff is long and tedious.
-The docs are here &lt;a href="https://github.com/lucadegasperi/oauth2-server-laravel/">https://github.com/lucadegasperi/oauth2-server-laravel/&lt;/a> wiki will help and then these lead to the League docs as well &lt;a href="http://oauth2.thephpleague.com/">http://oauth2.thephpleague.com/&lt;/a>&lt;/p>
-&lt;p>There is also a podcast interview with the Alex Bilbie who made the League Oauth Library &lt;a href="http://fullstackradio.com/episodes/4/">http://fullstackradio.com/episodes/4/&lt;/a>&lt;/p>
-&lt;p>What I will cover is mainly the instalation going beyond the docs above into the details of getting this thing going. I will also provide a &amp;ldquo;play&amp;rdquo; repo for you to review.&lt;/p>
-&lt;h2 id="base-laravel-install">Base Laravel Install&lt;/h2>
-&lt;p>If you want to use this demo to play around just run &lt;code>composer install&lt;/code> and see the migration info below.&lt;/p>
-&lt;p>Install laravel as normal, install the library as normal. You will see some extra stuff I have in the repo for helping out as well (this will be seen in the video too)&lt;/p>
-&lt;p>&lt;code>app/OauthTools&lt;/code>&lt;/p>
-&lt;p>Some commands to use artisan to make users, tokens etc.&lt;/p>
-&lt;p>So in the end my &lt;code>app/Console/Kernel.php&lt;/code> looked like &lt;a href="https://github.com/alnutile/oauth_how_to/blob/master/app/Console/Kernel.php">https://github.com/alnutile/oauth_how_to/blob/master/app/Console/Kernel.php&lt;/a>&lt;/p>
-&lt;p>So I could easily do&lt;/p>
-&lt;pre>&lt;code>php artisan oauth-tools:adduser admin@foo.com
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/4oz4yn8p8gxftt2/make_user_oauth.png?dl=0" alt="">&lt;/p>
-&lt;p>or&lt;/p>
-&lt;pre>&lt;code>php artisan oauth-tools:generate-token 33591b34-03c2-4ece-a763-d531aee0298a admin@foo.com client
-&lt;/code>&lt;/pre>&lt;p>Also note &lt;a href="https://github.com/alnutile/oauth_how_to/blob/master/composer.json">composer.json&lt;/a> I use a uuid library to help with these commands etc.&lt;/p>
-&lt;p>Finally to have all of this work out of the box with the Postman file I shared run it this way for now&lt;/p>
-&lt;pre>&lt;code>cd public
-php -S localhost:8181
-&lt;/code>&lt;/pre>&lt;p>The database for this example is sqlite so&lt;/p>
-&lt;pre>&lt;code>touch storage/database.sqlite
-php artisan migrate:refresh --seed
-&lt;/code>&lt;/pre>&lt;p>And you should now have a db and migrations&lt;/p>
-&lt;p>Since it is sqlite just rm the file and touch it again to re-migrate and save your self the headache of DBAL driver etc since this just just a quick working demo.&lt;/p>
-&lt;h2 id="setup-your-oauth-config">Setup your oauth config&lt;/h2>
-&lt;p>&lt;code>config/oauth2.php&lt;/code> file as seen &lt;a href="https://github.com/alnutile/oauth_how_to/blob/master/config/oauth2.php">here&lt;/a> &lt;strong>BUT&lt;/strong> only if you want these. And my &lt;code>access_token_ttl&lt;/code> is way too big so see the defaults in the docs. Also note it points to &lt;a href="https://github.com/alnutile/oauth_how_to/blob/master/app/OauthPasswordVerifier.php">OauthPasswordVerifier&lt;/a> which the docs talk about as well.&lt;/p>
-&lt;h2 id="route">Route&lt;/h2>
-&lt;p>As noted you add the code to your route&lt;/p>
-&lt;pre>&lt;code>Route::post('oauth/access_token', function() {
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>oauth on Alfred Nutile</title><link>https://alfrednutile.info/tags/oauth/</link><description>Recent content in oauth on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 14 Aug 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/oauth/index.xml" rel="self" type="application/rss+xml"/><item><title>Laravel 5.1 and Oauth</title><link>https://alfrednutile.info/posts/159/</link><pubDate>Fri, 14 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/159/</guid><description><h1 id="laravel-51-and-oauth2-server">Laravel 5.1 and Oauth2 Server</h1><p>Video coming soon&hellip;</p><p>Example repo is here<a href="https://github.com/alnutile/oauth_how_to">https://github.com/alnutile/oauth_how_to</a></p><p>The library we will use is</p><p><a href="https://github.com/lucadegasperi/oauth2-server-laravel">https://github.com/lucadegasperi/oauth2-server-laravel</a></p><p>This will setup a server both client_type and password_type for Grant Types.</p><h1 id="coming-to-terms-with-oauth">Coming to Terms with Oauth</h1><p>Coming to terms with this stuff is long and tedious.
+The docs are here<a href="https://github.com/lucadegasperi/oauth2-server-laravel/">https://github.com/lucadegasperi/oauth2-server-laravel/</a> wiki will help and then these lead to the League docs as well<a href="http://oauth2.thephpleague.com/">http://oauth2.thephpleague.com/</a></p><p>There is also a podcast interview with the Alex Bilbie who made the League Oauth Library<a href="http://fullstackradio.com/episodes/4/">http://fullstackradio.com/episodes/4/</a></p><p>What I will cover is mainly the instalation going beyond the docs above into the details of getting this thing going. I will also provide a &ldquo;play&rdquo; repo for you to review.</p><h2 id="base-laravel-install">Base Laravel Install</h2><p>If you want to use this demo to play around just run<code>composer install</code> and see the migration info below.</p><p>Install laravel as normal, install the library as normal. You will see some extra stuff I have in the repo for helping out as well (this will be seen in the video too)</p><p><code>app/OauthTools</code></p><p>Some commands to use artisan to make users, tokens etc.</p><p>So in the end my<code>app/Console/Kernel.php</code> looked like<a href="https://github.com/alnutile/oauth_how_to/blob/master/app/Console/Kernel.php">https://github.com/alnutile/oauth_how_to/blob/master/app/Console/Kernel.php</a></p><p>So I could easily do</p><pre><code>php artisan oauth-tools:adduser admin@foo.com</code></pre><p><img src="https://dl.dropboxusercontent.com/s/4oz4yn8p8gxftt2/make_user_oauth.png?dl=0" alt=""/><p>or</p><pre><code>php artisan oauth-tools:generate-token 33591b34-03c2-4ece-a763-d531aee0298a admin@foo.com client</code></pre><p>Also note<a href="https://github.com/alnutile/oauth_how_to/blob/master/composer.json">composer.json</a> I use a uuid library to help with these commands etc.</p><p>Finally to have all of this work out of the box with the Postman file I shared run it this way for now</p><pre><code>cd public
+php -S localhost:8181</code></pre><p>The database for this example is sqlite so</p><pre><code>touch storage/database.sqlite
+php artisan migrate:refresh --seed</code></pre><p>And you should now have a db and migrations</p><p>Since it is sqlite just rm the file and touch it again to re-migrate and save your self the headache of DBAL driver etc since this just just a quick working demo.</p><h2 id="setup-your-oauth-config">Setup your oauth config</h2><p><code>config/oauth2.php</code> file as seen<a href="https://github.com/alnutile/oauth_how_to/blob/master/config/oauth2.php">here</a><strong>BUT</strong> only if you want these. And my<code>access_token_ttl</code> is way too big so see the defaults in the docs. Also note it points to<a href="https://github.com/alnutile/oauth_how_to/blob/master/app/OauthPasswordVerifier.php">OauthPasswordVerifier</a> which the docs talk about as well.</p><h2 id="route">Route</h2><p>As noted you add the code to your route</p><pre><code>Route::post('oauth/access_token', function() {
+return Response::json(Authorizer::issueAccessToken());
+});<p>Route::get(&lsquo;test&rsquo;, [&lsquo;middleware&rsquo; => &lsquo;oauth&rsquo;, function() {
+return Response::json("Welcome");
+}]);</code></pre><p>Later on you will see this instead</p></p><pre><code>Route::post('oauth/access_token', function() {
 return Response::json(Authorizer::issueAccessToken());
 });
-Route::get('test', ['middleware' =&amp;gt; 'oauth', function() {
-return Response::json(&amp;quot;Welcome&amp;quot;);
-}]);
-&lt;/code>&lt;/pre>&lt;p>Later on you will see this instead&lt;/p>
-&lt;pre>&lt;code>Route::post('oauth/access_token', function() {
-return Response::json(Authorizer::issueAccessToken());
-});
-Route::get('test', ['middleware' =&amp;gt; 'oauthOrAuth', function() {
-return Response::json(&amp;quot;Welcome&amp;quot;);
-}]);
-&lt;/code>&lt;/pre>&lt;p>With the &lt;strong>oauthOrAuth&lt;/strong> I will explain that in the video as well. But basically and api endpoint can be used by a local session based user and a remote application using oauth. It is just how our APIs go.&lt;/p>
-&lt;p>So this lets that work just fine.&lt;/p>
-&lt;h2 id="postman">Postman&lt;/h2>
-&lt;p>Just to show it all working you will see in the video me using postman. You will see that in the repo &lt;a href="https://github.com/alnutile/oauth_how_to/blob/master/oauth_try_2.json.postman_collection">here&lt;/a>&lt;/p>
-&lt;h2 id="now-what">Now What&lt;/h2>
-&lt;p>Between the links above and Postman you have a working&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/bbt0fmfflm2zq7x/oauth_token.gif?dl=0" alt="">&lt;/p></description><tags>oauth, laravel</tags></item><item><title>Dealing with Oauth2 Server and Laravel for both a local app login and for remote apps using Lucadegasperi/oauth2-server-laravel</title><link>https://alfrednutile.info/posts/133/</link><pubDate>Mon, 23 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/133/</guid><description>&lt;p>This is all based around this library &lt;a href="https://github.com/lucadegasperi/oauth2-server-laravel">https://github.com/lucadegasperi/oauth2-server-laravel&lt;/a>&lt;/p>
-&lt;p>I am building and API to be used by an iOs and Android client I will be making soon. &lt;strong>But&lt;/strong> I also needed the filter system to deal with my local Laravel view that was using the api via an Angular driven widget so the user can go to the website as well.&lt;/p>
-&lt;p>So the website is where the user can go to do change settings, subscription updates etc, but in that case they are logged in via the Laravel login form. From there they land on the profile page where the Angular widget will do n xhr request to the api to fill in the table/settings.&lt;/p>
-&lt;p>The routes ends up looking like this&lt;/p>
-&lt;pre>&lt;code>
+Route::get('test', ['middleware' => 'oauthOrAuth', function() {
+return Response::json("Welcome");
+}]);</code></pre><p>With the<strong>oauthOrAuth</strong> I will explain that in the video as well. But basically and api endpoint can be used by a local session based user and a remote application using oauth. It is just how our APIs go.</p><p>So this lets that work just fine.</p><h2 id="postman">Postman</h2><p>Just to show it all working you will see in the video me using postman. You will see that in the repo<a href="https://github.com/alnutile/oauth_how_to/blob/master/oauth_try_2.json.postman_collection">here</a></p><h2 id="now-what">Now What</h2><p>Between the links above and Postman you have a working</p><p><img src="https://dl.dropboxusercontent.com/s/bbt0fmfflm2zq7x/oauth_token.gif?dl=0" alt=""/></description><tags>oauth, laravel</tags></item><item><title>Dealing with Oauth2 Server and Laravel for both a local app login and for remote apps using Lucadegasperi/oauth2-server-laravel</title><link>https://alfrednutile.info/posts/133/</link><pubDate>Mon, 23 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/133/</guid><description><p>This is all based around this library<a href="https://github.com/lucadegasperi/oauth2-server-laravel">https://github.com/lucadegasperi/oauth2-server-laravel</a></p><p>I am building and API to be used by an iOs and Android client I will be making soon.<strong>But</strong> I also needed the filter system to deal with my local Laravel view that was using the api via an Angular driven widget so the user can go to the website as well.</p><p>So the website is where the user can go to do change settings, subscription updates etc, but in that case they are logged in via the Laravel login form. From there they land on the profile page where the Angular widget will do n xhr request to the api to fill in the table/settings.</p><p>The routes ends up looking like this</p><pre><code>
 Route::filter('setUser', function()
 {
 if(Auth::guest())
@@ -64,27 +18,19 @@ if(Auth::guest())
 $user_id = Authorizer::getResourceOwnerId();
 Auth::loginUsingId($user_id);
 }
-});
-//The view they see using Laravel Blade and an embedded angular widget
-Route::get('profile', ['middleware' =&amp;gt; 'auth', 'uses' =&amp;gt; 'ProfileController@getProfile']);
-//The API
-Route::group(['prefix' =&amp;gt; 'api/v1', 'before' =&amp;gt; 'oauth|setUser|auth'], function() {
-Route::get('profile', 'ProfileController@getApiProfile');
-});
-&lt;/code>&lt;/pre>&lt;p>The thing is the Oauth2 filter was causing some issues&lt;/p>
-&lt;p>1 Looks for a access_token query string or header
-2 Does not load the user like I need&lt;/p>
-&lt;p>The first issue I just made a class to extend the core filter for the Oauth2 library.&lt;/p>
-&lt;h3 id="my-provider">My provider&lt;/h3>
-&lt;pre>&lt;code>&amp;lt;?php namespace App\Providers;
-use App\Filters\OauthTotalRecalls;
+});<p>//The view they see using Laravel Blade and an embedded angular widget
+Route::get(&lsquo;profile&rsquo;, [&lsquo;middleware&rsquo; => &lsquo;auth&rsquo;, &lsquo;uses&rsquo; => &lsquo;ProfileController@getProfile&rsquo;]);</p><p>//The API
+Route::group([&lsquo;prefix&rsquo; => &lsquo;api/v1&rsquo;, &lsquo;before&rsquo; => &lsquo;oauth|setUser|auth&rsquo;], function() {
+Route::get(&lsquo;profile&rsquo;, &lsquo;ProfileController@getApiProfile&rsquo;);
+});</code></pre><p>The thing is the Oauth2 filter was causing some issues</p></p><p>1 Looks for a access_token query string or header
+2 Does not load the user like I need</p><p>The first issue I just made a class to extend the core filter for the Oauth2 library.</p><h3 id="my-provider">My provider</h3><pre><code>&lt;?php namespace App\Providers;<p>use App\Filters\OauthTotalRecalls;
 use Illuminate\Support\ServiceProvider;
 class OauthFilterProvider extends ServiceProvider {
 public function boot()
 {
-$this-&amp;gt;app-&amp;gt;bindShared('LucaDegasperi\OAuth2Server\Filters\OAuthFilter', function ($app) {
-$httpHeadersOnly = $app['config']-&amp;gt;get('oauth2.http_headers_only');
-return new OauthTotalRecalls($app['oauth2-server.authorizer'], $httpHeadersOnly);
+$this->app->bindShared(&lsquo;LucaDegasperi\OAuth2Server\Filters\OAuthFilter&rsquo;, function ($app) {
+$httpHeadersOnly = $app[&lsquo;config&rsquo;]->get(&lsquo;oauth2.http_headers_only&rsquo;);
+return new OauthTotalRecalls($app[&lsquo;oauth2-server.authorizer&rsquo;], $httpHeadersOnly);
 });
 }
 /**
@@ -96,11 +42,7 @@ public function register()
 {
 // TODO: Implement register() method.
 }
-}
-&lt;/code>&lt;/pre>&lt;p>Then I register that in my app.conf after I register his.&lt;/p>
-&lt;h3 id="my-filter">My Filter&lt;/h3>
-&lt;p>It overrides the filter to do one thing and that is to check if the user is a guest. Which they would not be if they are logging in via the Laravel login form.&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php namespace App\Filters;
+}</code></pre><p>Then I register that in my app.conf after I register his.</p></p><h3 id="my-filter">My Filter</h3><p>It overrides the filter to do one thing and that is to check if the user is a guest. Which they would not be if they are logging in via the Laravel login form.</p><pre><code>&lt;?php namespace App\Filters;
 use Illuminate\Support\Facades\Auth;
 use LucaDegasperi\OAuth2Server\Filters\OAuthFilter;
 class OauthTotalRecalls extends OAuthFilter {
@@ -114,23 +56,19 @@ public function filter()
 {
 if(Auth::guest())
 {
-if (func_num_args() &amp;gt; 2) {
+if (func_num_args() > 2) {
 $args = func_get_args();
-$this-&amp;gt;scopes = array_slice($args, 2);
+$this->scopes = array_slice($args, 2);
 }
-$this-&amp;gt;authorizer-&amp;gt;validateAccessToken($this-&amp;gt;httpHeadersOnly);
-$this-&amp;gt;validateScopes();
+$this->authorizer->validateAccessToken($this->httpHeadersOnly);
+$this->validateScopes();
 }
 }
-}
-&lt;/code>&lt;/pre>&lt;h3 id="loading-user">Loading user&lt;/h3>
-&lt;p>So at this point the user is logged in via Laravel so the Auth::user() is fully set. But lastly if this was the token based log in the &amp;ldquo;setUser&amp;rdquo; filter will kick in and load the user from the token. If the token is wrong then this all will fail.&lt;/p>
-&lt;pre>&lt;code>Route::filter('setUser', function()
+}</code></pre><h3 id="loading-user">Loading user</h3><p>So at this point the user is logged in via Laravel so the Auth::user() is fully set. But lastly if this was the token based log in the &ldquo;setUser&rdquo; filter will kick in and load the user from the token. If the token is wrong then this all will fail.</p><pre><code>Route::filter('setUser', function()
 {
 if(Auth::guest())
 {
 $user_id = Authorizer::getResourceOwnerId();
 Auth::loginUsingId($user_id);
 }
-});
-&lt;/code>&lt;/pre></description><tags>oauth, laravel, apis</tags></item></channel></rss>
+});</code></pre></description><tags>oauth, laravel, apis</tags></item></channel></rss>

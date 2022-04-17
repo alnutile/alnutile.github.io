@@ -1,71 +1,36 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>integration on Alfred Nutile</title><link>https://alfrednutile.info/tags/integration/</link><description>Recent content in integration on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 27 May 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/integration/index.xml" rel="self" type="application/rss+xml"/><item><title>Easily Create Fixture Data from Remote Services and Refresh Mock Data</title><link>https://alfrednutile.info/posts/145/</link><pubDate>Wed, 27 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/145/</guid><description>&lt;p>&lt;strong>Oops Codeship and Laravel is &lt;a href="https://goo.gl/k62TEB">here&lt;/a>&lt;/strong>&lt;/p>
-&lt;h1 id="easily-create-fixture-data-from-remote-services-and-refresh-mock-data">Easily Create Fixture Data from Remote Services and Refresh Mock Data&lt;/h1>
-&lt;p>We have integration tests that hit remote apis like Github, S3, DynomoDB, our own APIs etc and we do not want to hit those during out tests but we also want to make sure we have the real data. So when one of those APIs change then our mock data can be refreshed to see if our systems really work with it.&lt;/p>
-&lt;p>Using Laravel&amp;rsquo;s new integration tests, though this works with any framework, we will swap out these Service classes with a Wrapper class ONLY if we have a matching file. This allows us to delete those files and get another one on the fly.&lt;/p>
-&lt;h2 id="lets-start-with-the-controller">Lets start with the Controller&lt;/h2>
-&lt;p>This simple Controller will talk to a Repo. Imagine the repo talking to Dynamodb or GithubApi, database etc.&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
-namespace App\Http\Controllers;
-use App\ExampleRepo;
-use Illuminate\Support\Facades\Response;
-class ExampleController extends Controller
-{
-public function mocking(ExampleRepo $exampleRepo)
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>integration on Alfred Nutile</title><link>https://alfrednutile.info/tags/integration/</link><description>Recent content in integration on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 27 May 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/integration/index.xml" rel="self" type="application/rss+xml"/><item><title>Easily Create Fixture Data from Remote Services and Refresh Mock Data</title><link>https://alfrednutile.info/posts/145/</link><pubDate>Wed, 27 May 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/145/</guid><description><p><strong>Oops Codeship and Laravel is<a href="https://goo.gl/k62TEB">here</a></strong></p><h1 id="easily-create-fixture-data-from-remote-services-and-refresh-mock-data">Easily Create Fixture Data from Remote Services and Refresh Mock Data</h1><p>We have integration tests that hit remote apis like Github, S3, DynomoDB, our own APIs etc and we do not want to hit those during out tests but we also want to make sure we have the real data. So when one of those APIs change then our mock data can be refreshed to see if our systems really work with it.</p><p>Using Laravel&rsquo;s new integration tests, though this works with any framework, we will swap out these Service classes with a Wrapper class ONLY if we have a matching file. This allows us to delete those files and get another one on the fly.</p><h2 id="lets-start-with-the-controller">Lets start with the Controller</h2><p>This simple Controller will talk to a Repo. Imagine the repo talking to Dynamodb or GithubApi, database etc.</p><pre><code>&lt;?php<p>namespace App\Http\Controllers;</p><p>use App\ExampleRepo;
+use Illuminate\Support\Facades\Response;</p><p>class ExampleController extends Controller
+{</p><pre><code>public function mocking(ExampleRepo $exampleRepo)
 {
 return Response::json(&amp;quot;You are here &amp;quot; . $exampleRepo-&amp;gt;get());
-}
-}
-&lt;/code>&lt;/pre>&lt;p>So thanks to the dependency injection system; and the use of the Reflection Class, &lt;code>ExampleRepo&lt;/code> get constructed as well.&lt;/p>
-&lt;h2 id="the-tests">The Tests&lt;/h2>
-&lt;p>First lets look at a normal test no mock&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\App;
+}</code></pre><p>}</code></pre><p>So thanks to the dependency injection system; and the use of the Reflection Class,<code>ExampleRepo</code> get constructed as well.</p></p><h2 id="the-tests">The Tests</h2><p>First lets look at a normal test no mock</p><pre><code>&lt;?php<p>use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseTransactions;</p><p>use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
-use Mockery as m;
-class ExampleTest extends TestCase
+use Mockery as m;</p><p>class ExampleTest extends TestCase
 {
 public function testDefault()
 {
-$this-&amp;gt;get('/mocking')-&amp;gt;see(&amp;quot;You are here foo&amp;quot;);
+$this->get('/mocking')->see("You are here foo");
 }
-}
-&lt;/code>&lt;/pre>&lt;p>Pretty simple. But not lets&amp;hellip;&lt;/p>
-&lt;h2 id="swap-things-out">Swap Things Out&lt;/h2>
-&lt;p>Here we add an example of replacing the default instance &lt;code>App&lt;/code> would make with our own Wrapper&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\App;
+}</code></pre><p>Pretty simple. But not lets…</p></p><h2 id="swap-things-out">Swap Things Out</h2><p>Here we add an example of replacing the default instance<code>App</code> would make with our own Wrapper</p><pre><code>&lt;?php<p>use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseTransactions;</p><p>use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
-use Mockery as m;
-class ExampleTest extends TestCase
+use Mockery as m;</p><p>class ExampleTest extends TestCase
 {
 public function testDefault()
 {
-$this-&amp;gt;get('/mocking')-&amp;gt;see(&amp;quot;You are here foo&amp;quot;);
-}
-public function testMocking()
+$this->get('/mocking')->see("You are here foo");
+}</p><pre><code>public function testMocking()
 {
 $mock = m::mock('App\ExampleRepo');
 $mock-&amp;gt;shouldReceive('get')-&amp;gt;once()-&amp;gt;andReturn('bar');
 App::instance('App\ExampleRepo', $mock);
 $this-&amp;gt;get('/mocking')-&amp;gt;see(&amp;quot;You are here bar&amp;quot;);
-}
-}
-&lt;/code>&lt;/pre>&lt;p>&lt;code>testMocking&lt;/code> will now return bar!&lt;/p>
-&lt;h2 id="making-fixtures-on-the-fly">Making Fixtures on the Fly&lt;/h2>
-&lt;p>Same results BUT we hit my wrapper not the real services. But here is where I think it gets even better. I can return fixture data BUT at the same time I can not worry about returning stale fixture data eg the apis have changed but my fixtures have not. All of this without having my test code wrapped into the app code.&lt;/p>
-&lt;p>This will look for the output of a route. That Controller and Repo we will show in a moment&lt;/p>
-&lt;pre>&lt;code> public function testMakeFixture()
+}</code></pre><p>}</p><p/></pre><p><code>testMocking</code> will now return bar!</p></p><h2 id="making-fixtures-on-the-fly">Making Fixtures on the Fly</h2><p>Same results BUT we hit my wrapper not the real services. But here is where I think it gets even better. I can return fixture data BUT at the same time I can not worry about returning stale fixture data eg the apis have changed but my fixtures have not. All of this without having my test code wrapped into the app code.</p><p>This will look for the output of a route. That Controller and Repo we will show in a moment</p><pre><code> public function testMakeFixture()
 {
 $wrapper = App::make('App\ExampleRepoWrapper');
-App::instance('App\ExampleRepo', $wrapper);
-$this-&amp;gt;get('/mocking')-&amp;gt;see(&amp;quot;You are here foo&amp;quot;);
-}
-&lt;/code>&lt;/pre>&lt;p>This test has a wrapper which extends the repo&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
+App::instance('App\ExampleRepo', $wrapper);<pre><code> $this-&amp;gt;get('/mocking')-&amp;gt;see(&amp;quot;You are here foo&amp;quot;);
+}</code></pre><p/></pre><p>This test has a wrapper which extends the repo</p></p><pre><code>&lt;?php
 namespace App;
 use Illuminate\Support\Facades\File;
 class ExampleRepoWrapper extends ExampleRepo
@@ -85,13 +50,8 @@ File::put(base_path('tests/fixtures/foo.json'), $content);
 }
 return $results;
 }
-}
-&lt;/code>&lt;/pre>&lt;p>So now the Controller will talk to the Wrapper instead which will look for a file &lt;code>(NOTE: You can easily pass in $id or $name to make the fixtures unique)&lt;/code>&lt;/p>
-&lt;p>So now when the Controller hits our Wrapper it goes right to the real &lt;code>ExampleRepo&lt;/code> (seen below) &lt;strong>if there is no fixture file&lt;/strong> and then the Wrapper kicks in to make the file (as seen in the above class).&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php namespace App;
-class ExampleRepo
-{
-protected $results;
+}</code></pre><p>So now the Controller will talk to the Wrapper instead which will look for a file<code>(NOTE: You can easily pass in $id or $name to make the fixtures unique)</code></p><p>So now when the Controller hits our Wrapper it goes right to the real<code>ExampleRepo</code> (seen below)<strong>if there is no fixture file</strong> and then the Wrapper kicks in to make the file (as seen in the above class).</p><pre><code>&lt;?php namespace App;<p>class ExampleRepo
+{</p><pre><code>protected $results;
 public function get()
 {
 $this-&amp;gt;results = 'foo';
@@ -103,43 +63,22 @@ return $this-&amp;gt;results;
 public function getResults()
 {
 return $this-&amp;gt;results;
-}
-}
-&lt;/code>&lt;/pre>&lt;p>That is it you can do integration testing on your APIs and not hit external services or even databases.&lt;/p>
-&lt;h2 id="force-full-integration">Force Full Integration&lt;/h2>
-&lt;p>Sometimes you want to hit the external resources. This can be part of a weekly or daily test to make sure you app is working with all the external APIs. You can do this by deleting all the fixtures before running that test.&lt;/p>
-&lt;p>So you can setup a provider like this&lt;/p>
-&lt;pre>&lt;code>
+}</code></pre><p>}</code></pre><p>That is it you can do integration testing on your APIs and not hit external services or even databases.</p></p><h2 id="force-full-integration">Force Full Integration</h2><p>Sometimes you want to hit the external resources. This can be part of a weekly or daily test to make sure you app is working with all the external APIs. You can do this by deleting all the fixtures before running that test.</p><p>So you can setup a provider like this</p><pre><code>
 class ExampleProvider extends ServiceProvider
+{<p>public function register()
 {
-public function register()
+if(App::environment() == &lsquo;testing&rsquo; and env(&lsquo;FULL_INTEGRATION&rsquo;) != &lsquo;true&rsquo;)
 {
-if(App::environment() == 'testing' and env('FULL_INTEGRATION') != 'true')
-{
-$this-&amp;gt;app-&amp;gt;bind('App\ExampleRepo', 'App\ExampleRepoWrapper');
-} else {
-$this-&amp;gt;app-&amp;gt;bind('App\ExampleRepo', 'App\ExampleRepo');
-}
-}
-}
-** UPDATE **
-Another good idea, by [Nathan Kirschbaum](https://twitter.com/n_kirschbaum), is to set the `FULL_INTEGRATION` setting by the user that is logged in.
-&lt;/code>&lt;/pre>&lt;h2 id="cons">Cons&lt;/h2>
-&lt;p>One is UI testing. Prior to this I would make wrappers as needed to then take over if say &lt;code>APP_MOCK=true&lt;/code>. Then I could mock even on Behat testing or the UI. But that meant a lot of Providers and alot of mixing of testing and code. But it worked and ran well on services like CodeShip and locally. If you Behat/Acceptance tests are hitting the API or UI it would be nice to fake all the external responses. Though now with the above the API testing is easy. The UI (when there is javascript) not so easy :(&lt;/p>
-&lt;p>Since we are using &lt;code>App::instance&lt;/code> we did not need to register a Provider Class. But to make the UI con a non issue you can go that far to register a ServiceProvider&lt;/p>
-&lt;pre>&lt;code>
+$this->app->bind(&lsquo;App\ExampleRepo&rsquo;, &lsquo;App\ExampleRepoWrapper&rsquo;);<br>
+} else {<br>
+$this->app->bind(&lsquo;App\ExampleRepo&rsquo;, &lsquo;App\ExampleRepo&rsquo;);
+}</p><p>}</p><p>}</p><p>** UPDATE **</p><p>Another good idea, by<a href="https://twitter.com/n_kirschbaum">Nathan Kirschbaum</a>, is to set the<code>FULL_INTEGRATION</code> setting by the user that is logged in.</p><p/></pre><h2 id="cons">Cons</h2></p><p>One is UI testing. Prior to this I would make wrappers as needed to then take over if say<code>APP_MOCK=true</code>. Then I could mock even on Behat testing or the UI. But that meant a lot of Providers and alot of mixing of testing and code. But it worked and ran well on services like CodeShip and locally. If you Behat/Acceptance tests are hitting the API or UI it would be nice to fake all the external responses. Though now with the above the API testing is easy. The UI (when there is javascript) not so easy :(</p><p>Since we are using<code>App::instance</code> we did not need to register a Provider Class. But to make the UI con a non issue you can go that far to register a ServiceProvider</p><pre><code>
 class ExampleProvider extends ServiceProvider
+{<p>public function register()
 {
-public function register()
+if(App::environment() == &lsquo;testing&rsquo;
 {
-if(App::environment() == 'testing'
-{
-$this-&amp;gt;app-&amp;gt;bind('App\ExampleRepo', 'App\ExampleRepoWrapper');
-} else {
-$this-&amp;gt;app-&amp;gt;bind('App\ExampleRepo', 'App\ExampleRepo');
-}
-}
-}
-&lt;/code>&lt;/pre>&lt;p>Then register as normal in your config/app.php . This can be kinda tedious but would produce the same results.&lt;/p>
-&lt;p>Great book on the topic &lt;a href="https://leanpub.com/laravel-testing-decoded">Laravel Testing Decoded&lt;/a>&lt;/p>
-&lt;p>&lt;img src="https://s3.amazonaws.com/titlepages.leanpub.com/laravel-testing-decoded/large?1425536214" alt="decoded">&lt;/p></description><tags>testing, laravel, php, phpunit, integration</tags></item></channel></rss>
+$this->app->bind(&lsquo;App\ExampleRepo&rsquo;, &lsquo;App\ExampleRepoWrapper&rsquo;);<br>
+} else {<br>
+$this->app->bind(&lsquo;App\ExampleRepo&rsquo;, &lsquo;App\ExampleRepo&rsquo;);
+}</p><p>}</p><p>}</p><p/></pre><p>Then register as normal in your config/app.php . This can be kinda tedious but would produce the same results.</p></p><p>Great book on the topic<a href="https://leanpub.com/laravel-testing-decoded">Laravel Testing Decoded</a></p><p><img src="https://s3.amazonaws.com/titlepages.leanpub.com/laravel-testing-decoded/large?1425536214" alt="decoded"/></description><tags>testing, laravel, php, phpunit, integration</tags></item></channel></rss>

@@ -1,25 +1,11 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>l5 on Alfred Nutile</title><link>https://alfrednutile.info/tags/l5/</link><description>Recent content in l5 on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 15 Oct 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/l5/index.xml" rel="self" type="application/rss+xml"/><item><title>CSRF Tokens and Angular.js</title><link>https://alfrednutile.info/posts/110/</link><pubDate>Wed, 15 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/110/</guid><description>&lt;p>This is key to preventing &lt;a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">Cross-site request forgery&lt;/a>. Basically you log in and do some work on one site, then go to a malicious site and now they can send POST requests to the sites you have authentication to. But by passing a token we can prevent that issue.&lt;/p>
-&lt;p>The steps&lt;/p>
-&lt;ul>
-&lt;li>Make a token path&lt;/li>
-&lt;li>Make a token service to use again and again in Angular.js&lt;/li>
-&lt;li>Add it as a resolve to the route in Angular.js&lt;/li>
-&lt;li>Add it to your forms&lt;/li>
-&lt;/ul>
-&lt;h2 id="make-a-token-path">Make a token path&lt;/h2>
-&lt;p>In this case it is Laravel and I just add this route (in a Controller or route.php same idea)&lt;/p>
-&lt;pre>&lt;code> /**
-* @Get(&amp;quot;auth/token&amp;quot;)
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>l5 on Alfred Nutile</title><link>https://alfrednutile.info/tags/l5/</link><description>Recent content in l5 on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 15 Oct 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/l5/index.xml" rel="self" type="application/rss+xml"/><item><title>CSRF Tokens and Angular.js</title><link>https://alfrednutile.info/posts/110/</link><pubDate>Wed, 15 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/110/</guid><description><p>This is key to preventing<a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">Cross-site request forgery</a>. Basically you log in and do some work on one site, then go to a malicious site and now they can send POST requests to the sites you have authentication to. But by passing a token we can prevent that issue.</p><p>The steps</p><ul><li>Make a token path</li><li>Make a token service to use again and again in Angular.js</li><li>Add it as a resolve to the route in Angular.js</li><li>Add it to your forms</li></ul><h2 id="make-a-token-path">Make a token path</h2><p>In this case it is Laravel and I just add this route (in a Controller or route.php same idea)</p><pre><code> /**
+* @Get("auth/token")
 */
 public function getToken()
 {
 return csrf_token();
-}
-&lt;/code>&lt;/pre>&lt;h2 id="make-your-angular-service-and-inject-it-into-the-controller">Make your Angular Service and inject it into the Controller&lt;/h2>
-&lt;p>Service in this case is&lt;/p>
-&lt;pre>&lt;code>(function(){
-'use strict';
-function TokenService($http)
+}</code></pre><h2 id="make-your-angular-service-and-inject-it-into-the-controller">Make your Angular Service and inject it into the Controller</h2><p>Service in this case is</p><pre><code>(function(){
+'use strict';<pre><code>function TokenService($http)
 {
 return {
 get: get
@@ -40,10 +26,7 @@ return response;
 }
 angular
 .module('app')
-.factory('TokenService', TokenService);
-})();
-&lt;/code>&lt;/pre>&lt;p>The ui router passes it in on this POST related route&lt;/p>
-&lt;pre>&lt;code> .state('projects_create', {
+.factory('TokenService', TokenService);</code></pre><p>})();</code></pre><p>The ui router passes it in on this POST related route</p></p><pre><code> .state('projects_create', {
 url: '/projects/create',
 views: {
 '': {
@@ -60,15 +43,10 @@ controller: 'ProjectsCreateCtrl',
 controllerAs: 'vm'
 }
 }
-})
-&lt;/code>&lt;/pre>&lt;p>Since it is a promise and in the resolve we get the benefits of not loading the page till this is done loading. A nice addition here could be getting is current_user info etc.&lt;/p>
-&lt;p>Add it to your Angular Controller&lt;/p>
-&lt;pre>&lt;code> function ProjectsCreateCtrl(project, token, ProjectHelpers, $window, Noty)
+})</code></pre><p>Since it is a promise and in the resolve we get the benefits of not loading the page till this is done loading. A nice addition here could be getting is current_user info etc.</p><p>Add it to your Angular Controller</p><pre><code> function ProjectsCreateCtrl(project, token, ProjectHelpers, $window, Noty)
 {
 var vm = this;
-vm.token = token.data;
-&lt;/code>&lt;/pre>&lt;p>Later, using &lt;a href="https://github.com/mgonto/restangular">Restangular&lt;/a>, during the post I add it to the payload. So when the user clicks Create Project they trigger this.&lt;/p>
-&lt;pre>&lt;code>function saveProject()
+vm.token = token.data;</code></pre><p>Later, using<a href="https://github.com/mgonto/restangular">Restangular</a>, during the post I add it to the payload. So when the user clicks Create Project they trigger this.</p><pre><code>function saveProject()
 {
 vm.rest.route = 'api/v1/projects';
 vm.rest._token = vm.token;
@@ -78,9 +56,4 @@ vm.success(response);
 }, function(response){
 vm.fail(response);
 });
-}
-&lt;/code>&lt;/pre>&lt;p>That is it. You can see it in the form&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/hilfee68v8acyx7/intheform.png?dl=0" alt="form">&lt;/p>
-&lt;p>And you can remove it to show the form fail.&lt;/p>
-&lt;p>You can also see it in the payload we are posting.&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/4vy90lut4l12o55/Screenshot%202014-10-15%2014.38.35.png?dl=0" alt="post">&lt;/p></description><tags>angularjs, laravel, l5, csrf</tags></item></channel></rss>
+}</code></pre><p>That is it. You can see it in the form</p><p><img src="https://dl.dropboxusercontent.com/s/hilfee68v8acyx7/intheform.png?dl=0" alt="form"/><p>And you can remove it to show the form fail.</p><p>You can also see it in the payload we are posting.</p><p><img src="https://dl.dropboxusercontent.com/s/4vy90lut4l12o55/Screenshot%202014-10-15%2014.38.35.png?dl=0" alt="post"/></description><tags>angularjs, laravel, l5, csrf</tags></item></channel></rss>

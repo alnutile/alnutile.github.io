@@ -1,18 +1,13 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>python on Alfred Nutile</title><link>https://alfrednutile.info/tags/python/</link><description>Recent content in python on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 04 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>Mocking, Python, Pytest</title><link>https://alfrednutile.info/posts/268/</link><pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/268/</guid><description>&lt;p>Ok this is going to be a collection of notes to self.&lt;/p>
-&lt;p>This &lt;a href="https://medium.com/@bfortuner/python-unit-testing-with-pytest-and-mock-197499c4623c">post&lt;/a> does a good job of summing up some mock patterns with PyTest.&lt;/p>
-&lt;p>I then had to mock the Snyk client which depended on the Requests library. I chose not to mock the requests library but the methods in the snyk library.&lt;/p>
-&lt;p>The thing was the method I mocked returned the &amp;ldquo;Response&amp;rdquo; object and I wanted to use the &lt;code>json()&lt;/code> feature of that object/class to return the results.&lt;/p>
-&lt;p>45 minutes later this worked.&lt;/p>
-&lt;pre>&lt;code> def test_get_week_of_scans(self, mocker):
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>python on Alfred Nutile</title><link>https://alfrednutile.info/tags/python/</link><description>Recent content in python on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 04 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/python/index.xml" rel="self" type="application/rss+xml"/><item><title>Mocking, Python, Pytest</title><link>https://alfrednutile.info/posts/268/</link><pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/268/</guid><description><p>Ok this is going to be a collection of notes to self.</p><p>This<a href="https://medium.com/@bfortuner/python-unit-testing-with-pytest-and-mock-197499c4623c">post</a> does a good job of summing up some mock patterns with PyTest.</p><p>I then had to mock the Snyk client which depended on the Requests library. I chose not to mock the requests library but the methods in the snyk library.</p><p>The thing was the method I mocked returned the &ldquo;Response&rdquo; object and I wanted to use the<code>json()</code> feature of that object/class to return the results.</p><p>45 minutes later this worked.</p><pre><code> def test_get_week_of_scans(self, mocker):
 mocker.patch.object(SnykClient, 'post')
 response = Response()
 response.status_code = 200
-response.reason = &amp;quot;OK&amp;quot;
-response.encoding = &amp;quot;utf-8&amp;quot;
+response.reason = "OK"
+response.encoding = "utf-8"
 results = json.dumps({
-&amp;quot;results&amp;quot;: [
+"results": [
 {
-&amp;quot;count&amp;quot;: 1989
+"count": 1989
 }
 ]
 }).encode('utf-8')
@@ -20,38 +15,25 @@ response._content = results
 SnykClient.post.return_value = response
 client = SnykReport()
 results = client.get_report_for_current_week(
-&amp;quot;98873-8ecc-46f0-b077-39322abc4390&amp;quot;)
-assert results == 1989
-&lt;/code>&lt;/pre>&lt;p>I no longer hit their API and &lt;code>post&lt;/code> returns the response I wanted.&lt;/p></description><tags>python, testing, mocking, pytest</tags></item><item><title>Lambda Tips</title><link>https://alfrednutile.info/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/264/</guid><description>&lt;p>@WIP&lt;/p>
-&lt;h2 id="taking-advantage-of-a-running-lambda-function-and-its-state">Taking advantage of a running Lambda function and it&amp;rsquo;s state&lt;/h2>
-&lt;p>&lt;a href="https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/">https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/&lt;/a> under the section &lt;strong>Lambda function&lt;/strong> has a nice &amp;ldquo;trick&amp;rdquo; of setting above the class &lt;code>app = None&lt;/code>&lt;/p>
-&lt;p>then later on it will see if that is set&lt;/p>
-&lt;pre>&lt;code>def lambda_handler(event, context):
+"98873-8ecc-46f0-b077-39322abc4390")
+assert results == 1989</code></pre><p>I no longer hit their API and<code>post</code> returns the response I wanted.</p></description><tags>python, testing, mocking, pytest</tags></item><item><title>Lambda Tips</title><link>https://alfrednutile.info/posts/264/</link><pubDate>Thu, 01 Aug 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/264/</guid><description><p>@WIP</p><h2 id="taking-advantage-of-a-running-lambda-function-and-its-state">Taking advantage of a running Lambda function and it&rsquo;s state</h2><p><a href="https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/">https://aws.amazon.com/blogs/compute/sharing-secrets-with-aws-lambda-using-aws-systems-manager-parameter-store/</a> under the section<strong>Lambda function</strong> has a nice &ldquo;trick&rdquo; of setting above the class<code>app = None</code></p><p>then later on it will see if that is set</p><pre><code>def lambda_handler(event, context):
 global app
 # Initialize app if it doesn't yet exist
 if app is None:
-print(&amp;quot;Loading config and creating new MyApp...&amp;quot;)
+print("Loading config and creating new MyApp...")
 config = load_config(full_config_path)
-app = MyApp(config)
-return &amp;quot;MyApp config is &amp;quot; + str(app.get_config()._sections)
-&lt;/code>&lt;/pre>&lt;p>If it is set it will not try to set it again but take advantage of the state and use it.&lt;/p>
-&lt;h2 id="keep-warm">Keep Warm&lt;/h2>
-&lt;p>&lt;a href="https://read.acloud.guru/how-to-keep-your-lambda-functions-warm-9d7e1aa6e2f0">https://read.acloud.guru/how-to-keep-your-lambda-functions-warm-9d7e1aa6e2f0&lt;/a>&lt;/p>
-&lt;p>You can set a bunch of schedulers and your Lambda function can check for the context of the request. If it is a scheduler event then just reply OK otherwise it should do what it normally would do.&lt;/p>
-&lt;pre>&lt;code>import boto3
-from config import Config
-class KeepAwake:
-def __init__(self):
-&amp;quot;&amp;quot;&amp;quot; keey awake &amp;quot;&amp;quot;&amp;quot;
+app = MyApp(config)<pre><code>return &amp;quot;MyApp config is &amp;quot; + str(app.get_config()._sections)</code></pre><p/></pre><p>If it is set it will not try to set it again but take advantage of the state and use it.</p></p><h2 id="keep-warm">Keep Warm</h2><p><a href="https://read.acloud.guru/how-to-keep-your-lambda-functions-warm-9d7e1aa6e2f0">https://read.acloud.guru/how-to-keep-your-lambda-functions-warm-9d7e1aa6e2f0</a></p><p>You can set a bunch of schedulers and your Lambda function can check for the context of the request. If it is a scheduler event then just reply OK otherwise it should do what it normally would do.</p><pre><code>import boto3
+from config import Config<p>class KeepAwake:
+def<strong>init</strong>(self):
+""" keey awake """
 self.config = Config()
 self.region = self.config.region
 self.app_env = self.config.app_env
-self.client = boto3.client('lambda', region_name=self.region)
+self.client = boto3.client(&lsquo;lambda&rsquo;, region_name=self.region)
 self.functions = [
-&amp;quot;foo&amp;quot;,
-&amp;quot;bar&amp;quot;,
-]
-def run(self):
+"foo",
+"bar",
+]</p><pre><code>def run(self):
 &amp;quot;&amp;quot;&amp;quot; interate over lambda functions &amp;quot;&amp;quot;&amp;quot;
 for lam in self.functions:
 print(&amp;quot;Invoking &amp;quot;, lam)
@@ -59,35 +41,26 @@ self.client.invoke(
 FunctionName=lam,
 InvocationType=&amp;quot;Event&amp;quot;
 )
-print(&amp;quot;Invoked &amp;quot;, lam)
-&lt;/code>&lt;/pre>&lt;p>Is another way to look around and call those functions.&lt;/p></description><tags>note2self, aws, python</tags></item><item><title>Mocking in Python</title><link>https://alfrednutile.info/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/263/</guid><description>&lt;p>Serious note to self.&lt;/p>
-&lt;p>I wanted to mock the Github module for python.&lt;/p>
-&lt;p>My simple class will get the ID of the team.&lt;/p>
-&lt;pre>&lt;code>from github import Github, Team
+print(&amp;quot;Invoked &amp;quot;, lam)</code></pre><p/></pre><p>Is another way to look around and call those functions.</p></p></description><tags>note2self, aws, python</tags></item><item><title>Mocking in Python</title><link>https://alfrednutile.info/posts/263/</link><pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/263/</guid><description><p>Serious note to self.</p><p>I wanted to mock the Github module for python.</p><p>My simple class will get the ID of the team.</p><pre><code>from github import Github, Team
 from dotenv import load_dotenv
 import os
 import sys
-import json
-class GetTeamId:
-def __init__(self):
+import json<p>class GetTeamId:
+def<strong>init</strong>(self):
 load_dotenv()
 self.team_id = 5555
-self.token = os.environ.get(&amp;quot;GITHUB_TOKEN&amp;quot;)
+self.token = os.environ.get("GITHUB_TOKEN")
 self.client = Github(self.token)
-self.org = self.client.get_organization('FooBar')
-def handle(self, team_name):
+self.org = self.client.get_organization(&lsquo;FooBar&rsquo;)</p><pre><code>def handle(self, team_name):
 teams = self.org.get_teams()
 for team in teams:
 if team_name == team.name:
 print(&amp;quot;Team id&amp;quot;, team.id)
-return team.id
-if __name__ == &amp;quot;__main__&amp;quot;:
+return team.id</code></pre><p>if<strong>name</strong> == "<strong>main</strong>":
 client = GetTeamId()
 team = sys.argv[1]
-print(&amp;quot;Going to get team&amp;quot;, team)
-client.handle(team)
-&lt;/code>&lt;/pre>&lt;p>But I need test coverage on this so I made this test.&lt;/p>
-&lt;pre>&lt;code>from unittest import TestCase
+print("Going to get team", team)
+client.handle(team)</p><p/></pre><p>But I need test coverage on this so I made this test.</p></p><pre><code>from unittest import TestCase
 import unittest
 from unittest.mock import patch, Mock
 import json
@@ -95,26 +68,20 @@ from src.get_team_id import GetTeamId
 class Team:
 def __init__(self):
 self.id = 4444444
-self.name = &amp;quot;foo-team&amp;quot;
+self.name = "foo-team"
 class TestGetTeamId(TestCase):
-@patch(&amp;quot;src.get_team_id.Github.get_organization&amp;quot;)
+@patch("src.get_team_id.Github.get_organization")
 def test_can_get_id(self, mock_github):
 mock_github.return_value.get_teams.return_value = [
 Team()
 ]
 client = GetTeamId()
-results = client.handle(&amp;quot;foo-team&amp;quot;)
-self.assertEqual(4444444, results)
-&lt;/code>&lt;/pre>&lt;p>Know how long that took!&lt;/p>
-&lt;h2 id="example-two">Example Two&lt;/h2>
-&lt;p>Mocking JIRA:&lt;/p>
-&lt;pre>&lt;code>from unittest import TestCase
+results = client.handle("foo-team")
+self.assertEqual(4444444, results)</code></pre><p>Know how long that took!</p><h2 id="example-two">Example Two</h2><p>Mocking JIRA:</p><pre><code>from unittest import TestCase
 import unittest
 from unittest.mock import patch, Mock
 import json
-from src.jira_ticket import JiraTicket
-class TestJiraCreateTicket(TestCase):
-@patch(&amp;quot;src.jira_ticket.JIRA.create_issue&amp;quot;)
+from src.jira_ticket import JiraTicket<p>class TestJiraCreateTicket(TestCase):</p><pre><code>@patch(&amp;quot;src.jira_ticket.JIRA.create_issue&amp;quot;)
 def test_can_make_ticket(self, mock_jira):
 mock_jira.return_value.create_issue.return_value.update.return_value = True
 client = JiraTicket()
@@ -123,9 +90,7 @@ project = &amp;quot;PENG&amp;quot;
 message = &amp;quot;\nTitle: Foo Bar\nIssue Url: https://boo.baz\nState: open\n&amp;quot;
 label = &amp;quot;renovate&amp;quot;
 client.create_ticket(title, message, project, label)
-mock_jira.assert_called_once()
-&lt;/code>&lt;/pre>&lt;p>and the class:&lt;/p>
-&lt;pre>&lt;code>import json
+mock_jira.assert_called_once()</code></pre><p/></pre><p>and the class:</p></p><pre><code>import json
 from dotenv import load_dotenv
 from collections import Counter
 from jira import JIRA
@@ -136,38 +101,19 @@ self.jira = None
 self.auth()
 def auth(self):
 load_dotenv()
-username = os.getenv(&amp;quot;JIRA_USERNAME&amp;quot;)
-password = os.getenv(&amp;quot;JIRA_PASSWORD&amp;quot;)
-self.jira = JIRA(server=&amp;quot;https://foo.atlassian.net&amp;quot;,
+username = os.getenv("JIRA_USERNAME")
+password = os.getenv("JIRA_PASSWORD")
+self.jira = JIRA(server="https://foo.atlassian.net",
 basic_auth=(username, password))
-def handle(self, title, message=None, label=None, project=&amp;quot;FOO&amp;quot;):
-&amp;quot;&amp;quot;&amp;quot; see if exists if does update &amp;quot;&amp;quot;&amp;quot;
+def handle(self, title, message=None, label=None, project="FOO"):
+""" see if exists if does update """
 def see_if_exists(self, title, project):
-results = self.jira.search_issues(&amp;quot;title ~ \&amp;quot;%s\&amp;quot; and project= \&amp;quot;%s\&amp;quot;&amp;quot; % (title, project))
-if len(results) &amp;gt; 0:
+results = self.jira.search_issues("title ~ \"%s\" and project= \"%s\"" % (title, project))
+if len(results) > 0:
 for issue in results:
 print(issue)
-return False
-&lt;/code>&lt;/pre>&lt;h2 id="good-reads">Good reads&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://docs.python.org/3/library/unittest.mock.html">https://docs.python.org/3/library/unittest.mock.html&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.toptal.com/python/an-introduction-to-mocking-in-python">https://www.toptal.com/python/an-introduction-to-mocking-in-python&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832">https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832&lt;/a>&lt;/li>
-&lt;/ul></description><tags>python, mocking, tdd, unittest</tags></item><item><title>Serverless Python and Example App WIP</title><link>https://alfrednutile.info/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/229/</guid><description>&lt;p>There are good docs on this &lt;a href="http://serverless.com">http://serverless.com&lt;/a> platform.
-For Python&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example">https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/serverless/examples">https://github.com/serverless/examples&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>I will cover some items here I need to do time after time.&lt;/p>
-&lt;ul>
-&lt;li>Tagging&lt;/li>
-&lt;li>ENV settings&lt;/li>
-&lt;li>Testing&lt;/li>
-&lt;/ul>
-&lt;h2 id="testing">Testing&lt;/h2>
-&lt;p>Example file &lt;code>test_cf_backuper.py&lt;/code>:&lt;/p>
-&lt;pre>&lt;code>import unittest
+return False</code></pre><h2 id="good-reads">Good reads</h2><ul><li><a href="https://docs.python.org/3/library/unittest.mock.html">https://docs.python.org/3/library/unittest.mock.html</a></li><li><a href="https://www.toptal.com/python/an-introduction-to-mocking-in-python">https://www.toptal.com/python/an-introduction-to-mocking-in-python</a></li><li><a href="https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832">https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832</a></li></ul></description><tags>python, mocking, tdd, unittest</tags></item><item><title>Serverless Python and Example App WIP</title><link>https://alfrednutile.info/posts/229/</link><pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/229/</guid><description><p>There are good docs on this<a href="http://serverless.com">http://serverless.com</a> platform.
+For Python</p><ul><li><a href="https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example">https://serverless.com/framework/docs/providers/aws/examples/hello-world/python/#hello-world-python-example</a></li><li><a href="https://github.com/serverless/examples">https://github.com/serverless/examples</a></li></ul><p>I will cover some items here I need to do time after time.</p><ul><li>Tagging</li><li>ENV settings</li><li>Testing</li></ul><h2 id="testing">Testing</h2><p>Example file<code>test_cf_backuper.py</code>:</p><pre><code>import unittest
 import mock
 from mock import MagicMock
 from get_buckets import GetBuckets
@@ -175,35 +121,17 @@ import boto3
 real_client = boto3.client('cloudformation')
 import logging
 import json
-from CFBackuper import CFBackuper
-logging.basicConfig()
+from CFBackuper import CFBackuper<p>logging.basicConfig()
 log = logging.getLogger()
-log.setLevel(logging.DEBUG)
-class TestHandler(unittest.TestCase):
-def test_get_one_template(self):
+log.setLevel(logging.DEBUG)</p><p>class TestHandler(unittest.TestCase):</p><pre><code>def test_get_one_template(self):
 client = CFBackuper()
 results = client.handle()
-self.assertTrue(results)
-&lt;/code>&lt;/pre>&lt;p>This allows me to mock the client for example of boto, more on that later.&lt;/p>
-&lt;pre>&lt;code>python -m unittest test_cf_backuper.TestHandler.test_get_one_template
-&lt;/code>&lt;/pre>&lt;h2 id="pip-install">Pip Install&lt;/h2>
-&lt;p>Along the way I make a &lt;code>requirments.txt&lt;/code>
-for example&lt;/p>
-&lt;pre>&lt;code>requests
+self.assertTrue(results)</code></pre><p/></pre><p>This allows me to mock the client for example of boto, more on that later.</p></p><pre><code>python -m unittest test_cf_backuper.TestHandler.test_get_one_template</code></pre><h2 id="pip-install">Pip Install</h2><p>Along the way I make a<code>requirments.txt</code>
+for example</p><pre><code>requests
 boto3
 mock
 logging
-python-dotenv
-&lt;/code>&lt;/pre>&lt;p>then&lt;/p>
-&lt;pre>&lt;code>pip install -r requirements.txt
-&lt;/code>&lt;/pre>&lt;p>gets me setup locally&lt;/p>
-&lt;h2 id="aws-cli">AWS Cli&lt;/h2>
-&lt;p>It is key to have your profile setup per their docs &lt;a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html">here&lt;/a>&lt;/p>
-&lt;p>Then shift the default as needed:&lt;/p>
-&lt;pre>&lt;code>export AWS_DEFAULT_PROFILE=profile_name_here
-&lt;/code>&lt;/pre>&lt;p>Or in the &lt;code>servless.yml&lt;/code> file:&lt;/p>
-&lt;pre>&lt;code>provider:
+python-dotenv</code></pre><p>then</p><pre><code>pip install -r requirements.txt</code></pre><p>gets me setup locally</p><h2 id="aws-cli">AWS Cli</h2><p>It is key to have your profile setup per their docs<a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html">here</a></p><p>Then shift the default as needed:</p><pre><code>export AWS_DEFAULT_PROFILE=profile_name_here</code></pre><p>Or in the<code>servless.yml</code> file:</p><pre><code>provider:
 name: aws
 runtime: python2.7
-profile: profile_name_here
-&lt;/code>&lt;/pre>&lt;p>More info &lt;a href="https://serverless.com/framework/docs/providers/aws/guide/credentials/#using-aws-profiles">here&lt;/a>&lt;/p></description><tags>serverless, python, wip</tags></item></channel></rss>
+profile: profile_name_here</code></pre><p>More info<a href="https://serverless.com/framework/docs/providers/aws/guide/credentials/#using-aws-profiles">here</a></p></description><tags>serverless, python, wip</tags></item></channel></rss>

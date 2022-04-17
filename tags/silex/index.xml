@@ -1,36 +1,25 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>silex on Alfred Nutile</title><link>https://alfrednutile.info/tags/silex/</link><description>Recent content in silex on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 10 Aug 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/silex/index.xml" rel="self" type="application/rss+xml"/><item><title>Boris REPL and you Applicatoin (Silex in this case)</title><link>https://alfrednutile.info/posts/102/</link><pubDate>Sun, 10 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/102/</guid><description>&lt;p>This video will cover the details &lt;a href="http://youtu.be/RHdxSsCDmNQ">http://youtu.be/RHdxSsCDmNQ&lt;/a>&lt;/p>
-&lt;p>&lt;img src="https://camo.githubusercontent.com/18c23fa613beeb044a7ba1ba58a5dfefe120ca6f/687474703a2f2f646c2e64726f70626f782e636f6d2f752f3530383630372f426f72697344656d6f2d76342e676966" alt="boris">&lt;/p>
-&lt;p>Just a few notes though &lt;a href="https://github.com/d11wtq/boris">https://github.com/d11wtq/boris&lt;/a> is a better place for getting started overall.&lt;/p>
-&lt;h2 id="borisrc">Borisrc&lt;/h2>
-&lt;p>This lives in the root of my application which includes the startup file for the application.&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
-#.borisrc
-$core = require_once(__DIR__.'/bootstrap/start.php');
-$boris = new \Boris\Boris('base_app&amp;gt; ');
-$boris-&amp;gt;setLocal(array('core' =&amp;gt; $core));
-$boris-&amp;gt;start();
-&lt;/code>&lt;/pre>&lt;p>The start.php file I am using for the core startup needed by index.php, this and later a command line class to run the queue daemon and other things&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>silex on Alfred Nutile</title><link>https://alfrednutile.info/tags/silex/</link><description>Recent content in silex on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 10 Aug 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/silex/index.xml" rel="self" type="application/rss+xml"/><item><title>Boris REPL and you Applicatoin (Silex in this case)</title><link>https://alfrednutile.info/posts/102/</link><pubDate>Sun, 10 Aug 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/102/</guid><description><p>This video will cover the details<a href="http://youtu.be/RHdxSsCDmNQ">http://youtu.be/RHdxSsCDmNQ</a></p><p><img src="https://camo.githubusercontent.com/18c23fa613beeb044a7ba1ba58a5dfefe120ca6f/687474703a2f2f646c2e64726f70626f782e636f6d2f752f3530383630372f426f72697344656d6f2d76342e676966" alt="boris"/><p>Just a few notes though<a href="https://github.com/d11wtq/boris">https://github.com/d11wtq/boris</a> is a better place for getting started overall.</p><h2 id="borisrc">Borisrc</h2><p>This lives in the root of my application which includes the startup file for the application.</p><pre><code>&lt;?php
+#.borisrc<p>$core = require_once(<strong>DIR</strong>.'/bootstrap/start.php');
+$boris = new \Boris\Boris(&lsquo;base_app> &lsquo;);
+$boris->setLocal(array(&lsquo;core&rsquo; => $core));
+$boris->start();</code></pre><p>The start.php file I am using for the core startup needed by index.php, this and later a command line class to run the queue daemon and other things</p></p><pre><code>&lt;?php
 #bootstrap/start.php
 require __DIR__.'/../bootstrap/autoload.php';
 $core = new \App\Core();
-$core-&amp;gt;getApp();
+$core->getApp();
 if (file_exists(__DIR__ . '/../.env')) {
 \Dotenv::load(__DIR__.'/../');
 }
 $paths = include(__DIR__.'/paths.php');
-$core-&amp;gt;setUpPaths($paths);
-$core-&amp;gt;setEnv();
-$core-&amp;gt;setDatabaseConnection();
-$core-&amp;gt;getApp()-&amp;gt;register(new Silex\Provider\MonologServiceProvider(), array(
-'monolog.logfile' =&amp;gt; $core-&amp;gt;getStoragePath() . '/logs/core.log',
+$core->setUpPaths($paths);
+$core->setEnv();
+$core->setDatabaseConnection();
+$core->getApp()->register(new Silex\Provider\MonologServiceProvider(), array(
+'monolog.logfile' => $core->getStoragePath() . '/logs/core.log',
 ));
 require_once(__DIR__.'/../custom_start.php');
-return $core;
-&lt;/code>&lt;/pre>&lt;p>So index.php like .borisrc calls to this&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
+return $core;</code></pre><p>So index.php like .borisrc calls to this</p><pre><code>&lt;?php
 #public/index.php
 $core = require_once __DIR__.'/../bootstrap/start.php';
 $core = require_once __DIR__.'/../app/routes.php';
-$core-&amp;gt;getApp()-&amp;gt;run();
-&lt;/code>&lt;/pre>&lt;p>At this point, as seen in the video we can interact with the core app and other methods!&lt;/p></description><tags>boris, php, silex</tags></item></channel></rss>
+$core->getApp()->run();</code></pre><p>At this point, as seen in the video we can interact with the core app and other methods!</p></description><tags>boris, php, silex</tags></item></channel></rss>

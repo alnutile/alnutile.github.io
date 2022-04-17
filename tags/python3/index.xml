@@ -1,17 +1,12 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>python3 on Alfred Nutile</title><link>https://alfrednutile.info/tags/python3/</link><description>Recent content in python3 on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 10 Aug 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/python3/index.xml" rel="self" type="application/rss+xml"/><item><title>Python3 Fixtures</title><link>https://alfrednutile.info/posts/252/</link><pubDate>Fri, 10 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/252/</guid><description>&lt;p>Just a reminder using pickle I can easily make fixtures for testing.&lt;/p>
-&lt;p>When I get results from AWS SDK for example I can just&lt;/p>
-&lt;pre>&lt;code>import pickle
-with open(&amp;quot;fixtures/describe_task_defination.pickle&amp;quot;, 'wb') as fixture:
-pickle.dump(self.stored_state_to_save, fixture)
-&lt;/code>&lt;/pre>&lt;p>Then when I want to feed it back in my test&lt;/p>
-&lt;pre>&lt;code>import pickle
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>python3 on Alfred Nutile</title><link>https://alfrednutile.info/tags/python3/</link><description>Recent content in python3 on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 10 Aug 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/python3/index.xml" rel="self" type="application/rss+xml"/><item><title>Python3 Fixtures</title><link>https://alfrednutile.info/posts/252/</link><pubDate>Fri, 10 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/252/</guid><description><p>Just a reminder using pickle I can easily make fixtures for testing.</p><p>When I get results from AWS SDK for example I can just</p><pre><code>import pickle<pre><code>with open(&amp;quot;fixtures/describe_task_defination.pickle&amp;quot;, 'wb') as fixture:
+pickle.dump(self.stored_state_to_save, fixture)</code></pre><p/></pre><p>Then when I want to feed it back in my test</p></p><pre><code>import pickle
 from unittest import TestCase
 from unittest.mock import patch
 from unittest import mock
 import pickle
 from task_image import TaskImage
 def getFixture(name):
-with open(&amp;quot;fixtures/&amp;quot; + name, 'rb') as fixture:
+with open("fixtures/" + name, 'rb') as fixture:
 return pickle.load(fixture)
 class TestTaskImage(TestCase)
 def setUp(self):
@@ -20,5 +15,4 @@ self.task_image = TaskImage()
 @patch('task_image.TaskImage._getService', return_value=getFixture('describe_services.pickle'))
 def test_gets_service(self, _getService, _getTaskDefinition):
 self.results = self.task_image.handle('default', 'cat-teamdocs-production-122')
-self.assertEqual('cat-teamdocs:latest', self.results)
-&lt;/code>&lt;/pre>&lt;p>Pretty easy and then I am not hitting the service&lt;/p></description><tags>note2self, python3, testing</tags></item></channel></rss>
+self.assertEqual('cat-teamdocs:latest', self.results)</code></pre><p>Pretty easy and then I am not hitting the service</p></description><tags>note2self, python3, testing</tags></item></channel></rss>

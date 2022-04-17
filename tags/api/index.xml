@@ -1,40 +1,27 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>api on Alfred Nutile</title><link>https://alfrednutile.info/tags/api/</link><description>Recent content in api on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 31 May 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/api/index.xml" rel="self" type="application/rss+xml"/><item><title>API Token Based Access Laravel 5.1 (Yet another article on this)</title><link>https://alfrednutile.info/posts/183/</link><pubDate>Tue, 31 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/183/</guid><description>&lt;h2 id="api-token">API Token&lt;/h2>
-&lt;p>Laravel 5.2 introduces the auth token guard setup which is way simpler than Oauth. Also it does not assume a certain level of complexity in needs like Scopes and expirations of tokens that we do not need for our internal app to app communications.&lt;/p>
-&lt;p>We are using 5.1 so this will implement it.&lt;/p>
-&lt;p>See some docs here &lt;a href="https://gistlog.co/JacobBennett/090369fbab0b31130b51">https://gistlog.co/JacobBennett/090369fbab0b31130b51&lt;/a>&lt;/p>
-&lt;p>For creating a user the AppServiceProvider boots the user record and if no api_token
-is present it will set one. As well as the UUID (we use &lt;a href="https://packagist.org/packages/ramsey/uuid">https://packagist.org/packages/ramsey/uuid&lt;/a> for this)&lt;/p>
-&lt;p>&lt;code>app/Providers/AppServiceProvider.php:18&lt;/code>&lt;/p>
-&lt;pre>&lt;code> User::creating(function($user) {
-if (!$user-&amp;gt;id)
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>api on Alfred Nutile</title><link>https://alfrednutile.info/tags/api/</link><description>Recent content in api on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 31 May 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/api/index.xml" rel="self" type="application/rss+xml"/><item><title>API Token Based Access Laravel 5.1 (Yet another article on this)</title><link>https://alfrednutile.info/posts/183/</link><pubDate>Tue, 31 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/183/</guid><description><h2 id="api-token">API Token</h2><p>Laravel 5.2 introduces the auth token guard setup which is way simpler than Oauth. Also it does not assume a certain level of complexity in needs like Scopes and expirations of tokens that we do not need for our internal app to app communications.</p><p>We are using 5.1 so this will implement it.</p><p>See some docs here<a href="https://gistlog.co/JacobBennett/090369fbab0b31130b51">https://gistlog.co/JacobBennett/090369fbab0b31130b51</a></p><p>For creating a user the AppServiceProvider boots the user record and if no api_token
+is present it will set one. As well as the UUID (we use<a href="https://packagist.org/packages/ramsey/uuid">https://packagist.org/packages/ramsey/uuid</a> for this)</p><p><code>app/Providers/AppServiceProvider.php:18</code></p><pre><code> User::creating(function($user) {
+if (!$user->id)
 {
-$user-&amp;gt;id = Uuid::uuid4()-&amp;gt;toString();
-}
-if (!$user-&amp;gt;api_token)
+$user->id = Uuid::uuid4()->toString();
+}<pre><code> if (!$user-&amp;gt;api_token)
 {
 $user-&amp;gt;api_token = Uuid::uuid4()-&amp;gt;toString();
 }
-});
-&lt;/code>&lt;/pre>&lt;p>The factory includes this as well &lt;code>database/factories/ModelFactory.php&lt;/code>&lt;/p>
-&lt;pre>&lt;code>$factory-&amp;gt;define(App\User::class, function ($faker) {
+});</code></pre><p/></pre><p>The factory includes this as well<code>database/factories/ModelFactory.php</code></p></p><pre><code>$factory->define(App\User::class, function ($faker) {
 return [
-'id' =&amp;gt; $faker-&amp;gt;uuid,
-'name' =&amp;gt; $faker-&amp;gt;name,
-'email' =&amp;gt; $faker-&amp;gt;email,
-'api_token' =&amp;gt; $faker-&amp;gt;uuid,
-'password' =&amp;gt; str_random(10),
-'remember_token' =&amp;gt; str_random(10),
+'id' => $faker->uuid,
+'name' => $faker->name,
+'email' => $faker->email,
+'api_token' => $faker->uuid,
+'password' => str_random(10),
+'remember_token' => str_random(10),
 ];
-});
-&lt;/code>&lt;/pre>&lt;p>Note in the &lt;code>\App\User&lt;/code> model has this field hidden like the password field &lt;code>app/User.php&lt;/code>&lt;/p>
-&lt;pre>&lt;code>///
+});</code></pre><p>Note in the<code>\App\User</code> model has this field hidden like the password field<code>app/User.php</code></p><pre><code>///
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
 use Authenticatable, CanResetPassword;
 protected $hidden = ['password', 'remember_token', 'api_token'];
-///
-&lt;/code>&lt;/pre>&lt;p>And of course we need the migration for this&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
+///</code></pre><p>And of course we need the migration for this</p><pre><code>&lt;?php
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 class AddApiTokenToUsersTable extends Migration
@@ -48,7 +35,7 @@ public function up()
 {
 Schema::table('users', function(Blueprint $table)
 {
-$table-&amp;gt;string('api_token', 60)-&amp;gt;unique();
+$table->string('api_token', 60)->unique();
 });
 }
 /**
@@ -61,12 +48,10 @@ public function down()
 Schema::table('users', function(Blueprint $table)
 {
 if(Schema::hasColumn('users', 'api_token'))
-$table-&amp;gt;dropColumn('api_token');
+$table->dropColumn('api_token');
 });
 }
-}
-&lt;/code>&lt;/pre>&lt;p>This is all happening using the &lt;code>api_token&lt;/code> middleware seen here &lt;code>app/Http/Middleware/ApiToken.php&lt;/code>&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
+}</code></pre><p>This is all happening using the<code>api_token</code> middleware seen here<code>app/Http/Middleware/ApiToken.php</code></p><pre><code>&lt;?php
 namespace App\Http\Middleware;
 use App\User;
 use Closure;
@@ -77,22 +62,22 @@ class ApiToken
 protected $auth;
 public function __construct(Guard $auth)
 {
-$this-&amp;gt;auth = $auth;
+$this->auth = $auth;
 }
 public function handle($request, Closure $next)
 {
-if($request-&amp;gt;input('api_token') &amp;amp;&amp;amp; $this-&amp;gt;hasMatchingToken($request-&amp;gt;input('api_token'))) {
+if($request->input('api_token') &amp;&amp; $this->hasMatchingToken($request->input('api_token'))) {
 return $next($request);
 }
 /**
 * This assumes it is behind auth at all times
 * so if the above fails we then let auth manage it
 */
-if ($this-&amp;gt;auth-&amp;gt;guest()) {
-if ($request-&amp;gt;ajax()) {
+if ($this->auth->guest()) {
+if ($request->ajax()) {
 return response('Unauthorized.', 401);
 } else {
-return redirect()-&amp;gt;guest('auth/login');
+return redirect()->guest('auth/login');
 }
 }
 return $next($request);
@@ -108,12 +93,10 @@ return $next($request);
 */
 public function hasMatchingToken($token)
 {
-if($user = User::where('api_token', $token)-&amp;gt;first())
+if($user = User::where('api_token', $token)->first())
 return true;
 }
-}
-&lt;/code>&lt;/pre>&lt;p>And plug that into the Kernel &lt;code>app/Http/Kernel.php&lt;/code>&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
+}</code></pre><p>And plug that into the Kernel<code>app/Http/Kernel.php</code></p><pre><code>&lt;?php
 namespace App\Http;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 class Kernel extends HttpKernel
@@ -137,15 +120,12 @@ protected $middleware = [
 * @var array
 */
 protected $routeMiddleware = [
-'auth' =&amp;gt; \App\Http\Middleware\Authenticate::class,
-'auth.token' =&amp;gt; \App\Http\Middleware\ApiToken::class,
-'auth.basic' =&amp;gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-'guest' =&amp;gt; \App\Http\Middleware\RedirectIfAuthenticated::class,
+'auth' => \App\Http\Middleware\Authenticate::class,
+'auth.token' => \App\Http\Middleware\ApiToken::class,
+'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
 ];
-}
-&lt;/code>&lt;/pre>&lt;h2 id="tests">Tests&lt;/h2>
-&lt;p>You can see the tests &lt;code>tests/UserTokenTest.php&lt;/code>&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
+}</code></pre><h2 id="tests">Tests</h2><p>You can see the tests<code>tests/UserTokenTest.php</code></p><pre><code>&lt;?php
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -157,34 +137,31 @@ use DatabaseMigrations;
 */
 public function should_pass_auth_with_no_token_since_they_auth()
 {
-$user = factory(\App\User::class)-&amp;gt;create();
-$this-&amp;gt;be($user);
-$results = $this-&amp;gt;call('GET', '/example/auth_token');
-$this-&amp;gt;assertEquals(200, $results-&amp;gt;status());
-$this-&amp;gt;assertEquals(&amp;quot;foo&amp;quot;, $results-&amp;gt;getContent());
+$user = factory(\App\User::class)->create();
+$this->be($user);
+$results = $this->call('GET', '/example/auth_token');
+$this->assertEquals(200, $results->status());
+$this->assertEquals("foo", $results->getContent());
 }
 /**
 * @test
 */
 public function should_auth_user_since_they_have_token()
 {
-$user = factory(\App\User::class)-&amp;gt;create();
-$results = $this-&amp;gt;call('GET', sprintf(&amp;quot;/example/auth_token?api_token=%s&amp;quot;, $user-&amp;gt;api_token));
-$this-&amp;gt;assertEquals(200, $results-&amp;gt;status());
-$this-&amp;gt;assertEquals(&amp;quot;foo&amp;quot;, $results-&amp;gt;getContent());
+$user = factory(\App\User::class)->create();
+$results = $this->call('GET', sprintf("/example/auth_token?api_token=%s", $user->api_token));
+$this->assertEquals(200, $results->status());
+$this->assertEquals("foo", $results->getContent());
 }
 /**
 * @test
 */
 public function should_fail_user_no_token_no_auth()
 {
-$results = $this-&amp;gt;call('GET', '/example/auth_token');
-$this-&amp;gt;assertEquals(302, $results-&amp;gt;status());
+$results = $this->call('GET', '/example/auth_token');
+$this->assertEquals(302, $results->status());
 }
-}
-&lt;/code>&lt;/pre>&lt;h2 id="console-commands-to-make-tokens">Console Commands to Make Tokens&lt;/h2>
-&lt;p>You can see the commands &lt;code>app/Console/Commands/UserTokenCrud.php&lt;/code>&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
+}</code></pre><h2 id="console-commands-to-make-tokens">Console Commands to Make Tokens</h2><p>You can see the commands<code>app/Console/Commands/UserTokenCrud.php</code></p><pre><code>&lt;?php
 namespace App\Console\Commands;
 use App\User;
 use Illuminate\Console\Command;
@@ -205,27 +182,25 @@ public function handle()
 {
 try
 {
-$user = User::where('email', $this-&amp;gt;argument('user_email'))-&amp;gt;first();
+$user = User::where('email', $this->argument('user_email'))->first();
 if(!$user)
-throw new \Exception(sprintf(&amp;quot;User not found for %s&amp;quot;, $this-&amp;gt;argument(&amp;quot;user_email&amp;quot;)));
-if($this-&amp;gt;option('show'))
+throw new \Exception(sprintf("User not found for %s", $this->argument("user_email")));
+if($this->option('show'))
 {
-$this-&amp;gt;info(sprintf(&amp;quot;User token is %s&amp;quot;, $user-&amp;gt;api_token));
+$this->info(sprintf("User token is %s", $user->api_token));
 return false;
 }
-$token = Uuid::uuid4()-&amp;gt;toString();
-$user-&amp;gt;api_token = $token;
-$user-&amp;gt;save();
-$this-&amp;gt;info(sprintf(&amp;quot;User with email %s now has token %s&amp;quot;, $user-&amp;gt;email, $token));
+$token = Uuid::uuid4()->toString();
+$user->api_token = $token;
+$user->save();
+$this->info(sprintf("User with email %s now has token %s", $user->email, $token));
 }
 catch(\Exception $e)
 {
-$this-&amp;gt;error(sprintf(&amp;quot;Error finding user %s&amp;quot;, $e-&amp;gt;getMessage()));
+$this->error(sprintf("Error finding user %s", $e->getMessage()));
 }
 }
-}
-&lt;/code>&lt;/pre>&lt;p>Plug that into the Console Kernel &lt;code>Console/Kernel.php&lt;/code>&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
+}</code></pre><p>Plug that into the Console Kernel<code>Console/Kernel.php</code></p><pre><code>&lt;?php
 namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -248,97 +223,67 @@ protected $commands = [
 */
 protected function schedule(Schedule $schedule)
 {
-//$schedule-&amp;gt;command('inspire')
--&amp;gt;hourly();
+//$schedule->command('inspire')
+->hourly();
 }
-}
-&lt;/code>&lt;/pre>&lt;p>Allowing to update, delete and see tokens&lt;/p>
-&lt;h2 id="example-routes">Example Routes&lt;/h2>
-&lt;pre>&lt;code>Route::group(['middleware' =&amp;gt; 'auth.token'], function () {
+}</code></pre><p>Allowing to update, delete and see tokens</p><h2 id="example-routes">Example Routes</h2><pre><code>Route::group(['middleware' => 'auth.token'], function () {
 Route::get('example/auth_token', function () {
-return &amp;quot;foo&amp;quot;;
+return "foo";
 });
-});
-&lt;/code>&lt;/pre>&lt;p>I added some testing / example routes. Once you have your api_token give them a try&lt;/p>
-&lt;ul>
-&lt;li>/example/auth_token?api_token=foo to show the API Token working&lt;/li>
-&lt;li>/s3?api_token=foo&lt;/li>
-&lt;li>/rds?api_token=foo&lt;/li>
-&lt;li>/dynamodb?api_token=foo&lt;/li>
-&lt;/ul>
-&lt;p>Note the token might change if you seed the database. You can ssh into the server and run&lt;/p>
-&lt;pre>&lt;code>php artisan cat:create-token foo@gmail.com --show
-&lt;/code>&lt;/pre>&lt;p>To get the token.&lt;/p></description><tags>php, auth, laravel, api</tags></item><item><title>Using VCR for PHP API Testing</title><link>https://alfrednutile.info/posts/97/</link><pubDate>Wed, 16 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/97/</guid><description>&lt;p>Testing that your code works against an API can take up lots of un-needed time. With this &lt;a href="https://github.com/php-vcr/php-vcr">php-vcr&lt;/a> library you can do ONE real request that saves a fixture file that will automatically be used with each additional requests!&lt;/p>
-&lt;p>They have decent docs on setting up but I will walk through them here.&lt;/p>
-&lt;p>I will base this off a seed phpunit repo I have &lt;a href="https://github.com/alnutile/base_library_repo">https://github.com/alnutile/base_library_repo&lt;/a>&lt;/p>
-&lt;p>You will need to add to the composer.json the packages for this library&lt;/p>
-&lt;pre>&lt;code> &amp;quot;require&amp;quot;: {
-&amp;quot;php&amp;quot;: &amp;quot;&amp;gt;=5.4.0&amp;quot;,
-&amp;quot;ext-curl&amp;quot;: &amp;quot;*&amp;quot;,
-&amp;quot;symfony/process&amp;quot;: &amp;quot;&amp;gt;=2.3&amp;quot;,
-&amp;quot;symfony/event-dispatcher&amp;quot;: &amp;quot;&amp;gt;=2.3&amp;quot;,
-&amp;quot;guzzle/guzzle&amp;quot;: &amp;quot;~3.7&amp;quot;,
-&amp;quot;vlucas/phpdotenv&amp;quot;: &amp;quot;1.0.6&amp;quot;
+});</code></pre><p>I added some testing / example routes. Once you have your api_token give them a try</p><ul><li>/example/auth_token?api_token=foo to show the API Token working</li><li>/s3?api_token=foo</li><li>/rds?api_token=foo</li><li>/dynamodb?api_token=foo</li></ul><p>Note the token might change if you seed the database. You can ssh into the server and run</p><pre><code>php artisan cat:create-token foo@gmail.com --show</code></pre><p>To get the token.</p></description><tags>php, auth, laravel, api</tags></item><item><title>Using VCR for PHP API Testing</title><link>https://alfrednutile.info/posts/97/</link><pubDate>Wed, 16 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/97/</guid><description><p>Testing that your code works against an API can take up lots of un-needed time. With this<a href="https://github.com/php-vcr/php-vcr">php-vcr</a> library you can do ONE real request that saves a fixture file that will automatically be used with each additional requests!</p><p>They have decent docs on setting up but I will walk through them here.</p><p>I will base this off a seed phpunit repo I have<a href="https://github.com/alnutile/base_library_repo">https://github.com/alnutile/base_library_repo</a></p><p>You will need to add to the composer.json the packages for this library</p><pre><code> "require": {
+"php": ">=5.4.0",
+"ext-curl": "*",
+"symfony/process": ">=2.3",
+"symfony/event-dispatcher": ">=2.3",
+"guzzle/guzzle": "~3.7",
+"vlucas/phpdotenv": "1.0.6"
 },
-&amp;quot;require-dev&amp;quot;: {
-&amp;quot;phpunit/phpunit&amp;quot;: &amp;quot;~3.0&amp;quot;,
-&amp;quot;mockery/mockery&amp;quot;: &amp;quot;dev-master&amp;quot;,
-&amp;quot;php-vcr/php-vcr&amp;quot;: &amp;quot;dev-master&amp;quot;,
-&amp;quot;php-vcr/phpunit-testlistener-vcr&amp;quot;: &amp;quot;dev-master&amp;quot;
-}
-&lt;/code>&lt;/pre>&lt;p>I have another post that talks about the dotenv package &lt;a href="http://www.alfrednutile.info/posts/76">here&lt;/a>&lt;/p>
-&lt;p>Then if you test folder make a a fixtures folder. So you layout is&lt;/p>
-&lt;pre>&lt;code>.
+"require-dev": {
+"phpunit/phpunit": "~3.0",
+"mockery/mockery": "dev-master",
+"php-vcr/php-vcr": "dev-master",
+"php-vcr/phpunit-testlistener-vcr": "dev-master"
+}</code></pre><p>I have another post that talks about the dotenv package<a href="http://www.alfrednutile.info/posts/76">here</a></p><p>Then if you test folder make a a fixtures folder. So you layout is</p><pre><code>.
 --test
------fixtures
-&lt;/code>&lt;/pre>&lt;p>And open your phpunit.xml file to add the code to intercept your requests.&lt;/p>
-&lt;pre>&lt;code>#/phpunit.xml
-&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
-&amp;lt;phpunit backupGlobals=&amp;quot;false&amp;quot;
-backupStaticAttributes=&amp;quot;false&amp;quot;
-bootstrap=&amp;quot;test/bootstrap.php&amp;quot;
-colors=&amp;quot;true&amp;quot;
-convertErrorsToExceptions=&amp;quot;true&amp;quot;
-convertNoticesToExceptions=&amp;quot;true&amp;quot;
-convertWarningsToExceptions=&amp;quot;true&amp;quot;
-processIsolation=&amp;quot;false&amp;quot;
-stopOnFailure=&amp;quot;false&amp;quot;
-syntaxCheck=&amp;quot;false&amp;quot;
-&amp;gt;
-&amp;lt;listeners&amp;gt;
-&amp;lt;listener class=&amp;quot;PHPUnit_Util_Log_VCR&amp;quot; file=&amp;quot;vendor/php-vcr/phpunit-testlistener-vcr/PHPUnit/Util/Log/VCR.php&amp;quot; /&amp;gt;
-&amp;lt;/listeners&amp;gt;
-&amp;lt;testsuites&amp;gt;
-&amp;lt;testsuite name=&amp;quot;Application Test Suite&amp;quot;&amp;gt;
-&amp;lt;directory&amp;gt;test&amp;lt;/directory&amp;gt;
-&amp;lt;/testsuite&amp;gt;
-&amp;lt;/testsuites&amp;gt;
-&amp;lt;/phpunit&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>Lastly edit your phpunit bootstrap file to setup VCR&lt;/p>
-&lt;pre>&lt;code>#test/bootstrap.php
-&amp;lt;?php
+-----fixtures</code></pre><p>And open your phpunit.xml file to add the code to intercept your requests.</p><pre><code>#/phpunit.xml<p>&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;phpunit backupGlobals="false"
+backupStaticAttributes="false"
+bootstrap="test/bootstrap.php"
+colors="true"
+convertErrorsToExceptions="true"
+convertNoticesToExceptions="true"
+convertWarningsToExceptions="true"
+processIsolation="false"
+stopOnFailure="false"
+syntaxCheck="false"
+>
+&lt;listeners>
+&lt;listener class="PHPUnit_Util_Log_VCR" file="vendor/php-vcr/phpunit-testlistener-vcr/PHPUnit/Util/Log/VCR.php" />
+&lt;/listeners>
+&lt;testsuites>
+&lt;testsuite name="Application Test Suite">
+&lt;directory>test&lt;/directory>
+&lt;/testsuite>
+&lt;/testsuites>
+&lt;/phpunit></code></pre><p>Lastly edit your phpunit bootstrap file to setup VCR</p></p><pre><code>#test/bootstrap.php
+&lt;?php
 function includeIfExists($file)
 {
 if (file_exists($file)) {
 return include $file;
 }
 }
-if ((!$loader = includeIfExists(__DIR__.'/../vendor/autoload.php')) &amp;amp;&amp;amp; (!$loader = includeIfExists(__DIR__.'/../../../.composer/autoload.php'))) {
+if ((!$loader = includeIfExists(__DIR__.'/../vendor/autoload.php')) &amp;&amp; (!$loader = includeIfExists(__DIR__.'/../../../.composer/autoload.php'))) {
 die('You must set up the project dependencies, run the following commands:'.PHP_EOL.
 'curl -s http://getcomposer.org/installer | php'.PHP_EOL.
 'php composer.phar install'.PHP_EOL);
 }
-\VCR\VCR::configure()-&amp;gt;setCassettePath(__DIR__ .'/../test/fixtures');
-$loader-&amp;gt;add('Foo\SauceLabs', __DIR__);
-return $loader;
-&lt;/code>&lt;/pre>&lt;p>Now you are ready to use the API. This repo has a ton of tests using the api &lt;a href="https://github.com/alnutile/saucelabs_client">https://github.com/alnutile/saucelabs_client&lt;/a>&lt;/p>
-&lt;p>You will see in this file for example how it is called in the doc blocks&lt;/p>
-&lt;pre>&lt;code>#test/SauceLabs/Tests/JobsTest.php
+\VCR\VCR::configure()->setCassettePath(__DIR__ .'/../test/fixtures');
+$loader->add('Foo\SauceLabs', __DIR__);
+return $loader;</code></pre><p>Now you are ready to use the API. This repo has a ton of tests using the api<a href="https://github.com/alnutile/saucelabs_client">https://github.com/alnutile/saucelabs_client</a></p><p>You will see in this file for example how it is called in the doc blocks</p><pre><code>#test/SauceLabs/Tests/JobsTest.php
 use SauceLabs\Client;
 use VCR\VCR;
-use SauceLabs\Tests\BaseTest as Base;
-class JobsTest extends Base {
-protected function tearDown()
+use SauceLabs\Tests\BaseTest as Base;<p>class JobsTest extends Base {</p><pre><code>protected function tearDown()
 {
 m::close();
 }
@@ -363,9 +308,7 @@ $this-&amp;gt;assertGreaterThan(15, count($response));
 VCR::eject();
 // Turn off VCR to stop intercepting requests
 VCR::turnOff();
-}
-&lt;/code>&lt;/pre>&lt;p>After the first time you run that you will have a new &amp;ldquo;cassette&amp;rdquo; in the test/fixtures folder that you can use as needed&lt;/p>
-&lt;pre>&lt;code>#test/fixtures/get_jobs
+}</code></pre><p/></pre><p>After the first time you run that you will have a new “cassette” in the test/fixtures folder that you can use as needed</p></p><pre><code>#test/fixtures/get_jobs
 -
 request:
 method: GET
@@ -385,7 +328,7 @@ Content-Type: 'application/json; charset=utf-8'
 Transfer-Encoding: chunked
 Connection: keep-alive
 X-Backend: mix
-body: '[{&amp;quot;id&amp;quot;: &amp;quot;79bd34f42d584da6ad59c051388134d9&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;d75177a863ec4a458c7222813e10ee84&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;67591976001c4c5a9522b93281e0e8ef&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;ada6876f799d4b589ef0e2c4069c7438&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;3e676ac921aa43f5a5628d231ca7115d&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;222cdddafb9e4c3fb0722bccc9891a15&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;6393dc7ca1ea447eb509b5e1dd6821ac&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;789004fc2ec34d0d8e03945759fc25b0&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;3331badd2da140d08613a786257d177d&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;9437a50a354e4fca8252447b03d21348&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;dec07ca1c30e40f4a693de7f7a102eab&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;3a1a0fb2d4be4580b00a3e35b86aa6fa&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;55de27651bf14c92b901cbd0a62b1603&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;7e12ec786ad544008c5f4e3e4340d5a8&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;a8edb7ab8a8f408a9b0829cc45ca4563&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;b67a4d7187cc4dc8ad661ef7045d15e9&amp;quot;}]'
+body: '[{"id": "79bd34f42d584da6ad59c051388134d9"}, {"id": "d75177a863ec4a458c7222813e10ee84"}, {"id": "67591976001c4c5a9522b93281e0e8ef"}, {"id": "ada6876f799d4b589ef0e2c4069c7438"}, {"id": "3e676ac921aa43f5a5628d231ca7115d"}, {"id": "222cdddafb9e4c3fb0722bccc9891a15"}, {"id": "6393dc7ca1ea447eb509b5e1dd6821ac"}, {"id": "789004fc2ec34d0d8e03945759fc25b0"}, {"id": "3331badd2da140d08613a786257d177d"}, {"id": "9437a50a354e4fca8252447b03d21348"}, {"id": "dec07ca1c30e40f4a693de7f7a102eab"}, {"id": "3a1a0fb2d4be4580b00a3e35b86aa6fa"}, {"id": "55de27651bf14c92b901cbd0a62b1603"}, {"id": "7e12ec786ad544008c5f4e3e4340d5a8"}, {"id": "a8edb7ab8a8f408a9b0829cc45ca4563"}, {"id": "b67a4d7187cc4dc8ad661ef7045d15e9"}]'
 -
 request:
 method: GET
@@ -405,6 +348,4 @@ Content-Type: 'application/json; charset=utf-8'
 Transfer-Encoding: chunked
 Connection: keep-alive
 X-Backend: mix
-body: '[{&amp;quot;id&amp;quot;: &amp;quot;3a4136e1bb6f4f6b8cae6fbd0bf2e6aa&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;1cde7b77e8744ff5b6198489ceffce81&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;79bd34f42d584da6ad59c051388134d9&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;d75177a863ec4a458c7222813e10ee84&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;67591976001c4c5a9522b93281e0e8ef&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;ada6876f799d4b589ef0e2c4069c7438&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;3e676ac921aa43f5a5628d231ca7115d&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;222cdddafb9e4c3fb0722bccc9891a15&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;6393dc7ca1ea447eb509b5e1dd6821ac&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;789004fc2ec34d0d8e03945759fc25b0&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;3331badd2da140d08613a786257d177d&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;9437a50a354e4fca8252447b03d21348&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;dec07ca1c30e40f4a693de7f7a102eab&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;3a1a0fb2d4be4580b00a3e35b86aa6fa&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;55de27651bf14c92b901cbd0a62b1603&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;7e12ec786ad544008c5f4e3e4340d5a8&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;a8edb7ab8a8f408a9b0829cc45ca4563&amp;quot;}, {&amp;quot;id&amp;quot;: &amp;quot;b67a4d7187cc4dc8ad661ef7045d15e9&amp;quot;}]'
-&lt;/code>&lt;/pre>&lt;p>That library should be a big help to try it out. You just need a Saucelabs account and make a file in the root of your folder called .env as noted in the README with your username and token for saucelabs and then run bin/phpunit.&lt;/p></description><tags>php, api, testing</tags></item><item><title>CORS and Laravel</title><link>https://alfrednutile.info/posts/4/</link><pubDate>Thu, 06 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/4/</guid><description>&lt;p>When doing some API work using Laravel as the REST server I was getting a common error &amp;quot;No &amp;#39;Access-Control-Allow-Origin&amp;#39; header is present on the requested resource.&amp;quot; which happens when the REST server is on a different domain than the client server.&lt;/p>
-&lt;p>I installed this package&amp;nbsp;&lt;a href="https://github.com/barryvdh/laravel-cors" target="_blank">https://github.com/barryvdh/laravel-cors&lt;/a>&amp;nbsp;and it now works fine.&lt;/p></description><tags>api</tags></item></channel></rss>
+body: '[{"id": "3a4136e1bb6f4f6b8cae6fbd0bf2e6aa"}, {"id": "1cde7b77e8744ff5b6198489ceffce81"}, {"id": "79bd34f42d584da6ad59c051388134d9"}, {"id": "d75177a863ec4a458c7222813e10ee84"}, {"id": "67591976001c4c5a9522b93281e0e8ef"}, {"id": "ada6876f799d4b589ef0e2c4069c7438"}, {"id": "3e676ac921aa43f5a5628d231ca7115d"}, {"id": "222cdddafb9e4c3fb0722bccc9891a15"}, {"id": "6393dc7ca1ea447eb509b5e1dd6821ac"}, {"id": "789004fc2ec34d0d8e03945759fc25b0"}, {"id": "3331badd2da140d08613a786257d177d"}, {"id": "9437a50a354e4fca8252447b03d21348"}, {"id": "dec07ca1c30e40f4a693de7f7a102eab"}, {"id": "3a1a0fb2d4be4580b00a3e35b86aa6fa"}, {"id": "55de27651bf14c92b901cbd0a62b1603"}, {"id": "7e12ec786ad544008c5f4e3e4340d5a8"}, {"id": "a8edb7ab8a8f408a9b0829cc45ca4563"}, {"id": "b67a4d7187cc4dc8ad661ef7045d15e9"}]'</code></pre><p>That library should be a big help to try it out. You just need a Saucelabs account and make a file in the root of your folder called .env as noted in the README with your username and token for saucelabs and then run bin/phpunit.</p></description><tags>php, api, testing</tags></item><item><title>CORS and Laravel</title><link>https://alfrednutile.info/posts/4/</link><pubDate>Thu, 06 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/4/</guid><description><p>When doing some API work using Laravel as the REST server I was getting a common error "No 'Access-Control-Allow-Origin' header is present on the requested resource." which happens when the REST server is on a different domain than the client server.</p><p>I installed this package&nbsp;<a href="https://github.com/barryvdh/laravel-cors" target="_blank">https://github.com/barryvdh/laravel-cors</a>&nbsp;and it now works fine.</p></description><tags>api</tags></item></channel></rss>

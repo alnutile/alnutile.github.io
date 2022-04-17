@@ -1,151 +1,64 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>windows on Alfred Nutile</title><link>https://alfrednutile.info/tags/windows/</link><description>Recent content in windows on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 25 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows Dev Box Try 3 2020</title><link>https://alfrednutile.info/posts/267/</link><pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/267/</guid><description>&lt;p>Yes this is try number 3. See &lt;a href="https://alfrednutile.info/posts/247">here&lt;/a> for the first 2 goes at it.&lt;/p>
-&lt;p>With WSL2 out and a great laptop I wanted to give this another try.&lt;/p>
-&lt;h2 id="mariadb">MariaDB&lt;/h2>
-&lt;p>Even though the install is super simple see &lt;a href="https://alfrednutile.info/posts/267/">https://alfrednutile.info/posts/267&lt;/a>&lt;/p>
-&lt;p>I still end up having to do:&lt;/p>
-&lt;pre>&lt;code>$ sudo mysql -u root # I had to use &amp;quot;sudo&amp;quot; since is new installation
-mysql&amp;gt; USE mysql;
-mysql&amp;gt; UPDATE user SET plugin='mysql_native_password' WHERE User='root';
-mysql&amp;gt; FLUSH PRIVILEGES;
-mysql&amp;gt; exit;
-$ service mysql restart
-&lt;/code>&lt;/pre>&lt;p>To allow me to then use this command, for example &lt;code>maraidb -uroot -proot&lt;/code> otherwise I have &amp;ldquo;Error connecting on localhost&amp;rdquo; type errors.&lt;/p>
-&lt;p>If using MySQL this worked really well &lt;a href="https://phoenixnap.com/kb/access-denied-for-user-root-localhost">here&lt;/a>&lt;/p>
-&lt;h2 id="xdebug">Xdebug&lt;/h2>
-&lt;p>Using my previous notes in the above post and &lt;a href="https://gcompagnon.github.io/wsl2/xdebug/vscode/php-fpm/2019/09/17/WSL2_php_VSCode_Xdebug.html">https://gcompagnon.github.io/wsl2/xdebug/vscode/php-fpm/2019/09/17/WSL2_php_VSCode_Xdebug.html&lt;/a>&lt;/p>
-&lt;p>I removed the reference to the host:&lt;/p>
-&lt;pre>&lt;code>[xdebug]
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>windows on Alfred Nutile</title><link>https://alfrednutile.info/tags/windows/</link><description>Recent content in windows on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 25 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/windows/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows Dev Box Try 3 2020</title><link>https://alfrednutile.info/posts/267/</link><pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/267/</guid><description><p>Yes this is try number 3. See<a href="https://alfrednutile.info/posts/247">here</a> for the first 2 goes at it.</p><p>With WSL2 out and a great laptop I wanted to give this another try.</p><h2 id="mariadb">MariaDB</h2><p>Even though the install is super simple see<a href="https://alfrednutile.info/posts/267/">https://alfrednutile.info/posts/267</a></p><p>I still end up having to do:</p><pre><code>$ sudo mysql -u root # I had to use "sudo" since is new installation<p>mysql> USE mysql;
+mysql> UPDATE user SET plugin=&lsquo;mysql_native_password&rsquo; WHERE User=&lsquo;root&rsquo;;
+mysql> FLUSH PRIVILEGES;
+mysql> exit;</p><p>$ service mysql restart</code></pre><p>To allow me to then use this command, for example<code>maraidb -uroot -proot</code> otherwise I have “Error connecting on localhost” type errors.</p></p><p>If using MySQL this worked really well<a href="https://phoenixnap.com/kb/access-denied-for-user-root-localhost">here</a></p><h2 id="xdebug">Xdebug</h2><p>Using my previous notes in the above post and<a href="https://gcompagnon.github.io/wsl2/xdebug/vscode/php-fpm/2019/09/17/WSL2_php_VSCode_Xdebug.html">https://gcompagnon.github.io/wsl2/xdebug/vscode/php-fpm/2019/09/17/WSL2_php_VSCode_Xdebug.html</a></p><p>I removed the reference to the host:</p><pre><code>[xdebug]
 xdebug.remote_enable=1
 xdebug.remote_autostart=1
 xdebug.remote_handler=dbgp
 xdebug.remote_port=9009
-xdebug.remote_log = /var/log/xdebug.log
-&lt;/code>&lt;/pre>&lt;p>in Visual Code my launch.json ended up looking like this:&lt;/p>
-&lt;pre>&lt;code>{
+xdebug.remote_log = /var/log/xdebug.log</code></pre><p>in Visual Code my launch.json ended up looking like this:</p><pre><code>{
 // Use IntelliSense to learn about possible attributes.
 // Hover to view descriptions of existing attributes.
 // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-&amp;quot;version&amp;quot;: &amp;quot;0.2.0&amp;quot;,
-&amp;quot;configurations&amp;quot;: [
+"version": "0.2.0",
+"configurations": [
 {
-&amp;quot;name&amp;quot;: &amp;quot;Listen for XDebug&amp;quot;,
-&amp;quot;type&amp;quot;: &amp;quot;php&amp;quot;,
-&amp;quot;request&amp;quot;: &amp;quot;launch&amp;quot;,
-&amp;quot;hostname&amp;quot;: &amp;quot;0.0.0.0&amp;quot;,
-&amp;quot;port&amp;quot;: 9009
+"name": "Listen for XDebug",
+"type": "php",
+"request": "launch",
+"hostname": "0.0.0.0",
+"port": 9009
 },
 {
-&amp;quot;name&amp;quot;: &amp;quot;Launch currently open script&amp;quot;,
-&amp;quot;type&amp;quot;: &amp;quot;php&amp;quot;,
-&amp;quot;request&amp;quot;: &amp;quot;launch&amp;quot;,
-&amp;quot;program&amp;quot;: &amp;quot;${file}&amp;quot;,
-&amp;quot;hostname&amp;quot;: &amp;quot;0.0.0.0&amp;quot;,
-&amp;quot;cwd&amp;quot;: &amp;quot;${fileDirname}&amp;quot;,
-&amp;quot;port&amp;quot;: 9009
+"name": "Launch currently open script",
+"type": "php",
+"request": "launch",
+"program": "${file}",
+"hostname": "0.0.0.0",
+"cwd": "${fileDirname}",
+"port": 9009
 }
 ]
-}
-&lt;/code>&lt;/pre></description><tags>windows, linux, wsl, php</tags></item><item><title>Windows Dev Box Try 2 2018</title><link>https://alfrednutile.info/posts/247/</link><pubDate>Mon, 11 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/247/</guid><description>&lt;p>Going to list somethings as I go.&lt;/p>
-&lt;p>The Mac, in spite of Apple, is a great developer experience, here is to hoping the Windows, with the help of Microsoft, grows to be better and better as the improve it via user feedback to make it a great development box.&lt;/p>
-&lt;h2 id="links">Links&lt;/h2>
-&lt;p>This started it all &lt;a href="https://char.gd/blog/2017/how-to-set-up-the-perfect-modern-dev-environment-on-windows">https://char.gd/blog/2017/how-to-set-up-the-perfect-modern-dev-environment-on-windows&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://daverupert.com/2018/04/developing-on-windows-with-wsl-and-visual-studio-code/">Webdev on Windows with WSL and VS Code&lt;/a>&lt;/p>
-&lt;h2 id="npm-and-composer-install-take-a-long-time">NPM and Composer install take a long time&lt;/h2>
-&lt;p>Some of this is the Windowsantimalware running. If you go to Windows Security -&amp;gt; Exclusion you can have it not search this folder.
-More info &lt;a href="https://blog.emsisoft.com/en/28620/antimalware-service-executable/">https://blog.emsisoft.com/en/28620/antimalware-service-executable/&lt;/a>&lt;/p>
-&lt;h2 id="local-php">Local PHP&lt;/h2>
-&lt;p>This one works best for me. I tried Valet etc just go lucky with this one &lt;a href="https://medium.freecodecamp.org/setup-a-php-development-environment-on-windows-subsystem-for-linux-wsl-9193ff28ae83">https://medium.freecodecamp.org/setup-a-php-development-environment-on-windows-subsystem-for-linux-wsl-9193ff28ae83&lt;/a>&lt;/p>
-&lt;p>Simple vhost file:&lt;/p>
-&lt;pre>&lt;code>&amp;lt;VirtualHost *:80&amp;gt;
+}</code></pre></description><tags>windows, linux, wsl, php</tags></item><item><title>Windows Dev Box Try 2 2018</title><link>https://alfrednutile.info/posts/247/</link><pubDate>Mon, 11 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/247/</guid><description><p>Going to list somethings as I go.</p><p>The Mac, in spite of Apple, is a great developer experience, here is to hoping the Windows, with the help of Microsoft, grows to be better and better as the improve it via user feedback to make it a great development box.</p><h2 id="links">Links</h2><p>This started it all<a href="https://char.gd/blog/2017/how-to-set-up-the-perfect-modern-dev-environment-on-windows">https://char.gd/blog/2017/how-to-set-up-the-perfect-modern-dev-environment-on-windows</a></p><p><a href="https://daverupert.com/2018/04/developing-on-windows-with-wsl-and-visual-studio-code/">Webdev on Windows with WSL and VS Code</a></p><h2 id="npm-and-composer-install-take-a-long-time">NPM and Composer install take a long time</h2><p>Some of this is the Windowsantimalware running. If you go to Windows Security -> Exclusion you can have it not search this folder.
+More info<a href="https://blog.emsisoft.com/en/28620/antimalware-service-executable/">https://blog.emsisoft.com/en/28620/antimalware-service-executable/</a></p><h2 id="local-php">Local PHP</h2><p>This one works best for me. I tried Valet etc just go lucky with this one<a href="https://medium.freecodecamp.org/setup-a-php-development-environment-on-windows-subsystem-for-linux-wsl-9193ff28ae83">https://medium.freecodecamp.org/setup-a-php-development-environment-on-windows-subsystem-for-linux-wsl-9193ff28ae83</a></p><p>Simple vhost file:</p><pre><code>&lt;VirtualHost *:80>
 ServerName APP_NAME.test
 ServerAdmin foo@foo.com
 DocumentRoot /var/www/devroot/APP_NAME/public
 Redirect permanent / https://APP_NAME.test/
-&amp;lt;Directory /var/www/&amp;gt;
+&lt;Directory /var/www/>
 Options Indexes FollowSymLinks
 AllowOverride All
 Require all granted
-&amp;lt;/Directory&amp;gt;
-ErrorLog ${APACHE_LOG_DIR}/error.log
-CustomLog ${APACHE_LOG_DIR}/access.log combined
-&amp;lt;/VirtualHost&amp;gt;
-&amp;lt;VirtualHost *:443&amp;gt;
+&lt;/Directory><pre><code> ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined</code></pre><p>&lt;/VirtualHost>
+&lt;VirtualHost *:443>
 ServerName APP_NAME.test
-ServerAdmin foo@foo.com
+ServerAdmin<a href="mailto:foo@foo.com">foo@foo.com</a>
 DocumentRoot /var/www/devroot/APP_NAME/public
 SSLEngine on
 SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
 SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
-&amp;lt;Directory /var/www/&amp;gt;
+&lt;Directory /var/www/>
 Options Indexes FollowSymLinks
 AllowOverride All
 Require all granted
-&amp;lt;/Directory&amp;gt;
-ErrorLog ${APACHE_LOG_DIR}/error.log
-CustomLog ${APACHE_LOG_DIR}/access.log combined
-&amp;lt;/VirtualHost&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>Make sure to run:&lt;/p>
-&lt;pre>&lt;code>sudo a2enmod ssl
+&lt;/Directory></p><pre><code> ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined</code></pre><p>&lt;/VirtualHost></code></pre><p>Make sure to run:</p></p><pre><code>sudo a2enmod ssl
 sudo a2enmod rewrite
-service apache2 restart
-&lt;/code>&lt;/pre>&lt;h2 id="mariadb">MariaDB&lt;/h2>
-&lt;p>Get the latest one installed so you have JSON fields etc &lt;a href="https://websiteforstudents.com/upgrading-mariadb-from-10-0-to-10-1-to-10-2-on-ubuntu-16-04-17-10/">here&lt;/a>&lt;/p>
-&lt;p>But see bug in section &lt;code>apt-key&lt;/code>&lt;/p>
-&lt;p>If you get this Linux error &lt;code>INSTALL PLUGIN unix_socket SONAME 'auth_socket';&lt;/code> checkout &lt;a href="https://mariadb.com/kb/en/library/authentication-plugin-unix-socket/">https://mariadb.com/kb/en/library/authentication-plugin-unix-socket/&lt;/a>&lt;/p>
-&lt;p>Trouble with root connecting to 127.0.0.1&lt;/p>
-&lt;p>Connect to mysql on localhost and run&lt;/p>
-&lt;pre>&lt;code>GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+service apache2 restart</code></pre><h2 id="mariadb">MariaDB</h2><p>Get the latest one installed so you have JSON fields etc<a href="https://websiteforstudents.com/upgrading-mariadb-from-10-0-to-10-1-to-10-2-on-ubuntu-16-04-17-10/">here</a></p><p>But see bug in section<code>apt-key</code></p><p>If you get this Linux error<code>INSTALL PLUGIN unix_socket SONAME 'auth_socket';</code> checkout<a href="https://mariadb.com/kb/en/library/authentication-plugin-unix-socket/">https://mariadb.com/kb/en/library/authentication-plugin-unix-socket/</a></p><p>Trouble with root connecting to 127.0.0.1</p><p>Connect to mysql on localhost and run</p><pre><code>GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'127.0.0.1';
-FLUSH PRIVILEGES;
-&lt;/code>&lt;/pre>&lt;p>Then set /etc/mysql/my.cnf to&lt;/p>
-&lt;pre>&lt;code>skip-name-resolve = 1
-bind-address = 0.0.0.0
-&lt;/code>&lt;/pre>&lt;p>service mysql restart&lt;/p>
-&lt;h2 id="apt-key">APT-KEY&lt;/h2>
-&lt;p>This will not work&lt;/p>
-&lt;pre>&lt;code>connecting dirmngr at '/tmp/apt-key-gpghome.L0JTeGaLOf/S.dirmngr' failed: IPC connect call failed
-&lt;/code>&lt;/pre>&lt;p>So run this instead&lt;/p>
-&lt;pre>&lt;code>curl -sL &amp;quot;http://keyserver.ubuntu.com/pks/lookup?op=get&amp;amp;search=0xF1656F24C74CD1D8&amp;quot; | sudo apt-key add
-&lt;/code>&lt;/pre>&lt;p>Putting the key in the search area. [https://github.com/Microsoft/WSL/issues/3286#issuecomment-395980628](Putting the key in the search area. &lt;a href="">https://github.com/Microsoft/WSL/issues/3286#issuecomment-395980628&lt;/a>&lt;/p>
-&lt;h2 id="npm-errors">NPM Errors&lt;/h2>
-&lt;h4 id="linux-error-pngquant-failed-to-build-make-sure-that-libpng-dev-is-installed">linux Error: pngquant failed to build, make sure that libpng-dev is installed&lt;/h4>
-&lt;p>Fix is &lt;a href="https://github.com/imagemin/pngquant-bin/issues/78">https://github.com/imagemin/pngquant-bin/issues/78&lt;/a>&lt;/p>
-&lt;h2 id="exclude-wsl-folders-from-virus-scans">Exclude WSL folders from virus scans&lt;/h2>
-&lt;p>&lt;a href="https://www.howtogeek.com/261383/how-to-access-your-ubuntu-bash-files-in-windows-and-your-windows-system-drive-in-bash/">https://www.howtogeek.com/261383/how-to-access-your-ubuntu-bash-files-in-windows-and-your-windows-system-drive-in-bash/&lt;/a>&lt;/p>
-&lt;p>For me this was more about my code folder&lt;/p>
-&lt;h2 id="apps">Apps&lt;/h2>
-&lt;h3 id="textexpanderhttpstextexpandercomprivacy-consenturldownload">&lt;a href="https://textexpander.com/privacy-consent?url=https://alfrednutile.info/download/">TextExpander&lt;/a>&lt;/h3>
-&lt;h3 id="1password">1Password&lt;/h3>
-&lt;p>Get this in the store to start&lt;/p>
-&lt;h3 id="windows-clipboard-historyhttpwwwwoxoneplugin">&lt;a href="http://www.wox.one/plugin">Windows ClipBoard History&lt;/a>&lt;/h3>
-&lt;p>And &lt;strong>Alfred&lt;/strong> replacement! The plugin section has the history one&lt;/p>
-&lt;h3 id="vpn">VPN&lt;/h3>
-&lt;h3 id="screenshots">ScreenShots&lt;/h3>
-&lt;p>This is built into Windows and works really well. Using the Pen I can also just make the back button do it on the fly.&lt;/p>
-&lt;p>&lt;img src="https://previews.dropbox.com/p/thumb/AAYQD1rU0bAoJwCbA0YztAqgxlXYd53Eq9Uj-ipujds86cFrqR0ouT5U41L2B2OIwu6hpbsalFFuy0s5sqDSWtli6gBLpt-EdxeJdquRTrxAvrchaPDiDfXy3DCfe0N9k0-YZGw3HstQW7MtfHgCd7FvREqGF9x8X-VI68qWul32L-lrvAHBwh8qdGKaiSd4r22L6IPi1tEC5NsmOzsomtEqGdet5tqCTsRbKMo-BDBkQE6evcSUfhnJQTd2_OAfQzWFE3GOsgrM1NQGfTSDuBLQFe1dbhskhPQMkvFWIoEWCp4vmf0I9PvtB9IRNH0OqO6oa9PzetGPoXPRRsARpX2T/p.png?size_mode=5" alt="">&lt;/p>
-&lt;h3 id="record-desktop">Record Desktop&lt;/h3>
-&lt;p>???&lt;/p>
-&lt;h3 id="mysqlworkbenchhttpsdevmysqlcomgetdownloadsmysqlguitoolsmysql-workbench-community-6310-winx64msi">&lt;a href="https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community-6.3.10-winx64.msi">MySQLWorkbench&lt;/a>&lt;/h3>
-&lt;p>not pretty but does handle things well&lt;/p>
-&lt;h3 id="add-wsl-file-path-to-be-ignored-in-the-windows-defender-scanner">Add WSL File path to be ignored in the Windows defender scanner&lt;/h3>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/5k1xpc2q7szahtr/exclude.png?dl=0" alt="">&lt;/p></description><tags>windows, note2self</tags></item><item><title>Getting Going Quickly Windows, Behat and Selenium</title><link>https://alfrednutile.info/posts/181/</link><pubDate>Tue, 03 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/181/</guid><description>&lt;p>Quick Install Steps&lt;/p>
-&lt;h2 id="vagrant-and-homestead">Vagrant and Homestead&lt;/h2>
-&lt;p>This was easy I just followed these steps &lt;a href="http://sherriflemings.blogspot.ca/2015/03/laravel-homestead-on-windows-8.html">here&lt;/a> and I was done. For me I used Vmware but Virtualbox is fine.&lt;/p>
-&lt;h2 id="windows-in-selenium">Windows in Selenium&lt;/h2>
-&lt;p>Two easy steps&lt;/p>
-&lt;h3 id="step-1-install-nodejs-super-easy">Step 1 Install Node.js SUPER EASY&lt;/h3>
-&lt;p>&lt;a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/&lt;/a>&lt;/p>
-&lt;p>Install the .exe, restart your console and you have node!&lt;/p>
-&lt;h3 id="step-2-install-selenium">Step 2 Install Selenium&lt;/h3>
-&lt;p>Just go here and you are done!
-&lt;a href="https://www.npmjs.com/package/selenium-standalone">https://www.npmjs.com/package/selenium-standalone&lt;/a>&lt;/p>
-&lt;p>After those steps I run it in a powershell and the server is running and I am set to use it.&lt;/p>
-&lt;h2 id="final-touches">Final Touches&lt;/h2>
-&lt;p>In my VM I &amp;ldquo;sudo vim /etc/hosts&amp;rdquo; and point it to my selenium on windows using the domain &amp;ldquo;selenium.dev&amp;rdquo;&lt;/p>
-&lt;pre>&lt;code>192.168.7.57 selenium.dev
-&lt;/code>&lt;/pre>&lt;p>Then my behat.yml looks like this&lt;/p>
-&lt;p>So when I run this inside the VM it knows to talk to the exteral version of Selenium&lt;/p>
-&lt;pre>&lt;code>default:
+FLUSH PRIVILEGES;</code></pre><p>Then set /etc/mysql/my.cnf to</p><pre><code>skip-name-resolve = 1
+bind-address = 0.0.0.0</code></pre><p>service mysql restart</p><h2 id="apt-key">APT-KEY</h2><p>This will not work</p><pre><code>connecting dirmngr at '/tmp/apt-key-gpghome.L0JTeGaLOf/S.dirmngr' failed: IPC connect call failed</code></pre><p>So run this instead</p><pre><code>curl -sL "http://keyserver.ubuntu.com/pks/lookup?op=get&amp;search=0xF1656F24C74CD1D8" | sudo apt-key add</code></pre><p>Putting the key in the search area. [https://github.com/Microsoft/WSL/issues/3286#issuecomment-395980628](Putting the key in the search area.<a href="">https://github.com/Microsoft/WSL/issues/3286#issuecomment-395980628</a></p><h2 id="npm-errors">NPM Errors</h2><h4 id="linux-error-pngquant-failed-to-build-make-sure-that-libpng-dev-is-installed">linux Error: pngquant failed to build, make sure that libpng-dev is installed</h4><p>Fix is<a href="https://github.com/imagemin/pngquant-bin/issues/78">https://github.com/imagemin/pngquant-bin/issues/78</a></p><h2 id="exclude-wsl-folders-from-virus-scans">Exclude WSL folders from virus scans</h2><p><a href="https://www.howtogeek.com/261383/how-to-access-your-ubuntu-bash-files-in-windows-and-your-windows-system-drive-in-bash/">https://www.howtogeek.com/261383/how-to-access-your-ubuntu-bash-files-in-windows-and-your-windows-system-drive-in-bash/</a></p><p>For me this was more about my code folder</p><h2 id="apps">Apps</h2><h3 id="textexpanderhttpstextexpandercomprivacy-consenturldownload"><a href="https://textexpander.com/privacy-consent?url=https://alfrednutile.info/download/">TextExpander</a></h3><h3 id="1password">1Password</h3><p>Get this in the store to start</p><h3 id="windows-clipboard-historyhttpwwwwoxoneplugin"><a href="http://www.wox.one/plugin">Windows ClipBoard History</a></h3><p>And<strong>Alfred</strong> replacement! The plugin section has the history one</p><h3 id="vpn">VPN</h3><h3 id="screenshots">ScreenShots</h3><p>This is built into Windows and works really well. Using the Pen I can also just make the back button do it on the fly.</p><p><img src="https://previews.dropbox.com/p/thumb/AAYQD1rU0bAoJwCbA0YztAqgxlXYd53Eq9Uj-ipujds86cFrqR0ouT5U41L2B2OIwu6hpbsalFFuy0s5sqDSWtli6gBLpt-EdxeJdquRTrxAvrchaPDiDfXy3DCfe0N9k0-YZGw3HstQW7MtfHgCd7FvREqGF9x8X-VI68qWul32L-lrvAHBwh8qdGKaiSd4r22L6IPi1tEC5NsmOzsomtEqGdet5tqCTsRbKMo-BDBkQE6evcSUfhnJQTd2_OAfQzWFE3GOsgrM1NQGfTSDuBLQFe1dbhskhPQMkvFWIoEWCp4vmf0I9PvtB9IRNH0OqO6oa9PzetGPoXPRRsARpX2T/p.png?size_mode=5" alt=""/><h3 id="record-desktop">Record Desktop</h3><p>???</p><h3 id="mysqlworkbenchhttpsdevmysqlcomgetdownloadsmysqlguitoolsmysql-workbench-community-6310-winx64msi"><a href="https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community-6.3.10-winx64.msi">MySQLWorkbench</a></h3><p>not pretty but does handle things well</p><h3 id="add-wsl-file-path-to-be-ignored-in-the-windows-defender-scanner">Add WSL File path to be ignored in the Windows defender scanner</h3><p><img src="https://dl.dropboxusercontent.com/s/5k1xpc2q7szahtr/exclude.png?dl=0" alt=""/></description><tags>windows, note2self</tags></item><item><title>Getting Going Quickly Windows, Behat and Selenium</title><link>https://alfrednutile.info/posts/181/</link><pubDate>Tue, 03 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/181/</guid><description><p>Quick Install Steps</p><h2 id="vagrant-and-homestead">Vagrant and Homestead</h2><p>This was easy I just followed these steps<a href="http://sherriflemings.blogspot.ca/2015/03/laravel-homestead-on-windows-8.html">here</a> and I was done. For me I used Vmware but Virtualbox is fine.</p><h2 id="windows-in-selenium">Windows in Selenium</h2><p>Two easy steps</p><h3 id="step-1-install-nodejs-super-easy">Step 1 Install Node.js SUPER EASY</h3><p><a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a></p><p>Install the .exe, restart your console and you have node!</p><h3 id="step-2-install-selenium">Step 2 Install Selenium</h3><p>Just go here and you are done!<a href="https://www.npmjs.com/package/selenium-standalone">https://www.npmjs.com/package/selenium-standalone</a></p><p>After those steps I run it in a powershell and the server is running and I am set to use it.</p><h2 id="final-touches">Final Touches</h2><p>In my VM I &ldquo;sudo vim /etc/hosts&rdquo; and point it to my selenium on windows using the domain &ldquo;selenium.dev&rdquo;</p><pre><code>192.168.7.57 selenium.dev</code></pre><p>Then my behat.yml looks like this</p><p>So when I run this inside the VM it knows to talk to the exteral version of Selenium</p><pre><code>default:
 suites:
 home_ui:
 paths: [ %paths.base%/features/home]
@@ -158,6 +71,5 @@ default_session: laravel
 base_url: https://recipes.dev
 laravel: ~
 selenium2:
-wd_host: &amp;quot;http://selenium.dev:4444/wd/hub&amp;quot;
-browser_name: chrome
-&lt;/code>&lt;/pre>&lt;p>You can see more of it &lt;a href="https://github.com/alnutile/recipes/blob/master/behat.yml">here&lt;/a>&lt;/p></description><tags>bdd, behat, windows</tags></item></channel></rss>
+wd_host: "http://selenium.dev:4444/wd/hub"
+browser_name: chrome</code></pre><p>You can see more of it<a href="https://github.com/alnutile/recipes/blob/master/behat.yml">here</a></p></description><tags>bdd, behat, windows</tags></item></channel></rss>

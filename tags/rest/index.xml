@@ -1,82 +1,67 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>REST on Alfred Nutile</title><link>https://alfrednutile.info/tags/rest/</link><description>Recent content in REST on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 14 Jun 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/rest/index.xml" rel="self" type="application/rss+xml"/><item><title>Transforming Output from the Database to the View/REST layer</title><link>https://alfrednutile.info/posts/88/</link><pubDate>Sat, 14 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/88/</guid><description>&lt;p>Having watched the screen cast &lt;a href="https://laracasts.com/series/incremental-api-development/episodes/4">here&lt;/a> by Jeffery Way and reading Phil Sturgeon&amp;rsquo;s &lt;a href="https://leanpub.com/build-apis-you-wont-hate">Build APIs You Won&amp;rsquo;t Hate&lt;/a> I used this approach on a recent project.&lt;/p>
-&lt;p>Basically, and they both cover it really well, instead of returning the data right to the ui/rest endpoint from the database I pass it through a class to transform the data formats, field name etc. This has been extremely helpful as we also work out some wording of fields that I can not do easily in this one class.&lt;/p>
-&lt;p>Also I can do output alterations using this Class and replace text depending on say a users permission level or maybe just to set a default image if there is none. So that user gets and Address Value Object that only shows the State.&lt;/p>
-&lt;p>Another good example was one server was LAMP and the other Nginx. Same db, etc but one has a setting to output a boolean as &amp;ldquo;1&amp;rdquo; and the other 1 so again I could verify and set these as needed as I built out the output. (yes I could have just Google the setting or better yet use a Vagrant box running Nginx to dev on)&lt;/p>
-&lt;p>Anyways just a really simple layer to add to a project.&lt;/p>
-&lt;p>Some good learning&lt;/p>
-&lt;ul>
-&lt;li>Incremental API &lt;a href="https://laracasts.com/series/incremental-api-development/episodes/4">https://laracasts.com/series/incremental-api-development/episodes/4&lt;/a>&lt;/li>
-&lt;li>Build APIs You Won&amp;rsquo;t Hate &lt;a href="https://leanpub.com/build-apis-you-wont-hate">https://leanpub.com/build-apis-you-wont-hate&lt;/a>&lt;/li>
-&lt;li>Fractal &lt;a href="http://fractal.thephpleague.com/simple-example/">http://fractal.thephpleague.com/simple-example/&lt;/a>&lt;/li>
-&lt;li>Fractal Class &lt;a href="https://github.com/thephpleague/fractal">https://github.com/thephpleague/fractal&lt;/a>&lt;/li>
-&lt;/ul></description><tags>REST, php, patterns</tags></item><item><title>Javascript Based Product Viewer</title><link>https://alfrednutile.info/posts/6/</link><pubDate>Fri, 22 Mar 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/6/</guid><description>&lt;p>Due to NDA limitations I had to remove links to the final product
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>REST on Alfred Nutile</title><link>https://alfrednutile.info/tags/rest/</link><description>Recent content in REST on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 14 Jun 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/rest/index.xml" rel="self" type="application/rss+xml"/><item><title>Transforming Output from the Database to the View/REST layer</title><link>https://alfrednutile.info/posts/88/</link><pubDate>Sat, 14 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/88/</guid><description><p>Having watched the screen cast<a href="https://laracasts.com/series/incremental-api-development/episodes/4">here</a> by Jeffery Way and reading Phil Sturgeon&rsquo;s<a href="https://leanpub.com/build-apis-you-wont-hate">Build APIs You Won&rsquo;t Hate</a> I used this approach on a recent project.</p><p>Basically, and they both cover it really well, instead of returning the data right to the ui/rest endpoint from the database I pass it through a class to transform the data formats, field name etc. This has been extremely helpful as we also work out some wording of fields that I can not do easily in this one class.</p><p>Also I can do output alterations using this Class and replace text depending on say a users permission level or maybe just to set a default image if there is none. So that user gets and Address Value Object that only shows the State.</p><p>Another good example was one server was LAMP and the other Nginx. Same db, etc but one has a setting to output a boolean as &ldquo;1&rdquo; and the other 1 so again I could verify and set these as needed as I built out the output. (yes I could have just Google the setting or better yet use a Vagrant box running Nginx to dev on)</p><p>Anyways just a really simple layer to add to a project.</p><p>Some good learning</p><ul><li>Incremental API<a href="https://laracasts.com/series/incremental-api-development/episodes/4">https://laracasts.com/series/incremental-api-development/episodes/4</a></li><li>Build APIs You Won&rsquo;t Hate<a href="https://leanpub.com/build-apis-you-wont-hate">https://leanpub.com/build-apis-you-wont-hate</a></li><li>Fractal<a href="http://fractal.thephpleague.com/simple-example/">http://fractal.thephpleague.com/simple-example/</a></li><li>Fractal Class<a href="https://github.com/thephpleague/fractal">https://github.com/thephpleague/fractal</a></li></ul></description><tags>REST, php, patterns</tags></item><item><title>Javascript Based Product Viewer</title><link>https://alfrednutile.info/posts/6/</link><pubDate>Fri, 22 Mar 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/6/</guid><description>Due to NDA limitations I had to remove links to the final product
 Latest Project Virtual Design Tool. [ url removed due to nda issues ) -: ]Some points that were fun, new, and
-challenging.&lt;ol>&lt;li>Model, View, Controller mindet.&lt;/li>&lt;li>Building the
-RESTful service/API first&lt;/li>&lt;li>Trying to follow a feature driven development
-plan.&lt;/li>&lt;li>Having smaller tasks and more points of QA&lt;/li>&lt;li>Having smaller
+challenging.<ol><li>Model, View, Controller mindet.</li><li>Building the
+RESTful service/API first</li><li>Trying to follow a feature driven development
+plan.</li><li>Having smaller tasks and more points of QA</li><li>Having smaller
 points to check in with the client to review the finished tasks and not wait
-till the &amp;ldquo;end&amp;rdquo;.&lt;/li>&lt;li>Make it modular so it would work just as well
-outside of the site as in.&lt;/li>&lt;li>Verbally breaking up the Classes, functions
-and overall code used to make the App. &lt;/li>&lt;li>NaturalDocs documentation
-tool and syntax&lt;/li>&lt;li>JetBrain IDE&lt;/li>&lt;/ol>I have been trying to learn the
+till the &ldquo;end&rdquo;.</li><li>Make it modular so it would work just as well
+outside of the site as in.</li><li>Verbally breaking up the Classes, functions
+and overall code used to make the App. </li><li>NaturalDocs documentation
+tool and syntax</li><li>JetBrain IDE</li></ol>I have been trying to learn the
 Model View Controller structure to code in. Since we are working with drupal it
 seems to be a tough fit. Basically drupal becomes possible via some custom code
-with a RESTful API. It&amp;rsquo;s menu router offering one point of access for
-anonymous level data (right now just read only). &lt;br>&lt;br>From there the work was making
-the &lt;b>Models&lt;/b> to deliver back to the &lt;b>Controller&lt;/b> the data requested. The App calls
-to this end point with requests. The App then has a &lt;b>View&lt;/b> that receives the
-Model&amp;rsquo;s data and outputs it on the page. MVC is still quite new to me. Mix
+with a RESTful API. It&rsquo;s menu router offering one point of access for
+anonymous level data (right now just read only).<br><br>From there the work was making
+the<b>Models</b> to deliver back to the<b>Controller</b> the data requested. The App calls
+to this end point with requests. The App then has a<b>View</b> that receives the
+Model&rsquo;s data and outputs it on the page. MVC is still quite new to me. Mix
 this with OOP and you get a lot of new ways of thinking in one project. So it
-was a good start but not perfect.&lt;br>&lt;span>&lt;br>We learned from our last project and 100
+was a good start but not perfect.<br><span><br>We learned from our last project and 100
 projects before that the endless issues with “Big Up Front Design”
 [“Because any big design created in advance of working software cannot be
-correct” &lt;a href="https://kindle.amazon.com/work/practical-object-oriented-
-esign-ruby-ebook/B0096GEQUE/B0096BYG7C" target="" rel="">Practical Object-Oriented Design in
-Ruby: An Agile Primer (Addison-Wesley Professional Ruby Series)&lt;/a> by
+correct”<a href="https://kindle.amazon.com/work/practical-object-oriented-  esign-ruby-ebook/B0096GEQUE/B0096BYG7C" target="" rel="">Practical Object-Oriented Design in
+Ruby: An Agile Primer (Addison-Wesley Professional Ruby Series)</a> by
 Sandi Metz] also not having enough small measurable pieces to review with the
-client, ie Agile.&lt;/span>&lt;blockquote>&lt;span>“Because any big design created in
-advance of working software cannot be correct” &lt;a href="https://kindle
-amazon.com/work/practical-object-oriented-design-ruby-ebook/
-0096GEQUE/B0096BYG7C" target="" rel="">Practical Object-Oriented Design in Ruby: An Agile Primer
-(Addison-Wesley Professional Ruby Series)&lt;/a> by Sandi
-Metz&lt;/span>&lt;/blockquote>&lt;span>&lt;br>This smaller project we took time to break up the scope
+client, ie Agile.</span><blockquote><span>“Because any big design created in
+advance of working software cannot be correct” <a href="https://kindle  amazon.com/work/practical-object-oriented-design-ruby-ebook/  0096GEQUE/B0096BYG7C" target="" rel="">Practical Object-Oriented Design in Ruby: An Agile Primer
+(Addison-Wesley Professional Ruby Series)</a> by Sandi
+Metz</span></blockquote><span><br>This smaller project we took time to break up the scope
 into numerous tasks grouped in a Feature. That feature/interaction was then
-placed inside a Burn Down chart to help track progress. [Great info here &lt;a href="http://joel.inpointform.net/software-development/burn-down-charts-tutorial-" target="" rel="">http://joel.inpointform.net/software-development/b
-rn-down-charts-tutorial-simple-agile-project-tracking/&lt;/a>]&lt;/span>Each task was smaller than 2 days. We initially played
+placed inside a Burn Down chart to help track progress. [Great info here<a href="http://joel.inpointform.net/software-development/burn-down-charts-tutorial-" target="" rel="">http://joel.inpointform.net/software-development/b
+rn-down-charts-tutorial-simple-agile-project-tracking/</a>]</span>Each task was smaller than 2 days. We initially played
 quoting poker as an office to guesstimate the tasks lengths. Many of the tasks
 ended up being small modular functional parts of the whole we that could QA
 internally or show to the client. For example the full product looks like
 this. [photo removed per NDA] But the work was broken up into
 smaller pieces as such Shapes
-BarOrientation Bar [photo removed per NDA]&lt;b> &lt;/b>Texture and Colors
+BarOrientation Bar [photo removed per NDA]<b> </b>Texture and Colors
 bar window where images wrap out. etc.  Small chunks that we could make
-focused css and javascript around. &lt;br>&lt;br>Then we took a full day, 2 coders, to
+focused css and javascript around. <br><br>Then we took a full day, 2 coders, to
 outline on paper, white board etc how to build the App. This was tough since it
 seems anti-productive. But mix this with writing tests, documentation and it was
 easier to be more precise about what was being built. The other goal here was to
 make it very modular. Ideally it could work outside of the website css and
-all. &lt;a href="https://kindle.amazon.com/work/scalable-modular-architecture-c
-s-ebook/B006FOFNAW/B006EQBPMG" target="" rel="">Scalable and Modular Architecture for
-CSS&lt;/a> [photo removed per NDA] &lt;br>&lt;br>On a side note one of the
+all. <a href="https://kindle.amazon.com/work/scalable-modular-architecture-c  s-ebook/B006FOFNAW/B006EQBPMG" target="" rel="">Scalable and Modular Architecture for
+CSS</a> [photo removed per NDA] <br><br>On a side note one of the
 cool things about the App is how the effect is made. There is really only
 one large swatch image and then a set of transparent orientations per
 Shape.  The initial load of the page
-only pulls down the default Shape&amp;rsquo;s set eg 4 orientations.  When
+only pulls down the default Shape&rsquo;s set eg 4 orientations.  When
 you click a Shape the new set is pulled from a stored result in the jQuery.data
 object which was stashed there via the initial delivery of the JSON data. There
 is no new pull from the server till you click a new Texture. This was one
 possible way to reduce the image lag and download that can happen with a large
-set of image..[photo removed per NDA] &lt;span>was a good way to document the code but I am
+set of image..[photo removed per NDA] <span>was a good way to document the code but I am
 starting to agree with some of the books I am reading that good code should read
 like a book and not need comments and docs [Clean Code: A Handbook of Agile
 Software Craftsmanship by Robert C.
-Martin &lt;a href="http://www.amazon.com/dp/B001GSTOAM/ref=r_soa_w_d" target="" rel="">http://www.amazon.com/dp/B001GSTOAM/ref=r_soa_w_d&lt;/a> ]. &lt;/span>Opening notes or a readme to get help the
+Martin<a href="http://www.amazon.com/dp/B001GSTOAM/ref=r_soa_w_d" target="" rel="">http://www.amazon.com/dp/B001GSTOAM/ref=r_soa_w_d</a> ].</span>Opening notes or a readme to get help the
 coder know the purpose of the file but the rest should be found in the names of
-the Classes and Methods and just well broken out code.&lt;br>&lt;span>&lt;br>Finally I
+the Classes and Methods and just well broken out code.<br><span><br>Finally I
 used an IDE other than Coda. I am running Ubuntu now and just wanted to try and
 IDE that could do a ton more than Coda. Simple tools like Textmate or Sublime
-peak my interest as well but so far the IDE from these people was really good &lt;a href="http://www.jetbrains.com/" target="" rel="">&lt;a href="http://www.jetbrains.com/">http://www.jetbrains.com/&lt;/a>&lt;/a>. I like how it
+peak my interest as well but so far the IDE from these people was really good<a href="http://www.jetbrains.com/" target="" rel=""><a href="http://www.jetbrains.com/">http://www.jetbrains.com/</a></a>. I like how it
 had jshint built in, integration to git that was “better” than Coda.
 Sure the command line is great for git but there gui was not bad at times to
 have as well. It was not slow at all, my Core 2 Duo on an SSD never seemed
-slow.&lt;/span>&lt;/p></description><tags>REST</tags></item></channel></rss>
+slow.</span></description><tags>REST</tags></item></channel></rss>

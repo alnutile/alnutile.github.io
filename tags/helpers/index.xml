@@ -1,65 +1,34 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>helpers on Alfred Nutile</title><link>https://alfrednutile.info/tags/helpers/</link><description>Recent content in helpers on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 25 Dec 2021 06:32:07 -0400</lastBuildDate><atom:link href="https://alfrednutile.info/tags/helpers/index.xml" rel="self" type="application/rss+xml"/><item><title>Get Fixture Put Fixture Helpers for Laravel</title><link>https://alfrednutile.info/posts/get_put/</link><pubDate>Sat, 25 Dec 2021 06:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/get_put/</guid><description>&lt;p>I do a lot with fixtures when testing. This means I put files in the &lt;code>tests/fixtures&lt;/code> folder that represet the JSON of what ever I am testing. For example maybe I hit an
-API that returns&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;foo&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;bar&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>And when I mock that API response I want to have that ready for me to use.&lt;/p>
-&lt;p>I then save it to the folder &lt;code>tests/fixtures/foo.json&lt;/code> and can just use it.&lt;/p>
-&lt;p>To do that I just do the following.&lt;/p>
-&lt;h2 id="setup-a-helpersphp-file-in-your-app">Setup a helpers.php file in your app&lt;/h2>
-&lt;p>Add the file &lt;code>app/helpers.php&lt;/code> for now with &lt;code>&amp;lt;?php&lt;/code> on top of it.&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
-&lt;/code>&lt;/pre>&lt;p>Not to exciting yet!&lt;/p>
-&lt;p>Then add it to &lt;code>composer.json&lt;/code>&lt;/p>
-&lt;pre>&lt;code>File: composer.json
-38: &amp;quot;autoload-dev&amp;quot;: {
-39: &amp;quot;psr-4&amp;quot;: {
-40: &amp;quot;Tests\\&amp;quot;: &amp;quot;tests/&amp;quot;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>helpers on Alfred Nutile</title><link>https://alfrednutile.info/tags/helpers/</link><description>Recent content in helpers on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 25 Dec 2021 06:32:07 -0400</lastBuildDate><atom:link href="https://alfrednutile.info/tags/helpers/index.xml" rel="self" type="application/rss+xml"/><item><title>Get Fixture Put Fixture Helpers for Laravel</title><link>https://alfrednutile.info/posts/get_put/</link><pubDate>Sat, 25 Dec 2021 06:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/get_put/</guid><description><p>I do a lot with fixtures when testing. This means I put files in the<code>tests/fixtures</code> folder that represet the JSON of what ever I am testing. For example maybe I hit an
+API that returns</p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#f92672">"foo"</span>:<span style="color:#e6db74">"bar"</span>
+}</code></pre></div><p>And when I mock that API response I want to have that ready for me to use.</p><p>I then save it to the folder<code>tests/fixtures/foo.json</code> and can just use it.</p><p>To do that I just do the following.</p><h2 id="setup-a-helpersphp-file-in-your-app">Setup a helpers.php file in your app</h2><p>Add the file<code>app/helpers.php</code> for now with<code>&lt;?php</code> on top of it.</p><pre><code>&lt;?php</code></pre><p>Not to exciting yet!</p><p>Then add it to<code>composer.json</code></p><pre><code>File: composer.json
+38: "autoload-dev": {
+39: "psr-4": {
+40: "Tests\\": "tests/"
 41: },
-42: &amp;quot;files&amp;quot;: [
-43: &amp;quot;app/helpers.php&amp;quot;
+42: "files": [
+43: "app/helpers.php"
 44: ]
-45: },
-&lt;/code>&lt;/pre>&lt;p>Now run &lt;code>composer dump&lt;/code> and you are ready to add helpers to your app.&lt;/p>
-&lt;h2 id="add-get-and-put-helpers">Add get and put helpers&lt;/h2>
-&lt;p>To that file I add the getter and putter(?):&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
-use Illuminate\Support\Facades\File;
-if (!function_exists(&amp;quot;put_fixture&amp;quot;)) {
+45: },</code></pre><p>Now run<code>composer dump</code> and you are ready to add helpers to your app.</p><h2 id="add-get-and-put-helpers">Add get and put helpers</h2><p>To that file I add the getter and putter(?):</p><pre><code>&lt;?php<p>use Illuminate\Support\Facades\File;</p><p>if (!function_exists("put_fixture")) {
 function put_fixture($file_name, $content = [], $json = true)
 {
 if ($json) {
 $content = json_encode($content, 128);
 }
 File::put(
-base_path(sprintf(&amp;quot;tests/fixtures/%s&amp;quot;, $file_name)),
+base_path(sprintf("tests/fixtures/%s", $file_name)),
 $content
 );
 return true;
 }
-}
-if (!function_exists(&amp;quot;get_fixture&amp;quot;)) {
+}</p><p>if (!function_exists("get_fixture")) {
 function get_fixture($file_name)
 {
 $results = File::get(base_path(sprintf(
-&amp;quot;tests/fixtures/%s&amp;quot;,
+"tests/fixtures/%s",
 $file_name
 )));
 return json_decode($results, true);
 }
-}
-&lt;/code>&lt;/pre>&lt;p>and I make the folder &lt;code>tests/fixtures&lt;/code>&lt;/p>
-&lt;p>And now in my tests I can do this:&lt;/p>
-&lt;pre>&lt;code>put_fixture('meta_data.json', $response_from_api_as_array);
-&lt;/code>&lt;/pre>&lt;blockquote>
-&lt;p>NOTE: Many apis have good docs that sometimes show a JSON response I can save. But somtimes I want a real response to save it so I hit the api ONCE from my test
-and mock it from then on&lt;/p>
-&lt;/blockquote>
-&lt;p>and I can use that later just like this&lt;/p>
-&lt;pre>&lt;code>get_fixture('meta_data.json', $response_from_api_as_array);
-&lt;/code>&lt;/pre>&lt;p>This will simply put a file and get that file &lt;code>tests/fixtures/meta_data.json&lt;/code>&lt;/p>
-&lt;p>And the file will be JSON for example:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;foo&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;bar&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div></description><tags>laravel, php, note2self, helpers</tags></item></channel></rss>
+}</code></pre><p>and I make the folder<code>tests/fixtures</code></p></p><p>And now in my tests I can do this:</p><pre><code>put_fixture('meta_data.json', $response_from_api_as_array);</code></pre><blockquote><p>NOTE: Many apis have good docs that sometimes show a JSON response I can save. But somtimes I want a real response to save it so I hit the api ONCE from my test
+and mock it from then on</p></blockquote><p>and I can use that later just like this</p><pre><code>get_fixture('meta_data.json', $response_from_api_as_array);</code></pre><p>This will simply put a file and get that file<code>tests/fixtures/meta_data.json</code></p><p>And the file will be JSON for example:</p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#f92672">"foo"</span>:<span style="color:#e6db74">"bar"</span>
+}</code></pre></div></description><tags>laravel, php, note2self, helpers</tags></item></channel></rss>

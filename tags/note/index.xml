@@ -1,12 +1,7 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>note on Alfred Nutile</title><link>https://alfrednutile.info/tags/note/</link><description>Recent content in note on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 17 Aug 2021 14:32:07 -0400</lastBuildDate><atom:link href="https://alfrednutile.info/tags/note/index.xml" rel="self" type="application/rss+xml"/><item><title>Odd Livewire Error(s)</title><link>https://alfrednutile.info/posts/livewire/</link><pubDate>Tue, 17 Aug 2021 14:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/livewire/</guid><description>&lt;p>Just keeping track of some nuances to LiveWire&lt;/p>
-&lt;h2 id="initialdatafingerprint">initialData.fingerprint&lt;/h2>
-&lt;p>The table with rows was not interating. The rows had two columns of for-each loops so
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>note on Alfred Nutile</title><link>https://alfrednutile.info/tags/note/</link><description>Recent content in note on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 17 Aug 2021 14:32:07 -0400</lastBuildDate><atom:link href="https://alfrednutile.info/tags/note/index.xml" rel="self" type="application/rss+xml"/><item><title>Odd Livewire Error(s)</title><link>https://alfrednutile.info/posts/livewire/</link><pubDate>Tue, 17 Aug 2021 14:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/livewire/</guid><description><p>Just keeping track of some nuances to LiveWire</p><h2 id="initialdatafingerprint">initialData.fingerprint</h2><p>The table with rows was not interating. The rows had two columns of for-each loops so
 as always you need keys, but I think my mistake was not making the keys different
-for either of them.&lt;/p>
-&lt;p>You can see the table below&lt;/p>
-&lt;pre>&lt;code>@foreach( $imports as $import)
-&amp;lt;tr class=&amp;quot;bg-emerald-200&amp;quot;&amp;gt;
-&amp;lt;td class=&amp;quot;border px-8 py-4&amp;quot;&amp;gt;{{ $import-&amp;gt;id }}&amp;lt;/td&amp;gt;
+for either of them.</p><p>You can see the table below</p><pre><code>@foreach( $imports as $import)
+&lt;tr class="bg-emerald-200"><pre><code> &amp;lt;td class=&amp;quot;border px-8 py-4&amp;quot;&amp;gt;{{ $import-&amp;gt;id }}&amp;lt;/td&amp;gt;
 &amp;lt;td class=&amp;quot;border px-8 py-4&amp;quot;&amp;gt;{{ $import-&amp;gt;name }}&amp;lt;/td&amp;gt;
 &amp;lt;td class=&amp;quot;border px-8 py-4&amp;quot;&amp;gt;{{ optional($import-&amp;gt;source)-&amp;gt;type }}&amp;lt;/td&amp;gt;
 &amp;lt;td class=&amp;quot;border px-8 py-4&amp;quot;&amp;gt;
@@ -23,63 +18,23 @@ for either of them.&lt;/p>
 ], key('link-' . $import-&amp;gt;id))
 &amp;lt;/td&amp;gt;
 &amp;lt;/tr&amp;gt;
-@endforeach
-&lt;/code>&lt;/pre>&lt;p>The keys&lt;/p>
-&lt;pre>&lt;code>key('download-' . $import-&amp;gt;id))
-&lt;/code>&lt;/pre>&lt;p>and&lt;/p>
-&lt;pre>&lt;code>key('link-' . $import-&amp;gt;id))
-&lt;/code>&lt;/pre>&lt;p>Did not work when I was using &lt;code>key($import-&amp;gt;id)&lt;/code>&lt;/p>
-&lt;p>The table and search all just stopped :(&lt;/p>
-&lt;p>Anyways hope this saves the future me an hour!&lt;/p></description><tags>laravel, livewire, note</tags></item><item><title>Laravel Sail and M1 Mac</title><link>https://alfrednutile.info/posts/sail/</link><pubDate>Sun, 23 May 2021 14:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/sail/</guid><description>&lt;p>Some notes to self will add more after time if needed.&lt;/p>
-&lt;h2 id="mac-m1">Mac M1&lt;/h2>
-&lt;p>Had a MySQL error:&lt;/p>
-&lt;pre>&lt;code>ERROR: no matching manifest for linux/arm64/v8 in the manifest list entries
-&lt;/code>&lt;/pre>&lt;p>All I had to do was update &lt;code>docker-composer.yml&lt;/code>:&lt;/p>
-&lt;pre>&lt;code>File: docker-compose.yml
+@endforeach</code></pre><p/></pre><p>The keys</p></p><pre><code>key('download-' . $import->id))</code></pre><p>and</p><pre><code>key('link-' . $import->id))</code></pre><p>Did not work when I was using<code>key($import->id)</code></p><p>The table and search all just stopped :(</p><p>Anyways hope this saves the future me an hour!</p></description><tags>laravel, livewire, note</tags></item><item><title>Laravel Sail and M1 Mac</title><link>https://alfrednutile.info/posts/sail/</link><pubDate>Sun, 23 May 2021 14:32:07 -0400</pubDate><guid>https://alfrednutile.info/posts/sail/</guid><description><p>Some notes to self will add more after time if needed.</p><h2 id="mac-m1">Mac M1</h2><p>Had a MySQL error:</p><pre><code>ERROR: no matching manifest for linux/arm64/v8 in the manifest list entries</code></pre><p>All I had to do was update<code>docker-composer.yml</code>:</p><pre><code>File: docker-compose.yml
 24: mysql:
 25: image: 'mysql:8.0'
 26: ports:
-27: - '${FORWARD_DB_PORT:-3306}:3306'
-&lt;/code>&lt;/pre>&lt;p>To:&lt;/p>
-&lt;pre>&lt;code> mysql:
+27: - '${FORWARD_DB_PORT:-3306}:3306'</code></pre><p>To:</p><pre><code> mysql:
 image: mariadb:10.5.8
 ports:
-- &amp;quot;${FORWARD_DB_PORT:-3306}:3306&amp;quot;
-&lt;/code>&lt;/pre>&lt;p>Then I disabled &lt;code>meilisearch&lt;/code> else everytime I ran &lt;code>sail anything&lt;/code> it would stop the docker container.&lt;/p>
-&lt;pre>&lt;code>File: docker-compose.yml
+- "${FORWARD_DB_PORT:-3306}:3306"</code></pre><p>Then I disabled<code>meilisearch</code> else everytime I ran<code>sail anything</code> it would stop the docker container.</p><pre><code>File: docker-compose.yml
 50: # meilisearch:
-51: # image: &amp;quot;getmeili/meilisearch:latest&amp;quot;
+51: # image: "getmeili/meilisearch:latest"
 52: # ports:
-53: # - &amp;quot;${FORWARD_MEILISEARCH_PORT:-7700}:7700&amp;quot;
+53: # - "${FORWARD_MEILISEARCH_PORT:-7700}:7700"
 54: # volumes:
-55: # - &amp;quot;sailmeilisearch:/data.ms&amp;quot;
+55: # - "sailmeilisearch:/data.ms"
 56: # networks:
-57: # - sail
-&lt;/code>&lt;/pre>&lt;p>I will have to come back to this one to fix it some info is &lt;a href="https://github.com/meilisearch/MeiliSearch/issues/1195">here&lt;/a>&lt;/p>
-&lt;h2 id="xdebug">Xdebug&lt;/h2>
-&lt;p>The article is a great start &lt;a href="https://medium.com/geekculture/debug-your-laravel-sail-applications-with-xdebug-160ad70fcd41">here&lt;/a>&lt;/p>
-&lt;p>But a couple of things I think need to be made more clear or might even be an error:&lt;/p>
-&lt;p>Set the &lt;code>SAIL_DEBUG=true&lt;/code> not &lt;code>SAILDEBUG=true&lt;/code>&lt;/p>
-&lt;p>When running the build do:&lt;/p>
-&lt;pre>&lt;code>❯ sail build --no-cache --build-arg XDEBUG=true
-&lt;/code>&lt;/pre>&lt;p>To pass the args. And as he notes run &lt;code>sail php -v&lt;/code> after sail is running to make sure you do not see any errors and xdebug is working.&lt;/p>
-&lt;h2 id="links">Links&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://medium.com/geekculture/debug-your-laravel-sail-applications-with-xdebug-160ad70fcd41">Xdebug&lt;/a>&lt;/li>
-&lt;li>Some overall m1 issues &lt;a href="https://github.com/laravel/sail/issues/104">here&lt;/a>&lt;/li>
-&lt;/ul></description><tags>laravel, note</tags></item><item><title>Note To Self: A VirtualBox machine with the name 'homestead' already exists.</title><link>https://alfrednutile.info/posts/161/</link><pubDate>Sat, 29 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/161/</guid><description>&lt;p>Since I know this will happen again I want to remind myself and others how to fix it.&lt;/p>
-&lt;p>I had this error &lt;code>A VirtualBox machine with the name 'homestead' already exists.&lt;/code> when doing my normal vagrant up. I got some help at &lt;a href="http://stackoverflow.com/questions/26993903/a-virtualbox-machine-with-the-name-homestead-already-exists">http://stackoverflow.com/questions/26993903/a-virtualbox-machine-with-the-name-homestead-already-exists&lt;/a> but it was not made too clear.&lt;/p>
-&lt;p>Here are the exact steps for me to fix this&lt;/p>
-&lt;p>Run &lt;code>vboxmanage list vms&lt;/code>&lt;/p>
-&lt;p>This will output a list&lt;/p>
-&lt;pre>&lt;code>&amp;quot;homestead&amp;quot; {5dc30604-8ebe-4060-8966-4881958e6bf5}
-&amp;quot;boot2docker-vm&amp;quot; {38af33d4-7ebc-4498-a80e-39711a08b413}
-&amp;quot;settler_default_1434987271004_24349_1440846292799_16470&amp;quot; {2c80bf94-99b8-4b51-95a0-034dddae8c33}
-&lt;/code>&lt;/pre>&lt;p>Then I took the id of homestead &lt;code>5dc30604-8ebe-4060-8966-4881958e6bf5&lt;/code> and did&lt;/p>
-&lt;pre>&lt;code>echo '5dc30604-8ebe-4060-8966-4881958e6bf5' &amp;gt; ~/Homestead/.vagrant/machines/default/virtualbox/id
-&lt;/code>&lt;/pre>&lt;p>&lt;strong>UPDATE&lt;/strong>&lt;/p>
-&lt;p>Rough day. Like I said this rarely happens but in this case I also had the &lt;code>default: Warning: Authentication failure. Retrying...&lt;/code> error so I did this&lt;/p>
-&lt;pre>&lt;code>cd /tmp
+57: # - sail</code></pre><p>I will have to come back to this one to fix it some info is<a href="https://github.com/meilisearch/MeiliSearch/issues/1195">here</a></p><h2 id="xdebug">Xdebug</h2><p>The article is a great start<a href="https://medium.com/geekculture/debug-your-laravel-sail-applications-with-xdebug-160ad70fcd41">here</a></p><p>But a couple of things I think need to be made more clear or might even be an error:</p><p>Set the<code>SAIL_DEBUG=true</code> not<code>SAILDEBUG=true</code></p><p>When running the build do:</p><pre><code>❯ sail build --no-cache --build-arg XDEBUG=true</code></pre><p>To pass the args. And as he notes run<code>sail php -v</code> after sail is running to make sure you do not see any errors and xdebug is working.</p><h2 id="links">Links</h2><ul><li><a href="https://medium.com/geekculture/debug-your-laravel-sail-applications-with-xdebug-160ad70fcd41">Xdebug</a></li><li>Some overall m1 issues<a href="https://github.com/laravel/sail/issues/104">here</a></li></ul></description><tags>laravel, note</tags></item><item><title>Note To Self: A VirtualBox machine with the name 'homestead' already exists.</title><link>https://alfrednutile.info/posts/161/</link><pubDate>Sat, 29 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/161/</guid><description><p>Since I know this will happen again I want to remind myself and others how to fix it.</p><p>I had this error<code>A VirtualBox machine with the name 'homestead' already exists.</code> when doing my normal vagrant up. I got some help at<a href="http://stackoverflow.com/questions/26993903/a-virtualbox-machine-with-the-name-homestead-already-exists">http://stackoverflow.com/questions/26993903/a-virtualbox-machine-with-the-name-homestead-already-exists</a> but it was not made too clear.</p><p>Here are the exact steps for me to fix this</p><p>Run<code>vboxmanage list vms</code></p><p>This will output a list</p><pre><code>"homestead" {5dc30604-8ebe-4060-8966-4881958e6bf5}
+"boot2docker-vm" {38af33d4-7ebc-4498-a80e-39711a08b413}
+"settler_default_1434987271004_24349_1440846292799_16470" {2c80bf94-99b8-4b51-95a0-034dddae8c33}</code></pre><p>Then I took the id of homestead<code>5dc30604-8ebe-4060-8966-4881958e6bf5</code> and did</p><pre><code>echo '5dc30604-8ebe-4060-8966-4881958e6bf5' > ~/Homestead/.vagrant/machines/default/virtualbox/id</code></pre><p><strong>UPDATE</strong></p><p>Rough day. Like I said this rarely happens but in this case I also had the<code>default: Warning: Authentication failure. Retrying...</code> error so I did this</p><pre><code>cd /tmp
 wget https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub
-cat vagrant.pub &amp;gt;&amp;gt; ~/.ssh/authorized_keys
-&lt;/code>&lt;/pre></description><tags>laravel, note</tags></item></channel></rss>
+cat vagrant.pub >> ~/.ssh/authorized_keys</code></pre></description><tags>laravel, note</tags></item></channel></rss>

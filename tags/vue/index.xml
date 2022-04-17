@@ -1,55 +1,34 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vue on Alfred Nutile</title><link>https://alfrednutile.info/tags/vue/</link><description>Recent content in vue on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 01 Nov 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/vue/index.xml" rel="self" type="application/rss+xml"/><item><title>Wrapping JSONEditor in Vue as Well as Laravel Blade</title><link>https://alfrednutile.info/posts/222/</link><pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/222/</guid><description>&lt;p>&lt;strong>UPDATED November 05 2017&lt;/strong>&lt;/p>
-&lt;p>This will cover how to make a &lt;a href="https://github.com/josdejong/jsoneditor">JSONEditor&lt;/a> component that I can then use in a Blade template and listen to events.&lt;/p>
-&lt;p>You will end up with this:&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/g8n5brbtjom1ulp/Screenshot%202017-11-02%2013.17.32.png?dl=0" alt="">&lt;/p>
-&lt;p>First making sure I have all the packages I need:&lt;/p>
-&lt;pre>&lt;code> //package.json
-&amp;quot;devDependencies&amp;quot;: {
-&amp;quot;axios&amp;quot;: &amp;quot;^0.17&amp;quot;,
-&amp;quot;bootstrap-sass&amp;quot;: &amp;quot;^3.3.7&amp;quot;,
-&amp;quot;cross-env&amp;quot;: &amp;quot;^5.0.1&amp;quot;,
-&amp;quot;jquery&amp;quot;: &amp;quot;^3.2&amp;quot;,
-&amp;quot;laravel-mix&amp;quot;: &amp;quot;^1.0&amp;quot;,
-&amp;quot;lodash&amp;quot;: &amp;quot;^4.17.4&amp;quot;,
-&amp;quot;vue&amp;quot;: &amp;quot;^2.1.10&amp;quot;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vue on Alfred Nutile</title><link>https://alfrednutile.info/tags/vue/</link><description>Recent content in vue on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 01 Nov 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/vue/index.xml" rel="self" type="application/rss+xml"/><item><title>Wrapping JSONEditor in Vue as Well as Laravel Blade</title><link>https://alfrednutile.info/posts/222/</link><pubDate>Wed, 01 Nov 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/222/</guid><description><p><strong>UPDATED November 05 2017</strong></p><p>This will cover how to make a<a href="https://github.com/josdejong/jsoneditor">JSONEditor</a> component that I can then use in a Blade template and listen to events.</p><p>You will end up with this:</p><p><img src="https://dl.dropboxusercontent.com/s/g8n5brbtjom1ulp/Screenshot%202017-11-02%2013.17.32.png?dl=0" alt=""/><p>First making sure I have all the packages I need:</p><pre><code> //package.json
+"devDependencies": {
+"axios": "^0.17",
+"bootstrap-sass": "^3.3.7",
+"cross-env": "^5.0.1",
+"jquery": "^3.2",
+"laravel-mix": "^1.0",
+"lodash": "^4.17.4",
+"vue": "^2.1.10"
 },
-&amp;quot;dependencies&amp;quot;: {
-&amp;quot;select2&amp;quot;: &amp;quot;^4.0.5&amp;quot;,
-&amp;quot;jsoneditor&amp;quot;: &amp;quot;^5.9.6&amp;quot;
-}
-&lt;/code>&lt;/pre>&lt;p>And to load it into my bootstrap file:&lt;/p>
-&lt;pre>&lt;code>//resources/assets/js/bootstrap.js
+"dependencies": {
+"select2": "^4.0.5",
+"jsoneditor": "^5.9.6"
+}</code></pre><p>And to load it into my bootstrap file:</p><pre><code>//resources/assets/js/bootstrap.js
 try {
 window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
-require(&amp;quot;select2&amp;quot;);
-require(&amp;quot;jsoneditor&amp;quot;);
+require("select2");
+require("jsoneditor");
 } catch (e) {
-console.log(&amp;quot;Error loading jquery&amp;quot;);
-}
-&lt;/code>&lt;/pre>&lt;p>Which gets pulled in by my app.js which I also register the global component:&lt;/p>
-&lt;pre>&lt;code>//resources/assets/js/app.js
-require('./bootstrap');
-window.Vue = require('vue');
-/**
-* Using this as a globle event emmitter for components to easily talk to other components
+console.log("Error loading jquery");
+}</code></pre><p>Which gets pulled in by my app.js which I also register the global component:</p><pre><code>//resources/assets/js/app.js
+require('./bootstrap');<p>window.Vue = require(&lsquo;vue&rsquo;);</p><p>/**</p><ul><li>Using this as a globle event emmitter for components to easily talk to other components
 */
-window.EventBus = new Vue();
-Vue.component('cat-json-editor', require('./components/JSONEditor'));
-Vue.component('cat-config-field', require('./components/ConfigField'));
-//end of file
-&lt;/code>&lt;/pre>&lt;blockquote>
-&lt;p>The app.js and bootstrap.js are default workflows of Laravel&lt;/p>
-&lt;/blockquote>
-&lt;p>Then I will make the component:&lt;/p>
-&lt;pre>&lt;code>//resources/assets/js/components/JSONEditor.vue
-&amp;lt;template&amp;gt;
-&amp;lt;div&amp;gt;
-&amp;lt;div id=&amp;quot;jsoneditor&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-&amp;lt;/div&amp;gt;
-&amp;lt;/template&amp;gt;
-&amp;lt;script&amp;gt;
-import JSONEditor from 'jsoneditor';
+window.EventBus = new Vue();</li></ul><p>Vue.component(&lsquo;cat-json-editor&rsquo;, require('./components/JSONEditor'));</p><p>Vue.component(&lsquo;cat-config-field&rsquo;, require('./components/ConfigField'));
+//end of file</code></pre><blockquote/><p>The app.js and bootstrap.js are default workflows of Laravel</p></blockquote><p>Then I will make the component:</p><pre><code>//resources/assets/js/components/JSONEditor.vue
+&lt;template>
+&lt;div>
+&lt;div id="jsoneditor">&lt;/div>
+&lt;/div>
+&lt;/template><p>&lt;script></p><pre><code>import JSONEditor from 'jsoneditor';
 export default Vue.extend({
 props: ['config'],
 mounted: function () {
@@ -64,25 +43,17 @@ modes: [&amp;quot;tree&amp;quot;, &amp;quot;text&amp;quot;],
 let editor = (container) ? new JSONEditor(container, options) : null;
 if(container) { editor.set(window.config); }
 }
-});
-&amp;lt;/script&amp;gt;
-&amp;lt;style type=&amp;quot;text/css&amp;quot;&amp;gt;
+});</code></pre><p>&lt;/script></p><p>&lt;style type="text/css">
 #jsoneditor {
 width: 800px;
 height: 600px;
 }
-&amp;lt;/style&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>Here I register the props and I setup some config using code I placed into window from my controller. You can use &lt;a href="https://github.com/laracasts/PHP-Vars-To-Js-Transformer">this tool&lt;/a> for this process.
-I could have passed it into the component but chose not to.&lt;/p>
-&lt;p>So now when there is a change it will emit the change to the global &lt;code>EventBus&lt;/code>&lt;/p>
-&lt;p>Now for the &lt;code>ConfigField&lt;/code> component:&lt;/p>
-&lt;pre>&lt;code>&amp;lt;&amp;lt;template&amp;gt;
-&amp;lt;div&amp;gt;
-&amp;lt;input type=&amp;quot;hidden&amp;quot; id=&amp;quot;config&amp;quot; name=&amp;quot;config&amp;quot; class=&amp;quot;form-control&amp;quot; rows=&amp;quot;30&amp;quot; v-model=&amp;quot;config&amp;quot;&amp;gt;
-&amp;lt;/div&amp;gt;
-&amp;lt;/template&amp;gt;
-&amp;lt;script&amp;gt;
-export default Vue.extend({
+&lt;/style></code></pre><p>Here I register the props and I setup some config using code I placed into window from my controller. You can use<a href="https://github.com/laracasts/PHP-Vars-To-Js-Transformer">this tool</a> for this process.
+I could have passed it into the component but chose not to.</p></p><p>So now when there is a change it will emit the change to the global<code>EventBus</code></p><p>Now for the<code>ConfigField</code> component:</p><pre><code>&lt;&lt;template>
+&lt;div>
+&lt;input type="hidden" id="config" name="config" class="form-control" rows="30" v-model="config">
+&lt;/div>
+&lt;/template><p>&lt;script></p><pre><code>export default Vue.extend({
 data() {
 return {
 'config': JSON.stringify(window.config)
@@ -96,26 +67,15 @@ this.config = JSON.stringify(json);
 created() {
 EventBus.$on(&amp;quot;config-updated&amp;quot;, this.configUpdated);
 }
-});
-&amp;lt;/script&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>With these two components in place I now need to add the components to the HTML template.&lt;/p>
-&lt;p>After this is setup my Blade file has the needed Vue listener etc to update the form (non-ajax) as needed:&lt;/p>
-&lt;pre>&lt;code>@push('scripts')
-&amp;lt;script&amp;gt;
+});</code></pre><p>&lt;/script></code></pre><p>With these two components in place I now need to add the components to the HTML template.</p></p><p>After this is setup my Blade file has the needed Vue listener etc to update the form (non-ajax) as needed:</p><pre><code>@push('scripts')
+&lt;script>
 new Vue({
-el: '#config_form',
-})
-&amp;lt;/script&amp;gt;
-@endpush
-&amp;lt;!-- Form above this that is doing all the form submission work --&amp;gt;
-&amp;lt;div id=&amp;quot;config_form&amp;quot;&amp;gt;
-&amp;lt;label for=&amp;quot;config&amp;quot;&amp;gt;Config&amp;lt;/label&amp;gt;
-&amp;lt;cat-json-editor&amp;gt;&amp;lt;/cat-json-editor&amp;gt;
-&amp;lt;cat-config-field&amp;gt;&amp;lt;/at-config-field&amp;gt;
-&amp;lt;/div&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>In this case I am taking advantage of Blades &lt;a href="https://laravel.com/docs/5.5/blade#stacks">stack feature&lt;/a>&lt;/p>
-&lt;p>And the minor amount of work here just mounts Vue onto the &lt;code>#config_form&lt;/code>&lt;/p>
-&lt;p>Then I use Vue to listen to the event &amp;ldquo;config-updated&amp;rdquo;. From there, since this is not about Ajax requests, I update the hidden field on the form.
-I could have done this with JQuery but just wanted to get use to this Vue workflow. Also I could see sending this over Ajax sooner than later even if just for validation notices etc.&lt;/p>
-&lt;p>Here is a quick look at the Scope of the objects:&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/nc1yn0hci05mtq4/events.png?dl=0" alt="">&lt;/p></description><tags>vue, vue2, laravel, blade, note2self</tags></item></channel></rss>
+el: '#config_form',<pre><code> })
+&amp;lt;/script&amp;gt;</code></pre><p>@endpush
+&lt;!&ndash; Form above this that is doing all the form submission work &ndash;>
+&lt;div id="config_form">
+&lt;label for="config">Config&lt;/label>
+&lt;cat-json-editor>&lt;/cat-json-editor>
+&lt;cat-config-field>&lt;/at-config-field>
+&lt;/div></p><p/></pre><p>In this case I am taking advantage of Blades<a href="https://laravel.com/docs/5.5/blade#stacks">stack feature</a></p></p><p>And the minor amount of work here just mounts Vue onto the<code>#config_form</code></p><p>Then I use Vue to listen to the event &ldquo;config-updated&rdquo;. From there, since this is not about Ajax requests, I update the hidden field on the form.
+I could have done this with JQuery but just wanted to get use to this Vue workflow. Also I could see sending this over Ajax sooner than later even if just for validation notices etc.</p><p>Here is a quick look at the Scope of the objects:</p><p><img src="https://dl.dropboxusercontent.com/s/nc1yn0hci05mtq4/events.png?dl=0" alt=""/></description><tags>vue, vue2, laravel, blade, note2self</tags></item></channel></rss>

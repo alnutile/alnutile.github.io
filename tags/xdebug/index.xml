@@ -1,135 +1,56 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>xdebug on Alfred Nutile</title><link>https://alfrednutile.info/tags/xdebug/</link><description>Recent content in xdebug on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 28 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/xdebug/index.xml" rel="self" type="application/rss+xml"/><item><title>PHP Xdebug Visual Code</title><link>https://alfrednutile.info/posts/262/</link><pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/262/</guid><description>&lt;blockquote>
-&lt;p>UPDATE: PHP 8 and Xdebug 3 2021.07.18&lt;/p>
-&lt;/blockquote>
-&lt;p>Ok this took a bit since the Xdebug site talks about &lt;code>arch -x86_64 sudo pecl install xdebug&lt;/code> which did not work.&lt;/p>
-&lt;p>I just did the normal&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo pecl install xdebug
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then I edit the addition it made:&lt;/p>
-&lt;p>&lt;code>/opt/homebrew/etc/php/8.0/php.ini&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">zend_extension&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;xdebug.so&amp;#34;&lt;/span>
-xdebug.mode &lt;span style="color:#f92672">=&lt;/span> debug
-xdebug.start_with_request &lt;span style="color:#f92672">=&lt;/span> yes
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>I moved it all to the bottom of the file too. The docs talk about OPCache but not sure this really helped.&lt;/p>
-&lt;p>Anyways after this and a PHP restart (see below) it all worked.&lt;/p>
-&lt;p>I ran &lt;code>valet restart&lt;/code> since I am using that for PHP.&lt;/p>
-&lt;p>Then ran &lt;code>php -v&lt;/code> to see&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">PHP 8.0.8 &lt;span style="color:#f92672">(&lt;/span>cli&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#f92672">(&lt;/span>built: Jul &lt;span style="color:#ae81ff">12&lt;/span> &lt;span style="color:#ae81ff">2021&lt;/span> 02:58:53&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#f92672">(&lt;/span> NTS &lt;span style="color:#f92672">)&lt;/span>
-Copyright &lt;span style="color:#f92672">(&lt;/span>c&lt;span style="color:#f92672">)&lt;/span> The PHP Group
-Zend Engine v4.0.8, Copyright &lt;span style="color:#f92672">(&lt;/span>c&lt;span style="color:#f92672">)&lt;/span> Zend Technologies
-with Xdebug v3.0.4, Copyright &lt;span style="color:#f92672">(&lt;/span>c&lt;span style="color:#f92672">)&lt;/span> 2002-2021, by Derick Rethans
-with Zend OPcache v8.0.8, Copyright &lt;span style="color:#f92672">(&lt;/span>c&lt;span style="color:#f92672">)&lt;/span>, by Zend Technologies
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>And my launch.json for VSCode is&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#960050;background-color:#1e0010">//&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">Use&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">IntelliSense&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">to&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">learn&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">about&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">possible&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">attributes.&lt;/span>
-&lt;span style="color:#960050;background-color:#1e0010">//&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">Hover&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">to&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">view&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">descriptions&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">of&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">existing&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">attributes.&lt;/span>
-&lt;span style="color:#960050;background-color:#1e0010">//&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">For&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">more&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">information,&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">visit:&lt;/span> &lt;span style="color:#960050;background-color:#1e0010">https://go.microsoft.com/fwlink/?linkid=830387&lt;/span>
-&lt;span style="color:#f92672">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;0.2.0&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;configurations&amp;#34;&lt;/span>: [
-{
-&lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Listen for Xdebug&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;php&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;request&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;launch&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">9003&lt;/span>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>xdebug on Alfred Nutile</title><link>https://alfrednutile.info/tags/xdebug/</link><description>Recent content in xdebug on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 28 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/xdebug/index.xml" rel="self" type="application/rss+xml"/><item><title>PHP Xdebug Visual Code</title><link>https://alfrednutile.info/posts/262/</link><pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/262/</guid><description><blockquote><p>UPDATE: PHP 8 and Xdebug 3 2021.07.18</p></blockquote><p>Ok this took a bit since the Xdebug site talks about<code>arch -x86_64 sudo pecl install xdebug</code> which did not work.</p><p>I just did the normal</p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo pecl install xdebug</code></pre></div><p>Then I edit the addition it made:</p><p><code>/opt/homebrew/etc/php/8.0/php.ini</code></p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">zend_extension<span style="color:#f92672">=</span><span style="color:#e6db74">"xdebug.so"</span>
+xdebug.mode<span style="color:#f92672">=</span> debug
+xdebug.start_with_request<span style="color:#f92672">=</span> yes</code></pre></div><p>I moved it all to the bottom of the file too. The docs talk about OPCache but not sure this really helped.</p><p>Anyways after this and a PHP restart (see below) it all worked.</p><p>I ran<code>valet restart</code> since I am using that for PHP.</p><p>Then ran<code>php -v</code> to see</p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">PHP 8.0.8<span style="color:#f92672">(</span>cli<span style="color:#f92672">)</span><span style="color:#f92672">(</span>built: Jul<span style="color:#ae81ff">12</span><span style="color:#ae81ff">2021</span> 02:58:53<span style="color:#f92672">)</span><span style="color:#f92672">(</span> NTS<span style="color:#f92672">)</span>
+Copyright<span style="color:#f92672">(</span>c<span style="color:#f92672">)</span> The PHP Group
+Zend Engine v4.0.8, Copyright<span style="color:#f92672">(</span>c<span style="color:#f92672">)</span> Zend Technologies
+with Xdebug v3.0.4, Copyright<span style="color:#f92672">(</span>c<span style="color:#f92672">)</span> 2002-2021, by Derick Rethans
+with Zend OPcache v8.0.8, Copyright<span style="color:#f92672">(</span>c<span style="color:#f92672">)</span>, by Zend Technologies</code></pre></div><p>And my launch.json for VSCode is</p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#960050;background-color:#1e0010">//</span><span style="color:#960050;background-color:#1e0010">Use</span><span style="color:#960050;background-color:#1e0010">IntelliSense</span><span style="color:#960050;background-color:#1e0010">to</span><span style="color:#960050;background-color:#1e0010">learn</span><span style="color:#960050;background-color:#1e0010">about</span><span style="color:#960050;background-color:#1e0010">possible</span><span style="color:#960050;background-color:#1e0010">attributes.</span><span style="color:#960050;background-color:#1e0010">//</span><span style="color:#960050;background-color:#1e0010">Hover</span><span style="color:#960050;background-color:#1e0010">to</span><span style="color:#960050;background-color:#1e0010">view</span><span style="color:#960050;background-color:#1e0010">descriptions</span><span style="color:#960050;background-color:#1e0010">of</span><span style="color:#960050;background-color:#1e0010">existing</span><span style="color:#960050;background-color:#1e0010">attributes.</span><span style="color:#960050;background-color:#1e0010">//</span><span style="color:#960050;background-color:#1e0010">For</span><span style="color:#960050;background-color:#1e0010">more</span><span style="color:#960050;background-color:#1e0010">information,</span><span style="color:#960050;background-color:#1e0010">visit:</span><span style="color:#960050;background-color:#1e0010">https://go.microsoft.com/fwlink/?linkid=830387</span><span style="color:#f92672">"version"</span>:<span style="color:#e6db74">"0.2.0"</span>,<span style="color:#f92672">"configurations"</span>: [
+{<span style="color:#f92672">"name"</span>:<span style="color:#e6db74">"Listen for Xdebug"</span>,<span style="color:#f92672">"type"</span>:<span style="color:#e6db74">"php"</span>,<span style="color:#f92672">"request"</span>:<span style="color:#e6db74">"launch"</span>,<span style="color:#f92672">"port"</span>:<span style="color:#ae81ff">9003</span>
 },
-{
-&lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Launch currently open script&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;php&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;request&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;launch&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;program&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;${file}&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;cwd&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;${fileDirname}&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">0&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;runtimeArgs&amp;#34;&lt;/span>: [
-&lt;span style="color:#e6db74">&amp;#34;-dxdebug.start_with_request=yes&amp;#34;&lt;/span>
-],
-&lt;span style="color:#f92672">&amp;#34;env&amp;#34;&lt;/span>: {
-&lt;span style="color:#f92672">&amp;#34;XDEBUG_MODE&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;debug,develop&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;XDEBUG_CONFIG&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;client_port=${port}&amp;#34;&lt;/span>
+{<span style="color:#f92672">"name"</span>:<span style="color:#e6db74">"Launch currently open script"</span>,<span style="color:#f92672">"type"</span>:<span style="color:#e6db74">"php"</span>,<span style="color:#f92672">"request"</span>:<span style="color:#e6db74">"launch"</span>,<span style="color:#f92672">"program"</span>:<span style="color:#e6db74">"${file}"</span>,<span style="color:#f92672">"cwd"</span>:<span style="color:#e6db74">"${fileDirname}"</span>,<span style="color:#f92672">"port"</span>:<span style="color:#ae81ff">0</span>,<span style="color:#f92672">"runtimeArgs"</span>: [<span style="color:#e6db74">"-dxdebug.start_with_request=yes"</span>
+],<span style="color:#f92672">"env"</span>: {<span style="color:#f92672">"XDEBUG_MODE"</span>:<span style="color:#e6db74">"debug,develop"</span>,<span style="color:#f92672">"XDEBUG_CONFIG"</span>:<span style="color:#e6db74">"client_port=${port}"</span>
 }
 },
-{
-&lt;span style="color:#f92672">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Launch Built-in web server&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;php&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;request&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;launch&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;runtimeArgs&amp;#34;&lt;/span>: [
-&lt;span style="color:#e6db74">&amp;#34;-dxdebug.mode=debug&amp;#34;&lt;/span>,
-&lt;span style="color:#e6db74">&amp;#34;-dxdebug.start_with_request=yes&amp;#34;&lt;/span>,
-&lt;span style="color:#e6db74">&amp;#34;-S&amp;#34;&lt;/span>,
-&lt;span style="color:#e6db74">&amp;#34;localhost:0&amp;#34;&lt;/span>
-],
-&lt;span style="color:#f92672">&amp;#34;program&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;cwd&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;${workspaceRoot}&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#ae81ff">9003&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;serverReadyAction&amp;#34;&lt;/span>: {
-&lt;span style="color:#f92672">&amp;#34;pattern&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Development Server \\(http://localhost:([0-9]+)\\) started&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;uriFormat&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;http://localhost:%s&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;action&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;openExternally&amp;#34;&lt;/span>
+{<span style="color:#f92672">"name"</span>:<span style="color:#e6db74">"Launch Built-in web server"</span>,<span style="color:#f92672">"type"</span>:<span style="color:#e6db74">"php"</span>,<span style="color:#f92672">"request"</span>:<span style="color:#e6db74">"launch"</span>,<span style="color:#f92672">"runtimeArgs"</span>: [<span style="color:#e6db74">"-dxdebug.mode=debug"</span>,<span style="color:#e6db74">"-dxdebug.start_with_request=yes"</span>,<span style="color:#e6db74">"-S"</span>,<span style="color:#e6db74">"localhost:0"</span>
+],<span style="color:#f92672">"program"</span>:<span style="color:#e6db74">""</span>,<span style="color:#f92672">"cwd"</span>:<span style="color:#e6db74">"${workspaceRoot}"</span>,<span style="color:#f92672">"port"</span>:<span style="color:#ae81ff">9003</span>,<span style="color:#f92672">"serverReadyAction"</span>: {<span style="color:#f92672">"pattern"</span>:<span style="color:#e6db74">"Development Server \\(http://localhost:([0-9]+)\\) started"</span>,<span style="color:#f92672">"uriFormat"</span>:<span style="color:#e6db74">"http://localhost:%s"</span>,<span style="color:#f92672">"action"</span>:<span style="color:#e6db74">"openExternally"</span>
 }
 }
 ]
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>UPDATE: PHP 7.4
-Every time I do &lt;code>value use php&lt;/code> I then lose my xdebug setup :( here is me taking a moment to stop having that happen&lt;/p>
-&lt;/blockquote>
-&lt;pre>&lt;code>vim /usr/local/etc/php/7.4/php.ini
-&lt;/code>&lt;/pre>&lt;p>Then add this&lt;/p>
-&lt;pre>&lt;code>[PHP]
-zend_extension=&amp;quot;xdebug.so&amp;quot;
+}</code></pre></div><blockquote><p>UPDATE: PHP 7.4
+Every time I do<code>value use php</code> I then lose my xdebug setup :( here is me taking a moment to stop having that happen</p></blockquote><pre><code>vim /usr/local/etc/php/7.4/php.ini</code></pre><p>Then add this</p><pre><code>[PHP]<p>zend_extension="xdebug.so"
 xdebug.remote_enable = 1
 xdebug.remote_autostart = 1
 xdebug.remote_handler = dbgp
 xdebug.remote_host = 127.0.0.1
 xdebug.remote_port = 9000
-xdebug.remote_mode = req
-&lt;/code>&lt;/pre>&lt;p>And then I am set again! Notice I am using 9000 above my insanity of using 9005 below has passed&lt;/p>
-&lt;p>I put two files in my home directory, one starts with the above and one does not. Then I put this alias into my &lt;code>~/.zshrc&lt;/code>&lt;/p>
-&lt;pre>&lt;code>alias debug_on=&amp;quot;cp ~/Code/php.ini.debugon /usr/local/etc/php/7.4/php.ini&amp;quot;
-alias debug_off=&amp;quot;cp ~/Code/php.ini.debugoff /usr/local/etc/php/7.4/php.ini&amp;quot;
-&lt;/code>&lt;/pre>&lt;p>&lt;code>source ~/.zshrc&lt;/code>&lt;/p>
-&lt;p>and now I can easily turn this on and off to save TONS of time with any php job (testing, etc)&lt;/p>
-&lt;blockquote>
-&lt;p>END UPDATE&lt;/p>
-&lt;/blockquote>
-&lt;p>This article got me going on using Xdebug &lt;a href="https://tighten.co/blog/configure-vscode-to-debug-phpunit-tests-with-xdebug">https://tighten.co/blog/configure-vscode-to-debug-phpunit-tests-with-xdebug&lt;/a>&lt;/p>
-&lt;p>But since 7.2 it has been tricky on the Mac.&lt;/p>
-&lt;pre>&lt;code>pecl install xdebug
-&lt;/code>&lt;/pre>&lt;p>Then &lt;code>vim /usr/local/etc/php/7.2/php.ini&lt;/code>&lt;/p>
-&lt;p>And remove from there any reference to &lt;code>xdebug.so&lt;/code>&lt;/p>
-&lt;p>Then &lt;code>/usr/local/etc/php/7.2/conf.d/ext-xdebug.ini&lt;/code>&lt;/p>
-&lt;pre>&lt;code>[xdebug]
-zend_extension=&amp;quot;xdebug.so&amp;quot;
+xdebug.remote_mode = req</code></pre><p>And then I am set again! Notice I am using 9000 above my insanity of using 9005 below has passed</p></p><p>I put two files in my home directory, one starts with the above and one does not. Then I put this alias into my<code>~/.zshrc</code></p><pre><code>alias debug_on="cp ~/Code/php.ini.debugon /usr/local/etc/php/7.4/php.ini"
+alias debug_off="cp ~/Code/php.ini.debugoff /usr/local/etc/php/7.4/php.ini"</code></pre><p><code>source ~/.zshrc</code></p><p>and now I can easily turn this on and off to save TONS of time with any php job (testing, etc)</p><blockquote><p>END UPDATE</p></blockquote><p>This article got me going on using Xdebug<a href="https://tighten.co/blog/configure-vscode-to-debug-phpunit-tests-with-xdebug">https://tighten.co/blog/configure-vscode-to-debug-phpunit-tests-with-xdebug</a></p><p>But since 7.2 it has been tricky on the Mac.</p><pre><code>pecl install xdebug</code></pre><p>Then<code>vim /usr/local/etc/php/7.2/php.ini</code></p><p>And remove from there any reference to<code>xdebug.so</code></p><p>Then<code>/usr/local/etc/php/7.2/conf.d/ext-xdebug.ini</code></p><pre><code>[xdebug]
+zend_extension="xdebug.so"
 xdebug.remote_autostart=1
 xdebug.remote_port=9005
 xdebug.remote_enable=1
 xdebug.profiler_enable=1
-xdebug.profiler_output_dir=&amp;quot;/Users/alfrednutile/xdebugtmp/&amp;quot;
-&lt;/code>&lt;/pre>&lt;p>and restart the services&lt;/p>
-&lt;pre>&lt;code>brew services restart php72
-&lt;/code>&lt;/pre>&lt;p>You should be able to run &lt;code>php --ini&lt;/code> at the command line.&lt;/p>
-&lt;pre>&lt;code>&amp;gt;php --ini
+xdebug.profiler_output_dir="/Users/alfrednutile/xdebugtmp/"</code></pre><p>and restart the services</p><pre><code>brew services restart php72</code></pre><p>You should be able to run<code>php --ini</code> at the command line.</p><pre><code>>php --ini
 Configuration File (php.ini) Path: /usr/local/etc/php/7.2
 Loaded Configuration File: /usr/local/etc/php/7.2/php.ini
 Scan for additional .ini files in: /usr/local/etc/php/7.2/conf.d
 Additional .ini files parsed: /usr/local/etc/php/7.2/conf.d/ext-opcache.ini,
 /usr/local/etc/php/7.2/conf.d/ext-xdebug.ini,
-/usr/local/etc/php/7.2/conf.d/php-memory-limits.ini
-&lt;/code>&lt;/pre>&lt;p>Visual Code&amp;rsquo;s xdebug &lt;code>launch.json&lt;/code> looks like:&lt;/p>
-&lt;pre>&lt;code>{
-&amp;quot;version&amp;quot;: &amp;quot;0.2.0&amp;quot;,
-&amp;quot;configurations&amp;quot;: [{
-&amp;quot;name&amp;quot;: &amp;quot;Listen for XDebug&amp;quot;,
-&amp;quot;type&amp;quot;: &amp;quot;php&amp;quot;,
-&amp;quot;request&amp;quot;: &amp;quot;launch&amp;quot;,
-&amp;quot;port&amp;quot;: 9005
+/usr/local/etc/php/7.2/conf.d/php-memory-limits.ini</code></pre><p>Visual Code&rsquo;s xdebug<code>launch.json</code> looks like:</p><pre><code>{
+"version": "0.2.0",
+"configurations": [{
+"name": "Listen for XDebug",
+"type": "php",
+"request": "launch",
+"port": 9005
 },
 {
-&amp;quot;name&amp;quot;: &amp;quot;Launch currently open script&amp;quot;,
-&amp;quot;type&amp;quot;: &amp;quot;php&amp;quot;,
-&amp;quot;request&amp;quot;: &amp;quot;launch&amp;quot;,
-&amp;quot;program&amp;quot;: &amp;quot;${file}&amp;quot;,
-&amp;quot;cwd&amp;quot;: &amp;quot;${fileDirname}&amp;quot;,
-&amp;quot;port&amp;quot;: 9005
+"name": "Launch currently open script",
+"type": "php",
+"request": "launch",
+"program": "${file}",
+"cwd": "${fileDirname}",
+"port": 9005
 }
 ]
-}
-&lt;/code>&lt;/pre></description><tags>php, xdebug</tags></item></channel></rss>
+}</code></pre></description><tags>php, xdebug</tags></item></channel></rss>

@@ -1,17 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>codeship on Alfred Nutile</title><link>https://alfrednutile.info/tags/codeship/</link><description>Recent content in codeship on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 12 Oct 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/codeship/index.xml" rel="self" type="application/rss+xml"/><item><title>Troubleshooting a Failed Build with Codeship and SauceLabs</title><link>https://alfrednutile.info/posts/192/</link><pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/192/</guid><description>&lt;p>In this article, I will continue where I left off with my previous post, Laravel and Behat Using Selenium and Headless Chrome, and explain what you can do when troubleshooting a failed build.&lt;/p>
-&lt;p>Checkout the article on CodeShip &lt;a href="https://blog.codeship.com/troubleshooting-a-failed-build-with-codeship-and-saucelabs/">https://blog.codeship.com/troubleshooting-a-failed-build-with-codeship-and-saucelabs/&lt;/a>&lt;/p></description><tags>codeship, saucelabs</tags></item><item><title>Codeship and Laravel for Continuous Integration</title><link>https://alfrednutile.info/posts/148/</link><pubDate>Sun, 07 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/148/</guid><description>&lt;p>Getting going on Codeship and Laravel is pretty easy.&lt;/p>
-&lt;p>Once you setup codeship to work with your github account just pull in your repo and set your Testing scripts as follows. (they have a ui for ENV variables as well)&lt;/p>
-&lt;h2 id="codeship-testing-settings-easier-copy-paste-bottom-of-article">Codeship Testing Settings [easier copy paste bottom of article]&lt;/h2>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/fh6vv3g5wpqw7ac/codeship1.png?dl=0" alt="codeship">&lt;/p>
-&lt;p>You can do this in their UI as well. But at this point I am&lt;/p>
-&lt;ul>
-&lt;li>Setting up the composer token for any private repos that application might have&lt;/li>
-&lt;li>Setting up .env for their specific needs as well eg MYSQL_*&lt;/li>
-&lt;/ul>
-&lt;p>For the Database to use their settings I have to edit &lt;code>config/database.php&lt;/code>&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
-return [
-'fetch' =&amp;gt; PDO::FETCH_CLASS,
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>codeship on Alfred Nutile</title><link>https://alfrednutile.info/tags/codeship/</link><description>Recent content in codeship on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 12 Oct 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/codeship/index.xml" rel="self" type="application/rss+xml"/><item><title>Troubleshooting a Failed Build with Codeship and SauceLabs</title><link>https://alfrednutile.info/posts/192/</link><pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/192/</guid><description><p>In this article, I will continue where I left off with my previous post, Laravel and Behat Using Selenium and Headless Chrome, and explain what you can do when troubleshooting a failed build.</p><p>Checkout the article on CodeShip<a href="https://blog.codeship.com/troubleshooting-a-failed-build-with-codeship-and-saucelabs/">https://blog.codeship.com/troubleshooting-a-failed-build-with-codeship-and-saucelabs/</a></p></description><tags>codeship, saucelabs</tags></item><item><title>Codeship and Laravel for Continuous Integration</title><link>https://alfrednutile.info/posts/148/</link><pubDate>Sun, 07 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/148/</guid><description><p>Getting going on Codeship and Laravel is pretty easy.</p><p>Once you setup codeship to work with your github account just pull in your repo and set your Testing scripts as follows. (they have a ui for ENV variables as well)</p><h2 id="codeship-testing-settings-easier-copy-paste-bottom-of-article">Codeship Testing Settings [easier copy paste bottom of article]</h2><p><img src="https://dl.dropboxusercontent.com/s/fh6vv3g5wpqw7ac/codeship1.png?dl=0" alt="codeship"/><p>You can do this in their UI as well. But at this point I am</p><ul><li>Setting up the composer token for any private repos that application might have</li><li>Setting up .env for their specific needs as well eg MYSQL_*</li></ul><p>For the Database to use their settings I have to edit<code>config/database.php</code></p><pre><code>&lt;?php<p>return [</p><pre><code>'fetch' =&amp;gt; PDO::FETCH_CLASS,
 'default' =&amp;gt; env('DB_CONNECTION', 'mysql'),
 'connections' =&amp;gt; [
 'mysql' =&amp;gt; [
@@ -26,54 +13,36 @@ return [
 'strict' =&amp;gt; false,
 ],
 ],
-.......
-];
-&lt;/code>&lt;/pre>&lt;p>Adding&lt;/p>
-&lt;pre>&lt;code>env('DB_PASSWORD', env('MYSQL_PASSWORD')),
+.......</code></pre><p>];</p><p/></pre><p>Adding</p></p><pre><code>env('DB_PASSWORD', env('MYSQL_PASSWORD')),
 env('DB_USERNAME', env('MYSQL_USER')),
-env('DB_DATABASE', env('TEST_ENV_NUMBER')),
-&lt;/code>&lt;/pre>&lt;p>So we default to theirs if ours is not there. Finally when we run the test I set the db to the name they want&lt;/p>
-&lt;pre>&lt;code>DB_DATABASE=test phpunit
-&lt;/code>&lt;/pre>&lt;h2 id="envoy-deploy">Envoy Deploy&lt;/h2>
-&lt;p>After it passes I can use Envoy to deploy it.&lt;/p>
-&lt;p>The Envoy scripts are not on Forge but use to be so a lot of the naming matches.&lt;/p>
-&lt;p>Under the Codeship Deployment page I set&lt;/p>
-&lt;pre>&lt;code>composer global require &amp;quot;laravel/envoy=~1.0&amp;quot; &amp;amp;&amp;amp; /home/rof/.composer/vendor/bin/envoy run deploy_dev
-&lt;/code>&lt;/pre>&lt;p>In that script do what ever you need to make this thing deploy for example.&lt;/p>
-&lt;pre>&lt;code>@servers(['dev' =&amp;gt; 'forge@foo.com'])
-@task('deploy_dev', ['on' =&amp;gt; 'dev'])
+env('DB_DATABASE', env('TEST_ENV_NUMBER')),</code></pre><p>So we default to theirs if ours is not there. Finally when we run the test I set the db to the name they want</p><pre><code>DB_DATABASE=test phpunit</code></pre><h2 id="envoy-deploy">Envoy Deploy</h2><p>After it passes I can use Envoy to deploy it.</p><p>The Envoy scripts are not on Forge but use to be so a lot of the naming matches.</p><p>Under the Codeship Deployment page I set</p><pre><code>composer global require "laravel/envoy=~1.0" &amp;&amp; /home/rof/.composer/vendor/bin/envoy run deploy_dev</code></pre><p>In that script do what ever you need to make this thing deploy for example.</p><pre><code>@servers(['dev' => 'forge@foo.com'])<p>@task(&lsquo;deploy_dev&rsquo;, [&lsquo;on&rsquo; => &lsquo;dev&rsquo;])
 cd /home/forge/app
-git reset --hard HEAD
+git reset &ndash;hard HEAD
 git pull origin dev
 composer config -g github-oauth.github.com foo
 rm -rf vendor
 composer install
 composer dump-autoload
-php artisan migrate:refresh --seed
+php artisan migrate:refresh &ndash;seed
 bower install
-@endtask
-&lt;/code>&lt;/pre>&lt;p>We do not do this on Prod. Someone with proper permissions will run Envoy locally once the tests are passing.&lt;/p>
-&lt;p>&lt;strong>UPDATE&lt;/strong>&lt;/p>
-&lt;p>Easier copy paste&lt;/p>
-&lt;pre>&lt;code># Set php version through phpenv. 5.3, 5.4 and 5.5 available
+@endtask</p><p/></pre><p>We do not do this on Prod. Someone with proper permissions will run Envoy locally once the tests are passing.</p></p><p><strong>UPDATE</strong></p><p>Easier copy paste</p><pre><code># Set php version through phpenv. 5.3, 5.4 and 5.5 available
 phpenv local 5.5
 # Install dependencies through Composer
 composer config -g github-oauth.github.com foo
 touch .env
-echo &amp;quot;APP_ENV='testing'&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;MYSQL_TESTING_URL='localhost'&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;MYSQL_TESTING_URL='localhost'&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;APP_KEY=foo&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;CACHE_DRIVER=file&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;SESSION_DRIVER=file&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;QUEUE_DRIVER=sync&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;MAIL_DRIVER=smtp&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;MAIL_HOST=smtp.mailgun.org&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;MAIL_PORT=2525&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;MAIL_USERNAME=postmaster@email.foo.io&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;MAIL_PASSWORD=foo&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;MAIL_ENCRYPTION=true&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;STRIPE_API_SECRET='foo'&amp;quot; &amp;gt;&amp;gt; .env
-echo &amp;quot;STRIPE_PUBLIC='foo'&amp;quot; &amp;gt;&amp;gt; .env
-composer install --dev
-&lt;/code>&lt;/pre></description><tags>laravel, testing, phpunit, php, ci, codeship</tags></item></channel></rss>
+echo "APP_ENV='testing'" >> .env
+echo "MYSQL_TESTING_URL='localhost'" >> .env
+echo "MYSQL_TESTING_URL='localhost'" >> .env
+echo "APP_KEY=foo" >> .env
+echo "CACHE_DRIVER=file" >> .env
+echo "SESSION_DRIVER=file" >> .env
+echo "QUEUE_DRIVER=sync" >> .env
+echo "MAIL_DRIVER=smtp" >> .env
+echo "MAIL_HOST=smtp.mailgun.org" >> .env
+echo "MAIL_PORT=2525" >> .env
+echo "MAIL_USERNAME=postmaster@email.foo.io" >> .env
+echo "MAIL_PASSWORD=foo" >> .env
+echo "MAIL_ENCRYPTION=true" >> .env
+echo "STRIPE_API_SECRET='foo'" >> .env
+echo "STRIPE_PUBLIC='foo'" >> .env
+composer install --dev</code></pre></description><tags>laravel, testing, phpunit, php, ci, codeship</tags></item></channel></rss>

@@ -1,26 +1,11 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>docs on Alfred Nutile</title><link>https://alfrednutile.info/tags/docs/</link><description>Recent content in docs on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 05 Aug 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Using your project docs inside the application</title><link>https://alfrednutile.info/posts/157/</link><pubDate>Wed, 05 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/157/</guid><description>&lt;p>The applications I work on have markdown docs. These can be in the docs/ folder for example as &lt;code>docs/webhooks.md&lt;/code>&lt;/p>
-&lt;p>But some of these docs have value to the user of the UI not just the developer, and when we include these docs inside the application repo it is a TON easier to just update them as you fix and make new features in the codebase.&lt;/p>
-&lt;p>You can have the best of both worlds with a simple to use library &lt;a href="https://github.com/michelf/php-markdown">https://github.com/michelf/php-markdown&lt;/a>&lt;/p>
-&lt;h2 id="the-controller">The Controller&lt;/h2>
-&lt;p>This then allows me, in my controllers to get some content from these docs, for example&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
-namespace App\Http\Controllers;
-use App\Http\Requests;
-use Michelf\MarkdownExtra;
-class HelpController extends Controller
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>docs on Alfred Nutile</title><link>https://alfrednutile.info/tags/docs/</link><description>Recent content in docs on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 05 Aug 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Using your project docs inside the application</title><link>https://alfrednutile.info/posts/157/</link><pubDate>Wed, 05 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/157/</guid><description><p>The applications I work on have markdown docs. These can be in the docs/ folder for example as<code>docs/webhooks.md</code></p><p>But some of these docs have value to the user of the UI not just the developer, and when we include these docs inside the application repo it is a TON easier to just update them as you fix and make new features in the codebase.</p><p>You can have the best of both worlds with a simple to use library<a href="https://github.com/michelf/php-markdown">https://github.com/michelf/php-markdown</a></p><h2 id="the-controller">The Controller</h2><p>This then allows me, in my controllers to get some content from these docs, for example</p><pre><code>&lt;?php<p>namespace App\Http\Controllers;</p><p>use App\Http\Requests;
+use Michelf\MarkdownExtra;</p><p>class HelpController extends Controller
 {
 public function api()
 {
-$text = file_get_contents(base_path('docs/webhooks.md'));
-$webhooks = MarkdownExtra::defaultTransform($text);
-return view('help.api', compact('webhooks'));
-}
-}
-&lt;/code>&lt;/pre>&lt;h2 id="the-blade-template-file">The Blade Template File&lt;/h2>
-&lt;p>Then in the blade template all I need to do to show those docs are&lt;/p>
-&lt;pre>&lt;code>@extends('layouts.default')
-@section('content')
-&amp;lt;div class=&amp;quot;page-header&amp;quot;&amp;gt;
+$text = file_get_contents(base_path(&lsquo;docs/webhooks.md&rsquo;));
+$webhooks = MarkdownExtra::defaultTransform($text);</p><pre><code> return view('help.api', compact('webhooks'));
+}</code></pre><p>}</code></pre><h2 id="the-blade-template-file">The Blade Template File</h2></p><p>Then in the blade template all I need to do to show those docs are</p><pre><code>@extends('layouts.default')<p>@section(&lsquo;content&rsquo;)</p><pre><code>&amp;lt;div class=&amp;quot;page-header&amp;quot;&amp;gt;
 &amp;lt;h1&amp;gt;API Help&amp;lt;/h1&amp;gt;
 &amp;lt;/div&amp;gt;
 &amp;lt;div class=&amp;quot;row&amp;quot;&amp;gt;
@@ -31,10 +16,4 @@ return view('help.api', compact('webhooks'));
 &amp;lt;/div&amp;gt;
 &amp;lt;/div&amp;gt;
 &amp;lt;/div&amp;gt;
-&amp;lt;/div&amp;gt;
-@endsection
-&lt;/code>&lt;/pre>&lt;p>Being a private repo we review the code so using &amp;ldquo;{!!&amp;rdquo; is not so bad. But keep in mind you are trusting what is in these files! Of course a simple&lt;/p>
-&lt;pre>&lt;code>$webhooks = strip_tags($webhooks, &amp;quot;tags you allow here&amp;quot;);
-&lt;/code>&lt;/pre>&lt;p>Will help out there.&lt;/p>
-&lt;h2 id="the-markdown">The Markdown&lt;/h2>
-&lt;p>Then just write your file as normal in markdown!&lt;/p></description><tags>laravel, php, docs</tags></item></channel></rss>
+&amp;lt;/div&amp;gt;</code></pre><p>@endsection</code></pre><p>Being a private repo we review the code so using “{!!” is not so bad. But keep in mind you are trusting what is in these files! Of course a simple</p></p><pre><code>$webhooks = strip_tags($webhooks, "tags you allow here");</code></pre><p>Will help out there.</p><h2 id="the-markdown">The Markdown</h2><p>Then just write your file as normal in markdown!</p></description><tags>laravel, php, docs</tags></item></channel></rss>

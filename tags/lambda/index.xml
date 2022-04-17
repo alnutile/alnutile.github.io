@@ -1,77 +1,57 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>lambda on Alfred Nutile</title><link>https://alfrednutile.info/tags/lambda/</link><description>Recent content in lambda on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 08 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/lambda/index.xml" rel="self" type="application/rss+xml"/><item><title>Lambda and Github Webhooks</title><link>https://alfrednutile.info/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/245/</guid><description>&lt;p>Related to &lt;a href="https://developer.github.com/webhooks/">https://developer.github.com/webhooks/&lt;/a> and pushing data to Lambda AWS.&lt;/p>
-&lt;p>I can check the token by just having this check in my handler.&lt;/p>
-&lt;pre>&lt;code>const crypto = require('crypto');
-exports.handler = (event, context, callback) =&amp;gt; {
-let headers = event.headers;
-let body = event.body;
-if (typeof body === 'object') {
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>lambda on Alfred Nutile</title><link>https://alfrednutile.info/tags/lambda/</link><description>Recent content in lambda on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 08 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/lambda/index.xml" rel="self" type="application/rss+xml"/><item><title>Lambda and Github Webhooks</title><link>https://alfrednutile.info/posts/245/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/245/</guid><description><p>Related to<a href="https://developer.github.com/webhooks/">https://developer.github.com/webhooks/</a> and pushing data to Lambda AWS.</p><p>I can check the token by just having this check in my handler.</p><pre><code>const crypto = require('crypto');<p>exports.handler = (event, context, callback) => {
+let headers = event.headers;</p><p>let body = event.body;</p><p>if (typeof body === &lsquo;object&rsquo;) {
 body = JSON.stringify(event.body);
-}
-let github_event = headers['X-GitHub-Event'];
-if (
+}</p><p>let github_event = headers[&lsquo;X-GitHub-Event&rsquo;];</p><p>if (
 github_event === undefined ||
-typeof github_event !== 'string' ||
-github_event.length &amp;lt; 1
+typeof github_event !== &lsquo;string&rsquo; ||
+github_event.length &lt; 1
 ) {
 callback(null, {
 statusCode: 400,
-body: 'Missing X-GitHub-Event'
+body: &lsquo;Missing X-GitHub-Event&rsquo;
 });
 return;
-}
-let github_signature = headers['X-Hub-Signature'];
-if (
+}</p><p>let github_signature = headers[&lsquo;X-Hub-Signature&rsquo;];</p><p>if (
 github_signature === undefined ||
-typeof github_signature !== 'string' ||
+typeof github_signature !== &lsquo;string&rsquo; ||
 !github_signature.match(/sha1=\S+/)
 ) {
 callback(null, {
 statusCode: 400,
-body: 'Missing X-Hub-Signature'
+body: &lsquo;Missing X-Hub-Signature&rsquo;
 });
-}
-let secret = process.env.SECRET;
-if (secret === undefined || secret.length &amp;lt; 1) {
+}</p><p>let secret = process.env.SECRET;</p><p>if (secret === undefined || secret.length &lt; 1) {
 callback(null, {
 statusCode: 500,
-body: 'We are missing the secret in our server sorry'
+body: &lsquo;We are missing the secret in our server sorry&rsquo;
 });
 return;
-}
-let signature = headers['X-Hub-Signature'];
-let computed_signature = crypto
-.createHmac('sha1', secret)
+}</p><p>let signature = headers[&lsquo;X-Hub-Signature&rsquo;];</p><p>let computed_signature = crypto
+.createHmac(&lsquo;sha1&rsquo;, secret)
 .update(body)
-.digest('hex');
-if (`sha1=${computed_signature}` !== signature) {
+.digest(&lsquo;hex&rsquo;);</p><p>if (<code>sha1=${computed_signature}</code> !== signature) {
 callback(null, {
 statusCode: 403,
-body: 'HMAC Output not Correct'
+body: &lsquo;HMAC Output not Correct&rsquo;
 });
 return;
-}
-//ready to process token
+}</p><p>//ready to process token
 callback(null, {
 statusCode: 204,
-body: 'OK'
+body: &lsquo;OK&rsquo;
 });
-};
-&lt;/code>&lt;/pre>&lt;p>With the serverless library from AWS &lt;a href="https://github.com/awslabs/serverless-application-model">https://github.com/awslabs/serverless-application-model&lt;/a> I can build a template to include this in the Resource&lt;/p>
-&lt;pre>&lt;code>Resources:
+};</code></pre><p>With the serverless library from AWS<a href="https://github.com/awslabs/serverless-application-model"><a href="https://github.com/awslabs/serverless-application-model">https://github.com/awslabs/serverless-application-model</a></a> I can build a template to include this in the Resource</p></p><pre><code>Resources:
 GithubSecurityWebhook:
 Type: AWS::Serverless::Function
 DependsOn:
 - Stream
 Properties:
 Runtime: nodejs8.10
-Description: &amp;gt;-
+Description: >-
 This will verify that the incoming data is from Github and hashed with the key
 we are using for this environment
 Environment:
 Variables:
 SECRET: !Sub ${Secret}
 APP_ENV: !Sub ${AppEnv}
-APP_REGION: &amp;quot;eu-west-1&amp;quot;
-&lt;/code>&lt;/pre>&lt;p>then during the update command I can pass&lt;/p>
-&lt;pre>&lt;code>SECRET=FOO
-&lt;/code>&lt;/pre>&lt;p>or put a .env file on the system and use the &lt;code>dotenv&lt;/code> library&lt;/p></description><tags>serverless, lambda, aws</tags></item></channel></rss>
+APP_REGION: "eu-west-1"</code></pre><p>then during the update command I can pass</p><pre><code>SECRET=FOO</code></pre><p>or put a .env file on the system and use the<code>dotenv</code> library</p></description><tags>serverless, lambda, aws</tags></item></channel></rss>

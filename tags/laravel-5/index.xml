@@ -1,12 +1,5 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>laravel 5 on Alfred Nutile</title><link>https://alfrednutile.info/tags/laravel-5/</link><description>Recent content in laravel 5 on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 12 Oct 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/laravel-5/index.xml" rel="self" type="application/rss+xml"/><item><title>Temporary Auth Updates L5</title><link>https://alfrednutile.info/posts/109/</link><pubDate>Sun, 12 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/109/</guid><description>&lt;h1 id="auth-updates">Auth updates&lt;/h1>
-&lt;p>First make sure your composer update has the latest Laravel and check that
-there are not relevant fixes already via laravel/docs master laravel/framework master or laravel/laravel dev&lt;/p>
-&lt;p>Moved evn files to the new format and only 1 is needed now having the&lt;/p>
-&lt;pre>&lt;code>APP_ENV='local'
-&lt;/code>&lt;/pre>&lt;p>setting for the environment.&lt;/p>
-&lt;p>Then update the path in the AuthController to go to auth/login&lt;/p>
-&lt;pre>&lt;code>#app/Http/Controllers/Auth/AuthController
-public function login(LoginRequest $request)
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>laravel 5 on Alfred Nutile</title><link>https://alfrednutile.info/tags/laravel-5/</link><description>Recent content in laravel 5 on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 12 Oct 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/laravel-5/index.xml" rel="self" type="application/rss+xml"/><item><title>Temporary Auth Updates L5</title><link>https://alfrednutile.info/posts/109/</link><pubDate>Sun, 12 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/109/</guid><description><h1 id="auth-updates">Auth updates</h1><p>First make sure your composer update has the latest Laravel and check that
+there are not relevant fixes already via laravel/docs master laravel/framework master or laravel/laravel dev</p><p>Moved evn files to the new format and only 1 is needed now having the</p><pre><code>APP_ENV='local'</code></pre><p>setting for the environment.</p><p>Then update the path in the AuthController to go to auth/login</p><pre><code>#app/Http/Controllers/Auth/AuthController<pre><code>public function login(LoginRequest $request)
 {
 if ($this-&amp;gt;auth-&amp;gt;attempt($request-&amp;gt;only('email', 'password')))
 {
@@ -15,75 +8,54 @@ return redirect('/');
 return redirect('/auth/login')-&amp;gt;withErrors([
 'email' =&amp;gt; 'The credentials you entered did not match our records. Try again?',
 ]);
-}
-&lt;/code>&lt;/pre>&lt;p>Here is a good article on using annotations which are needed now in the controller.&lt;/p>
-&lt;p>&lt;a href="http://mattstauffer.co/blog/laravel-5.0-route-annotations">http://mattstauffer.co/blog/laravel-5.0-route-annotations&lt;/a>&lt;/p>
-&lt;p>For example I remove api/v1/projects from routes.php (which is key it can not be in both)&lt;/p>
-&lt;p>Then in the ProjectsController.php I added this to the top of the class&lt;/p>
-&lt;pre>&lt;code>/**
-* @Middleware(&amp;quot;BehatEditor\Http\Middleware\AuthMiddleware&amp;quot;)
-* @Before(&amp;quot;auth&amp;quot;)
+}</code></pre><p/></pre><p>Here is a good article on using annotations which are needed now in the controller.</p></p><p><a href="http://mattstauffer.co/blog/laravel-5.0-route-annotations">http://mattstauffer.co/blog/laravel-5.0-route-annotations</a></p><p>For example I remove api/v1/projects from routes.php (which is key it can not be in both)</p><p>Then in the ProjectsController.php I added this to the top of the class</p><pre><code>/**
+* @Middleware("BehatEditor\Http\Middleware\AuthMiddleware")
+* @Before("auth")
 */
-class ProjectsController extends BaseController {
-&lt;/code>&lt;/pre>&lt;p>and in the index function&lt;/p>
-&lt;pre>&lt;code>
+class ProjectsController extends BaseController {</code></pre><p>and in the index function</p><pre><code>
 /**
-* @Get(&amp;quot;api/v1/projects&amp;quot;, as=&amp;quot;api.v1.projects&amp;quot;)
+* @Get("api/v1/projects", as="api.v1.projects")
 * @return mixed
 */
 public function index()
 {
 try
 {
-$results = $this-&amp;gt;service-&amp;gt;getAllProjectsForThisUser();
+$results = $this->service->getAllProjectsForThisUser();
 /**
 * @TODO move Response to a class to not have it tightly coupled here
 */
-return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($results, &amp;quot;Loaded Projects&amp;quot;), 200);
+return Response::json($this->responseServices->respond($results, "Loaded Projects"), 200);
 }
 catch(\Exception $e) {
-return Response::json($this-&amp;gt;responseServices-&amp;gt;respond($e-&amp;gt;getMessage(), &amp;quot;Error Getting Project Failed&amp;quot;), 422);
-}
-}
-&lt;/code>&lt;/pre>&lt;p>So the route is now api/v1/projects using Get and the route name for ease of use is api.v1.projects&lt;/p>
-&lt;p>Then I ran&lt;/p>
-&lt;pre>&lt;code>php artisan route:scan
-&lt;/code>&lt;/pre>&lt;p>to get this file made for me&lt;/p>
-&lt;pre>&lt;code>storage/framework/routes.scanned.php
-&lt;/code>&lt;/pre>&lt;p>Inside we see&lt;/p>
-&lt;pre>&lt;code>&amp;lt;?php
-$router-&amp;gt;get('auth/login', ['uses' =&amp;gt; 'App\Http\Controllers\Auth\AuthController@showLoginForm', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; NULL, 'middleware' =&amp;gt; array (
-0 =&amp;gt; 'csrf',
-1 =&amp;gt; 'guest',
-), 'where' =&amp;gt; array (
+return Response::json($this->responseServices->respond($e->getMessage(), "Error Getting Project Failed"), 422);
+}<pre><code>}</code></pre><p/></pre><p>So the route is now api/v1/projects using Get and the route name for ease of use is api.v1.projects</p></p><p>Then I ran</p><pre><code>php artisan route:scan</code></pre><p>to get this file made for me</p><pre><code>storage/framework/routes.scanned.php</code></pre><p>Inside we see</p><pre><code>&lt;?php<p>$router->get(&lsquo;auth/login&rsquo;, [&lsquo;uses&rsquo; => &lsquo;App\Http\Controllers\Auth\AuthController@showLoginForm&rsquo;, &lsquo;domain&rsquo; => NULL, &lsquo;as&rsquo; => NULL, &lsquo;middleware&rsquo; => array (
+0 => &lsquo;csrf&rsquo;,
+1 => &lsquo;guest&rsquo;,
+), &lsquo;where&rsquo; => array (
 )]);
-$router-&amp;gt;post('auth/login', ['uses' =&amp;gt; 'App\Http\Controllers\Auth\AuthController@login', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; NULL, 'middleware' =&amp;gt; array (
-0 =&amp;gt; 'csrf',
-1 =&amp;gt; 'guest',
-), 'where' =&amp;gt; array (
+$router->post(&lsquo;auth/login&rsquo;, [&lsquo;uses&rsquo; => &lsquo;App\Http\Controllers\Auth\AuthController@login&rsquo;, &lsquo;domain&rsquo; => NULL, &lsquo;as&rsquo; => NULL, &lsquo;middleware&rsquo; => array (
+0 => &lsquo;csrf&rsquo;,
+1 => &lsquo;guest&rsquo;,
+), &lsquo;where&rsquo; => array (
 )]);
-$router-&amp;gt;get('auth/logout', ['uses' =&amp;gt; 'App\Http\Controllers\Auth\AuthController@logout', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; NULL, 'middleware' =&amp;gt; array (
-0 =&amp;gt; 'csrf',
-1 =&amp;gt; 'guest',
-), 'where' =&amp;gt; array (
+$router->get(&lsquo;auth/logout&rsquo;, [&lsquo;uses&rsquo; => &lsquo;App\Http\Controllers\Auth\AuthController@logout&rsquo;, &lsquo;domain&rsquo; => NULL, &lsquo;as&rsquo; => NULL, &lsquo;middleware&rsquo; => array (
+0 => &lsquo;csrf&rsquo;,
+1 => &lsquo;guest&rsquo;,
+), &lsquo;where&rsquo; => array (
 )]);
-$router-&amp;gt;get('api/v1/sites/reports', ['uses' =&amp;gt; 'App\Http\Controllers\DashController@getDash', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; 'sites.reports', 'middleware' =&amp;gt; array (
-0 =&amp;gt; 'App\\Http\\Middleware\\AuthMiddleware',
-), 'where' =&amp;gt; array (
+$router->get(&lsquo;api/v1/sites/reports&rsquo;, [&lsquo;uses&rsquo; => &lsquo;App\Http\Controllers\DashController@getDash&rsquo;, &lsquo;domain&rsquo; => NULL, &lsquo;as&rsquo; => &lsquo;sites.reports&rsquo;, &lsquo;middleware&rsquo; => array (
+0 => &lsquo;App\Http\Middleware\AuthMiddleware&rsquo;,
+), &lsquo;where&rsquo; => array (
 )]);
-$router-&amp;gt;get('api/v1/projects', ['uses' =&amp;gt; 'App\Http\Controllers\ProjectsController@index', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; 'api.v1.projects', 'middleware' =&amp;gt; array (
-0 =&amp;gt; 'App\\Http\\Middleware\\AuthMiddleware',
-), 'where' =&amp;gt; array (
+$router->get(&lsquo;api/v1/projects&rsquo;, [&lsquo;uses&rsquo; => &lsquo;App\Http\Controllers\ProjectsController@index&rsquo;, &lsquo;domain&rsquo; => NULL, &lsquo;as&rsquo; => &lsquo;api.v1.projects&rsquo;, &lsquo;middleware&rsquo; => array (
+0 => &lsquo;App\Http\Middleware\AuthMiddleware&rsquo;,
+), &lsquo;where&rsquo; => array (
 )]);
-$router-&amp;gt;get('sites', ['uses' =&amp;gt; 'App\Http\Controllers\SitesController@index', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; 'sites.index', 'middleware' =&amp;gt; array (
-0 =&amp;gt; 'App\\Http\\Middleware\\AuthMiddleware',
-), 'where' =&amp;gt; array (
-)]);
-&lt;/code>&lt;/pre>&lt;p>All the App namespaces can really be your App or the default Laravel app files.&lt;/p>
-&lt;p>This file is auto generated from that command so do not edit it.&lt;/p>
-&lt;p>The one we just made is&lt;/p>
-&lt;pre>&lt;code>$router-&amp;gt;get('api/v1/projects', ['uses' =&amp;gt; 'App\Http\Controllers\ProjectsController@index', 'domain' =&amp;gt; NULL, 'as' =&amp;gt; 'api.v1.projects', 'middleware' =&amp;gt; array (
-0 =&amp;gt; 'App\\Http\\Middleware\\AuthMiddleware',
-), 'where' =&amp;gt; array (
-)]);
-&lt;/code>&lt;/pre></description><tags>laravel, laravel 5, auth</tags></item></channel></rss>
+$router->get(&lsquo;sites&rsquo;, [&lsquo;uses&rsquo; => &lsquo;App\Http\Controllers\SitesController@index&rsquo;, &lsquo;domain&rsquo; => NULL, &lsquo;as&rsquo; => &lsquo;sites.index&rsquo;, &lsquo;middleware&rsquo; => array (
+0 => &lsquo;App\Http\Middleware\AuthMiddleware&rsquo;,
+), &lsquo;where&rsquo; => array (
+)]);</p><p/></pre><p>All the App namespaces can really be your App or the default Laravel app files.</p></p><p>This file is auto generated from that command so do not edit it.</p><p>The one we just made is</p><pre><code>$router->get('api/v1/projects', ['uses' => 'App\Http\Controllers\ProjectsController@index', 'domain' => NULL, 'as' => 'api.v1.projects', 'middleware' => array (
+0 => 'App\\Http\\Middleware\\AuthMiddleware',
+), 'where' => array (
+)]);</code></pre></description><tags>laravel, laravel 5, auth</tags></item></channel></rss>

@@ -1,79 +1,61 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>serverless.com on Alfred Nutile</title><link>https://alfrednutile.info/tags/serverless.com/</link><description>Recent content in serverless.com on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 18 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/serverless.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Serverless, AWS API Gateway and Authentication</title><link>https://alfrednutile.info/posts/214/</link><pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/214/</guid><description>&lt;p>Just a note2self really.&lt;/p>
-&lt;p>Setting up Auth was super easy&lt;/p>
-&lt;p>As seen below I had to add to my serverless.yml &lt;code>authorizer&lt;/code>&lt;/p>
-&lt;pre>&lt;code> addQuote:
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>serverless.com on Alfred Nutile</title><link>https://alfrednutile.info/tags/serverless.com/</link><description>Recent content in serverless.com on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 18 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/serverless.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Serverless, AWS API Gateway and Authentication</title><link>https://alfrednutile.info/posts/214/</link><pubDate>Tue, 18 Jul 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/214/</guid><description><p>Just a note2self really.</p><p>Setting up Auth was super easy</p><p>As seen below I had to add to my serverless.yml<code>authorizer</code></p><pre><code> addQuote:
 handler: quote/handler.add
 events:
 - http:
 path: quote
 method: post
 cors: true
-authorizer: aws_iam
-&lt;/code>&lt;/pre>&lt;p>&lt;strong>authorizer: aws_iam&lt;/strong>&lt;/p>
-&lt;p>From here I then needed, in this case Postman, to pass an AWS KEY and SECRET made for this app.&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/54mz7mxo0x7ei25/auth_aws.jpg?dl=0" alt="">&lt;/p>
-&lt;p>When making the user I attached this Policy to the user&lt;/p>
-&lt;pre>&lt;code>{
-&amp;quot;Version&amp;quot;: &amp;quot;2012-10-17&amp;quot;,
-&amp;quot;Statement&amp;quot;: [
+authorizer: aws_iam</code></pre><p><strong>authorizer: aws_iam</strong></p><p>From here I then needed, in this case Postman, to pass an AWS KEY and SECRET made for this app.</p><p><img src="https://dl.dropboxusercontent.com/s/54mz7mxo0x7ei25/auth_aws.jpg?dl=0" alt=""/><p>When making the user I attached this Policy to the user</p><pre><code>{
+"Version": "2012-10-17",
+"Statement": [
 {
-&amp;quot;Effect&amp;quot;: &amp;quot;Allow&amp;quot;,
-&amp;quot;Action&amp;quot;: [
-&amp;quot;execute-api:Invoke&amp;quot;
+"Effect": "Allow",
+"Action": [
+"execute-api:Invoke"
 ],
-&amp;quot;Resource&amp;quot;: &amp;quot;arn:aws:execute-api:us-east-1:AWS_ID:*/dev/POST/quote&amp;quot;
+"Resource": "arn:aws:execute-api:us-east-1:AWS_ID:*/dev/POST/quote"
 }
 ]
-}
-&lt;/code>&lt;/pre>&lt;p>I an easily make this in the &lt;code>serverless.yml&lt;/code> file by adding the following:&lt;/p>
-&lt;pre>&lt;code>
+}</code></pre><p>I an easily make this in the<code>serverless.yml</code> file by adding the following:</p><pre><code>
 resources:
 Resources:
 s3Data:
 Type: AWS::S3::Bucket
 Properties:
-BucketName: &amp;quot;${self:custom.bucket}&amp;quot;
+BucketName: "${self:custom.bucket}"
 VersioningConfiguration:
 Status: Enabled
 quotePolicy:
 Type: AWS::IAM::Policy
 Properties:
-PolicyName: &amp;quot;serverless-quotes-policy-${opt:stage, self:provider.stage}&amp;quot;
+PolicyName: "serverless-quotes-policy-${opt:stage, self:provider.stage}"
 PolicyDocument:
-Version: &amp;quot;2012-10-17&amp;quot;
+Version: "2012-10-17"
 Statement:
 -
-Effect: &amp;quot;Allow&amp;quot;
+Effect: "Allow"
 Action:
-- &amp;quot;execute-api:Invoke&amp;quot;
-Resource: &amp;quot;arn:aws:execute-api:#{AWS::Region}:#{AWS::AccountId}:*/${opt:stage, self:provider.stage}/POST/quote&amp;quot;
+- "execute-api:Invoke"
+Resource: "arn:aws:execute-api:#{AWS::Region}:#{AWS::AccountId}:*/${opt:stage, self:provider.stage}/POST/quote"
 Users:
-- &amp;quot;serverless-quotes-${opt:stage, self:provider.stage}&amp;quot;
+- "serverless-quotes-${opt:stage, self:provider.stage}"
 DependsOn:
 - authUser
 userKey:
 Type: AWS::IAM::AccessKey
 Properties:
-UserName: &amp;quot;serverless-quotes-${opt:stage, self:provider.stage}&amp;quot;
+UserName: "serverless-quotes-${opt:stage, self:provider.stage}"
 DependsOn:
 - authUser
 authUser:
 Type: AWS::IAM::User
 Properties:
-UserName: &amp;quot;serverless-quotes-${opt:stage, self:provider.stage}&amp;quot;
-Outputs:
+UserName: "serverless-quotes-${opt:stage, self:provider.stage}"<p>Outputs:
 UserSecret:
 Description: The user secret
 Value:
-&amp;quot;Fn::GetAtt&amp;quot;: [ userKey, SecretAccessKey ]
+"Fn::GetAtt": [ userKey, SecretAccessKey ]
 UserKey:
 Description: The user key
 Value:
-&amp;quot;Ref&amp;quot;: userKey
-&lt;/code>&lt;/pre>&lt;p>This is after adding &lt;code>serverless-pseudo-parameters&lt;/code> plugin, see link below.&lt;/p>
-&lt;p>Now when I run &lt;code>sls deploy --stage dev&lt;/code> I get the User, IAM, Key and Secret (via the webui output), then I need to access this url.&lt;/p>
-&lt;p>That was it. With serverless.com I could have limited stage, production builds to the unique user per stack as well.&lt;/p>
-&lt;h2 id="links">Links&lt;/h2>
-&lt;p>&lt;a href="https://aws.amazon.com/premiumsupport/knowledge-center/iam-authentication-api-gateway/">https://aws.amazon.com/premiumsupport/knowledge-center/iam-authentication-api-gateway/&lt;/a>&lt;/p>
-&lt;p>&lt;a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html">http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference">https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference&lt;/a>&lt;/p></description><tags>serverless.com, aws, serverless</tags></item></channel></rss>
+"Ref": userKey</code></pre><p>This is after adding<code>serverless-pseudo-parameters</code> plugin, see link below.</p></p><p>Now when I run<code>sls deploy --stage dev</code> I get the User, IAM, Key and Secret (via the webui output), then I need to access this url.</p><p>That was it. With serverless.com I could have limited stage, production builds to the unique user per stack as well.</p><h2 id="links">Links</h2><p><a href="https://aws.amazon.com/premiumsupport/knowledge-center/iam-authentication-api-gateway/">https://aws.amazon.com/premiumsupport/knowledge-center/iam-authentication-api-gateway/</a></p><p><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html">http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html</a></p><p><a href="https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference">https://serverless.com/framework/docs/providers/aws/guide/serverless.yml/#serverlessyml-reference</a></p></description><tags>serverless.com, aws, serverless</tags></item></channel></rss>
