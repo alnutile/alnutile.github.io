@@ -87,5 +87,4 @@ fi
 &amp;quot;ECR&amp;quot;
 ]
 },
-&lt;/code>&lt;/pre>&lt;p>So when I update this I can just update the &lt;code>ProductionTag&lt;/code> and this will take effect.&lt;/p></description>
-aws, fargate</item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>So when I update this I can just update the &lt;code>ProductionTag&lt;/code> and this will take effect.&lt;/p></description><tags>aws, fargate</tags></item></channel></rss>

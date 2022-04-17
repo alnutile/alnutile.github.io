@@ -1,8 +1,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>github on Alfred Nutile</title><link>https://alfrednutile.info/tags/github/</link><description>Recent content in github on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 13 May 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>Github CLI to get Teams and Members of an Org</title><link>https://alfrednutile.info/posts/67/</link><pubDate>Tue, 13 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/67/</guid><description>&lt;p>Needed to make a quick library for pulling down this info and making it a CSV file.&lt;/p>
 &lt;p>The libraries made this super easy. But it was hard to get all the emails since these can only been seen if in the users profile.&lt;/p>
 &lt;h3 id="the-link">the link&lt;/h3>
-&lt;p>&lt;a href="https://github.com/alnutile/org_reports">https://github.com/alnutile/org_reports&lt;/a>&lt;/p></description>
-github, tools, apis, php</item><item><title>Using Github Pages for your help docs</title><link>https://alfrednutile.info/posts/54/</link><pubDate>Thu, 13 Feb 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/54/</guid><description>&lt;p>Really impressed with how this came out.&lt;/p>
+&lt;p>&lt;a href="https://github.com/alnutile/org_reports">https://github.com/alnutile/org_reports&lt;/a>&lt;/p></description><tags>github, tools, apis, php</tags></item><item><title>Using Github Pages for your help docs</title><link>https://alfrednutile.info/posts/54/</link><pubDate>Thu, 13 Feb 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/54/</guid><description>&lt;p>Really impressed with how this came out.&lt;/p>
 &lt;p>Using Github pages with no theme we can use that repo to then pull in our help files to our local project via a JSON request. This separates documentation from the project so anyone on the team can checkout the git branch for the docs, make an edit and push to that branch which then shows on the site in minutes.&lt;/p>
 &lt;p>To start with take the repo you are using to make a new branch called gh-pages as noted here &lt;a href="https://help.github.com/articles/creating-project-pages-manually" target="_blank">Github Docs&lt;/a>&amp;nbsp;&lt;/p>
 &lt;p>Once you have that branch start writing your Markdown files.&amp;nbsp;&lt;/p>
@@ -33,5 +32,4 @@ github, tools, apis, php</item><item><title>Using Github Pages for your help doc
 &lt;p>Finally I have a route that gets it for me and cleans it up. This could have been done in JS but I did it this way&lt;/p>
 &lt;script src="https://gist.github.com/alnutile/8976685.js?file=router.php">&lt;/script>
 &lt;p>Note&lt;/p>
-&lt;p>&lt;a name="mdlibrary">[1] &lt;/a>I will be using the markdown to html library soon so we can just leave the&amp;nbsp;md&amp;nbsp;as is.&lt;/p></description>
-github</item></channel></rss>
+&lt;p>&lt;a name="mdlibrary">[1] &lt;/a>I will be using the markdown to html library soon so we can just leave the&amp;nbsp;md&amp;nbsp;as is.&lt;/p></description><tags>github</tags></item></channel></rss>

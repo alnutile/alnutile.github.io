@@ -10,5 +10,4 @@ Git goes over what is available here
 &lt;/p>&lt;p>
 All I did was add post-receive to the git repo and added the curl command in the script noted in the plugin above and now Jenkins will auto run on every git push origin development
 &lt;/p>
-Nice!</description>
-git</item></channel></rss>
+Nice!</description><tags>git</tags></item></channel></rss>

@@ -75,8 +75,7 @@ Title: Onboarding Links URL: https://foo.com/onboarding-links
 return [
 'slack_report' =&amp;gt; env('SLACK_TOKEN_FEATURE_FOO', '12345'),
 ];
-&lt;/code>&lt;/pre></description>
-slack, laravel</item><item><title>Super Simple Sending Messages to Slack from Laravel</title><link>https://alfrednutile.info/posts/202/</link><pubDate>Thu, 29 Dec 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/202/</guid><description>&lt;p>Laravel 5.3 has this feature. But for those not using that version or who just want to see how easy this is, I will show here how I been doing this for some time now.&lt;/p>
+&lt;/code>&lt;/pre></description><tags>slack, laravel</tags></item><item><title>Super Simple Sending Messages to Slack from Laravel</title><link>https://alfrednutile.info/posts/202/</link><pubDate>Thu, 29 Dec 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/202/</guid><description>&lt;p>Laravel 5.3 has this feature. But for those not using that version or who just want to see how easy this is, I will show here how I been doing this for some time now.&lt;/p>
 &lt;p>Here is the main Class I call to send a message. As you can see I am using Guzzle, in this case &lt;code>&amp;quot;guzzlehttp/guzzle&amp;quot;: &amp;quot;^6.1&amp;quot;&lt;/code> but others versions can work.&lt;/p>
 &lt;pre>&lt;code>&amp;lt;?php
 namespace App\Services;
@@ -132,8 +131,7 @@ return $this;
 }
 &lt;/code>&lt;/pre>&lt;p>And that is it. As long as I set this &lt;code>env('SLACK_URL')&lt;/code> in my .env OR in the class instantiation it will get to that endpoint.&lt;/p>
 &lt;p>Then in slack just add get the webhook/room you want to post to&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/rk2gd4c5tpflpmi/webhooks_slack.png?dl=0" alt="">&lt;/p></description>
-php, laravel, slack</item><item><title>Slack Custom Commands and Laravel to Make an American to British Translater</title><link>https://alfrednutile.info/posts/173/</link><pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/173/</guid><description>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/b8vwn1peb7s5cet/a2b.gif?dl=0" alt="in use">&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/rk2gd4c5tpflpmi/webhooks_slack.png?dl=0" alt="">&lt;/p></description><tags>php, laravel, slack</tags></item><item><title>Slack Custom Commands and Laravel to Make an American to British Translater</title><link>https://alfrednutile.info/posts/173/</link><pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/173/</guid><description>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/b8vwn1peb7s5cet/a2b.gif?dl=0" alt="in use">&lt;/p>
 &lt;p>Laravel or anything you are comfortable with making a Route and Response will work fine really.&lt;/p>
 &lt;p>This &amp;ldquo;messaging as a platform&amp;rdquo; is a new world for me, challenging my way of thinking in many ways. Some things just do not need a authentication of their own, a UI, etc they just need a place to get info from, or do something with some info etc.&lt;/p>
 &lt;p>In this case I made a really simple &amp;ldquo;Custom Slash Command&amp;rdquo; to translate British Slang to American and American to British (so I can sound cooler!)&lt;/p>
@@ -264,5 +262,4 @@ Make sure you exclude this route from the &amp;ldquo;app/Http/Middleware/VerifyC
 &lt;pre>&lt;code> protected $except = [
 'api/v1/imports'
 ];
-&lt;/code>&lt;/pre></description>
-laravel, php, slack</item></channel></rss>
+&lt;/code>&lt;/pre></description><tags>laravel, php, slack</tags></item></channel></rss>

@@ -86,8 +86,7 @@ this.$snotify.warning(&amp;quot;error getting metric standars&amp;quot;, &amp;qu
 }
 }
 &amp;lt;/script&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>If do the &lt;code>v-if&lt;/code> to load the editor AFTER I have some state for it. I am sure I could have done some watcher but this worked.&lt;/p></description>
-vuejs, laravel</item><item><title>Query Strings, Vue and Bootstrap Active Tab</title><link>https://alfrednutile.info/posts/254/</link><pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/254/</guid><description>&lt;p>In order to have the tabs and URL change as needed when the user lands on the page or clicks the tab I had to setup a few things.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>If do the &lt;code>v-if&lt;/code> to load the editor AFTER I have some state for it. I am sure I could have done some watcher but this worked.&lt;/p></description><tags>vuejs, laravel</tags></item><item><title>Query Strings, Vue and Bootstrap Active Tab</title><link>https://alfrednutile.info/posts/254/</link><pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/254/</guid><description>&lt;p>In order to have the tabs and URL change as needed when the user lands on the page or clicks the tab I had to setup a few things.&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/bdawx8hl7gisijs/tabs.gif?dl=0" alt="">&lt;/p>
 &lt;p>First I setup the Vue.js router as seen &lt;a href="https://alfrednutile.info/posts/244">here&lt;/a>&lt;/p>
 &lt;p>Then my component will work out the rest.&lt;/p>
@@ -162,8 +161,7 @@ this.changeTab();
 }
 }
 },
-&lt;/code>&lt;/pre></description>
-vuejs, laravel</item><item><title>Vuex External File</title><link>https://alfrednutile.info/posts/250/</link><pubDate>Tue, 03 Jul 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/250/</guid><description>&lt;p>Setup Vuex with external file &lt;a href="https://vuex.vuejs.org/installation.html">https://vuex.vuejs.org/installation.html&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre></description><tags>vuejs, laravel</tags></item><item><title>Vuex External File</title><link>https://alfrednutile.info/posts/250/</link><pubDate>Tue, 03 Jul 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/250/</guid><description>&lt;p>Setup Vuex with external file &lt;a href="https://vuex.vuejs.org/installation.html">https://vuex.vuejs.org/installation.html&lt;/a>&lt;/p>
 &lt;p>But after this make a file in the &lt;code>resources/assets/js&lt;/code> called &lt;code>store.js&lt;/code> then set it up as needed
 Here I will have one loading state&lt;/p>
 &lt;pre>&lt;code>export default {
@@ -195,8 +193,7 @@ window.Laravel = {!! json_encode([
 &amp;quot;apiToken&amp;quot; =&amp;gt; auth()-&amp;gt;user()-&amp;gt;api_token ?? null
 ]) !!};
 &amp;lt;/script&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>Just to help with some basic stuff&lt;/p></description>
-note2self, vuejs, laravel</item><item><title>Simple API_Token Auth for VueJS Components and Laravel</title><link>https://alfrednutile.info/posts/249/</link><pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/249/</guid><description>&lt;p>For those non Passport moments just a simple site that has VueJS Components that need to access routes with authentication in place.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Just to help with some basic stuff&lt;/p></description><tags>note2self, vuejs, laravel</tags></item><item><title>Simple API_Token Auth for VueJS Components and Laravel</title><link>https://alfrednutile.info/posts/249/</link><pubDate>Wed, 27 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/249/</guid><description>&lt;p>For those non Passport moments just a simple site that has VueJS Components that need to access routes with authentication in place.&lt;/p>
 &lt;p>Thanks to&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://pineco.de/vue-components-laravel-based-apis/">https://pineco.de/vue-components-laravel-based-apis/&lt;/a>&lt;/li>
@@ -259,8 +256,7 @@ this.status_message = null;
 console.log('issue with trigger');
 });
 }
-&lt;/code>&lt;/pre>&lt;p>That is it now your component will work with the route.&lt;/p></description>
-vuejs, laravel</item><item><title>Query Strings and VueJS</title><link>https://alfrednutile.info/posts/244/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/244/</guid><description>&lt;p>Quick way to make the url reflect the query string so the user can share the url and filters.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>That is it now your component will work with the route.&lt;/p></description><tags>vuejs, laravel</tags></item><item><title>Query Strings and VueJS</title><link>https://alfrednutile.info/posts/244/</link><pubDate>Tue, 08 May 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/244/</guid><description>&lt;p>Quick way to make the url reflect the query string so the user can share the url and filters.&lt;/p>
 &lt;p>This is component based VueJS building so not an SPA
 But I still install &lt;code>&amp;quot;vue-router&amp;quot;: &amp;quot;^3.0.1&amp;quot;&lt;/code>&lt;/p>
 &lt;p>And load it&lt;/p>
@@ -364,8 +360,7 @@ this.$router.push({
 query: items
 });
 },
-&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/lmnyjw7aub0ggb2/filters.gif?dl=0" alt="">&lt;/p></description>
-vuejs, note2self, laravel</item><item><title>BrowserSync and Laravel</title><link>https://alfrednutile.info/posts/239/</link><pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/239/</guid><description>&lt;p>Quick reminder to take advantage of this amazing feature &lt;a href="https://laravel.com/docs/5.6/mix#browsersync-reloading">https://laravel.com/docs/5.6/mix#browsersync-reloading&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/lmnyjw7aub0ggb2/filters.gif?dl=0" alt="">&lt;/p></description><tags>vuejs, note2self, laravel</tags></item><item><title>BrowserSync and Laravel</title><link>https://alfrednutile.info/posts/239/</link><pubDate>Thu, 15 Mar 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/239/</guid><description>&lt;p>Quick reminder to take advantage of this amazing feature &lt;a href="https://laravel.com/docs/5.6/mix#browsersync-reloading">https://laravel.com/docs/5.6/mix#browsersync-reloading&lt;/a>&lt;/p>
 &lt;p>No more reloading your browser.&lt;/p>
 &lt;pre>&lt;code>yarn add browser-sync --dev
 &lt;/code>&lt;/pre>&lt;p>then to your &lt;code>webpack.mix.js&lt;/code> e.g. the domain of the site you are working on.&lt;/p>
@@ -374,13 +369,11 @@ vuejs, note2self, laravel</item><item><title>BrowserSync and Laravel</title><lin
 &lt;pre>&lt;code>yarn run watch
 &lt;/code>&lt;/pre>&lt;blockquote>
 &lt;p>Note turn off sourceMaps when running this else it can be kinda slow&lt;/p>
-&lt;/blockquote></description>
-laravel, note2self, vuejs</item><item><title>Passing from Blade to VueJs</title><link>https://alfrednutile.info/posts/236/</link><pubDate>Sat, 24 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/236/</guid><description>&lt;p>A lot of posts had &lt;a href="https://medium.com/@m_ramsden/passing-data-from-laravel-to-vue-98b9d2a4bd23">this&lt;/a> style.&lt;/p>
+&lt;/blockquote></description><tags>laravel, note2self, vuejs</tags></item><item><title>Passing from Blade to VueJs</title><link>https://alfrednutile.info/posts/236/</link><pubDate>Sat, 24 Feb 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/236/</guid><description>&lt;p>A lot of posts had &lt;a href="https://medium.com/@m_ramsden/passing-data-from-laravel-to-vue-98b9d2a4bd23">this&lt;/a> style.&lt;/p>
 &lt;p>I ended up just needing this:&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/huucm3vx4uyklq7/Screenshot%202018-02-23%2020.29.22.png?dl=0" alt="">&lt;/p>
 &lt;p>The controller simply does this:&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/qw7x7u7ayr7j441/Screenshot%202018-02-23%2020.29.52.png?dl=0" alt="">&lt;/p></description>
-laravel, note2self, vuejs</item><item><title>VueJS Transition Helper</title><link>https://alfrednutile.info/posts/228/</link><pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/228/</guid><description>&lt;p>There are docs on how to get a Transition to take effect when an item loads &lt;a href="https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components">https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/qw7x7u7ayr7j441/Screenshot%202018-02-23%2020.29.52.png?dl=0" alt="">&lt;/p></description><tags>laravel, note2self, vuejs</tags></item><item><title>VueJS Transition Helper</title><link>https://alfrednutile.info/posts/228/</link><pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/228/</guid><description>&lt;p>There are docs on how to get a Transition to take effect when an item loads &lt;a href="https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components">https://vuejs.org/v2/guide/transitions.html#Transitioning-Single-Elements-Components&lt;/a>&lt;/p>
 &lt;p>But I was not having much luck with this using &lt;a href="https://uiv.wxsm.space/carousel">https://uiv.wxsm.space/carousel&lt;/a>.&lt;/p>
 &lt;p>I ended up making a quick helper function to keep it from looking like exploded elements.&lt;/p>
 &lt;p>You can see the results of this change here&lt;/p>
@@ -433,5 +426,4 @@ this.show = true;
 &amp;lt;/div&amp;gt;
 &amp;lt;div class=&amp;quot;ibox-content&amp;quot;&amp;gt;
 &lt;/code>&lt;/pre>&lt;p>You can see the &lt;code>display:none&lt;/code> kicking in before the page loads &lt;code>js&lt;/code> etc keeping it well hidden.
-Then once it is all loaded and we are ready I show it and transition it in.&lt;/p></description>
-vuejs, note2self</item></channel></rss>
+Then once it is all loaded and we are ready I show it and transition it in.&lt;/p></description><tags>vuejs, note2self</tags></item></channel></rss>

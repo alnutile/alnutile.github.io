@@ -17,5 +17,4 @@ base_url: 'http://cms.dev:8000/'
 browser_name: chrome
 &lt;/code>&lt;/pre>&lt;p>I placed chromedriver in /opt and just ran this&lt;/p>
 &lt;pre>&lt;code>java -jar selenium-server-standalone-2.43.1.jar -Dwebdriver.chrome.driver=&amp;quot;/opt/chromedriver&amp;quot;
-&lt;/code>&lt;/pre>&lt;p>That was it. Now in my vagrant box I can run behat to open the chrome browser which happens to be faster for me than Safari and Firefox on this mac.&lt;/p></description>
-behat, chrome</item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>That was it. Now in my vagrant box I can run behat to open the chrome browser which happens to be faster for me than Safari and Firefox on this mac.&lt;/p></description><tags>behat, chrome</tags></item></channel></rss>

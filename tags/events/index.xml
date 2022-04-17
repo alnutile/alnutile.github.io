@@ -61,5 +61,4 @@ Event::fire('example2', array($state));
 return sprintf(&amp;quot;Event Example 2 data total state %s&amp;quot;, $state-&amp;gt;total);
 });
 &lt;/code>&lt;/pre>&lt;p>This one you just see in the browser&lt;/p>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/alnutile/laravel_guide/master/docs/img/events/example2.png" alt="example2">&lt;/p></description>
-laravel, events, php</item></channel></rss>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/alnutile/laravel_guide/master/docs/img/events/example2.png" alt="example2">&lt;/p></description><tags>laravel, events, php</tags></item></channel></rss>

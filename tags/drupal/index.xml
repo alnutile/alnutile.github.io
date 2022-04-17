@@ -4,8 +4,7 @@
 sudo ln -s /usr/local/sbin/drush/drush .
 &lt;/code>&lt;/pre>&lt;p>Then in /usr/local/sbin/drush I ran&lt;/p>
 &lt;pre>&lt;code>sudo composer install
-&lt;/code>&lt;/pre></description>
-drush, drupal, laravel, homestead</item><item><title>When you have to use Angular inside of Drupal</title><link>https://alfrednutile.info/posts/89/</link><pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/89/</guid><description>&lt;p>The angularjs module for drupal will direct you to setup a menu path for Angular.js to get it&amp;rsquo;s template files.&lt;/p>
+&lt;/code>&lt;/pre></description><tags>drush, drupal, laravel, homestead</tags></item><item><title>When you have to use Angular inside of Drupal</title><link>https://alfrednutile.info/posts/89/</link><pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/89/</guid><description>&lt;p>The angularjs module for drupal will direct you to setup a menu path for Angular.js to get it&amp;rsquo;s template files.&lt;/p>
 &lt;p>So the Angular route would look like this&lt;/p>
 &lt;pre>&lt;code>//app.js
 behat_reports.config(['$routeProvider',
@@ -46,8 +45,7 @@ drupal_add_js($path . '/js/reportsController.js');
 drupal_add_js($path . '/js/app.js');
 return theme('behat_reports_v2');
 }
-&lt;/code>&lt;/pre>&lt;p>You are basically allowing Angular to get the html files it needs without bootstrapping the template system in drupal. Yeah!&lt;/p></description>
-angular.js, drupal</item><item><title>Drupal and Composer install or update</title><link>https://alfrednutile.info/posts/65/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/65/</guid><description>&lt;p>Using composer and drupal, even d7, is great.
+&lt;/code>&lt;/pre>&lt;p>You are basically allowing Angular to get the html files it needs without bootstrapping the template system in drupal. Yeah!&lt;/p></description><tags>angular.js, drupal</tags></item><item><title>Drupal and Composer install or update</title><link>https://alfrednutile.info/posts/65/</link><pubDate>Sun, 04 May 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/65/</guid><description>&lt;p>Using composer and drupal, even d7, is great.
 But an update or install can leave you with a broken drupal registry.&lt;/p>
 &lt;p>So here is a workflow that is pretty bullet proof.&lt;/p>
 &lt;p>In this example drupal&amp;rsquo;s composer folder where composer.json lives is located in /var/www/drupal/sites/default/files/composer&lt;/p>
@@ -60,5 +58,4 @@ composer --working-dir=/var/www/drupal/sites/default/files/composer update
 &lt;pre>&lt;code>drush composer-manager update
 &lt;/code>&lt;/pre>&lt;p>You can clear that up with&lt;/p>
 &lt;pre>&lt;code>drush rr
-&lt;/code>&lt;/pre>&lt;p>And then use composer directly as I did above to update/install your composer related files.&lt;/p></description>
-composer, drupal, php</item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>And then use composer directly as I did above to update/install your composer related files.&lt;/p></description><tags>composer, drupal, php</tags></item></channel></rss>

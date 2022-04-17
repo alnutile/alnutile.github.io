@@ -45,8 +45,7 @@ xdebug.remote_log = /var/log/xdebug.log
 }
 ]
 }
-&lt;/code>&lt;/pre></description>
-windows, linux, wsl, php</item><item><title>Windows Dev Box Try 2 2018</title><link>https://alfrednutile.info/posts/247/</link><pubDate>Mon, 11 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/247/</guid><description>&lt;p>Going to list somethings as I go.&lt;/p>
+&lt;/code>&lt;/pre></description><tags>windows, linux, wsl, php</tags></item><item><title>Windows Dev Box Try 2 2018</title><link>https://alfrednutile.info/posts/247/</link><pubDate>Mon, 11 Jun 2018 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/247/</guid><description>&lt;p>Going to list somethings as I go.&lt;/p>
 &lt;p>The Mac, in spite of Apple, is a great developer experience, here is to hoping the Windows, with the help of Microsoft, grows to be better and better as the improve it via user feedback to make it a great development box.&lt;/p>
 &lt;h2 id="links">Links&lt;/h2>
 &lt;p>This started it all &lt;a href="https://char.gd/blog/2017/how-to-set-up-the-perfect-modern-dev-environment-on-windows">https://char.gd/blog/2017/how-to-set-up-the-perfect-modern-dev-environment-on-windows&lt;/a>&lt;/p>
@@ -129,8 +128,7 @@ bind-address = 0.0.0.0
 &lt;h3 id="mysqlworkbenchhttpsdevmysqlcomgetdownloadsmysqlguitoolsmysql-workbench-community-6310-winx64msi">&lt;a href="https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community-6.3.10-winx64.msi">MySQLWorkbench&lt;/a>&lt;/h3>
 &lt;p>not pretty but does handle things well&lt;/p>
 &lt;h3 id="add-wsl-file-path-to-be-ignored-in-the-windows-defender-scanner">Add WSL File path to be ignored in the Windows defender scanner&lt;/h3>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/5k1xpc2q7szahtr/exclude.png?dl=0" alt="">&lt;/p></description>
-windows, note2self</item><item><title>Getting Going Quickly Windows, Behat and Selenium</title><link>https://alfrednutile.info/posts/181/</link><pubDate>Tue, 03 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/181/</guid><description>&lt;p>Quick Install Steps&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/5k1xpc2q7szahtr/exclude.png?dl=0" alt="">&lt;/p></description><tags>windows, note2self</tags></item><item><title>Getting Going Quickly Windows, Behat and Selenium</title><link>https://alfrednutile.info/posts/181/</link><pubDate>Tue, 03 May 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/181/</guid><description>&lt;p>Quick Install Steps&lt;/p>
 &lt;h2 id="vagrant-and-homestead">Vagrant and Homestead&lt;/h2>
 &lt;p>This was easy I just followed these steps &lt;a href="http://sherriflemings.blogspot.ca/2015/03/laravel-homestead-on-windows-8.html">here&lt;/a> and I was done. For me I used Vmware but Virtualbox is fine.&lt;/p>
 &lt;h2 id="windows-in-selenium">Windows in Selenium&lt;/h2>
@@ -162,5 +160,4 @@ laravel: ~
 selenium2:
 wd_host: &amp;quot;http://selenium.dev:4444/wd/hub&amp;quot;
 browser_name: chrome
-&lt;/code>&lt;/pre>&lt;p>You can see more of it &lt;a href="https://github.com/alnutile/recipes/blob/master/behat.yml">here&lt;/a>&lt;/p></description>
-bdd, behat, windows</item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>You can see more of it &lt;a href="https://github.com/alnutile/recipes/blob/master/behat.yml">here&lt;/a>&lt;/p></description><tags>bdd, behat, windows</tags></item></channel></rss>

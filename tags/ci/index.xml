@@ -222,8 +222,7 @@ The upper right corner will be a Green &amp;ldquo;Review Pr&amp;rdquo; button if
 &lt;p>&lt;a href="https://semver.org">Semantic Verision&lt;/a> &lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description>
-laravel, ci, cd, accelerate, devops</item><item><title>Codeship and Laravel for Continuous Integration</title><link>https://alfrednutile.info/posts/148/</link><pubDate>Sun, 07 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/148/</guid><description>&lt;p>Getting going on Codeship and Laravel is pretty easy.&lt;/p>
+&lt;/section></description><tags>laravel, ci, cd, accelerate, devops</tags></item><item><title>Codeship and Laravel for Continuous Integration</title><link>https://alfrednutile.info/posts/148/</link><pubDate>Sun, 07 Jun 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/148/</guid><description>&lt;p>Getting going on Codeship and Laravel is pretty easy.&lt;/p>
 &lt;p>Once you setup codeship to work with your github account just pull in your repo and set your Testing scripts as follows. (they have a ui for ENV variables as well)&lt;/p>
 &lt;h2 id="codeship-testing-settings-easier-copy-paste-bottom-of-article">Codeship Testing Settings [easier copy paste bottom of article]&lt;/h2>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/fh6vv3g5wpqw7ac/codeship1.png?dl=0" alt="codeship">&lt;/p>
@@ -300,5 +299,4 @@ echo &amp;quot;MAIL_ENCRYPTION=true&amp;quot; &amp;gt;&amp;gt; .env
 echo &amp;quot;STRIPE_API_SECRET='foo'&amp;quot; &amp;gt;&amp;gt; .env
 echo &amp;quot;STRIPE_PUBLIC='foo'&amp;quot; &amp;gt;&amp;gt; .env
 composer install --dev
-&lt;/code>&lt;/pre></description>
-laravel, testing, phpunit, php, ci, codeship</item></channel></rss>
+&lt;/code>&lt;/pre></description><tags>laravel, testing, phpunit, php, ci, codeship</tags></item></channel></rss>

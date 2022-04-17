@@ -46,5 +46,4 @@ At this point Apache is set, the folders are set and the site can be accessed. A
 &lt;/p>
 &lt;p>
 The next steps will be to integrate this into Travis CI to test and deploy via the github/git webhook feature.
-&lt;/p></description>
-travis</item></channel></rss>
+&lt;/p></description><tags>travis</tags></item></channel></rss>

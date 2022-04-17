@@ -74,8 +74,7 @@ This is very import. The hardest part of our job is not coding but communicating
 &lt;p>Agile Estimating and Planning &lt;a href="https://www.mountaingoatsoftware.com/books/agile-estimating-and-planning">here&lt;/a>&lt;/p>
 &lt;p>Joel&amp;rsquo;s burn down &lt;a href="https://docs.google.com/spreadsheets/d/1p1xBV9xj0vEbZlpu1Zwv9g1VBgm0OGogkY86QZxeiyA/edit#gid=7">here&lt;/a>&lt;/p>
 &lt;p>My Quoting Template &lt;a href="https://docs.google.com/spreadsheets/d/1RJeqqF0BIeYgww_pcbQvszFdkFCexRLSrN1a5u9faw8/edit?usp=sharing">here&lt;/a>
-Figured from the book linked to above&lt;/p></description>
-coding, planning</item><item><title>Keeping a Controller Method Simple</title><link>https://alfrednutile.info/posts/186/</link><pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/186/</guid><description>&lt;p>When I am done with a controller, done mocking up ideas and ready for some long term code, then I think this is the most information a Controller method should have.&lt;/p>
+Figured from the book linked to above&lt;/p></description><tags>coding, planning</tags></item><item><title>Keeping a Controller Method Simple</title><link>https://alfrednutile.info/posts/186/</link><pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/186/</guid><description>&lt;p>When I am done with a controller, done mocking up ideas and ready for some long term code, then I think this is the most information a Controller method should have.&lt;/p>
 &lt;pre>&lt;code>public function updateFoor($id, $foo) {
         try {
            
@@ -89,8 +88,7 @@ coding, planning</item><item><title>Keeping a Controller Method Simple</title><l
         }
 }
 &lt;/code>&lt;/pre>&lt;p>At this point I have &lt;code>someRepoOrServiceClass&lt;/code> well tested outside of this Controller. And I do not need to do much to this controller since it is just returning the results or dealing with an error.&lt;/p>
-&lt;p>Even using &lt;a href="https://laravel.com/docs/5.2/validation#form-request-validation">Form Request Validation&lt;/a> I can create logic and test logic outside of my Controller. Making the moment I come back to my controller just about plugging in these &amp;ldquo;lego&amp;rdquo; like pieces.&lt;/p></description>
-php, coding</item><item><title>Put It All Into Version Control Even Composer!</title><link>https://alfrednutile.info/posts/171/</link><pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/171/</guid><description>&lt;p>&lt;strong>Update: September 06 2016&lt;/strong>&lt;/p>
+&lt;p>Even using &lt;a href="https://laravel.com/docs/5.2/validation#form-request-validation">Form Request Validation&lt;/a> I can create logic and test logic outside of my Controller. Making the moment I come back to my controller just about plugging in these &amp;ldquo;lego&amp;rdquo; like pieces.&lt;/p></description><tags>php, coding</tags></item><item><title>Put It All Into Version Control Even Composer!</title><link>https://alfrednutile.info/posts/171/</link><pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/171/</guid><description>&lt;p>&lt;strong>Update: September 06 2016&lt;/strong>&lt;/p>
 &lt;p>We stopped doing this. I do not think it is a bad idea but we ended up going with CodeDeploy on AWS. So after our CI does a Composer install and all passes, CodeDeploy will just bundle everything up as a Zip file and deploy that to the server.&lt;/p>
 &lt;p>&lt;strong>Or Listen &lt;a href="http://www.readorlisten.com/2">here&lt;/a>&lt;/strong>&lt;/p>
 &lt;p>Another article about this written by Loran Jane Mitchell &lt;a href="http://www.lornajane.net/posts/2014/using-composer-without-gitignoring">Using Composer Without GitIgnoring Vendor&lt;/a>&lt;/p>
@@ -110,5 +108,4 @@ php, coding</item><item><title>Put It All Into Version Control Even Composer!</t
 &lt;p>&amp;ldquo;when things are down on production 1/2 a minute can feel like a life time&amp;rdquo;&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="fixing-merge-conflicts">Fixing Merge Conflicts&lt;/h2>
-&lt;p>Well what happens when there is a conflict in this vendor folder? That is easy really just &lt;code>rm&lt;/code> the whole thing and do what I have been doing all along &lt;code>composer install&lt;/code> saving &lt;code>composer update&lt;/code> only for those moments you are looking for something to really be updated and feeling lucky (and patient).&lt;/p></description>
-laravel, php, workflows, coding, best practices</item></channel></rss>
+&lt;p>Well what happens when there is a conflict in this vendor folder? That is easy really just &lt;code>rm&lt;/code> the whole thing and do what I have been doing all along &lt;code>composer install&lt;/code> saving &lt;code>composer update&lt;/code> only for those moments you are looking for something to really be updated and feeling lucky (and patient).&lt;/p></description><tags>laravel, php, workflows, coding, best practices</tags></item></channel></rss>

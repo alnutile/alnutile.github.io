@@ -142,5 +142,4 @@ $this-&amp;gt;app-&amp;gt;bind('App\ExampleRepo', 'App\ExampleRepo');
 }
 &lt;/code>&lt;/pre>&lt;p>Then register as normal in your config/app.php . This can be kinda tedious but would produce the same results.&lt;/p>
 &lt;p>Great book on the topic &lt;a href="https://leanpub.com/laravel-testing-decoded">Laravel Testing Decoded&lt;/a>&lt;/p>
-&lt;p>&lt;img src="https://s3.amazonaws.com/titlepages.leanpub.com/laravel-testing-decoded/large?1425536214" alt="decoded">&lt;/p></description>
-testing, laravel, php, phpunit, integration</item></channel></rss>
+&lt;p>&lt;img src="https://s3.amazonaws.com/titlepages.leanpub.com/laravel-testing-decoded/large?1425536214" alt="decoded">&lt;/p></description><tags>testing, laravel, php, phpunit, integration</tags></item></channel></rss>

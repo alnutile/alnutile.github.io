@@ -1,6 +1,5 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>heroku on Alfred Nutile</title><link>https://alfrednutile.info/tags/heroku/</link><description>Recent content in heroku on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 11 Oct 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/heroku/index.xml" rel="self" type="application/rss+xml"/><item><title>Quick Script to update Heroku database</title><link>https://alfrednutile.info/posts/33/</link><pubDate>Fri, 11 Oct 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/33/</guid><description>&lt;p>Just need to go from dev to basic on some sites. Later I will fix up the script to pass in the plan type and pg_wait.&lt;/p>
-&lt;script src="https://gist.github.com/alnutile/6927783.js">&lt;/script></description>
-heroku</item><item><title>Hosting is Dead?</title><link>https://alfrednutile.info/posts/28/</link><pubDate>Fri, 30 Aug 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/28/</guid><description>&lt;p>Hosting is Dead? &lt;a href="https://www.getpantheon.com/resources/hostingisdead">https://www.getpantheon.com/resources/hostingisdead&lt;/a>&lt;/p>
+&lt;script src="https://gist.github.com/alnutile/6927783.js">&lt;/script></description><tags>heroku</tags></item><item><title>Hosting is Dead?</title><link>https://alfrednutile.info/posts/28/</link><pubDate>Fri, 30 Aug 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/28/</guid><description>&lt;p>Hosting is Dead? &lt;a href="https://www.getpantheon.com/resources/hostingisdead">https://www.getpantheon.com/resources/hostingisdead&lt;/a>&lt;/p>
 &lt;p>Okay so they have a good reason to say that. But it is still worth a read.&lt;/p>
 &lt;p>Some points I have experienced in the past&lt;/p>
 &lt;h3>Server and Site Updates&lt;/h3>
@@ -30,5 +29,4 @@ and updates are cumbersome and can take down the live site.&lt;/p>
 &lt;/blockquote>
 &lt;p>Anyways, it is worth reading but more importantly the subject is worth go back and forth on in discussion #hostingisdead to write your thoughts on twitter or link to a post of your own.&lt;/p>
 &lt;p>ps&lt;/p>
-&lt;p>this site is on A2hosting and I will soon move it to heroku to further test out these ideas.&lt;/p></description>
-heroku</item></channel></rss>
+&lt;p>this site is on A2hosting and I will soon move it to heroku to further test out these ideas.&lt;/p></description><tags>heroku</tags></item></channel></rss>

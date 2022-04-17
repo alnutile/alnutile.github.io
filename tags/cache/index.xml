@@ -49,5 +49,4 @@ public static function boot()
 parent::boot();
 Post::observe(new PostObserver());
 }
-&lt;/code>&lt;/pre></description>
-laravel, cache</item></channel></rss>
+&lt;/code>&lt;/pre></description><tags>laravel, cache</tags></item></channel></rss>

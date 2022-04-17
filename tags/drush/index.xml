@@ -4,11 +4,9 @@
 sudo ln -s /usr/local/sbin/drush/drush .
 &lt;/code>&lt;/pre>&lt;p>Then in /usr/local/sbin/drush I ran&lt;/p>
 &lt;pre>&lt;code>sudo composer install
-&lt;/code>&lt;/pre></description>
-drush, drupal, laravel, homestead</item><item><title>Drush and Features-Export</title><link>https://alfrednutile.info/posts/29/</link><pubDate>Fri, 08 Nov 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/29/</guid><description>&lt;p>When at the command line with drush making features keep in mind you may need to use quotes. Example&lt;/p>
+&lt;/code>&lt;/pre></description><tags>drush, drupal, laravel, homestead</tags></item><item><title>Drush and Features-Export</title><link>https://alfrednutile.info/posts/29/</link><pubDate>Fri, 08 Nov 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/29/</guid><description>&lt;p>When at the command line with drush making features keep in mind you may need to use quotes. Example&lt;/p>
 &lt;div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">
 &lt;p>&lt;span style="line-height: normal; font-family: Arial;">drush features-export --destination=&amp;quot;sites/all/modules/custom&amp;quot; behat_site_settings dependencies:behat menu_custom:main-menu menu_links:main-menu:&amp;quot;&amp;lt;front&amp;gt;&amp;quot; menu_links:main-menu:&amp;quot;user/login&amp;quot; menu_links:main-menu:user menu_links:navigation_:&amp;quot;behat/testarea&amp;quot;&amp;nbsp;&lt;/span>&lt;/p>
 &lt;/div>
 &lt;p>Without the quotes around the menu links you would get an error from bash.&lt;/p>
-&lt;p>&amp;nbsp;&lt;/p></description>
-drush</item></channel></rss>
+&lt;p>&amp;nbsp;&lt;/p></description><tags>drush</tags></item></channel></rss>

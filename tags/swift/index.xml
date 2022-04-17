@@ -150,5 +150,4 @@ authState.signedIn = authState.isSignedIn
 HomeView().environmentObject(authState)
 }
 }
-&lt;/code>&lt;/pre>&lt;/div></description>
-swiftui, swift, note2self</item></channel></rss>
+&lt;/code>&lt;/pre>&lt;/div></description><tags>swiftui, swift, note2self</tags></item></channel></rss>

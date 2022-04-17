@@ -1,8 +1,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>JavaScript on Alfred Nutile</title><link>https://alfrednutile.info/tags/javascript/</link><description>Recent content in JavaScript on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 20 Nov 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/javascript/index.xml" rel="self" type="application/rss+xml"/><item><title>Drupal FAPI Validation Error</title><link>https://alfrednutile.info/posts/31/</link><pubDate>Wed, 20 Nov 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/31/</guid><description>&lt;p>when setting options in an option list dyamically you may run into &amp;quot;An illegal choice has been detected&amp;quot;&amp;nbsp;&lt;/p>
 &lt;p>You will have to set those fileds #validate =&amp;gt; TRUE as seen bellow&lt;/p>
 &lt;script src="https://gist.github.com/alnutile/7647356.js">&lt;/script>
-&lt;p>&amp;nbsp;&lt;/p></description>
-JavaScript</item><item><title>jQuery Address</title><link>https://alfrednutile.info/posts/5/</link><pubDate>Mon, 14 Jan 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/5/</guid><description>&lt;p>Simple example of jQuery.address in use.
+&lt;p>&amp;nbsp;&lt;/p></description><tags>JavaScript</tags></item><item><title>jQuery Address</title><link>https://alfrednutile.info/posts/5/</link><pubDate>Mon, 14 Jan 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/5/</guid><description>&lt;p>Simple example of jQuery.address in use.
 As you click the top &amp;ldquo;black&amp;rdquo; menu area the pages will load via Ajax (and title) notice also the URL.
 Then if you click back it forces a reload.
 There is very little code needed to make this work.
@@ -31,5 +30,4 @@ One other thing is I set the state to&lt;/p>
 $.address.state('/');
 &lt;/code>
 &lt;/pre>
-&lt;p>This made it possible to remove the # from the url.&lt;/p></description>
-JavaScript</item></channel></rss>
+&lt;p>This made it possible to remove the # from the url.&lt;/p></description><tags>JavaScript</tags></item></channel></rss>

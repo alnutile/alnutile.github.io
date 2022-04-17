@@ -22,5 +22,4 @@ client = SnykReport()
 results = client.get_report_for_current_week(
 &amp;quot;98873-8ecc-46f0-b077-39322abc4390&amp;quot;)
 assert results == 1989
-&lt;/code>&lt;/pre>&lt;p>I no longer hit their API and &lt;code>post&lt;/code> returns the response I wanted.&lt;/p></description>
-python, testing, mocking, pytest</item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>I no longer hit their API and &lt;code>post&lt;/code> returns the response I wanted.&lt;/p></description><tags>python, testing, mocking, pytest</tags></item></channel></rss>

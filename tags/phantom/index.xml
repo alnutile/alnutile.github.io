@@ -66,5 +66,4 @@ browser_name: 'phantomjs'
 &lt;p>Running phantom in the background as &lt;code>phantomjs --webdriver=8643&lt;/code>&lt;/p>
 &lt;h2 id="coming-up">Coming up&lt;/h2>
 &lt;h3 id="self-signed-ssl">Self Signed SSL&lt;/h3>
-&lt;h3 id="render-tree-dumps-of-the-site-for-later-parsing">Render Tree dumps of the site for later parsing&lt;/h3></description>
-behat, phantom</item></channel></rss>
+&lt;h3 id="render-tree-dumps-of-the-site-for-later-parsing">Render Tree dumps of the site for later parsing&lt;/h3></description><tags>behat, phantom</tags></item></channel></rss>

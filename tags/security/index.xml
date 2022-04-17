@@ -1,6 +1,5 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>security on Alfred Nutile</title><link>https://alfrednutile.info/tags/security/</link><description>Recent content in security on Alfred Nutile</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 29 Dec 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://alfrednutile.info/tags/security/index.xml" rel="self" type="application/rss+xml"/><item><title>LarScanner simple foundation for building a good Laravel Security Scanner</title><link>https://alfrednutile.info/posts/203/</link><pubDate>Thu, 29 Dec 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/203/</guid><description>&lt;p>Just the start to a new library that I hope others will help out on &lt;a href="https://github.com/alfred-nutile-inc/larscanner">https://github.com/alfred-nutile-inc/larscanner&lt;/a>&lt;/p>
-&lt;p>There is a roadmap in the readme.md but basically how to start adding more and more features on this to protect our applications built in Laravel.&lt;/p></description>
-laravel, security</item><item><title>Laravel Throttle Feature using IP address as Key</title><link>https://alfrednutile.info/posts/193/</link><pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/193/</guid><description>&lt;p>&lt;strong>NOTE: 5.3, for 5.2 see ending update&lt;/strong>&lt;/p>
+&lt;p>There is a roadmap in the readme.md but basically how to start adding more and more features on this to protect our applications built in Laravel.&lt;/p></description><tags>laravel, security</tags></item><item><title>Laravel Throttle Feature using IP address as Key</title><link>https://alfrednutile.info/posts/193/</link><pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/193/</guid><description>&lt;p>&lt;strong>NOTE: 5.3, for 5.2 see ending update&lt;/strong>&lt;/p>
 &lt;p>The Laravel Throttle feature &lt;a href="https://laravel.com/docs/5.3/authentication#login-throttling">here&lt;/a> is a great addition to the framework. By default it uses the &lt;code>username&lt;/code> and the IP for the key to count &lt;code>attempts&lt;/code>.&lt;/p>
 &lt;p>But I want to cover how to switch that to use an IP only and not the username. A good example of why is a hacker running through a list of emails and passwords just trying to break into sites where that user would use the same password as the site the got the list from. This person could try this 5000 long list against your server and not once will Throttle care about that.&lt;/p>
 &lt;p>The fix is fairly simple in your &lt;code>app/Http/Controllers/Auth/AuthController.php&lt;/code> add&lt;/p>
@@ -35,8 +34,7 @@ return Str::lower($request-&amp;gt;input($this-&amp;gt;username())).'|'.$request
 &lt;p>From here on the IP will track the failed attempts.&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/0n2v4f1o6jxbmmm/login_throttle_fail.png?dl=0" alt="">&lt;/p>
 &lt;h2 id="laravel-52">Laravel 5.2&lt;/h2>
-&lt;p>In 5.2 I had to change &lt;code> protected function throttleKey&lt;/code> to &lt;code> protected function throttleKey&lt;/code>&lt;/p></description>
-laravel, security</item><item><title>Throttle Password Reset</title><link>https://alfrednutile.info/posts/194/</link><pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/194/</guid><description>&lt;p>Laravel Throttle works on failed auth attempts but how about password resets?&lt;/p>
+&lt;p>In 5.2 I had to change &lt;code> protected function throttleKey&lt;/code> to &lt;code> protected function throttleKey&lt;/code>&lt;/p></description><tags>laravel, security</tags></item><item><title>Throttle Password Reset</title><link>https://alfrednutile.info/posts/194/</link><pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/194/</guid><description>&lt;p>Laravel Throttle works on failed auth attempts but how about password resets?&lt;/p>
 &lt;p>Here is what I made my &lt;code>app/Http/Controllers/Auth/PasswordController.php&lt;/code> look like&lt;/p>
 &lt;h2 id="53">5.3&lt;/h2>
 &lt;pre>&lt;code>&amp;lt;?php
@@ -182,8 +180,7 @@ return $request-&amp;gt;ip();
 'sent' =&amp;gt; 'We have e-mailed your password reset link!',
 'token' =&amp;gt; 'This password reset token is invalid.',
 'user' =&amp;gt; &amp;quot;If you are a user in the system an a reset email has been sent&amp;quot;,
-&lt;/code>&lt;/pre>&lt;p>Where &lt;code>user&lt;/code> does not leak out any information about the email being correct or not.&lt;/p></description>
-laravel, security</item><item><title>Quick Tip Forcing More Complex Passwords in Laravel</title><link>https://alfrednutile.info/posts/166/</link><pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/166/</guid><description>&lt;p>With the great &lt;a href="http://laravel.com/docs/5.1/validation">Laravel Docs&lt;/a> I will quickly show how to &amp;ldquo;encourage&amp;rdquo; the user to set a better password.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Where &lt;code>user&lt;/code> does not leak out any information about the email being correct or not.&lt;/p></description><tags>laravel, security</tags></item><item><title>Quick Tip Forcing More Complex Passwords in Laravel</title><link>https://alfrednutile.info/posts/166/</link><pubDate>Wed, 21 Oct 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/166/</guid><description>&lt;p>With the great &lt;a href="http://laravel.com/docs/5.1/validation">Laravel Docs&lt;/a> I will quickly show how to &amp;ldquo;encourage&amp;rdquo; the user to set a better password.&lt;/p>
 &lt;p>Going through the standard docs for &lt;a href="http://laravel.com/docs/5.1/authentication">Authentication&lt;/a> we end up with a registration form.&lt;/p>
 &lt;p>Then in the &lt;a href="https://github.com/laravel/laravel/blob/master/app/Http/Controllers/Auth/AuthController.php">AuthController&lt;/a> that comes with Laravel I modify it a bit.&lt;/p>
 &lt;pre>&lt;code> protected function validator(array $data)
@@ -198,8 +195,7 @@ return Validator::make($data, [
 &lt;/code>&lt;/pre>&lt;p>Using the &lt;code>regex&lt;/code> rule seen in the &lt;a href="http://laravel.com/docs/5.1/validation#available-validation-rules">docs&lt;/a> &lt;a href="http://php.net/manual/en/function.preg-match.php">http://php.net/manual/en/function.preg-match.php&lt;/a> and the Laravel docs I can then set an expression to check for these characters, and I can also set a custom message if it fails.&lt;/p>
 &lt;p>And with that little bit of work we get an error message to help the user make a better password.&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/y9jloa191jwryfg/regex_error.png?dl=0" alt="https://dl.dropboxusercontent.com/s/y9jloa191jwryfg/regex_error.png?dl=0">&lt;/p>
-&lt;p>btw this is coming about as I start this &lt;a href="https://onemonth.com/courses/web-security">Web Security Course&lt;/a> and try to consider some of these ideas in my day to day Laravel work.&lt;/p></description>
-laravel, php, security</item><item><title>Adding Expose IDS to Laravel MiddleWare</title><link>https://alfrednutile.info/posts/162/</link><pubDate>Thu, 03 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/162/</guid><description>&lt;p>The library is &lt;a href="https://github.com/enygma/expose">https://github.com/enygma/expose&lt;/a>&lt;/p>
+&lt;p>btw this is coming about as I start this &lt;a href="https://onemonth.com/courses/web-security">Web Security Course&lt;/a> and try to consider some of these ideas in my day to day Laravel work.&lt;/p></description><tags>laravel, php, security</tags></item><item><title>Adding Expose IDS to Laravel MiddleWare</title><link>https://alfrednutile.info/posts/162/</link><pubDate>Thu, 03 Sep 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/162/</guid><description>&lt;p>The library is &lt;a href="https://github.com/enygma/expose">https://github.com/enygma/expose&lt;/a>&lt;/p>
 &lt;blockquote>
 &lt;p>&amp;ldquo;Expose is an Intrusion Detection System for PHP loosely based on the PHPIDS project (and using it&amp;rsquo;s ruleset for detecting potential threats).&amp;rdquo;&lt;/p>
 &lt;/blockquote>
@@ -283,5 +279,4 @@ throw new TokenMismatchException;
 &lt;li>Keep track of issues and notify the team of issues&lt;/li>
 &lt;li>Cut through a can without getting dull&lt;/li>
 &lt;/ul>
-&lt;p>Anyways I have a ways to go with this but just seeing the different tools I could use to make my applications more secure.&lt;/p></description>
-security, laravel, php</item></channel></rss>
+&lt;p>Anyways I have a ways to go with this but just seeing the different tools I could use to make my applications more secure.&lt;/p></description><tags>security, laravel, php</tags></item></channel></rss>

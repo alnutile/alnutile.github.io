@@ -195,5 +195,4 @@ false
 &lt;pre>&lt;code>composer require guzzlehttp/guzzle
 &lt;/code>&lt;/pre>&lt;p>At this point we have a working example. The queue takes the json and the worker processes it!&lt;/p>
 &lt;p>&lt;a href="https://github.com/alnutile/laravel_guide/blob/master/projects/example_worker/app/RenderTreeTextGrepperWorker/GrepCallbackListener.php">/projects/example_worker/app/RenderTreeTextGrepperWorker/GrepCallbackListener.php&lt;/a>&lt;/p>
-&lt;p>Thanks to the library and Iron.io it really is that simple.&lt;/p></description>
-microservices, laravel, iron.io</item></channel></rss>
+&lt;p>Thanks to the library and Iron.io it really is that simple.&lt;/p></description><tags>microservices, laravel, iron.io</tags></item></channel></rss>

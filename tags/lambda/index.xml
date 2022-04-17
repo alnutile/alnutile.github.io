@@ -74,5 +74,4 @@ APP_ENV: !Sub ${AppEnv}
 APP_REGION: &amp;quot;eu-west-1&amp;quot;
 &lt;/code>&lt;/pre>&lt;p>then during the update command I can pass&lt;/p>
 &lt;pre>&lt;code>SECRET=FOO
-&lt;/code>&lt;/pre>&lt;p>or put a .env file on the system and use the &lt;code>dotenv&lt;/code> library&lt;/p></description>
-serverless, lambda, aws</item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>or put a .env file on the system and use the &lt;code>dotenv&lt;/code> library&lt;/p></description><tags>serverless, lambda, aws</tags></item></channel></rss>

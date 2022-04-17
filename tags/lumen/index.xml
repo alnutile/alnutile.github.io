@@ -275,5 +275,4 @@ zip -r PDF2PagesWorker.zip .
 &lt;p>another example &lt;a href="https://github.com/alnutile/thumbnail-maker">Thumbnail Maker&lt;/a>&lt;/p>
 &lt;p>[1] These seems to be a part of the iron worker for version 1 but not sure why not for 2 maybe there is a better pattern for this.&lt;/p>
 &lt;p>[2] I renamed it to ExampleOneLumen&lt;/p>
-&lt;p>[3] So far this is a 50/50 solution it did not work for pdf2svg but it did work for pdftk&lt;/p></description>
-laravel, php, iron, lumen</item></channel></rss>
+&lt;p>[3] So far this is a 50/50 solution it did not work for pdf2svg but it did work for pdftk&lt;/p></description><tags>laravel, php, iron, lumen</tags></item></channel></rss>

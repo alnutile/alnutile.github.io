@@ -279,8 +279,7 @@ angular.module('app.upload')
 &lt;/code>&lt;/pre>&lt;p>So we use the flow upload event to run our upload method. This then adds the token to the POST request for the CSRF middleware.&lt;/p>
 &lt;p>Keep in mind my Angular is just a widget in blade. There is no separate session situation that you may have in SPA (Single Page Applications)&lt;/p>
 &lt;p>Thats it, drag file, file uploads and you have Flow, Angular and Laravel.&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/01l8psl1rpud4ee/laravel_flow_angular.png?dl=0" alt="">&lt;/p></description>
-laravel, php, angular</item><item><title>Laravel and Angular Widgets e.g. Non SPA (Single Page Application) Pattern</title><link>https://alfrednutile.info/posts/160/</link><pubDate>Wed, 26 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/160/</guid><description>&lt;p>Not all apps need to be an SPA (Single Page Application). Sure they have their place but in most cases the task might benefit from just a Blade template and Angular widget. This saves you from having to write an angular route which can be a tedious duplication of work. Also Blade is fast and fun to work with.&lt;/p>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/01l8psl1rpud4ee/laravel_flow_angular.png?dl=0" alt="">&lt;/p></description><tags>laravel, php, angular</tags></item><item><title>Laravel and Angular Widgets e.g. Non SPA (Single Page Application) Pattern</title><link>https://alfrednutile.info/posts/160/</link><pubDate>Wed, 26 Aug 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/160/</guid><description>&lt;p>Not all apps need to be an SPA (Single Page Application). Sure they have their place but in most cases the task might benefit from just a Blade template and Angular widget. This saves you from having to write an angular route which can be a tedious duplication of work. Also Blade is fast and fun to work with.&lt;/p>
 &lt;h2 id="step-one-add-data-to-global-window">Step One Add Data to Global Window&lt;/h2>
 &lt;p>Using the &lt;a href="https://github.com/laracasts/PHP-Vars-To-Js-Transformer">Transform PHP Vars to JavaScript&lt;/a> you can easily start to inject some content into your templates, if needed, to setup the data your Angular widget can use to build out it&amp;rsquo;s elements.&lt;/p>
 &lt;p>For example the Controller below will push some info into the view that I can use later&lt;/p>
@@ -390,8 +389,7 @@ angular.module('app')
 .controller('ApiControllerUserShow', ApiControllerUserShow);
 })();
 &lt;/code>&lt;/pre>&lt;p>That is it. Keep in mind that Blade template can have numerous angular &amp;ldquo;widgets&amp;rdquo; so different sections of the page can benefit from Angular. Or the one page can have several places that the Angular controller controls some of the output.&lt;/p>
-&lt;p>So hopefully this sums up a quick way to start putting Angular widgets into your Laravel application and still benefit from all speed that these too tools offer both in developing and in rendering!&lt;/p></description>
-laravel, php, angular</item><item><title>Quick way to Request Json from Angular and return from Laravel</title><link>https://alfrednutile.info/posts/152/</link><pubDate>Mon, 06 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/152/</guid><description>&lt;p>I simply want to make sure to return json from my app more easily even on errors. So in Angular I set my app.js as such&lt;/p>
+&lt;p>So hopefully this sums up a quick way to start putting Angular widgets into your Laravel application and still benefit from all speed that these too tools offer both in developing and in rendering!&lt;/p></description><tags>laravel, php, angular</tags></item><item><title>Quick way to Request Json from Angular and return from Laravel</title><link>https://alfrednutile.info/posts/152/</link><pubDate>Mon, 06 Jul 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/152/</guid><description>&lt;p>I simply want to make sure to return json from my app more easily even on errors. So in Angular I set my app.js as such&lt;/p>
 &lt;pre>&lt;code>(function(){
 'use strict';
 angular.module('app', []);
@@ -411,8 +409,7 @@ if($request-&amp;gt;header('Accept') == 'application/json')
 return $blogs;
 return view('blogs.index', compact('blogs', 'customPagination'));
 }
-&lt;/code>&lt;/pre>&lt;p>Then I can share the same route with Angular that I do with my Blade templates as needed.&lt;/p></description>
-laravel, angular</item><item><title>Code for making a Shortcut tool for your App</title><link>https://alfrednutile.info/posts/141/</link><pubDate>Sun, 29 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/141/</guid><description>&lt;p>This allows the user to easily make shortcuts to urls they are on and give them names.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Then I can share the same route with Angular that I do with my Blade templates as needed.&lt;/p></description><tags>laravel, angular</tags></item><item><title>Code for making a Shortcut tool for your App</title><link>https://alfrednutile.info/posts/141/</link><pubDate>Sun, 29 Mar 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/141/</guid><description>&lt;p>This allows the user to easily make shortcuts to urls they are on and give them names.&lt;/p>
 &lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/bwnfydndpx6ic4l/widget_shortcuts.gif?dl=0" alt="image 1">&lt;/p>
 &lt;p>&lt;a href="http://youtu.be/tMi0tqPmnhg">video&lt;/a>&lt;/p>
 &lt;h1 id="the-migration">The Migration&lt;/h1>
@@ -701,8 +698,7 @@ Given I have the payload:
 &amp;quot;&amp;quot;&amp;quot;
 When I request &amp;quot;POST /api/v1/shortcuts&amp;quot;
 Then I get a &amp;quot;200&amp;quot; response
-&lt;/code>&lt;/pre></description>
-angular, laravel</item><item><title>Sending Dates to Angular from Laravel</title><link>https://alfrednutile.info/posts/134/</link><pubDate>Tue, 24 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/134/</guid><description>&lt;p>This might not be ideal but so far it allows me to more easily sort dates and filter dates in Angular.&lt;/p>
+&lt;/code>&lt;/pre></description><tags>angular, laravel</tags></item><item><title>Sending Dates to Angular from Laravel</title><link>https://alfrednutile.info/posts/134/</link><pubDate>Tue, 24 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/134/</guid><description>&lt;p>This might not be ideal but so far it allows me to more easily sort dates and filter dates in Angular.&lt;/p>
 &lt;p>From the Laravel model I add these two methods&lt;/p>
 &lt;pre>&lt;code>
 /**
@@ -717,8 +713,7 @@ return Carbon::parse($attr)-&amp;gt;timestamp; //Change the format to whichever 
 }
 &lt;/code>&lt;/pre>&lt;p>Then in Angular I can use the filters&lt;/p>
 &lt;pre>&lt;code>{{ vm.created_at | date:'medium'}}
-&lt;/code>&lt;/pre></description>
-laravel, angular</item><item><title>Laravel Behat and Selenium</title><link>https://alfrednutile.info/posts/130/</link><pubDate>Mon, 02 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/130/</guid><description>&lt;p>Laracasts has some great videos and libraries for Laravel 5 and Behat integration.&lt;/p>
+&lt;/code>&lt;/pre></description><tags>laravel, angular</tags></item><item><title>Laravel Behat and Selenium</title><link>https://alfrednutile.info/posts/130/</link><pubDate>Mon, 02 Feb 2015 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/130/</guid><description>&lt;p>Laracasts has some great videos and libraries for Laravel 5 and Behat integration.&lt;/p>
 &lt;p>Examples&lt;/p>
 &lt;p>&lt;a href="https://github.com/laracasts/Behat-Laravel-Extension">https://github.com/laracasts/Behat-Laravel-Extension&lt;/a>&lt;/p>
 &lt;p>and&lt;/p>
@@ -973,8 +968,7 @@ public function iCreatePersonFixtureWithId($arg1)
 {
 Factory::create('TheHub\Profile\User', [ 'id' =&amp;gt; $arg1 ]);
 }
-&lt;/code>&lt;/pre>&lt;p>Using the Laracast TestDummy library I can quickly stub out data for the test.&lt;/p></description>
-laravel, php, behat, angular</item><item><title>Reusable UI/API CRUD Laravel and Angular</title><link>https://alfrednutile.info/posts/126/</link><pubDate>Fri, 26 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/126/</guid><description>&lt;p>&lt;a href="https://github.com/alnutile/angular_stubber">related repo&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>Using the Laracast TestDummy library I can quickly stub out data for the test.&lt;/p></description><tags>laravel, php, behat, angular</tags></item><item><title>Reusable UI/API CRUD Laravel and Angular</title><link>https://alfrednutile.info/posts/126/</link><pubDate>Fri, 26 Dec 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/126/</guid><description>&lt;p>&lt;a href="https://github.com/alnutile/angular_stubber">related repo&lt;/a>&lt;/p>
 &lt;p>Working on a recent project it finally hit me how repetitive then need was to make a Resource at the API level and to make the UI to Create, Retrieve, Update, Delete, Index. And how easy it would be to make a foundation for this to use for each Resource keeping the UI goals consistent and simple between these Resources. With this came also a set of API tests in Behat that could also be used with the project.&lt;/p>
 &lt;p>What I will cover below is building out the foundation for this code and using it in a &amp;lsquo;real life&amp;rsquo; example.&lt;/p>
 &lt;p>You will end up with a UI like this&lt;/p>
@@ -1248,8 +1242,7 @@ $user-&amp;gt;roles()-&amp;gt;sync($roles);
 return $user;
 }
 }
-&lt;/code>&lt;/pre></description>
-laravel, php, angular</item><item><title>Redirecting back to original Angular.js destination from Laravel Auth</title><link>https://alfrednutile.info/posts/119/</link><pubDate>Fri, 21 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/119/</guid><description>&lt;p>&lt;strong>UPDATE&lt;/strong>&lt;/p>
+&lt;/code>&lt;/pre></description><tags>laravel, php, angular</tags></item><item><title>Redirecting back to original Angular.js destination from Laravel Auth</title><link>https://alfrednutile.info/posts/119/</link><pubDate>Fri, 21 Nov 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/119/</guid><description>&lt;p>&lt;strong>UPDATE&lt;/strong>&lt;/p>
 &lt;p>You can see in the &lt;a href="https://www.alfrednutile.info/posts/119#comment-2448723710">comments&lt;/a> some updated info.&lt;/p>
 &lt;p>When a user visits an Angular url (not html5) like &lt;a href="http://foo.com/app#some/long/path">http://foo.com/app#some/long/path&lt;/a>&lt;/p>
 &lt;p>Then gets redirected to &lt;a href="http://foo.com/auth/login">http://foo.com/auth/login&lt;/a> because they are not logged in. It would be nice to send them right back after that.&lt;/p>
@@ -1265,8 +1258,7 @@ var intended = window.location.hash;
 &lt;p>Finally after an successful auth add this&lt;/p>
 &lt;pre>&lt;code>return Redirect::to($_COOKIE['intended']);
 &lt;/code>&lt;/pre>&lt;p>Laravel 4.2 = app/controllers/AuthController.php:61&lt;/p>
-&lt;p>Laravel 5 = app/Http/Controllers/AuthController.php:52&lt;/p></description>
-laravel, php, angular</item><item><title>Angular Pusher Factory to Centralize Code (also using Laravel to set constants and properties)</title><link>https://alfrednutile.info/posts/111/</link><pubDate>Fri, 24 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/111/</guid><description>&lt;p>This will cover&lt;/p>
+&lt;p>Laravel 5 = app/Http/Controllers/AuthController.php:52&lt;/p></description><tags>laravel, php, angular</tags></item><item><title>Angular Pusher Factory to Centralize Code (also using Laravel to set constants and properties)</title><link>https://alfrednutile.info/posts/111/</link><pubDate>Fri, 24 Oct 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/111/</guid><description>&lt;p>This will cover&lt;/p>
 &lt;ul>
 &lt;li>Making an Angular factory to centralize Pusher setup in Angular&lt;/li>
 &lt;li>Passing settings form Laravel to Angular (though could be just Angular and a .env file as well)&lt;/li>
@@ -1395,5 +1387,4 @@ JavaScript::put([
 return view('layouts.main');
 }
 }
-&lt;/code>&lt;/pre>&lt;p>If you have more than on View the share option might work &lt;a href="http://laravel.com/docs/master/views">http://laravel.com/docs/master/views&lt;/a>&lt;/p></description>
-angular, laravel</item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>If you have more than on View the share option might work &lt;a href="http://laravel.com/docs/master/views">http://laravel.com/docs/master/views&lt;/a>&lt;/p></description><tags>angular, laravel</tags></item></channel></rss>

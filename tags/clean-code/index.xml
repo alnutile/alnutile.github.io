@@ -56,5 +56,4 @@ private function checkItHasAName($folder)
 {
 return isset($folder['name']);
 }
-&lt;/code>&lt;/pre>&lt;p>Just a lot easier to come back to an remember why and what I am doing in the if statements. Also just to read a bit more easily what the needs are here of the data.&lt;/p></description>
-php, clean code</item></channel></rss>
+&lt;/code>&lt;/pre>&lt;p>Just a lot easier to come back to an remember why and what I am doing in the if statements. Also just to read a bit more easily what the needs are here of the data.&lt;/p></description><tags>php, clean code</tags></item></channel></rss>

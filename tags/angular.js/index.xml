@@ -46,8 +46,7 @@ A great look at being a programmer that not only makes code but more importantly
 &lt;h2 id="the-pragmatic-programmer-from-journeyman-to-masterhttpskindleamazoncomworknode-js-right-way-server-side-javascript-ebookb00hsocscyb00hso6yd8">&lt;a href="https://kindle.amazon.com/work/node-js-right-way-server-side-javascript-ebook/B00HSOCSCY/B00HSO6YD8">The Pragmatic Programmer: From Journeyman to Master&lt;/a>&lt;/h2>
 &lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/41oqLxoTYsL._SS130_.jpg" alt="https://images-na.ssl-images-amazon.com/images/I/41oqLxoTYsL.SS130.jpg">&lt;/p>
 &lt;h2 id="restful-web-apishttpskindleamazoncomworkrestful-web-apis-leonard-richardson-ebookb00dduvtr2b00f5bs966">&lt;a href="https://kindle.amazon.com/work/restful-web-apis-leonard-richardson-ebook/B00DDUVTR2/B00F5BS966">RESTful Web APIs&lt;/a>&lt;/h2>
-&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/51KhFuo-5%2BL._SS130_.jpg" alt="https://images-na.ssl-images-amazon.com/images/I/51KhFuo-5%2BL.SS130.jpg">&lt;/p></description>
-php, angular.js, coder</item><item><title>Many to Many Polymorphic Relations from Laravel to Angular and back</title><link>https://alfrednutile.info/posts/95/</link><pubDate>Sat, 05 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/95/</guid><description>&lt;p>This will cover having a polymorphic relationship in Laravel, showing it on a form in Angular and saving it back to Laravel. Overall it is well documented &lt;a href="http://laravel.com/docs/eloquent#many-to-many-polymorphic-relations">here&lt;/a> at the great docs at Laravel but this post might help in a few areas.&lt;/p>
+&lt;p>&lt;img src="https://images-na.ssl-images-amazon.com/images/I/51KhFuo-5%2BL._SS130_.jpg" alt="https://images-na.ssl-images-amazon.com/images/I/51KhFuo-5%2BL.SS130.jpg">&lt;/p></description><tags>php, angular.js, coder</tags></item><item><title>Many to Many Polymorphic Relations from Laravel to Angular and back</title><link>https://alfrednutile.info/posts/95/</link><pubDate>Sat, 05 Jul 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/95/</guid><description>&lt;p>This will cover having a polymorphic relationship in Laravel, showing it on a form in Angular and saving it back to Laravel. Overall it is well documented &lt;a href="http://laravel.com/docs/eloquent#many-to-many-polymorphic-relations">here&lt;/a> at the great docs at Laravel but this post might help in a few areas.&lt;/p>
 &lt;p>As someone defines Polymorphic Relationships there&lt;/p>
 &lt;blockquote>
 &lt;p>&amp;ldquo;Polymorphic relations allow a model to belong to more than one other model, on a single association. For example, you might have a photo model that belongs to either a staff model or an order model. &amp;quot;&lt;/p>
@@ -118,8 +117,7 @@ $user-&amp;gt;specialties()-&amp;gt;sync($this-&amp;gt;original_specialities);
 return $user;
 }
 &lt;/code>&lt;/pre>&lt;p>Finally back to Angular with the results.&lt;/p>
-&lt;p>Another good way to tie all this together is the Model Observer Pattern noted here &lt;a href="http://laravel.com/docs/eloquent#model-observers">http://laravel.com/docs/eloquent#model-observers&lt;/a>&lt;/p></description>
-laravel, php, angular.js</item><item><title>Restangular and nested responses</title><link>https://alfrednutile.info/posts/91/</link><pubDate>Sat, 21 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/91/</guid><description>&lt;p>&lt;a href="https://github.com/mgonto/restangular#my-response-is-actually-wrapped-with-some-metadata-how-do-i-get-the-data-in-that-case">this was key&lt;/a> to dealing with this type of results&lt;/p>
+&lt;p>Another good way to tie all this together is the Model Observer Pattern noted here &lt;a href="http://laravel.com/docs/eloquent#model-observers">http://laravel.com/docs/eloquent#model-observers&lt;/a>&lt;/p></description><tags>laravel, php, angular.js</tags></item><item><title>Restangular and nested responses</title><link>https://alfrednutile.info/posts/91/</link><pubDate>Sat, 21 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/91/</guid><description>&lt;p>&lt;a href="https://github.com/mgonto/restangular#my-response-is-actually-wrapped-with-some-metadata-how-do-i-get-the-data-in-that-case">this was key&lt;/a> to dealing with this type of results&lt;/p>
 &lt;pre>&lt;code>{
 &amp;quot;data&amp;quot;: {
 &amp;quot;name&amp;quot;: &amp;quot;Foo&amp;quot;
@@ -138,8 +136,7 @@ extractedData = data.data;
 return extractedData;
 });
 });
-&lt;/code>&lt;/pre></description>
-angular.js, note2self</item><item><title>When you have to use Angular inside of Drupal</title><link>https://alfrednutile.info/posts/89/</link><pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/89/</guid><description>&lt;p>The angularjs module for drupal will direct you to setup a menu path for Angular.js to get it&amp;rsquo;s template files.&lt;/p>
+&lt;/code>&lt;/pre></description><tags>angular.js, note2self</tags></item><item><title>When you have to use Angular inside of Drupal</title><link>https://alfrednutile.info/posts/89/</link><pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/89/</guid><description>&lt;p>The angularjs module for drupal will direct you to setup a menu path for Angular.js to get it&amp;rsquo;s template files.&lt;/p>
 &lt;p>So the Angular route would look like this&lt;/p>
 &lt;pre>&lt;code>//app.js
 behat_reports.config(['$routeProvider',
@@ -180,8 +177,7 @@ drupal_add_js($path . '/js/reportsController.js');
 drupal_add_js($path . '/js/app.js');
 return theme('behat_reports_v2');
 }
-&lt;/code>&lt;/pre>&lt;p>You are basically allowing Angular to get the html files it needs without bootstrapping the template system in drupal. Yeah!&lt;/p></description>
-angular.js, drupal</item><item><title>Angular and Scope - or - How not to waste time figuring out why a scope value is not 'working'</title><link>https://alfrednutile.info/posts/62/</link><pubDate>Wed, 30 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/62/</guid><description>&lt;p>The creator of Angular notes it in this &lt;a href="https://www.youtube.com/watch?v=ZhfUv0spHCY&amp;amp;list=FLZa3QWzy1z1G9FIw02pytdA&amp;amp;index=2">video&lt;/a> which is well worth the watch.&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>You are basically allowing Angular to get the html files it needs without bootstrapping the template system in drupal. Yeah!&lt;/p></description><tags>angular.js, drupal</tags></item><item><title>Angular and Scope - or - How not to waste time figuring out why a scope value is not 'working'</title><link>https://alfrednutile.info/posts/62/</link><pubDate>Wed, 30 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/62/</guid><description>&lt;p>The creator of Angular notes it in this &lt;a href="https://www.youtube.com/watch?v=ZhfUv0spHCY&amp;amp;list=FLZa3QWzy1z1G9FIw02pytdA&amp;amp;index=2">video&lt;/a> which is well worth the watch.&lt;/p>
 &lt;p>Basically when using includes or directives etc you may not be getting a scope value as easily because it is child scope and you may be looking in the parent scope.&lt;/p>
 &lt;h3 id="for-example">For example&lt;/h3>
 &lt;p>This include if I have an include and it references a model attribute like this&lt;/p>
@@ -197,8 +193,7 @@ $scope.person.firstname = &amp;quot;Bob&amp;quot;
 &lt;/code>&lt;/pre>&lt;p>Tends to work better than fighting with $parent prefixes as such&lt;/p>
 &lt;pre>&lt;code>//Some include
 &amp;lt;input ng-model=&amp;quot;$parent.firstname&amp;quot;&amp;gt;
-&lt;/code>&lt;/pre>&lt;p>Anyways glad I watched the video which meant I only wasted under an hour one this head scratcher.&lt;/p></description>
-angular.js, note2self</item><item><title>Angular.js, CKEditor, and REST including file uploads</title><link>https://alfrednutile.info/posts/50/</link><pubDate>Mon, 14 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/50/</guid><description>&lt;h2 id="i-wanted-to-share-the-steps-i-followed-to-get-this-wysiwyg-editor-working-with-angular-and-to-allow-uploads-by-the-end-of-it-you-will-see-how-to">I wanted to share the steps I followed to get this WYSIWYG editor working with Angular and to allow uploads. By the end of it you will see how to&lt;/h2>
+&lt;/code>&lt;/pre>&lt;p>Anyways glad I watched the video which meant I only wasted under an hour one this head scratcher.&lt;/p></description><tags>angular.js, note2self</tags></item><item><title>Angular.js, CKEditor, and REST including file uploads</title><link>https://alfrednutile.info/posts/50/</link><pubDate>Mon, 14 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/50/</guid><description>&lt;h2 id="i-wanted-to-share-the-steps-i-followed-to-get-this-wysiwyg-editor-working-with-angular-and-to-allow-uploads-by-the-end-of-it-you-will-see-how-to">I wanted to share the steps I followed to get this WYSIWYG editor working with Angular and to allow uploads. By the end of it you will see how to&lt;/h2>
 &lt;ol>
 &lt;li>Plug CKeditor into your Angular app&lt;/li>
 &lt;li>Setup the config options in your Angular Controller and your view&lt;/li>
@@ -355,8 +350,7 @@ return $script;
 &lt;li>&lt;a href="http://docs.cksource.com/CKEditor_3.x/Developers_Guide/File_Browser_(Uploader)">http://docs.cksource.com/CKEditor_3.x/Developers_Guide/File_Browser_(Uploader)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="http://www.paulfp.net/blog/2010/10/how-to-add-and-upload-an-image-using-ckeditor/">http://www.paulfp.net/blog/2010/10/how-to-add-and-upload-an-image-using-ckeditor/&lt;/a>&lt;/li>
 &lt;li>&lt;a href="http://www.mixedwaves.com/2010/02/integrating-fckeditor-filemanager-in-ckeditor/">http://www.mixedwaves.com/2010/02/integrating-fckeditor-filemanager-in-ckeditor/&lt;/a>&lt;/li>
-&lt;/ul></description>
-angular.js</item><item><title>Building the UI first with Angular, Mocked Data and REST</title><link>https://alfrednutile.info/posts/58/</link><pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/58/</guid><description>&lt;p>&lt;span style="line-height: 1.6em;">Lately I have had a few projects using a RESTful backend to output JSON formatted data and a javascript front end. All of them are different technologies but the front end is in Angular.js.&lt;/span>&lt;/p>
+&lt;/ul></description><tags>angular.js</tags></item><item><title>Building the UI first with Angular, Mocked Data and REST</title><link>https://alfrednutile.info/posts/58/</link><pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/58/</guid><description>&lt;p>&lt;span style="line-height: 1.6em;">Lately I have had a few projects using a RESTful backend to output JSON formatted data and a javascript front end. All of them are different technologies but the front end is in Angular.js.&lt;/span>&lt;/p>
 &lt;p>So using the Angular mock module I have been able to build out the front end with no backend. I started to do this for speed reasons but realized a number of huge benefits.&lt;/p>
 &lt;p>Angular has some good docs on how to mock this data and use this &lt;a href="http://docs.angularjs.org/api/ngMockE2E/service/$httpBackend" target="_blank">$httpbackend&lt;/a> module here.&lt;/p>
 &lt;p>Also I posted a quick video here on getting the json data from your app or from this great site &lt;a href="http://www.json-generator.com/" target="_blank">JsonGenerator&lt;/a>.&lt;/p>
@@ -377,29 +371,24 @@ angular.js</item><item><title>Building the UI first with Angular, Mocked Data an
 &lt;h2>Links&lt;/h2>
 &lt;h3>Supports wildcard&lt;/h3>
 &lt;p>&lt;a href="http://docs.angularjs.org/api/ngMock/service/$httpBackend" target="_blank">http://docs.angularjs.org/api/ngMock/service/$httpBackend&lt;/a> and &lt;a href="http://stackoverflow.com/questions/18618532/is-it-possible-to-use-wild-cards-in-angularjs-mocks" target="_blank">http://stackoverflow.com/questions/18618532/is-it-possible-to-use-wild-cards-in-angularjs-mocks&lt;/a>&lt;/p>
-&lt;p>UPDATE: June 17 13:54 a friend just posted a link to http://jsonstub.com/ which looks really interesting&lt;/p></description>
-angular.js</item><item><title>Angular Watching a model and it's filters</title><link>https://alfrednutile.info/posts/43/</link><pubDate>Thu, 20 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/43/</guid><description>&lt;p>I had to update other items on the page including an CSV export as the user made filter changes on the site.&lt;/p>
+&lt;p>UPDATE: June 17 13:54 a friend just posted a link to http://jsonstub.com/ which looks really interesting&lt;/p></description><tags>angular.js</tags></item><item><title>Angular Watching a model and it's filters</title><link>https://alfrednutile.info/posts/43/</link><pubDate>Thu, 20 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/43/</guid><description>&lt;p>I had to update other items on the page including an CSV export as the user made filter changes on the site.&lt;/p>
 &lt;p>I had to pass the results of ng-repeat into a model and then the filters as seen here&lt;/p>
 &lt;p>&lt;script src="https://gist.github.com/alnutile/9673298.js?file=index.html">&lt;/script>&lt;/p>
 &lt;p>And in my controller I added a watcher to process the new results as needed.&lt;/p>
 &lt;p>&lt;script src="https://gist.github.com/alnutile/9673298.js?file=reportController.js">&lt;/script>&lt;/p>
-&lt;p>This simple solution I had some trouble grasping.&lt;/p></description>
-angular.js</item><item><title>Angular Seed Testing Setup</title><link>https://alfrednutile.info/posts/19/</link><pubDate>Wed, 12 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/19/</guid><description>&lt;p>This took a few settings to get it working.&lt;/p>
+&lt;p>This simple solution I had some trouble grasping.&lt;/p></description><tags>angular.js</tags></item><item><title>Angular Seed Testing Setup</title><link>https://alfrednutile.info/posts/19/</link><pubDate>Wed, 12 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/19/</guid><description>&lt;p>This took a few settings to get it working.&lt;/p>
 &lt;p>For one I put the correct paths in for karma and webdriver&lt;/p>
 &lt;script src="https://gist.github.com/alnutile/9518483.js">&lt;/script>
 &lt;p>I then had to download mocks http://code.angularjs.org/1.2.14/angular-mocks.js even though I used angular-seed and setup my module to include this &amp;#39;ngMockE2E&amp;#39;&lt;/p>
 &lt;p>This page was a good starting point http://docs.angularjs.org/api/ngMockE2E/service/$httpBackend&lt;/p>
 &lt;p>Then there is the testing end 2 end frame work https://github.com/angular/protractor/tree/master/docs/ that allowed me to easily write non-unit tests&lt;/p>
-&lt;p>&amp;nbsp;&lt;/p></description>
-angular.js</item><item><title>Angular Drupal and CSRF</title><link>https://alfrednutile.info/posts/48/</link><pubDate>Tue, 11 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/48/</guid><description>&lt;p>quick tip on getting and setting your token for drupal when doing a put, post, destroy against a drupal site.&amp;Acirc;&amp;nbsp;&lt;/p>
+&lt;p>&amp;nbsp;&lt;/p></description><tags>angular.js</tags></item><item><title>Angular Drupal and CSRF</title><link>https://alfrednutile.info/posts/48/</link><pubDate>Tue, 11 Mar 2014 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/48/</guid><description>&lt;p>quick tip on getting and setting your token for drupal when doing a put, post, destroy against a drupal site.&amp;Acirc;&amp;nbsp;&lt;/p>
 &lt;p>Mostly gotten from &lt;a href="http://angularjs-best-practices.blogspot.com/2013/07/angularjs-and-xsrfcsrf-cross-site.html" target="_blank">here&lt;/a>&lt;/p>
 &lt;p>Might even be better to reset the formant for X-CSRF-Token to the default one Angular is looking for X-CSRFToken&lt;/p>
-&lt;p>&lt;script src="https://gist.github.com/alnutile/9484320.js">&lt;/script>&lt;/p></description>
-angular.js</item><item><title>Angular.js Ticket System</title><link>https://alfrednutile.info/posts/18/</link><pubDate>Fri, 05 Jul 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/18/</guid><description>&lt;p>Fun side project to make a ticket system in Angular.js.&lt;br />
+&lt;p>&lt;script src="https://gist.github.com/alnutile/9484320.js">&lt;/script>&lt;/p></description><tags>angular.js</tags></item><item><title>Angular.js Ticket System</title><link>https://alfrednutile.info/posts/18/</link><pubDate>Fri, 05 Jul 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/18/</guid><description>&lt;p>Fun side project to make a ticket system in Angular.js.&lt;br />
 Still have to build out the authentication system and ideally move the api into Rails.&lt;br />
 And of course wrap up a few other things ( -;&lt;br />
 http://angular.alfrednutile.info/&lt;br />
 Or the video&lt;br />
 http://www.youtube.com/watch?v=RjCJNn7wpj0&lt;br />
-&lt;iframe allowfullscreen="" frameborder="0" height="315" src="//www.youtube.com/embed/RjCJNn7wpj0" width="420">&lt;/iframe>&lt;/p></description>
-angular.js</item></channel></rss>
+&lt;iframe allowfullscreen="" frameborder="0" height="315" src="//www.youtube.com/embed/RjCJNn7wpj0" width="420">&lt;/iframe>&lt;/p></description><tags>angular.js</tags></item></channel></rss>

@@ -91,8 +91,7 @@ return False
 &lt;li>&lt;a href="https://docs.python.org/3/library/unittest.mock.html">https://docs.python.org/3/library/unittest.mock.html&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://www.toptal.com/python/an-introduction-to-mocking-in-python">https://www.toptal.com/python/an-introduction-to-mocking-in-python&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832">https://medium.com/@yeraydiazdiaz/what-the-mock-cheatsheet-mocking-in-python-6a71db997832&lt;/a>&lt;/li>
-&lt;/ul></description>
-python, mocking, tdd, unittest</item><item><title>My first Rails site for the masses.</title><link>https://alfrednutile.info/posts/15/</link><pubDate>Thu, 27 Jun 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/15/</guid><description>&lt;p>
+&lt;/ul></description><tags>python, mocking, tdd, unittest</tags></item><item><title>My first Rails site for the masses.</title><link>https://alfrednutile.info/posts/15/</link><pubDate>Thu, 27 Jun 2013 00:00:00 +0000</pubDate><guid>https://alfrednutile.info/posts/15/</guid><description>&lt;p>
 First Rails site for the masses for me. Thanks to Progressive Exchange &lt;a href=http://www.progressiveexchange.org/welcome.htm target="_blank">http://www.progressiveexchange.org/welcome.htm&lt;/a>
 I was able to volunteer for a webapp for Doctors for America &lt;a target="_blank" href="http://www.drsforamerica.org/">http://www.drsforamerica.org/&lt;/a>
 So not only do I get to learn Ruby on Rails and practice but I get to build something for a good group and purpose.
@@ -122,5 +121,4 @@ All code on GitHub
 &lt;p>
 rake stats! – next time more tests
 &lt;a href="https://dl.dropboxusercontent.com/u/54803135/dfa_stats.png">https://dl.dropboxusercontent.com/u/54803135/dfa_stats.png&lt;/a>
-&lt;/p></description>
-tdd</item></channel></rss>
+&lt;/p></description><tags>tdd</tags></item></channel></rss>

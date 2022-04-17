@@ -104,5 +104,4 @@ $schedule-&amp;gt;command('approve:cleanuploads --minutes=10')
 }
 &lt;/code>&lt;/pre>&lt;p>And that is it.&lt;/p>
 &lt;p>One big thing about Commands is the power of Asynchronous processing that libraries like &lt;a href="http://symfony.com/doc/current/components/process.html">Symfony Process&lt;/a> gives us the ability to run numerous commands at once!&lt;/p>
-&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/cu1v0wl61ul29qr/cleanFiles.gif?dl=0" alt="running">&lt;/p></description>
-laravel, php, commands</item></channel></rss>
+&lt;p>&lt;img src="https://dl.dropboxusercontent.com/s/cu1v0wl61ul29qr/cleanFiles.gif?dl=0" alt="running">&lt;/p></description><tags>laravel, php, commands</tags></item></channel></rss>
